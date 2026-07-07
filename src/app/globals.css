@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --grid-line: rgba(255, 255, 255, 0.06);
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Selección con signal red */
+  ::selection {
+    background: theme("colors.signal.DEFAULT");
+    color: white;
+  }
+
+  /* Focus visible más marcado — accesibilidad */
+  :focus-visible {
+    outline: 2px solid theme("colors.signal.DEFAULT");
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Eyebrow techno — usado en secciones */
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-techno text-steel-400;
+  }
+
+  /* Hairline separator */
+  .hairline {
+    @apply h-px w-full bg-white/10;
+  }
+
+  /* SKU pill — el elemento visual firma */
+  .sku-tag {
+    @apply inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-techno
+           text-steel-300 border border-white/10 px-2 py-0.5 rounded-xs;
+  }
+
+  /* Spec cell — pa' tablas de especificaciones */
+  .spec-key {
+    @apply font-mono text-[11px] uppercase tracking-techno text-steel-400;
+  }
+  .spec-val {
+    @apply font-mono text-sm text-surface;
+  }
+
+  /* Grid pattern de fondo — sutil, solo en secciones oscuras */
+  .grid-bg {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Botón primary — signal red, industrial */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
+           text-white font-medium px-5 py-3 rounded-xs
+           text-sm uppercase tracking-wider transition-colors
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40
+           text-surface font-medium px-5 py-3 rounded-xs
+           text-sm uppercase tracking-wider transition-colors
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-surface hover:text-signal
+           text-sm font-medium transition-colors;
+  }
+
+  /* Card industrial — bordes duros, minimal chrome */
+  .card {
+    @apply bg-carbon-800 border border-white/5 hover:border-white/15 rounded-xs
+           transition-colors;
+  }
+
+  /* Container principal */
+  .container-max {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section padding standard */
+  .section-pad {
+    @apply py-16 sm:py-20 lg:py-28;
+  }
+}
+
+@layer utilities {
+  /* Texto con hint técnico — usa mono ocasionalmente */
+  .text-numeric {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Marca de agua tipo blueprint */
+  .blueprint-tick::before {
+    content: "◆";
+    color: theme("colors.signal.DEFAULT");
+    margin-right: 0.5rem;
+    font-size: 0.6em;
+    vertical-align: middle;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
