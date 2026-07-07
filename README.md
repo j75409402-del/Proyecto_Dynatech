@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dynatech Ingeniería — Catálogo Web
 
 Plataforma B2B para catálogo industrial de Dynatech Ingeniería SRL.
@@ -223,3 +224,6 @@ En B2B industrial el precio depende de volumen, plazo y proyecto — mejor pedir
 ---
 
 Made for Dynatech Ingeniería SRL · Santo Domingo, RD
+=======
+# Proyecto_Dynatech
+>>>>>>> dd78708ada92792c1effec289a8a34274e3aeb4f
