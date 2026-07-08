@@ -27,7 +27,8 @@ export function slugify(text: string): string {
     .replace(/\s+/g, "-");
 }
 
-export function stockStatusLabel(status: string): string {
+export function stockStatusLabel(status: string | null): string {
+  if (!status) return "Consultar disponibilidad";
   const map: Record<string, string> = {
     en_stock: "En stock",
     bajo_pedido: "Bajo pedido",
@@ -37,7 +38,8 @@ export function stockStatusLabel(status: string): string {
   return map[status] ?? status;
 }
 
-export function stockStatusColor(status: string): string {
+export function stockStatusColor(status: string | null): string {
+  if (!status) return "bg-steel-400";
   const map: Record<string, string> = {
     en_stock: "bg-emerald-500",
     bajo_pedido: "bg-warning",
