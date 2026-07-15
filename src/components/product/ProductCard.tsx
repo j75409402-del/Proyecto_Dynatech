@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import type { ProductWithRelations } from "@/types";
 import { stockStatusLabel, stockStatusColor, cn } from "@/lib/utils";
+import { TiltCard } from "@/components/motion/TiltCard";
 
 type Props = {
   product: ProductWithRelations;
@@ -14,12 +15,12 @@ export function ProductCard({ product, className }: Props) {
   const specEntries = Object.entries(specs).slice(0, 3);
 
   return (
+    <TiltCard max={5} glare className={className}>
     <Link
       href={`/productos/${product.slug}`}
       className={cn(
         "group relative bg-carbon-800 border border-white/5 hover:border-signal/50",
-        "flex flex-col transition-all duration-200",
-        className,
+        "flex flex-col transition-all duration-200 h-full",
       )}
     >
       {/* Imagen o placeholder */}
@@ -96,6 +97,7 @@ export function ProductCard({ product, className }: Props) {
         </div>
       </div>
     </Link>
+    </TiltCard>
   );
 }
 

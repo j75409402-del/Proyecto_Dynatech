@@ -61,6 +61,12 @@ const config: Config = {
       animation: {
         "marquee": "marquee 40s linear infinite",
         "fade-up": "fade-up 0.5s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "float-slow": "float 9s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 2.6s ease-in-out infinite",
+        "blob": "blob 14s ease-in-out infinite",
+        "trace": "trace 2.4s linear infinite",
+        "spin-slow": "spin 18s linear infinite",
       },
       keyframes: {
         marquee: {
@@ -70,6 +76,23 @@ const config: Config = {
         "fade-up": {
           "0%": { opacity: "0", transform: "translateY(8px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "0.35", transform: "scale(1)" },
+          "50%": { opacity: "1", transform: "scale(1.4)" },
+        },
+        blob: {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(24px, -18px) scale(1.06)" },
+          "66%": { transform: "translate(-18px, 14px) scale(0.96)" },
+        },
+        trace: {
+          "0%": { strokeDashoffset: "24" },
+          "100%": { strokeDashoffset: "0" },
         },
       },
     },

@@ -2,26 +2,46 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { NAV, CONTACT, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 12);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/5 bg-carbon/85 backdrop-blur-md">
-      <div className="container-max flex h-16 items-center justify-between">
+    <header
+      className={cn(
+        "sticky top-0 z-40 border-b bg-carbon/85 backdrop-blur-md transition-all duration-300",
+        scrolled ? "border-white/10 shadow-[0_8px_30px_-16px_rgba(0,0,0,0.6)]" : "border-white/5",
+      )}
+    >
+      <div
+        className={cn(
+          "container-max flex items-center justify-between transition-[height] duration-300",
+          scrolled ? "h-14" : "h-16",
+        )}
+      >
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-2.5 group">
+        <Link href="/" className="flex items-center gap-2.5 group [perspective:400px]">
           <Image
             src="/logo-mark.png"
             alt=""
             width={36}
             height={36}
             priority
-            className="h-9 w-9 shrink-0 transition-transform group-hover:scale-105"
+            className="h-9 w-9 shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:[transform:rotateY(18deg)]"
           />
           <div className="hidden sm:block">
             <div className="font-display font-semibold text-surface leading-none">

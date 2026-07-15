@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { CONTACT, SITE, SOCIAL } from "@/lib/constants";
+import { Reveal } from "@/components/motion/Reveal";
 
 const categoryLinks = [
   { label: "Neumática",            href: "/categorias/neumatica" },
@@ -22,7 +23,7 @@ export function Footer() {
   return (
     <footer className="bg-carbon-900 border-t border-white/5 mt-24">
       <div className="container-max py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <Reveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand + tagline */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
@@ -113,7 +114,7 @@ export function Footer() {
               </li>
             </ul>
           </div>
-        </div>
+        </Reveal>
 
         <div className="hairline my-10" />
 
