@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { NAV, CONTACT, SITE } from "@/lib/constants";
@@ -13,13 +14,15 @@ export function Navbar() {
     <header className="sticky top-0 z-40 border-b border-white/5 bg-carbon/85 backdrop-blur-md">
       <div className="container-max flex h-16 items-center justify-between">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="relative">
-            <div className="h-8 w-8 bg-signal rounded-xs grid place-items-center">
-              <span className="font-display font-bold text-white text-sm leading-none">D</span>
-            </div>
-            <div className="absolute -bottom-1 -right-1 h-2 w-2 bg-warning rounded-full" />
-          </div>
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={36}
+            height={36}
+            priority
+            className="h-9 w-9 shrink-0 transition-transform group-hover:scale-105"
+          />
           <div className="hidden sm:block">
             <div className="font-display font-semibold text-surface leading-none">
               {SITE.shortName}

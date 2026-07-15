@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { CONTACT, SITE, SOCIAL } from "@/lib/constants";
 
@@ -24,10 +25,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand + tagline */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="h-8 w-8 bg-signal rounded-xs grid place-items-center">
-                <span className="font-display font-bold text-white text-sm leading-none">D</span>
-              </div>
+            <div className="flex items-center gap-2.5 mb-4">
+              <Image
+                src="/logo-mark.png"
+                alt=""
+                width={36}
+                height={36}
+                className="h-9 w-9 shrink-0"
+              />
               <div>
                 <div className="font-display font-semibold text-surface leading-none">
                   {SITE.shortName}
