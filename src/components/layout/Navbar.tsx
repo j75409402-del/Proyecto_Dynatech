@@ -23,8 +23,8 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b bg-carbon/85 backdrop-blur-md transition-all duration-300",
-        scrolled ? "border-black/10 shadow-[0_8px_30px_-16px_rgba(0,0,0,0.6)]" : "border-black/5",
+        "sticky top-0 z-40 border-b border-black/10 bg-signal transition-all duration-300",
+        scrolled && "shadow-[0_8px_30px_-16px_rgba(0,0,0,0.6)]",
       )}
     >
       <div
@@ -35,19 +35,21 @@ export function Navbar() {
       >
         {/* Brand */}
         <Link href="/" className="flex items-center gap-2.5 group [perspective:400px]">
-          <Image
-            src="/logo-mark.png"
-            alt=""
-            width={36}
-            height={36}
-            priority
-            className="h-9 w-9 shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:[transform:rotateY(18deg)]"
-          />
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+            <Image
+              src="/logo-mark.png"
+              alt=""
+              width={28}
+              height={28}
+              priority
+              className="h-7 w-7 transition-transform duration-300 group-hover:scale-105 group-hover:[transform:rotateY(18deg)]"
+            />
+          </span>
           <div className="hidden sm:block">
-            <div className="font-display font-semibold text-surface leading-none">
+            <div className="font-display font-semibold text-white leading-none">
               {SITE.shortName}
             </div>
-            <div className="font-mono text-[9px] uppercase tracking-techno text-steel-400 mt-0.5">
+            <div className="font-mono text-[9px] uppercase tracking-techno text-white/70 mt-0.5">
               Ingeniería · SRL
             </div>
           </div>
@@ -59,7 +61,7 @@ export function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm text-steel-200 hover:text-surface transition-colors font-medium"
+              className="text-sm text-white/85 hover:text-white transition-colors font-medium"
             >
               {item.label}
             </Link>
@@ -70,19 +72,22 @@ export function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           <a
             href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-            className="flex items-center gap-2 text-sm text-steel-300 hover:text-surface transition-colors"
+            className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
           >
             <Phone className="h-4 w-4" />
             <span className="font-mono">{CONTACT.phone}</span>
           </a>
-          <Link href="/cotizacion" className="btn-primary py-2 px-4 text-xs">
+          <Link
+            href="/cotizacion"
+            className="inline-flex items-center justify-center gap-2 bg-white hover:bg-white/90 text-signal font-medium py-2 px-4 rounded-xs text-xs uppercase tracking-wider transition-colors"
+          >
             Solicitar cotización
           </Link>
         </div>
 
         {/* Menú mobile */}
         <button
-          className="lg:hidden text-surface p-2 -mr-2"
+          className="lg:hidden text-white p-2 -mr-2"
           onClick={() => setOpen((v) => !v)}
           aria-label="Menú"
         >
@@ -93,7 +98,7 @@ export function Navbar() {
       {/* Panel mobile */}
       <div
         className={cn(
-          "lg:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out border-t border-black/5",
+          "lg:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out border-t border-white/15",
           open ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
         )}
       >
@@ -103,7 +108,7 @@ export function Navbar() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="py-3 border-b border-black/5 text-steel-200 hover:text-surface font-medium"
+              className="py-3 border-b border-white/15 text-white/85 hover:text-white font-medium"
             >
               {item.label}
             </Link>
@@ -111,7 +116,7 @@ export function Navbar() {
           <Link
             href="/cotizacion"
             onClick={() => setOpen(false)}
-            className="btn-primary mt-4"
+            className="inline-flex items-center justify-center gap-2 bg-white hover:bg-white/90 text-signal font-medium py-3 rounded-xs text-sm uppercase tracking-wider transition-colors mt-4"
           >
             Solicitar cotización
           </Link>
