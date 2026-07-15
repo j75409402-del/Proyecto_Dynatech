@@ -86,7 +86,7 @@ export function QuoteForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
       {/* Datos empresa */}
       <fieldset className="space-y-4">
-        <legend className="eyebrow mb-4 pb-2 border-b border-white/10 w-full">
+        <legend className="eyebrow mb-4 pb-2 border-b border-black/10 w-full">
           01 · Datos de la empresa
         </legend>
 
@@ -124,13 +124,13 @@ export function QuoteForm() {
 
       {/* Ítems */}
       <fieldset className="space-y-4">
-        <legend className="eyebrow mb-4 pb-2 border-b border-white/10 w-full">
+        <legend className="eyebrow mb-4 pb-2 border-b border-black/10 w-full">
           02 · Ítems a cotizar
         </legend>
 
         <div className="space-y-3">
           {fields.map((field, index) => (
-            <div key={field.id} className="border border-white/10 p-4 bg-carbon-800">
+            <div key={field.id} className="border border-black/10 p-4 bg-carbon-800">
               <div className="flex items-center justify-between mb-3">
                 <span className="font-mono text-xs text-signal">
                   ÍTEM {String(index + 1).padStart(2, "0")}
@@ -201,7 +201,7 @@ export function QuoteForm() {
 
       {/* Mensaje adicional */}
       <fieldset>
-        <legend className="eyebrow mb-4 pb-2 border-b border-white/10 w-full">
+        <legend className="eyebrow mb-4 pb-2 border-b border-black/10 w-full">
           03 · Información adicional
         </legend>
         <Label htmlFor="message">¿Algo más que debamos saber?</Label>

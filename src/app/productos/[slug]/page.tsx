@@ -83,7 +83,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Imagen */}
-        <div className="relative aspect-square bg-carbon-800 border border-white/10">
+        <div className="relative aspect-square bg-carbon-800 border border-black/10">
           {product.thumbnail_url ? (
             <Image
               src={product.thumbnail_url}
@@ -192,7 +192,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
       {/* Related */}
       {related && related.length > 0 && (
-        <div className="mt-16 pt-16 border-t border-white/10">
+        <div className="mt-16 pt-16 border-t border-black/10">
           <div className="eyebrow mb-6">Productos relacionados</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {(related as ProductWithRelations[]).map((rel) => (
@@ -215,7 +215,7 @@ function FactBlock({
   value: string;
 }) {
   return (
-    <div className="border border-white/10 p-3">
+    <div className="border border-black/10 p-3">
       <div className="flex items-center gap-1.5 text-steel-400 mb-1.5">
         {icon}
         <span className="font-mono text-[9px] uppercase tracking-techno">{label}</span>

@@ -14,7 +14,7 @@ export async function BrandsMarquee() {
   const loop = [...brands, ...brands];
 
   return (
-    <section id="marcas" className="py-12 border-b border-white/5 overflow-hidden bg-carbon-900">
+    <section id="marcas" className="py-12 border-b border-black/5 overflow-hidden bg-carbon-900">
       <Reveal className="container-max mb-6">
         <div className="eyebrow">04 · Distribución oficial de</div>
       </Reveal>

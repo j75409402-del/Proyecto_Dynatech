@@ -12,7 +12,7 @@ export default function NosotrosPage() {
   return (
     <>
       {/* Hero */}
-      <section className="border-b border-white/5 section-pad">
+      <section className="border-b border-black/5 section-pad">
         <div className="container-max max-w-4xl">
           <div className="eyebrow mb-3">Nosotros</div>
           <h1 className="font-display text-display-xl text-surface mb-6">
@@ -28,7 +28,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* Filosofía en 3 párrafos */}
-      <section className="section-pad border-b border-white/5">
+      <section className="section-pad border-b border-black/5">
         <div className="container-max grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl">
           <div>
             <div className="eyebrow mb-4">01 · Ingeniería primero</div>
@@ -57,7 +57,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* Números o hitos */}
-      <section className="section-pad border-b border-white/5 bg-carbon-900">
+      <section className="section-pad border-b border-black/5 bg-carbon-900">
         <div className="container-max max-w-5xl">
           <div className="eyebrow mb-8">Datos operativos</div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">

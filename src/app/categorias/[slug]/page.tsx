@@ -84,7 +84,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
             <Link
               key={sub.id}
               href={`/categorias/${sub.slug}`}
-              className="border border-white/10 hover:border-signal px-3 py-1.5 text-sm text-steel-200 hover:text-signal transition-colors"
+              className="border border-black/10 hover:border-signal px-3 py-1.5 text-sm text-steel-200 hover:text-signal transition-colors"
             >
               {sub.name}
             </Link>
@@ -100,7 +100,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
           ))}
         </div>
       ) : (
-        <div className="border border-white/10 p-12 text-center">
+        <div className="border border-black/10 p-12 text-center">
           <h2 className="font-display text-2xl text-surface mb-3">
             Estamos armando esta sección.
           </h2>

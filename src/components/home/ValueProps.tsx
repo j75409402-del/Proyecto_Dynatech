@@ -4,7 +4,7 @@ import { TiltCard } from "@/components/motion/TiltCard";
 
 export function ValueProps() {
   return (
-    <section className="section-pad border-b border-white/5">
+    <section className="section-pad border-b border-black/5">
       <div className="container-max">
         <Reveal className="max-w-2xl mb-14">
           <div className="eyebrow mb-3">03 · Por qué Dynatech</div>
@@ -13,7 +13,7 @@ export function ValueProps() {
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-black/5 border border-black/5">
           {VALUE_PROPS.map((prop, i) => (
             <Reveal key={prop.number} delay={i * 0.08}>
               <TiltCard max={5} className="h-full">

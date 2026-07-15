@@ -17,7 +17,7 @@ export async function FeaturedProducts() {
   if (!products || products.length === 0) return null;
 
   return (
-    <section className="section-pad border-b border-white/5 bg-carbon-900">
+    <section className="section-pad border-b border-black/5 bg-carbon-900">
       <div className="container-max">
         <Reveal className="flex items-end justify-between mb-12 gap-6 flex-wrap">
           <div>

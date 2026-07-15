@@ -30,7 +30,7 @@ export function ProductFilters({ categories, brands }: Props) {
     <aside className="space-y-8">
       {/* Categorías */}
       <div>
-        <div className="eyebrow mb-4 pb-2 border-b border-white/10">Categorías</div>
+        <div className="eyebrow mb-4 pb-2 border-b border-black/10">Categorías</div>
         <ul className="space-y-1">
           <li>
             <Link
@@ -63,7 +63,7 @@ export function ProductFilters({ categories, brands }: Props) {
 
       {/* Marcas */}
       <div>
-        <div className="eyebrow mb-4 pb-2 border-b border-white/10">Marcas</div>
+        <div className="eyebrow mb-4 pb-2 border-b border-black/10">Marcas</div>
         <ul className="space-y-1">
           <li>
             <Link

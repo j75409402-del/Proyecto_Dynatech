@@ -78,7 +78,7 @@ export default async function BrandPage({ params }: { params: Params }) {
           ))}
         </div>
       ) : (
-        <div className="border border-white/10 p-12 text-center">
+        <div className="border border-black/10 p-12 text-center">
           <h2 className="font-display text-2xl text-surface mb-3">
             Aún no publicamos productos de esta marca.
           </h2>

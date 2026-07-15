@@ -24,7 +24,7 @@ export function Navbar() {
     <header
       className={cn(
         "sticky top-0 z-40 border-b bg-carbon/85 backdrop-blur-md transition-all duration-300",
-        scrolled ? "border-white/10 shadow-[0_8px_30px_-16px_rgba(0,0,0,0.6)]" : "border-white/5",
+        scrolled ? "border-black/10 shadow-[0_8px_30px_-16px_rgba(0,0,0,0.6)]" : "border-black/5",
       )}
     >
       <div
@@ -93,7 +93,7 @@ export function Navbar() {
       {/* Panel mobile */}
       <div
         className={cn(
-          "lg:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out border-t border-white/5",
+          "lg:hidden overflow-hidden transition-[max-height,opacity] duration-300 ease-out border-t border-black/5",
           open ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
         )}
       >
@@ -103,7 +103,7 @@ export function Navbar() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="py-3 border-b border-white/5 text-steel-200 hover:text-surface font-medium"
+              className="py-3 border-b border-black/5 text-steel-200 hover:text-surface font-medium"
             >
               {item.label}
             </Link>

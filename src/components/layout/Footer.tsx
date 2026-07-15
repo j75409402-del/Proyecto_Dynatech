@@ -21,7 +21,7 @@ const companyLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-carbon-900 border-t border-white/5 mt-24">
+    <footer className="bg-carbon-900 border-t border-black/5 mt-24">
       <div className="container-max py-16">
         <Reveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand + tagline */}

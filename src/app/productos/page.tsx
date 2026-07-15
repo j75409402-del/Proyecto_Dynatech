@@ -100,7 +100,7 @@ export default async function ProductosPage({
 
 function EmptyState() {
   return (
-    <div className="border border-white/10 p-12 text-center">
+    <div className="border border-black/10 p-12 text-center">
       <div className="eyebrow mb-3">Sin resultados</div>
       <h2 className="font-display text-2xl text-surface mb-3">
         No encontramos productos con esos filtros.

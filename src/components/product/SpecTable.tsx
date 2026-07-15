@@ -8,12 +8,12 @@ export function SpecTable({ specs }: Props) {
   const entries = Object.entries(specs);
 
   return (
-    <div className="border border-white/10">
-      <div className="px-5 py-3 border-b border-white/10 bg-carbon-800 flex items-center gap-2">
+    <div className="border border-black/10">
+      <div className="px-5 py-3 border-b border-black/10 bg-carbon-800 flex items-center gap-2">
         <span className="h-2 w-2 bg-signal" />
         <span className="eyebrow">Ficha técnica</span>
       </div>
-      <dl className="divide-y divide-white/5">
+      <dl className="divide-y divide-black/5">
         {entries.map(([key, value]) => (
           <div
             key={key}

@@ -19,12 +19,12 @@ export function ProductCard({ product, className }: Props) {
     <Link
       href={`/productos/${product.slug}`}
       className={cn(
-        "group relative bg-carbon-800 border border-white/5 hover:border-signal/50",
+        "group relative bg-carbon-800 border border-black/5 hover:border-signal/50",
         "flex flex-col transition-all duration-200 h-full",
       )}
     >
       {/* Imagen o placeholder */}
-      <div className="relative aspect-[4/3] bg-carbon-700 border-b border-white/5 overflow-hidden">
+      <div className="relative aspect-[4/3] bg-carbon-700 border-b border-black/5 overflow-hidden">
         {product.thumbnail_url ? (
           <Image
             src={product.thumbnail_url}
@@ -40,7 +40,7 @@ export function ProductCard({ product, className }: Props) {
         )}
 
         {/* Stock badge */}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-carbon/80 backdrop-blur-sm px-2 py-1 border border-white/10">
+        <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-carbon/80 backdrop-blur-sm px-2 py-1 border border-black/10">
           <span className={cn("h-1.5 w-1.5 rounded-full", stockStatusColor(product.stock_status))} />
           <span className="font-mono text-[9px] uppercase tracking-techno text-steel-200">
             {stockStatusLabel(product.stock_status)}
@@ -49,7 +49,7 @@ export function ProductCard({ product, className }: Props) {
 
         {/* Brand tag */}
         {product.brand && (
-          <div className="absolute top-3 right-3 bg-carbon/80 backdrop-blur-sm px-2 py-1 border border-white/10">
+          <div className="absolute top-3 right-3 bg-carbon/80 backdrop-blur-sm px-2 py-1 border border-black/10">
             <span className="font-mono text-[9px] uppercase tracking-techno text-signal">
               {product.brand.name}
             </span>
@@ -76,7 +76,7 @@ export function ProductCard({ product, className }: Props) {
 
         {/* Specs preview */}
         {specEntries.length > 0 && (
-          <dl className="space-y-1 mb-4 mt-auto pt-4 border-t border-white/5">
+          <dl className="space-y-1 mb-4 mt-auto pt-4 border-t border-black/5">
             {specEntries.map(([k, v]) => (
               <div key={k} className="flex items-center justify-between gap-4 text-[11px]">
                 <dt className="font-mono uppercase tracking-techno text-steel-500 capitalize">
@@ -89,7 +89,7 @@ export function ProductCard({ product, className }: Props) {
         )}
 
         {/* Footer CTA */}
-        <div className="flex items-center justify-between pt-3 border-t border-white/5">
+        <div className="flex items-center justify-between pt-3 border-t border-black/5">
           <span className="text-xs text-steel-400">
             {product.category?.name ?? "Ver detalle"}
           </span>

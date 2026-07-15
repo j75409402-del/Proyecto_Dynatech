@@ -58,8 +58,8 @@ export default function ContactoPage() {
         </div>
 
         {/* Form */}
-        <div className="border border-white/10 p-6 sm:p-8 bg-carbon-800">
-          <div className="eyebrow mb-4 pb-2 border-b border-white/10">Formulario</div>
+        <div className="border border-black/10 p-6 sm:p-8 bg-carbon-800">
+          <div className="eyebrow mb-4 pb-2 border-b border-black/10">Formulario</div>
           <ContactForm />
         </div>
       </div>
@@ -81,7 +81,7 @@ function ContactBlock({
   external?: boolean;
 }) {
   const content = (
-    <div className="flex items-start gap-4 py-3 border-b border-white/5 group">
+    <div className="flex items-start gap-4 py-3 border-b border-black/5 group">
       <div className="text-signal shrink-0 mt-0.5">{icon}</div>
       <div>
         <div className="font-mono text-[10px] uppercase tracking-techno text-steel-400 mb-0.5">

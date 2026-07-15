@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --grid-line: rgba(255, 255, 255, 0.06);
+    --grid-line: rgba(11, 13, 16, 0.06);
   }
 
   * {
@@ -41,13 +41,13 @@
 
   /* Hairline separator */
   .hairline {
-    @apply h-px w-full bg-white/10;
+    @apply h-px w-full bg-black/10;
   }
 
   /* SKU pill — el elemento visual firma */
   .sku-tag {
     @apply inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-techno
-           text-steel-300 border border-white/10 px-2 py-0.5 rounded-xs;
+           text-steel-300 border border-black/10 px-2 py-0.5 rounded-xs;
   }
 
   /* Spec cell — pa' tablas de especificaciones */
@@ -58,7 +58,7 @@
     @apply font-mono text-sm text-surface;
   }
 
-  /* Grid pattern de fondo — sutil, solo en secciones oscuras */
+  /* Grid pattern de fondo — sutil, blueprint técnico */
   .grid-bg {
     background-image:
       linear-gradient(var(--grid-line) 1px, transparent 1px),
@@ -88,7 +88,7 @@
   }
 
   .btn-secondary {
-    @apply relative inline-flex items-center justify-center gap-2 border border-white/20 hover:border-signal/60
+    @apply relative inline-flex items-center justify-center gap-2 border border-black/20 hover:border-signal/60
            text-surface font-medium px-5 py-3 rounded-xs
            text-sm uppercase tracking-wider transition-all duration-300
            hover:shadow-[0_0_20px_-4px_rgba(228,0,43,0.5)]
@@ -102,7 +102,7 @@
 
   /* Card industrial — bordes duros, minimal chrome */
   .card {
-    @apply bg-carbon-800 border border-white/5 hover:border-white/15 rounded-xs
+    @apply bg-carbon-800 border border-black/5 hover:border-black/15 rounded-xs
            transition-colors;
   }
 

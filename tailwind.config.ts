@@ -5,21 +5,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Dynatech industrial palette
+        // Dynatech industrial palette — tema claro, fondo blanco
         carbon: {
-          DEFAULT: "#0E1116", // near-black, page base
-          900: "#0E1116",
-          800: "#15191F",
-          700: "#1D222A",
-          600: "#2A2F36",
-          500: "#3A4048",
+          DEFAULT: "#FFFFFF", // page base
+          900: "#FFFFFF",
+          800: "#F8FAFC", // tarjetas — apenas diferenciado del blanco
+          700: "#F1F5F9", // hover / elevación
+          600: "#E2E8F0", // divisores más marcados
+          500: "#CBD5E1", // bordes pesados
         },
         steel: {
-          DEFAULT: "#5B636E",
-          400: "#7A8390",
-          300: "#A0A8B4",
-          200: "#C7CCD3",
-          100: "#E4E7EB",
+          DEFAULT: "#334155",
+          100: "#0F172A", // reservado, tono más oscuro de la escala
+          200: "#1E293B", // texto secundario prominente (nav, párrafos)
+          300: "#334155", // texto de cuerpo / labels
+          400: "#475569", // eyebrows / etiquetas mono
+          500: "#64748B", // íconos / metadata
+          600: "#94A3B8", // patrón decorativo (placeholder)
         },
         signal: {
           DEFAULT: "#E4002B", // safety red — Dynatech accent
@@ -27,11 +29,11 @@ const config: Config = {
           soft: "#FEE7EB",
         },
         warning: {
-          DEFAULT: "#F2C438", // hazard yellow — used sparingly
+          DEFAULT: "#B9860C", // hazard yellow oscurecido — legible sobre blanco
         },
         surface: {
-          DEFAULT: "#F5F5F4",
-          alt: "#FAFAF9",
+          DEFAULT: "#0B0D10", // texto principal — casi negro, sobre fondo blanco
+          alt: "#14171C",
         },
       },
       fontFamily: {

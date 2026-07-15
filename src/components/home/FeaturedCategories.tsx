@@ -16,7 +16,7 @@ export async function FeaturedCategories() {
   if (!categories || categories.length === 0) return null;
 
   return (
-    <section id="categorias" className="section-pad border-b border-white/5">
+    <section id="categorias" className="section-pad border-b border-black/5">
       <div className="container-max">
         <Reveal className="flex items-end justify-between mb-12 gap-6 flex-wrap">
           <div>
@@ -31,7 +31,7 @@ export async function FeaturedCategories() {
           </Link>
         </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-black/5 border border-black/5">
           {categories.map((cat, i) => (
             <Reveal key={cat.id} delay={i * 0.07}>
               <TiltCard max={4} className="h-full">

@@ -20,7 +20,7 @@ const item: Variants = {
 export function Hero() {
   return (
     <section
-      className="relative overflow-hidden border-b border-white/5"
+      className="relative overflow-hidden border-b border-black/5"
       style={{ perspective: 1200 }}
     >
       <HeroScene />
@@ -76,7 +76,7 @@ export function Hero() {
                   Familias técnicas
                 </div>
               </div>
-              <div className="border-l border-white/20 pl-4">
+              <div className="border-l border-black/20 pl-4">
                 <div className="font-display font-semibold text-2xl text-surface text-numeric">
                   <Counter value={8} />
                 </div>
@@ -84,7 +84,7 @@ export function Hero() {
                   Marcas OEM
                 </div>
               </div>
-              <div className="border-l border-white/20 pl-4">
+              <div className="border-l border-black/20 pl-4">
                 <div className="font-display font-semibold text-2xl text-surface text-numeric">
                   <Counter value={24} suffix="h" />
                 </div>
@@ -129,9 +129,9 @@ function DatasheetCard() {
       <div className="absolute -bottom-2 -left-2 h-4 w-4 border-l-2 border-b-2 border-signal" />
       <div className="absolute -bottom-2 -right-2 h-4 w-4 border-r-2 border-b-2 border-signal" />
 
-      <div className="bg-carbon-800 border border-white/10 p-6 sm:p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)]">
+      <div className="bg-carbon-800 border border-black/10 p-6 sm:p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)]">
         {/* Header ficha */}
-        <div className="flex items-start justify-between mb-6 pb-4 border-b border-white/10">
+        <div className="flex items-start justify-between mb-6 pb-4 border-b border-black/10">
           <div>
             <div className="eyebrow mb-1">Ficha técnica</div>
             <div className="font-display text-xl text-surface">DSBC-32-100-PPVA-N3</div>
@@ -167,7 +167,7 @@ function DatasheetCard() {
           ].map(([k, v]) => (
             <div
               key={k}
-              className="flex items-center justify-between gap-4 py-1 border-b border-white/5 last:border-0"
+              className="flex items-center justify-between gap-4 py-1 border-b border-black/5 last:border-0"
             >
               <dt className="spec-key">{k}</dt>
               <dd className="spec-val text-numeric">{v}</dd>
@@ -176,7 +176,7 @@ function DatasheetCard() {
         </dl>
 
         {/* Footer con SKU */}
-        <div className="flex items-center justify-between pt-4 border-t border-white/10">
+        <div className="flex items-center justify-between pt-4 border-t border-black/10">
           <span className="sku-tag">SKU · FES-DSBC-32-100</span>
           <button className="btn-ghost text-xs">
             <Download className="h-3.5 w-3.5" />
