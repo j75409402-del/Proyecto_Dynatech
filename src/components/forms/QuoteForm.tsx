@@ -5,10 +5,11 @@ import { useSearchParams } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { CheckCircle2, Plus, Trash2, Send, AlertCircle } from "lucide-react";
+import { CheckCircle2, MessageSquare, Plus, Trash2, Send, AlertCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { whatsappQuoteRequest } from "@/lib/whatsapp";
 
 const quoteSchema = z.object({
   company_name: z.string().min(2, "Nombre de empresa requerido"),
@@ -35,7 +36,7 @@ export function QuoteForm() {
 
   const [state, setState] = useState<
     { status: "idle" | "submitting" } |
-    { status: "success"; quoteNumber: string } |
+    { status: "success"; quoteNumber: string; whatsappLink: string } |
     { status: "error"; message: string }
   >({ status: "idle" });
 
@@ -58,7 +59,8 @@ export function QuoteForm() {
       });
       if (!res.ok) throw new Error("No se pudo enviar la cotización");
       const json = await res.json();
-      setState({ status: "success", quoteNumber: json.quote_number });
+      const whatsappLink = whatsappQuoteRequest(data.items, data.company_name);
+      setState({ status: "success", quoteNumber: json.quote_number, whatsappLink });
     } catch (err) {
       setState({
         status: "error",
@@ -74,10 +76,19 @@ export function QuoteForm() {
         <h3 className="font-display text-2xl text-surface mb-2">
           Cotización recibida
         </h3>
-        <p className="text-steel-300 mb-4">
+        <p className="text-steel-300 mb-6">
           Tu solicitud <span className="font-mono text-signal">{state.quoteNumber}</span> ya
           está en cola. Un ingeniero de Dynatech te contactará en menos de 24 horas hábiles.
         </p>
+        <a
+          href={state.whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-primary"
+        >
+          <MessageSquare className="h-4 w-4" />
+          Continuar por WhatsApp
+        </a>
       </div>
     );
   }
