@@ -3,8 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, MessageSquare } from "lucide-react";
 import { NAV, CONTACT, SITE } from "@/lib/constants";
+import { whatsappGeneral } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -71,11 +72,13 @@ export function Navbar() {
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-3">
           <a
-            href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
+            href={whatsappGeneral()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
           >
-            <Phone className="h-4 w-4" />
-            <span className="font-mono">{CONTACT.phone}</span>
+            <MessageSquare className="h-4 w-4" />
+            <span className="font-mono">{CONTACT.whatsappDisplay}</span>
           </a>
           <Link
             href="/cotizacion"
@@ -113,10 +116,19 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
+          <a
+            href={whatsappGeneral()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 py-3 text-white/85 hover:text-white font-mono text-sm"
+          >
+            <MessageSquare className="h-4 w-4" />
+            {CONTACT.whatsappDisplay}
+          </a>
           <Link
             href="/cotizacion"
             onClick={() => setOpen(false)}
-            className="inline-flex items-center justify-center gap-2 bg-white hover:bg-white/90 text-signal font-medium py-3 rounded-xs text-sm uppercase tracking-wider transition-colors mt-4"
+            className="inline-flex items-center justify-center gap-2 bg-white hover:bg-white/90 text-signal font-medium py-3 rounded-xs text-sm uppercase tracking-wider transition-colors mt-2"
           >
             Solicitar cotización
           </Link>
