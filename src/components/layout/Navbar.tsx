@@ -119,6 +119,7 @@ export function Navbar() {
                        text-white font-medium py-2.5 px-5 rounded-full text-xs uppercase tracking-wider
                        transition-colors shrink-0"
           >
+            <MessageSquare className="h-3.5 w-3.5" />
             Solicitar cotización
           </Link>
 
@@ -180,6 +181,7 @@ export function Navbar() {
                        text-white font-medium py-3 rounded-full text-sm uppercase tracking-wider
                        transition-colors mt-2"
           >
+            <MessageSquare className="h-4 w-4" />
             Solicitar cotización
           </Link>
         </nav>
