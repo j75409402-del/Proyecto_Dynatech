@@ -120,7 +120,7 @@ export function Footer() {
 
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <p className="text-xs text-steel-400 font-mono">
-            © {new Date().getFullYear()} {SITE.name} SRL · RNC ###-#####-# · Santo Domingo, RD
+            © {new Date().getFullYear()} {SITE.name} SRL · RNC {SITE.rnc} · Santo Domingo, RD
           </p>
           <div className="flex gap-4 text-sm">
             <a

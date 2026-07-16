@@ -5,6 +5,7 @@ export const SITE = {
   description:
     "Distribuidor B2B de neumática, automatización, instrumentación y sensores industriales en República Dominicana.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://dynatech.do",
+  rnc: "133-45350-9",
 } as const;
 
 export const CONTACT = {
