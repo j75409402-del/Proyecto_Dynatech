@@ -79,10 +79,10 @@ export function ProductCard({ product, className }: Props) {
           <dl className="space-y-1 mb-4 mt-auto pt-4 border-t border-black/5 min-h-[68px]">
             {specEntries.map(([k, v]) => (
               <div key={k} className="flex items-center justify-between gap-4 text-[11px]">
-                <dt className="font-mono uppercase tracking-techno text-steel-500 capitalize">
+                <dt className="font-mono uppercase tracking-techno text-steel-500 capitalize shrink-0">
                   {k.replace(/_/g, " ")}
                 </dt>
-                <dd className="font-mono text-steel-200 text-numeric truncate">{v}</dd>
+                <dd className="font-mono text-steel-200 text-numeric truncate" title={v}>{v}</dd>
               </div>
             ))}
           </dl>

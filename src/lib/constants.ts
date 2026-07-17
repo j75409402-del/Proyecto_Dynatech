@@ -4,7 +4,7 @@ export const SITE = {
   tagline: "Piezas industriales que mantienen tu planta corriendo.",
   description:
     "Distribuidor B2B de neumática, automatización, instrumentación y sensores industriales en República Dominicana.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://dynatech.do",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.dynatech.com.do",
   rnc: "133-45350-9",
 } as const;
 

@@ -3,8 +3,24 @@ import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
-import { SITE } from "@/lib/constants";
+import { SITE, CONTACT } from "@/lib/constants";
 import "./globals.css";
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/logo-mark.png`,
+  description: SITE.description,
+  email: CONTACT.email,
+  telephone: CONTACT.phone,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: CONTACT.address,
+    addressCountry: "DO",
+  },
+};
 
 const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -63,6 +79,10 @@ export default function RootLayout({
       className={`${plexSans.variable} ${plexMono.variable}`}
     >
       <body className="bg-carbon text-surface antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

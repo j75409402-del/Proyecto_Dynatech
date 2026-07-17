@@ -32,35 +32,48 @@ export async function FeaturedCategories() {
         </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-black/5 border border-black/5">
-          {categories.map((cat, i) => (
-            <Reveal key={cat.id} delay={i * 0.07}>
-              <TiltCard max={4} className="h-full">
-                <Link
-                  href={`/categorias/${cat.slug}`}
-                  className="group relative flex h-full flex-col bg-carbon p-8 hover:bg-carbon-800 transition-colors"
-                >
-                  <div className="flex items-start justify-between mb-8">
-                    <span className="font-mono text-[10px] uppercase tracking-techno text-steel-400">
-                      {String(i + 1).padStart(2, "0")} / {String(categories.length).padStart(2, "0")}
-                    </span>
-                    <ArrowUpRight className="h-4 w-4 text-steel-500 group-hover:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
-                  </div>
+          {categories.map((cat, i) => {
+            const isLast = i === categories.length - 1;
+            const remSm = categories.length % 2;
+            const remLg = categories.length % 3;
+            const spanClass = [
+              isLast && remSm === 1 && "sm:col-span-2",
+              isLast && remLg === 1 && "lg:col-span-3",
+              isLast && remLg === 2 && "lg:col-span-2",
+            ]
+              .filter(Boolean)
+              .join(" ");
 
-                  <h3 className="font-display text-2xl text-surface mb-3">
-                    {cat.name}
-                  </h3>
-                  {cat.description && (
-                    <p className="text-sm text-steel-300 leading-relaxed line-clamp-2">
-                      {cat.description}
-                    </p>
-                  )}
+            return (
+              <Reveal key={cat.id} delay={i * 0.07} className={spanClass}>
+                <TiltCard max={4} className="h-full">
+                  <Link
+                    href={`/categorias/${cat.slug}`}
+                    className="group relative flex h-full flex-col bg-carbon p-8 hover:bg-carbon-800 transition-colors"
+                  >
+                    <div className="flex items-start justify-between mb-8">
+                      <span className="font-mono text-[10px] uppercase tracking-techno text-steel-400">
+                        {String(i + 1).padStart(2, "0")} / {String(categories.length).padStart(2, "0")}
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 text-steel-500 group-hover:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    </div>
 
-                  {/* Bottom accent line */}
-                  <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-signal group-hover:w-full transition-all duration-500" />
-                </Link>
-              </TiltCard>
-            </Reveal>
-          ))}
+                    <h3 className="font-display text-2xl text-surface mb-3">
+                      {cat.name}
+                    </h3>
+                    {cat.description && (
+                      <p className="text-sm text-steel-300 leading-relaxed line-clamp-2">
+                        {cat.description}
+                      </p>
+                    )}
+
+                    {/* Bottom accent line */}
+                    <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-signal group-hover:w-full transition-all duration-500" />
+                  </Link>
+                </TiltCard>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

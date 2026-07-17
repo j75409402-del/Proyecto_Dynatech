@@ -59,8 +59,23 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
   const specs = product.specs as Record<string, string> | null;
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    sku: product.sku,
+    description: product.short_desc ?? product.description ?? undefined,
+    image: product.thumbnail_url ?? undefined,
+    category: product.category?.name ?? undefined,
+    brand: product.brand ? { "@type": "Brand", name: product.brand.name } : undefined,
+  };
+
   return (
     <div className="container-max py-12 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 text-xs font-mono mb-8" aria-label="Breadcrumb">
         <Link href="/" className="text-steel-400 hover:text-signal">Inicio</Link>
