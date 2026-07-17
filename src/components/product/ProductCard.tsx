@@ -31,7 +31,7 @@ export function ProductCard({ product, className }: Props) {
             alt={product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <div className="absolute inset-0 grid place-items-center">
