@@ -74,9 +74,9 @@ export function ProductCard({ product, className }: Props) {
           </p>
         )}
 
-        {/* Specs preview */}
+        {/* Specs preview — altura reservada pa' 3 filas, así el pie queda alineado entre tarjetas */}
         {specEntries.length > 0 && (
-          <dl className="space-y-1 mb-4 mt-auto pt-4 border-t border-black/5">
+          <dl className="space-y-1 mb-4 mt-auto pt-4 border-t border-black/5 min-h-[68px]">
             {specEntries.map(([k, v]) => (
               <div key={k} className="flex items-center justify-between gap-4 text-[11px]">
                 <dt className="font-mono uppercase tracking-techno text-steel-500 capitalize">
