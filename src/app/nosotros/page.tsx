@@ -20,9 +20,9 @@ export default function NosotrosPage() {
             <span className="text-signal">Vendemos uptime.</span>
           </h1>
           <p className="text-xl text-steel-200 leading-relaxed max-w-3xl">
-            Dynatech Ingeniería SRL nació pa' resolver un problema concreto de la industria
-            dominicana: encontrar la pieza correcta, al precio correcto, sin esperar tres
-            semanas de importación mientras la producción se detiene.
+            Dynatech Ingeniería SRL nació para resolver un problema concreto de la industria
+            dominicana: encontrar la pieza correcta, al precio correcto, sin esperar semanas
+            de importación mientras la producción se detiene.
           </p>
         </div>
       </section>
@@ -33,24 +33,25 @@ export default function NosotrosPage() {
           <div>
             <div className="eyebrow mb-4">01 · Ingeniería primero</div>
             <p className="text-steel-200 leading-relaxed">
-              Detrás de cada cotización hay un ingeniero que entiende lo que estás
-              montando. No un vendedor leyendo hojas de datos. Preguntamos, dimensionamos,
-              recomendamos.
+              Detrás de cada cotización hay un ingeniero que comprende la aplicación,
+              no un vendedor leyendo hojas de datos. Evaluamos, dimensionamos y
+              recomendamos con criterio técnico.
             </p>
           </div>
           <div>
             <div className="eyebrow mb-4">02 · Distribución oficial</div>
             <p className="text-steel-200 leading-relaxed">
               Somos representantes autorizados de Festo, SMC, Siemens, Omron, Parker,
-              Schneider y otros. Cero réplicas, cero mercado gris. Cada pieza con garantía
-              del fabricante.
+              Schneider y otras marcas líderes. Sin réplicas ni mercado gris: cada pieza
+              cuenta con garantía del fabricante.
             </p>
           </div>
           <div>
             <div className="eyebrow mb-4">03 · Local, no lento</div>
             <p className="text-steel-200 leading-relaxed">
-              Inventario en Santo Domingo pa' consumibles y repuestos críticos. Importación
-              directa pa' equipos especiales — con tiempos definidos, no promesas vagas.
+              Contamos con inventario en Santo Domingo para consumibles y repuestos
+              críticos, e importación directa para equipos especiales, con tiempos de
+              entrega definidos.
             </p>
           </div>
         </div>
@@ -84,10 +85,10 @@ export default function NosotrosPage() {
       <section className="section-pad">
         <div className="container-max max-w-4xl text-center">
           <h2 className="font-display text-display-lg text-surface mb-4">
-            ¿Necesitas algo específico?
+            ¿Necesita una solución específica?
           </h2>
           <p className="text-steel-300 mb-8 max-w-xl mx-auto">
-            Cuéntanos qué proyecto tienes en manos y cotizamos.
+            Cuéntenos sobre su proyecto y le enviaremos una cotización.
           </p>
           <Link href="/cotizacion" className="btn-primary">
             Solicitar cotización
