@@ -1,26 +1,22 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { SITE } from "@/lib/constants";
 import "./globals.css";
 
-const inter = Inter({
+const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
   display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -64,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable}`}
+      className={`${plexSans.variable} ${plexMono.variable}`}
     >
       <body className="bg-carbon text-surface antialiased">
         <Navbar />
