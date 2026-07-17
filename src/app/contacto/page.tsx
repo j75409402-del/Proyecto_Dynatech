@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MapPin, Clock, MessageSquare } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { CONTACT } from "@/lib/constants";
 import { whatsappGeneral } from "@/lib/whatsapp";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -26,7 +27,7 @@ export default function ContactoPage() {
 
           <div className="space-y-6">
             <ContactBlock
-              icon={<MessageSquare className="h-5 w-5" />}
+              icon={<WhatsAppIcon className="h-5 w-5" />}
               label="WhatsApp"
               value="Respuesta inmediata"
               href={whatsappGeneral()}

@@ -5,11 +5,12 @@ import { useSearchParams } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { CheckCircle2, MessageSquare, Plus, Trash2, Send, AlertCircle } from "lucide-react";
+import { CheckCircle2, Plus, Trash2, Send, AlertCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { whatsappQuoteRequest } from "@/lib/whatsapp";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 const quoteSchema = z.object({
   company_name: z.string().min(2, "Nombre de empresa requerido"),
@@ -86,7 +87,7 @@ export function QuoteForm() {
           rel="noopener noreferrer"
           className="btn-primary"
         >
-          <MessageSquare className="h-4 w-4" />
+          <WhatsAppIcon className="h-4 w-4" />
           Continuar por WhatsApp
         </a>
       </div>

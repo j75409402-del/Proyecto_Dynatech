@@ -4,9 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Menu, X, MessageSquare, Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { NAV, CONTACT, SITE } from "@/lib/constants";
 import { whatsappGeneral } from "@/lib/whatsapp";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -45,7 +46,7 @@ export function Navbar() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-xs text-white/90 hover:text-white transition-colors"
           >
-            <MessageSquare className="h-3.5 w-3.5" />
+            <WhatsAppIcon className="h-3.5 w-3.5" />
             <span className="font-mono">{CONTACT.whatsappDisplay}</span>
           </a>
         </div>
@@ -119,7 +120,7 @@ export function Navbar() {
                        text-white font-medium py-2.5 px-5 rounded-full text-xs uppercase tracking-wider
                        transition-colors shrink-0"
           >
-            <MessageSquare className="h-3.5 w-3.5" />
+            <WhatsAppIcon className="h-3.5 w-3.5" />
             Solicitar cotización
           </Link>
 
@@ -171,7 +172,7 @@ export function Navbar() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 py-3 text-steel-200 hover:text-signal font-mono text-sm"
           >
-            <MessageSquare className="h-4 w-4" />
+            <WhatsAppIcon className="h-4 w-4" />
             {CONTACT.whatsappDisplay}
           </a>
           <Link
@@ -181,7 +182,7 @@ export function Navbar() {
                        text-white font-medium py-3 rounded-full text-sm uppercase tracking-wider
                        transition-colors mt-2"
           >
-            <MessageSquare className="h-4 w-4" />
+            <WhatsAppIcon className="h-4 w-4" />
             Solicitar cotización
           </Link>
         </nav>
