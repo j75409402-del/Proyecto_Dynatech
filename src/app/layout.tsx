@@ -78,13 +78,13 @@ export default function RootLayout({
       lang="es"
       className={`${plexSans.variable} ${plexMono.variable}`}
     >
-      <body className="bg-carbon text-surface antialiased">
+      <body className="bg-carbon text-surface antialiased flex min-h-screen flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppFab />
       </body>
