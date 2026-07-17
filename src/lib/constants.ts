@@ -12,7 +12,7 @@ export const CONTACT = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "18092844336",
   whatsappDisplay: "+1 (809) 284-4336",
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "ventas@dynatech.do",
-  phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+1 (809) 555-1234",
+  phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+1 (809) 284-4336",
   address: "Av. Rómulo Betancourt, Santo Domingo, República Dominicana",
   hours: "Lunes a Viernes · 8:00 AM - 5:30 PM",
 } as const;
