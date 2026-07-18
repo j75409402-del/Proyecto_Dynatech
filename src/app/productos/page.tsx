@@ -2,15 +2,18 @@ import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductFilters } from "@/components/product/ProductFilters";
+import { MobileFilters } from "@/components/product/MobileFilters";
 import { Reveal } from "@/components/motion/Reveal";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { computeCatalogCounts } from "@/lib/catalogCounts";
 import type { ProductWithRelations, Category } from "@/types";
 
 export const metadata: Metadata = {
   title: "Catálogo",
-  description: "Explora el catálogo completo de piezas industriales de Dynatech.",
+  description: "Explora el catálogo completo de piezas industriales de Dynatech: neumática, eléctrica industrial, sensores e instrumentación.",
 };
 
-type SearchParams = Promise<{ categoria?: string; marca?: string; q?: string }>;
+type SearchParams = Promise<{ categoria?: string; marca?: string; disponibilidad?: string; q?: string }>;
 
 export default async function ProductosPage({
   searchParams,
@@ -19,6 +22,9 @@ export default async function ProductosPage({
 }) {
   const params = await searchParams;
   const supabase = await createClient();
+
+  const activeBrandSlugs = params.marca?.split(",").filter(Boolean) ?? [];
+  const activeStock = params.disponibilidad?.split(",").filter(Boolean) ?? [];
 
   // Filtros dinámicos
   let query = supabase
@@ -34,7 +40,6 @@ export default async function ProductosPage({
       .eq("slug", params.categoria)
       .maybeSingle();
     if (cat) {
-      // Obtener también subcategorías
       const { data: children } = await supabase
         .from("categories")
         .select("id")
@@ -44,25 +49,36 @@ export default async function ProductosPage({
     }
   }
 
-  if (params.marca) {
-    const { data: brand } = await supabase
+  if (activeBrandSlugs.length > 0) {
+    const { data: matchedBrands } = await supabase
       .from("brands")
       .select("id")
-      .eq("slug", params.marca)
-      .maybeSingle();
-    if (brand) query = query.eq("brand_id", brand.id);
+      .in("slug", activeBrandSlugs);
+    if (matchedBrands?.length) {
+      query = query.in("brand_id", matchedBrands.map((b) => b.id));
+    }
+  }
+
+  if (activeStock.length > 0) {
+    query = query.in("stock_status", activeStock);
   }
 
   if (params.q) {
     query = query.or(`name.ilike.%${params.q}%,sku.ilike.%${params.q}%`);
   }
 
-  const [{ data: products, count }, categoriesRes, allCategoriesRes, brandsRes] = await Promise.all([
+  const [{ data: products, count }, categoriesRes, allCategoriesRes, brandsRes, allActiveRes] = await Promise.all([
     query.order("featured", { ascending: false }).order("created_at", { ascending: false }).limit(60),
     supabase.from("categories").select("*").is("parent_id", null).order("sort_order"),
     supabase.from("categories").select("*"),
     supabase.from("brands").select("*").order("sort_order"),
+    supabase.from("products").select("category_id, brand_id").eq("active", true),
   ]);
+
+  const { categoryCounts, brandCounts } = computeCatalogCounts(
+    allActiveRes.data ?? [],
+    allCategoriesRes.data ?? [],
+  );
 
   // Agrupamos por familia (categoría raíz) cuando se ve el catálogo completo sin filtrar —
   // con un filtro activo el listado ya está suficientemente acotado.
@@ -75,56 +91,90 @@ export default async function ProductosPage({
       )
     : null;
 
+  const activeCategory = params.categoria
+    ? (categoriesRes.data ?? []).find((c) => c.slug === params.categoria)
+    : null;
+
   return (
-    <div className="container-max py-12 sm:py-16">
-      {/* Header */}
-      <div className="mb-12">
-        <div className="eyebrow mb-3">Catálogo · {count ?? 0} productos</div>
-        <h1 className="font-display text-display-lg text-surface">
-          Piezas industriales <br />pa' tu operación.
-        </h1>
+    <div className="mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Breadcrumbs
+        items={[
+          { label: "Catálogo", href: "/productos" },
+          ...(activeCategory ? [{ label: activeCategory.name }] : []),
+        ]}
+      />
+
+      {/* Header — compacto */}
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h1 className="font-display text-display-md text-surface mb-2">
+            {activeCategory ? activeCategory.name : "Catálogo de productos"}
+          </h1>
+          <p className="text-sm text-steel-300 max-w-xl">
+            {activeCategory?.description ??
+              "Piezas y componentes industriales con inventario en Santo Domingo — neumática, eléctrica, sensores e instrumentación."}
+          </p>
+        </div>
+        <div className="font-mono text-xs uppercase tracking-techno text-steel-400 shrink-0">
+          {count ?? 0} {count === 1 ? "producto" : "productos"}
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
-        {/* Filters */}
-        <div className="lg:col-span-1">
+      <MobileFilters
+        categories={categoriesRes.data ?? []}
+        brands={brandsRes.data ?? []}
+        categoryCounts={Object.fromEntries(categoryCounts)}
+        brandCounts={Object.fromEntries(brandCounts)}
+        totalCount={allActiveRes.data?.length ?? 0}
+      />
+
+      <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-8 xl:gap-10">
+        {/* Filters — desktop */}
+        <div className="hidden lg:block">
           <ProductFilters
             categories={categoriesRes.data ?? []}
             brands={brandsRes.data ?? []}
+            categoryCounts={Object.fromEntries(categoryCounts)}
+            brandCounts={Object.fromEntries(brandCounts)}
+            totalCount={allActiveRes.data?.length ?? 0}
           />
         </div>
 
         {/* Grid */}
-        <div className="lg:col-span-3">
+        <div className="min-w-0">
           {!products || products.length === 0 ? (
             <EmptyState />
           ) : groups ? (
-            <div className="space-y-16">
+            <div className="space-y-14">
               {groups.map(({ category, items }, i) => (
                 <Reveal key={category.id} delay={i * 0.05}>
-                  <div className="flex items-baseline justify-between gap-4 mb-6 pb-3 border-b border-black/10">
+                  <div className="flex items-baseline justify-between gap-4 mb-5 pb-3 border-b border-black/10">
                     <h2 className="font-display text-xl text-surface">{category.name}</h2>
                     <span className="font-mono text-[11px] uppercase tracking-techno text-steel-400 shrink-0">
                       {items.length} {items.length === 1 ? "producto" : "productos"}
                     </span>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
-                    {items.map((product) => (
-                      <ProductCard key={product.id} product={product} />
-                    ))}
-                  </div>
+                  <ProductGrid products={items} />
                 </Reveal>
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
-              {(products as ProductWithRelations[]).map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <ProductGrid products={products as ProductWithRelations[]} />
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function ProductGrid({ products }: { products: ProductWithRelations[] }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 items-stretch">
+      {products.map((product, i) => (
+        <Reveal key={product.id} delay={Math.min(i, 8) * 0.04}>
+          <ProductCard product={product} />
+        </Reveal>
+      ))}
     </div>
   );
 }
@@ -160,7 +210,6 @@ function groupByTopLevelCategory(
     .filter((c) => buckets.has(c.id))
     .map((category) => ({ category, items: buckets.get(category.id)! }));
 
-  // Por si algún producto quedó sin categoría raíz reconocible
   const orphan = buckets.get("sin-categoria");
   if (orphan?.length) {
     ordered.push({
