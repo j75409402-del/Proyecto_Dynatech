@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight, Download, Package, Clock, Ruler } from "lucide-react";
+import { Download, Package, Clock, Ruler } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { SpecTable } from "@/components/product/SpecTable";
 import { QuoteButton } from "@/components/product/QuoteButton";
 import { ProductCard } from "@/components/product/ProductCard";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { stockStatusLabel, stockStatusColor, cn } from "@/lib/utils";
 import type { ProductWithRelations } from "@/types";
 
@@ -76,25 +76,15 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
-      {/* Breadcrumb */}
-      <nav className="flex items-center gap-1.5 text-xs font-mono mb-8" aria-label="Breadcrumb">
-        <Link href="/" className="text-steel-400 hover:text-signal">Inicio</Link>
-        <ChevronRight className="h-3 w-3 text-steel-500" />
-        <Link href="/productos" className="text-steel-400 hover:text-signal">Catálogo</Link>
-        {product.category && (
-          <>
-            <ChevronRight className="h-3 w-3 text-steel-500" />
-            <Link
-              href={`/categorias/${product.category.slug}`}
-              className="text-steel-400 hover:text-signal"
-            >
-              {product.category.name}
-            </Link>
-          </>
-        )}
-        <ChevronRight className="h-3 w-3 text-steel-500" />
-        <span className="text-signal uppercase tracking-techno">{product.sku}</span>
-      </nav>
+      <Breadcrumbs
+        items={[
+          { label: "Catálogo", href: "/productos" },
+          ...(product.category
+            ? [{ label: product.category.name, href: `/categorias/${product.category.slug}` }]
+            : []),
+          { label: product.name },
+        ]}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Imagen */}

@@ -3,17 +3,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { NAV, CONTACT, SITE } from "@/lib/constants";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { SearchAutocomplete } from "@/components/layout/SearchAutocomplete";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     function onScroll() {
@@ -24,22 +23,16 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  function handleSearch(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const q = new FormData(e.currentTarget).get("q");
-    router.push(q ? `/productos?q=${encodeURIComponent(String(q))}` : "/productos");
-  }
-
   return (
     <header className="sticky top-0 z-40 transition-all duration-300">
       {/* Franja utilitaria — WhatsApp */}
       <div
         className={cn(
           "overflow-hidden bg-signal transition-[max-height,opacity] duration-300",
-          scrolled ? "max-h-0 opacity-0" : "max-h-10 opacity-100",
+          scrolled ? "max-h-0 opacity-0" : "max-h-8 opacity-100",
         )}
       >
-        <div className="container-max flex h-9 items-center justify-end">
+        <div className="container-max flex h-7 items-center justify-end">
           <a
             href={whatsappGeneral()}
             target="_blank"
@@ -62,7 +55,7 @@ export function Navbar() {
         <div
           className={cn(
             "container-max flex items-center justify-between gap-6 transition-[height] duration-300",
-            scrolled ? "h-14" : "h-16",
+            scrolled ? "h-12" : "h-14",
           )}
         >
           {/* Brand */}
@@ -70,10 +63,10 @@ export function Navbar() {
             <Image
               src="/logo-mark.png"
               alt=""
-              width={36}
-              height={36}
+              width={32}
+              height={32}
               priority
-              className="h-9 w-9 shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:[transform:rotateY(18deg)]"
+              className="h-8 w-8 shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:[transform:rotateY(18deg)]"
             />
             <div className="hidden sm:block">
               <div className="font-display font-semibold text-signal leading-none">
@@ -99,19 +92,7 @@ export function Navbar() {
           </nav>
 
           {/* Buscador */}
-          <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-xs">
-            <label className="relative flex w-full items-center">
-              <Search className="pointer-events-none absolute left-3 h-4 w-4 text-steel-500" />
-              <input
-                type="search"
-                name="q"
-                placeholder="Buscar productos, SKU..."
-                className="w-full bg-carbon-700 hover:bg-carbon-600 focus:bg-carbon-600 border border-transparent
-                           focus:border-signal/40 rounded-full py-2 pl-9 pr-3 text-sm text-surface
-                           placeholder:text-steel-500 outline-none transition-colors"
-              />
-            </label>
-          </form>
+          <SearchAutocomplete className="hidden md:flex flex-1 max-w-xs" />
 
           {/* CTA */}
           <Link
@@ -143,18 +124,7 @@ export function Navbar() {
         )}
       >
         <nav className="container-max py-6 flex flex-col gap-1">
-          <form onSubmit={handleSearch} className="mb-3">
-            <label className="relative flex w-full items-center">
-              <Search className="pointer-events-none absolute left-3 h-4 w-4 text-steel-500" />
-              <input
-                type="search"
-                name="q"
-                placeholder="Buscar productos, SKU..."
-                className="w-full bg-carbon-700 border border-transparent focus:border-signal/40 rounded-full
-                           py-2.5 pl-9 pr-3 text-sm text-surface placeholder:text-steel-500 outline-none"
-              />
-            </label>
-          </form>
+          <SearchAutocomplete className="mb-3" onNavigate={() => setOpen(false)} />
 
           {NAV.main.map((item) => (
             <Link

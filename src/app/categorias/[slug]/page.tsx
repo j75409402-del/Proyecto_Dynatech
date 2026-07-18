@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { ProductCard } from "@/components/product/ProductCard";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import type { ProductWithRelations } from "@/types";
 
 type Params = Promise<{ slug: string }>;
@@ -53,14 +53,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
 
   return (
     <div className="container-max py-12 sm:py-16">
-      {/* Breadcrumb */}
-      <nav className="flex items-center gap-1.5 text-xs font-mono mb-8">
-        <Link href="/" className="text-steel-400 hover:text-signal">Inicio</Link>
-        <ChevronRight className="h-3 w-3 text-steel-500" />
-        <Link href="/productos" className="text-steel-400 hover:text-signal">Catálogo</Link>
-        <ChevronRight className="h-3 w-3 text-steel-500" />
-        <span className="text-signal uppercase tracking-techno">{category.name}</span>
-      </nav>
+      <Breadcrumbs items={[{ label: "Catálogo", href: "/productos" }, { label: category.name }]} />
 
       {/* Header */}
       <div className="mb-12 max-w-3xl">
@@ -94,7 +87,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
 
       {/* Products */}
       {products && products.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
           {(products as ProductWithRelations[]).map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
