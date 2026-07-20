@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { Search, Check, Star } from "lucide-react";
-import { updateStockStatus, toggleFeatured } from "@/app/admin/actions";
+import { updateStockStatus, updateStockQuantity, toggleFeatured } from "@/app/admin/actions";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
@@ -14,7 +14,7 @@ const STATUS_OPTIONS = [
 ];
 
 type Props = {
-  products: Pick<Product, "id" | "sku" | "name" | "stock_status" | "featured">[];
+  products: Pick<Product, "id" | "sku" | "name" | "stock_status" | "stock_quantity" | "featured">[];
 };
 
 export function AdminProductList({ products }: Props) {
@@ -23,6 +23,7 @@ export function AdminProductList({ products }: Props) {
   const [isPending, startTransition] = useTransition();
   const [localStatus, setLocalStatus] = useState<Record<string, string>>({});
   const [localFeatured, setLocalFeatured] = useState<Record<string, boolean>>({});
+  const [localQuantity, setLocalQuantity] = useState<Record<string, string>>({});
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -50,6 +51,17 @@ export function AdminProductList({ products }: Props) {
     });
   }
 
+  function handleQuantityCommit(productId: string, raw: string) {
+    const trimmed = raw.trim();
+    const quantity = trimmed === "" ? null : Number(trimmed);
+    if (quantity !== null && (!Number.isInteger(quantity) || quantity < 0)) return;
+    startTransition(async () => {
+      await updateStockQuantity(productId, quantity);
+      setSavedId(productId);
+      setTimeout(() => setSavedId((cur) => (cur === productId ? null : cur)), 1500);
+    });
+  }
+
   return (
     <div>
       <div className="relative max-w-sm mb-6">
@@ -69,6 +81,8 @@ export function AdminProductList({ products }: Props) {
         {filtered.map((product) => {
           const currentStatus = localStatus[product.id] ?? product.stock_status ?? "consultar";
           const isFeatured = localFeatured[product.id] ?? product.featured ?? false;
+          const currentQuantity =
+            localQuantity[product.id] ?? (product.stock_quantity != null ? String(product.stock_quantity) : "");
           return (
             <div
               key={product.id}
@@ -115,6 +129,26 @@ export function AdminProductList({ products }: Props) {
                     </option>
                   ))}
                 </select>
+                <label className="flex items-center gap-1.5 text-xs text-steel-400">
+                  Stock
+                  <input
+                    type="number"
+                    min={0}
+                    step={1}
+                    value={currentQuantity}
+                    placeholder="—"
+                    onChange={(e) =>
+                      setLocalQuantity((prev) => ({ ...prev, [product.id]: e.target.value }))
+                    }
+                    onBlur={(e) => handleQuantityCommit(product.id, e.target.value)}
+                    disabled={isPending}
+                    className={cn(
+                      "w-20 bg-carbon-800 border border-black/10 text-sm text-surface px-2 py-2",
+                      "focus:border-signal focus:ring-1 focus:ring-signal focus:outline-none",
+                      "rounded-xs transition-colors disabled:opacity-50",
+                    )}
+                  />
+                </label>
               </div>
             </div>
           );

@@ -27,24 +27,27 @@ export function slugify(text: string): string {
     .replace(/\s+/g, "-");
 }
 
-export function stockStatusLabel(status: string | null): string {
-  if (!status) return "Consultar disponibilidad";
-  const map: Record<string, string> = {
-    en_stock: "En stock",
-    bajo_pedido: "Bajo pedido",
-    consultar: "Consultar disponibilidad",
-    agotado: "Agotado",
-  };
-  return map[status] ?? status;
-}
-
-export function stockStatusColor(status: string | null): string {
-  if (!status) return "bg-steel-400";
-  const map: Record<string, string> = {
-    en_stock: "bg-emerald-500",
-    bajo_pedido: "bg-warning",
-    consultar: "bg-steel-400",
-    agotado: "bg-signal",
-  };
-  return map[status] ?? "bg-steel-400";
+/**
+ * De cara al público solo mostramos 2 estados (En stock / Agotado) — "bajo_pedido" y
+ * "consultar" se muestran como En stock con una aclaración, pa' no perder ventas reales
+ * de productos que sí se consiguen aunque no estén físicamente en el almacén hoy.
+ */
+export function stockDisplay(
+  status: string | null,
+  quantity?: number | null,
+): { available: boolean; label: string; sublabel: string } {
+  if (status === "agotado") {
+    return { available: false, label: "Agotado", sublabel: "Stock: 0 unidades" };
+  }
+  if (status === "en_stock" && typeof quantity === "number") {
+    return {
+      available: true,
+      label: "En stock",
+      sublabel: `Stock: ${quantity} unidad${quantity === 1 ? "" : "es"}`,
+    };
+  }
+  if (status === "en_stock") {
+    return { available: true, label: "En stock", sublabel: "" };
+  }
+  return { available: true, label: "En stock", sublabel: "Disponible bajo pedido" };
 }

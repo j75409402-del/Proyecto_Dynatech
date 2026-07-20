@@ -13,7 +13,7 @@ export default async function AdminPage() {
 
   const { data: products } = await supabase
     .from("products")
-    .select("id, sku, name, stock_status, featured")
+    .select("id, sku, name, stock_status, stock_quantity, featured")
     .order("name");
 
   return (

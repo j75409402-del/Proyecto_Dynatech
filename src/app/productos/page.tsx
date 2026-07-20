@@ -67,7 +67,14 @@ export default async function ProductosPage({
   }
 
   if (activeStock.length > 0) {
-    query = query.in("stock_status", activeStock);
+    // El filtro público solo conoce "disponible"/"agotado" (ver decisión en stockDisplay());
+    // "disponible" cubre en_stock/bajo_pedido/consultar, que de cara al cliente sí se consiguen.
+    const statusValues = new Set<string>();
+    if (activeStock.includes("disponible")) {
+      statusValues.add("en_stock").add("bajo_pedido").add("consultar");
+    }
+    if (activeStock.includes("agotado")) statusValues.add("agotado");
+    query = query.in("stock_status", Array.from(statusValues));
   }
 
   if (params.q) {

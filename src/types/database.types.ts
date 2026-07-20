@@ -182,6 +182,7 @@ export type Database = {
           slug: string
           specs: Json | null
           stock_status: string | null
+          stock_quantity: number | null
           thumbnail_url: string | null
           updated_at: string | null
         }
@@ -207,6 +208,7 @@ export type Database = {
           slug: string
           specs?: Json | null
           stock_status?: string | null
+          stock_quantity?: number | null
           thumbnail_url?: string | null
           updated_at?: string | null
         }
@@ -232,6 +234,7 @@ export type Database = {
           slug?: string
           specs?: Json | null
           stock_status?: string | null
+          stock_quantity?: number | null
           thumbnail_url?: string | null
           updated_at?: string | null
         }
@@ -248,6 +251,62 @@ export type Database = {
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_variants: {
+        Row: {
+          active: boolean
+          attributes: Json
+          created_at: string
+          id: string
+          label: string
+          price: number | null
+          product_id: string
+          sku: string
+          sort_order: number
+          stock_quantity: number | null
+          stock_status: string
+          updated_at: string
+          weight_kg: number | null
+        }
+        Insert: {
+          active?: boolean
+          attributes?: Json
+          created_at?: string
+          id?: string
+          label: string
+          price?: number | null
+          product_id: string
+          sku: string
+          sort_order?: number
+          stock_quantity?: number | null
+          stock_status?: string
+          updated_at?: string
+          weight_kg?: number | null
+        }
+        Update: {
+          active?: boolean
+          attributes?: Json
+          created_at?: string
+          id?: string
+          label?: string
+          price?: number | null
+          product_id?: string
+          sku?: string
+          sort_order?: number
+          stock_quantity?: number | null
+          stock_status?: string
+          updated_at?: string
+          weight_kg?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_variants_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
             referencedColumns: ["id"]
           },
         ]

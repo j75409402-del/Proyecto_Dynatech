@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import type { ProductWithRelations } from "@/types";
-import { stockStatusLabel, stockStatusColor, cn } from "@/lib/utils";
+import { stockDisplay, cn } from "@/lib/utils";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 
@@ -12,6 +12,8 @@ type Props = {
 };
 
 export function ProductCard({ product, className }: Props) {
+  const stock = stockDisplay(product.stock_status, product.stock_quantity);
+
   return (
     <TiltCard max={4} glare className={className}>
       <div
@@ -39,9 +41,9 @@ export function ProductCard({ product, className }: Props) {
             )}
 
             <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-carbon/80 backdrop-blur-sm px-2 py-1 border border-black/10">
-              <span className={cn("h-1.5 w-1.5 rounded-full", stockStatusColor(product.stock_status))} />
+              <span className={cn("h-1.5 w-1.5 rounded-full", stock.available ? "bg-emerald-500" : "bg-signal")} />
               <span className="font-mono text-[9px] uppercase tracking-techno text-steel-200">
-                {stockStatusLabel(product.stock_status)}
+                {stock.label}
               </span>
             </div>
 

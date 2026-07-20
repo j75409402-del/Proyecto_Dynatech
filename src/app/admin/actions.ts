@@ -35,6 +35,25 @@ export async function updateStockStatus(productId: string, status: string) {
   revalidatePath("/productos");
 }
 
+export async function updateStockQuantity(productId: string, quantity: number | null) {
+  await requireAdmin();
+
+  if (quantity !== null && (!Number.isInteger(quantity) || quantity < 0)) {
+    throw new Error("Cantidad de stock inválida");
+  }
+
+  const supabase = createServiceClient();
+  const { error } = await supabase
+    .from("products")
+    .update({ stock_quantity: quantity })
+    .eq("id", productId);
+
+  if (error) throw new Error("No se pudo actualizar la cantidad de stock");
+
+  revalidatePath("/admin");
+  revalidatePath("/productos");
+}
+
 export async function toggleFeatured(productId: string, featured: boolean) {
   await requireAdmin();
 

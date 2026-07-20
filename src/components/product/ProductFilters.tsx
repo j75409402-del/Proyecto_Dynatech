@@ -6,7 +6,6 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { ChevronDown, Search, X } from "lucide-react";
 import type { Category, Brand } from "@/types";
 import { CategoryIcon } from "@/lib/categoryIcons";
-import { stockStatusLabel } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -17,7 +16,10 @@ type Props = {
   totalCount: number;
 };
 
-const STOCK_OPTIONS = ["en_stock", "bajo_pedido", "consultar", "agotado"];
+const STOCK_OPTIONS = [
+  { value: "disponible", label: "Disponible" },
+  { value: "agotado", label: "Agotado" },
+];
 
 export function ProductFilters({ categories, brands, categoryCounts, brandCounts, totalCount }: Props) {
   const pathname = usePathname();
@@ -175,12 +177,12 @@ export function ProductFilters({ categories, brands, categoryCounts, brandCounts
         onToggle={() => setOpenSections((s) => ({ ...s, stock: !s.stock }))}
       >
         <ul className="space-y-0.5">
-          {STOCK_OPTIONS.map((status) => {
-            const checked = activeStock.has(status);
+          {STOCK_OPTIONS.map((opt) => {
+            const checked = activeStock.has(opt.value);
             return (
-              <li key={status}>
+              <li key={opt.value}>
                 <Link
-                  href={toggleSetParam("disponibilidad", status, activeStock)}
+                  href={toggleSetParam("disponibilidad", opt.value, activeStock)}
                   className="flex items-center gap-2 rounded-xs px-2 py-1.5 text-sm text-steel-300
                              hover:bg-carbon-700 hover:text-surface transition-colors"
                 >
@@ -192,7 +194,7 @@ export function ProductFilters({ categories, brands, categoryCounts, brandCounts
                   >
                     {checked && <CheckIcon />}
                   </span>
-                  {stockStatusLabel(status)}
+                  {opt.label}
                 </Link>
               </li>
             );
