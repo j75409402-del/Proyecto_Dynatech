@@ -18,13 +18,21 @@ const companyLinks = [
   { label: "Contacto",     href: "/contacto" },
 ];
 
+const legalLinks = [
+  { label: "Preguntas frecuentes", href: "/faq" },
+  { label: "Garantías",            href: "/garantias" },
+  { label: "Devoluciones",         href: "/devoluciones" },
+  { label: "Privacidad",           href: "/privacidad" },
+  { label: "Términos y condiciones", href: "/terminos" },
+];
+
 export function Footer() {
   return (
     <footer className="bg-carbon-900 border-t border-black/5 mt-24">
       <div className="container-max py-16">
-        <Reveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <Reveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
           {/* Brand + tagline */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
               <Image
                 src="/logo-mark.png"
@@ -81,6 +89,23 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Ayuda / legal */}
+          <div>
+            <div className="eyebrow mb-4">Ayuda</div>
+            <ul className="space-y-2">
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-steel-200 hover:text-signal transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Contacto */}
           <div>
             <div className="eyebrow mb-4">Contacto</div>
@@ -122,6 +147,9 @@ export function Footer() {
             © {new Date().getFullYear()} {SITE.name} SRL · RNC {SITE.rnc} · Santo Domingo, RD
           </p>
           <div className="flex gap-4 text-sm">
+            <Link href="/mapa-del-sitio" className="text-steel-400 hover:text-signal transition-colors">
+              Mapa del sitio
+            </Link>
             <a
               href={SOCIAL.instagram}
               target="_blank"

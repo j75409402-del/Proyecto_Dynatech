@@ -6,6 +6,7 @@ import { motion, type Variants } from "framer-motion";
 import { HeroScene } from "@/components/motion/HeroScene";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { Counter } from "@/components/motion/Counter";
+import { cn } from "@/lib/utils";
 
 const container: Variants = {
   hidden: {},
@@ -17,7 +18,21 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] } },
 };
 
-export function Hero() {
+type Props = {
+  stats: { familias: number; marcas: number };
+};
+
+const GRID_COLS = { 1: "grid-cols-1", 2: "grid-cols-2", 3: "grid-cols-3" } as const;
+
+export function Hero({ stats }: Props) {
+  const statBlocks = [
+    stats.familias > 0
+      ? { value: stats.familias, suffix: "+", label: "Familias técnicas" }
+      : null,
+    stats.marcas > 0 ? { value: stats.marcas, suffix: "+", label: "Marcas OEM" } : null,
+    { value: 24, suffix: "h", label: "Respuesta cotización" },
+  ].filter((b): b is { value: number; suffix: string; label: string } => b !== null);
+
   return (
     <section
       className="relative overflow-hidden border-b border-black/5"
@@ -57,7 +72,11 @@ export function Hero() {
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap gap-3">
-              <Link href="/productos" className="btn-primary group/btn">
+              <Link
+                href="/productos"
+                className="btn-primary group/btn px-7 py-4 text-sm shadow-[0_10px_40px_-8px_rgba(228,0,43,0.55)]
+                           hover:shadow-[0_14px_46px_-6px_rgba(228,0,43,0.7)] hover:scale-[1.03] transition-all"
+              >
                 Explorar catálogo
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
               </Link>
@@ -66,33 +85,27 @@ export function Hero() {
               </Link>
             </motion.div>
 
-            {/* Stats bar */}
-            <motion.div variants={item} className="mt-14 grid grid-cols-3 gap-6 max-w-lg">
-              <div className="border-l border-signal pl-4">
-                <div className="font-display font-semibold text-2xl text-surface text-numeric">
-                  <Counter value={6} suffix="+" />
-                </div>
-                <div className="font-mono text-[10px] uppercase tracking-techno text-steel-400 mt-1">
-                  Familias técnicas
-                </div>
-              </div>
-              <div className="border-l border-black/20 pl-4">
-                <div className="font-display font-semibold text-2xl text-surface text-numeric">
-                  <Counter value={8} />
-                </div>
-                <div className="font-mono text-[10px] uppercase tracking-techno text-steel-400 mt-1">
-                  Marcas OEM
-                </div>
-              </div>
-              <div className="border-l border-black/20 pl-4">
-                <div className="font-display font-semibold text-2xl text-surface text-numeric">
-                  <Counter value={24} suffix="h" />
-                </div>
-                <div className="font-mono text-[10px] uppercase tracking-techno text-steel-400 mt-1">
-                  Respuesta cotización
-                </div>
-              </div>
-            </motion.div>
+            {/* Stats bar — solo se muestran los datos reales (nada en cero) */}
+            {statBlocks.length > 0 && (
+              <motion.div
+                variants={item}
+                className={cn("mt-14 grid gap-6 max-w-lg", GRID_COLS[statBlocks.length as 1 | 2 | 3])}
+              >
+                {statBlocks.map((block, i) => (
+                  <div
+                    key={block.label}
+                    className={cn("pl-4", i === 0 ? "border-l border-signal" : "border-l border-black/20")}
+                  >
+                    <div className="font-display font-semibold text-2xl text-surface text-numeric">
+                      <Counter value={block.value} suffix={block.suffix} />
+                    </div>
+                    <div className="font-mono text-[10px] uppercase tracking-techno text-steel-400 mt-1">
+                      {block.label}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            )}
           </motion.div>
 
           {/* DERECHA — Datasheet mockup en 3D (elemento firma) */}

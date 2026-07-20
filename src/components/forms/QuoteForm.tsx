@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { whatsappQuoteRequest } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { useCart } from "@/components/cart/CartContext";
 
 const quoteSchema = z.object({
   company_name: z.string().min(2, "Nombre de empresa requerido"),
@@ -34,6 +35,8 @@ export function QuoteForm() {
   const searchParams = useSearchParams();
   const prefilledSku = searchParams.get("sku") ?? "";
   const prefilledName = searchParams.get("nombre") ?? "";
+  const { items: cartItems, clearCart } = useCart();
+  const appliedCartRef = useRef(false);
 
   const [state, setState] = useState<
     { status: "idle" | "submitting" } |
@@ -48,7 +51,15 @@ export function QuoteForm() {
     },
   });
 
-  const { fields, append, remove } = useFieldArray({ control, name: "items" });
+  const { fields, append, remove, replace } = useFieldArray({ control, name: "items" });
+
+  // Si venimos del carrito (sin ?sku= puntual) y hay ítems guardados, poblamos el form con ellos.
+  useEffect(() => {
+    if (appliedCartRef.current || prefilledSku) return;
+    if (cartItems.length === 0) return;
+    replace(cartItems.map((it) => ({ sku: it.sku, name: it.name, quantity: it.quantity, notes: "" })));
+    appliedCartRef.current = true;
+  }, [cartItems, prefilledSku, replace]);
 
   const onSubmit = async (data: QuoteFormData) => {
     setState({ status: "submitting" });
@@ -61,6 +72,7 @@ export function QuoteForm() {
       if (!res.ok) throw new Error("No se pudo enviar la cotización");
       const json = await res.json();
       const whatsappLink = whatsappQuoteRequest(data.items, data.company_name);
+      clearCart();
       setState({ status: "success", quoteNumber: json.quote_number, whatsappLink });
     } catch (err) {
       setState({

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MessageSquare } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import type { ProductWithRelations } from "@/types";
 import { stockStatusLabel, stockStatusColor, cn } from "@/lib/utils";
 import { TiltCard } from "@/components/motion/TiltCard";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
 
 type Props = {
   product: ProductWithRelations;
@@ -67,18 +68,19 @@ export function ProductCard({ product, className }: Props) {
           </div>
         </Link>
 
-        {/* CTA — link independiente, no anidado dentro del Link de arriba */}
-        <div className="relative p-4 pt-0">
+        {/* CTAs — links/botón independientes, no anidados dentro del Link de arriba */}
+        <div className="relative grid grid-cols-2 gap-2 p-4 pt-0">
           <Link
-            href={`/cotizacion?sku=${encodeURIComponent(product.sku)}&nombre=${encodeURIComponent(product.name)}`}
-            className="relative z-10 flex w-full items-center justify-center gap-1.5 border border-black/10
-                       hover:border-signal hover:bg-signal hover:text-white
+            href={`/productos/${product.slug}`}
+            className="relative z-10 flex items-center justify-center gap-1.5 border border-black/10
+                       hover:border-signal hover:text-signal
                        text-steel-300 text-xs font-medium uppercase tracking-wider py-2.5
                        transition-colors duration-200"
           >
-            <MessageSquare className="h-3.5 w-3.5" />
-            Solicitar cotización
+            Ver detalles
+            <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
+          <AddToCartButton product={product} variant="primary" className="text-[10px] gap-1 px-2 py-2.5" />
         </div>
       </div>
     </TiltCard>

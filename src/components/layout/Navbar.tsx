@@ -3,16 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { NAV, CONTACT, SITE } from "@/lib/constants";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { SearchAutocomplete } from "@/components/layout/SearchAutocomplete";
+import { useCart } from "@/components/cart/CartContext";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { totalCount } = useCart();
 
   useEffect(() => {
     function onScroll() {
@@ -105,6 +107,20 @@ export function Navbar() {
             Solicitar cotización
           </Link>
 
+          {/* Carrito de cotización */}
+          <Link
+            href="/carrito"
+            className="relative inline-flex items-center justify-center p-2 text-steel-200 hover:text-signal transition-colors shrink-0"
+            aria-label={totalCount > 0 ? `Carrito de cotización, ${totalCount} ítems` : "Carrito de cotización"}
+          >
+            <ShoppingCart className="h-5 w-5" />
+            {totalCount > 0 && (
+              <span className="absolute top-0.5 right-0.5 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-signal px-1 text-[9px] font-bold leading-none text-white">
+                {totalCount}
+              </span>
+            )}
+          </Link>
+
           {/* Menú mobile */}
           <button
             className="lg:hidden text-surface p-2 -mr-2"
@@ -136,6 +152,21 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
+          <Link
+            href="/carrito"
+            onClick={() => setOpen(false)}
+            className="flex items-center justify-between py-3 border-b border-black/5 text-steel-200 hover:text-signal font-medium"
+          >
+            <span className="flex items-center gap-2">
+              <ShoppingCart className="h-4 w-4" />
+              Carrito de cotización
+            </span>
+            {totalCount > 0 && (
+              <span className="flex h-5 min-w-[20px] items-center justify-center rounded-full bg-signal px-1.5 text-[10px] font-bold text-white">
+                {totalCount}
+              </span>
+            )}
+          </Link>
           <a
             href={whatsappGeneral()}
             target="_blank"

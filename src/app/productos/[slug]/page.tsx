@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Download, Package, Clock, Ruler } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { SpecTable } from "@/components/product/SpecTable";
 import { QuoteButton } from "@/components/product/QuoteButton";
 import { ProductCard } from "@/components/product/ProductCard";
+import { ProductGallery } from "@/components/product/ProductGallery";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { stockStatusLabel, stockStatusColor, cn } from "@/lib/utils";
 import type { ProductWithRelations } from "@/types";
@@ -58,6 +58,9 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     .limit(3);
 
   const specs = product.specs as Record<string, string> | null;
+  const galleryImages = Array.from(
+    new Set([product.thumbnail_url, ...((product.images as string[] | null) ?? [])].filter(Boolean)),
+  ) as string[];
 
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -88,32 +91,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Imagen */}
-        <div className="relative aspect-square bg-carbon-800 border border-black/10">
-          {product.thumbnail_url ? (
-            <Image
-              src={product.thumbnail_url}
-              alt={product.name}
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-contain p-8"
-            />
-          ) : (
-            <div className="absolute inset-0 grid place-items-center">
-              <div className="text-steel-600 opacity-30">
-                <svg width="180" height="180" viewBox="0 0 80 80" fill="none">
-                  <circle cx="40" cy="40" r="30" stroke="currentColor" strokeWidth="0.5" strokeDasharray="4 4" />
-                  <circle cx="40" cy="40" r="18" stroke="currentColor" strokeWidth="0.5" />
-                </svg>
-              </div>
-            </div>
-          )}
-
-          {/* Corner brackets */}
-          <div className="absolute -top-2 -left-2 h-4 w-4 border-l-2 border-t-2 border-signal" />
-          <div className="absolute -top-2 -right-2 h-4 w-4 border-r-2 border-t-2 border-signal" />
-          <div className="absolute -bottom-2 -left-2 h-4 w-4 border-l-2 border-b-2 border-signal" />
-          <div className="absolute -bottom-2 -right-2 h-4 w-4 border-r-2 border-b-2 border-signal" />
-        </div>
+        <ProductGallery images={galleryImages} alt={product.name} />
 
         {/* Info */}
         <div>

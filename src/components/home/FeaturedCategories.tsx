@@ -50,7 +50,8 @@ export async function FeaturedCategories() {
                 <TiltCard max={4} className="h-full">
                   <Link
                     href={`/categorias/${cat.slug}`}
-                    className="group relative flex h-full flex-col bg-carbon hover:bg-carbon-800 transition-colors"
+                    className="group relative flex h-full flex-col bg-carbon hover:bg-carbon-800
+                               hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-all duration-300"
                   >
                     {cat.image_url && (
                       <div className="relative aspect-[16/9] bg-carbon-700 border-b border-black/5 overflow-hidden">

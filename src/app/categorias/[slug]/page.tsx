@@ -33,21 +33,30 @@ export default async function CategoryPage({ params }: { params: Params }) {
 
   if (!category) notFound();
 
-  // Subcategorías
-  const { data: subcategories } = await supabase
-    .from("categories")
-    .select("*")
-    .eq("parent_id", category.id)
-    .order("sort_order");
+  // Subcategorías directas (para los chips) y TODOS los descendientes (para no perder
+  // productos de sub-subcategorías, ej. Neumática → Cilindros → Doble efecto).
+  const { data: allCategories } = await supabase.from("categories").select("*");
+  const subcategories = (allCategories ?? [])
+    .filter((c) => c.parent_id === category.id)
+    .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0));
 
-  // Productos: si es padre, buscar en padre + subcategorías
-  const catIds = [category.id, ...(subcategories?.map((s) => s.id) ?? [])];
+  const catIds = new Set([category.id]);
+  let expanded = true;
+  while (expanded) {
+    expanded = false;
+    for (const c of allCategories ?? []) {
+      if (c.parent_id && catIds.has(c.parent_id) && !catIds.has(c.id)) {
+        catIds.add(c.id);
+        expanded = true;
+      }
+    }
+  }
 
   const { data: products } = await supabase
     .from("products")
     .select("*, category:categories(*), brand:brands(*)")
     .eq("active", true)
-    .in("category_id", catIds)
+    .in("category_id", Array.from(catIds))
     .order("featured", { ascending: false })
     .limit(60);
 

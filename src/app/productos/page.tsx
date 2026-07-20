@@ -26,6 +26,10 @@ export default async function ProductosPage({
   const activeBrandSlugs = params.marca?.split(",").filter(Boolean) ?? [];
   const activeStock = params.disponibilidad?.split(",").filter(Boolean) ?? [];
 
+  // Categorías completas — las necesitamos antes de armar la query si hay búsqueda por texto,
+  // para poder expandir "cilindro" a la categoría Cilindros + sus subcategorías/accesorios.
+  const { data: allCategories } = await supabase.from("categories").select("*");
+
   // Filtros dinámicos
   let query = supabase
     .from("products")
@@ -33,19 +37,22 @@ export default async function ProductosPage({
     .eq("active", true);
 
   if (params.categoria) {
-    // Resolvemos la categoría por slug pa' obtener el id (incluye subcategorías si es padre)
-    const { data: cat } = await supabase
-      .from("categories")
-      .select("id")
-      .eq("slug", params.categoria)
-      .maybeSingle();
+    // Resolvemos la categoría por slug e incluimos TODOS sus descendientes (no solo un nivel),
+    // pa' que filtrar por una categoría raíz también traiga productos de sub-subcategorías.
+    const cat = (allCategories ?? []).find((c) => c.slug === params.categoria);
     if (cat) {
-      const { data: children } = await supabase
-        .from("categories")
-        .select("id")
-        .eq("parent_id", cat.id);
-      const ids = [cat.id, ...(children?.map((c) => c.id) ?? [])];
-      query = query.in("category_id", ids);
+      const ids = new Set([cat.id]);
+      let expanded = true;
+      while (expanded) {
+        expanded = false;
+        for (const c of allCategories ?? []) {
+          if (c.parent_id && ids.has(c.parent_id) && !ids.has(c.id)) {
+            ids.add(c.id);
+            expanded = true;
+          }
+        }
+      }
+      query = query.in("category_id", Array.from(ids));
     }
   }
 
@@ -64,20 +71,44 @@ export default async function ProductosPage({
   }
 
   if (params.q) {
-    query = query.or(`name.ilike.%${params.q}%,sku.ilike.%${params.q}%`);
+    // Búsqueda "a lo Amazon": además del texto, si el término coincide con el nombre de una
+    // categoría (ej. "cilindro" → Cilindros neumáticos) traemos también sus subcategorías/accesorios.
+    const qLower = params.q.toLowerCase();
+    const matchedCatIds = new Set(
+      (allCategories ?? []).filter((c) => c.name.toLowerCase().includes(qLower)).map((c) => c.id),
+    );
+    let expanded = true;
+    while (expanded) {
+      expanded = false;
+      for (const c of allCategories ?? []) {
+        if (c.parent_id && matchedCatIds.has(c.parent_id) && !matchedCatIds.has(c.id)) {
+          matchedCatIds.add(c.id);
+          expanded = true;
+        }
+      }
+    }
+
+    const orParts = [
+      `name.ilike.%${params.q}%`,
+      `sku.ilike.%${params.q}%`,
+      `search_tags.ilike.%${params.q}%`,
+    ];
+    if (matchedCatIds.size > 0) {
+      orParts.push(`category_id.in.(${Array.from(matchedCatIds).join(",")})`);
+    }
+    query = query.or(orParts.join(","));
   }
 
-  const [{ data: products, count }, categoriesRes, allCategoriesRes, brandsRes, allActiveRes] = await Promise.all([
+  const [{ data: products, count }, categoriesRes, brandsRes, allActiveRes] = await Promise.all([
     query.order("featured", { ascending: false }).order("created_at", { ascending: false }).limit(60),
     supabase.from("categories").select("*").is("parent_id", null).order("sort_order"),
-    supabase.from("categories").select("*"),
     supabase.from("brands").select("*").order("sort_order"),
     supabase.from("products").select("category_id, brand_id").eq("active", true),
   ]);
 
   const { categoryCounts, brandCounts } = computeCatalogCounts(
     allActiveRes.data ?? [],
-    allCategoriesRes.data ?? [],
+    allCategories ?? [],
   );
 
   // Agrupamos por familia (categoría raíz) cuando se ve el catálogo completo sin filtrar —
@@ -87,7 +118,7 @@ export default async function ProductosPage({
     ? groupByTopLevelCategory(
         (products as ProductWithRelations[]) ?? [],
         categoriesRes.data ?? [],
-        allCategoriesRes.data ?? [],
+        allCategories ?? [],
       )
     : null;
 
