@@ -23,7 +23,7 @@ export async function FeaturedProducts() {
           <div>
             <div className="eyebrow mb-3">02 · Productos destacados</div>
             <h2 className="font-display text-display-lg text-surface max-w-2xl">
-              Del catálogo <br />esta semana.
+              Productos más vendidos
             </h2>
           </div>
           <Link href="/productos" className="btn-ghost">

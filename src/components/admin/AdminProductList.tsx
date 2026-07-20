@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
-import { Search, Check } from "lucide-react";
-import { updateStockStatus } from "@/app/admin/actions";
+import { Search, Check, Star } from "lucide-react";
+import { updateStockStatus, toggleFeatured } from "@/app/admin/actions";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
@@ -14,7 +14,7 @@ const STATUS_OPTIONS = [
 ];
 
 type Props = {
-  products: Pick<Product, "id" | "sku" | "name" | "stock_status">[];
+  products: Pick<Product, "id" | "sku" | "name" | "stock_status" | "featured">[];
 };
 
 export function AdminProductList({ products }: Props) {
@@ -22,6 +22,7 @@ export function AdminProductList({ products }: Props) {
   const [savedId, setSavedId] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const [localStatus, setLocalStatus] = useState<Record<string, string>>({});
+  const [localFeatured, setLocalFeatured] = useState<Record<string, boolean>>({});
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -35,6 +36,15 @@ export function AdminProductList({ products }: Props) {
     setLocalStatus((prev) => ({ ...prev, [productId]: status }));
     startTransition(async () => {
       await updateStockStatus(productId, status);
+      setSavedId(productId);
+      setTimeout(() => setSavedId((cur) => (cur === productId ? null : cur)), 1500);
+    });
+  }
+
+  function handleFeaturedToggle(productId: string, current: boolean) {
+    setLocalFeatured((prev) => ({ ...prev, [productId]: !current }));
+    startTransition(async () => {
+      await toggleFeatured(productId, !current);
       setSavedId(productId);
       setTimeout(() => setSavedId((cur) => (cur === productId ? null : cur)), 1500);
     });
@@ -58,6 +68,7 @@ export function AdminProductList({ products }: Props) {
       <div className="border border-black/10 divide-y divide-black/5">
         {filtered.map((product) => {
           const currentStatus = localStatus[product.id] ?? product.stock_status ?? "consultar";
+          const isFeatured = localFeatured[product.id] ?? product.featured ?? false;
           return (
             <div
               key={product.id}
@@ -72,6 +83,22 @@ export function AdminProductList({ products }: Props) {
                 {savedId === product.id && (
                   <Check className="h-4 w-4 text-emerald-500" />
                 )}
+                <button
+                  type="button"
+                  onClick={() => handleFeaturedToggle(product.id, isFeatured)}
+                  disabled={isPending}
+                  aria-pressed={isFeatured}
+                  title="Destacado en Productos Más Vendidos"
+                  className={cn(
+                    "flex items-center gap-1.5 border px-3 py-2 text-sm transition-colors rounded-xs disabled:opacity-50",
+                    isFeatured
+                      ? "border-signal bg-signal/10 text-signal"
+                      : "border-black/10 text-steel-400 hover:border-signal/40",
+                  )}
+                >
+                  <Star className={cn("h-3.5 w-3.5", isFeatured && "fill-signal")} />
+                  Destacado
+                </button>
                 <select
                   value={currentStatus}
                   onChange={(e) => handleChange(product.id, e.target.value)}

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingCart, FileDown } from "lucide-react";
 import { NAV, CONTACT, SITE } from "@/lib/constants";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -11,7 +11,11 @@ import { SearchAutocomplete } from "@/components/layout/SearchAutocomplete";
 import { useCart } from "@/components/cart/CartContext";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+type Props = {
+  catalogPdfUrl?: string | null;
+};
+
+export function Navbar({ catalogPdfUrl }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { totalCount } = useCart();
@@ -96,6 +100,19 @@ export function Navbar() {
           {/* Buscador */}
           <SearchAutocomplete className="hidden md:flex flex-1 max-w-xs" />
 
+          {/* Descargar catálogo */}
+          {catalogPdfUrl && (
+            <a
+              href={catalogPdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden xl:inline-flex items-center gap-1.5 text-sm text-steel-200 hover:text-signal transition-colors font-medium shrink-0"
+            >
+              <FileDown className="h-4 w-4" />
+              Descargar catálogo
+            </a>
+          )}
+
           {/* CTA */}
           <Link
             href="/cotizacion"
@@ -167,6 +184,18 @@ export function Navbar() {
               </span>
             )}
           </Link>
+          {catalogPdfUrl && (
+            <a
+              href={catalogPdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 py-3 border-b border-black/5 text-steel-200 hover:text-signal font-medium"
+            >
+              <FileDown className="h-4 w-4" />
+              Descargar catálogo
+            </a>
+          )}
           <a
             href={whatsappGeneral()}
             target="_blank"

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, FileDown } from "lucide-react";
 import { CONTACT, SITE, SOCIAL } from "@/lib/constants";
 import { Reveal } from "@/components/motion/Reveal";
+import { getSiteSettings } from "@/lib/siteSettings";
 
 const categoryLinks = [
   { label: "Neumática",           href: "/categorias/neumatica" },
@@ -26,7 +27,9 @@ const legalLinks = [
   { label: "Términos y condiciones", href: "/terminos" },
 ];
 
-export function Footer() {
+export async function Footer() {
+  const settings = await getSiteSettings();
+
   return (
     <footer className="bg-carbon-900 border-t border-black/5 mt-24">
       <div className="container-max py-16">
@@ -86,6 +89,19 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              {settings.catalog_pdf_url && (
+                <li>
+                  <a
+                    href={settings.catalog_pdf_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-sm text-steel-200 hover:text-signal transition-colors"
+                  >
+                    <FileDown className="h-3.5 w-3.5" />
+                    Descargar catálogo
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
 

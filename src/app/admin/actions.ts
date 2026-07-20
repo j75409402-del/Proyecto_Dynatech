@@ -35,6 +35,48 @@ export async function updateStockStatus(productId: string, status: string) {
   revalidatePath("/productos");
 }
 
+export async function toggleFeatured(productId: string, featured: boolean) {
+  await requireAdmin();
+
+  const supabase = createServiceClient();
+  const { error } = await supabase
+    .from("products")
+    .update({ featured })
+    .eq("id", productId);
+
+  if (error) throw new Error("No se pudo actualizar el producto destacado");
+
+  revalidatePath("/admin");
+  revalidatePath("/");
+  revalidatePath("/productos");
+}
+
+const SETTINGS_KEYS = [
+  "catalog_pdf_url",
+  "stat_productos",
+  "stat_marcas",
+  "stat_clientes",
+  "stat_respuesta",
+] as const;
+
+export async function updateSiteSettings(values: Record<string, string>) {
+  await requireAdmin();
+
+  const rows = SETTINGS_KEYS.filter((key) => key in values).map((key) => ({
+    key,
+    value: values[key],
+    updated_at: new Date().toISOString(),
+  }));
+
+  const supabase = createServiceClient();
+  const { error } = await supabase.from("site_settings").upsert(rows, { onConflict: "key" });
+
+  if (error) throw new Error("No se pudo guardar la configuración");
+
+  revalidatePath("/admin/configuracion");
+  revalidatePath("/");
+}
+
 export async function signOutAdmin() {
   const supabase = await createClient();
   await supabase.auth.signOut();

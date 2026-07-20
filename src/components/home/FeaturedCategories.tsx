@@ -23,7 +23,7 @@ export async function FeaturedCategories() {
           <div>
             <div className="eyebrow mb-3">01 · Catálogo</div>
             <h2 className="font-display text-display-lg text-surface max-w-2xl">
-              Categorías técnicas que <br />mueven tu producción.
+              Nuestras categorías
             </h2>
           </div>
           <Link href="/productos" className="btn-ghost">

@@ -36,22 +36,32 @@ export const NAV = {
 export const VALUE_PROPS = [
   {
     number: "01",
-    title: "Inventario local",
-    body: "Stock disponible en Santo Domingo. Sin esperas de importación pa' repuestos críticos.",
+    title: "Productos originales",
+    body: "Distribución directa de fabricantes: Festo, SMC, Siemens, Omron. Cero réplicas.",
   },
   {
     number: "02",
-    title: "Marcas originales",
-    body: "Distribución directa de fabricantes: Festo, SMC, Siemens, Omron. Cero replicas.",
+    title: "Importación internacional",
+    body: "Lo que no está en catálogo lo importamos bajo pedido desde EE.UU., Europa y Asia.",
   },
   {
     number: "03",
+    title: "Atención personalizada",
+    body: "Un equipo que conoce tu operación, no un formulario genérico que nadie lee.",
+  },
+  {
+    number: "04",
     title: "Soporte técnico",
     body: "Ingenieros que dimensionan, cotizan y resuelven — no un catálogo que se navega solo.",
   },
   {
-    number: "04",
-    title: "Cotización 24 h",
+    number: "05",
+    title: "Cotizaciones rápidas",
     body: "Envías tu lista, recibes precios y disponibilidad en menos de un día hábil.",
+  },
+  {
+    number: "06",
+    title: "Soluciones industriales",
+    body: "Neumática, instrumentación, sensores y control eléctrico bajo un mismo proveedor.",
   },
 ] as const;

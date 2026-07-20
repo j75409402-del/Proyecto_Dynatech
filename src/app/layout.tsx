@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { CartProvider } from "@/components/cart/CartContext";
 import { SITE, CONTACT } from "@/lib/constants";
+import { getSiteSettings } from "@/lib/siteSettings";
 import "./globals.css";
 
 const organizationJsonLd = {
@@ -69,11 +70,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const settings = await getSiteSettings();
+
   return (
     <html
       lang="es"
@@ -85,7 +88,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <CartProvider>
-          <Navbar />
+          <Navbar catalogPdfUrl={settings.catalog_pdf_url} />
           <main className="flex-1">{children}</main>
           <Footer />
           <WhatsAppFab />

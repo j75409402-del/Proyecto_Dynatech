@@ -52,6 +52,19 @@ Quedo pendiente. Gracias.`;
 }
 
 /**
+ * Link pa' solicitar la importación de un producto que no está en catálogo.
+ */
+export function whatsappImportRequest(): string {
+  const msg = `Hola Dynatech, no encontré en el catálogo un producto que necesito y quisiera que me ayuden a importarlo.
+
+Número de parte / modelo / fabricante:
+(o adjunto una foto del producto)
+
+Cantidad:`;
+  return whatsappLink(msg);
+}
+
+/**
  * Link genérico "quiero cotizar".
  */
 export function whatsappGeneral(): string {

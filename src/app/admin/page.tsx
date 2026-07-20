@@ -1,4 +1,5 @@
-import { LogOut } from "lucide-react";
+import Link from "next/link";
+import { LogOut, Settings } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { AdminProductList } from "@/components/admin/AdminProductList";
 import { signOutAdmin } from "./actions";
@@ -12,7 +13,7 @@ export default async function AdminPage() {
 
   const { data: products } = await supabase
     .from("products")
-    .select("id, sku, name, stock_status")
+    .select("id, sku, name, stock_status, featured")
     .order("name");
 
   return (
@@ -25,12 +26,18 @@ export default async function AdminPage() {
           </h1>
           <p className="text-sm text-steel-400">{user?.email}</p>
         </div>
-        <form action={signOutAdmin}>
-          <button type="submit" className="btn-ghost text-sm">
-            <LogOut className="h-4 w-4" />
-            Salir
-          </button>
-        </form>
+        <div className="flex items-center gap-3">
+          <Link href="/admin/configuracion" className="btn-ghost text-sm">
+            <Settings className="h-4 w-4" />
+            Configuración del sitio
+          </Link>
+          <form action={signOutAdmin}>
+            <button type="submit" className="btn-ghost text-sm">
+              <LogOut className="h-4 w-4" />
+              Salir
+            </button>
+          </form>
+        </div>
       </div>
 
       <AdminProductList products={products ?? []} />
