@@ -79,7 +79,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
                            hover:border-signal/50 hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)]
                            transition-all duration-300"
               >
-                <div className="relative aspect-[4/3] bg-carbon-700 border-b border-black/5 overflow-hidden">
+                <div className="relative aspect-[4/3] bg-white border-b border-black/5 overflow-hidden">
                   {sub.image_url ? (
                     <Image
                       src={sub.image_url}

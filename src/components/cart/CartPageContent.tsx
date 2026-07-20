@@ -52,7 +52,7 @@ export function CartPageContent() {
           <div key={item.productId} className="flex items-center gap-4 p-4">
             <Link
               href={`/productos/${item.slug}`}
-              className="relative h-16 w-16 shrink-0 bg-carbon-800 border border-black/10 overflow-hidden"
+              className="relative h-16 w-16 shrink-0 bg-white border border-black/10 overflow-hidden"
             >
               {item.thumbnailUrl && (
                 <Image src={item.thumbnailUrl} alt="" fill sizes="64px" className="object-contain p-1.5" />

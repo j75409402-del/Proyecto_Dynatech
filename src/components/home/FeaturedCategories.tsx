@@ -65,7 +65,7 @@ export async function FeaturedCategories() {
                     {cat.image_url && (
                       <div
                         className={cn(
-                          "relative bg-carbon-700 border-black/5 overflow-hidden shrink-0",
+                          "relative bg-white border-black/5 overflow-hidden shrink-0",
                           spansFullLg
                             ? "aspect-[16/9] border-b lg:aspect-auto lg:w-2/5 lg:border-b-0 lg:border-r"
                             : "aspect-[16/9] border-b",

@@ -112,7 +112,7 @@ export function SearchAutocomplete({ className, inputClassName, onNavigate }: Pr
                       }}
                       className="flex items-center gap-3 px-3 py-2.5 hover:bg-carbon-700 transition-colors"
                     >
-                      <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xs bg-carbon-700 border border-black/5">
+                      <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xs bg-white border border-black/5">
                         {r.thumbnail_url && (
                           <Image src={r.thumbnail_url} alt="" fill className="object-cover" sizes="40px" />
                         )}

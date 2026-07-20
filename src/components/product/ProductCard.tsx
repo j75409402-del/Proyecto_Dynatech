@@ -25,7 +25,7 @@ export function ProductCard({ product, className }: Props) {
       >
         <Link href={`/productos/${product.slug}`} className="flex flex-1 flex-col">
           {/* Imagen */}
-          <div className="relative aspect-[4/3] bg-carbon-700 border-b border-black/5 overflow-hidden">
+          <div className="relative aspect-[4/3] bg-white border-b border-black/5 overflow-hidden">
             {product.thumbnail_url ? (
               <Image
                 src={product.thumbnail_url}

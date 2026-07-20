@@ -31,7 +31,7 @@ export function ProductGallery({ images, alt }: Props) {
       <div
         ref={containerRef}
         className={cn(
-          "relative aspect-square bg-carbon-800 border border-black/10 overflow-hidden",
+          "relative aspect-square bg-white border border-black/10 overflow-hidden",
           src && "cursor-zoom-in",
         )}
         onMouseEnter={() => setZoom(true)}
@@ -78,7 +78,7 @@ export function ProductGallery({ images, alt }: Props) {
               aria-label={`Ver imagen ${i + 1}`}
               aria-current={i === active}
               className={cn(
-                "relative aspect-square border bg-carbon-800 overflow-hidden transition-colors",
+                "relative aspect-square border bg-white overflow-hidden transition-colors",
                 i === active ? "border-signal" : "border-black/10 hover:border-black/30",
               )}
             >
