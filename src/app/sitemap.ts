@@ -14,6 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${SITE.url}/`, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE.url}/productos`, changeFrequency: "daily", priority: 0.9 },
+    { url: `${SITE.url}/reparacion-cilindros-neumaticos`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE.url}/nosotros`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE.url}/contacto`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE.url}/cotizacion`, changeFrequency: "monthly", priority: 0.6 },
