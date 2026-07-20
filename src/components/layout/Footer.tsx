@@ -5,11 +5,10 @@ import { CONTACT, SITE, SOCIAL } from "@/lib/constants";
 import { Reveal } from "@/components/motion/Reveal";
 
 const categoryLinks = [
-  { label: "Neumática",            href: "/categorias/neumatica" },
-  { label: "Automatización",       href: "/categorias/automatizacion" },
-  { label: "Instrumentación",      href: "/categorias/instrumentacion" },
-  { label: "Sensores",             href: "/categorias/sensores" },
-  { label: "Eléctrica industrial", href: "/categorias/electrica" },
+  { label: "Neumática",           href: "/categorias/neumatica" },
+  { label: "Instrumentación",     href: "/categorias/instrumentacion" },
+  { label: "Sensores",            href: "/categorias/sensores" },
+  { label: "Controles eléctricos", href: "/categorias/electrica" },
 ];
 
 const companyLinks = [
