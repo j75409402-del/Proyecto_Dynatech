@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Reveal } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
+import { cn } from "@/lib/utils";
 
 export async function FeaturedCategories() {
   const supabase = await createClient();
@@ -37,9 +38,14 @@ export async function FeaturedCategories() {
             const isLast = i === categories.length - 1;
             const remSm = categories.length % 2;
             const remLg = categories.length % 3;
+            // Cuando la última tarjeta queda sola en su fila, ocupa todo el ancho —
+            // en ese caso pasa a layout horizontal (imagen a la izquierda, texto centrado
+            // verticalmente a la derecha) en vez de quedar una imagen angosta con texto
+            // desalineado flotando en un contenedor gigante.
+            const spansFullLg = isLast && remLg === 1;
             const spanClass = [
               isLast && remSm === 1 && "sm:col-span-2",
-              isLast && remLg === 1 && "lg:col-span-3",
+              spansFullLg && "lg:col-span-3",
               isLast && remLg === 2 && "lg:col-span-2",
             ]
               .filter(Boolean)
@@ -50,11 +56,21 @@ export async function FeaturedCategories() {
                 <TiltCard max={4} className="h-full">
                   <Link
                     href={`/categorias/${cat.slug}`}
-                    className="group relative flex h-full flex-col bg-carbon hover:bg-carbon-800
-                               hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-all duration-300"
+                    className={cn(
+                      "group relative flex h-full bg-carbon hover:bg-carbon-800",
+                      "hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-all duration-300",
+                      spansFullLg ? "flex-col lg:flex-row" : "flex-col",
+                    )}
                   >
                     {cat.image_url && (
-                      <div className="relative aspect-[16/9] bg-carbon-700 border-b border-black/5 overflow-hidden">
+                      <div
+                        className={cn(
+                          "relative bg-carbon-700 border-black/5 overflow-hidden shrink-0",
+                          spansFullLg
+                            ? "aspect-[16/9] border-b lg:aspect-auto lg:w-2/5 lg:border-b-0 lg:border-r"
+                            : "aspect-[16/9] border-b",
+                        )}
+                      >
                         <Image
                           src={cat.image_url}
                           alt=""
@@ -65,7 +81,12 @@ export async function FeaturedCategories() {
                       </div>
                     )}
 
-                    <div className="flex flex-1 flex-col p-8">
+                    <div
+                      className={cn(
+                        "flex flex-1 flex-col p-8",
+                        spansFullLg && "lg:justify-center",
+                      )}
+                    >
                       <div className="flex items-start justify-between mb-8">
                         <span className="font-mono text-[10px] uppercase tracking-techno text-steel-400">
                           {String(i + 1).padStart(2, "0")} / {String(categories.length).padStart(2, "0")}
@@ -77,7 +98,12 @@ export async function FeaturedCategories() {
                         {cat.name}
                       </h3>
                       {cat.description && (
-                        <p className="text-sm text-steel-300 leading-relaxed line-clamp-2">
+                        <p
+                          className={cn(
+                            "text-sm text-steel-300 leading-relaxed",
+                            spansFullLg ? "lg:max-w-md" : "line-clamp-2",
+                          )}
+                        >
                           {cat.description}
                         </p>
                       )}
