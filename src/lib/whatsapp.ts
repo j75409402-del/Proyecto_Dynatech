@@ -1,5 +1,4 @@
 import { CONTACT, SITE } from "./constants";
-import type { Product } from "@/types";
 
 /**
  * Genera un link de wa.me con mensaje pre-cargado.
@@ -7,19 +6,6 @@ import type { Product } from "@/types";
 export function whatsappLink(message: string): string {
   const encoded = encodeURIComponent(message);
   return `https://wa.me/${CONTACT.whatsapp}?text=${encoded}`;
-}
-
-/**
- * Link pa' consultar sobre un producto específico.
- */
-export function whatsappProductInquiry(product: Pick<Product, "sku" | "name">): string {
-  const msg = `Hola Dynatech, quisiera cotizar:
-
-*${product.name}*
-SKU: ${product.sku}
-
-Mi consulta:`;
-  return whatsappLink(msg);
 }
 
 type QuoteMessageItem = {

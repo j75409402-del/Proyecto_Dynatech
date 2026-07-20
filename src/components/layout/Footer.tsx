@@ -6,10 +6,10 @@ import { Reveal } from "@/components/motion/Reveal";
 import { getSiteSettings } from "@/lib/siteSettings";
 
 const categoryLinks = [
-  { label: "Neumática",           href: "/categorias/neumatica" },
-  { label: "Instrumentación",     href: "/categorias/instrumentacion" },
-  { label: "Sensores",            href: "/categorias/sensores" },
-  { label: "Controles eléctricos", href: "/categorias/electrica" },
+  { label: "Neumática",             href: "/categorias/neumatica" },
+  { label: "Instrumentación",       href: "/categorias/instrumentacion" },
+  { label: "Sensores y fotoceldas", href: "/categorias/sensores" },
+  { label: "Controles eléctricos",  href: "/categorias/electrica" },
 ];
 
 const companyLinks = [
@@ -53,7 +53,7 @@ export async function Footer() {
                 </div>
               </div>
             </div>
-            <p className="text-sm text-steel-300 leading-relaxed max-w-xs">
+            <p className="text-sm text-steel-300 leading-relaxed max-w-sm">
               {SITE.description}
             </p>
           </div>

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { WhatsAppFab } from "@/components/layout/WhatsAppFab";
 import { CartProvider } from "@/components/cart/CartContext";
 import { SITE, CONTACT } from "@/lib/constants";
 import { getSiteSettings } from "@/lib/siteSettings";
@@ -91,7 +90,6 @@ export default async function RootLayout({
           <Navbar catalogPdfUrl={settings.catalog_pdf_url} />
           <main className="flex-1">{children}</main>
           <Footer />
-          <WhatsAppFab />
         </CartProvider>
       </body>
     </html>

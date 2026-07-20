@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Menu, X, ShoppingCart, FileDown } from "lucide-react";
-import { NAV, CONTACT, SITE } from "@/lib/constants";
+import { NAV, SITE } from "@/lib/constants";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { SearchAutocomplete } from "@/components/layout/SearchAutocomplete";
@@ -31,26 +31,6 @@ export function Navbar({ catalogPdfUrl }: Props) {
 
   return (
     <header className="sticky top-0 z-40 transition-all duration-300">
-      {/* Franja utilitaria — WhatsApp */}
-      <div
-        className={cn(
-          "overflow-hidden bg-signal transition-[max-height,opacity] duration-300",
-          scrolled ? "max-h-0 opacity-0" : "max-h-8 opacity-100",
-        )}
-      >
-        <div className="container-max flex h-7 items-center justify-end">
-          <a
-            href={whatsappGeneral()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-xs text-white/90 hover:text-white transition-colors"
-          >
-            <WhatsAppIcon className="h-3.5 w-3.5" />
-            <span className="font-mono">{CONTACT.whatsappDisplay}</span>
-          </a>
-        </div>
-      </div>
-
       {/* Nav principal */}
       <div
         className={cn(
@@ -113,16 +93,18 @@ export function Navbar({ catalogPdfUrl }: Props) {
             </a>
           )}
 
-          {/* CTA */}
-          <Link
-            href="/cotizacion"
+          {/* CTA — único acceso principal a WhatsApp del sitio */}
+          <a
+            href={whatsappGeneral()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden lg:inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
                        text-white font-medium py-2.5 px-5 rounded-full text-xs uppercase tracking-wider
                        transition-colors shrink-0"
           >
             <WhatsAppIcon className="h-3.5 w-3.5" />
-            Solicitar cotización
-          </Link>
+            Cotizar por WhatsApp
+          </a>
 
           {/* Carrito de cotización */}
           <Link
@@ -200,21 +182,14 @@ export function Navbar({ catalogPdfUrl }: Props) {
             href={whatsappGeneral()}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 py-3 text-steel-200 hover:text-signal font-mono text-sm"
-          >
-            <WhatsAppIcon className="h-4 w-4" />
-            {CONTACT.whatsappDisplay}
-          </a>
-          <Link
-            href="/cotizacion"
             onClick={() => setOpen(false)}
             className="inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
                        text-white font-medium py-3 rounded-full text-sm uppercase tracking-wider
                        transition-colors mt-2"
           >
             <WhatsAppIcon className="h-4 w-4" />
-            Solicitar cotización
-          </Link>
+            Cotizar por WhatsApp
+          </a>
         </nav>
       </div>
     </header>
