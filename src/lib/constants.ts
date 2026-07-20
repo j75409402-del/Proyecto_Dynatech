@@ -28,7 +28,7 @@ export const NAV = {
     { label: "Catálogo",    href: "/productos" },
     { label: "Categorías",  href: "/#categorias" },
     { label: "Marcas",      href: "/#marcas" },
-    { label: "Reparación de cilindros", href: "/reparacion-cilindros-neumaticos" },
+    { label: "Reparaciones", href: "/reparacion-cilindros-neumaticos" },
     { label: "Nosotros",    href: "/nosotros" },
     { label: "Contacto",    href: "/contacto" },
   ],
