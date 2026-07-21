@@ -58,8 +58,6 @@ export function ProductCard({ product, className }: Props) {
 
           {/* Contenido */}
           <div className="p-4 flex-1 flex flex-col">
-            <span className="sku-tag mb-2.5 self-start">SKU · {product.sku}</span>
-
             <h3 className="font-display text-sm text-surface leading-snug mb-1.5 line-clamp-2 group-hover:text-signal transition-colors">
               {product.name}
             </h3>

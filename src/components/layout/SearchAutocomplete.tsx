@@ -119,9 +119,13 @@ export function SearchAutocomplete({ className, inputClassName, onNavigate }: Pr
                       </span>
                       <span className="min-w-0 flex-1">
                         <span className="block truncate text-sm text-surface">{r.name}</span>
-                        <span className="block truncate font-mono text-[10px] uppercase tracking-techno text-steel-400">
-                          SKU {r.sku} {r.brand && `· ${r.brand.name}`}
-                        </span>
+                        {(r.category || r.brand) && (
+                          <span className="block truncate font-mono text-[10px] uppercase tracking-techno text-steel-400">
+                            {r.category?.name}
+                            {r.category && r.brand && " · "}
+                            {r.brand?.name}
+                          </span>
+                        )}
                       </span>
                     </Link>
                   </li>

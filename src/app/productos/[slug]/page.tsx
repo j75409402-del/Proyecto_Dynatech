@@ -4,7 +4,7 @@ import { Clock, Building2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { SpecTable } from "@/components/product/SpecTable";
 import { QuoteButton } from "@/components/product/QuoteButton";
-import { CylinderConfigurator, type ConfiguratorConfig } from "@/components/product/CylinderConfigurator";
+import { VariantConfigurator, type ConfiguratorConfig } from "@/components/product/VariantConfigurator";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductTabs } from "@/components/product/ProductTabs";
@@ -157,8 +157,6 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               {product.name}
             </h1>
 
-            {!configurator && <span className="sku-tag mb-6">SKU · {product.sku}</span>}
-
             {product.short_desc && (
               <p className="text-lg text-steel-200 leading-relaxed mb-6 mt-6">
                 {product.short_desc}
@@ -187,7 +185,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
             {/* CTAs — configurador pa' productos maestro con variantes, botones fijos pa' el resto */}
             {configurator ? (
-              <CylinderConfigurator product={product} config={configurator} />
+              <VariantConfigurator product={product} config={configurator} />
             ) : (
               <QuoteButton product={product} />
             )}
