@@ -4,6 +4,7 @@ import { Clock, Building2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { SpecTable } from "@/components/product/SpecTable";
 import { QuoteButton } from "@/components/product/QuoteButton";
+import { CylinderConfigurator, type ConfiguratorConfig } from "@/components/product/CylinderConfigurator";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductTabs } from "@/components/product/ProductTabs";
@@ -84,7 +85,13 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     .order("featured", { ascending: false })
     .limit(8);
 
-  const specs = product.specs as Record<string, string> | null;
+  const rawSpecs = (product.specs as (Record<string, unknown> & { configurator?: ConfiguratorConfig }) | null) ?? null;
+  const configurator = rawSpecs?.configurator ?? null;
+  const specs = rawSpecs
+    ? (Object.fromEntries(
+        Object.entries(rawSpecs).filter(([key]) => key !== "configurator"),
+      ) as Record<string, string>)
+    : null;
   const galleryImages = Array.from(
     new Set([product.thumbnail_url, ...((product.images as string[] | null) ?? [])].filter(Boolean)),
   ) as string[];
@@ -150,7 +157,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               {product.name}
             </h1>
 
-            <span className="sku-tag mb-6">SKU · {product.sku}</span>
+            {!configurator && <span className="sku-tag mb-6">SKU · {product.sku}</span>}
 
             {product.short_desc && (
               <p className="text-lg text-steel-200 leading-relaxed mb-6 mt-6">
@@ -178,8 +185,12 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               />
             </div>
 
-            {/* CTAs */}
-            <QuoteButton product={product} />
+            {/* CTAs — configurador pa' productos maestro con variantes, botones fijos pa' el resto */}
+            {configurator ? (
+              <CylinderConfigurator product={product} config={configurator} />
+            ) : (
+              <QuoteButton product={product} />
+            )}
           </div>
         </div>
 

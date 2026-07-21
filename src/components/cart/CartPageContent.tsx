@@ -49,7 +49,7 @@ export function CartPageContent() {
 
       <div className="border border-black/10 divide-y divide-black/10 mb-8">
         {items.map((item) => (
-          <div key={item.productId} className="flex items-center gap-4 p-4">
+          <div key={item.sku} className="flex items-center gap-4 p-4">
             <Link
               href={`/productos/${item.slug}`}
               className="relative h-16 w-16 shrink-0 bg-white border border-black/10 overflow-hidden"
@@ -74,7 +74,7 @@ export function CartPageContent() {
             <div className="flex items-center border border-black/10 shrink-0">
               <button
                 type="button"
-                onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                onClick={() => updateQuantity(item.sku, item.quantity - 1)}
                 className="p-2 text-steel-300 hover:text-signal transition-colors"
                 aria-label="Reducir cantidad"
               >
@@ -83,7 +83,7 @@ export function CartPageContent() {
               <span className="w-8 text-center text-sm font-mono">{item.quantity}</span>
               <button
                 type="button"
-                onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                onClick={() => updateQuantity(item.sku, item.quantity + 1)}
                 className="p-2 text-steel-300 hover:text-signal transition-colors"
                 aria-label="Aumentar cantidad"
               >
@@ -93,7 +93,7 @@ export function CartPageContent() {
 
             <button
               type="button"
-              onClick={() => removeItem(item.productId)}
+              onClick={() => removeItem(item.sku)}
               className="p-2 text-steel-400 hover:text-signal transition-colors shrink-0"
               aria-label="Quitar del carrito"
             >

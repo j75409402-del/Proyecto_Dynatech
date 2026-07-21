@@ -23,10 +23,10 @@ type CartContextValue = {
   items: CartItem[];
   totalCount: number;
   addItem: (item: Omit<CartItem, "quantity">, quantity?: number) => void;
-  removeItem: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
+  removeItem: (sku: string) => void;
+  updateQuantity: (sku: string, quantity: number) => void;
   clearCart: () => void;
-  isInCart: (productId: string) => boolean;
+  isInCart: (sku: string) => boolean;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -51,12 +51,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items, hydrated]);
 
+  // Se identifica por SKU (no por productId) — un mismo producto maestro configurable
+  // (ej. cilindro ISO con diámetro/carrera variables) comparte productId entre variantes
+  // distintas, así que el SKU es lo único que identifica la variante exacta en el carrito.
   const addItem = useCallback((item: Omit<CartItem, "quantity">, quantity = 1) => {
     setItems((prev) => {
-      const existing = prev.find((it) => it.productId === item.productId);
+      const existing = prev.find((it) => it.sku === item.sku);
       if (existing) {
         return prev.map((it) =>
-          it.productId === item.productId
+          it.sku === item.sku
             ? { ...it, quantity: it.quantity + quantity }
             : it,
         );
@@ -65,21 +68,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  const removeItem = useCallback((productId: string) => {
-    setItems((prev) => prev.filter((it) => it.productId !== productId));
+  const removeItem = useCallback((sku: string) => {
+    setItems((prev) => prev.filter((it) => it.sku !== sku));
   }, []);
 
-  const updateQuantity = useCallback((productId: string, quantity: number) => {
+  const updateQuantity = useCallback((sku: string, quantity: number) => {
     setItems((prev) => {
-      if (quantity < 1) return prev.filter((it) => it.productId !== productId);
-      return prev.map((it) => (it.productId === productId ? { ...it, quantity } : it));
+      if (quantity < 1) return prev.filter((it) => it.sku !== sku);
+      return prev.map((it) => (it.sku === sku ? { ...it, quantity } : it));
     });
   }, []);
 
   const clearCart = useCallback(() => setItems([]), []);
 
   const isInCart = useCallback(
-    (productId: string) => items.some((it) => it.productId === productId),
+    (sku: string) => items.some((it) => it.sku === sku),
     [items],
   );
 
