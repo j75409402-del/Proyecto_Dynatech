@@ -28,6 +28,7 @@ const nextConfig = {
       { source: "/productos/sensor-omron-e2e-x10me1", destination: "/productos/sensor-inductivo-omron", permanent: true },
       { source: "/productos/valvula-smc-vf3130-5dz", destination: "/productos/valvula-neumatica-smc-5-2", permanent: true },
       { source: "/productos/manguera-neumatica-pu", destination: "/productos/manguera-neumatica", permanent: true },
+      { source: "/productos/cilindro-festo-adn-32-25-a-p-a", destination: "/productos/cilindro-compacto-iso-21287", permanent: true },
     ];
   },
 };
