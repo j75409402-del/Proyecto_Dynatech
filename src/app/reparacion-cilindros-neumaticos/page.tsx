@@ -2,17 +2,35 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Wrench,
+  Factory,
+  Ruler,
+  ShieldCheck,
+  PackageCheck,
+  Settings,
+  FileText,
+  Cog,
+  Gauge,
+  CalendarCheck,
+  Inbox,
+  Search,
+  Activity,
+  Layers,
+  Truck,
   Package,
   Award,
-  ClipboardList,
-  ShieldCheck,
-  ImageOff,
+  Zap,
+  Clock,
   ArrowRight,
 } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
+import { Lightbox } from "@/components/ui/Lightbox";
+import { AccordionItem } from "@/components/ui/Accordion";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { SITE } from "@/lib/constants";
+import { whatsappCylinderService } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Reparación y Fabricación de Cilindros Neumáticos",
@@ -35,16 +53,16 @@ export const metadata: Metadata = {
 };
 
 const SERVICIOS = [
-  "Reparación de cilindros neumáticos",
-  "Fabricación de cilindros neumáticos",
-  "Fabricación de vástagos",
-  "Fabricación de camisas (tubos)",
-  "Fabricación de tapas",
-  "Fabricación de pistones",
-  "Cambio de sellos",
-  "Cambio de empaques",
-  "Rectificación de componentes",
-  "Fabricación bajo plano",
+  { icon: Wrench, title: "Reparación de cilindros neumáticos", desc: "Diagnóstico y reparación completa, con repuesto de calidad y prueba de funcionamiento." },
+  { icon: Factory, title: "Fabricación de cilindros", desc: "Fabricación de cilindros completos a medida cuando el original ya no está disponible." },
+  { icon: Ruler, title: "Fabricación de vástagos", desc: "Vástagos cromados fabricados a medida, con el acabado y tolerancia del original." },
+  { icon: ShieldCheck, title: "Cambio de sellos", desc: "Reemplazo de sellos por repuesto de calidad para eliminar fugas de aire." },
+  { icon: PackageCheck, title: "Cambio de empaques", desc: "Empaques nuevos ajustados a cada modelo, sin comprometer la presión de trabajo." },
+  { icon: Settings, title: "Rectificación de vástagos", desc: "Rectificado de precisión para recuperar vástagos con desgaste o corrosión." },
+  { icon: FileText, title: "Fabricación bajo plano", desc: "Fabricamos el componente completo a partir de tus especificaciones técnicas." },
+  { icon: Cog, title: "Mecanizado de piezas", desc: "Mecanizado CNC de piezas y componentes neumáticos a medida." },
+  { icon: Gauge, title: "Pruebas neumáticas", desc: "Pruebas de presión y funcionamiento antes de cada entrega." },
+  { icon: CalendarCheck, title: "Mantenimiento preventivo", desc: "Planes de mantenimiento para reducir paradas no programadas en tu línea." },
 ];
 
 const TIPOS_CILINDROS = [
@@ -64,24 +82,35 @@ const MARCAS = [
 ];
 
 const PROCESO = [
-  "Recepción del cilindro o plano",
-  "Inspección técnica",
-  "Diagnóstico",
-  "Cotización",
-  "Aprobación",
-  "Reparación o fabricación",
-  "Pruebas de funcionamiento",
-  "Entrega",
+  { icon: Inbox, title: "Recepción", desc: "Recibimos el cilindro dañado o tu plano de fabricación." },
+  { icon: Search, title: "Inspección", desc: "Revisión técnica de cada componente." },
+  { icon: Activity, title: "Diagnóstico", desc: "Identificamos causa y alcance del daño." },
+  { icon: FileText, title: "Cotización", desc: "Te enviamos precio y tiempo estimado." },
+  { icon: Wrench, title: "Reparación o fabricación", desc: "Ejecutamos el trabajo con repuesto de calidad." },
+  { icon: Layers, title: "Ensamblaje", desc: "Armado con las tolerancias correctas." },
+  { icon: Gauge, title: "Pruebas", desc: "Prueba de presión y funcionamiento real." },
+  { icon: Truck, title: "Entrega", desc: "Entregamos el cilindro listo para instalar." },
 ];
 
 const BENEFICIOS = [
-  "Personal técnico especializado",
-  "Fabricación personalizada",
-  "Repuestos de alta calidad",
-  "Pruebas de funcionamiento",
-  "Soluciones para la industria",
-  "Atención rápida",
-  "Garantía en los trabajos realizados",
+  { icon: Award, title: "Personal especializado" },
+  { icon: Ruler, title: "Alta precisión" },
+  { icon: PackageCheck, title: "Repuestos de calidad" },
+  { icon: ShieldCheck, title: "Garantía" },
+  { icon: Factory, title: "Fabricación personalizada" },
+  { icon: Zap, title: "Atención rápida" },
+  { icon: Package, title: "Soluciones industriales" },
+];
+
+const ANTES_DESPUES = [
+  "Cilindro ISO 32mm",
+  "Vástago cromado",
+  "Camisa reacondicionada",
+];
+
+const GALERIA = [
+  "Taller", "Reparaciones", "Fabricación", "Vástagos",
+  "Cilindros", "Banco de pruebas", "Equipos", "Maquinarias",
 ];
 
 const FAQS = [
@@ -131,29 +160,63 @@ const faqJsonLd = {
   })),
 };
 
+function quoteHref(item: string) {
+  return `/cotizacion?nombre=${encodeURIComponent(item)}`;
+}
+
 export default function ReparacionCilindrosPage() {
   return (
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
-      {/* Header */}
-      <section className="border-b border-black/5 section-pad">
-        <div className="container-max max-w-4xl">
+      {/* HERO */}
+      <section className="relative border-b border-black/5 overflow-hidden">
+        <div className="container-max py-16 sm:py-20">
           <Breadcrumbs items={[{ label: "Reparación y fabricación de cilindros neumáticos" }]} />
-          <div className="eyebrow mb-3 mt-6">Neumática · Servicio técnico</div>
-          <h1 className="font-display text-display-xl text-surface mb-6">
-            Reparación y fabricación de <span className="text-signal">cilindros neumáticos</span>
-          </h1>
-          <p className="text-xl text-steel-200 leading-relaxed max-w-3xl">
-            Reparación, mantenimiento y fabricación bajo plano de cilindros neumáticos para la
-            industria dominicana — vástagos, camisas, tapas, pistones, sellos y empaques, con
-            personal técnico especializado y garantía en cada trabajo.
-          </p>
+
+          <div className="grid lg:grid-cols-12 gap-12 items-center mt-8">
+            <Reveal className="lg:col-span-6">
+              <div className="eyebrow mb-4">Neumática · Servicio técnico</div>
+              <h1 className="font-display text-display-xl text-surface mb-6">
+                Reparación y fabricación de <span className="text-signal">cilindros neumáticos</span>
+              </h1>
+              <p className="text-xl text-steel-200 leading-relaxed mb-8 max-w-xl">
+                Soluciones especializadas para recuperar y fabricar cilindros neumáticos
+                industriales con altos estándares de calidad.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href={quoteHref("Reparación / fabricación de cilindro neumático")} className="btn-primary">
+                  Solicitar cotización
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <a
+                  href={whatsappCylinderService()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                >
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Contactar por WhatsApp
+                </a>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.15} className="lg:col-span-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="aspect-[3/4] border border-black/10">
+                  <ImagePlaceholder label="Taller reparando cilindros" />
+                </div>
+                <div className="aspect-[3/4] border border-black/10 mt-8">
+                  <ImagePlaceholder label="Cilindros neumáticos nuevos" />
+                </div>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* Nuestros Servicios */}
+      {/* NUESTROS SERVICIOS */}
       <section className="section-pad border-b border-black/5">
         <div className="container-max">
           <Reveal className="max-w-2xl mb-12">
@@ -161,13 +224,26 @@ export default function ReparacionCilindrosPage() {
             <h2 className="font-display text-display-lg text-surface">Nuestros servicios</h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-black/5 border border-black/5">
-            {SERVICIOS.map((servicio, i) => (
-              <Reveal key={servicio} delay={i * 0.04}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {SERVICIOS.map((s, i) => (
+              <Reveal key={s.title} delay={i * 0.04}>
                 <TiltCard max={4} className="h-full">
-                  <div className="group bg-carbon hover:bg-carbon-800 p-6 flex items-start gap-3 h-full transition-colors duration-300">
-                    <Wrench className="h-4 w-4 text-signal shrink-0 mt-0.5" />
-                    <span className="text-sm text-steel-200">{servicio}</span>
+                  <div className="group flex h-full flex-col border border-black/10 bg-carbon hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)] transition-all duration-300">
+                    <div className="aspect-[16/10] border-b border-black/10">
+                      <ImagePlaceholder label={s.title} className="group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div className="flex flex-1 flex-col p-6">
+                      <s.icon className="h-5 w-5 text-signal mb-4" />
+                      <h3 className="font-display text-lg text-surface mb-2">{s.title}</h3>
+                      <p className="text-sm text-steel-300 leading-relaxed mb-5 flex-1">{s.desc}</p>
+                      <Link
+                        href={quoteHref(s.title)}
+                        className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
+                      >
+                        Solicitar cotización
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 </TiltCard>
               </Reveal>
@@ -176,20 +252,39 @@ export default function ReparacionCilindrosPage() {
         </div>
       </section>
 
-      {/* Tipos de cilindros */}
+      {/* ANTES Y DESPUÉS */}
       <section className="section-pad border-b border-black/5 bg-carbon-900">
         <div className="container-max">
           <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">02 · Alcance técnico</div>
-            <h2 className="font-display text-display-lg text-surface">Tipos de cilindros que reparamos</h2>
+            <div className="eyebrow mb-3">02 · Resultados reales</div>
+            <h2 className="font-display text-display-lg text-surface">Antes y después</h2>
+            <p className="text-steel-300 mt-4">
+              Comparaciones de cilindros dañados recuperados en nuestro taller — se reemplazan
+              por fotografías reales cuando estén disponibles.
+            </p>
           </Reveal>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {TIPOS_CILINDROS.map((tipo, i) => (
-              <Reveal key={tipo} delay={i * 0.04}>
-                <div className="flex items-center gap-2.5 border border-black/10 bg-carbon px-4 py-3.5">
-                  <Package className="h-4 w-4 text-signal shrink-0" />
-                  <span className="text-sm text-steel-200">{tipo}</span>
+          <div className="space-y-6">
+            {ANTES_DESPUES.map((item, i) => (
+              <Reveal key={item} delay={i * 0.06}>
+                <div className="border border-black/10 bg-carbon">
+                  <div className="px-6 py-4 border-b border-black/10">
+                    <span className="font-display text-base text-surface">{item}</span>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="aspect-[16/9] border-r border-black/10 relative">
+                      <ImagePlaceholder label={`Antes · ${item}`} />
+                      <span className="absolute top-3 left-3 bg-signal text-white font-mono text-[9px] uppercase tracking-techno px-2 py-1">
+                        Antes
+                      </span>
+                    </div>
+                    <div className="aspect-[16/9] relative">
+                      <ImagePlaceholder label={`Después · ${item}`} />
+                      <span className="absolute top-3 left-3 bg-emerald-500 text-white font-mono text-[9px] uppercase tracking-techno px-2 py-1">
+                        Después
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -197,58 +292,33 @@ export default function ReparacionCilindrosPage() {
         </div>
       </section>
 
-      {/* Marcas compatibles */}
+      {/* PROCESO DE TRABAJO */}
       <section className="section-pad border-b border-black/5">
         <div className="container-max">
-          <Reveal className="max-w-2xl mb-10">
-            <div className="eyebrow mb-3">03 · Compatibilidad</div>
-            <h2 className="font-display text-display-lg text-surface">Marcas compatibles</h2>
-            <p className="text-steel-300 mt-4">
-              Reparamos y fabricamos componentes compatibles con las principales marcas de
-              neumática industrial.
-            </p>
-          </Reveal>
-
-          <Reveal className="flex flex-wrap gap-3">
-            {MARCAS.map((marca) => (
-              <span
-                key={marca}
-                className="flex items-center gap-2 border border-black/10 bg-carbon-800 px-4 py-2.5"
-              >
-                <Award className="h-3.5 w-3.5 text-signal" />
-                <span className="text-sm text-steel-200">{marca}</span>
-              </span>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Proceso de trabajo */}
-      <section className="section-pad border-b border-black/5 bg-carbon-900">
-        <div className="container-max max-w-3xl">
-          <Reveal className="mb-12">
-            <div className="eyebrow mb-3">04 · Cómo trabajamos</div>
+          <Reveal className="max-w-2xl mb-12">
+            <div className="eyebrow mb-3">03 · Cómo trabajamos</div>
             <h2 className="font-display text-display-lg text-surface">Proceso de trabajo</h2>
           </Reveal>
 
-          <ol className="space-y-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/5 border border-black/5">
             {PROCESO.map((paso, i) => (
-              <Reveal key={paso} delay={i * 0.05}>
-                <li className="flex items-start gap-5 py-4 border-b border-black/10 last:border-0">
-                  <span className="font-display text-2xl text-signal text-numeric shrink-0 w-10">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-steel-200 pt-1">{paso}</span>
-                </li>
+              <Reveal key={paso.title} delay={i * 0.05}>
+                <div className="group bg-carbon hover:bg-carbon-800 p-6 h-full min-h-[180px] flex flex-col transition-colors duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="font-mono text-xs text-signal tracking-techno">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <paso.icon className="h-4 w-4 text-signal transition-transform duration-300 group-hover:scale-110" />
+                  </div>
+                  <h3 className="font-display text-base text-surface mb-2">{paso.title}</h3>
+                  <p className="text-xs text-steel-400 leading-relaxed">{paso.desc}</p>
+                </div>
               </Reveal>
             ))}
-          </ol>
+          </div>
 
           <Reveal className="mt-10">
-            <Link
-              href={`/cotizacion?nombre=${encodeURIComponent("Reparación / fabricación de cilindro neumático")}`}
-              className="btn-primary"
-            >
+            <Link href={quoteHref("Reparación / fabricación de cilindro neumático")} className="btn-primary">
               Solicitar cotización de este servicio
               <ArrowRight className="h-4 w-4" />
             </Link>
@@ -256,21 +326,43 @@ export default function ReparacionCilindrosPage() {
         </div>
       </section>
 
-      {/* Beneficios */}
+      {/* GALERÍA */}
+      <section className="section-pad border-b border-black/5 bg-carbon-900">
+        <div className="container-max">
+          <Reveal className="max-w-2xl mb-12">
+            <div className="eyebrow mb-3">04 · Trabajos realizados</div>
+            <h2 className="font-display text-display-lg text-surface">Galería</h2>
+            <p className="text-steel-300 mt-4">
+              Espacio preparado para fotografías reales del taller, reparaciones y fabricaciones
+              — haz clic para ampliar.
+            </p>
+          </Reveal>
+
+          <Reveal>
+            <Lightbox items={GALERIA} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* TIPOS DE CILINDROS */}
       <section className="section-pad border-b border-black/5">
         <div className="container-max">
           <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">05 · Por qué Dynatech</div>
-            <h2 className="font-display text-display-lg text-surface">Beneficios</h2>
+            <div className="eyebrow mb-3">05 · Alcance técnico</div>
+            <h2 className="font-display text-display-lg text-surface">Tipos de cilindros que reparamos</h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/5 border border-black/5">
-            {BENEFICIOS.map((beneficio, i) => (
-              <Reveal key={beneficio} delay={i * 0.06}>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {TIPOS_CILINDROS.map((tipo, i) => (
+              <Reveal key={tipo} delay={i * 0.04}>
                 <TiltCard max={4} className="h-full">
-                  <div className="group bg-carbon hover:bg-carbon-800 p-6 flex flex-col items-start gap-3 h-full min-h-[140px] transition-colors duration-300">
-                    <ShieldCheck className="h-5 w-5 text-signal" />
-                    <span className="text-sm text-steel-200 leading-relaxed">{beneficio}</span>
+                  <div className="group border border-black/10 bg-carbon hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)] transition-all duration-300">
+                    <div className="aspect-square border-b border-black/10">
+                      <ImagePlaceholder label={tipo} className="group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                    <div className="p-4">
+                      <span className="text-sm text-steel-200">{tipo}</span>
+                    </div>
                   </div>
                 </TiltCard>
               </Reveal>
@@ -279,26 +371,50 @@ export default function ReparacionCilindrosPage() {
         </div>
       </section>
 
-      {/* Galería de trabajos */}
+      {/* BENEFICIOS */}
       <section className="section-pad border-b border-black/5 bg-carbon-900">
         <div className="container-max">
           <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">06 · Trabajos realizados</div>
-            <h2 className="font-display text-display-lg text-surface">Galería de trabajos</h2>
-            <p className="text-steel-300 mt-4">
-              Espacio preparado para fotografías reales de reparaciones y fabricaciones — se
-              reemplaza cuando esté disponible el material fotográfico.
-            </p>
+            <div className="eyebrow mb-3">06 · Por qué Dynatech</div>
+            <h2 className="font-display text-display-lg text-surface">Beneficios</h2>
           </Reveal>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <Reveal key={i} delay={i * 0.03}>
-                <div className="aspect-square bg-carbon-800 border border-black/10 flex flex-col items-center justify-center gap-2 text-steel-500">
-                  <ImageOff className="h-6 w-6" strokeWidth={1.25} />
-                  <span className="font-mono text-[9px] uppercase tracking-techno">Imagen a reemplazar</span>
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-black/5 border border-black/5">
+            {BENEFICIOS.map((b, i) => (
+              <Reveal key={b.title} delay={i * 0.06}>
+                <TiltCard max={4} className="h-full">
+                  <div className="group bg-carbon hover:bg-carbon-800 p-6 flex flex-col items-start gap-4 h-full min-h-[140px] transition-colors duration-300">
+                    <span className="grid h-10 w-10 place-items-center bg-signal-soft text-signal transition-transform duration-300 group-hover:scale-110">
+                      <b.icon className="h-5 w-5" />
+                    </span>
+                    <span className="text-sm text-steel-200 leading-relaxed">{b.title}</span>
+                  </div>
+                </TiltCard>
               </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MARCAS — carrusel */}
+      <section className="py-12 border-b border-black/5 overflow-hidden">
+        <Reveal className="container-max mb-6">
+          <div className="eyebrow">07 · Compatibilidad</div>
+          <h2 className="font-display text-2xl text-surface mt-2">Marcas compatibles</h2>
+        </Reveal>
+
+        <div className="relative">
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-carbon to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-carbon to-transparent z-10" />
+
+          <div className="flex animate-marquee gap-16 w-max hover:[animation-play-state:paused]">
+            {[...MARCAS, ...MARCAS].map((marca, i) => (
+              <div key={`${marca}-${i}`} className="group flex items-center gap-3 px-2 shrink-0">
+                <Award className="h-4 w-4 text-signal transition-transform duration-300 group-hover:scale-125" />
+                <span className="font-display text-xl text-steel-200 whitespace-nowrap transition-colors duration-300 group-hover:text-surface">
+                  {marca}
+                </span>
+              </div>
             ))}
           </div>
         </div>
@@ -307,26 +423,61 @@ export default function ReparacionCilindrosPage() {
       {/* FAQ */}
       <section className="section-pad">
         <div className="container-max max-w-3xl">
-          <Reveal className="mb-12">
-            <div className="eyebrow mb-3">07 · Preguntas frecuentes</div>
-            <h2 className="font-display text-display-lg text-surface">
-              Preguntas frecuentes
-            </h2>
+          <Reveal className="mb-4">
+            <div className="eyebrow mb-3">08 · Preguntas frecuentes</div>
+            <h2 className="font-display text-display-lg text-surface">Preguntas frecuentes</h2>
           </Reveal>
 
-          <div className="space-y-10">
-            {FAQS.map((faq) => (
-              <Reveal key={faq.q}>
-                <div className="flex items-start gap-4">
-                  <ClipboardList className="h-4 w-4 text-signal shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-display text-lg text-surface mb-2">{faq.q}</h3>
-                    <p className="text-sm text-steel-300 leading-relaxed">{faq.a}</p>
-                  </div>
-                </div>
-              </Reveal>
+          <div>
+            {FAQS.map((faq, i) => (
+              <AccordionItem key={faq.q} question={faq.q} defaultOpen={i === 0}>
+                {faq.a}
+              </AccordionItem>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CTA FINAL — fondo oscuro a propósito, usa `surface` (el tono casi negro del sistema
+          de diseño) ya que la escala `carbon` es toda clara en este sitio (tema claro). */}
+      <section className="bg-surface relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(228,0,43,0.18),transparent_60%)]" />
+        <div className="container-max relative py-20 sm:py-24 text-center">
+          <Reveal>
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="h-px w-8 bg-signal" />
+              <span className="font-mono text-xs uppercase tracking-techno text-white/50">
+                Servicio técnico especializado
+              </span>
+              <div className="h-px w-8 bg-signal" />
+            </div>
+            <h2 className="font-display text-display-xl text-white mb-8 max-w-3xl mx-auto">
+              ¿Necesita reparar o fabricar un cilindro neumático?
+            </h2>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link
+                href={quoteHref("Reparación / fabricación de cilindro neumático")}
+                className="btn-primary px-8 py-4 text-sm"
+              >
+                Solicitar cotización
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <a
+                href={whatsappCylinderService()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40
+                           text-white font-medium px-8 py-4 text-sm uppercase tracking-wider transition-colors"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                WhatsApp
+              </a>
+            </div>
+            <p className="mt-8 flex items-center justify-center gap-2 text-xs text-white/40 font-mono uppercase tracking-techno">
+              <Clock className="h-3.5 w-3.5" />
+              Respuesta en menos de 24 horas hábiles
+            </p>
+          </Reveal>
         </div>
       </section>
     </div>

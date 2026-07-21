@@ -51,6 +51,17 @@ Cantidad:`;
 }
 
 /**
+ * Link pa' consultar sobre reparación/fabricación de cilindros neumáticos.
+ */
+export function whatsappCylinderService(): string {
+  const msg = `Hola Dynatech, tengo un cilindro neumático que necesito reparar / fabricar.
+
+Marca/modelo (si lo tengo):
+Problema o especificación:`;
+  return whatsappLink(msg);
+}
+
+/**
  * Link genérico "quiero cotizar".
  */
 export function whatsappGeneral(): string {
