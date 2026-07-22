@@ -118,20 +118,26 @@ export default async function ProductosPage({
     allCategories ?? [],
   );
 
-  // Agrupamos por familia (categoría raíz) cuando se ve el catálogo completo sin filtrar —
-  // con un filtro activo el listado ya está suficientemente acotado.
-  const showGrouped = !params.categoria && !params.q;
-  const groups = showGrouped
+  const activeCategory = params.categoria
+    ? (allCategories ?? []).find((c) => c.slug === params.categoria)
+    : null;
+
+  // Agrupamos por familia (categoría raíz) cuando se ve el catálogo completo sin filtrar,
+  // y por subcategoría cuando el filtro activo es una categoría raíz (ej. "Neumática") —
+  // en ese caso el listado sigue teniendo decenas de productos de familias distintas
+  // (cilindros, válvulas, racores, mangueras...) y necesita el mismo orden visual.
+  // Si el filtro ya es una subcategoría puntual, el listado está suficientemente acotado.
+  const showGroupedByRoot = !params.categoria && !params.q;
+  const showGroupedBySubcategory = !!activeCategory && !activeCategory.parent_id && !params.q;
+  const groups = showGroupedByRoot
     ? groupByTopLevelCategory(
         (products as ProductWithRelations[]) ?? [],
         categoriesRes.data ?? [],
         allCategories ?? [],
       )
-    : null;
-
-  const activeCategory = params.categoria
-    ? (categoriesRes.data ?? []).find((c) => c.slug === params.categoria)
-    : null;
+    : showGroupedBySubcategory
+      ? groupBySubcategory((products as ProductWithRelations[]) ?? [])
+      : null;
 
   return (
     <div className="mx-auto max-w-[1800px] px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
@@ -254,6 +260,32 @@ function groupByTopLevelCategory(
       category: { id: "sin-categoria", name: "Otros", slug: "otros" } as Category,
       items: orphan,
     });
+  }
+
+  return ordered;
+}
+
+/** Agrupa productos por su categoría directa (subcategoría) — usado cuando el filtro activo ya es una categoría raíz. */
+function groupBySubcategory(products: ProductWithRelations[]) {
+  const buckets = new Map<string, { category: Category; items: ProductWithRelations[] }>();
+  const otros: ProductWithRelations[] = [];
+
+  for (const product of products) {
+    const cat = product.category as Category | null;
+    if (!cat) {
+      otros.push(product);
+      continue;
+    }
+    if (!buckets.has(cat.id)) buckets.set(cat.id, { category: cat, items: [] });
+    buckets.get(cat.id)!.items.push(product);
+  }
+
+  const ordered = Array.from(buckets.values()).sort(
+    (a, b) => (a.category.sort_order ?? 0) - (b.category.sort_order ?? 0),
+  );
+
+  if (otros.length > 0) {
+    ordered.push({ category: { id: "sin-categoria", name: "Otros", slug: "otros" } as Category, items: otros });
   }
 
   return ordered;
