@@ -14,12 +14,12 @@ export default function LoadingProductos() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-6">
           {Array.from({ length: 10 }).map((_, i) => (
             <div key={i} className="bg-carbon-800 border border-black/5">
-              <div className="aspect-[4/3] bg-carbon-700" />
+              <div className="h-9 bg-carbon-700 border-b border-black/5" />
+              <div className="h-[220px] bg-carbon-700" />
               <div className="p-4 space-y-2">
-                <div className="h-3 w-20 bg-carbon-700 rounded-xs" />
                 <div className="h-4 w-full bg-carbon-700 rounded-xs" />
                 <div className="h-3 w-3/4 bg-carbon-700 rounded-xs" />
                 <div className="h-9 w-full bg-carbon-700 rounded-xs mt-3" />

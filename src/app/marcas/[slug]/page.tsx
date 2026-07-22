@@ -69,7 +69,7 @@ export default async function BrandPage({ params }: { params: Params }) {
       </div>
 
       {products && products.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-6 items-stretch">
           {(products as ProductWithRelations[]).map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

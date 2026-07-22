@@ -207,7 +207,7 @@ export default async function ProductosPage({
 
 function ProductGrid({ products }: { products: ProductWithRelations[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 items-stretch">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-6 items-stretch">
       {products.map((product, i) => (
         <Reveal key={product.id} delay={Math.min(i, 8) * 0.04}>
           <ProductCard product={product} />

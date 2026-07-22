@@ -11,8 +11,22 @@ type Props = {
   className?: string;
 };
 
+function quickSpecs(specs: ProductWithRelations["specs"]): [string, string][] {
+  if (!specs || typeof specs !== "object") return [];
+  return Object.entries(specs as Record<string, unknown>)
+    .filter(([key, value]) => key !== "configurator" && typeof value === "string" && value.trim() !== "")
+    .slice(0, 3)
+    .map(([key, value]) => {
+      const label = key.replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase());
+      return [label, value as string];
+    });
+}
+
+// Orden fijo de la tarjeta (no cambiar): Stock -> Marca -> Imagen -> Nombre ->
+// Descripción -> Especificaciones rápidas -> Ver detalles -> Agregar al carrito.
 export function ProductCard({ product, className }: Props) {
   const stock = stockDisplay(product.stock_status, product.stock_quantity);
+  const specs = quickSpecs(product.specs);
   // Objeto acotado a propósito: el botón (client component) solo recibe lo que
   // necesita para el carrito — nunca el SKU real, así no queda embebido en el
   // HTML/RSC de la tarjeta (ver pedido de ocultar el SKU/código de fabricante).
@@ -25,61 +39,77 @@ export function ProductCard({ product, className }: Props) {
   };
 
   return (
-    <TiltCard max={4} glare className={className}>
+    <TiltCard max={4} glare className={cn("h-full", className)}>
       <div
         className={cn(
           "group relative flex h-full flex-col bg-carbon-800 border border-black/5",
-          "hover:border-signal/50 hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)]",
+          "hover:border-signal hover:-translate-y-1 hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)]",
           "transition-all duration-300",
         )}
       >
         <Link href={`/productos/${product.slug}`} className="flex flex-1 flex-col">
-          {/* Imagen */}
-          <div className="relative aspect-[4/3] bg-white border-b border-black/5 overflow-hidden">
+          {/* Stock + Marca */}
+          <div className="flex items-center justify-between px-4 py-2.5 border-b border-black/5">
+            <span className="flex items-center gap-1.5">
+              <span className={cn("h-1.5 w-1.5 rounded-full shrink-0", stock.dotClass)} />
+              <span className="font-mono text-[9px] uppercase tracking-techno text-steel-300">
+                {stock.label}
+              </span>
+            </span>
+            {product.brand && (
+              <span className="font-mono text-[9px] uppercase tracking-techno text-signal truncate max-w-[45%]">
+                {product.brand.name}
+              </span>
+            )}
+          </div>
+
+          {/* Imagen — mismo alto en todas las tarjetas, siempre contain, nunca cover */}
+          <div className="relative h-[220px] bg-white border-b border-black/5 overflow-hidden shrink-0">
             {product.thumbnail_url ? (
               <Image
                 src={product.thumbnail_url}
                 alt={product.name}
                 fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 22vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                sizes="(max-width: 640px) 90vw, 320px"
+                className="object-contain p-6 group-hover:scale-105 transition-transform duration-500"
               />
             ) : (
               <div className="absolute inset-0 grid place-items-center">
                 <PlaceholderPattern />
               </div>
             )}
-
-            <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-carbon/80 backdrop-blur-sm px-2 py-1 border border-black/10">
-              <span className={cn("h-1.5 w-1.5 rounded-full", stock.available ? "bg-emerald-500" : "bg-signal")} />
-              <span className="font-mono text-[9px] uppercase tracking-techno text-steel-200">
-                {stock.label}
-              </span>
-            </div>
-
-            {product.brand && (
-              <div className="absolute top-3 right-3 bg-carbon/80 backdrop-blur-sm px-2 py-1 border border-black/10">
-                <span className="font-mono text-[9px] uppercase tracking-techno text-signal">
-                  {product.brand.name}
-                </span>
-              </div>
-            )}
           </div>
 
-          {/* Contenido */}
+          {/* Nombre, descripción, specs rápidas */}
           <div className="p-4 flex-1 flex flex-col">
             <h3 className="font-display text-sm text-surface leading-snug mb-1.5 line-clamp-2 group-hover:text-signal transition-colors">
               {product.name}
             </h3>
 
             {product.short_desc && (
-              <p className="text-xs text-steel-300 line-clamp-2">{product.short_desc}</p>
+              <p className="text-xs text-steel-300 line-clamp-2 mb-2">{product.short_desc}</p>
+            )}
+
+            {specs.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mt-2">
+                {specs.map(([label, value]) => (
+                  <span
+                    key={label}
+                    title={`${label}: ${value}`}
+                    className="font-mono text-[9px] uppercase tracking-techno text-steel-400 border border-black/10 px-1.5 py-0.5 truncate max-w-[120px]"
+                  >
+                    {label}: {value}
+                  </span>
+                ))}
+              </div>
             )}
           </div>
         </Link>
 
-        {/* CTAs — links/botón independientes, no anidados dentro del Link de arriba */}
-        <div className="relative grid grid-cols-2 gap-2 p-4 pt-0">
+        {/* CTAs — links/botón independientes, no anidados dentro del Link de arriba.
+            mt-auto es cinturón-y-tirantes: el Link de arriba ya es flex-1, así que
+            estos botones siempre quedan al fondo aunque el contenido varíe de largo. */}
+        <div className="relative grid grid-cols-2 gap-2 p-4 pt-0 mt-auto">
           <Link
             href={`/productos/${product.slug}`}
             className="relative z-10 flex items-center justify-center gap-1.5 border border-black/10

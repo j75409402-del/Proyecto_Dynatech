@@ -161,7 +161,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               )}
               <div className="flex flex-col items-end gap-0.5">
                 <div className="flex items-center gap-1.5">
-                  <span className={cn("h-2 w-2 rounded-full", stock.available ? "bg-emerald-500" : "bg-signal")} />
+                  <span className={cn("h-2 w-2 rounded-full", stock.dotClass)} />
                   <span className="font-mono text-[10px] uppercase tracking-techno text-steel-200">
                     {stock.label}
                   </span>
