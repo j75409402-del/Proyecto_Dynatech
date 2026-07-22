@@ -26,7 +26,6 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder";
-import { Lightbox } from "@/components/ui/Lightbox";
 import { AccordionItem } from "@/components/ui/Accordion";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { SITE } from "@/lib/constants";
@@ -65,17 +64,6 @@ const SERVICIOS = [
   { icon: CalendarCheck, title: "Mantenimiento preventivo", desc: "Planes de mantenimiento para reducir paradas no programadas en tu línea." },
 ];
 
-const TIPOS_CILINDROS = [
-  "Cilindros ISO",
-  "Cilindros compactos",
-  "Cilindros mini",
-  "Cilindros guiados",
-  "Cilindros sin vástago",
-  "Cilindros especiales",
-  "Cilindros de doble efecto",
-  "Cilindros de simple efecto",
-];
-
 const MARCAS = [
   "SMC", "Festo", "Airtac", "Parker", "Metal Work",
   "Camozzi", "Norgren", "Bosch Rexroth", "CKD", "Mindman",
@@ -103,14 +91,8 @@ const BENEFICIOS = [
 ];
 
 const ANTES_DESPUES = [
-  "Cilindro ISO 32mm",
   "Vástago cromado",
   "Camisa reacondicionada",
-];
-
-const GALERIA = [
-  "Taller", "Reparaciones", "Fabricación", "Vástagos",
-  "Cilindros", "Banco de pruebas", "Equipos", "Maquinarias",
 ];
 
 const FAQS = [
@@ -229,9 +211,6 @@ export default function ReparacionCilindrosPage() {
               <Reveal key={s.title} delay={i * 0.04}>
                 <TiltCard max={4} className="h-full">
                   <div className="group flex h-full flex-col border border-black/10 bg-carbon hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)] transition-all duration-300">
-                    <div className="aspect-[16/10] border-b border-black/10">
-                      <ImagePlaceholder label={s.title} className="group-hover:scale-105 transition-transform duration-500" />
-                    </div>
                     <div className="flex flex-1 flex-col p-6">
                       <s.icon className="h-5 w-5 text-signal mb-4" />
                       <h3 className="font-display text-lg text-surface mb-2">{s.title}</h3>
@@ -256,7 +235,7 @@ export default function ReparacionCilindrosPage() {
       <section className="section-pad border-b border-black/5 bg-carbon-900">
         <div className="container-max">
           <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">02 · Resultados reales</div>
+            <div className="eyebrow mb-3">02 · Resultados</div>
             <h2 className="font-display text-display-lg text-surface">Antes y después</h2>
             <p className="text-steel-300 mt-4">
               Comparaciones de cilindros dañados recuperados en nuestro taller — se reemplazan
@@ -326,56 +305,11 @@ export default function ReparacionCilindrosPage() {
         </div>
       </section>
 
-      {/* GALERÍA */}
-      <section className="section-pad border-b border-black/5 bg-carbon-900">
-        <div className="container-max">
-          <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">04 · Trabajos realizados</div>
-            <h2 className="font-display text-display-lg text-surface">Galería</h2>
-            <p className="text-steel-300 mt-4">
-              Espacio preparado para fotografías reales del taller, reparaciones y fabricaciones
-              — haz clic para ampliar.
-            </p>
-          </Reveal>
-
-          <Reveal>
-            <Lightbox items={GALERIA} />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* TIPOS DE CILINDROS */}
-      <section className="section-pad border-b border-black/5">
-        <div className="container-max">
-          <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">05 · Alcance técnico</div>
-            <h2 className="font-display text-display-lg text-surface">Tipos de cilindros que reparamos</h2>
-          </Reveal>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {TIPOS_CILINDROS.map((tipo, i) => (
-              <Reveal key={tipo} delay={i * 0.04}>
-                <TiltCard max={4} className="h-full">
-                  <div className="group border border-black/10 bg-carbon hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)] transition-all duration-300">
-                    <div className="aspect-square border-b border-black/10">
-                      <ImagePlaceholder label={tipo} className="group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-                    <div className="p-4">
-                      <span className="text-sm text-steel-200">{tipo}</span>
-                    </div>
-                  </div>
-                </TiltCard>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* BENEFICIOS */}
       <section className="section-pad border-b border-black/5 bg-carbon-900">
         <div className="container-max">
           <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">06 · Por qué Dynatech</div>
+            <div className="eyebrow mb-3">04 · Por qué Dynatech</div>
             <h2 className="font-display text-display-lg text-surface">Beneficios</h2>
           </Reveal>
 
@@ -399,7 +333,7 @@ export default function ReparacionCilindrosPage() {
       {/* MARCAS — carrusel */}
       <section className="py-12 border-b border-black/5 overflow-hidden">
         <Reveal className="container-max mb-6">
-          <div className="eyebrow">07 · Compatibilidad</div>
+          <div className="eyebrow">05 · Compatibilidad</div>
           <h2 className="font-display text-2xl text-surface mt-2">Marcas compatibles</h2>
         </Reveal>
 
@@ -424,7 +358,7 @@ export default function ReparacionCilindrosPage() {
       <section className="section-pad">
         <div className="container-max max-w-3xl">
           <Reveal className="mb-4">
-            <div className="eyebrow mb-3">08 · Preguntas frecuentes</div>
+            <div className="eyebrow mb-3">06 · Preguntas frecuentes</div>
             <h2 className="font-display text-display-lg text-surface">Preguntas frecuentes</h2>
           </Reveal>
 
