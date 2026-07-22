@@ -13,6 +13,16 @@ type Props = {
 
 export function ProductCard({ product, className }: Props) {
   const stock = stockDisplay(product.stock_status, product.stock_quantity);
+  // Objeto acotado a propósito: el botón (client component) solo recibe lo que
+  // necesita para el carrito — nunca el SKU real, así no queda embebido en el
+  // HTML/RSC de la tarjeta (ver pedido de ocultar el SKU/código de fabricante).
+  const cardProduct = {
+    id: product.id,
+    slug: product.slug,
+    name: product.name,
+    thumbnail_url: product.thumbnail_url,
+    brand: product.brand,
+  };
 
   return (
     <TiltCard max={4} glare className={className}>
@@ -80,7 +90,7 @@ export function ProductCard({ product, className }: Props) {
             Ver detalles
             <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
-          <AddToCartButton product={product} variant="primary" className="text-[10px] gap-1 px-2 py-2.5" />
+          <AddToCartButton product={cardProduct} variant="primary" className="text-[10px] gap-1 px-2 py-2.5" />
         </div>
       </div>
     </TiltCard>

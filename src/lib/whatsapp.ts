@@ -10,18 +10,21 @@ export function whatsappLink(message: string): string {
 
 type QuoteMessageItem = {
   name: string;
-  sku?: string;
   quantity: number;
   notes?: string;
 };
 
 /**
- * Link pa' cotización de múltiples ítems.
+ * Link pa' cotización de múltiples ítems. A propósito no incluye SKU/código de
+ * fabricante en el mensaje — el nombre del ítem ya trae la variante configurada
+ * (ej. "Cilindro Neumático ISO 15552 · 32 mm · 100 mm") y eso alcanza para que
+ * el equipo de Dynatech identifique qué cotizar; el código real, si hace falta,
+ * se busca en el panel admin.
  */
 export function whatsappQuoteRequest(items: QuoteMessageItem[], companyName?: string): string {
   const itemsList = items
     .map((it, i) => {
-      const meta = [it.sku && `SKU: ${it.sku}`, `Cantidad: ${it.quantity}`].filter(Boolean).join(" — ");
+      const meta = `Cantidad: ${it.quantity}`;
       const lines = [`${i + 1}. ${it.name}`, `   ${meta}`];
       if (it.notes) lines.push(`   Notas: ${it.notes}`);
       return lines.join("\n");

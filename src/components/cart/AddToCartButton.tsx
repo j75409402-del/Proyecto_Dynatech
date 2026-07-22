@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 import type { ProductWithRelations } from "@/types";
 
 type Props = {
-  product: Pick<ProductWithRelations, "id" | "slug" | "sku" | "name" | "thumbnail_url" | "brand">;
-  /** Pa' productos configurables (ej. cilindro ISO) — pisa sku/nombre con la variante elegida. */
+  product: Pick<ProductWithRelations, "id" | "slug" | "name" | "thumbnail_url" | "brand">;
+  /** Pa' productos configurables (ej. cilindro ISO) — pisa la clave interna/nombre con la variante elegida. */
   overrideSku?: string;
   overrideName?: string;
   className?: string;
@@ -18,7 +18,9 @@ type Props = {
 export function AddToCartButton({ product, overrideSku, overrideName, className, variant = "secondary" }: Props) {
   const { addItem, isInCart } = useCart();
   const [justAdded, setJustAdded] = useState(false);
-  const sku = overrideSku ?? product.sku;
+  // Clave interna del carrito: nunca el SKU/código de fabricante real — para
+  // productos sin configurador alcanza con el id del producto (1 fila = 1 producto).
+  const sku = overrideSku ?? product.id;
   const inCart = isInCart(sku);
 
   function handleClick(e: React.MouseEvent) {

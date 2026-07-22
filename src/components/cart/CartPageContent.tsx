@@ -29,7 +29,7 @@ export function CartPageContent() {
   }
 
   const whatsappHref = whatsappQuoteRequest(
-    items.map((it) => ({ name: it.name, sku: it.sku, quantity: it.quantity })),
+    items.map((it) => ({ name: it.name, quantity: it.quantity })),
   );
 
   return (

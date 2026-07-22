@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
-const SELECT = "id, slug, sku, name, thumbnail_url, category:categories(name), brand:brands(name)";
+// A propósito NO incluye "sku" — la respuesta de esta API es pública y el
+// código interno/de fabricante no debe viajar al navegador. El filtro por SKU
+// más abajo (sku.ilike) sigue funcionando igual: filtrar no requiere seleccionarlo.
+const SELECT = "id, slug, name, thumbnail_url, category:categories(name), brand:brands(name)";
 
 export async function GET(req: Request) {
   const q = new URL(req.url).searchParams.get("q")?.trim() ?? "";

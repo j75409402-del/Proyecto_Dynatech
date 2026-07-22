@@ -85,13 +85,33 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     .order("featured", { ascending: false })
     .limit(8);
 
-  const rawSpecs = (product.specs as (Record<string, unknown> & { configurator?: ConfiguratorConfig }) | null) ?? null;
-  const configurator = rawSpecs?.configurator ?? null;
+  // Shape completo tal cual vive en la DB — incluye sku_template/part_template,
+  // que son server-only y JAMÁS deben pasar como prop a un client component.
+  type StoredConfiguratorConfig = ConfiguratorConfig & { sku_template: string; part_template: string };
+  const rawSpecs =
+    (product.specs as (Record<string, unknown> & { configurator?: StoredConfiguratorConfig }) | null) ?? null;
+  const storedConfigurator = rawSpecs?.configurator ?? null;
+  // Versión saneada para el cliente: solo attributes/description_template/defaults.
+  const configurator: ConfiguratorConfig | null = storedConfigurator
+    ? {
+        attributes: storedConfigurator.attributes,
+        description_template: storedConfigurator.description_template,
+        defaults: storedConfigurator.defaults,
+      }
+    : null;
   const specs = rawSpecs
     ? (Object.fromEntries(
         Object.entries(rawSpecs).filter(([key]) => key !== "configurator"),
       ) as Record<string, string>)
     : null;
+  // Objeto acotado para los client components de CTA — nunca el SKU real.
+  const publicProduct = {
+    id: product.id,
+    slug: product.slug,
+    name: product.name,
+    thumbnail_url: product.thumbnail_url,
+    brand: product.brand,
+  };
   const galleryImages = Array.from(
     new Set([product.thumbnail_url, ...((product.images as string[] | null) ?? [])].filter(Boolean)),
   ) as string[];
@@ -101,7 +121,6 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    sku: product.sku,
     description: product.short_desc ?? product.description ?? undefined,
     image: product.thumbnail_url ?? undefined,
     category: product.category?.name ?? undefined,
@@ -185,9 +204,9 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
             {/* CTAs — configurador pa' productos maestro con variantes, botones fijos pa' el resto */}
             {configurator ? (
-              <VariantConfigurator product={product} config={configurator} />
+              <VariantConfigurator product={publicProduct} config={configurator} />
             ) : (
-              <QuoteButton product={product} />
+              <QuoteButton product={publicProduct} />
             )}
           </div>
         </div>

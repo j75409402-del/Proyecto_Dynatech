@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -32,9 +31,6 @@ const quoteSchema = z.object({
 type QuoteFormData = z.infer<typeof quoteSchema>;
 
 export function QuoteForm() {
-  const searchParams = useSearchParams();
-  const prefilledSku = searchParams.get("sku") ?? "";
-  const prefilledName = searchParams.get("nombre") ?? "";
   const { items: cartItems, clearCart } = useCart();
   const appliedCartRef = useRef(false);
 
@@ -47,19 +43,21 @@ export function QuoteForm() {
   const { register, control, handleSubmit, formState: { errors } } = useForm<QuoteFormData>({
     resolver: zodResolver(quoteSchema),
     defaultValues: {
-      items: [{ sku: prefilledSku, name: prefilledName, quantity: 1, notes: "" }],
+      items: [{ sku: "", name: "", quantity: 1, notes: "" }],
     },
   });
 
   const { fields, append, remove, replace } = useFieldArray({ control, name: "items" });
 
-  // Si venimos del carrito (sin ?sku= puntual) y hay ítems guardados, poblamos el form con ellos.
+  // Si venimos del carrito de cotización, poblamos el form con esos ítems (una sola vez).
+  // El campo "sku" queda vacío a propósito — es un campo opcional para que el cliente
+  // ponga SU propia referencia, nunca se precarga con nuestro código interno.
   useEffect(() => {
-    if (appliedCartRef.current || prefilledSku) return;
+    if (appliedCartRef.current) return;
     if (cartItems.length === 0) return;
-    replace(cartItems.map((it) => ({ sku: it.sku, name: it.name, quantity: it.quantity, notes: "" })));
+    replace(cartItems.map((it) => ({ sku: "", name: it.name, quantity: it.quantity, notes: "" })));
     appliedCartRef.current = true;
-  }, [cartItems, prefilledSku, replace]);
+  }, [cartItems, replace]);
 
   const onSubmit = async (data: QuoteFormData) => {
     setState({ status: "submitting" });

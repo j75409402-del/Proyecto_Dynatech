@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
 
 type Result = {
   slug: string;
-  sku: string;
   name: string;
   thumbnail_url: string | null;
   category: { name: string } | null;
