@@ -91,8 +91,7 @@ const BENEFICIOS = [
 ];
 
 const ANTES_DESPUES = [
-  "Vástago cromado",
-  "Camisa reacondicionada",
+  "Cilindro ISO 32mm",
 ];
 
 const FAQS = [
