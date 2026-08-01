@@ -8,12 +8,46 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { buildCategoryTrail } from "@/lib/categoryBreadcrumb";
 import { computeCatalogCounts } from "@/lib/catalogCounts";
-import { ResistenciaSpecTable, type ResistenciaRow } from "@/components/product/ResistenciaSpecTable";
+import { ReferenceTable, type ReferenceTableColumn, type ReferenceTableRow } from "@/components/product/ReferenceTable";
 import type { ProductWithRelations } from "@/types";
 
-// Categorías que se muestran como tabla de especificaciones (buscador + filtros + stock)
-// en vez del grid de tarjetas de producto habitual.
-const TABLE_CATEGORY_SLUGS = new Set(["resistencias-maquinas-inyeccion-plastico"]);
+// Categorías que se muestran como una sola tabla de referencias (buscador + stock) en vez
+// del grid de tarjetas de producto habitual. Cada una lee sus filas desde specs.<specsKey>
+// del producto interno "holder" (inactivo a propósito, no tiene página individual).
+const TABLE_CATEGORIES: Record<
+  string,
+  {
+    holderSlug: string;
+    specsKey: string;
+    columns: ReferenceTableColumn[];
+    searchKeys: string[];
+    searchPlaceholder: string;
+    filterKey?: string;
+  }
+> = {
+  "resistencias-maquinas-inyeccion-plastico": {
+    holderSlug: "resistencia-maquina-inyeccion-plastico",
+    specsKey: "resistencias",
+    columns: [
+      { key: "medida", label: "Medida" },
+      { key: "potencia", label: "Potencia" },
+      { key: "voltaje", label: "Voltaje" },
+    ],
+    searchKeys: ["medida"],
+    searchPlaceholder: "Buscar por medida (ej. 1-1/2 x 3/4)...",
+    filterKey: "voltaje",
+  },
+  "automatizacion-industrial-autonics": {
+    holderSlug: "automatizacion-industrial-autonics",
+    specsKey: "autonics",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por modelo o descripción...",
+  },
+};
 
 type Params = Promise<{ slug: string }>;
 
@@ -117,19 +151,23 @@ export default async function CategoryPage({ params }: { params: Params }) {
     );
   }
 
-  // Categoría "tabla de especificaciones" -> no usa productos individuales, lee las filas
-  // desde el producto interno que sostiene los datos (specs.resistencias) y las muestra
-  // como tabla con buscador/filtros/stock, sin páginas de detalle por referencia.
-  if (TABLE_CATEGORY_SLUGS.has(category.slug)) {
+  // Categoría "tabla de referencias" -> no usa productos individuales, lee las filas desde
+  // el producto interno que sostiene los datos y las muestra en una tabla con
+  // buscador/filtros/stock, sin páginas de detalle por referencia.
+  const tableConfig = TABLE_CATEGORIES[category.slug];
+  if (tableConfig) {
     // El producto que sostiene los datos queda inactivo a propósito (para no tener página
     // propia), así que la RLS pública lo bloquea — usamos service_role solo para esta lectura.
     const { data: holder } = await createServiceClient()
       .from("products")
       .select("specs")
-      .eq("slug", "resistencia-maquina-inyeccion-plastico")
+      .eq("slug", tableConfig.holderSlug)
       .maybeSingle();
 
-    const rows = (holder?.specs as { resistencias?: ResistenciaRow[] } | null)?.resistencias ?? [];
+    const rows =
+      ((holder?.specs as Record<string, ReferenceTableRow[]> | null)?.[tableConfig.specsKey] as
+        | ReferenceTableRow[]
+        | undefined) ?? [];
 
     return (
       <div className="container-max py-12 sm:py-16">
@@ -143,7 +181,13 @@ export default async function CategoryPage({ params }: { params: Params }) {
           )}
         </div>
 
-        <ResistenciaSpecTable rows={rows} />
+        <ReferenceTable
+          columns={tableConfig.columns}
+          rows={rows}
+          searchKeys={tableConfig.searchKeys}
+          searchPlaceholder={tableConfig.searchPlaceholder}
+          filterKey={tableConfig.filterKey}
+        />
       </div>
     );
   }
