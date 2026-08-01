@@ -47,6 +47,13 @@ const TABLE_CATEGORIES: Record<
     searchKeys: ["modelo", "descripcion"],
     searchPlaceholder: "Buscar por modelo o descripción...",
   },
+  "cilindros-neumaticos-bimba": {
+    holderSlug: "cilindros-neumaticos-bimba",
+    specsKey: "bimba",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo o medida...",
+  },
 };
 
 type Params = Promise<{ slug: string }>;
