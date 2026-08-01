@@ -9,10 +9,12 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductTabs } from "@/components/product/ProductTabs";
 import { ProductQuoteForm } from "@/components/product/ProductQuoteForm";
+import { ReferenceTable, type ReferenceTableRow } from "@/components/product/ReferenceTable";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ImportCTA } from "@/components/home/ImportCTA";
 import { CatalogDownload } from "@/components/home/CatalogDownload";
 import { buildCategoryTrail } from "@/lib/categoryBreadcrumb";
+import { TABLE_CATEGORIES, TABLE_SPECS_KEYS } from "@/lib/tableCategories";
 import { stockDisplay, cn } from "@/lib/utils";
 import type { ProductWithRelations, Category } from "@/types";
 
@@ -101,9 +103,16 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     : null;
   const specs = rawSpecs
     ? (Object.fromEntries(
-        Object.entries(rawSpecs).filter(([key]) => key !== "configurator"),
+        Object.entries(rawSpecs).filter(([key]) => key !== "configurator" && !TABLE_SPECS_KEYS.has(key)),
       ) as Record<string, string>)
     : null;
+  // Productos que además de su ficha muestran la tabla completa de referencias/stock
+  // (Resistencias, Autonics, Bimba) — mismo dato que /categorias/[slug] pero acá acompañado
+  // de galería, WhatsApp, etc.
+  const tableConfig = product.category ? TABLE_CATEGORIES[product.category.slug] : undefined;
+  const referenceRows = tableConfig
+    ? ((rawSpecs?.[tableConfig.specsKey] as ReferenceTableRow[] | undefined) ?? [])
+    : [];
   // Objeto acotado para los client components de CTA — nunca el SKU real.
   const publicProduct = {
     id: product.id,
@@ -215,6 +224,23 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
         <div className="mt-16">
           <ProductTabs
             tabs={[
+              ...(tableConfig
+                ? [
+                    {
+                      id: "referencias",
+                      label: "Referencias disponibles",
+                      content: (
+                        <ReferenceTable
+                          columns={tableConfig.columns}
+                          rows={referenceRows}
+                          searchKeys={tableConfig.searchKeys}
+                          searchPlaceholder={tableConfig.searchPlaceholder}
+                          filterKey={tableConfig.filterKey}
+                        />
+                      ),
+                    },
+                  ]
+                : []),
               {
                 id: "specs",
                 label: "Especificaciones",

@@ -5,16 +5,16 @@ import { useRouter } from "next/navigation";
 import type { ProductWithRelations } from "@/types";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { useCart } from "@/components/cart/CartContext";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { whatsappQuoteRequest } from "@/lib/whatsapp";
 
 type Props = {
   product: Pick<ProductWithRelations, "id" | "name" | "slug" | "thumbnail_url" | "brand">;
 };
 
-// El botón de WhatsApp de este componente se quitó a propósito — el sitio mantiene un
-// único acceso principal a WhatsApp en el header (ver Navbar). Acá quedan agregar al
-// carrito y el botón a la cotización multi-ítem (distinto del formulario inline de un
-// solo producto que ya está más abajo en la misma página). No usa un <Link> con el SKU
-// en la URL a propósito — agrega al carrito de cotización y navega sin query params.
+// Botón de WhatsApp por producto — pedido explícito del cliente, indispensable en cada
+// ficha. No incluye SKU/código de fabricante en el mensaje, solo el nombre del producto
+// (igual que whatsappQuoteRequest en el resto del sitio).
 export function QuoteButton({ product }: Props) {
   const router = useRouter();
   const { addItem } = useCart();
@@ -33,7 +33,16 @@ export function QuoteButton({ product }: Props) {
 
   return (
     <div className="flex flex-col sm:flex-row gap-3">
-      <AddToCartButton product={product} variant="primary" className="flex-1" />
+      <a
+        href={whatsappQuoteRequest([{ name: product.name, quantity: 1 }])}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-primary flex-1 bg-[#25D366] hover:bg-[#1ebe57] border-[#25D366] hover:border-[#1ebe57]"
+      >
+        <WhatsAppIcon className="h-4 w-4" />
+        Solicitar cotización por WhatsApp
+      </a>
+      <AddToCartButton product={product} variant="secondary" className="flex-1" />
       <button type="button" onClick={handleQuoteClick} className="btn-secondary flex-1">
         <FileText className="h-4 w-4" />
         Cotización multi-ítem
