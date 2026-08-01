@@ -57,6 +57,10 @@ export default async function CategoryPage({ params }: { params: Params }) {
       .select("category_id, brand_id")
       .eq("active", true);
     const { categoryCounts } = computeCatalogCounts(activeProducts ?? [], allCategories ?? []);
+    // Subcategorías sin productos activos todavía no se muestran como tarjeta (evita tiles
+    // vacíos con "Imagen a reemplazar" + "0 productos") — la categoría sigue existiendo,
+    // solo se oculta de esta vista hasta que tenga contenido real.
+    const visibleSubcategories = subcategories.filter((sub) => (categoryCounts.get(sub.id) ?? 0) > 0);
 
     return (
       <div className="container-max py-12 sm:py-16">
@@ -70,8 +74,21 @@ export default async function CategoryPage({ params }: { params: Params }) {
           )}
         </div>
 
+        {visibleSubcategories.length === 0 ? (
+          <div className="border border-black/10 p-12 text-center">
+            <h2 className="font-display text-2xl text-surface mb-3">
+              Estamos armando esta sección.
+            </h2>
+            <p className="text-steel-300 max-w-md mx-auto mb-6">
+              ¿Necesitas algo puntual? Cotízalo directo y te contactamos.
+            </p>
+            <Link href="/cotizacion" className="btn-primary">
+              Solicitar cotización
+            </Link>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {subcategories.map((sub) => {
+          {visibleSubcategories.map((sub) => {
             const count = categoryCounts.get(sub.id) ?? 0;
             return (
               <Link
@@ -110,6 +127,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
             );
           })}
         </div>
+        )}
       </div>
     );
   }
