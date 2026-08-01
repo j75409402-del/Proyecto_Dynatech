@@ -8,7 +8,12 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { buildCategoryTrail } from "@/lib/categoryBreadcrumb";
 import { computeCatalogCounts } from "@/lib/catalogCounts";
+import { ResistenciaSpecTable, type ResistenciaRow } from "@/components/product/ResistenciaSpecTable";
 import type { ProductWithRelations } from "@/types";
+
+// Categorías que se muestran como tabla de especificaciones (buscador + filtros + stock)
+// en vez del grid de tarjetas de producto habitual.
+const TABLE_CATEGORY_SLUGS = new Set(["resistencias-maquinas-inyeccion-plastico"]);
 
 type Params = Promise<{ slug: string }>;
 
@@ -108,6 +113,35 @@ export default async function CategoryPage({ params }: { params: Params }) {
             );
           })}
         </div>
+      </div>
+    );
+  }
+
+  // Categoría "tabla de especificaciones" -> no usa productos individuales, lee las filas
+  // desde el producto interno que sostiene los datos (specs.resistencias) y las muestra
+  // como tabla con buscador/filtros/stock, sin páginas de detalle por referencia.
+  if (TABLE_CATEGORY_SLUGS.has(category.slug)) {
+    const { data: holder } = await supabase
+      .from("products")
+      .select("specs")
+      .eq("slug", "resistencia-maquina-inyeccion-plastico")
+      .maybeSingle();
+
+    const rows = (holder?.specs as { resistencias?: ResistenciaRow[] } | null)?.resistencias ?? [];
+
+    return (
+      <div className="container-max py-12 sm:py-16">
+        <Breadcrumbs items={breadcrumbItems} />
+
+        <div className="mb-10 max-w-3xl">
+          <div className="eyebrow mb-3">Catálogo · {rows.length} referencias</div>
+          <h1 className="font-display text-display-lg text-surface mb-4">{category.name}</h1>
+          {category.description && (
+            <p className="text-lg text-steel-300 leading-relaxed">{category.description}</p>
+          )}
+        </div>
+
+        <ResistenciaSpecTable rows={rows} />
       </div>
     );
   }
