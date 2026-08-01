@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, ImageOff } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { buildCategoryTrail } from "@/lib/categoryBreadcrumb";
@@ -121,7 +121,9 @@ export default async function CategoryPage({ params }: { params: Params }) {
   // desde el producto interno que sostiene los datos (specs.resistencias) y las muestra
   // como tabla con buscador/filtros/stock, sin páginas de detalle por referencia.
   if (TABLE_CATEGORY_SLUGS.has(category.slug)) {
-    const { data: holder } = await supabase
+    // El producto que sostiene los datos queda inactivo a propósito (para no tener página
+    // propia), así que la RLS pública lo bloquea — usamos service_role solo para esta lectura.
+    const { data: holder } = await createServiceClient()
       .from("products")
       .select("specs")
       .eq("slug", "resistencia-maquina-inyeccion-plastico")
