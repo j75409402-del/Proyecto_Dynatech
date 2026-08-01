@@ -2,8 +2,11 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+type SortKey = string | "stock";
+type SortDir = "asc" | "desc";
 
 export type ReferenceTableColumn = { key: string; label: string };
 export type ReferenceTableRow = Record<string, string> & { stock: number | null };
@@ -34,6 +37,8 @@ export function ReferenceTable({
 }) {
   const [query, setQuery] = useState("");
   const [filterValue, setFilterValue] = useState<string>("todos");
+  const [sortKey, setSortKey] = useState<SortKey | null>(null);
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
 
   const filterOptions = useMemo(() => {
     if (!filterKey) return [];
@@ -48,6 +53,30 @@ export function ReferenceTable({
       return matchesQuery && matchesFilter;
     });
   }, [rows, query, searchKeys, filterKey, filterValue]);
+
+  const sorted = useMemo(() => {
+    if (!sortKey) return filtered;
+    const dir = sortDir === "asc" ? 1 : -1;
+    return [...filtered].sort((a, b) => {
+      if (sortKey === "stock") {
+        // Sin stock trackeado ("consultar") siempre al final, sin importar la dirección.
+        if (a.stock === null && b.stock === null) return 0;
+        if (a.stock === null) return 1;
+        if (b.stock === null) return -1;
+        return (a.stock - b.stock) * dir;
+      }
+      return a[sortKey].localeCompare(b[sortKey], "es") * dir;
+    });
+  }, [filtered, sortKey, sortDir]);
+
+  function toggleSort(key: SortKey) {
+    if (sortKey === key) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortDir("asc");
+    }
+  }
 
   return (
     <div>
@@ -83,20 +112,21 @@ export function ReferenceTable({
           <thead>
             <tr className="border-b border-black/10 bg-carbon-700">
               {columns.map((col) => (
-                <th
-                  key={col.key}
-                  className="px-4 py-3 text-left font-mono text-[11px] uppercase tracking-techno text-steel-400"
-                >
-                  {col.label}
+                <th key={col.key} className="px-4 py-3 text-left">
+                  <SortButton active={sortKey === col.key} dir={sortDir} onClick={() => toggleSort(col.key)}>
+                    {col.label}
+                  </SortButton>
                 </th>
               ))}
-              <th className="px-4 py-3 text-left font-mono text-[11px] uppercase tracking-techno text-steel-400">
-                Stock actual
+              <th className="px-4 py-3 text-left">
+                <SortButton active={sortKey === "stock"} dir={sortDir} onClick={() => toggleSort("stock")}>
+                  Stock actual
+                </SortButton>
               </th>
             </tr>
           </thead>
           <tbody>
-            {filtered.map((r, i) => {
+            {sorted.map((r, i) => {
               const stock = stockCell(r.stock);
               return (
                 <tr
@@ -123,7 +153,7 @@ export function ReferenceTable({
                 </tr>
               );
             })}
-            {filtered.length === 0 && (
+            {sorted.length === 0 && (
               <tr>
                 <td colSpan={columns.length + 1} className="px-4 py-10 text-center text-steel-400">
                   No encontramos referencias con esos filtros.
@@ -142,6 +172,33 @@ export function ReferenceTable({
         y te confirmamos disponibilidad.
       </p>
     </div>
+  );
+}
+
+function SortButton({
+  active,
+  dir,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  dir: SortDir;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  const Icon = active ? (dir === "asc" ? ArrowUp : ArrowDown) : ArrowUpDown;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-techno transition-colors",
+        active ? "text-signal" : "text-steel-400 hover:text-surface",
+      )}
+    >
+      {children}
+      <Icon className="h-3 w-3 shrink-0" />
+    </button>
   );
 }
 

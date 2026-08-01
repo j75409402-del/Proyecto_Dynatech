@@ -20,10 +20,9 @@ const item: Variants = {
 // Líneas de producto del carrusel — imágenes son placeholders a propósito,
 // el usuario las reemplaza por fotografía profesional más adelante.
 const SLIDES = [
-  { tag: "Línea 01", title: "Neumática industrial" },
-  { tag: "Línea 02", title: "Instrumentación de procesos" },
-  { tag: "Línea 03", title: "Sensores y fotoceldas" },
-  { tag: "Línea 04", title: "Controles eléctricos" },
+  { tag: "Línea 01", title: "Resistencias para inyección de plásticos" },
+  { tag: "Línea 02", title: "Automatización industrial Autonics" },
+  { tag: "Línea 03", title: "Cilindros neumáticos Bimba" },
 ] as const;
 
 const AUTO_ADVANCE_MS = 5000;
