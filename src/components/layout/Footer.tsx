@@ -6,9 +6,10 @@ import { Reveal } from "@/components/motion/Reveal";
 import { getSiteSettings } from "@/lib/siteSettings";
 
 const categoryLinks = [
-  { label: "Resistencias Máquina Inyección de Plásticos", href: "/categorias/resistencias-maquinas-inyeccion-plastico" },
-  { label: "Automatización Industrial Autonics",          href: "/categorias/automatizacion-industrial-autonics" },
-  { label: "Cilindros Neumáticos Bimba",                  href: "/categorias/cilindros-neumaticos-bimba" },
+  { label: "Neumática",             href: "/categorias/neumatica" },
+  { label: "Instrumentación",       href: "/categorias/instrumentacion" },
+  { label: "Sensores y fotoceldas", href: "/categorias/sensores" },
+  { label: "Controles eléctricos",  href: "/categorias/electrica" },
 ];
 
 const companyLinks = [
