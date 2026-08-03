@@ -10,11 +10,12 @@ import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductTabs } from "@/components/product/ProductTabs";
 import { ProductQuoteForm } from "@/components/product/ProductQuoteForm";
 import { ReferenceTable, type ReferenceTableRow } from "@/components/product/ReferenceTable";
+import { ConsultAvailabilityButton } from "@/components/product/ConsultAvailabilityButton";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ImportCTA } from "@/components/home/ImportCTA";
 import { CatalogDownload } from "@/components/home/CatalogDownload";
 import { buildCategoryTrail } from "@/lib/categoryBreadcrumb";
-import { TABLE_CATEGORIES, TABLE_SPECS_KEYS } from "@/lib/tableCategories";
+import { TABLE_CATEGORIES, TABLE_SPECS_KEYS, MEDIDAS_SPECS_KEY } from "@/lib/tableCategories";
 import { stockDisplay, cn } from "@/lib/utils";
 import type { ProductWithRelations, Category } from "@/types";
 
@@ -113,6 +114,9 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
   const referenceRows = tableConfig
     ? ((rawSpecs?.[tableConfig.specsKey] as ReferenceTableRow[] | undefined) ?? [])
     : [];
+  // Familias sin stock/carrito (ej. Cilindros American): solo tabla de medidas + botón
+  // único "Consultar disponibilidad", sin importar la categoría.
+  const medidasRows = rawSpecs?.[MEDIDAS_SPECS_KEY] as ReferenceTableRow[] | undefined;
   // Objeto acotado para los client components de CTA — nunca el SKU real.
   const publicProduct = {
     id: product.id,
@@ -211,9 +215,12 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               />
             </div>
 
-            {/* CTAs — configurador pa' productos maestro con variantes, botones fijos pa' el resto */}
+            {/* CTAs — configurador pa' productos maestro con variantes, "Consultar disponibilidad"
+                único pa' familias sin stock/carrito (ej. Cilindros American), botones fijos pa' el resto */}
             {configurator ? (
               <VariantConfigurator product={publicProduct} config={configurator} />
+            ) : medidasRows ? (
+              <ConsultAvailabilityButton productName={product.name} />
             ) : (
               <QuoteButton product={publicProduct} />
             )}
@@ -236,6 +243,23 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                           searchKeys={tableConfig.searchKeys}
                           searchPlaceholder={tableConfig.searchPlaceholder}
                           filterKey={tableConfig.filterKey}
+                        />
+                      ),
+                    },
+                  ]
+                : []),
+              ...(medidasRows
+                ? [
+                    {
+                      id: "medidas",
+                      label: "Medidas disponibles",
+                      content: (
+                        <ReferenceTable
+                          columns={[{ key: "descripcion", label: "Descripción" }]}
+                          rows={medidasRows}
+                          searchKeys={["descripcion"]}
+                          searchPlaceholder="Buscar por medida..."
+                          showStock={false}
                         />
                       ),
                     },

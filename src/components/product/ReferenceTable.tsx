@@ -9,7 +9,7 @@ type SortKey = string | "stock";
 type SortDir = "asc" | "desc";
 
 export type ReferenceTableColumn = { key: string; label: string };
-export type ReferenceTableRow = Record<string, string> & { stock: number | null };
+export type ReferenceTableRow = Record<string, string> & { stock?: number | null };
 
 function stockCell(stock: number | null) {
   if (stock === null) {
@@ -27,6 +27,7 @@ export function ReferenceTable({
   searchKeys,
   searchPlaceholder,
   filterKey,
+  showStock = true,
 }: {
   columns: ReferenceTableColumn[];
   rows: ReferenceTableRow[];
@@ -34,6 +35,8 @@ export function ReferenceTable({
   searchPlaceholder: string;
   /** Si se define, agrega chips de filtro de valor único sobre esta columna (ej. "voltaje"). */
   filterKey?: string;
+  /** Algunas familias (ej. cilindros American) no manejan stock, solo "Consultar disponibilidad" aparte. */
+  showStock?: boolean;
 }) {
   const [query, setQuery] = useState("");
   const [filterValue, setFilterValue] = useState<string>("todos");
@@ -60,10 +63,12 @@ export function ReferenceTable({
     return [...filtered].sort((a, b) => {
       if (sortKey === "stock") {
         // Sin stock trackeado ("consultar") siempre al final, sin importar la dirección.
-        if (a.stock === null && b.stock === null) return 0;
-        if (a.stock === null) return 1;
-        if (b.stock === null) return -1;
-        return (a.stock - b.stock) * dir;
+        const aStock = a.stock ?? null;
+        const bStock = b.stock ?? null;
+        if (aStock === null && bStock === null) return 0;
+        if (aStock === null) return 1;
+        if (bStock === null) return -1;
+        return (aStock - bStock) * dir;
       }
       return a[sortKey].localeCompare(b[sortKey], "es") * dir;
     });
@@ -118,16 +123,18 @@ export function ReferenceTable({
                   </SortButton>
                 </th>
               ))}
-              <th className="px-4 py-3 text-left">
-                <SortButton active={sortKey === "stock"} dir={sortDir} onClick={() => toggleSort("stock")}>
-                  Stock actual
-                </SortButton>
-              </th>
+              {showStock && (
+                <th className="px-4 py-3 text-left">
+                  <SortButton active={sortKey === "stock"} dir={sortDir} onClick={() => toggleSort("stock")}>
+                    Stock actual
+                  </SortButton>
+                </th>
+              )}
             </tr>
           </thead>
           <tbody>
             {sorted.map((r, i) => {
-              const stock = stockCell(r.stock);
+              const stock = stockCell(r.stock ?? null);
               return (
                 <tr
                   key={columns.map((c) => r[c.key]).join("|")}
@@ -144,18 +151,20 @@ export function ReferenceTable({
                       {r[col.key]}
                     </td>
                   ))}
-                  <td className="px-4 py-3">
-                    <span className="inline-flex items-center gap-1.5">
-                      <span className={cn("h-2 w-2 rounded-full shrink-0", stock.dot)} />
-                      <span className="text-surface">{stock.text}</span>
-                    </span>
-                  </td>
+                  {showStock && (
+                    <td className="px-4 py-3">
+                      <span className="inline-flex items-center gap-1.5">
+                        <span className={cn("h-2 w-2 rounded-full shrink-0", stock.dot)} />
+                        <span className="text-surface">{stock.text}</span>
+                      </span>
+                    </td>
+                  )}
                 </tr>
               );
             })}
             {sorted.length === 0 && (
               <tr>
-                <td colSpan={columns.length + 1} className="px-4 py-10 text-center text-steel-400">
+                <td colSpan={columns.length + (showStock ? 1 : 0)} className="px-4 py-10 text-center text-steel-400">
                   No encontramos referencias con esos filtros.
                 </td>
               </tr>

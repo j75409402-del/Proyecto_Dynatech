@@ -47,4 +47,15 @@ export const TABLE_CATEGORIES: Record<
   },
 };
 
-export const TABLE_SPECS_KEYS = new Set(Object.values(TABLE_CATEGORIES).map((c) => c.specsKey));
+/**
+ * Clave de specs para familias de variantes SIN stock ni carrito (ej. Cilindros American):
+ * solo una tabla de medidas disponibles + botón único "Consultar disponibilidad". A
+ * diferencia de TABLE_CATEGORIES, esto no depende de la categoría — cualquier producto con
+ * specs.medidas usa este modo.
+ */
+export const MEDIDAS_SPECS_KEY = "medidas";
+
+export const TABLE_SPECS_KEYS = new Set([
+  ...Object.values(TABLE_CATEGORIES).map((c) => c.specsKey),
+  MEDIDAS_SPECS_KEY,
+]);
