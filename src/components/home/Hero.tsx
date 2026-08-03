@@ -21,10 +21,10 @@ const item: Variants = {
 // Líneas de producto del carrusel — las que aún no tienen banner real quedan con
 // placeholder hasta que Dynatech la suba.
 const SLIDES = [
-  { tag: "Línea 01", title: "Neumática industrial", image: null },
+  { tag: "Línea 01", title: "Neumática industrial", image: "/banners/neumatica-industrial.jpg" },
   { tag: "Línea 02", title: "Instrumentación de procesos", image: null },
   { tag: "Línea 03", title: "Sensores y fotoceldas", image: "/banners/sensores-fotoceldas.jpg" },
-  { tag: "Línea 04", title: "Controles eléctricos", image: null },
+  { tag: "Línea 04", title: "Controles eléctricos", image: "/banners/controles-electricos.jpg" },
 ] as const;
 
 const AUTO_ADVANCE_MS = 5000;
