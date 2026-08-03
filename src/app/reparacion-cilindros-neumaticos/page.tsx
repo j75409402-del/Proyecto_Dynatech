@@ -267,14 +267,14 @@ export default function ReparacionCilindrosPage() {
                     <span className="font-display text-base text-surface">{item.title}</span>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="aspect-[16/9] border-r border-black/10 relative overflow-hidden">
+                    <div className="aspect-[3/1] border-r border-black/10 relative overflow-hidden">
                       {item.antes ? (
                         <Image
                           src={item.antes}
                           alt={`Antes · ${item.title}`}
                           fill
                           sizes="(max-width: 1024px) 50vw, 25vw"
-                          className="object-cover"
+                          className="object-contain"
                         />
                       ) : (
                         <>
@@ -285,14 +285,14 @@ export default function ReparacionCilindrosPage() {
                         </>
                       )}
                     </div>
-                    <div className="aspect-[16/9] relative overflow-hidden">
+                    <div className="aspect-[3/1] relative overflow-hidden">
                       {item.despues ? (
                         <Image
                           src={item.despues}
                           alt={`Después · ${item.title}`}
                           fill
                           sizes="(max-width: 1024px) 50vw, 25vw"
-                          className="object-cover"
+                          className="object-contain"
                         />
                       ) : (
                         <>
