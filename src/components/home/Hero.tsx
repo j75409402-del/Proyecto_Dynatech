@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight, ImageOff } from "lucide-react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { HeroScene } from "@/components/motion/HeroScene";
@@ -17,13 +18,13 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] } },
 };
 
-// Líneas de producto del carrusel — imágenes son placeholders a propósito,
-// el usuario las reemplaza por fotografía profesional más adelante.
+// Líneas de producto del carrusel — las que aún no tienen banner real quedan con
+// placeholder hasta que Dynatech la suba.
 const SLIDES = [
-  { tag: "Línea 01", title: "Neumática industrial" },
-  { tag: "Línea 02", title: "Instrumentación de procesos" },
-  { tag: "Línea 03", title: "Sensores y fotoceldas" },
-  { tag: "Línea 04", title: "Controles eléctricos" },
+  { tag: "Línea 01", title: "Neumática industrial", image: null },
+  { tag: "Línea 02", title: "Instrumentación de procesos", image: null },
+  { tag: "Línea 03", title: "Sensores y fotoceldas", image: "/banners/sensores-fotoceldas.jpg" },
+  { tag: "Línea 04", title: "Controles eléctricos", image: null },
 ] as const;
 
 const AUTO_ADVANCE_MS = 5000;
@@ -109,20 +110,40 @@ export function Hero() {
               <div className="absolute -bottom-2 -right-2 h-4 w-4 border-r-2 border-b-2 border-signal z-10" />
 
               <AnimatePresence mode="wait">
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-10 text-center"
-                >
-                  <ImageOff className="h-9 w-9 text-steel-500" strokeWidth={1.25} />
-                  <div className="font-mono text-[10px] uppercase tracking-techno text-steel-500">
-                    {SLIDES[index].tag} · imagen a reemplazar
-                  </div>
-                  <div className="font-display text-2xl text-surface">{SLIDES[index].title}</div>
-                </motion.div>
+                {SLIDES[index].image ? (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="absolute inset-0"
+                  >
+                    <Image
+                      src={SLIDES[index].image}
+                      alt={SLIDES[index].title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority={index === 0}
+                      className="object-cover"
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-10 text-center"
+                  >
+                    <ImageOff className="h-9 w-9 text-steel-500" strokeWidth={1.25} />
+                    <div className="font-mono text-[10px] uppercase tracking-techno text-steel-500">
+                      {SLIDES[index].tag} · imagen a reemplazar
+                    </div>
+                    <div className="font-display text-2xl text-surface">{SLIDES[index].title}</div>
+                  </motion.div>
+                )}
               </AnimatePresence>
 
               {/* Controles */}
