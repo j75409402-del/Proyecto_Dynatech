@@ -117,6 +117,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
   // Familias sin stock/carrito (ej. Cilindros American): solo tabla de medidas + botón
   // único "Consultar disponibilidad", sin importar la categoría.
   const medidasRows = rawSpecs?.[MEDIDAS_SPECS_KEY] as ReferenceTableRow[] | undefined;
+  const hideStockIndicator = Boolean(medidasRows) || tableConfig?.showStock === false;
   // Objeto acotado para los client components de CTA — nunca el SKU real.
   const publicProduct = {
     id: product.id,
@@ -165,24 +166,27 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
           {/* Info */}
           <div>
-            {/* Brand + stock */}
+            {/* Brand + stock — sin indicador de stock pa' familias sin stock/carrito
+                (ej. Resistencias, Cilindros American): solo "Consultar disponibilidad" */}
             <div className="flex items-center justify-between mb-4">
               {product.brand && (
                 <span className="font-mono text-xs uppercase tracking-techno text-signal">
                   {product.brand.name} {product.brand.country && `· ${product.brand.country}`}
                 </span>
               )}
-              <div className="flex flex-col items-end gap-0.5">
-                <div className="flex items-center gap-1.5">
-                  <span className={cn("h-2 w-2 rounded-full", stock.dotClass)} />
-                  <span className="font-mono text-[10px] uppercase tracking-techno text-steel-200">
-                    {stock.label}
-                  </span>
+              {!hideStockIndicator && (
+                <div className="flex flex-col items-end gap-0.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className={cn("h-2 w-2 rounded-full", stock.dotClass)} />
+                    <span className="font-mono text-[10px] uppercase tracking-techno text-steel-200">
+                      {stock.label}
+                    </span>
+                  </div>
+                  {stock.sublabel && (
+                    <span className="font-mono text-[10px] text-steel-400">{stock.sublabel}</span>
+                  )}
                 </div>
-                {stock.sublabel && (
-                  <span className="font-mono text-[10px] text-steel-400">{stock.sublabel}</span>
-                )}
-              </div>
+              )}
             </div>
 
             <h1 className="font-display text-display-md text-surface mb-4">
@@ -219,7 +223,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                 único pa' familias sin stock/carrito (ej. Cilindros American), botones fijos pa' el resto */}
             {configurator ? (
               <VariantConfigurator product={publicProduct} config={configurator} />
-            ) : medidasRows ? (
+            ) : hideStockIndicator ? (
               <ConsultAvailabilityButton productName={product.name} />
             ) : (
               <QuoteButton product={publicProduct} />
@@ -243,6 +247,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                           searchKeys={tableConfig.searchKeys}
                           searchPlaceholder={tableConfig.searchPlaceholder}
                           filterKey={tableConfig.filterKey}
+                          showStock={tableConfig.showStock ?? true}
                         />
                       ),
                     },

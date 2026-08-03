@@ -14,6 +14,8 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: string[];
     searchPlaceholder: string;
     filterKey?: string;
+    /** false = sin columna de stock ni carrito, solo botón único "Consultar disponibilidad". */
+    showStock?: boolean;
   }
 > = {
   "resistencias-maquinas-inyeccion-plastico": {
@@ -27,6 +29,7 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["medida"],
     searchPlaceholder: "Buscar por medida (ej. 1-1/2 x 3/4)...",
     filterKey: "voltaje",
+    showStock: false,
   },
   "automatizacion-industrial-autonics": {
     holderSlug: "automatizacion-industrial-autonics",

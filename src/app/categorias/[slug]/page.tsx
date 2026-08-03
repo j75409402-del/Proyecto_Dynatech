@@ -166,6 +166,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
           searchKeys={tableConfig.searchKeys}
           searchPlaceholder={tableConfig.searchPlaceholder}
           filterKey={tableConfig.filterKey}
+          showStock={tableConfig.showStock ?? true}
         />
       </div>
     );

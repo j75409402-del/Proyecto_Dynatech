@@ -6,10 +6,11 @@ import { Reveal } from "@/components/motion/Reveal";
 import { getSiteSettings } from "@/lib/siteSettings";
 
 const categoryLinks = [
-  { label: "Neumática",             href: "/categorias/neumatica" },
-  { label: "Instrumentación",       href: "/categorias/instrumentacion" },
-  { label: "Sensores y fotoceldas", href: "/categorias/sensores" },
-  { label: "Controles eléctricos",  href: "/categorias/electrica" },
+  { label: "Neumática",                          href: "/categorias/neumatica" },
+  { label: "Instrumentación",                    href: "/categorias/instrumentacion" },
+  { label: "Sensores y fotoceldas",               href: "/categorias/sensores" },
+  { label: "Controles eléctricos",                href: "/categorias/electrica" },
+  { label: "Resistencias Eléctricas Industriales", href: "/categorias/resistencias-maquinas-inyeccion-plastico" },
 ];
 
 const companyLinks = [
