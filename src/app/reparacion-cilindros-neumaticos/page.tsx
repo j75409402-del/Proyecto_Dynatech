@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Wrench,
   Factory,
@@ -185,11 +186,23 @@ export default function ReparacionCilindrosPage() {
 
             <Reveal delay={0.15} className="lg:col-span-6">
               <div className="grid grid-cols-2 gap-4">
-                <div className="aspect-[3/4] border border-black/10">
-                  <ImagePlaceholder label="Taller reparando cilindros" />
+                <div className="relative aspect-[3/4] border border-black/10 overflow-hidden">
+                  <Image
+                    src="/cilindros/taller-reparando.jpg"
+                    alt="Taller reparando cilindros neumáticos"
+                    fill
+                    sizes="(max-width: 1024px) 45vw, 25vw"
+                    className="object-cover"
+                  />
                 </div>
-                <div className="aspect-[3/4] border border-black/10 mt-8">
-                  <ImagePlaceholder label="Cilindros neumáticos nuevos" />
+                <div className="relative aspect-[3/4] border border-black/10 mt-8 overflow-hidden">
+                  <Image
+                    src="/cilindros/cilindros-nuevos.jpg"
+                    alt="Cilindros neumáticos nuevos"
+                    fill
+                    sizes="(max-width: 1024px) 45vw, 25vw"
+                    className="object-cover"
+                  />
                 </div>
               </div>
             </Reveal>
