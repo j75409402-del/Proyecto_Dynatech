@@ -25,7 +25,7 @@ const SLIDES: Slide[] = [
   { tag: "Línea 01", title: "Neumática industrial", image: "/banners/neumatica-industrial.jpg" },
   { tag: "Línea 02", title: "Instrumentación de procesos", image: "/banners/instrumentacion-procesos.jpg" },
   { tag: "Línea 03", title: "Sensores y fotoceldas", image: "/banners/sensores-fotoceldas.jpg" },
-  { tag: "Línea 04", title: "Controles eléctricos", image: null },
+  { tag: "Línea 04", title: "Controles eléctricos", image: "/banners/controles-electricos.jpg" },
 ];
 
 const AUTO_ADVANCE_MS = 5000;
