@@ -92,7 +92,11 @@ const BENEFICIOS = [
 ];
 
 const ANTES_DESPUES = [
-  "Cilindro ISO 32mm",
+  {
+    title: "Cilindro ISO 32mm",
+    antes: "/cilindros/antes-cilindro-iso-32mm.jpg",
+    despues: "/cilindros/despues-cilindro-iso-32mm.jpg",
+  },
 ];
 
 const FAQS = [
@@ -257,23 +261,47 @@ export default function ReparacionCilindrosPage() {
 
           <div className="space-y-6">
             {ANTES_DESPUES.map((item, i) => (
-              <Reveal key={item} delay={i * 0.06}>
+              <Reveal key={item.title} delay={i * 0.06}>
                 <div className="border border-black/10 bg-carbon">
                   <div className="px-6 py-4 border-b border-black/10">
-                    <span className="font-display text-base text-surface">{item}</span>
+                    <span className="font-display text-base text-surface">{item.title}</span>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="aspect-[16/9] border-r border-black/10 relative">
-                      <ImagePlaceholder label={`Antes · ${item}`} />
-                      <span className="absolute top-3 left-3 bg-signal text-white font-mono text-[9px] uppercase tracking-techno px-2 py-1">
-                        Antes
-                      </span>
+                    <div className="aspect-[16/9] border-r border-black/10 relative overflow-hidden">
+                      {item.antes ? (
+                        <Image
+                          src={item.antes}
+                          alt={`Antes · ${item.title}`}
+                          fill
+                          sizes="(max-width: 1024px) 50vw, 25vw"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <>
+                          <ImagePlaceholder label={`Antes · ${item.title}`} />
+                          <span className="absolute top-3 left-3 bg-signal text-white font-mono text-[9px] uppercase tracking-techno px-2 py-1">
+                            Antes
+                          </span>
+                        </>
+                      )}
                     </div>
-                    <div className="aspect-[16/9] relative">
-                      <ImagePlaceholder label={`Después · ${item}`} />
-                      <span className="absolute top-3 left-3 bg-emerald-500 text-white font-mono text-[9px] uppercase tracking-techno px-2 py-1">
-                        Después
-                      </span>
+                    <div className="aspect-[16/9] relative overflow-hidden">
+                      {item.despues ? (
+                        <Image
+                          src={item.despues}
+                          alt={`Después · ${item.title}`}
+                          fill
+                          sizes="(max-width: 1024px) 50vw, 25vw"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <>
+                          <ImagePlaceholder label={`Después · ${item.title}`} />
+                          <span className="absolute top-3 left-3 bg-emerald-500 text-white font-mono text-[9px] uppercase tracking-techno px-2 py-1">
+                            Después
+                          </span>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
