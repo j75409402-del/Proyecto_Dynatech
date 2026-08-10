@@ -15,7 +15,13 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ImportCTA } from "@/components/home/ImportCTA";
 import { CatalogDownload } from "@/components/home/CatalogDownload";
 import { buildCategoryTrail } from "@/lib/categoryBreadcrumb";
-import { TABLE_CATEGORIES, TABLE_SPECS_KEYS, MEDIDAS_SPECS_KEY, CTA_LABEL_SPECS_KEY } from "@/lib/tableCategories";
+import {
+  TABLE_CATEGORIES,
+  TABLE_SPECS_KEYS,
+  MEDIDAS_SPECS_KEY,
+  CTA_LABEL_SPECS_KEY,
+  MEDIDAS_COLUMN_LABEL_SPECS_KEY,
+} from "@/lib/tableCategories";
 import { stockDisplay, cn } from "@/lib/utils";
 import type { ProductWithRelations, Category } from "@/types";
 
@@ -120,6 +126,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
   const hideStockIndicator = Boolean(medidasRows) || tableConfig?.showStock === false;
   const consultCtaLabel =
     tableConfig?.ctaLabel ?? (rawSpecs?.[CTA_LABEL_SPECS_KEY] as string | undefined) ?? "Consultar disponibilidad";
+  const medidasColumnLabel = (rawSpecs?.[MEDIDAS_COLUMN_LABEL_SPECS_KEY] as string | undefined) ?? "Descripción";
   // Objeto acotado para los client components de CTA — nunca el SKU real.
   const publicProduct = {
     id: product.id,
@@ -262,7 +269,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                       label: "Medidas disponibles",
                       content: (
                         <ReferenceTable
-                          columns={[{ key: "descripcion", label: "Descripción" }]}
+                          columns={[{ key: "descripcion", label: medidasColumnLabel }]}
                           rows={medidasRows}
                           searchKeys={["descripcion"]}
                           searchPlaceholder="Buscar por medida..."

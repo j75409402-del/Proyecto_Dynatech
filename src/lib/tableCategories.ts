@@ -85,9 +85,13 @@ export const TABLE_CATEGORIES: Record<
 export const MEDIDAS_SPECS_KEY = "medidas";
 /** Texto opcional del botón único para productos en modo specs.medidas (ver CTA_LABEL_SPECS_KEY). */
 export const CTA_LABEL_SPECS_KEY = "ctaLabel";
+/** Encabezado opcional de la columna única en modo specs.medidas. Default: "Descripción"
+ * (ej. Cilindros American). Fusibles lo pisa a "Disponibilidad". */
+export const MEDIDAS_COLUMN_LABEL_SPECS_KEY = "medidasColumnLabel";
 
 export const TABLE_SPECS_KEYS = new Set([
   ...Object.values(TABLE_CATEGORIES).map((c) => c.specsKey),
   MEDIDAS_SPECS_KEY,
   CTA_LABEL_SPECS_KEY,
+  MEDIDAS_COLUMN_LABEL_SPECS_KEY,
 ]);
