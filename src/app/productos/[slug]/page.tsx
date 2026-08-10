@@ -15,7 +15,7 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ImportCTA } from "@/components/home/ImportCTA";
 import { CatalogDownload } from "@/components/home/CatalogDownload";
 import { buildCategoryTrail } from "@/lib/categoryBreadcrumb";
-import { TABLE_CATEGORIES, TABLE_SPECS_KEYS, MEDIDAS_SPECS_KEY } from "@/lib/tableCategories";
+import { TABLE_CATEGORIES, TABLE_SPECS_KEYS, MEDIDAS_SPECS_KEY, CTA_LABEL_SPECS_KEY } from "@/lib/tableCategories";
 import { stockDisplay, cn } from "@/lib/utils";
 import type { ProductWithRelations, Category } from "@/types";
 
@@ -118,6 +118,8 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
   // único "Consultar disponibilidad", sin importar la categoría.
   const medidasRows = rawSpecs?.[MEDIDAS_SPECS_KEY] as ReferenceTableRow[] | undefined;
   const hideStockIndicator = Boolean(medidasRows) || tableConfig?.showStock === false;
+  const consultCtaLabel =
+    tableConfig?.ctaLabel ?? (rawSpecs?.[CTA_LABEL_SPECS_KEY] as string | undefined) ?? "Consultar disponibilidad";
   // Objeto acotado para los client components de CTA — nunca el SKU real.
   const publicProduct = {
     id: product.id,
@@ -224,7 +226,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
             {configurator ? (
               <VariantConfigurator product={publicProduct} config={configurator} />
             ) : hideStockIndicator ? (
-              <ConsultAvailabilityButton productName={product.name} />
+              <ConsultAvailabilityButton productName={product.name} label={consultCtaLabel} />
             ) : (
               <QuoteButton product={publicProduct} />
             )}

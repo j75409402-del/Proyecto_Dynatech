@@ -14,8 +14,10 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: string[];
     searchPlaceholder: string;
     filterKey?: string;
-    /** false = sin columna de stock ni carrito, solo botón único "Consultar disponibilidad". */
+    /** false = sin columna de stock ni carrito, solo botón único (ver ctaLabel). */
     showStock?: boolean;
+    /** Texto del botón único cuando showStock=false. Default: "Consultar disponibilidad". */
+    ctaLabel?: string;
   }
 > = {
   "resistencias-maquinas-inyeccion-plastico": {
@@ -48,6 +50,30 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo o medida...",
   },
+  "bases-para-fusibles": {
+    holderSlug: "bases-para-fusibles",
+    specsKey: "bases",
+    columns: [
+      { key: "descripcion", label: "Descripción" },
+      { key: "capacidad", label: "Capacidad" },
+    ],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar base por modelo compatible...",
+    showStock: false,
+    ctaLabel: "Solicitar cotización",
+  },
+  "accesorios-para-fusibles": {
+    holderSlug: "accesorios-para-fusibles",
+    specsKey: "accesorios",
+    columns: [
+      { key: "descripcion", label: "Descripción" },
+      { key: "capacidad", label: "Capacidad" },
+    ],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar accesorio...",
+    showStock: false,
+    ctaLabel: "Solicitar cotización",
+  },
 };
 
 /**
@@ -57,8 +83,11 @@ export const TABLE_CATEGORIES: Record<
  * specs.medidas usa este modo.
  */
 export const MEDIDAS_SPECS_KEY = "medidas";
+/** Texto opcional del botón único para productos en modo specs.medidas (ver CTA_LABEL_SPECS_KEY). */
+export const CTA_LABEL_SPECS_KEY = "ctaLabel";
 
 export const TABLE_SPECS_KEYS = new Set([
   ...Object.values(TABLE_CATEGORIES).map((c) => c.specsKey),
   MEDIDAS_SPECS_KEY,
+  CTA_LABEL_SPECS_KEY,
 ]);

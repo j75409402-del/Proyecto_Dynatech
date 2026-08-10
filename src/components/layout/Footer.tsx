@@ -11,6 +11,7 @@ const categoryLinks = [
   { label: "Sensores y fotoceldas",               href: "/categorias/sensores" },
   { label: "Controles eléctricos",                href: "/categorias/electrica" },
   { label: "Resistencias Eléctricas Industriales", href: "/categorias/resistencias-maquinas-inyeccion-plastico" },
+  { label: "Fusibles",                             href: "/categorias/fusibles" },
 ];
 
 const companyLinks = [

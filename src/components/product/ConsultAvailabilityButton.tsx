@@ -1,8 +1,18 @@
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { whatsappQuoteRequest } from "@/lib/whatsapp";
 
-/** Único CTA para familias sin stock/carrito (ej. Cilindros American) — pedido explícito: "Mostrar únicamente el botón Consultar disponibilidad". */
-export function ConsultAvailabilityButton({ productName }: { productName: string }) {
+/**
+ * Único CTA para familias sin stock/carrito (ej. Cilindros American, Fusibles) — pedido
+ * explícito: "Mostrar únicamente el botón [label]". El texto es configurable porque distintas
+ * categorías piden distinto wording ("Consultar disponibilidad" vs "Solicitar cotización").
+ */
+export function ConsultAvailabilityButton({
+  productName,
+  label = "Consultar disponibilidad",
+}: {
+  productName: string;
+  label?: string;
+}) {
   return (
     <a
       href={whatsappQuoteRequest([{ name: productName, quantity: 1 }])}
@@ -11,7 +21,7 @@ export function ConsultAvailabilityButton({ productName }: { productName: string
       className="btn-primary bg-[#25D366] hover:bg-[#1ebe57] border-[#25D366] hover:border-[#1ebe57]"
     >
       <WhatsAppIcon className="h-4 w-4" />
-      Consultar disponibilidad
+      {label}
     </a>
   );
 }

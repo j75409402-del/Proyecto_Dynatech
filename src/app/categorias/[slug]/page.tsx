@@ -14,6 +14,18 @@ import type { ProductWithRelations } from "@/types";
 
 type Params = Promise<{ slug: string }>;
 
+// Bloque CTA opcional al final de una categoría con subcategorías (ej. Fusibles).
+const CATEGORY_CTA_BLOCKS: Record<
+  string,
+  { heading: string; body: string; buttonLabel: string }
+> = {
+  fusibles: {
+    heading: "¿Necesitas un fusible industrial específico?",
+    body: "Contamos con diferentes modelos y capacidades para aplicaciones industriales.",
+    buttonLabel: "Solicita tu cotización",
+  },
+};
+
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const supabase = await createClient();
@@ -127,6 +139,20 @@ export default async function CategoryPage({ params }: { params: Params }) {
             );
           })}
         </div>
+        )}
+
+        {CATEGORY_CTA_BLOCKS[category.slug] && (
+          <div className="mt-12 border border-black/10 bg-carbon-800 p-8 sm:p-10 text-center">
+            <h2 className="font-display text-2xl text-surface mb-3">
+              {CATEGORY_CTA_BLOCKS[category.slug].heading}
+            </h2>
+            <p className="text-steel-300 max-w-xl mx-auto mb-6">
+              {CATEGORY_CTA_BLOCKS[category.slug].body}
+            </p>
+            <Link href="/cotizacion" className="btn-primary">
+              {CATEGORY_CTA_BLOCKS[category.slug].buttonLabel}
+            </Link>
+          </div>
         )}
       </div>
     );
