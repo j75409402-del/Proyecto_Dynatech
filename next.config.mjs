@@ -92,6 +92,10 @@ const nextConfig = {
       { source: "/productos/cilindro-festo-dsw-32-160-p-b-161426", destination: "/productos/cilindros-festo", permanent: true },
       { source: "/productos/cilindro-festo-advu-32-30-p-a-156535", destination: "/productos/cilindros-festo", permanent: true },
       { source: "/productos/cilindro-festo-advu-40-20-pa-156543", destination: "/productos/cilindros-festo", permanent: true },
+      // R432-08/R432-10 vuelven a la tabla unificada de Válvulas Neumáticas EMC (ya no
+      // tienen ficha propia).
+      { source: "/productos/valvula-manual-5-3-r432-08", destination: "/categorias/valvulas-neumaticas", permanent: true },
+      { source: "/productos/valvula-manual-5-3-r432-10", destination: "/categorias/valvulas-neumaticas", permanent: true },
     ];
   },
 };
