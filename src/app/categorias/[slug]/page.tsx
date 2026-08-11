@@ -174,6 +174,16 @@ export default async function CategoryPage({ params }: { params: Params }) {
         | ReferenceTableRow[]
         | undefined) ?? [];
 
+    // Algunos modelos de esta misma categoría piden ficha propia en vez de ir en la tabla
+    // unificada (ej. R432-08/R432-10) — se muestran aparte, como tarjetas normales.
+    const { data: standaloneProducts } = await supabase
+      .from("products")
+      .select("*, category:categories(*), brand:brands(*)")
+      .eq("active", true)
+      .eq("category_id", category.id)
+      .neq("slug", tableConfig.holderSlug)
+      .order("featured", { ascending: false });
+
     return (
       <div className="container-max py-12 sm:py-16">
         <Breadcrumbs items={breadcrumbItems} />
@@ -194,6 +204,17 @@ export default async function CategoryPage({ params }: { params: Params }) {
           filterKey={tableConfig.filterKey}
           showStock={tableConfig.showStock ?? true}
         />
+
+        {standaloneProducts && standaloneProducts.length > 0 && (
+          <div className="mt-14 pt-14 border-t border-black/10">
+            <div className="eyebrow mb-5">Otros modelos</div>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-6 items-stretch">
+              {(standaloneProducts as ProductWithRelations[]).map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     );
   }

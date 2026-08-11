@@ -126,9 +126,11 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
   // Familias sin stock/carrito (ej. Cilindros American): solo tabla de medidas + botón
   // único "Consultar disponibilidad", sin importar la categoría.
   const medidasRows = rawSpecs?.[MEDIDAS_SPECS_KEY] as ReferenceTableRow[] | undefined;
-  const hideStockIndicator = Boolean(medidasRows) || tableConfig?.showStock === false;
-  const consultCtaLabel =
-    tableConfig?.ctaLabel ?? (rawSpecs?.[CTA_LABEL_SPECS_KEY] as string | undefined) ?? "Consultar disponibilidad";
+  // Un producto simple (sin tabla de variantes) también puede pedir el botón único —
+  // basta con que traiga specs.ctaLabel, no depende de tener specs.medidas.
+  const productCtaLabel = rawSpecs?.[CTA_LABEL_SPECS_KEY] as string | undefined;
+  const hideStockIndicator = Boolean(medidasRows) || tableConfig?.showStock === false || Boolean(productCtaLabel);
+  const consultCtaLabel = tableConfig?.ctaLabel ?? productCtaLabel ?? "Consultar disponibilidad";
   const medidasColumnLabel = (rawSpecs?.[MEDIDAS_COLUMN_LABEL_SPECS_KEY] as string | undefined) ?? "Descripción";
   // Objeto acotado para los client components de CTA — nunca el SKU real.
   const publicProduct = {
