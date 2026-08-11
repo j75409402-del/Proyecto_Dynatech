@@ -43,6 +43,16 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["modelo", "descripcion"],
     searchPlaceholder: "Buscar por modelo o descripción...",
   },
+  "sensores-autonics": {
+    holderSlug: "sensores-autonics",
+    specsKey: "sensoresAutonics",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por modelo o descripción...",
+  },
   "cilindros-neumaticos-bimba": {
     holderSlug: "cilindros-neumaticos-bimba",
     specsKey: "bimba",
