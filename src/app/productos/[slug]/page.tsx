@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Clock, Building2 } from "lucide-react";
+import { Clock, Building2, Hash } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { SpecTable } from "@/components/product/SpecTable";
 import { QuoteButton } from "@/components/product/QuoteButton";
@@ -113,6 +113,9 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
         Object.entries(rawSpecs).filter(([key]) => key !== "configurator" && !TABLE_SPECS_KEYS.has(key)),
       ) as Record<string, string>)
     : null;
+  // Referencia del fabricante, cuando el producto la muestra explícitamente en vez de "Marca"
+  // (pedido explícito: no crear un campo "Marca" para productos sin marca asociada).
+  const referencia = specs?.["Referencia"];
   // Productos que además de su ficha muestran la tabla completa de referencias/stock
   // (Resistencias, Autonics, Bimba) — mismo dato que /categorias/[slug] pero acá acompañado
   // de galería, WhatsApp, etc.
@@ -214,18 +217,19 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               </p>
             )}
 
-            {/* Quick facts */}
+            {/* Quick facts — sin "Marca" para productos sin marca asociada; en su lugar,
+                "Referencia" si el producto la trae (pedido explícito, no fabricar el dato). */}
             <div className="grid grid-cols-2 gap-3 mb-8">
               <FactBlock
                 icon={<Clock className="h-4 w-4" />}
                 label="Entrega"
                 value={product.lead_time_days ? `${product.lead_time_days} días` : "Consultar"}
               />
-              <FactBlock
-                icon={<Building2 className="h-4 w-4" />}
-                label="Marca"
-                value={product.brand?.name ?? "—"}
-              />
+              {product.brand ? (
+                <FactBlock icon={<Building2 className="h-4 w-4" />} label="Marca" value={product.brand.name} />
+              ) : (
+                referencia && <FactBlock icon={<Hash className="h-4 w-4" />} label="Referencia" value={referencia} />
+              )}
             </div>
 
             {/* CTAs — configurador pa' productos maestro con variantes, "Consultar disponibilidad"
