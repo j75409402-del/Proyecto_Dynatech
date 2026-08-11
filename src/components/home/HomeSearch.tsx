@@ -14,7 +14,7 @@ export function HomeSearch() {
             inputClassName="py-4 pl-12 text-base bg-carbon border border-black/10 hover:border-black/20"
           />
           <p className="mt-4 text-xs text-steel-400">
-            Busca por nombre, número de parte, marca o categoría.
+            Busca por nombre, número de parte o categoría.
           </p>
         </Reveal>
       </div>
