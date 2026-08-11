@@ -53,9 +53,9 @@ export default function TerminosPage() {
           body: (
             <p>
               El contenido de este sitio (textos, marca, logo, diseño) pertenece a {SITE.name}{" "}
-              SRL o se usa bajo licencia. Las marcas de terceros mencionadas (Festo, SMC,
-              Siemens, Omron, y otras) pertenecen a sus respectivos fabricantes y se citan
-              únicamente con fines informativos de distribución.
+              SRL o se usa bajo licencia. Cualquier marca de terceros que pudiera mencionarse
+              pertenece a su respectivo fabricante y se cita únicamente con fines informativos,
+              sin implicar relación comercial oficial alguna.
             </p>
           ),
         },

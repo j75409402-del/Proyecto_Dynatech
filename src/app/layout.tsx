@@ -47,8 +47,7 @@ export const metadata: Metadata = {
   keywords: [
     "neumática República Dominicana",
     "automatización industrial RD",
-    "Festo Santo Domingo",
-    "SMC República Dominicana",
+    "componentes industriales Santo Domingo",
     "sensores industriales",
     "instrumentación",
     "piezas industriales",

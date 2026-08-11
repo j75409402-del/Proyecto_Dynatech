@@ -22,7 +22,7 @@ function quickSpecs(specs: ProductWithRelations["specs"]): [string, string][] {
     });
 }
 
-// Orden fijo de la tarjeta (no cambiar): Stock -> Marca -> Imagen -> Nombre ->
+// Orden fijo de la tarjeta (no cambiar): Stock -> Imagen -> Nombre ->
 // Descripción -> Especificaciones rápidas -> Ver detalles -> Agregar al carrito.
 export function ProductCard({ product, className }: Props) {
   const stock = stockDisplay(product.stock_status, product.stock_quantity);
@@ -35,7 +35,6 @@ export function ProductCard({ product, className }: Props) {
     slug: product.slug,
     name: product.name,
     thumbnail_url: product.thumbnail_url,
-    brand: product.brand,
   };
 
   return (
@@ -48,19 +47,14 @@ export function ProductCard({ product, className }: Props) {
         )}
       >
         <Link href={`/productos/${product.slug}`} className="flex flex-1 flex-col">
-          {/* Stock + Marca */}
-          <div className="flex items-center justify-between px-4 py-2.5 border-b border-black/5">
+          {/* Stock */}
+          <div className="flex items-center px-4 py-2.5 border-b border-black/5">
             <span className="flex items-center gap-1.5">
               <span className={cn("h-1.5 w-1.5 rounded-full shrink-0", stock.dotClass)} />
               <span className="font-mono text-[9px] uppercase tracking-techno text-steel-300">
                 {stock.label}
               </span>
             </span>
-            {product.brand && (
-              <span className="font-mono text-[9px] uppercase tracking-techno text-signal truncate max-w-[45%]">
-                {product.brand.name}
-              </span>
-            )}
           </div>
 
           {/* Imagen — mismo alto en todas las tarjetas, siempre contain, nunca cover */}

@@ -12,7 +12,6 @@ type Result = {
   name: string;
   thumbnail_url: string | null;
   category: { name: string } | null;
-  brand: { name: string } | null;
 };
 
 type Props = {
@@ -118,11 +117,9 @@ export function SearchAutocomplete({ className, inputClassName, onNavigate }: Pr
                       </span>
                       <span className="min-w-0 flex-1">
                         <span className="block truncate text-sm text-surface">{r.name}</span>
-                        {(r.category || r.brand) && (
+                        {r.category && (
                           <span className="block truncate font-mono text-[10px] uppercase tracking-techno text-steel-400">
-                            {r.category?.name}
-                            {r.category && r.brand && " · "}
-                            {r.brand?.name}
+                            {r.category.name}
                           </span>
                         )}
                       </span>

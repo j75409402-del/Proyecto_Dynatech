@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Explora el catálogo completo de piezas industriales de Dynatech: neumática, eléctrica industrial, sensores e instrumentación.",
 };
 
-type SearchParams = Promise<{ categoria?: string; marca?: string; disponibilidad?: string; q?: string }>;
+type SearchParams = Promise<{ categoria?: string; disponibilidad?: string; q?: string }>;
 
 export default async function ProductosPage({
   searchParams,
@@ -23,7 +23,6 @@ export default async function ProductosPage({
   const params = await searchParams;
   const supabase = await createClient();
 
-  const activeBrandSlugs = params.marca?.split(",").filter(Boolean) ?? [];
   const activeStock = params.disponibilidad?.split(",").filter(Boolean) ?? [];
 
   // Categorías completas — las necesitamos antes de armar la query si hay búsqueda por texto,
@@ -33,7 +32,7 @@ export default async function ProductosPage({
   // Filtros dinámicos
   let query = supabase
     .from("products")
-    .select("*, category:categories(*), brand:brands(*)", { count: "exact" })
+    .select("*, category:categories(*)", { count: "exact" })
     .eq("active", true);
 
   if (params.categoria) {
@@ -53,16 +52,6 @@ export default async function ProductosPage({
         }
       }
       query = query.in("category_id", Array.from(ids));
-    }
-  }
-
-  if (activeBrandSlugs.length > 0) {
-    const { data: matchedBrands } = await supabase
-      .from("brands")
-      .select("id")
-      .in("slug", activeBrandSlugs);
-    if (matchedBrands?.length) {
-      query = query.in("brand_id", matchedBrands.map((b) => b.id));
     }
   }
 
@@ -106,17 +95,13 @@ export default async function ProductosPage({
     query = query.or(orParts.join(","));
   }
 
-  const [{ data: products, count }, categoriesRes, brandsRes, allActiveRes] = await Promise.all([
+  const [{ data: products, count }, categoriesRes, allActiveRes] = await Promise.all([
     query.order("featured", { ascending: false }).order("created_at", { ascending: false }).limit(60),
     supabase.from("categories").select("*").is("parent_id", null).order("sort_order"),
-    supabase.from("brands").select("*").order("sort_order"),
-    supabase.from("products").select("category_id, brand_id").eq("active", true),
+    supabase.from("products").select("category_id").eq("active", true),
   ]);
 
-  const { categoryCounts, brandCounts } = computeCatalogCounts(
-    allActiveRes.data ?? [],
-    allCategories ?? [],
-  );
+  const { categoryCounts } = computeCatalogCounts(allActiveRes.data ?? [], allCategories ?? []);
 
   const activeCategory = params.categoria
     ? (allCategories ?? []).find((c) => c.slug === params.categoria)
@@ -166,9 +151,7 @@ export default async function ProductosPage({
 
       <MobileFilters
         categories={categoriesRes.data ?? []}
-        brands={brandsRes.data ?? []}
         categoryCounts={Object.fromEntries(categoryCounts)}
-        brandCounts={Object.fromEntries(brandCounts)}
         totalCount={allActiveRes.data?.length ?? 0}
       />
 
@@ -177,9 +160,7 @@ export default async function ProductosPage({
         <div className="hidden lg:block">
           <ProductFilters
             categories={categoriesRes.data ?? []}
-            brands={brandsRes.data ?? []}
             categoryCounts={Object.fromEntries(categoryCounts)}
-            brandCounts={Object.fromEntries(brandCounts)}
             totalCount={allActiveRes.data?.length ?? 0}
           />
         </div>

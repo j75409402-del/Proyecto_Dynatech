@@ -35,7 +35,7 @@ import { whatsappCylinderService } from "@/lib/whatsapp";
 export const metadata: Metadata = {
   title: "Reparación y Fabricación de Cilindros Neumáticos",
   description:
-    "Reparación de cilindros neumáticos, fabricación de vástagos, camisas, tapas y pistones, cambio de sellos y empaques. Servicios neumáticos industriales en República Dominicana — SMC, Festo, Airtac, Parker y más.",
+    "Reparación de cilindros neumáticos, fabricación de vástagos, camisas, tapas y pistones, cambio de sellos y empaques. Servicios neumáticos industriales en República Dominicana.",
   keywords: [
     "reparación de cilindros neumáticos",
     "fabricación de cilindros neumáticos",
@@ -63,11 +63,6 @@ const SERVICIOS = [
   { icon: Cog, title: "Mecanizado de piezas", desc: "Mecanizado CNC de piezas y componentes neumáticos a medida." },
   { icon: Gauge, title: "Pruebas neumáticas", desc: "Pruebas de presión y funcionamiento antes de cada entrega." },
   { icon: CalendarCheck, title: "Mantenimiento preventivo", desc: "Planes de mantenimiento para reducir paradas no programadas en tu línea." },
-];
-
-const MARCAS = [
-  "SMC", "Festo", "Airtac", "Parker", "Metal Work",
-  "Camozzi", "Norgren", "Bosch Rexroth", "CKD", "Mindman",
 ];
 
 const PROCESO = [
@@ -117,8 +112,8 @@ const FAQS = [
     a: "Desarme completo del cilindro, reemplazo de sellos/empaques por repuesto de calidad, limpieza y rectificación si el componente lo requiere, y prueba de funcionamiento antes de la entrega.",
   },
   {
-    q: "¿Trabajan con todas las marcas de cilindros?",
-    a: "Reparamos y fabricamos componentes compatibles con SMC, Festo, Airtac, Parker, Metal Work, Camozzi, Norgren, Bosch Rexroth, CKD, Mindman y otras marcas industriales estándar.",
+    q: "¿Trabajan con todos los cilindros neumáticos industriales?",
+    a: "Reparamos y fabricamos componentes compatibles con cilindros neumáticos industriales estándar, sin importar el fabricante de origen.",
   },
   {
     q: "¿El trabajo tiene garantía?",
@@ -370,35 +365,11 @@ export default function ReparacionCilindrosPage() {
         </div>
       </section>
 
-      {/* MARCAS — carrusel */}
-      <section className="py-12 border-b border-black/5 overflow-hidden">
-        <Reveal className="container-max mb-6">
-          <div className="eyebrow">05 · Compatibilidad</div>
-          <h2 className="font-display text-2xl text-surface mt-2">Marcas compatibles</h2>
-        </Reveal>
-
-        <div className="relative">
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-carbon to-transparent z-10" />
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-carbon to-transparent z-10" />
-
-          <div className="flex animate-marquee gap-16 w-max hover:[animation-play-state:paused]">
-            {[...MARCAS, ...MARCAS].map((marca, i) => (
-              <div key={`${marca}-${i}`} className="group flex items-center gap-3 px-2 shrink-0">
-                <Award className="h-4 w-4 text-signal transition-transform duration-300 group-hover:scale-125" />
-                <span className="font-display text-xl text-steel-200 whitespace-nowrap transition-colors duration-300 group-hover:text-surface">
-                  {marca}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
       <section className="section-pad">
         <div className="container-max max-w-3xl">
           <Reveal className="mb-4">
-            <div className="eyebrow mb-3">06 · Preguntas frecuentes</div>
+            <div className="eyebrow mb-3">05 · Preguntas frecuentes</div>
             <h2 className="font-display text-display-lg text-surface">Preguntas frecuentes</h2>
           </Reveal>
 

@@ -14,7 +14,6 @@ export type CartItem = {
   slug: string;
   sku: string;
   name: string;
-  brand: string | null;
   thumbnailUrl: string | null;
   quantity: number;
 };

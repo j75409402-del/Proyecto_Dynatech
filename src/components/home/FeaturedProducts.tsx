@@ -9,7 +9,7 @@ export async function FeaturedProducts() {
   const supabase = await createClient();
   const { data: products } = await supabase
     .from("products")
-    .select("*, category:categories(*), brand:brands(*)")
+    .select("*, category:categories(*)")
     .eq("active", true)
     .eq("featured", true)
     .limit(6);

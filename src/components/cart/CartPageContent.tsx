@@ -66,11 +66,6 @@ export function CartPageContent() {
               >
                 {item.name}
               </Link>
-              {item.brand && (
-                <div className="font-mono text-[10px] uppercase tracking-techno text-steel-400 mt-1">
-                  {item.brand}
-                </div>
-              )}
             </div>
 
             <div className="flex items-center border border-black/10 shrink-0">

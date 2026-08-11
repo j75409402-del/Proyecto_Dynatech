@@ -31,7 +31,7 @@ export type ConfiguratorConfig = {
 };
 
 type Props = {
-  product: Pick<ProductWithRelations, "id" | "slug" | "name" | "thumbnail_url" | "brand">;
+  product: Pick<ProductWithRelations, "id" | "slug" | "name" | "thumbnail_url">;
   config: ConfiguratorConfig;
 };
 
@@ -85,7 +85,6 @@ export function VariantConfigurator({ product, config }: Props) {
       slug: product.slug,
       sku: variantKey,
       name: variantName,
-      brand: product.brand?.name ?? null,
       thumbnailUrl: product.thumbnail_url,
     });
     router.push("/cotizacion");

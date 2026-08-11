@@ -13,17 +13,16 @@ export default function GarantiasPage() {
       eyebrow="Soporte"
       title="Garantías"
       updated="julio 2026"
-      intro="Como distribuidor oficial, Dynatech Ingeniería traslada a cada cliente la garantía de fábrica del fabricante correspondiente, y gestiona el proceso de reclamo en representación tuya."
+      intro="Dynatech Ingeniería traslada a cada cliente la garantía de fábrica del fabricante correspondiente, y gestiona el proceso de reclamo en representación tuya."
       sections={[
         {
           heading: "Cobertura",
           body: (
             <p>
               Los productos cubren defectos de fabricación, materiales o funcionamiento bajo
-              condiciones normales de uso, según el plazo y términos que defina cada fabricante
-              (Festo, SMC, Siemens, Omron, Parker Hannifin, Schneider Electric, WIKA, entre
-              otros). El plazo específico de cada producto se indica en su ficha técnica o
-              datasheet cuando el fabricante lo publica.
+              condiciones normales de uso, según el plazo y términos que defina cada fabricante.
+              El plazo específico de cada producto se indica en su ficha técnica o datasheet
+              cuando el fabricante lo publica.
             </p>
           ),
         },

@@ -14,7 +14,6 @@ export async function Stats() {
 
   const stats = [
     { label: "Productos", raw: settings.stat_productos },
-    { label: "Marcas", raw: settings.stat_marcas },
     { label: "Clientes", raw: settings.stat_clientes },
     { label: "Tiempo de respuesta", raw: settings.stat_respuesta },
   ].filter((s) => s.raw?.trim());

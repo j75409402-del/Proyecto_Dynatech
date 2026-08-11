@@ -66,7 +66,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
   if (subcategories.length > 0) {
     const { data: activeProducts } = await supabase
       .from("products")
-      .select("category_id, brand_id")
+      .select("category_id")
       .eq("active", true);
     const { categoryCounts } = computeCatalogCounts(activeProducts ?? [], allCategories ?? []);
     // Subcategorías sin productos activos todavía no se muestran como tarjeta (evita tiles
@@ -178,7 +178,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
     // unificada (ej. R432-08/R432-10) — se muestran aparte, como tarjetas normales.
     const { data: standaloneProducts } = await supabase
       .from("products")
-      .select("*, category:categories(*), brand:brands(*)")
+      .select("*, category:categories(*)")
       .eq("active", true)
       .eq("category_id", category.id)
       .neq("slug", tableConfig.holderSlug)
@@ -222,7 +222,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
   // Categoría hoja (sin subcategorías) -> se muestran los productos directamente.
   const { data: products } = await supabase
     .from("products")
-    .select("*, category:categories(*), brand:brands(*)")
+    .select("*, category:categories(*)")
     .eq("active", true)
     .eq("category_id", category.id)
     .order("featured", { ascending: false })

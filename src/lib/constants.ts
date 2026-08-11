@@ -27,7 +27,6 @@ export const NAV = {
   main: [
     { label: "Catálogo",    href: "/productos" },
     { label: "Categorías",  href: "/#categorias" },
-    { label: "Marcas",      href: "/#marcas" },
     { label: "Cilindros", href: "/reparacion-cilindros-neumaticos" },
     { label: "Nosotros",    href: "/nosotros" },
     { label: "Contacto",    href: "/contacto" },
@@ -38,7 +37,7 @@ export const VALUE_PROPS = [
   {
     number: "01",
     title: "Productos originales",
-    body: "Distribución directa de fabricantes: Festo, SMC, Siemens, Omron. Cero réplicas.",
+    body: "Componentes industriales genuinos, con número de parte verificable. Cero réplicas.",
   },
   {
     number: "02",

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Clock, Building2, Hash } from "lucide-react";
+import { Clock, Hash } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { SpecTable } from "@/components/product/SpecTable";
 import { QuoteButton } from "@/components/product/QuoteButton";
@@ -56,7 +56,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
   const { data: product } = await supabase
     .from("products")
-    .select("*, category:categories(*), brand:brands(*)")
+    .select("*, category:categories(*)")
     .eq("slug", slug)
     .eq("active", true)
     .maybeSingle<ProductWithRelations>();
@@ -87,7 +87,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
   const { data: related } = await supabase
     .from("products")
-    .select("*, category:categories(*), brand:brands(*)")
+    .select("*, category:categories(*)")
     .eq("active", true)
     .in("category_id", relatedCategoryIds.length > 0 ? relatedCategoryIds : [""])
     .neq("id", product.id)
@@ -138,7 +138,6 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     slug: product.slug,
     name: product.name,
     thumbnail_url: product.thumbnail_url,
-    brand: product.brand,
   };
   const galleryImages = Array.from(
     new Set([product.thumbnail_url, ...((product.images as string[] | null) ?? [])].filter(Boolean)),
@@ -152,7 +151,6 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     description: product.short_desc ?? product.description ?? undefined,
     image: product.thumbnail_url ?? undefined,
     category: product.category?.name ?? undefined,
-    brand: product.brand ? { "@type": "Brand", name: product.brand.name } : undefined,
   };
 
   return (
@@ -180,15 +178,10 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
           {/* Info */}
           <div>
-            {/* Brand + stock — sin indicador de stock pa' familias sin stock/carrito
-                (ej. Resistencias, Cilindros American): solo "Consultar disponibilidad" */}
-            <div className="flex items-center justify-between mb-4">
-              {product.brand && (
-                <span className="font-mono text-xs uppercase tracking-techno text-signal">
-                  {product.brand.name} {product.brand.country && `· ${product.brand.country}`}
-                </span>
-              )}
-              {!hideStockIndicator && (
+            {/* Stock — sin indicador pa' familias sin stock/carrito (ej. Resistencias,
+                Cilindros American): solo "Consultar disponibilidad" */}
+            {!hideStockIndicator && (
+              <div className="flex items-center justify-end mb-4">
                 <div className="flex flex-col items-end gap-0.5">
                   <div className="flex items-center gap-1.5">
                     <span className={cn("h-2 w-2 rounded-full", stock.dotClass)} />
@@ -200,8 +193,8 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                     <span className="font-mono text-[10px] text-steel-400">{stock.sublabel}</span>
                   )}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
 
             <h1 className="font-display text-display-md text-surface mb-4">
               {product.name}
@@ -219,19 +212,15 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               </p>
             )}
 
-            {/* Quick facts — sin "Marca" para productos sin marca asociada; en su lugar,
-                "Referencia" si el producto la trae (pedido explícito, no fabricar el dato). */}
+            {/* Quick facts — nunca "Marca"; "Referencia" cuando el producto la trae
+                (pedido explícito, no fabricar el dato si no viene dado). */}
             <div className="grid grid-cols-2 gap-3 mb-8">
               <FactBlock
                 icon={<Clock className="h-4 w-4" />}
                 label="Entrega"
                 value={product.lead_time_days ? `${product.lead_time_days} días` : "Consultar"}
               />
-              {product.brand ? (
-                <FactBlock icon={<Building2 className="h-4 w-4" />} label="Marca" value={product.brand.name} />
-              ) : (
-                referencia && <FactBlock icon={<Hash className="h-4 w-4" />} label="Referencia" value={referencia} />
-              )}
+              {referencia && <FactBlock icon={<Hash className="h-4 w-4" />} label="Referencia" value={referencia} />}
             </div>
 
             {/* CTAs — configurador pa' productos maestro con variantes, "Consultar disponibilidad"
@@ -314,16 +303,6 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                           className="btn-secondary"
                         >
                           Descargar PDF
-                        </a>
-                      )}
-                      {product.brand?.website && (
-                        <a
-                          href={product.brand.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-secondary"
-                        >
-                          Catálogo del fabricante
                         </a>
                       )}
                     </div>

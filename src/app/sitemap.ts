@@ -5,10 +5,9 @@ import { SITE } from "@/lib/constants";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const supabase = await createClient();
 
-  const [{ data: products }, { data: categories }, { data: brands }] = await Promise.all([
+  const [{ data: products }, { data: categories }] = await Promise.all([
     supabase.from("products").select("slug, updated_at").eq("active", true),
     supabase.from("categories").select("slug"),
-    supabase.from("brands").select("slug"),
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -39,11 +38,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  const brandRoutes: MetadataRoute.Sitemap = (brands ?? []).map((b) => ({
-    url: `${SITE.url}/marcas/${b.slug}`,
-    changeFrequency: "monthly",
-    priority: 0.5,
-  }));
-
-  return [...staticRoutes, ...productRoutes, ...categoryRoutes, ...brandRoutes];
+  return [...staticRoutes, ...productRoutes, ...categoryRoutes];
 }

@@ -3,16 +3,14 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { ChevronDown, Search, X } from "lucide-react";
-import type { Category, Brand } from "@/types";
+import { ChevronDown, X } from "lucide-react";
+import type { Category } from "@/types";
 import { CategoryIcon } from "@/lib/categoryIcons";
 import { cn } from "@/lib/utils";
 
 type Props = {
   categories: Category[];
-  brands: Brand[];
   categoryCounts: Record<string, number>;
-  brandCounts: Record<string, number>;
   totalCount: number;
 };
 
@@ -21,20 +19,15 @@ const STOCK_OPTIONS = [
   { value: "agotado", label: "Agotado" },
 ];
 
-export function ProductFilters({ categories, brands, categoryCounts, brandCounts, totalCount }: Props) {
+export function ProductFilters({ categories, categoryCounts, totalCount }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get("categoria");
-  const activeBrands = useMemo(
-    () => new Set((searchParams.get("marca") ?? "").split(",").filter(Boolean)),
-    [searchParams],
-  );
   const activeStock = useMemo(
     () => new Set((searchParams.get("disponibilidad") ?? "").split(",").filter(Boolean)),
     [searchParams],
   );
-  const [brandQuery, setBrandQuery] = useState("");
-  const [openSections, setOpenSections] = useState({ brands: true, stock: false });
+  const [openSections, setOpenSections] = useState({ stock: false });
 
   function buildHref(params: Record<string, string | null>) {
     const sp = new URLSearchParams(searchParams);
@@ -46,18 +39,14 @@ export function ProductFilters({ categories, brands, categoryCounts, brandCounts
     return qs ? `${pathname}?${qs}` : pathname;
   }
 
-  function toggleSetParam(key: "marca" | "disponibilidad", value: string, current: Set<string>) {
+  function toggleSetParam(key: "disponibilidad", value: string, current: Set<string>) {
     const next = new Set(current);
     if (next.has(value)) next.delete(value);
     else next.add(value);
     return buildHref({ [key]: next.size ? Array.from(next).join(",") : null });
   }
 
-  const visibleBrands = brandQuery
-    ? brands.filter((b) => b.name.toLowerCase().includes(brandQuery.toLowerCase()))
-    : brands;
-
-  const hasActiveFilters = activeCategory || activeBrands.size > 0 || activeStock.size > 0;
+  const hasActiveFilters = activeCategory || activeStock.size > 0;
 
   return (
     <aside className="space-y-1">
@@ -119,56 +108,6 @@ export function ProductFilters({ categories, brands, categoryCounts, brandCounts
           })}
         </ul>
       </div>
-
-      {/* Marcas */}
-      <FilterSection
-        title="Marcas"
-        open={openSections.brands}
-        onToggle={() => setOpenSections((s) => ({ ...s, brands: !s.brands }))}
-      >
-        <label className="relative mb-3 flex items-center">
-          <Search className="pointer-events-none absolute left-2.5 h-3.5 w-3.5 text-steel-500" />
-          <input
-            type="text"
-            value={brandQuery}
-            onChange={(e) => setBrandQuery(e.target.value)}
-            placeholder="Buscar marca..."
-            className="w-full rounded-xs border border-black/10 bg-carbon-700 py-1.5 pl-8 pr-2 text-xs
-                       text-surface placeholder:text-steel-500 outline-none focus:border-signal/40"
-          />
-        </label>
-        <ul className="space-y-0.5 max-h-56 overflow-y-auto">
-          {visibleBrands.map((brand) => {
-            const checked = activeBrands.has(brand.slug);
-            const count = brandCounts[brand.id] ?? 0;
-            return (
-              <li key={brand.id}>
-                <Link
-                  href={toggleSetParam("marca", brand.slug, activeBrands)}
-                  className="flex items-center justify-between gap-2 rounded-xs px-2 py-1.5 text-sm text-steel-300
-                             hover:bg-carbon-700 hover:text-surface transition-colors"
-                >
-                  <span className="flex items-center gap-2">
-                    <span
-                      className={cn(
-                        "flex h-4 w-4 shrink-0 items-center justify-center rounded-xs border transition-colors",
-                        checked ? "bg-signal border-signal" : "border-black/20",
-                      )}
-                    >
-                      {checked && <CheckIcon />}
-                    </span>
-                    {brand.name}
-                  </span>
-                  <span className="font-mono text-[11px] text-steel-500">{count}</span>
-                </Link>
-              </li>
-            );
-          })}
-          {visibleBrands.length === 0 && (
-            <li className="px-2 py-2 text-xs text-steel-500">Sin resultados</li>
-          )}
-        </ul>
-      </FilterSection>
 
       {/* Disponibilidad */}
       <FilterSection

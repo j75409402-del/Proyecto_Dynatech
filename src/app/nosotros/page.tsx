@@ -39,11 +39,10 @@ export default function NosotrosPage() {
             </p>
           </div>
           <div>
-            <div className="eyebrow mb-4">02 · Distribución oficial</div>
+            <div className="eyebrow mb-4">02 · Componentes genuinos</div>
             <p className="text-steel-200 leading-relaxed">
-              Somos representantes autorizados de Festo, SMC, Siemens, Omron, Parker,
-              Schneider y otras marcas líderes. Sin réplicas ni mercado gris: cada pieza
-              cuenta con garantía del fabricante.
+              Trabajamos con componentes industriales genuinos, con número de parte
+              verificable. Sin réplicas ni mercado gris.
             </p>
           </div>
           <div>
@@ -64,7 +63,7 @@ export default function NosotrosPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { n: "24h", l: "Respuesta cotización" },
-              { n: "8+",  l: "Marcas representadas" },
+              { n: "6+",  l: "Categorías industriales" },
               { n: "100+", l: "SKUs en catálogo activo" },
               { n: "RD", l: "Base de operaciones" },
             ].map((s) => (

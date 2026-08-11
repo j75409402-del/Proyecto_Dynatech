@@ -9,7 +9,7 @@ import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { whatsappQuoteRequest } from "@/lib/whatsapp";
 
 type Props = {
-  product: Pick<ProductWithRelations, "id" | "name" | "slug" | "thumbnail_url" | "brand">;
+  product: Pick<ProductWithRelations, "id" | "name" | "slug" | "thumbnail_url">;
 };
 
 // Botón de WhatsApp por producto — pedido explícito del cliente, indispensable en cada
@@ -25,7 +25,6 @@ export function QuoteButton({ product }: Props) {
       slug: product.slug,
       sku: product.id,
       name: product.name,
-      brand: product.brand?.name ?? null,
       thumbnailUrl: product.thumbnail_url,
     });
     router.push("/cotizacion");

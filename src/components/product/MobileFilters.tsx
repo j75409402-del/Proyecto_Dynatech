@@ -3,13 +3,11 @@
 import { useEffect, useState } from "react";
 import { SlidersHorizontal, X } from "lucide-react";
 import { ProductFilters } from "./ProductFilters";
-import type { Category, Brand } from "@/types";
+import type { Category } from "@/types";
 
 type Props = {
   categories: Category[];
-  brands: Brand[];
   categoryCounts: Record<string, number>;
-  brandCounts: Record<string, number>;
   totalCount: number;
 };
 

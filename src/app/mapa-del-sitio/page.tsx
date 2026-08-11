@@ -22,7 +22,6 @@ export default async function SitemapPage() {
       links: [
         { label: "Inicio", href: "/" },
         { label: "Catálogo completo", href: "/productos" },
-        { label: "Marcas", href: "/#marcas" },
         { label: "Nosotros", href: "/nosotros" },
         { label: "Contacto", href: "/contacto" },
       ],

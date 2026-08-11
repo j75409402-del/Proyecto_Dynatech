@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import type { ProductWithRelations } from "@/types";
 
 type Props = {
-  product: Pick<ProductWithRelations, "id" | "slug" | "name" | "thumbnail_url" | "brand">;
+  product: Pick<ProductWithRelations, "id" | "slug" | "name" | "thumbnail_url">;
   /** Pa' productos configurables (ej. cilindro ISO) — pisa la clave interna/nombre con la variante elegida. */
   overrideSku?: string;
   overrideName?: string;
@@ -31,7 +31,6 @@ export function AddToCartButton({ product, overrideSku, overrideName, className,
       slug: product.slug,
       sku,
       name: overrideName ?? product.name,
-      brand: product.brand?.name ?? null,
       thumbnailUrl: product.thumbnail_url,
     });
     setJustAdded(true);

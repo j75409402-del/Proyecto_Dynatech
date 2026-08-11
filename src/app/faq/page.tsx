@@ -5,7 +5,7 @@ import { CONTACT } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Preguntas frecuentes",
-  description: "Resolvemos las dudas más comunes sobre pedidos, tiempos de entrega, marcas y cotizaciones en Dynatech Ingeniería.",
+  description: "Resolvemos las dudas más comunes sobre pedidos, tiempos de entrega, productos y cotizaciones en Dynatech Ingeniería.",
 };
 
 export default function FaqPage() {
@@ -57,11 +57,12 @@ export default function FaqPage() {
           ),
         },
         {
-          heading: "¿Las marcas que venden son originales?",
+          heading: "¿Los productos que venden son originales?",
           body: (
             <p>
-              Sí. Trabajamos con distribución directa de fabricantes — no manejamos réplicas ni
-              clones. Cada ficha de producto indica la marca de origen.
+              Sí. Trabajamos con componentes industriales genuinos — no manejamos réplicas ni
+              clones. Cada ficha de producto incluye su referencia o número de parte para que
+              puedas verificarlo.
             </p>
           ),
         },
