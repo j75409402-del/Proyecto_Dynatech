@@ -39,7 +39,7 @@ export function QuoteButton({ product }: Props) {
         className="btn-primary flex-1 bg-[#25D366] hover:bg-[#1ebe57] border-[#25D366] hover:border-[#1ebe57]"
       >
         <WhatsAppIcon className="h-4 w-4" />
-        Solicitar cotización por WhatsApp
+        Cotizar por WhatsApp
       </a>
       <AddToCartButton product={product} variant="secondary" className="flex-1" />
       <button type="button" onClick={handleQuoteClick} className="btn-secondary flex-1">

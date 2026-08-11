@@ -9,6 +9,8 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { buildCategoryTrail } from "@/lib/categoryBreadcrumb";
 import { computeCatalogCounts } from "@/lib/catalogCounts";
 import { ReferenceTable, type ReferenceTableRow } from "@/components/product/ReferenceTable";
+import { ProductGallery } from "@/components/product/ProductGallery";
+import { ConsultAvailabilityButton } from "@/components/product/ConsultAvailabilityButton";
 import { TABLE_CATEGORIES } from "@/lib/tableCategories";
 import type { ProductWithRelations } from "@/types";
 
@@ -165,7 +167,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
   if (tableConfig) {
     const { data: holder } = await createServiceClient()
       .from("products")
-      .select("specs")
+      .select("slug, name, short_desc, thumbnail_url, images, specs")
       .eq("slug", tableConfig.holderSlug)
       .maybeSingle();
 
@@ -173,6 +175,11 @@ export default async function CategoryPage({ params }: { params: Params }) {
       ((holder?.specs as Record<string, ReferenceTableRow[]> | null)?.[tableConfig.specsKey] as
         | ReferenceTableRow[]
         | undefined) ?? [];
+    const galleryImages = holder
+      ? (Array.from(
+          new Set([holder.thumbnail_url, ...((holder.images as string[] | null) ?? [])].filter(Boolean)),
+        ) as string[])
+      : [];
 
     // Algunos modelos de esta misma categoría piden ficha propia en vez de ir en la tabla
     // unificada (ej. R432-08/R432-10) — se muestran aparte, como tarjetas normales.
@@ -188,12 +195,33 @@ export default async function CategoryPage({ params }: { params: Params }) {
       <div className="container-max py-12 sm:py-16">
         <Breadcrumbs items={breadcrumbItems} />
 
-        <div className="mb-10 max-w-3xl">
-          <div className="eyebrow mb-3">Catálogo · {rows.length} referencias</div>
-          <h1 className="font-display text-display-lg text-surface mb-4">{category.name}</h1>
-          {category.description && (
-            <p className="text-lg text-steel-300 leading-relaxed">{category.description}</p>
-          )}
+        {/* Presentación visual de la familia — imagen (cargable desde el admin) + botón
+            de WhatsApp, para que esto se sienta como catálogo, no como lista de texto. */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-14">
+          <ProductGallery images={galleryImages} alt={category.name} />
+          <div className="flex flex-col justify-center">
+            <div className="eyebrow mb-3">Catálogo · {rows.length} referencias</div>
+            <h1 className="font-display text-display-lg text-surface mb-4">{category.name}</h1>
+            <p className="text-lg text-steel-200 leading-relaxed mb-2">
+              {holder?.short_desc || category.description}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <ConsultAvailabilityButton
+                productName={category.name}
+                label="Cotizar por WhatsApp"
+              />
+              {holder && (
+                <Link href={`/productos/${holder.slug}`} className="btn-secondary">
+                  Ver ficha completa
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6">
+          <div className="eyebrow mb-1">Referencias disponibles</div>
+          <h2 className="font-display text-xl text-surface">Todas las medidas y capacidades</h2>
         </div>
 
         <ReferenceTable
