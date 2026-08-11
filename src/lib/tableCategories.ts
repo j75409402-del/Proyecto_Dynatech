@@ -58,6 +58,14 @@ export const TABLE_CATEGORIES: Record<
     searchPlaceholder: "Buscar por modelo o referencia...",
     // showStock por default (true): esta categoría sí conserva "Stock actual".
   },
+  "valvulas-neumaticas": {
+    holderSlug: "valvulas-neumaticas-emc",
+    specsKey: "valvulas",
+    columns: [{ key: "descripcion", label: "Disponibilidad" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo o tipo de válvula...",
+    // showStock por default (true): esta categoría sí conserva "Stock actual".
+  },
   "bases-para-fusibles": {
     holderSlug: "bases-para-fusibles",
     specsKey: "bases",
