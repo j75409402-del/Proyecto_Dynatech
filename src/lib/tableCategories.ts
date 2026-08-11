@@ -50,6 +50,14 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo o medida...",
   },
+  "cilindros-festo": {
+    holderSlug: "cilindros-festo",
+    specsKey: "cilindros",
+    columns: [{ key: "descripcion", label: "Disponibilidad" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo o referencia...",
+    // showStock por default (true): esta categoría sí conserva "Stock actual".
+  },
   "bases-para-fusibles": {
     holderSlug: "bases-para-fusibles",
     specsKey: "bases",
