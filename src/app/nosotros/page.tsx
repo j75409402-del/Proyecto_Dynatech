@@ -16,13 +16,15 @@ export default function NosotrosPage() {
         <div className="container-max max-w-4xl">
           <div className="eyebrow mb-3">Nosotros</div>
           <h1 className="font-display text-display-xl text-surface mb-6">
-            No vendemos catálogo.<br />
-            <span className="text-signal">Vendemos uptime.</span>
+            La referencia exacta.<br />
+            <span className="text-signal">No la más parecida.</span>
           </h1>
           <p className="text-xl text-steel-200 leading-relaxed max-w-3xl">
-            Dynatech Ingeniería SRL nació para resolver un problema concreto de la industria
-            dominicana: encontrar la pieza correcta, al precio correcto, sin esperar semanas
-            de importación mientras la producción se detiene.
+            Dynatech Ingeniería SRL distribuye componentes industriales en República
+            Dominicana — neumática, sensores, fusibles, válvulas y resistencias — con
+            número de parte verificado y stock real en Santo Domingo. Nada de adivinar
+            el repuesto ni de esperar semanas de importación mientras la producción
+            se detiene.
           </p>
         </div>
       </section>
