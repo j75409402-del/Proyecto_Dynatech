@@ -126,6 +126,15 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo o medida...",
   },
+  // Los kits de sello/reparación no son cilindros — se separan en su propia subcategoría
+  // dentro de Neumática, junto a (no mezclados con) los cilindros.
+  "kits-sello-cilindros": {
+    holderSlug: "kits-sello-cilindros-bimba",
+    specsKey: "kitsSello",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar kit por modelo de cilindro...",
+  },
   "cilindros-festo": {
     holderSlug: "cilindros-festo",
     specsKey: "cilindros",
