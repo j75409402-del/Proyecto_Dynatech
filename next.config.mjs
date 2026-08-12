@@ -98,6 +98,10 @@ const nextConfig = {
       // tienen ficha propia).
       { source: "/productos/valvula-manual-5-3-r432-08", destination: "/categorias/valvulas-neumaticas", permanent: true },
       { source: "/productos/valvula-manual-5-3-r432-10", destination: "/categorias/valvulas-neumaticas", permanent: true },
+      // "Sensores Autonics" y "Automatización Industrial Autonics" mezclaban varias familias
+      // reales — se separaron en 8 productos/categorías por familia (ver tableCategories.ts).
+      { source: "/productos/sensores-autonics", destination: "/categorias/sensores", permanent: true },
+      { source: "/productos/automatizacion-industrial-autonics", destination: "/categorias/electrica", permanent: true },
     ];
   },
 };

@@ -16,6 +16,18 @@ import type { ProductWithRelations } from "@/types";
 
 type Params = Promise<{ slug: string }>;
 
+// Orden secundario por nombre (después de featured) para que productos de la misma familia
+// (mismo prefijo, ej. "Fusible Gould AT...") queden siempre agrupados en la grilla, nunca
+// intercalados con otras familias.
+function sortByFeaturedThenName<T extends { featured: boolean | null; name: string }>(
+  products: T[] | null,
+): T[] {
+  return [...(products ?? [])].sort((a, b) => {
+    if (a.featured !== b.featured) return a.featured ? -1 : 1;
+    return a.name.localeCompare(b.name, "es");
+  });
+}
+
 // Bloque CTA opcional al final de una categoría con subcategorías (ej. Fusibles).
 const CATEGORY_CTA_BLOCKS: Record<
   string,
@@ -183,13 +195,13 @@ export default async function CategoryPage({ params }: { params: Params }) {
 
     // Algunos modelos de esta misma categoría piden ficha propia en vez de ir en la tabla
     // unificada (ej. R432-08/R432-10) — se muestran aparte, como tarjetas normales.
-    const { data: standaloneProducts } = await supabase
+    const { data: standaloneProductsRaw } = await supabase
       .from("products")
       .select("*, category:categories(*)")
       .eq("active", true)
       .eq("category_id", category.id)
-      .neq("slug", tableConfig.holderSlug)
-      .order("featured", { ascending: false });
+      .neq("slug", tableConfig.holderSlug);
+    const standaloneProducts = sortByFeaturedThenName(standaloneProductsRaw);
 
     return (
       <div className="container-max py-12 sm:py-16">
@@ -248,14 +260,16 @@ export default async function CategoryPage({ params }: { params: Params }) {
     );
   }
 
-  // Categoría hoja (sin subcategorías) -> se muestran los productos directamente.
-  const { data: products } = await supabase
+  // Categoría hoja (sin subcategorías) -> se muestran los productos directamente. Orden
+  // alfabético por nombre como criterio secundario para que las familias (mismo prefijo,
+  // ej. "Fusible Gould AT...") queden siempre agrupadas y nunca intercaladas.
+  const { data: productsRaw } = await supabase
     .from("products")
     .select("*, category:categories(*)")
     .eq("active", true)
     .eq("category_id", category.id)
-    .order("featured", { ascending: false })
     .limit(60);
+  const products = sortByFeaturedThenName(productsRaw);
 
   return (
     <div className="container-max py-12 sm:py-16">

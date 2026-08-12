@@ -35,9 +35,13 @@ export const TABLE_CATEGORIES: Record<
     filterKey: "voltaje",
     showStock: false,
   },
-  "automatizacion-industrial-autonics": {
-    holderSlug: "automatizacion-industrial-autonics",
-    specsKey: "autonics",
+  // "Automatización Industrial Autonics" y "Sensores Autonics" eran cajones de sastre que
+  // mezclaban varias familias reales (temporizadores, contadores, luces piloto, pulsadores/
+  // selectores, controladores de temperatura / inductivos, capacitivos, fotoeléctricos) —
+  // se separaron en una categoría/holder por familia real (ver más abajo).
+  "temporizadores-electricos": {
+    holderSlug: "temporizadores-autonics",
+    specsKey: "temporizadores",
     columns: [
       { key: "modelo", label: "Modelo" },
       { key: "descripcion", label: "Descripción" },
@@ -45,9 +49,69 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["modelo", "descripcion"],
     searchPlaceholder: "Buscar por modelo o descripción...",
   },
-  "sensores-autonics": {
-    holderSlug: "sensores-autonics",
-    specsKey: "sensoresAutonics",
+  "contadores-electricos": {
+    holderSlug: "contadores-autonics",
+    specsKey: "contadores",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por modelo o descripción...",
+  },
+  "luces-piloto": {
+    holderSlug: "luces-piloto-autonics",
+    specsKey: "lucesPiloto",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por color o voltaje...",
+  },
+  "controladores-temperatura": {
+    holderSlug: "controladores-temperatura-autonics",
+    specsKey: "controladoresTemperatura",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por modelo o descripción...",
+  },
+  "pulsadores": {
+    holderSlug: "pulsadores-selectores-autonics",
+    specsKey: "pulsadoresSelectores",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por color o tipo...",
+  },
+  "sensores-inductivos": {
+    holderSlug: "sensores-inductivos-autonics",
+    specsKey: "sensoresInductivos",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por modelo o descripción...",
+  },
+  "sensores-capacitivos": {
+    holderSlug: "sensores-capacitivos-autonics",
+    specsKey: "sensoresCapacitivos",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por modelo o descripción...",
+  },
+  "sensores-fotoelectricos": {
+    holderSlug: "sensores-fotoelectricos-autonics",
+    specsKey: "sensoresFotoelectricos",
     columns: [
       { key: "modelo", label: "Modelo" },
       { key: "descripcion", label: "Descripción" },
