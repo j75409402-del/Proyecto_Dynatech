@@ -14,7 +14,7 @@ export const CONTACT = {
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "cotizaciones.dynatech@outlook.com",
   phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+1 (809) 284-4336",
   address: "Av. Rómulo Betancourt, Santo Domingo, República Dominicana",
-  hours: "Lunes a Viernes · 8:00 AM - 5:30 PM",
+  hours: "Lunes a Viernes · 8:30 AM - 5:00 PM",
 } as const;
 
 export const SOCIAL = {
