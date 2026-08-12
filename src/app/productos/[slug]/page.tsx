@@ -252,6 +252,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                           searchPlaceholder={tableConfig.searchPlaceholder}
                           filterKey={tableConfig.filterKey}
                           showStock={tableConfig.showStock ?? true}
+                          stockMode={tableConfig.stockMode ?? "count"}
                         />
                       ),
                     },

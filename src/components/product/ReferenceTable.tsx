@@ -11,7 +11,12 @@ type SortDir = "asc" | "desc";
 export type ReferenceTableColumn = { key: string; label: string };
 export type ReferenceTableRow = Record<string, string> & { stock?: number | null };
 
-function stockCell(stock: number | null) {
+function stockCell(stock: number | null, mode: "count" | "boolean") {
+  if (mode === "boolean") {
+    return stock !== null && stock > 0
+      ? { dot: "bg-emerald-500", text: "Disponible" }
+      : { dot: "bg-signal", text: "No disponible" };
+  }
   if (stock === null) {
     return { dot: "bg-amber-500", text: "Consultar disponibilidad" };
   }
@@ -28,6 +33,7 @@ export function ReferenceTable({
   searchPlaceholder,
   filterKey,
   showStock = true,
+  stockMode = "count",
 }: {
   columns: ReferenceTableColumn[];
   rows: ReferenceTableRow[];
@@ -37,6 +43,8 @@ export function ReferenceTable({
   filterKey?: string;
   /** Algunas familias (ej. cilindros American) no manejan stock, solo "Consultar disponibilidad" aparte. */
   showStock?: boolean;
+  /** "boolean" = sin cantidades, solo Disponible/No disponible (ej. Accesorios Neumáticos). */
+  stockMode?: "count" | "boolean";
 }) {
   const [query, setQuery] = useState("");
   const [filterValue, setFilterValue] = useState<string>("todos");
@@ -126,7 +134,7 @@ export function ReferenceTable({
               {showStock && (
                 <th className="px-4 py-3 text-left">
                   <SortButton active={sortKey === "stock"} dir={sortDir} onClick={() => toggleSort("stock")}>
-                    Stock actual
+                    {stockMode === "boolean" ? "Disponibilidad" : "Stock actual"}
                   </SortButton>
                 </th>
               )}
@@ -134,7 +142,7 @@ export function ReferenceTable({
           </thead>
           <tbody>
             {sorted.map((r, i) => {
-              const stock = stockCell(r.stock ?? null);
+              const stock = stockCell(r.stock ?? null, stockMode);
               return (
                 <tr
                   key={columns.map((c) => r[c.key]).join("|")}

@@ -18,6 +18,8 @@ export const TABLE_CATEGORIES: Record<
     showStock?: boolean;
     /** Texto del botón único cuando showStock=false. Default: "Consultar disponibilidad". */
     ctaLabel?: string;
+    /** "boolean" = columna de disponibilidad sin cantidades (Disponible/No disponible). */
+    stockMode?: "count" | "boolean";
   }
 > = {
   "resistencias-maquinas-inyeccion-plastico": {
@@ -99,6 +101,112 @@ export const TABLE_CATEGORIES: Record<
     searchPlaceholder: "Buscar accesorio...",
     showStock: false,
     ctaLabel: "Solicitar cotización",
+  },
+  // Neumática -> Accesorios Neumáticos: 13 familias, 135 referencias. Disponibilidad
+  // binaria (Disponible/No disponible) sin cantidades — pedido explícito del cliente.
+  "conectores-rectos": {
+    holderSlug: "conectores-rectos",
+    specsKey: "conectoresRectos",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "codos-neumaticos": {
+    holderSlug: "codos-neumaticos",
+    specsKey: "codosNeumaticos",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "tes-uniones-roscadas": {
+    holderSlug: "tes-uniones-roscadas",
+    specsKey: "tesUniones",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "reguladores-flujo": {
+    holderSlug: "reguladores-flujo",
+    specsKey: "reguladoresFlujo",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "llaves-paso-neumaticas": {
+    holderSlug: "llaves-paso-neumaticas",
+    specsKey: "llavesPaso",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "uniones-manguera": {
+    holderSlug: "uniones-manguera",
+    specsKey: "unionesManguera",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "uniones-y": {
+    holderSlug: "uniones-y",
+    specsKey: "unionesY",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "bulkhead-neumatico": {
+    holderSlug: "bulkhead-neumatico",
+    specsKey: "bulkhead",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "reducciones-neumaticas": {
+    holderSlug: "reducciones-neumaticas",
+    specsKey: "reducciones",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "tapones-neumaticos": {
+    holderSlug: "tapones-neumaticos",
+    specsKey: "tapones",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "codos-manguera": {
+    holderSlug: "codos-manguera",
+    specsKey: "codosManguera",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida, conexión o marca...",
+    stockMode: "boolean",
+  },
+  "blue-cap": {
+    holderSlug: "blue-cap",
+    specsKey: "blueCap",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida...",
+    stockMode: "boolean",
+  },
+  "silenciadores-neumaticos": {
+    holderSlug: "silenciadores-neumaticos",
+    specsKey: "silenciadores",
+    columns: [{ key: "descripcion", label: "Referencia" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por medida o conexión...",
+    stockMode: "boolean",
   },
 };
 
