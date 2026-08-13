@@ -343,13 +343,6 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo...",
   },
-  "filtro-rl-smc": {
-    holderSlug: "filtro-rl-smc",
-    specsKey: "filtroRlSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
   "kits-sello-smc": {
     holderSlug: "kits-sello-smc",
     specsKey: "kitsSelloSmc",

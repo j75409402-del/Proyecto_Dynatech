@@ -108,6 +108,9 @@ const nextConfig = {
       // se separaron en categorías por familia real (ver tableCategories.ts).
       { source: "/productos/accesorios-neumaticos-smc", destination: "/categorias/neumatica", permanent: true },
       { source: "/productos/accesorios-sensores-ifm", destination: "/categorias/sensores", permanent: true },
+      // "Filtro RL SMC" se eliminó por completo (pedido explícito del cliente, hard delete).
+      { source: "/categorias/filtro-rl-smc", destination: "/categorias/neumatica", permanent: true },
+      { source: "/productos/filtro-rl-smc", destination: "/categorias/neumatica", permanent: true },
     ];
   },
 };
