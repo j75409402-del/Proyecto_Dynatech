@@ -111,6 +111,9 @@ const nextConfig = {
       // "Filtro RL SMC" se eliminó por completo (pedido explícito del cliente, hard delete).
       { source: "/categorias/filtro-rl-smc", destination: "/categorias/neumatica", permanent: true },
       { source: "/productos/filtro-rl-smc", destination: "/categorias/neumatica", permanent: true },
+      // "Sensores para Cilindros SMC" se eliminó por completo (pedido explícito del cliente).
+      { source: "/categorias/sensores-cilindros-smc", destination: "/categorias/neumatica", permanent: true },
+      { source: "/productos/sensores-cilindros-smc", destination: "/categorias/neumatica", permanent: true },
     ];
   },
 };

@@ -364,13 +364,6 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo...",
   },
-  "sensores-cilindros-smc": {
-    holderSlug: "sensores-cilindros-smc",
-    specsKey: "sensoresCilindrosSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
   "amortiguadores-smc": {
     holderSlug: "amortiguadores-smc",
     specsKey: "amortiguadoresSmc",
