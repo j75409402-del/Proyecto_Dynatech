@@ -104,6 +104,10 @@ const nextConfig = {
       // reales — se separaron en 8 productos/categorías por familia (ver tableCategories.ts).
       { source: "/productos/sensores-autonics", destination: "/categorias/sensores", permanent: true },
       { source: "/productos/automatizacion-industrial-autonics", destination: "/categorias/electrica", permanent: true },
+      // "Accesorios Neumáticos SMC" y "Accesorios de Sensores IFM" eran cajones de sastre —
+      // se separaron en categorías por familia real (ver tableCategories.ts).
+      { source: "/productos/accesorios-neumaticos-smc", destination: "/categorias/neumatica", permanent: true },
+      { source: "/productos/accesorios-sensores-ifm", destination: "/categorias/sensores", permanent: true },
     ];
   },
 };

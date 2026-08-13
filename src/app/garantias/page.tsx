@@ -21,8 +21,7 @@ export default function GarantiasPage() {
             <p>
               Los productos cubren defectos de fabricación, materiales o funcionamiento bajo
               condiciones normales de uso, según el plazo y términos que defina cada fabricante.
-              El plazo específico de cada producto se indica en su ficha técnica o datasheet
-              cuando el fabricante lo publica.
+              El plazo específico de cada producto se confirma al momento de la cotización.
             </p>
           ),
         },

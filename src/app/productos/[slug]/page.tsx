@@ -22,7 +22,6 @@ import {
   CTA_LABEL_SPECS_KEY,
   MEDIDAS_COLUMN_LABEL_SPECS_KEY,
 } from "@/lib/tableCategories";
-import { stockDisplay, cn } from "@/lib/utils";
 import type { ProductWithRelations, Category } from "@/types";
 
 type Params = Promise<{ slug: string }>;
@@ -129,8 +128,11 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
   // Un producto simple (sin tabla de variantes) también puede pedir el botón único —
   // basta con que traiga specs.ctaLabel, no depende de tener specs.medidas.
   const productCtaLabel = rawSpecs?.[CTA_LABEL_SPECS_KEY] as string | undefined;
-  const hideStockIndicator = Boolean(medidasRows) || tableConfig?.showStock === false || Boolean(productCtaLabel);
-  const consultCtaLabel = tableConfig?.ctaLabel ?? productCtaLabel ?? "Consultar disponibilidad";
+  // Disponibilidad unificada en todo el catálogo: cualquier producto con tabla de
+  // referencias o de medidas usa el botón único "Consultar disponibilidad" (nunca stock
+  // real, nunca "Agotado"/"Disponible" — pedido explícito del cliente, sin excepción).
+  const hideStockIndicator = Boolean(tableConfig) || Boolean(medidasRows) || Boolean(productCtaLabel);
+  const consultCtaLabel = "Consultar disponibilidad";
   const medidasColumnLabel = (rawSpecs?.[MEDIDAS_COLUMN_LABEL_SPECS_KEY] as string | undefined) ?? "Descripción";
   // Objeto acotado para los client components de CTA — nunca el SKU real.
   const publicProduct = {
@@ -142,8 +144,6 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
   const galleryImages = Array.from(
     new Set([product.thumbnail_url, ...((product.images as string[] | null) ?? [])].filter(Boolean)),
   ) as string[];
-  const stock = stockDisplay(product.stock_status, product.stock_quantity);
-
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -178,21 +178,16 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
           {/* Info */}
           <div>
-            {/* Stock — sin indicador pa' familias sin stock/carrito (ej. Resistencias,
-                Cilindros American): solo "Consultar disponibilidad" */}
+            {/* Disponibilidad — nunca cantidades ni "Agotado"/"En stock", siempre el mismo
+                texto (pedido explícito del cliente). */}
             {!hideStockIndicator && (
               <div className="flex items-center justify-end mb-4">
-                <div className="flex flex-col items-end gap-0.5">
-                  <div className="flex items-center gap-1.5">
-                    <span className={cn("h-2 w-2 rounded-full", stock.dotClass)} />
-                    <span className="font-mono text-[10px] uppercase tracking-techno text-steel-200">
-                      {stock.label}
-                    </span>
-                  </div>
-                  {stock.sublabel && (
-                    <span className="font-mono text-[10px] text-steel-400">{stock.sublabel}</span>
-                  )}
-                </div>
+                <span className="flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-steel-400" />
+                  <span className="font-mono text-[10px] uppercase tracking-techno text-steel-200">
+                    Consultar disponibilidad
+                  </span>
+                </span>
               </div>
             )}
 
@@ -251,8 +246,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                           searchKeys={tableConfig.searchKeys}
                           searchPlaceholder={tableConfig.searchPlaceholder}
                           filterKey={tableConfig.filterKey}
-                          showStock={tableConfig.showStock ?? true}
-                          stockMode={tableConfig.stockMode ?? "count"}
+                          showStock={tableConfig.showStock ?? false}
                         />
                       ),
                     },
@@ -284,31 +278,6 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                   ) : (
                     <p className="text-sm text-steel-400">Sin especificaciones cargadas para este producto.</p>
                   ),
-              },
-              {
-                id: "ficha",
-                label: "Ficha técnica",
-                content: (
-                  <div className="space-y-6">
-                    {product.description ? (
-                      <p className="text-sm text-steel-300 leading-relaxed max-w-2xl">{product.description}</p>
-                    ) : (
-                      <p className="text-sm text-steel-400">Sin ficha técnica adicional para este producto.</p>
-                    )}
-                    <div className="flex flex-wrap gap-3">
-                      {product.datasheet_url && (
-                        <a
-                          href={product.datasheet_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn-secondary"
-                        >
-                          Descargar PDF
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                ),
               },
             ]}
           />

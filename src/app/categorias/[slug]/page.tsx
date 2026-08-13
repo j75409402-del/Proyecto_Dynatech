@@ -242,8 +242,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
           searchKeys={tableConfig.searchKeys}
           searchPlaceholder={tableConfig.searchPlaceholder}
           filterKey={tableConfig.filterKey}
-          showStock={tableConfig.showStock ?? true}
-          stockMode={tableConfig.stockMode ?? "count"}
+          showStock={tableConfig.showStock ?? false}
         />
 
         {standaloneProducts && standaloneProducts.length > 0 && (

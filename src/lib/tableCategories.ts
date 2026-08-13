@@ -14,12 +14,12 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: string[];
     searchPlaceholder: string;
     filterKey?: string;
-    /** false = sin columna de stock ni carrito, solo botón único (ver ctaLabel). */
+    /** Default false en todo el catálogo (sin excepción): sin columna de stock ni carrito,
+     * solo botón único "Consultar disponibilidad" (ver ctaLabel). true = excepción explícita
+     * que sí muestra stock real — no usar salvo pedido explícito del cliente. */
     showStock?: boolean;
-    /** Texto del botón único cuando showStock=false. Default: "Consultar disponibilidad". */
+    /** Texto del botón único. Default: "Consultar disponibilidad". */
     ctaLabel?: string;
-    /** "boolean" = columna de disponibilidad sin cantidades (Disponible/No disponible). */
-    stockMode?: "count" | "boolean";
   }
 > = {
   "resistencias-maquinas-inyeccion-plastico": {
@@ -141,7 +141,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Disponibilidad" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo o referencia...",
-    // showStock por default (true): esta categoría sí conserva "Stock actual".
   },
   "valvulas-neumaticas": {
     holderSlug: "valvulas-neumaticas-emc",
@@ -149,7 +148,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Disponibilidad" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo o tipo de válvula...",
-    // showStock por default (true): esta categoría sí conserva "Stock actual".
   },
   "bases-para-fusibles": {
     holderSlug: "bases-para-fusibles",
@@ -160,8 +158,6 @@ export const TABLE_CATEGORIES: Record<
     ],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar base por modelo compatible...",
-    showStock: false,
-    ctaLabel: "Solicitar cotización",
   },
   "accesorios-para-fusibles": {
     holderSlug: "accesorios-para-fusibles",
@@ -172,18 +168,14 @@ export const TABLE_CATEGORIES: Record<
     ],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar accesorio...",
-    showStock: false,
-    ctaLabel: "Solicitar cotización",
   },
-  // Neumática -> Fittings Neumáticos: 13 familias, 135 referencias. Disponibilidad
-  // binaria (Disponible/No disponible) sin cantidades — pedido explícito del cliente.
+  // Neumática -> Fittings Neumáticos: 13 familias, 135 referencias.
   "conectores-rectos": {
     holderSlug: "conectores-rectos",
     specsKey: "conectoresRectos",
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "codos-neumaticos": {
     holderSlug: "codos-neumaticos",
@@ -191,7 +183,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "tes-uniones-roscadas": {
     holderSlug: "tes-uniones-roscadas",
@@ -199,7 +190,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "reguladores-flujo": {
     holderSlug: "reguladores-flujo",
@@ -207,7 +197,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "llaves-paso-neumaticas": {
     holderSlug: "llaves-paso-neumaticas",
@@ -215,7 +204,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "uniones-manguera": {
     holderSlug: "uniones-manguera",
@@ -223,7 +211,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "uniones-y": {
     holderSlug: "uniones-y",
@@ -231,7 +218,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "bulkhead-neumatico": {
     holderSlug: "bulkhead-neumatico",
@@ -239,7 +225,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "reducciones-neumaticas": {
     holderSlug: "reducciones-neumaticas",
@@ -247,7 +232,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "tapones-neumaticos": {
     holderSlug: "tapones-neumaticos",
@@ -255,7 +239,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "codos-manguera": {
     holderSlug: "codos-manguera",
@@ -263,7 +246,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
-    stockMode: "boolean",
   },
   "blue-cap": {
     holderSlug: "blue-cap",
@@ -271,7 +253,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida...",
-    stockMode: "boolean",
   },
   "silenciadores-neumaticos": {
     holderSlug: "silenciadores-neumaticos",
@@ -279,7 +260,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida o conexión...",
-    stockMode: "boolean",
   },
   // Lote IFM/SMC/MAC/Harting — sin columna de stock: solo botón único "Consultar
   // disponibilidad" (regla explícita del cliente: nunca mostrar Stock/Agotado/números).
@@ -307,14 +287,6 @@ export const TABLE_CATEGORIES: Record<
     searchPlaceholder: "Buscar por modelo...",
     showStock: false,
   },
-  "accesorios-sensores": {
-    holderSlug: "accesorios-sensores-ifm",
-    specsKey: "ifmAccesorios",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar accesorio...",
-    showStock: false,
-  },
   "cilindros-neumaticos-smc": {
     holderSlug: "cilindros-neumaticos-smc",
     specsKey: "smcCilindros",
@@ -329,14 +301,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Descripción" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo...",
-    showStock: false,
-  },
-  "accesorios-neumaticos-smc": {
-    holderSlug: "accesorios-neumaticos-smc",
-    specsKey: "smcAccesorios",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar accesorio...",
     showStock: false,
   },
   "valvulas-neumaticas-mac": {
@@ -354,6 +318,135 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por código o amperaje...",
     showStock: false,
+  },
+  // "Accesorios Neumáticos SMC" y "Accesorios de Sensores IFM" eran cajones de sastre
+  // (reguladores + uniones + kits + interruptores + etc. todo junto) — se separan en una
+  // categoría por familia real, igual que se hizo con los Autonics.
+  "reguladores-flujo-smc": {
+    holderSlug: "reguladores-flujo-smc",
+    specsKey: "reguladoresFlujoSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "uniones-t-smc": {
+    holderSlug: "uniones-t-smc",
+    specsKey: "unionesTSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo o medida...",
+  },
+  "bulkhead-smc": {
+    holderSlug: "bulkhead-smc",
+    specsKey: "bulkheadSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "filtro-rl-smc": {
+    holderSlug: "filtro-rl-smc",
+    specsKey: "filtroRlSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "kits-sello-smc": {
+    holderSlug: "kits-sello-smc",
+    specsKey: "kitsSelloSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar kit por modelo compatible...",
+  },
+  "actuadores-smc": {
+    holderSlug: "actuadores-smc",
+    specsKey: "actuadoresSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "interruptores-presion-smc": {
+    holderSlug: "interruptores-presion-smc",
+    specsKey: "interruptoresPresionSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "sensores-cilindros-smc": {
+    holderSlug: "sensores-cilindros-smc",
+    specsKey: "sensoresCilindrosSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "amortiguadores-smc": {
+    holderSlug: "amortiguadores-smc",
+    specsKey: "amortiguadoresSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "generadores-vacio-smc": {
+    holderSlug: "generadores-vacio-smc",
+    specsKey: "generadoresVacioSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "bases-soportes-smc": {
+    holderSlug: "bases-soportes-smc",
+    specsKey: "basesSoportesSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "bobinas-smc": {
+    holderSlug: "bobinas-smc",
+    specsKey: "bobinasSmc",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "conectores-sensores-ifm": {
+    holderSlug: "conectores-sensores-ifm",
+    specsKey: "conectoresSensoresIfm",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "cables-sensores-ifm": {
+    holderSlug: "cables-sensores-ifm",
+    specsKey: "cablesSensoresIfm",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "modulos-amplificadores-ifm": {
+    holderSlug: "modulos-amplificadores-ifm",
+    specsKey: "modulosAmplificadoresIfm",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "soportes-bases-ifm": {
+    holderSlug: "soportes-bases-ifm",
+    specsKey: "soportesBasesIfm",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "herramientas-software-ifm": {
+    holderSlug: "herramientas-software-ifm",
+    specsKey: "herramientasSoftwareIfm",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "adaptadores-ifm": {
+    holderSlug: "adaptadores-ifm",
+    specsKey: "adaptadoresIfm",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
   },
 };
 

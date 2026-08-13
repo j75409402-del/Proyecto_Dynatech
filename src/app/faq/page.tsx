@@ -39,9 +39,9 @@ export default function FaqPage() {
           heading: "¿Cuál es el pedido mínimo?",
           body: (
             <p>
-              Depende del producto — cada ficha técnica indica la cantidad mínima de orden
-              cuando aplica. Para la mayoría de piezas de catálogo no hay mínimo; para pedidos
-              especiales o importación directa, tu ingeniero de cuenta te lo confirma al cotizar.
+              Depende del producto. Para la mayoría de piezas de catálogo no hay mínimo; para
+              pedidos especiales o importación directa, tu ingeniero de cuenta te lo confirma
+              al cotizar.
             </p>
           ),
         },
@@ -49,10 +49,9 @@ export default function FaqPage() {
           heading: "¿Cuánto tardan las entregas?",
           body: (
             <p>
-              Los productos marcados &quot;En stock&quot; salen de nuestro inventario en Santo
-              Domingo, normalmente en 24-48 horas. Los productos &quot;Bajo pedido&quot; dependen
-              del tiempo de entrega del fabricante, indicado en la ficha técnica cuando está
-              disponible.
+              Depende del producto y su origen — desde nuestro inventario en Santo Domingo o
+              por importación directa. Escríbenos con la referencia que necesitas y te
+              confirmamos disponibilidad y tiempo de entrega al cotizar.
             </p>
           ),
         },

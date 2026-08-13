@@ -1,9 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
-import { ChevronDown, X } from "lucide-react";
+import { X } from "lucide-react";
 import type { Category } from "@/types";
 import { CategoryIcon } from "@/lib/categoryIcons";
 import { cn } from "@/lib/utils";
@@ -14,20 +13,10 @@ type Props = {
   totalCount: number;
 };
 
-const STOCK_OPTIONS = [
-  { value: "disponible", label: "Disponible" },
-  { value: "agotado", label: "Agotado" },
-];
-
 export function ProductFilters({ categories, categoryCounts, totalCount }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get("categoria");
-  const activeStock = useMemo(
-    () => new Set((searchParams.get("disponibilidad") ?? "").split(",").filter(Boolean)),
-    [searchParams],
-  );
-  const [openSections, setOpenSections] = useState({ stock: false });
 
   function buildHref(params: Record<string, string | null>) {
     const sp = new URLSearchParams(searchParams);
@@ -39,14 +28,7 @@ export function ProductFilters({ categories, categoryCounts, totalCount }: Props
     return qs ? `${pathname}?${qs}` : pathname;
   }
 
-  function toggleSetParam(key: "disponibilidad", value: string, current: Set<string>) {
-    const next = new Set(current);
-    if (next.has(value)) next.delete(value);
-    else next.add(value);
-    return buildHref({ [key]: next.size ? Array.from(next).join(",") : null });
-  }
-
-  const hasActiveFilters = activeCategory || activeStock.size > 0;
+  const hasActiveFilters = activeCategory;
 
   return (
     <aside className="space-y-1">
@@ -108,81 +90,6 @@ export function ProductFilters({ categories, categoryCounts, totalCount }: Props
           })}
         </ul>
       </div>
-
-      {/* Disponibilidad */}
-      <FilterSection
-        title="Disponibilidad"
-        open={openSections.stock}
-        onToggle={() => setOpenSections((s) => ({ ...s, stock: !s.stock }))}
-      >
-        <ul className="space-y-0.5">
-          {STOCK_OPTIONS.map((opt) => {
-            const checked = activeStock.has(opt.value);
-            return (
-              <li key={opt.value}>
-                <Link
-                  href={toggleSetParam("disponibilidad", opt.value, activeStock)}
-                  className="flex items-center gap-2 rounded-xs px-2 py-1.5 text-sm text-steel-300
-                             hover:bg-carbon-700 hover:text-surface transition-colors"
-                >
-                  <span
-                    className={cn(
-                      "flex h-4 w-4 shrink-0 items-center justify-center rounded-xs border transition-colors",
-                      checked ? "bg-signal border-signal" : "border-black/20",
-                    )}
-                  >
-                    {checked && <CheckIcon />}
-                  </span>
-                  {opt.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </FilterSection>
     </aside>
-  );
-}
-
-function FilterSection({
-  title,
-  open,
-  onToggle,
-  children,
-}: {
-  title: string;
-  open: boolean;
-  onToggle: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="border-b border-black/10 py-4">
-      <button
-        type="button"
-        onClick={onToggle}
-        className="flex w-full items-center justify-between text-left"
-      >
-        <span className="eyebrow">{title}</span>
-        <ChevronDown
-          className={cn("h-4 w-4 text-steel-500 transition-transform duration-300", open && "rotate-180")}
-        />
-      </button>
-      <div
-        className={cn(
-          "grid transition-[grid-template-rows] duration-300 ease-out",
-          open ? "grid-rows-[1fr] mt-3" : "grid-rows-[0fr]",
-        )}
-      >
-        <div className="overflow-hidden">{children}</div>
-      </div>
-    </div>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 12 12" className="h-2.5 w-2.5 fill-none stroke-white stroke-[2.5]">
-      <path d="M2 6.5 4.5 9 10 3" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }

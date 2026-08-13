@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import type { ProductWithRelations } from "@/types";
-import { stockDisplay, cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 
@@ -25,7 +25,6 @@ function quickSpecs(specs: ProductWithRelations["specs"]): [string, string][] {
 // Orden fijo de la tarjeta (no cambiar): Stock -> Imagen -> Nombre ->
 // Descripción -> Especificaciones rápidas -> Ver detalles -> Agregar al carrito.
 export function ProductCard({ product, className }: Props) {
-  const stock = stockDisplay(product.stock_status, product.stock_quantity);
   const specs = quickSpecs(product.specs);
   // Objeto acotado a propósito: el botón (client component) solo recibe lo que
   // necesita para el carrito — nunca el SKU real, así no queda embebido en el
@@ -47,12 +46,12 @@ export function ProductCard({ product, className }: Props) {
         )}
       >
         <Link href={`/productos/${product.slug}`} className="flex flex-1 flex-col">
-          {/* Stock */}
+          {/* Disponibilidad — mismo texto siempre, nunca cantidades ni "Agotado". */}
           <div className="flex items-center px-4 py-2.5 border-b border-black/5">
             <span className="flex items-center gap-1.5">
-              <span className={cn("h-1.5 w-1.5 rounded-full shrink-0", stock.dotClass)} />
+              <span className="h-1.5 w-1.5 rounded-full shrink-0 bg-steel-400" />
               <span className="font-mono text-[9px] uppercase tracking-techno text-steel-300">
-                {stock.label}
+                Consultar disponibilidad
               </span>
             </span>
           </div>

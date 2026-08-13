@@ -26,25 +26,3 @@ export function slugify(text: string): string {
     .trim()
     .replace(/\s+/g, "-");
 }
-
-/**
- * De cara al público mostramos 3 estados: En stock (verde), Importación (ámbar —
- * "bajo_pedido"/"consultar", se consigue pero hay que traerlo) y Agotado (rojo).
- */
-export function stockDisplay(
-  status: string | null,
-  quantity?: number | null,
-): { available: boolean; label: string; sublabel: string; dotClass: string } {
-  if (status === "agotado") {
-    return { available: false, label: "Agotado", sublabel: "Stock: 0 unidades", dotClass: "bg-signal" };
-  }
-  if (status === "en_stock") {
-    return {
-      available: true,
-      label: "En stock",
-      sublabel: typeof quantity === "number" ? `Stock: ${quantity} unidad${quantity === 1 ? "" : "es"}` : "",
-      dotClass: "bg-emerald-500",
-    };
-  }
-  return { available: true, label: "Importación", sublabel: "Disponible bajo pedido", dotClass: "bg-amber-500" };
-}

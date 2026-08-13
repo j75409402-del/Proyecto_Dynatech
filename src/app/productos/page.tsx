@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: "Explora el catálogo completo de piezas industriales de Dynatech: neumática, eléctrica industrial, sensores e instrumentación.",
 };
 
-type SearchParams = Promise<{ categoria?: string; disponibilidad?: string; q?: string }>;
+type SearchParams = Promise<{ categoria?: string; q?: string }>;
 
 export default async function ProductosPage({
   searchParams,
@@ -22,8 +22,6 @@ export default async function ProductosPage({
 }) {
   const params = await searchParams;
   const supabase = await createClient();
-
-  const activeStock = params.disponibilidad?.split(",").filter(Boolean) ?? [];
 
   // Categorías completas — las necesitamos antes de armar la query si hay búsqueda por texto,
   // para poder expandir "cilindro" a la categoría Cilindros + sus subcategorías/accesorios.
@@ -53,17 +51,6 @@ export default async function ProductosPage({
       }
       query = query.in("category_id", Array.from(ids));
     }
-  }
-
-  if (activeStock.length > 0) {
-    // El filtro público solo conoce "disponible"/"agotado" (ver decisión en stockDisplay());
-    // "disponible" cubre en_stock/bajo_pedido/consultar, que de cara al cliente sí se consiguen.
-    const statusValues = new Set<string>();
-    if (activeStock.includes("disponible")) {
-      statusValues.add("en_stock").add("bajo_pedido").add("consultar");
-    }
-    if (activeStock.includes("agotado")) statusValues.add("agotado");
-    query = query.in("stock_status", Array.from(statusValues));
   }
 
   if (params.q) {

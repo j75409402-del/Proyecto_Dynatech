@@ -11,29 +11,13 @@ type SortDir = "asc" | "desc";
 export type ReferenceTableColumn = { key: string; label: string };
 export type ReferenceTableRow = Record<string, string> & { stock?: number | null };
 
-function stockCell(stock: number | null, mode: "count" | "boolean") {
-  if (mode === "boolean") {
-    return stock !== null && stock > 0
-      ? { dot: "bg-emerald-500", text: "Disponible" }
-      : { dot: "bg-signal", text: "No disponible" };
-  }
-  if (stock === null) {
-    return { dot: "bg-amber-500", text: "Consultar disponibilidad" };
-  }
-  if (stock === 0) {
-    return { dot: "bg-signal", text: "Agotado" };
-  }
-  return { dot: "bg-emerald-500", text: `${stock} unidad${stock === 1 ? "" : "es"}` };
-}
-
 export function ReferenceTable({
   columns,
   rows,
   searchKeys,
   searchPlaceholder,
   filterKey,
-  showStock = true,
-  stockMode = "count",
+  showStock = false,
 }: {
   columns: ReferenceTableColumn[];
   rows: ReferenceTableRow[];
@@ -41,10 +25,9 @@ export function ReferenceTable({
   searchPlaceholder: string;
   /** Si se define, agrega chips de filtro de valor único sobre esta columna (ej. "voltaje"). */
   filterKey?: string;
-  /** Algunas familias (ej. cilindros American) no manejan stock, solo "Consultar disponibilidad" aparte. */
+  /** Excepción explícita para mostrar stock real — default false en todo el catálogo
+   * (pedido del cliente: nunca cantidades, nunca "Agotado", solo "Consultar disponibilidad"). */
   showStock?: boolean;
-  /** "boolean" = sin cantidades, solo Disponible/No disponible (ej. Accesorios Neumáticos). */
-  stockMode?: "count" | "boolean";
 }) {
   const [query, setQuery] = useState("");
   const [filterValue, setFilterValue] = useState<string>("todos");
@@ -133,43 +116,40 @@ export function ReferenceTable({
               ))}
               {showStock && (
                 <th className="px-4 py-3 text-left">
-                  <SortButton active={sortKey === "stock"} dir={sortDir} onClick={() => toggleSort("stock")}>
-                    {stockMode === "boolean" ? "Disponibilidad" : "Stock actual"}
-                  </SortButton>
+                  <span className="font-mono text-[11px] uppercase tracking-techno text-steel-400">
+                    Disponibilidad
+                  </span>
                 </th>
               )}
             </tr>
           </thead>
           <tbody>
-            {sorted.map((r, i) => {
-              const stock = stockCell(r.stock ?? null, stockMode);
-              return (
-                <tr
-                  key={columns.map((c) => r[c.key]).join("|")}
-                  className={cn(
-                    "border-b border-black/5 last:border-b-0 hover:bg-carbon-700/60 transition-colors",
-                    i % 2 === 1 && "bg-black/5",
-                  )}
-                >
-                  {columns.map((col, ci) => (
-                    <td
-                      key={col.key}
-                      className={cn("px-4 py-3", ci === 0 ? "text-surface font-medium" : "text-steel-300")}
-                    >
-                      {r[col.key]}
-                    </td>
-                  ))}
-                  {showStock && (
-                    <td className="px-4 py-3">
-                      <span className="inline-flex items-center gap-1.5">
-                        <span className={cn("h-2 w-2 rounded-full shrink-0", stock.dot)} />
-                        <span className="text-surface">{stock.text}</span>
-                      </span>
-                    </td>
-                  )}
-                </tr>
-              );
-            })}
+            {sorted.map((r, i) => (
+              <tr
+                key={columns.map((c) => r[c.key]).join("|")}
+                className={cn(
+                  "border-b border-black/5 last:border-b-0 hover:bg-carbon-700/60 transition-colors",
+                  i % 2 === 1 && "bg-black/5",
+                )}
+              >
+                {columns.map((col, ci) => (
+                  <td
+                    key={col.key}
+                    className={cn("px-4 py-3", ci === 0 ? "text-surface font-medium" : "text-steel-300")}
+                  >
+                    {r[col.key]}
+                  </td>
+                ))}
+                {showStock && (
+                  <td className="px-4 py-3">
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="h-2 w-2 rounded-full shrink-0 bg-steel-400" />
+                      <span className="text-surface">Consultar disponibilidad</span>
+                    </span>
+                  </td>
+                )}
+              </tr>
+            ))}
             {sorted.length === 0 && (
               <tr>
                 <td colSpan={columns.length + (showStock ? 1 : 0)} className="px-4 py-10 text-center text-steel-400">
