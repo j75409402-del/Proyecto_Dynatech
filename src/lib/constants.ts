@@ -20,7 +20,6 @@ export const CONTACT = {
 export const SOCIAL = {
   instagram: "https://www.instagram.com/dynatech_ingenieria",
   linkedin: "https://linkedin.com/company/dynatech-do",
-  facebook: "https://facebook.com/dynatech.do",
 } as const;
 
 export const NAV = {

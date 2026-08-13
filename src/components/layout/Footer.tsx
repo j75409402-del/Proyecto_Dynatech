@@ -184,14 +184,6 @@ export async function Footer() {
             >
               LinkedIn
             </a>
-            <a
-              href={SOCIAL.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-steel-400 hover:text-signal transition-colors"
-            >
-              Facebook
-            </a>
           </div>
         </div>
       </div>
