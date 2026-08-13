@@ -175,7 +175,7 @@ export const TABLE_CATEGORIES: Record<
     showStock: false,
     ctaLabel: "Solicitar cotización",
   },
-  // Neumática -> Accesorios Neumáticos: 13 familias, 135 referencias. Disponibilidad
+  // Neumática -> Fittings Neumáticos: 13 familias, 135 referencias. Disponibilidad
   // binaria (Disponible/No disponible) sin cantidades — pedido explícito del cliente.
   "conectores-rectos": {
     holderSlug: "conectores-rectos",
