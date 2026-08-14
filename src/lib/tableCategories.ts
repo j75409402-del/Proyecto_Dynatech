@@ -306,9 +306,16 @@ export const TABLE_CATEGORIES: Record<
   "valvulas-neumaticas-mac": {
     holderSlug: "valvulas-neumaticas-mac",
     specsKey: "macValvulas",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "tipo", label: "Tipo" },
+      { key: "conexion", label: "Conexión" },
+      { key: "voltaje", label: "Voltaje" },
+      { key: "configuracion", label: "Configuración" },
+    ],
+    searchKeys: ["modelo", "tipo", "conexion", "voltaje"],
+    searchPlaceholder: "Buscar por modelo, conexión o voltaje...",
+    filterKey: "tipo",
     showStock: false,
   },
   "conectores-industriales": {
