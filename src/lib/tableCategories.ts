@@ -122,6 +122,18 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["modelo", "descripcion"],
     searchPlaceholder: "Buscar por modelo o descripción...",
   },
+  // PA12 (amplificador) se sacó de Sensores Fotoeléctricos — no es un sensor, es un módulo
+  // accesorio. Queda junto a las demás categorías de accesorios de sensores.
+  "amplificadores-autonics": {
+    holderSlug: "amplificadores-autonics",
+    specsKey: "amplificadoresAutonics",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por modelo o descripción...",
+  },
   "cilindros-neumaticos-bimba": {
     holderSlug: "cilindros-neumaticos-bimba",
     specsKey: "bimba",
