@@ -1,12 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { whatsappQuoteRequest } from "@/lib/whatsapp";
+import { cn } from "@/lib/utils";
 import type { ReferenceTableRow } from "./ReferenceTable";
 
-const HIDDEN_KEYS = new Set(["stock"]);
+// "voltajes_disponibles" (ej. "220 VAC, 110 VAC, 24 VAC, 12 VDC, 24 VDC") marca una
+// referencia que no tiene un único voltaje fijo por Part Number — la fila muestra
+// "Seleccionar voltaje" y esta ficha ofrece un selector real en vez del texto estático.
+const HIDDEN_KEYS = new Set(["stock", "voltajes_disponibles"]);
 const LABELS: Record<string, string> = {
   modelo: "Modelo",
   marca: "Marca",
@@ -36,6 +41,10 @@ const LABELS: Record<string, string> = {
   capacidad: "Capacidad",
   medida: "Medida",
   estado: "Estado del dato",
+  control: "Control",
+  presion_maxima: "Presión máxima",
+  temperatura: "Temperatura de trabajo",
+  bobina: "Bobina",
 };
 
 function labelFor(key: string): string {
@@ -60,8 +69,17 @@ export function ReferenceDetailPanel({
   onClose: () => void;
 }) {
   const title = row.modelo || row.descripcion || familyName;
-  const entries = Object.entries(row).filter(([k, v]) => !HIDDEN_KEYS.has(k) && v);
+  const voltageOptions = row.voltajes_disponibles
+    ? row.voltajes_disponibles.split(",").map((v) => v.trim()).filter(Boolean)
+    : [];
+  const [selectedVoltage, setSelectedVoltage] = useState<string | null>(null);
+  // Con selector de voltaje, el texto fijo "Seleccionar voltaje" del campo voltaje no debe
+  // repetirse como spec estática — el selector interactivo lo reemplaza.
+  const entries = Object.entries(row).filter(
+    ([k, v]) => !HIDDEN_KEYS.has(k) && v && !(k === "voltaje" && voltageOptions.length > 0),
+  );
   const waName = row.modelo ? `${familyName} — ${row.modelo}` : `${familyName} — ${title}`;
+  const waNameWithVoltage = selectedVoltage ? `${waName} (${selectedVoltage})` : waName;
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-4 sm:items-center">
@@ -96,6 +114,34 @@ export function ReferenceDetailPanel({
             </div>
           )}
 
+          {voltageOptions.length > 0 && (
+            <div>
+              <div className="eyebrow mb-2">Voltaje — seleccionar variante</div>
+              <div className="flex flex-wrap gap-1.5">
+                {voltageOptions.map((v) => (
+                  <button
+                    key={v}
+                    type="button"
+                    onClick={() => setSelectedVoltage(v)}
+                    className={cn(
+                      "rounded-xs border px-3 py-2 text-xs font-mono uppercase tracking-techno transition-colors",
+                      selectedVoltage === v
+                        ? "border-signal/40 bg-signal-soft text-signal"
+                        : "border-black/10 text-steel-300 hover:text-surface",
+                    )}
+                  >
+                    {v}
+                  </button>
+                ))}
+              </div>
+              {!selectedVoltage && (
+                <p className="mt-2 text-xs text-steel-400">
+                  Esta referencia se pide especificando el voltaje — elegí una opción o indicalo al cotizar.
+                </p>
+              )}
+            </div>
+          )}
+
           <div className="border border-black/10">
             <div className="border-b border-black/10 bg-carbon-800 px-4 py-2.5">
               <span className="eyebrow">Especificaciones</span>
@@ -121,7 +167,7 @@ export function ReferenceDetailPanel({
 
           <div className="flex flex-col gap-2 sm:flex-row">
             <a
-              href={whatsappQuoteRequest([{ name: waName, quantity: 1 }])}
+              href={whatsappQuoteRequest([{ name: waNameWithVoltage, quantity: 1 }])}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary flex-1 justify-center bg-[#25D366] hover:bg-[#1ebe57] border-[#25D366] hover:border-[#1ebe57]"

@@ -163,12 +163,37 @@ export const TABLE_CATEGORIES: Record<
       { key: "carrera", label: "Carrera" },
     ],
   },
+  // Mismo patrón de filtros ricos que SMC/MAC. "voltaje" puede ser un valor fijo, "No
+  // aplica" (válvulas mecánicas/manuales, sin solenoide) o "Seleccionar voltaje" cuando el
+  // Part Number se pide especificando el voltaje entre varias opciones — en ese caso las
+  // opciones reales viven en voltajes_disponibles y se eligen en la ficha (ReferenceDetailPanel).
   "valvulas-neumaticas": {
     holderSlug: "valvulas-neumaticas-emc",
     specsKey: "valvulas",
-    columns: [{ key: "descripcion", label: "Disponibilidad" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo o tipo de válvula...",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "tipo", label: "Tipo" },
+      { key: "configuracion", label: "Configuración" },
+      { key: "conexion", label: "Conexión" },
+      { key: "rosca", label: "Rosca" },
+      { key: "voltaje", label: "Voltaje" },
+      { key: "accionamiento", label: "Accionamiento" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: [
+      "modelo", "serie", "tipo", "configuracion", "accionamiento", "conexion", "rosca",
+      "voltaje", "voltajes_disponibles", "descripcion",
+    ],
+    searchPlaceholder: "Buscar por Part Number, tipo, conexión o voltaje...",
+    filters: [
+      { key: "tipo", label: "Tipo" },
+      { key: "accionamiento", label: "Accionamiento" },
+      { key: "configuracion", label: "Configuración" },
+      { key: "conexion", label: "Conexión" },
+      { key: "rosca", label: "Rosca" },
+      { key: "voltaje", label: "Voltaje" },
+    ],
+    showStock: false,
   },
   "bases-para-fusibles": {
     holderSlug: "bases-para-fusibles",

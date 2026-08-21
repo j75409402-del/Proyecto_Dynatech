@@ -61,6 +61,16 @@ export function ReferenceTable({
     return Array.from(new Set(rows.map((r) => r[filterKey]))).sort();
   }, [rows, filterKey]);
 
+  // Coincidencia por inclusión (no igualdad estricta): una fila cuyo campo lista varias
+  // opciones separadas por coma (ej. voltaje = "220 VAC, 110 VAC, 24 VAC, 12 VDC, 24 VDC"
+  // para una electroválvula que se pide especificando el voltaje al cotizar) también debe
+  // aparecer cuando el cliente filtra por cualquiera de esas opciones individuales — no
+  // solo cuando el campo es un valor único idéntico al chip.
+  const rowMatchesFilterValue = (row: ReferenceTableRow, key: string, value: string) => {
+    const cell = row[key];
+    return typeof cell === "string" && cell.includes(value);
+  };
+
   // Las opciones de cada grupo de filtro se calculan sobre las filas que ya cumplen los
   // DEMÁS filtros activos (no el propio) — así un chip nunca ofrece una combinación que
   // no existe realmente entre las referencias visibles (ej. elegir Tipo=3/2 oculta los
@@ -73,7 +83,7 @@ export function ReferenceTable({
           filters.every((other) => {
             if (other.key === f.key) return true;
             const v = filterValues[other.key];
-            return !v || v === "todos" || r[other.key] === v;
+            return !v || v === "todos" || rowMatchesFilterValue(r, other.key, v);
           }),
         );
         const options = Array.from(new Set(rowsForThisFilter.map((r) => r[f.key]).filter(Boolean))).sort();
@@ -92,7 +102,8 @@ export function ReferenceTable({
         words.every((w) => searchKeys.some((key) => r[key]?.toLowerCase().includes(w)));
       const matchesFilter = !filterKey || filterValue === "todos" || r[filterKey] === filterValue;
       const matchesMultiFilters =
-        !filters || filters.every((f) => !filterValues[f.key] || filterValues[f.key] === "todos" || r[f.key] === filterValues[f.key]);
+        !filters ||
+        filters.every((f) => !filterValues[f.key] || filterValues[f.key] === "todos" || rowMatchesFilterValue(r, f.key, filterValues[f.key]));
       return matchesQuery && matchesFilter && matchesMultiFilters;
     });
   }, [rows, query, searchKeys, filterKey, filterValue, filters, filterValues]);
