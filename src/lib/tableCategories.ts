@@ -224,13 +224,6 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
   },
-  "llaves-paso-neumaticas": {
-    holderSlug: "llaves-paso-neumaticas",
-    specsKey: "llavesPaso",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
-  },
   "uniones-manguera": {
     holderSlug: "uniones-manguera",
     specsKey: "unionesManguera",

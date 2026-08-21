@@ -129,6 +129,9 @@ const nextConfig = {
       { source: "/productos/bulkhead-smc", destination: "/productos/bulkhead-neumatico", permanent: true },
       { source: "/categorias/codos-manguera", destination: "/categorias/codos-neumaticos", permanent: true },
       { source: "/productos/codos-manguera", destination: "/productos/codos-neumaticos", permanent: true },
+      // "Llaves de Paso" se eliminó por completo (pedido explícito del cliente, hard delete).
+      { source: "/categorias/llaves-paso-neumaticas", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/llaves-paso-neumaticas", destination: "/categorias/fittings-neumaticos", permanent: true },
     ];
   },
 };
