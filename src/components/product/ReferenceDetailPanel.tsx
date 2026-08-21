@@ -12,15 +12,30 @@ const LABELS: Record<string, string> = {
   marca: "Marca",
   descripcion: "Descripción",
   tipo: "Tipo",
+  tipo_mac: "Tipo técnico (MAC)",
+  serie: "Serie",
   conexion: "Conexión",
+  rosca: "Rosca",
   voltaje: "Voltaje",
+  frecuencia: "Frecuencia",
+  potencia: "Potencia",
   configuracion: "Configuración",
+  centro: "Centro",
+  accionamiento: "Accionamiento",
+  pilotaje: "Pilotaje",
+  retorno: "Retorno",
+  operador_manual: "Operador manual",
+  conexion_electrica: "Conexión eléctrica",
+  montaje: "Montaje",
+  presion: "Presión de trabajo",
+  caudal: "Caudal / Cv",
+  puerto_piloto: "Puerto piloto",
   diametro: "Diámetro",
   carrera: "Carrera",
   amperaje: "Amperaje",
   capacidad: "Capacidad",
-  potencia: "Potencia",
   medida: "Medida",
+  estado: "Estado del dato",
 };
 
 function labelFor(key: string): string {
@@ -104,15 +119,23 @@ export function ReferenceDetailPanel({
             </div>
           )}
 
-          <a
-            href={whatsappQuoteRequest([{ name: waName, quantity: 1 }])}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary w-full justify-center bg-[#25D366] hover:bg-[#1ebe57] border-[#25D366] hover:border-[#1ebe57]"
-          >
-            <WhatsAppIcon className="h-4 w-4" />
-            Cotizar por WhatsApp
-          </a>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <a
+              href={whatsappQuoteRequest([{ name: waName, quantity: 1 }])}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary flex-1 justify-center bg-[#25D366] hover:bg-[#1ebe57] border-[#25D366] hover:border-[#1ebe57]"
+            >
+              <WhatsAppIcon className="h-4 w-4" />
+              Cotizar por WhatsApp
+            </a>
+            <Link href="/cotizacion" className="btn-secondary flex-1 justify-center">
+              Solicitar cotización
+            </Link>
+          </div>
+          <button type="button" onClick={onClose} className="text-sm text-steel-400 hover:text-surface underline">
+            Volver al catálogo
+          </button>
 
           {relatedProducts && relatedProducts.length > 0 && (
             <div>

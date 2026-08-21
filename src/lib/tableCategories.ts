@@ -345,19 +345,30 @@ export const TABLE_CATEGORIES: Record<
     ],
     showStock: false,
   },
+  // Mismo patrón de filtros ricos que valvulas-neumaticas-smc — Tipo aquí es la clasificación
+  // COMERCIAL de Dynatech (3/2, 5/2, 5/3, Otras); la nomenclatura técnica MAC (4/2, 4/3, etc.)
+  // vive en tipo_mac y se muestra solo en la ficha, nunca en la tabla/filtro.
   "valvulas-neumaticas-mac": {
     holderSlug: "valvulas-neumaticas-mac",
     specsKey: "macValvulas",
     columns: [
       { key: "modelo", label: "Modelo" },
       { key: "tipo", label: "Tipo" },
-      { key: "conexion", label: "Conexión" },
-      { key: "voltaje", label: "Voltaje" },
       { key: "configuracion", label: "Configuración" },
+      { key: "conexion", label: "Conexión" },
+      { key: "rosca", label: "Rosca" },
+      { key: "voltaje", label: "Voltaje" },
+      { key: "descripcion", label: "Descripción" },
     ],
-    searchKeys: ["modelo", "tipo", "conexion", "voltaje"],
-    searchPlaceholder: "Buscar por modelo, conexión o voltaje...",
-    filterKey: "tipo",
+    searchKeys: ["modelo", "serie", "tipo", "configuracion", "conexion", "voltaje", "descripcion"],
+    searchPlaceholder: "Buscar por Part Number, conexión o voltaje...",
+    filters: [
+      { key: "tipo", label: "Tipo" },
+      { key: "configuracion", label: "Configuración" },
+      { key: "conexion", label: "Conexión" },
+      { key: "rosca", label: "Rosca" },
+      { key: "voltaje", label: "Voltaje" },
+    ],
     showStock: false,
   },
   "conectores-industriales": {
