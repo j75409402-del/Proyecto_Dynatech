@@ -61,17 +61,35 @@ export function ReferenceTable({
     return Array.from(new Set(rows.map((r) => r[filterKey]))).sort();
   }, [rows, filterKey]);
 
+  // Las opciones de cada grupo de filtro se calculan sobre las filas que ya cumplen los
+  // DEMÁS filtros activos (no el propio) — así un chip nunca ofrece una combinación que
+  // no existe realmente entre las referencias visibles (ej. elegir Tipo=3/2 oculta los
+  // voltajes que solo existen en válvulas 5/3).
   const multiFilterOptions = useMemo(() => {
     if (!filters) return {};
     return Object.fromEntries(
-      filters.map((f) => [f.key, Array.from(new Set(rows.map((r) => r[f.key]).filter(Boolean))).sort()]),
+      filters.map((f) => {
+        const rowsForThisFilter = rows.filter((r) =>
+          filters.every((other) => {
+            if (other.key === f.key) return true;
+            const v = filterValues[other.key];
+            return !v || v === "todos" || r[other.key] === v;
+          }),
+        );
+        const options = Array.from(new Set(rowsForThisFilter.map((r) => r[f.key]).filter(Boolean))).sort();
+        return [f.key, options];
+      }),
     );
-  }, [rows, filters]);
+  }, [rows, filters, filterValues]);
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    // Palabras sueltas (ej. "5/2 24V 1/4") — cada una debe aparecer en algún campo
+    // buscable de la fila, en vez de exigir la frase completa como substring exacto.
+    const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
     return rows.filter((r) => {
-      const matchesQuery = !q || searchKeys.some((key) => r[key]?.toLowerCase().includes(q));
+      const matchesQuery =
+        words.length === 0 ||
+        words.every((w) => searchKeys.some((key) => r[key]?.toLowerCase().includes(w)));
       const matchesFilter = !filterKey || filterValue === "todos" || r[filterKey] === filterValue;
       const matchesMultiFilters =
         !filters || filters.every((f) => !filterValues[f.key] || filterValues[f.key] === "todos" || r[f.key] === filterValues[f.key]);

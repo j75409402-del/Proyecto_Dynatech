@@ -319,12 +319,30 @@ export const TABLE_CATEGORIES: Record<
     ],
     showStock: false,
   },
+  // Datos técnicos ricos (marca/serie/tipo/configuración/conexión/rosca/voltaje/etc.) para
+  // las 16 válvulas direccionales verificadas por el cliente — el resto de filas antiguas
+  // (sin esos campos) sigue mostrando solo su descripción, retrocompatible.
   "valvulas-neumaticas-smc": {
     holderSlug: "valvulas-neumaticas-smc",
     specsKey: "smcValvulas",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "tipo", label: "Tipo" },
+      { key: "configuracion", label: "Configuración" },
+      { key: "conexion", label: "Conexión" },
+      { key: "rosca", label: "Rosca" },
+      { key: "voltaje", label: "Voltaje" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "serie", "tipo", "configuracion", "accionamiento", "conexion", "voltaje", "descripcion"],
+    searchPlaceholder: "Buscar por Part Number, tipo, conexión o voltaje...",
+    filters: [
+      { key: "tipo", label: "Tipo" },
+      { key: "configuracion", label: "Configuración" },
+      { key: "conexion", label: "Conexión" },
+      { key: "rosca", label: "Rosca" },
+      { key: "voltaje", label: "Voltaje" },
+    ],
     showStock: false,
   },
   "valvulas-neumaticas-mac": {
@@ -443,6 +461,28 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Descripción" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo...",
+  },
+  // No se trata como válvula individual — es la base/manifold para montar varias válvulas.
+  "manifold-smc": {
+    holderSlug: "manifold-smc",
+    specsKey: "manifoldSmc",
+    columns: [{ key: "modelo", label: "Modelo" }, { key: "tipo", label: "Tipo" }],
+    searchKeys: ["modelo", "tipo", "descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "valvulas-descarga-rapida-smc": {
+    holderSlug: "valvulas-descarga-rapida-smc",
+    specsKey: "descargaRapidaSmc",
+    columns: [{ key: "modelo", label: "Modelo" }, { key: "conexion", label: "Conexión" }],
+    searchKeys: ["modelo", "conexion", "descripcion"],
+    searchPlaceholder: "Buscar por modelo o conexión...",
+  },
+  "cheque-neumatico-smc": {
+    holderSlug: "cheque-neumatico-smc",
+    specsKey: "chequeNeumaticoSmc",
+    columns: [{ key: "modelo", label: "Modelo" }, { key: "conexion", label: "Conexión" }],
+    searchKeys: ["modelo", "conexion", "descripcion"],
+    searchPlaceholder: "Buscar por modelo o conexión...",
   },
 };
 
