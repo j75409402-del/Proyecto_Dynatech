@@ -132,6 +132,12 @@ const nextConfig = {
       // "Llaves de Paso" se eliminó por completo (pedido explícito del cliente, hard delete).
       { source: "/categorias/llaves-paso-neumaticas", destination: "/categorias/fittings-neumaticos", permanent: true },
       { source: "/productos/llaves-paso-neumaticas", destination: "/categorias/fittings-neumaticos", permanent: true },
+      // "Herramientas y Software IFM" y "Adaptadores IFM" se eliminaron por completo
+      // (pedido explícito del cliente, hard delete).
+      { source: "/categorias/herramientas-software-ifm", destination: "/categorias/accesorios-sensores", permanent: true },
+      { source: "/productos/herramientas-software-ifm", destination: "/categorias/accesorios-sensores", permanent: true },
+      { source: "/categorias/adaptadores-ifm", destination: "/categorias/accesorios-sensores", permanent: true },
+      { source: "/productos/adaptadores-ifm", destination: "/categorias/accesorios-sensores", permanent: true },
     ];
   },
 };

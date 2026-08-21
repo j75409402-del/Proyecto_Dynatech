@@ -496,20 +496,6 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo...",
   },
-  "herramientas-software-ifm": {
-    holderSlug: "herramientas-software-ifm",
-    specsKey: "herramientasSoftwareIfm",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
-  "adaptadores-ifm": {
-    holderSlug: "adaptadores-ifm",
-    specsKey: "adaptadoresIfm",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
   // No se trata como válvula individual — es la base/manifold para montar varias válvulas.
   "manifold-smc": {
     holderSlug: "manifold-smc",
