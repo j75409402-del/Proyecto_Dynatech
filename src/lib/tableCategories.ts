@@ -482,9 +482,18 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo...",
   },
+  // El amplificador (único, "AMPLIFICADOR IFM 2 CH...") se separó a su propia categoría
+  // "amplificadores-ifm" — acá solo quedan los módulos (IO-Link, display, convertidor).
   "modulos-amplificadores-ifm": {
     holderSlug: "modulos-amplificadores-ifm",
-    specsKey: "modulosAmplificadoresIfm",
+    specsKey: "modulosIfm",
+    columns: [{ key: "descripcion", label: "Descripción" }],
+    searchKeys: ["descripcion"],
+    searchPlaceholder: "Buscar por modelo...",
+  },
+  "amplificadores-ifm": {
+    holderSlug: "amplificadores-ifm",
+    specsKey: "amplificadoresIfm",
     columns: [{ key: "descripcion", label: "Descripción" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo...",
