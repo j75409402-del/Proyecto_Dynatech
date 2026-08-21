@@ -109,6 +109,20 @@ export const TABLE_CATEGORIES: Record<
     searchPlaceholder: "Buscar por modelo, tipo o descripción...",
     filters: [{ key: "tipo", label: "Tipo" }],
   },
+  // Mismo criterio: Inductivos IFM + Capacitivos IFM + Fotoeléctricos IFM (antes 3
+  // categorías separadas, cada una con solo el producto IFM tras sacar el Autonics)
+  // se unificaron en una sola categoría/tabla "Sensores IFM".
+  "sensores-ifm": {
+    holderSlug: "sensores-ifm",
+    specsKey: "sensoresIfm",
+    columns: [
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["descripcion", "tipo"],
+    searchPlaceholder: "Buscar por tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
   "cilindros-neumaticos-bimba": {
     holderSlug: "cilindros-neumaticos-bimba",
     specsKey: "bimba",

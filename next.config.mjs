@@ -145,6 +145,14 @@ const nextConfig = {
       { source: "/productos/sensores-inductivos-autonics", destination: "/categorias/sensores-autonics", permanent: true },
       { source: "/productos/sensores-capacitivos-autonics", destination: "/categorias/sensores-autonics", permanent: true },
       { source: "/productos/sensores-fotoelectricos-autonics", destination: "/categorias/sensores-autonics", permanent: true },
+      // Inductivos IFM, Capacitivos IFM y Fotoeléctricos IFM (categorías, ya sin el Autonics
+      // adentro) se unificaron en "Sensores IFM" (un solo tile, un solo listado por tipo).
+      { source: "/categorias/sensores-inductivos", destination: "/categorias/sensores-ifm", permanent: true },
+      { source: "/categorias/sensores-capacitivos", destination: "/categorias/sensores-ifm", permanent: true },
+      { source: "/categorias/sensores-fotoelectricos", destination: "/categorias/sensores-ifm", permanent: true },
+      { source: "/productos/sensores-inductivos-ifm", destination: "/categorias/sensores-ifm", permanent: true },
+      { source: "/productos/sensores-capacitivos-ifm", destination: "/categorias/sensores-ifm", permanent: true },
+      { source: "/productos/sensores-fotoelectricos-ifm", destination: "/categorias/sensores-ifm", permanent: true },
     ];
   },
 };
