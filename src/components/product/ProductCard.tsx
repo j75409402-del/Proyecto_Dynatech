@@ -22,7 +22,7 @@ function quickSpecs(specs: ProductWithRelations["specs"]): [string, string][] {
     });
 }
 
-// Orden fijo de la tarjeta (no cambiar): Stock -> Imagen -> Nombre ->
+// Orden fijo de la tarjeta (no cambiar): Stock -> Imagen -> Categoría -> Nombre ->
 // Descripción -> Especificaciones rápidas -> Ver detalles -> Agregar al carrito.
 export function ProductCard({ product, className }: Props) {
   const specs = quickSpecs(product.specs);
@@ -75,6 +75,11 @@ export function ProductCard({ product, className }: Props) {
 
           {/* Nombre, descripción, specs rápidas */}
           <div className="p-4 flex-1 flex flex-col">
+            {product.category?.name && (
+              <span className="font-mono text-[9px] uppercase tracking-techno text-steel-500 mb-1">
+                {product.category.name}
+              </span>
+            )}
             <h3 className="font-display text-sm text-surface leading-snug mb-1.5 line-clamp-2 group-hover:text-signal transition-colors">
               {product.name}
             </h3>

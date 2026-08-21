@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { SlidersHorizontal, X } from "lucide-react";
 import { ProductFilters } from "./ProductFilters";
 import type { Category } from "@/types";
+import type { CatalogFilterGroup } from "@/lib/catalogFilters";
 
 type Props = {
   categories: Category[];
   categoryCounts: Record<string, number>;
   totalCount: number;
+  filterGroups?: CatalogFilterGroup[];
 };
 
 export function MobileFilters(props: Props) {

@@ -12,14 +12,19 @@ export async function GET(req: Request) {
 
   const supabase = await createClient();
   const qLower = q.toLowerCase();
+  // Palabras sueltas (ej. "sensor inductivo") — cada una debe aparecer en alguna
+  // columna buscable, en vez de exigir la frase completa como substring exacto.
+  const words = q.split(/\s+/).filter((w) => w.length >= 2);
+
+  let searchQuery = supabase.from("products").select(SELECT).eq("active", true);
+  for (const word of words.length > 0 ? words : [q]) {
+    searchQuery = searchQuery.or(
+      `name.ilike.%${word}%,sku.ilike.%${word}%,search_tags.ilike.%${word}%`,
+    );
+  }
 
   const [{ data: textMatches }, { data: allCategories }] = await Promise.all([
-    supabase
-      .from("products")
-      .select(SELECT)
-      .eq("active", true)
-      .or(`name.ilike.%${q}%,sku.ilike.%${q}%,search_tags.ilike.%${q}%`)
-      .limit(6),
+    searchQuery.limit(6),
     supabase.from("categories").select("id, parent_id, name"),
   ]);
 

@@ -6,6 +6,8 @@ import { MobileFilters } from "@/components/product/MobileFilters";
 import { Reveal } from "@/components/motion/Reveal";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { computeCatalogCounts } from "@/lib/catalogCounts";
+import { computeCatalogFilterGroups, productMatchesCatalogFilters } from "@/lib/catalogFilters";
+import { whatsappImportRequest } from "@/lib/whatsapp";
 import type { ProductWithRelations, Category } from "@/types";
 
 export const metadata: Metadata = {
@@ -13,7 +15,7 @@ export const metadata: Metadata = {
   description: "Explora el catálogo completo de piezas industriales de Dynatech: neumática, eléctrica industrial, sensores e instrumentación.",
 };
 
-type SearchParams = Promise<{ categoria?: string; q?: string }>;
+type SearchParams = Promise<{ categoria?: string; q?: string; [key: string]: string | undefined }>;
 
 export default async function ProductosPage({
   searchParams,
@@ -28,10 +30,7 @@ export default async function ProductosPage({
   const { data: allCategories } = await supabase.from("categories").select("*");
 
   // Filtros dinámicos
-  let query = supabase
-    .from("products")
-    .select("*, category:categories(*)", { count: "exact" })
-    .eq("active", true);
+  let query = supabase.from("products").select("*, category:categories(*)").eq("active", true);
 
   if (params.categoria) {
     // Resolvemos la categoría por slug e incluimos TODOS sus descendientes (no solo un nivel),
@@ -71,18 +70,25 @@ export default async function ProductosPage({
       }
     }
 
-    const orParts = [
-      `name.ilike.%${params.q}%`,
-      `sku.ilike.%${params.q}%`,
-      `search_tags.ilike.%${params.q}%`,
-    ];
+    // Palabras sueltas (ej. "sensor inductivo") — cada una debe aparecer en alguna
+    // columna buscable (AND entre palabras), en vez de exigir la frase completa
+    // como substring exacto. La coincidencia por categoría sigue siendo una
+    // alternativa independiente (OR), no una condición adicional sobre el texto.
+    const words = params.q.split(/\s+/).filter((w) => w.length >= 2);
+    const terms = words.length > 0 ? words : [params.q];
+    const wordClauses = terms.map(
+      (word) => `or(name.ilike.%${word}%,sku.ilike.%${word}%,search_tags.ilike.%${word}%)`,
+    );
+    const textClause = terms.length > 1 ? `and(${wordClauses.join(",")})` : wordClauses[0];
+
+    const orParts = [textClause];
     if (matchedCatIds.size > 0) {
       orParts.push(`category_id.in.(${Array.from(matchedCatIds).join(",")})`);
     }
     query = query.or(orParts.join(","));
   }
 
-  const [{ data: products, count }, categoriesRes, allActiveRes] = await Promise.all([
+  const [{ data: products }, categoriesRes, allActiveRes] = await Promise.all([
     query.order("featured", { ascending: false }).order("created_at", { ascending: false }).limit(60),
     supabase.from("categories").select("*").is("parent_id", null).order("sort_order"),
     supabase.from("products").select("category_id").eq("active", true),
@@ -94,6 +100,18 @@ export default async function ProductosPage({
     ? (allCategories ?? []).find((c) => c.slug === params.categoria)
     : null;
 
+  // Filtros técnicos (Diámetro, Carrera, Marca, Tipo...) — solo aparecen cuando las familias
+  // listadas ya traen esos campos estructurados (ver src/lib/catalogFilters.ts). Se calculan
+  // sobre el resultado de categoría/búsqueda ANTES de aplicarlos, para que las opciones no
+  // desaparezcan al seleccionar una de ellas.
+  const preFilterProducts = (products as ProductWithRelations[]) ?? [];
+  const filterGroups = computeCatalogFilterGroups(preFilterProducts);
+  const selectedFilters = Object.fromEntries(filterGroups.map((g) => [g.key, params[g.key]]));
+  const hasActiveTechFilters = Object.values(selectedFilters).some(Boolean);
+  const filteredProducts = hasActiveTechFilters
+    ? preFilterProducts.filter((p) => productMatchesCatalogFilters(p, selectedFilters))
+    : preFilterProducts;
+
   // Agrupamos por familia (categoría raíz) cuando se ve el catálogo completo sin filtrar,
   // y por subcategoría cuando el filtro activo es una categoría raíz (ej. "Neumática") —
   // en ese caso el listado sigue teniendo decenas de productos de familias distintas
@@ -102,13 +120,9 @@ export default async function ProductosPage({
   const showGroupedByRoot = !params.categoria && !params.q;
   const showGroupedBySubcategory = !!activeCategory && !activeCategory.parent_id && !params.q;
   const groups = showGroupedByRoot
-    ? groupByTopLevelCategory(
-        (products as ProductWithRelations[]) ?? [],
-        categoriesRes.data ?? [],
-        allCategories ?? [],
-      )
+    ? groupByTopLevelCategory(filteredProducts, categoriesRes.data ?? [], allCategories ?? [])
     : showGroupedBySubcategory
-      ? groupBySubcategory((products as ProductWithRelations[]) ?? [])
+      ? groupBySubcategory(filteredProducts)
       : null;
 
   return (
@@ -132,7 +146,7 @@ export default async function ProductosPage({
           </p>
         </div>
         <div className="font-mono text-xs uppercase tracking-techno text-steel-400 shrink-0">
-          {count ?? 0} {count === 1 ? "producto" : "productos"}
+          {filteredProducts.length} {filteredProducts.length === 1 ? "producto" : "productos"}
         </div>
       </div>
 
@@ -140,6 +154,7 @@ export default async function ProductosPage({
         categories={categoriesRes.data ?? []}
         categoryCounts={Object.fromEntries(categoryCounts)}
         totalCount={allActiveRes.data?.length ?? 0}
+        filterGroups={filterGroups}
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-8 xl:gap-10">
@@ -149,12 +164,13 @@ export default async function ProductosPage({
             categories={categoriesRes.data ?? []}
             categoryCounts={Object.fromEntries(categoryCounts)}
             totalCount={allActiveRes.data?.length ?? 0}
+            filterGroups={filterGroups}
           />
         </div>
 
         {/* Grid */}
         <div className="min-w-0">
-          {!products || products.length === 0 ? (
+          {filteredProducts.length === 0 ? (
             <EmptyState />
           ) : groups ? (
             <div className="space-y-14">
@@ -171,7 +187,7 @@ export default async function ProductosPage({
               ))}
             </div>
           ) : (
-            <ProductGrid products={products as ProductWithRelations[]} />
+            <ProductGrid products={filteredProducts} />
           )}
         </div>
       </div>
@@ -268,6 +284,10 @@ function EmptyState() {
       </h2>
       <p className="text-steel-300 max-w-md mx-auto">
         Prueba con menos filtros, o cuéntanos qué necesitas por{" "}
+        <a href={whatsappImportRequest()} target="_blank" rel="noopener noreferrer" className="text-signal hover:underline">
+          WhatsApp
+        </a>{" "}
+        o por{" "}
         <a href="/cotizacion" className="text-signal hover:underline">
           formulario de cotización
         </a>{" "}

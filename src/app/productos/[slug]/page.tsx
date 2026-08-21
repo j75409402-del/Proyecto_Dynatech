@@ -115,6 +115,9 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
   // Referencia del fabricante, cuando el producto la muestra explícitamente en vez de "Marca"
   // (pedido explícito: no crear un campo "Marca" para productos sin marca asociada).
   const referencia = specs?.["Referencia"];
+  // Solo se muestra cuando el producto ya trae este dato cargado — no se inventa texto
+  // genérico de "aplicaciones" para productos que no lo tienen.
+  const aplicaciones = specs?.["Aplicaciones"];
   // Productos que además de su ficha muestran la tabla completa de referencias/stock
   // (Resistencias, Autonics, Bimba) — mismo dato que /categorias/[slug] pero acá acompañado
   // de galería, WhatsApp, etc.
@@ -291,6 +294,15 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                     <p className="text-sm text-steel-400">Sin especificaciones cargadas para este producto.</p>
                   ),
               },
+              ...(aplicaciones
+                ? [
+                    {
+                      id: "aplicaciones",
+                      label: "Aplicaciones",
+                      content: <p className="text-sm text-steel-300 leading-relaxed">{aplicaciones}</p>,
+                    },
+                  ]
+                : []),
               ...(product.datasheet_url
                 ? [
                     {
