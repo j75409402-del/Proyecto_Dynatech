@@ -138,6 +138,13 @@ const nextConfig = {
       { source: "/productos/herramientas-software-ifm", destination: "/categorias/accesorios-sensores", permanent: true },
       { source: "/categorias/adaptadores-ifm", destination: "/categorias/accesorios-sensores", permanent: true },
       { source: "/productos/adaptadores-ifm", destination: "/categorias/accesorios-sensores", permanent: true },
+      // Inductivos, Capacitivos, Fotoeléctricos y Amplificadores Autonics se unificaron en
+      // "Sensores Autonics" (un solo tile, un solo listado con separador por tipo).
+      { source: "/categorias/amplificadores-autonics", destination: "/categorias/sensores-autonics", permanent: true },
+      { source: "/productos/amplificadores-autonics", destination: "/categorias/sensores-autonics", permanent: true },
+      { source: "/productos/sensores-inductivos-autonics", destination: "/categorias/sensores-autonics", permanent: true },
+      { source: "/productos/sensores-capacitivos-autonics", destination: "/categorias/sensores-autonics", permanent: true },
+      { source: "/productos/sensores-fotoelectricos-autonics", destination: "/categorias/sensores-autonics", permanent: true },
     ];
   },
 };

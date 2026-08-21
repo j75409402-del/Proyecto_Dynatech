@@ -92,47 +92,22 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["modelo", "descripcion"],
     searchPlaceholder: "Buscar por color o tipo...",
   },
-  "sensores-inductivos": {
-    holderSlug: "sensores-inductivos-autonics",
-    specsKey: "sensoresInductivos",
+  // Inductivos, Capacitivos, Fotoeléctricos y Amplificadores Autonics se unificaron en una
+  // sola categoría/tabla "Sensores Autonics" (pedido del cliente: un solo tile, un solo
+  // listado). Las categorías "sensores-inductivos/capacitivos/fotoelectricos" siguen
+  // existiendo pero ahora solo contienen su producto IFM (sin entrada acá, cae al
+  // render genérico de categoría hoja).
+  "sensores-autonics": {
+    holderSlug: "sensores-autonics",
+    specsKey: "sensoresAutonics",
     columns: [
       { key: "modelo", label: "Modelo" },
+      { key: "tipo", label: "Tipo" },
       { key: "descripcion", label: "Descripción" },
     ],
-    searchKeys: ["modelo", "descripcion"],
-    searchPlaceholder: "Buscar por modelo o descripción...",
-  },
-  "sensores-capacitivos": {
-    holderSlug: "sensores-capacitivos-autonics",
-    specsKey: "sensoresCapacitivos",
-    columns: [
-      { key: "modelo", label: "Modelo" },
-      { key: "descripcion", label: "Descripción" },
-    ],
-    searchKeys: ["modelo", "descripcion"],
-    searchPlaceholder: "Buscar por modelo o descripción...",
-  },
-  "sensores-fotoelectricos": {
-    holderSlug: "sensores-fotoelectricos-autonics",
-    specsKey: "sensoresFotoelectricos",
-    columns: [
-      { key: "modelo", label: "Modelo" },
-      { key: "descripcion", label: "Descripción" },
-    ],
-    searchKeys: ["modelo", "descripcion"],
-    searchPlaceholder: "Buscar por modelo o descripción...",
-  },
-  // PA12 (amplificador) se sacó de Sensores Fotoeléctricos — no es un sensor, es un módulo
-  // accesorio. Queda junto a las demás categorías de accesorios de sensores.
-  "amplificadores-autonics": {
-    holderSlug: "amplificadores-autonics",
-    specsKey: "amplificadoresAutonics",
-    columns: [
-      { key: "modelo", label: "Modelo" },
-      { key: "descripcion", label: "Descripción" },
-    ],
-    searchKeys: ["modelo", "descripcion"],
-    searchPlaceholder: "Buscar por modelo o descripción...",
+    searchKeys: ["modelo", "descripcion", "tipo"],
+    searchPlaceholder: "Buscar por modelo, tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
   },
   "cilindros-neumaticos-bimba": {
     holderSlug: "cilindros-neumaticos-bimba",

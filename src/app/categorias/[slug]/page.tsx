@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -28,16 +27,6 @@ function sortByFeaturedThenName<T extends { featured: boolean | null; name: stri
     return a.name.localeCompare(b.name, "es");
   });
 }
-
-// Subcategorías cuyo contenido es 100% marca Autonics — se agrupan primero y con
-// separador visual dentro de "Sensores y Fotoceldas" (pedido explícito del cliente:
-// que los productos Autonics queden juntos, sin mezclarse con otras marcas como IFM).
-const AUTONICS_CATEGORY_SLUGS = new Set([
-  "sensores-inductivos",
-  "sensores-capacitivos",
-  "sensores-fotoelectricos",
-  "amplificadores-autonics",
-]);
 
 // Bloque CTA opcional al final de una categoría con subcategorías (ej. Fusibles).
 const CATEGORY_CTA_BLOCKS: Record<
@@ -125,27 +114,12 @@ export default async function CategoryPage({ params }: { params: Params }) {
           </div>
         ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {visibleSubcategories.map((sub, i) => {
+          {visibleSubcategories.map((sub) => {
             const count = categoryCounts.get(sub.id) ?? 0;
-            // Separador de marca: solo aparece si el listado realmente mezcla Autonics
-            // con otras marcas (si todo es Autonics, o nada lo es, no hace falta dividir).
-            const isAutonics = AUTONICS_CATEGORY_SLUGS.has(sub.slug);
-            const prevIsAutonics = i > 0 ? AUTONICS_CATEGORY_SLUGS.has(visibleSubcategories[i - 1].slug) : null;
-            const hasMixedBrands = visibleSubcategories.some((s) => AUTONICS_CATEGORY_SLUGS.has(s.slug)) &&
-              visibleSubcategories.some((s) => !AUTONICS_CATEGORY_SLUGS.has(s.slug));
-            const showDivider = hasMixedBrands && (i === 0 || isAutonics !== prevIsAutonics);
             return (
-              <Fragment key={sub.id}>
-                {showDivider && (
-                  <div className="col-span-full mt-2 first:mt-0 flex items-center gap-3">
-                    <span className="font-mono text-[11px] uppercase tracking-techno text-signal">
-                      {isAutonics ? "Autonics" : "Otras marcas"}
-                    </span>
-                    <span className="h-px flex-1 bg-black/10" />
-                  </div>
-                )}
-                <Link
-                  href={`/categorias/${sub.slug}`}
+              <Link
+                key={sub.id}
+                href={`/categorias/${sub.slug}`}
                 className="group relative flex flex-col border border-black/10 bg-carbon-800
                            hover:border-signal/50 hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)]
                            transition-all duration-300"
@@ -176,7 +150,6 @@ export default async function CategoryPage({ params }: { params: Params }) {
                   <ArrowUpRight className="h-4 w-4 text-steel-500 shrink-0 group-hover:text-signal group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                 </div>
               </Link>
-              </Fragment>
             );
           })}
         </div>
