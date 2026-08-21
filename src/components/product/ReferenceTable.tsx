@@ -61,15 +61,22 @@ export function ReferenceTable({
     return Array.from(new Set(rows.map((r) => r[filterKey]))).sort();
   }, [rows, filterKey]);
 
-  // Coincidencia por inclusión (no igualdad estricta): una fila cuyo campo lista varias
-  // opciones separadas por coma (ej. voltaje = "220 VAC, 110 VAC, 24 VAC, 12 VDC, 24 VDC"
-  // para una electroválvula que se pide especificando el voltaje al cotizar) también debe
-  // aparecer cuando el cliente filtra por cualquiera de esas opciones individuales — no
-  // solo cuando el campo es un valor único idéntico al chip.
-  const rowMatchesFilterValue = (row: ReferenceTableRow, key: string, value: string) => {
-    const cell = row[key];
-    return typeof cell === "string" && cell.includes(value);
+  // Una fila puede no tener un único valor fijo para un campo (ej. una electroválvula que
+  // se pide especificando el voltaje entre varias opciones): en vez de "voltaje" trae
+  // "voltaje_disponibles"/"voltajes_disponibles" con la lista real separada por comas. Esta
+  // función junta ambas fuentes en un solo texto para filtrar y para generar los chips.
+  const filterableText = (row: ReferenceTableRow, key: string): string => {
+    const base = row[key] ?? "";
+    const extra = row[`${key}_disponibles`] ?? row[`${key}s_disponibles`] ?? "";
+    return `${base} ${extra}`;
   };
+
+  // Coincidencia por inclusión (no igualdad estricta): una fila cuyo campo lista varias
+  // opciones separadas por coma también debe aparecer cuando el cliente filtra por
+  // cualquiera de esas opciones individuales — no solo cuando el campo es un valor único
+  // idéntico al chip.
+  const rowMatchesFilterValue = (row: ReferenceTableRow, key: string, value: string) =>
+    filterableText(row, key).includes(value);
 
   // Las opciones de cada grupo de filtro se calculan sobre las filas que ya cumplen los
   // DEMÁS filtros activos (no el propio) — así un chip nunca ofrece una combinación que
@@ -86,7 +93,15 @@ export function ReferenceTable({
             return !v || v === "todos" || rowMatchesFilterValue(r, other.key, v);
           }),
         );
-        const options = Array.from(new Set(rowsForThisFilter.map((r) => r[f.key]).filter(Boolean))).sort();
+        const options = Array.from(
+          new Set(
+            rowsForThisFilter.flatMap((r) => {
+              const extra = r[`${f.key}_disponibles`] ?? r[`${f.key}s_disponibles`];
+              if (extra) return extra.split(",").map((v) => v.trim()).filter(Boolean);
+              return r[f.key] ? [r[f.key]] : [];
+            }),
+          ),
+        ).sort();
         return [f.key, options];
       }),
     );
