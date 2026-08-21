@@ -1,4 +1,4 @@
-import type { ReferenceTableColumn } from "@/components/product/ReferenceTable";
+import type { ReferenceTableColumn, ReferenceTableFilter } from "@/components/product/ReferenceTable";
 
 /**
  * Categorías que además de su ficha de producto normal (galería, WhatsApp, etc.) muestran
@@ -14,6 +14,9 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: string[];
     searchPlaceholder: string;
     filterKey?: string;
+    /** Varios filtros simultáneos (ej. Cilindros: Diámetro + Carrera + Marca). Solo se declara
+     * para categorías cuyas filas ya traen esos campos estructurados. */
+    filters?: ReferenceTableFilter[];
     /** Default false en todo el catálogo (sin excepción): sin columna de stock ni carrito,
      * solo botón único "Consultar disponibilidad" (ver ctaLabel). true = excepción explícita
      * que sí muestra stock real — no usar salvo pedido explícito del cliente. */
@@ -122,9 +125,18 @@ export const TABLE_CATEGORIES: Record<
   "cilindros-neumaticos-bimba": {
     holderSlug: "cilindros-neumaticos-bimba",
     specsKey: "bimba",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
+    columns: [
+      { key: "descripcion", label: "Descripción" },
+      { key: "modelo", label: "Modelo" },
+      { key: "diametro", label: "Diámetro" },
+      { key: "carrera", label: "Carrera" },
+    ],
+    searchKeys: ["descripcion", "modelo"],
     searchPlaceholder: "Buscar por modelo o medida...",
+    filters: [
+      { key: "diametro", label: "Diámetro" },
+      { key: "carrera", label: "Carrera" },
+    ],
   },
   // Los kits de sello/reparación no son cilindros — se separan en su propia subcategoría
   // dentro de Neumática, junto a (no mezclados con) los cilindros.
@@ -138,9 +150,18 @@ export const TABLE_CATEGORIES: Record<
   "cilindros-festo": {
     holderSlug: "cilindros-festo",
     specsKey: "cilindros",
-    columns: [{ key: "descripcion", label: "Disponibilidad" }],
-    searchKeys: ["descripcion"],
+    columns: [
+      { key: "descripcion", label: "Disponibilidad" },
+      { key: "modelo", label: "Modelo" },
+      { key: "diametro", label: "Diámetro" },
+      { key: "carrera", label: "Carrera" },
+    ],
+    searchKeys: ["descripcion", "modelo"],
     searchPlaceholder: "Buscar por modelo o referencia...",
+    filters: [
+      { key: "diametro", label: "Diámetro" },
+      { key: "carrera", label: "Carrera" },
+    ],
   },
   "valvulas-neumaticas": {
     holderSlug: "valvulas-neumaticas-emc",
@@ -290,9 +311,18 @@ export const TABLE_CATEGORIES: Record<
   "cilindros-neumaticos-smc": {
     holderSlug: "cilindros-neumaticos-smc",
     specsKey: "smcCilindros",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
+    columns: [
+      { key: "descripcion", label: "Descripción" },
+      { key: "modelo", label: "Modelo" },
+      { key: "diametro", label: "Diámetro" },
+      { key: "carrera", label: "Carrera" },
+    ],
+    searchKeys: ["descripcion", "modelo"],
     searchPlaceholder: "Buscar por modelo o medida...",
+    filters: [
+      { key: "diametro", label: "Diámetro" },
+      { key: "carrera", label: "Carrera" },
+    ],
     showStock: false,
   },
   "valvulas-neumaticas-smc": {

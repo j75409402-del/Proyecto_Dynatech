@@ -4,12 +4,14 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowUp, ArrowUpDown, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ReferenceDetailPanel, type RelatedProductLink } from "./ReferenceDetailPanel";
 
 type SortKey = string | "stock";
 type SortDir = "asc" | "desc";
 
 export type ReferenceTableColumn = { key: string; label: string };
 export type ReferenceTableRow = Record<string, string> & { stock?: number | null };
+export type ReferenceTableFilter = { key: string; label: string };
 
 export function ReferenceTable({
   columns,
@@ -17,36 +19,65 @@ export function ReferenceTable({
   searchKeys,
   searchPlaceholder,
   filterKey,
+  filters,
   showStock = false,
+  familyName,
+  internalCode,
+  datasheetUrl,
+  relatedProducts,
 }: {
   columns: ReferenceTableColumn[];
   rows: ReferenceTableRow[];
   searchKeys: string[];
   searchPlaceholder: string;
-  /** Si se define, agrega chips de filtro de valor único sobre esta columna (ej. "voltaje"). */
+  /** Un solo filtro de valor único sobre esta columna (ej. "voltaje"). Para varios filtros
+   * simultáneos (ej. Cilindros: Diámetro + Carrera + Marca), usar `filters` en su lugar. */
   filterKey?: string;
+  /** Varios grupos de chips de filtro (uno por campo declarado), combinados con AND. Solo se
+   * declara para categorías cuyas filas ya traen esos campos estructurados. */
+  filters?: ReferenceTableFilter[];
   /** Excepción explícita para mostrar stock real — default false en todo el catálogo
    * (pedido del cliente: nunca cantidades, nunca "Agotado", solo "Consultar disponibilidad"). */
   showStock?: boolean;
+  /** Contexto para la ficha expandible por referencia (opcional) — cuando una fila trae
+   * `marca` o `modelo`, gana una acción "Ver ficha" con specs/descargas/relacionados/WhatsApp
+   * de esa referencia puntual, sin crear una URL/página nueva por cada una. */
+  familyName?: string;
+  internalCode?: string | null;
+  datasheetUrl?: string | null;
+  relatedProducts?: RelatedProductLink[];
 }) {
   const [query, setQuery] = useState("");
   const [filterValue, setFilterValue] = useState<string>("todos");
+  const [filterValues, setFilterValues] = useState<Record<string, string>>({});
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [sortDir, setSortDir] = useState<SortDir>("asc");
+  const [detailRow, setDetailRow] = useState<ReferenceTableRow | null>(null);
+
+  const hasDetailData = useMemo(() => rows.some((r) => r.marca || r.modelo), [rows]);
 
   const filterOptions = useMemo(() => {
     if (!filterKey) return [];
     return Array.from(new Set(rows.map((r) => r[filterKey]))).sort();
   }, [rows, filterKey]);
 
+  const multiFilterOptions = useMemo(() => {
+    if (!filters) return {};
+    return Object.fromEntries(
+      filters.map((f) => [f.key, Array.from(new Set(rows.map((r) => r[f.key]).filter(Boolean))).sort()]),
+    );
+  }, [rows, filters]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return rows.filter((r) => {
       const matchesQuery = !q || searchKeys.some((key) => r[key]?.toLowerCase().includes(q));
       const matchesFilter = !filterKey || filterValue === "todos" || r[filterKey] === filterValue;
-      return matchesQuery && matchesFilter;
+      const matchesMultiFilters =
+        !filters || filters.every((f) => !filterValues[f.key] || filterValues[f.key] === "todos" || r[f.key] === filterValues[f.key]);
+      return matchesQuery && matchesFilter && matchesMultiFilters;
     });
-  }, [rows, query, searchKeys, filterKey, filterValue]);
+  }, [rows, query, searchKeys, filterKey, filterValue, filters, filterValues]);
 
   const sorted = useMemo(() => {
     if (!sortKey) return filtered;
@@ -103,6 +134,40 @@ export function ReferenceTable({
         )}
       </div>
 
+      {filters && filters.length > 0 && (
+        <div className="mb-6 flex flex-wrap gap-x-8 gap-y-4">
+          {filters.map((f) => {
+            const options = multiFilterOptions[f.key] ?? [];
+            if (options.length < 2) return null;
+            const active = filterValues[f.key] ?? "todos";
+            return (
+              <div key={f.key}>
+                <div className="mb-1.5 font-mono text-[10px] uppercase tracking-techno text-steel-500">
+                  {f.label}
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  <FilterChip
+                    active={active === "todos"}
+                    onClick={() => setFilterValues((prev) => ({ ...prev, [f.key]: "todos" }))}
+                  >
+                    Todos
+                  </FilterChip>
+                  {options.map((v) => (
+                    <FilterChip
+                      key={v}
+                      active={active === v}
+                      onClick={() => setFilterValues((prev) => ({ ...prev, [f.key]: v }))}
+                    >
+                      {v}
+                    </FilterChip>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
       <div className="overflow-x-auto border border-black/10 bg-carbon-800">
         <table className="w-full min-w-[560px] border-collapse text-sm">
           <thead>
@@ -121,6 +186,7 @@ export function ReferenceTable({
                   </span>
                 </th>
               )}
+              {hasDetailData && <th className="px-4 py-3 text-left" />}
             </tr>
           </thead>
           <tbody>
@@ -148,11 +214,27 @@ export function ReferenceTable({
                     </span>
                   </td>
                 )}
+                {hasDetailData && (
+                  <td className="px-4 py-3 text-right">
+                    {(r.marca || r.modelo) && (
+                      <button
+                        type="button"
+                        onClick={() => setDetailRow(r)}
+                        className="font-mono text-[11px] uppercase tracking-techno text-signal hover:underline"
+                      >
+                        Ver ficha
+                      </button>
+                    )}
+                  </td>
+                )}
               </tr>
             ))}
             {sorted.length === 0 && (
               <tr>
-                <td colSpan={columns.length + (showStock ? 1 : 0)} className="px-4 py-10 text-center text-steel-400">
+                <td
+                  colSpan={columns.length + (showStock ? 1 : 0) + (hasDetailData ? 1 : 0)}
+                  className="px-4 py-10 text-center text-steel-400"
+                >
                   No encontramos referencias con esos filtros.
                 </td>
               </tr>
@@ -168,6 +250,17 @@ export function ReferenceTable({
         </Link>{" "}
         y te confirmamos disponibilidad.
       </p>
+
+      {detailRow && familyName && (
+        <ReferenceDetailPanel
+          row={detailRow}
+          familyName={familyName}
+          internalCode={internalCode}
+          datasheetUrl={datasheetUrl}
+          relatedProducts={relatedProducts}
+          onClose={() => setDetailRow(null)}
+        />
+      )}
     </div>
   );
 }

@@ -179,9 +179,22 @@ export default async function CategoryPage({ params }: { params: Params }) {
   if (tableConfig) {
     const { data: holder } = await createServiceClient()
       .from("products")
-      .select("slug, name, short_desc, thumbnail_url, images, specs")
+      .select("slug, name, short_desc, thumbnail_url, images, specs, internal_code, datasheet_url")
       .eq("slug", tableConfig.holderSlug)
       .maybeSingle();
+
+    // Relacionados para la ficha expandible por referencia: otras familias bajo la misma
+    // categoría raíz (ej. ver un cilindro también sugiere fittings, mangueras, válvulas).
+    const topLevel = buildCategoryTrail(category, allCategories ?? [])[0];
+    const relatedCategoryIds = (allCategories ?? [])
+      .filter((c) => c.id !== category.id && buildCategoryTrail(c, allCategories ?? [])[0]?.id === topLevel?.id)
+      .map((c) => c.id);
+    const { data: relatedRaw } = await supabase
+      .from("products")
+      .select("name, slug")
+      .eq("active", true)
+      .in("category_id", relatedCategoryIds.length > 0 ? relatedCategoryIds : [""])
+      .limit(8);
 
     const rows =
       ((holder?.specs as Record<string, ReferenceTableRow[]> | null)?.[tableConfig.specsKey] as
@@ -242,7 +255,12 @@ export default async function CategoryPage({ params }: { params: Params }) {
           searchKeys={tableConfig.searchKeys}
           searchPlaceholder={tableConfig.searchPlaceholder}
           filterKey={tableConfig.filterKey}
+          filters={tableConfig.filters}
           showStock={tableConfig.showStock ?? false}
+          familyName={category.name}
+          internalCode={holder?.internal_code}
+          datasheetUrl={holder?.datasheet_url}
+          relatedProducts={relatedRaw ?? undefined}
         />
 
         {standaloneProducts && standaloneProducts.length > 0 && (

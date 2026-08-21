@@ -216,6 +216,9 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                 value={product.lead_time_days ? `${product.lead_time_days} días` : "Consultar"}
               />
               {referencia && <FactBlock icon={<Hash className="h-4 w-4" />} label="Referencia" value={referencia} />}
+              {product.internal_code && (
+                <FactBlock icon={<Hash className="h-4 w-4" />} label="Código Dynatech" value={product.internal_code} />
+              )}
             </div>
 
             {/* CTAs — configurador pa' productos maestro con variantes, "Consultar disponibilidad"
@@ -246,7 +249,12 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                           searchKeys={tableConfig.searchKeys}
                           searchPlaceholder={tableConfig.searchPlaceholder}
                           filterKey={tableConfig.filterKey}
+                          filters={tableConfig.filters}
                           showStock={tableConfig.showStock ?? false}
+                          familyName={product.name}
+                          internalCode={product.internal_code}
+                          datasheetUrl={product.datasheet_url}
+                          relatedProducts={related?.map((p) => ({ name: p.name, slug: p.slug }))}
                         />
                       ),
                     },
@@ -264,6 +272,10 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                           searchKeys={["descripcion"]}
                           searchPlaceholder="Buscar por medida..."
                           showStock={false}
+                          familyName={product.name}
+                          internalCode={product.internal_code}
+                          datasheetUrl={product.datasheet_url}
+                          relatedProducts={related?.map((p) => ({ name: p.name, slug: p.slug }))}
                         />
                       ),
                     },
@@ -279,6 +291,21 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                     <p className="text-sm text-steel-400">Sin especificaciones cargadas para este producto.</p>
                   ),
               },
+              ...(product.datasheet_url
+                ? [
+                    {
+                      id: "descargas",
+                      label: "Descargas",
+                      content: (
+                        <div className="flex flex-wrap gap-3">
+                          <a href={product.datasheet_url} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                            Descargar datasheet
+                          </a>
+                        </div>
+                      ),
+                    },
+                  ]
+                : []),
             ]}
           />
         </div>
