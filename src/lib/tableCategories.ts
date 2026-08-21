@@ -190,7 +190,9 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar accesorio...",
   },
-  // Neumática -> Fittings Neumáticos: 13 familias, 135 referencias.
+  // Neumática -> Fittings Neumáticos: 12 familias, 142 referencias (reorganizado: T's
+  // dispersas unificadas en "Unión T", duplicados de Reguladores de Flujo/Bulkhead/Codos
+  // fusionados en una sola categoría cada uno).
   "conectores-rectos": {
     holderSlug: "conectores-rectos",
     specsKey: "conectoresRectos",
@@ -205,9 +207,12 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
   },
-  "tes-uniones-roscadas": {
-    holderSlug: "tes-uniones-roscadas",
-    specsKey: "tesUniones",
+  // "Unión T" reúne todas las T dispersas del catálogo: las que ya eran "Tés y Uniones
+  // Roscadas" (100% T, pese al nombre — no había ninguna unión roscada genérica mezclada),
+  // "Uniones T SMC", y las "Unión T" que estaban sueltas dentro de Uniones para Manguera.
+  "union-t": {
+    holderSlug: "union-t",
+    specsKey: "unionT",
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
@@ -247,9 +252,12 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
   },
-  "reducciones-neumaticas": {
-    holderSlug: "reducciones-neumaticas",
-    specsKey: "reducciones",
+  // "Uniones Roscadas" = ex "Reducciones": las reducciones EMC/SPC hembra-hembra son
+  // uniones de conexión roscada por definición — único contenido real disponible hoy para
+  // esta categoría (no había otras uniones roscadas genéricas sueltas en el catálogo).
+  "uniones-roscadas": {
+    holderSlug: "uniones-roscadas",
+    specsKey: "unionesRoscadas",
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
@@ -257,13 +265,6 @@ export const TABLE_CATEGORIES: Record<
   "tapones-neumaticos": {
     holderSlug: "tapones-neumaticos",
     specsKey: "tapones",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
-  },
-  "codos-manguera": {
-    holderSlug: "codos-manguera",
-    specsKey: "codosManguera",
     columns: [{ key: "descripcion", label: "Referencia" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por medida, conexión o marca...",
@@ -359,27 +360,6 @@ export const TABLE_CATEGORIES: Record<
   // "Accesorios Neumáticos SMC" y "Accesorios de Sensores IFM" eran cajones de sastre
   // (reguladores + uniones + kits + interruptores + etc. todo junto) — se separan en una
   // categoría por familia real, igual que se hizo con los Autonics.
-  "reguladores-flujo-smc": {
-    holderSlug: "reguladores-flujo-smc",
-    specsKey: "reguladoresFlujoSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
-  "uniones-t-smc": {
-    holderSlug: "uniones-t-smc",
-    specsKey: "unionesTSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo o medida...",
-  },
-  "bulkhead-smc": {
-    holderSlug: "bulkhead-smc",
-    specsKey: "bulkheadSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
   "kits-sello-smc": {
     holderSlug: "kits-sello-smc",
     specsKey: "kitsSelloSmc",

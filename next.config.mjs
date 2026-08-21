@@ -115,6 +115,20 @@ const nextConfig = {
       // "Sensores para Cilindros SMC" se eliminó por completo (pedido explícito del cliente).
       { source: "/categorias/sensores-cilindros-smc", destination: "/categorias/neumatica", permanent: true },
       { source: "/productos/sensores-cilindros-smc", destination: "/categorias/neumatica", permanent: true },
+      // Reorganización de Fittings Neumáticos: T's dispersas unificadas en "Unión T",
+      // duplicados de Reguladores de Flujo/Bulkhead/Codos fusionados en una sola categoría.
+      { source: "/categorias/tes-uniones-roscadas", destination: "/categorias/union-t", permanent: true },
+      { source: "/productos/tes-uniones-roscadas", destination: "/productos/union-t", permanent: true },
+      { source: "/categorias/uniones-t-smc", destination: "/categorias/union-t", permanent: true },
+      { source: "/productos/uniones-t-smc", destination: "/productos/union-t", permanent: true },
+      { source: "/categorias/reducciones-neumaticas", destination: "/categorias/uniones-roscadas", permanent: true },
+      { source: "/productos/reducciones-neumaticas", destination: "/productos/uniones-roscadas", permanent: true },
+      { source: "/categorias/reguladores-flujo-smc", destination: "/categorias/reguladores-flujo", permanent: true },
+      { source: "/productos/reguladores-flujo-smc", destination: "/productos/reguladores-flujo", permanent: true },
+      { source: "/categorias/bulkhead-smc", destination: "/categorias/bulkhead-neumatico", permanent: true },
+      { source: "/productos/bulkhead-smc", destination: "/productos/bulkhead-neumatico", permanent: true },
+      { source: "/categorias/codos-manguera", destination: "/categorias/codos-neumaticos", permanent: true },
+      { source: "/productos/codos-manguera", destination: "/productos/codos-neumaticos", permanent: true },
     ];
   },
 };
