@@ -88,7 +88,8 @@ const nextConfig = {
       { source: "/productos/resistencia-cartucho-3x2-600w-240v", destination: "/productos/resistencia-maquina-inyeccion-plastico", permanent: true },
       { source: "/productos/resistencia-cartucho-3-1-2x1-350w-240v", destination: "/productos/resistencia-maquina-inyeccion-plastico", permanent: true },
       // Cilindros Neumáticos (7 productos individuales) -> Cilindros Festo (1 solo listado unificado).
-      { source: "/categorias/cilindros-neumaticos", destination: "/categorias/cilindros-festo", permanent: true },
+      // NOTA: el slug "/categorias/cilindros-neumaticos" se reutiliza ahora para la categoría
+      // agrupadora real (Cilindros Neumáticos = Festo+Bimba+American+SMC) — ya no redirige.
       { source: "/productos/cil-festo-dsnu-20-125-ppv-a-19240", destination: "/productos/cilindros-festo", permanent: true },
       { source: "/productos/cil-festo-dsnu-25-50-ppv-a-19246", destination: "/productos/cilindros-festo", permanent: true },
       { source: "/productos/cilindro-festo-dnc-4-3-5-ppv-a-178074", destination: "/productos/cilindros-festo", permanent: true },

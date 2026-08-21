@@ -7,6 +7,11 @@ export type Json =
   | Json[]
 
 export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "14.5"
+  }
   graphql_public: {
     Tables: {
       [_ in never]: never
@@ -159,102 +164,6 @@ export type Database = {
         }
         Relationships: []
       }
-      products: {
-        Row: {
-          active: boolean | null
-          brand_id: string | null
-          category_id: string | null
-          created_at: string | null
-          currency: string | null
-          datasheet_url: string | null
-          description: string | null
-          featured: boolean | null
-          id: string
-          images: string[] | null
-          lead_time_days: number | null
-          min_order_qty: number | null
-          name: string
-          price: number | null
-          price_visible: boolean | null
-          search_tags: string | null
-          short_desc: string | null
-          sku: string
-          slug: string
-          specs: Json | null
-          stock_status: string | null
-          stock_quantity: number | null
-          thumbnail_url: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          active?: boolean | null
-          brand_id?: string | null
-          category_id?: string | null
-          created_at?: string | null
-          currency?: string | null
-          datasheet_url?: string | null
-          description?: string | null
-          featured?: boolean | null
-          id?: string
-          images?: string[] | null
-          lead_time_days?: number | null
-          min_order_qty?: number | null
-          name: string
-          price?: number | null
-          price_visible?: boolean | null
-          search_tags?: string | null
-          short_desc?: string | null
-          sku: string
-          slug: string
-          specs?: Json | null
-          stock_status?: string | null
-          stock_quantity?: number | null
-          thumbnail_url?: string | null
-          updated_at?: string | null
-        }
-        Update: {
-          active?: boolean | null
-          brand_id?: string | null
-          category_id?: string | null
-          created_at?: string | null
-          currency?: string | null
-          datasheet_url?: string | null
-          description?: string | null
-          featured?: boolean | null
-          id?: string
-          images?: string[] | null
-          lead_time_days?: number | null
-          min_order_qty?: number | null
-          name?: string
-          price?: number | null
-          price_visible?: boolean | null
-          search_tags?: string | null
-          short_desc?: string | null
-          sku?: string
-          slug?: string
-          specs?: Json | null
-          stock_status?: string | null
-          stock_quantity?: number | null
-          thumbnail_url?: string | null
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "products_brand_id_fkey"
-            columns: ["brand_id"]
-            isOneToOne: false
-            referencedRelation: "brands"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "products_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       product_variants: {
         Row: {
           active: boolean
@@ -311,23 +220,104 @@ export type Database = {
           },
         ]
       }
-      site_settings: {
+      products: {
         Row: {
-          key: string
-          updated_at: string
-          value: string | null
+          active: boolean | null
+          brand_id: string | null
+          category_id: string | null
+          created_at: string | null
+          currency: string | null
+          datasheet_url: string | null
+          description: string | null
+          featured: boolean | null
+          id: string
+          images: string[] | null
+          internal_code: string | null
+          lead_time_days: number | null
+          min_order_qty: number | null
+          name: string
+          price: number | null
+          price_visible: boolean | null
+          search_tags: string | null
+          short_desc: string | null
+          sku: string
+          slug: string
+          specs: Json | null
+          stock_quantity: number | null
+          stock_status: string | null
+          thumbnail_url: string | null
+          updated_at: string | null
         }
         Insert: {
-          key: string
-          updated_at?: string
-          value?: string | null
+          active?: boolean | null
+          brand_id?: string | null
+          category_id?: string | null
+          created_at?: string | null
+          currency?: string | null
+          datasheet_url?: string | null
+          description?: string | null
+          featured?: boolean | null
+          id?: string
+          images?: string[] | null
+          internal_code?: string | null
+          lead_time_days?: number | null
+          min_order_qty?: number | null
+          name: string
+          price?: number | null
+          price_visible?: boolean | null
+          search_tags?: string | null
+          short_desc?: string | null
+          sku: string
+          slug: string
+          specs?: Json | null
+          stock_quantity?: number | null
+          stock_status?: string | null
+          thumbnail_url?: string | null
+          updated_at?: string | null
         }
         Update: {
-          key?: string
-          updated_at?: string
-          value?: string | null
+          active?: boolean | null
+          brand_id?: string | null
+          category_id?: string | null
+          created_at?: string | null
+          currency?: string | null
+          datasheet_url?: string | null
+          description?: string | null
+          featured?: boolean | null
+          id?: string
+          images?: string[] | null
+          internal_code?: string | null
+          lead_time_days?: number | null
+          min_order_qty?: number | null
+          name?: string
+          price?: number | null
+          price_visible?: boolean | null
+          search_tags?: string | null
+          short_desc?: string | null
+          sku?: string
+          slug?: string
+          specs?: Json | null
+          stock_quantity?: number | null
+          stock_status?: string | null
+          thumbnail_url?: string | null
+          updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "products_brand_id_fkey"
+            columns: ["brand_id"]
+            isOneToOne: false
+            referencedRelation: "brands"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "products_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       quotes: {
         Row: {
@@ -383,6 +373,24 @@ export type Database = {
           source?: string | null
           status?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          key: string
+          updated_at: string
+          value: string | null
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value?: string | null
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value?: string | null
         }
         Relationships: []
       }
@@ -528,4 +536,3 @@ export const Constants = {
     Enums: {},
   },
 } as const
-
