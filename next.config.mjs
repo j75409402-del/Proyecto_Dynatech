@@ -103,12 +103,9 @@ const nextConfig = {
       { source: "/productos/valvula-manual-5-3-r432-10", destination: "/categorias/valvulas-neumaticas", permanent: true },
       // "Sensores Autonics" y "Automatización Industrial Autonics" mezclaban varias familias
       // reales — se separaron en 8 productos/categorías por familia (ver tableCategories.ts).
-      { source: "/productos/sensores-autonics", destination: "/categorias/sensores", permanent: true },
+      // NOTA: el slug "/productos/sensores-autonics" se reutiliza ahora para el producto real
+      // (Inductivos+Capacitivos+Fotoeléctricos+Amplificadores Autonics fusionados) — ya no redirige.
       { source: "/productos/automatizacion-industrial-autonics", destination: "/categorias/electrica", permanent: true },
-      // "Accesorios Neumáticos SMC" y "Accesorios de Sensores IFM" eran cajones de sastre —
-      // se separaron en categorías por familia real (ver tableCategories.ts).
-      { source: "/productos/accesorios-neumaticos-smc", destination: "/categorias/neumatica", permanent: true },
-      { source: "/productos/accesorios-sensores-ifm", destination: "/categorias/sensores", permanent: true },
       // "Filtro RL SMC" se eliminó por completo (pedido explícito del cliente, hard delete).
       { source: "/categorias/filtro-rl-smc", destination: "/categorias/neumatica", permanent: true },
       { source: "/productos/filtro-rl-smc", destination: "/categorias/neumatica", permanent: true },
@@ -153,6 +150,61 @@ const nextConfig = {
       { source: "/productos/sensores-inductivos-ifm", destination: "/categorias/sensores-ifm", permanent: true },
       { source: "/productos/sensores-capacitivos-ifm", destination: "/categorias/sensores-ifm", permanent: true },
       { source: "/productos/sensores-fotoelectricos-ifm", destination: "/categorias/sensores-ifm", permanent: true },
+      // Reestructuración Tipo -> Marca del catálogo (pedido del cliente). Fittings Neumáticos:
+      // 11 categorías por tipo (mezclaban EMC/PISCO/SPC/SMC/otras en el texto) -> 5 tiles por
+      // marca, con "Tipo" como filtro dentro de cada una. No hay un destino único correcto por
+      // slug viejo (cada tipo tenía varias marcas mezcladas), así que todos van al padre.
+      { source: "/categorias/conectores-rectos", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/conectores-rectos", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/categorias/codos-neumaticos", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/codos-neumaticos", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/categorias/union-t", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/union-t", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/categorias/uniones-roscadas", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/uniones-roscadas", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/categorias/reguladores-flujo", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/reguladores-flujo", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/categorias/bulkhead-neumatico", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/bulkhead-neumatico", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/categorias/uniones-manguera", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/uniones-manguera", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/categorias/uniones-y", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/uniones-y", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/categorias/tapones-neumaticos", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/tapones-neumaticos", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/categorias/blue-cap", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/blue-cap", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/categorias/silenciadores-neumaticos", destination: "/categorias/fittings-neumaticos", permanent: true },
+      { source: "/productos/silenciadores-neumaticos", destination: "/categorias/fittings-neumaticos", permanent: true },
+      // Accesorios Neumáticos: 7 categorías 100% SMC (Kits de Sellos/Actuadores/Amortiguadores/
+      // Generadores de Vacío/Bases y Soportes/Bobinas/Manifold) -> un solo tile "SMC".
+      { source: "/categorias/kits-sello-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/productos/kits-sello-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/categorias/actuadores-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/productos/actuadores-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/categorias/amortiguadores-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/productos/amortiguadores-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/categorias/generadores-vacio-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/productos/generadores-vacio-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/categorias/bases-soportes-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/productos/bases-soportes-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/categorias/bobinas-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/productos/bobinas-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/categorias/manifold-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      { source: "/productos/manifold-smc", destination: "/categorias/accesorios-neumaticos-smc", permanent: true },
+      // Válvulas de Descarga Rápida SMC y Cheque Neumático SMC se fusionaron a la tabla
+      // existente de Válvulas Neumáticas SMC (nuevo campo "tipo" las distingue).
+      { source: "/categorias/valvulas-descarga-rapida-smc", destination: "/categorias/valvulas-neumaticas-smc", permanent: true },
+      { source: "/productos/valvulas-descarga-rapida-smc", destination: "/categorias/valvulas-neumaticas-smc", permanent: true },
+      { source: "/categorias/cheque-neumatico-smc", destination: "/categorias/valvulas-neumaticas-smc", permanent: true },
+      { source: "/productos/cheque-neumatico-smc", destination: "/categorias/valvulas-neumaticas-smc", permanent: true },
+      // Accesorios de Sensores: Conectores/Cables/Soportes y Bases IFM -> un solo tile "IFM".
+      { source: "/categorias/conectores-sensores-ifm", destination: "/categorias/accesorios-sensores-ifm", permanent: true },
+      { source: "/productos/conectores-sensores-ifm", destination: "/categorias/accesorios-sensores-ifm", permanent: true },
+      { source: "/categorias/cables-sensores-ifm", destination: "/categorias/accesorios-sensores-ifm", permanent: true },
+      { source: "/productos/cables-sensores-ifm", destination: "/categorias/accesorios-sensores-ifm", permanent: true },
+      { source: "/categorias/soportes-bases-ifm", destination: "/categorias/accesorios-sensores-ifm", permanent: true },
+      { source: "/productos/soportes-bases-ifm", destination: "/categorias/accesorios-sensores-ifm", permanent: true },
     ];
   },
 };

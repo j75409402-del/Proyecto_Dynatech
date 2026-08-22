@@ -216,91 +216,66 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar accesorio...",
   },
-  // Neumática -> Fittings Neumáticos: 12 familias, 142 referencias (reorganizado: T's
-  // dispersas unificadas en "Unión T", duplicados de Reguladores de Flujo/Bulkhead/Codos
-  // fusionados en una sola categoría cada uno).
-  "conectores-rectos": {
-    holderSlug: "conectores-rectos",
-    specsKey: "conectoresRectos",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
+  // Neumática -> Fittings Neumáticos: reestructurado de "11 categorías por tipo" (mezclaban
+  // marcas EMC/PISCO/SPC/SMC en el texto de cada fila) a "5 tiles por marca", con "Tipo"
+  // (Conector Recto, Codo, Unión T, etc.) como columna/filtro dentro de cada marca — pedido
+  // explícito del cliente: primero separar por tipo de producto, luego agrupar por marca.
+  "fittings-emc": {
+    holderSlug: "fittings-emc",
+    specsKey: "fittingsEmc",
+    columns: [
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Referencia" },
+    ],
+    searchKeys: ["descripcion", "tipo"],
+    searchPlaceholder: "Buscar por medida, conexión o tipo...",
+    filters: [{ key: "tipo", label: "Tipo" }],
   },
-  "codos-neumaticos": {
-    holderSlug: "codos-neumaticos",
-    specsKey: "codosNeumaticos",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
+  "fittings-pisco": {
+    holderSlug: "fittings-pisco",
+    specsKey: "fittingsPisco",
+    columns: [
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Referencia" },
+    ],
+    searchKeys: ["descripcion", "tipo"],
+    searchPlaceholder: "Buscar por medida, conexión o tipo...",
+    filters: [{ key: "tipo", label: "Tipo" }],
   },
-  // "Unión T" reúne todas las T dispersas del catálogo: las que ya eran "Tés y Uniones
-  // Roscadas" (100% T, pese al nombre — no había ninguna unión roscada genérica mezclada),
-  // "Uniones T SMC", y las "Unión T" que estaban sueltas dentro de Uniones para Manguera.
-  "union-t": {
-    holderSlug: "union-t",
-    specsKey: "unionT",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
+  "fittings-spc": {
+    holderSlug: "fittings-spc",
+    specsKey: "fittingsSpc",
+    columns: [
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Referencia" },
+    ],
+    searchKeys: ["descripcion", "tipo"],
+    searchPlaceholder: "Buscar por medida, conexión o tipo...",
+    filters: [{ key: "tipo", label: "Tipo" }],
   },
-  "reguladores-flujo": {
-    holderSlug: "reguladores-flujo",
-    specsKey: "reguladoresFlujo",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
+  "fittings-smc": {
+    holderSlug: "fittings-smc",
+    specsKey: "fittingsSmc",
+    columns: [
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Referencia" },
+    ],
+    searchKeys: ["descripcion", "tipo"],
+    searchPlaceholder: "Buscar por medida, conexión o tipo...",
+    filters: [{ key: "tipo", label: "Tipo" }],
   },
-  "uniones-manguera": {
-    holderSlug: "uniones-manguera",
-    specsKey: "unionesManguera",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
-  },
-  "uniones-y": {
-    holderSlug: "uniones-y",
-    specsKey: "unionesY",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
-  },
-  "bulkhead-neumatico": {
-    holderSlug: "bulkhead-neumatico",
-    specsKey: "bulkhead",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
-  },
-  // "Uniones Roscadas" = ex "Reducciones": las reducciones EMC/SPC hembra-hembra son
-  // uniones de conexión roscada por definición — único contenido real disponible hoy para
-  // esta categoría (no había otras uniones roscadas genéricas sueltas en el catálogo).
-  "uniones-roscadas": {
-    holderSlug: "uniones-roscadas",
-    specsKey: "unionesRoscadas",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
-  },
-  "tapones-neumaticos": {
-    holderSlug: "tapones-neumaticos",
-    specsKey: "tapones",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida, conexión o marca...",
-  },
-  "blue-cap": {
-    holderSlug: "blue-cap",
-    specsKey: "blueCap",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida...",
-  },
-  "silenciadores-neumaticos": {
-    holderSlug: "silenciadores-neumaticos",
-    specsKey: "silenciadores",
-    columns: [{ key: "descripcion", label: "Referencia" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por medida o conexión...",
+  // MW, NZ y filas sin marca legible en el texto (ej. fittings tipo compresión genéricos,
+  // silenciadores sin marca) — volumen chico, se agrupan para no crear tiles casi vacíos.
+  "fittings-otras-marcas": {
+    holderSlug: "fittings-otras-marcas",
+    specsKey: "fittingsOtras",
+    columns: [
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Referencia" },
+    ],
+    searchKeys: ["descripcion", "tipo"],
+    searchPlaceholder: "Buscar por medida, conexión o tipo...",
+    filters: [{ key: "tipo", label: "Tipo" }],
   },
   // Lote IFM/SMC/MAC/Harting — sin columna de stock: solo botón único "Consultar
   // disponibilidad" (regla explícita del cliente: nunca mostrar Stock/Agotado/números).
@@ -405,22 +380,18 @@ export const TABLE_CATEGORIES: Record<
     searchPlaceholder: "Buscar por código o amperaje...",
     showStock: false,
   },
-  // "Accesorios Neumáticos SMC" y "Accesorios de Sensores IFM" eran cajones de sastre
-  // (reguladores + uniones + kits + interruptores + etc. todo junto) — se separan en una
-  // categoría por familia real, igual que se hizo con los Autonics.
-  "kits-sello-smc": {
-    holderSlug: "kits-sello-smc",
-    specsKey: "kitsSelloSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar kit por modelo compatible...",
-  },
-  "actuadores-smc": {
-    holderSlug: "actuadores-smc",
-    specsKey: "actuadoresSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
+  // Rescatado del mismo producto huérfano que dio el sensor de cilindro de arriba — la
+  // categoría "Unidades FRL" existía vacía, ahora tiene su primer contenido real (SMC).
+  "unidades-frl": {
+    holderSlug: "unidades-frl-smc",
+    specsKey: "unidadesFrlSmc",
+    columns: [
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["descripcion", "tipo"],
+    searchPlaceholder: "Buscar por tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
   },
   "interruptores-presion-smc": {
     holderSlug: "interruptores-presion-smc",
@@ -429,47 +400,34 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo...",
   },
-  "amortiguadores-smc": {
-    holderSlug: "amortiguadores-smc",
-    specsKey: "amortiguadoresSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
+  // Accesorios Neumáticos: 7 categorías 100% SMC (Kits de Sellos, Actuadores, Amortiguadores,
+  // Generadores de Vacío, Bases y Soportes, Bobinas, Manifold) se unificaron en un solo tile
+  // "SMC" con "Tipo" como filtro — mismo criterio que Fittings. También incluye un sensor para
+  // cilindro SMC rescatado de un producto huérfano/inactivo que no tenía hogar en el catálogo.
+  "accesorios-neumaticos-smc": {
+    holderSlug: "accesorios-neumaticos-smc",
+    specsKey: "accesoriosNeumaticosSmc",
+    columns: [
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["descripcion", "tipo", "modelo"],
+    searchPlaceholder: "Buscar por tipo, modelo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
   },
-  "generadores-vacio-smc": {
-    holderSlug: "generadores-vacio-smc",
-    specsKey: "generadoresVacioSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
-  "bases-soportes-smc": {
-    holderSlug: "bases-soportes-smc",
-    specsKey: "basesSoportesSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
-  "bobinas-smc": {
-    holderSlug: "bobinas-smc",
-    specsKey: "bobinasSmc",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
-  "conectores-sensores-ifm": {
-    holderSlug: "conectores-sensores-ifm",
-    specsKey: "conectoresSensoresIfm",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
-  "cables-sensores-ifm": {
-    holderSlug: "cables-sensores-ifm",
-    specsKey: "cablesSensoresIfm",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
+  // Accesorios de Sensores: Conectores, Cables y Soportes/Bases IFM se unificaron en un solo
+  // tile "IFM" con "Tipo" como filtro. Módulos y Amplificadores IFM quedan aparte (son
+  // electrónica de señal, no accesorios mecánicos — no se mezclan solo por ser la misma marca).
+  "accesorios-sensores-ifm": {
+    holderSlug: "accesorios-sensores-ifm",
+    specsKey: "accesoriosSensoresIfm",
+    columns: [
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["descripcion", "tipo"],
+    searchPlaceholder: "Buscar por tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
   },
   // El amplificador (único, "AMPLIFICADOR IFM 2 CH...") se separó a su propia categoría
   // "amplificadores-ifm" — acá solo quedan los módulos (IO-Link, display, convertidor).
@@ -486,35 +444,6 @@ export const TABLE_CATEGORIES: Record<
     columns: [{ key: "descripcion", label: "Descripción" }],
     searchKeys: ["descripcion"],
     searchPlaceholder: "Buscar por modelo...",
-  },
-  "soportes-bases-ifm": {
-    holderSlug: "soportes-bases-ifm",
-    specsKey: "soportesBasesIfm",
-    columns: [{ key: "descripcion", label: "Descripción" }],
-    searchKeys: ["descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
-  // No se trata como válvula individual — es la base/manifold para montar varias válvulas.
-  "manifold-smc": {
-    holderSlug: "manifold-smc",
-    specsKey: "manifoldSmc",
-    columns: [{ key: "modelo", label: "Modelo" }, { key: "tipo", label: "Tipo" }],
-    searchKeys: ["modelo", "tipo", "descripcion"],
-    searchPlaceholder: "Buscar por modelo...",
-  },
-  "valvulas-descarga-rapida-smc": {
-    holderSlug: "valvulas-descarga-rapida-smc",
-    specsKey: "descargaRapidaSmc",
-    columns: [{ key: "modelo", label: "Modelo" }, { key: "conexion", label: "Conexión" }],
-    searchKeys: ["modelo", "conexion", "descripcion"],
-    searchPlaceholder: "Buscar por modelo o conexión...",
-  },
-  "cheque-neumatico-smc": {
-    holderSlug: "cheque-neumatico-smc",
-    specsKey: "chequeNeumaticoSmc",
-    columns: [{ key: "modelo", label: "Modelo" }, { key: "conexion", label: "Conexión" }],
-    searchKeys: ["modelo", "conexion", "descripcion"],
-    searchPlaceholder: "Buscar por modelo o conexión...",
   },
 };
 
