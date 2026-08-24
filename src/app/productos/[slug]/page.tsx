@@ -21,7 +21,9 @@ import {
   MEDIDAS_SPECS_KEY,
   CTA_LABEL_SPECS_KEY,
   MEDIDAS_COLUMN_LABEL_SPECS_KEY,
+  isHolderProduct,
 } from "@/lib/tableCategories";
+import { isProductOutOfStock } from "@/lib/stock";
 import type { ProductWithRelations, Category } from "@/types";
 
 type Params = Promise<{ slug: string }>;
@@ -84,7 +86,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     .map((c) => c.id);
   const relatedCategoryIds = Array.from(new Set([product.category_id, ...siblingIds].filter(Boolean))) as string[];
 
-  const { data: related } = await supabase
+  const { data: relatedRaw } = await supabase
     .from("products")
     .select("*, category:categories(*)")
     .eq("active", true)
@@ -92,6 +94,9 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     .neq("id", product.id)
     .order("featured", { ascending: false })
     .limit(8);
+  // Nunca sugerir un "holder" (sostiene una tabla de referencias, no es un producto
+  // comprable individual) ni un producto con stock 0 confirmado como "relacionado".
+  const related = (relatedRaw ?? []).filter((p) => !isHolderProduct(p.specs) && !isProductOutOfStock(p));
 
   // Shape completo tal cual vive en la DB — incluye sku_template/part_template,
   // que son server-only y JAMÁS deben pasar como prop a un client component.

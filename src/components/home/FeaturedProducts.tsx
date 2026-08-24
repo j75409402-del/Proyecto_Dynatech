@@ -3,18 +3,26 @@ import { ArrowUpRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Reveal } from "@/components/motion/Reveal";
+import { isHolderProduct } from "@/lib/tableCategories";
+import { isProductOutOfStock } from "@/lib/stock";
 import type { ProductWithRelations } from "@/types";
 
 export async function FeaturedProducts() {
   const supabase = await createClient();
-  const { data: products } = await supabase
+  const { data: productsRaw } = await supabase
     .from("products")
     .select("*, category:categories(*)")
     .eq("active", true)
     .eq("featured", true)
     .limit(6);
 
-  if (!products || products.length === 0) return null;
+  // Nunca un "holder" (sostiene una tabla de referencias, no es un producto comprable
+  // individual) ni un producto con stock 0 confirmado.
+  const products = (productsRaw ?? []).filter(
+    (p) => !isHolderProduct(p.specs) && !isProductOutOfStock(p),
+  );
+
+  if (products.length === 0) return null;
 
   return (
     <section className="section-pad border-b border-black/5 bg-carbon-900">

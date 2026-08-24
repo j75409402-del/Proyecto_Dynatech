@@ -12,6 +12,7 @@ import { ReferenceTable, type ReferenceTableRow } from "@/components/product/Ref
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ConsultAvailabilityButton } from "@/components/product/ConsultAvailabilityButton";
 import { TABLE_CATEGORIES } from "@/lib/tableCategories";
+import { isOutOfStock, isProductOutOfStock } from "@/lib/stock";
 import type { ProductWithRelations } from "@/types";
 
 type Params = Promise<{ slug: string }>;
@@ -196,10 +197,11 @@ export default async function CategoryPage({ params }: { params: Params }) {
       .in("category_id", relatedCategoryIds.length > 0 ? relatedCategoryIds : [""])
       .limit(8);
 
-    const rows =
+    const rows = (
       ((holder?.specs as Record<string, ReferenceTableRow[]> | null)?.[tableConfig.specsKey] as
         | ReferenceTableRow[]
-        | undefined) ?? [];
+        | undefined) ?? []
+    ).filter((r) => !isOutOfStock(r.stock));
     const galleryImages = holder
       ? (Array.from(
           new Set([holder.thumbnail_url, ...((holder.images as string[] | null) ?? [])].filter(Boolean)),
@@ -214,7 +216,9 @@ export default async function CategoryPage({ params }: { params: Params }) {
       .eq("active", true)
       .eq("category_id", category.id)
       .neq("slug", tableConfig.holderSlug);
-    const standaloneProducts = sortByFeaturedThenName(standaloneProductsRaw);
+    const standaloneProducts = sortByFeaturedThenName(
+      (standaloneProductsRaw ?? []).filter((p) => !isProductOutOfStock(p)),
+    );
 
     return (
       <div className="container-max py-12 sm:py-16">
@@ -286,7 +290,9 @@ export default async function CategoryPage({ params }: { params: Params }) {
     .eq("active", true)
     .eq("category_id", category.id)
     .limit(60);
-  const products = sortByFeaturedThenName(productsRaw);
+  const products = sortByFeaturedThenName(
+    (productsRaw ?? []).filter((p) => !isProductOutOfStock(p)),
+  );
 
   return (
     <div className="container-max py-12 sm:py-16">

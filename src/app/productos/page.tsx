@@ -8,6 +8,8 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { computeCatalogCounts } from "@/lib/catalogCounts";
 import { computeCatalogFilterGroups, productMatchesCatalogFilters } from "@/lib/catalogFilters";
 import { whatsappImportRequest } from "@/lib/whatsapp";
+import { isHolderProduct } from "@/lib/tableCategories";
+import { isProductOutOfStock } from "@/lib/stock";
 import type { ProductWithRelations, Category } from "@/types";
 
 export const metadata: Metadata = {
@@ -104,7 +106,12 @@ export default async function ProductosPage({
   // listadas ya traen esos campos estructurados (ver src/lib/catalogFilters.ts). Se calculan
   // sobre el resultado de categoría/búsqueda ANTES de aplicarlos, para que las opciones no
   // desaparezcan al seleccionar una de ellas.
-  const preFilterProducts = (products as ProductWithRelations[]) ?? [];
+  // Los productos "holder" (sostienen una tabla de referencias en specs.<key>, ej. "Válvulas
+  // Neumáticas SMC") no son un producto comprable individual — nunca deben listarse como card
+  // con botón de carrito acá. Tampoco se listan productos con stock 0 confirmado.
+  const preFilterProducts = ((products as ProductWithRelations[]) ?? []).filter(
+    (p) => !isHolderProduct(p.specs) && !isProductOutOfStock(p),
+  );
   const filterGroups = computeCatalogFilterGroups(preFilterProducts);
   const selectedFilters = Object.fromEntries(filterGroups.map((g) => [g.key, params[g.key]]));
   const hasActiveTechFilters = Object.values(selectedFilters).some(Boolean);

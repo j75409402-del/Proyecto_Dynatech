@@ -42,7 +42,10 @@ export const TABLE_CATEGORIES: Record<
   // mezclaban varias familias reales (temporizadores, contadores, luces piloto, pulsadores/
   // selectores, controladores de temperatura / inductivos, capacitivos, fotoeléctricos) —
   // se separaron en una categoría/holder por familia real (ver más abajo).
-  "temporizadores-electricos": {
+  // Controles Eléctricos: cada tipo (Temporizadores, Contadores, etc.) ahora tiene un hijo de
+  // marca explícito ("Autonics"/"Harting") aunque hoy sea la única marca — pedido del cliente,
+  // mismo patrón Tipo -> Marca que Neumática, listo para sumar otras marcas sin reconstruir.
+  "temporizadores-autonics": {
     holderSlug: "temporizadores-autonics",
     specsKey: "temporizadores",
     columns: [
@@ -52,7 +55,7 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["modelo", "descripcion"],
     searchPlaceholder: "Buscar por modelo o descripción...",
   },
-  "contadores-electricos": {
+  "contadores-autonics": {
     holderSlug: "contadores-autonics",
     specsKey: "contadores",
     columns: [
@@ -62,7 +65,7 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["modelo", "descripcion"],
     searchPlaceholder: "Buscar por modelo o descripción...",
   },
-  "luces-piloto": {
+  "luces-piloto-autonics": {
     holderSlug: "luces-piloto-autonics",
     specsKey: "lucesPiloto",
     columns: [
@@ -72,7 +75,7 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["modelo", "descripcion"],
     searchPlaceholder: "Buscar por color o voltaje...",
   },
-  "controladores-temperatura": {
+  "controladores-temperatura-autonics": {
     holderSlug: "controladores-temperatura-autonics",
     specsKey: "controladoresTemperatura",
     columns: [
@@ -82,7 +85,7 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["modelo", "descripcion"],
     searchPlaceholder: "Buscar por modelo o descripción...",
   },
-  "pulsadores": {
+  "pulsadores-selectores-autonics": {
     holderSlug: "pulsadores-selectores-autonics",
     specsKey: "pulsadoresSelectores",
     columns: [
@@ -372,7 +375,7 @@ export const TABLE_CATEGORIES: Record<
     ],
     showStock: false,
   },
-  "conectores-industriales": {
+  "conectores-industriales-harting": {
     holderSlug: "conectores-industriales-harting",
     specsKey: "conectoresIndustriales",
     columns: [{ key: "descripcion", label: "Descripción" }],
@@ -466,3 +469,17 @@ export const TABLE_SPECS_KEYS = new Set([
   CTA_LABEL_SPECS_KEY,
   MEDIDAS_COLUMN_LABEL_SPECS_KEY,
 ]);
+
+/**
+ * Un producto "holder" sostiene un array de referencias/variantes en specs.<key> (una
+ * categoría-tabla entera, ej. "Válvulas Neumáticas SMC", o un specs.medidas genérico, ej.
+ * "Cilindros American Serie SS") — no es una sola referencia comprable. Se detecta por forma
+ * (¿tiene alguna key de TABLE_SPECS_KEYS?), no por lista de slugs, para cubrir ambos patrones
+ * sin mantener dos registros separados. Usar esto para excluir holders de cualquier listado
+ * genérico de productos (catálogo, destacados, relacionados) — nunca deben ser "agregables al
+ * carrito" como si fueran un solo producto.
+ */
+export function isHolderProduct(specs: unknown): boolean {
+  if (!specs || typeof specs !== "object") return false;
+  return Object.keys(specs).some((k) => TABLE_SPECS_KEYS.has(k));
+}

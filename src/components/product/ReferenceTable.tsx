@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowUp, ArrowUpDown, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { isOutOfStock } from "@/lib/stock";
 import { ReferenceDetailPanel, type RelatedProductLink } from "./ReferenceDetailPanel";
 
 type SortKey = string | "stock";
@@ -54,12 +55,16 @@ export function ReferenceTable({
   const [sortDir, setSortDir] = useState<SortDir>("asc");
   const [detailRow, setDetailRow] = useState<ReferenceTableRow | null>(null);
 
-  const hasDetailData = useMemo(() => rows.some((r) => r.marca || r.modelo), [rows]);
+  // Stock 0 confirmado ("agotado") se oculta del todo — sin stock trackeado (null/undefined)
+  // sigue visible, significa "consultar disponibilidad", no "confirmado agotado".
+  const visibleRows = useMemo(() => rows.filter((r) => !isOutOfStock(r.stock)), [rows]);
+
+  const hasDetailData = useMemo(() => visibleRows.some((r) => r.marca || r.modelo), [visibleRows]);
 
   const filterOptions = useMemo(() => {
     if (!filterKey) return [];
-    return Array.from(new Set(rows.map((r) => r[filterKey]))).sort();
-  }, [rows, filterKey]);
+    return Array.from(new Set(visibleRows.map((r) => r[filterKey]))).sort();
+  }, [visibleRows, filterKey]);
 
   // Una fila puede no tener un único valor fijo para un campo (ej. una electroválvula que
   // se pide especificando el voltaje entre varias opciones): en vez de "voltaje" trae
@@ -86,7 +91,7 @@ export function ReferenceTable({
     if (!filters) return {};
     return Object.fromEntries(
       filters.map((f) => {
-        const rowsForThisFilter = rows.filter((r) =>
+        const rowsForThisFilter = visibleRows.filter((r) =>
           filters.every((other) => {
             if (other.key === f.key) return true;
             const v = filterValues[other.key];
@@ -105,13 +110,13 @@ export function ReferenceTable({
         return [f.key, options];
       }),
     );
-  }, [rows, filters, filterValues]);
+  }, [visibleRows, filters, filterValues]);
 
   const filtered = useMemo(() => {
     // Palabras sueltas (ej. "5/2 24V 1/4") — cada una debe aparecer en algún campo
     // buscable de la fila, en vez de exigir la frase completa como substring exacto.
     const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    return rows.filter((r) => {
+    return visibleRows.filter((r) => {
       const matchesQuery =
         words.length === 0 ||
         words.every((w) => searchKeys.some((key) => r[key]?.toLowerCase().includes(w)));
@@ -121,7 +126,7 @@ export function ReferenceTable({
         filters.every((f) => !filterValues[f.key] || filterValues[f.key] === "todos" || rowMatchesFilterValue(r, f.key, filterValues[f.key]));
       return matchesQuery && matchesFilter && matchesMultiFilters;
     });
-  }, [rows, query, searchKeys, filterKey, filterValue, filters, filterValues]);
+  }, [visibleRows, query, searchKeys, filterKey, filterValue, filters, filterValues]);
 
   const sorted = useMemo(() => {
     if (!sortKey) return filtered;
