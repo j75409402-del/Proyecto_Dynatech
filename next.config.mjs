@@ -205,6 +205,10 @@ const nextConfig = {
       { source: "/productos/cables-sensores-ifm", destination: "/categorias/accesorios-sensores-ifm", permanent: true },
       { source: "/categorias/soportes-bases-ifm", destination: "/categorias/accesorios-sensores-ifm", permanent: true },
       { source: "/productos/soportes-bases-ifm", destination: "/categorias/accesorios-sensores-ifm", permanent: true },
+      // "Presión" era un envoltorio con un solo contenido real (Interruptor de Presión) —
+      // se aplanó: Interruptor de Presión y Sensores de presión pasan a ser hijos directos
+      // de Instrumentación (pedido del cliente: "dice solo Presión y está mal").
+      { source: "/categorias/presion", destination: "/categorias/interruptores-presion-smc", permanent: true },
     ];
   },
 };
