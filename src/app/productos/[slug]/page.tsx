@@ -21,7 +21,6 @@ import {
   MEDIDAS_SPECS_KEY,
   CTA_LABEL_SPECS_KEY,
   MEDIDAS_COLUMN_LABEL_SPECS_KEY,
-  isHolderProduct,
 } from "@/lib/tableCategories";
 import { isProductOutOfStock } from "@/lib/stock";
 import type { ProductWithRelations, Category } from "@/types";
@@ -94,9 +93,10 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
     .neq("id", product.id)
     .order("featured", { ascending: false })
     .limit(8);
-  // Nunca sugerir un "holder" (sostiene una tabla de referencias, no es un producto
-  // comprable individual) ni un producto con stock 0 confirmado como "relacionado".
-  const related = (relatedRaw ?? []).filter((p) => !isHolderProduct(p.specs) && !isProductOutOfStock(p));
+  // Un "holder" (ej. "Válvulas Neumáticas SMC") sí puede sugerirse como relacionado —
+  // ProductCard nunca le pone botón de carrito (ver isHolderProduct ahí). Acá solo se saca
+  // stock 0 confirmado.
+  const related = (relatedRaw ?? []).filter((p) => !isProductOutOfStock(p));
 
   // Shape completo tal cual vive en la DB — incluye sku_template/part_template,
   // que son server-only y JAMÁS deben pasar como prop a un client component.

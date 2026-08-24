@@ -5,6 +5,7 @@ import type { ProductWithRelations } from "@/types";
 import { cn } from "@/lib/utils";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
+import { isHolderProduct } from "@/lib/tableCategories";
 
 type Props = {
   product: ProductWithRelations;
@@ -26,6 +27,11 @@ function quickSpecs(specs: ProductWithRelations["specs"]): [string, string][] {
 // Descripción -> Especificaciones rápidas -> Ver detalles -> Agregar al carrito.
 export function ProductCard({ product, className }: Props) {
   const specs = quickSpecs(product.specs);
+  // Un "holder" sostiene una tabla de varias referencias (ej. "Fusible Gould ATM" tiene
+  // 3A/10A/12A adentro) — no es un solo producto comprable, así que nunca lleva botón de
+  // carrito acá (esa validación real vive en tableCategories.isHolderProduct, reusada en
+  // todo el catálogo para que "marca/categoría/familia" nunca termine en el carrito).
+  const isHolder = isHolderProduct(product.specs);
   // Objeto acotado a propósito: el botón (client component) solo recibe lo que
   // necesita para el carrito — nunca el SKU real, así no queda embebido en el
   // HTML/RSC de la tarjeta (ver pedido de ocultar el SKU/código de fabricante).
@@ -107,7 +113,7 @@ export function ProductCard({ product, className }: Props) {
         {/* CTAs — links/botón independientes, no anidados dentro del Link de arriba.
             mt-auto es cinturón-y-tirantes: el Link de arriba ya es flex-1, así que
             estos botones siempre quedan al fondo aunque el contenido varíe de largo. */}
-        <div className="relative grid grid-cols-2 gap-2 p-4 pt-0 mt-auto">
+        <div className={cn("relative grid gap-2 p-4 pt-0 mt-auto", isHolder ? "grid-cols-1" : "grid-cols-2")}>
           <Link
             href={`/productos/${product.slug}`}
             className="relative z-10 flex items-center justify-center gap-1.5 border border-black/10
@@ -115,10 +121,12 @@ export function ProductCard({ product, className }: Props) {
                        text-steel-300 text-xs font-medium uppercase tracking-wider py-2.5
                        transition-colors duration-200"
           >
-            Ver detalles
+            {isHolder ? "Ver referencias" : "Ver detalles"}
             <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
-          <AddToCartButton product={cardProduct} variant="primary" className="text-[10px] gap-1 px-2 py-2.5" />
+          {!isHolder && (
+            <AddToCartButton product={cardProduct} variant="primary" className="text-[10px] gap-1 px-2 py-2.5" />
+          )}
         </div>
       </div>
     </TiltCard>

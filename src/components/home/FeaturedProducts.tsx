@@ -3,7 +3,6 @@ import { ArrowUpRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Reveal } from "@/components/motion/Reveal";
-import { isHolderProduct } from "@/lib/tableCategories";
 import { isProductOutOfStock } from "@/lib/stock";
 import type { ProductWithRelations } from "@/types";
 
@@ -16,11 +15,9 @@ export async function FeaturedProducts() {
     .eq("featured", true)
     .limit(6);
 
-  // Nunca un "holder" (sostiene una tabla de referencias, no es un producto comprable
-  // individual) ni un producto con stock 0 confirmado.
-  const products = (productsRaw ?? []).filter(
-    (p) => !isHolderProduct(p.specs) && !isProductOutOfStock(p),
-  );
+  // Un "holder" (ej. "Válvulas Neumáticas SMC") sí puede destacarse — ProductCard nunca le
+  // pone botón de carrito (ver isHolderProduct ahí). Acá solo se saca stock 0 confirmado.
+  const products = (productsRaw ?? []).filter((p) => !isProductOutOfStock(p));
 
   if (products.length === 0) return null;
 
