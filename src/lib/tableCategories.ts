@@ -385,7 +385,9 @@ export const TABLE_CATEGORIES: Record<
   },
   // Rescatado del mismo producto huérfano que dio el sensor de cilindro de arriba — la
   // categoría "Unidades FRL" existía vacía, ahora tiene su primer contenido real (SMC).
-  "unidades-frl": {
+  // Unidades FRL: pasó de tener a SMC directo a Tipo -> Marca (SMC/EMC/Midman/Fluidtec/
+  // Dynafluid), mismo patrón que el resto de Neumática, tras sumar el inventario real de WECH.
+  "unidades-frl-smc": {
     holderSlug: "unidades-frl-smc",
     specsKey: "unidadesFrlSmc",
     columns: [
@@ -395,6 +397,112 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["descripcion", "tipo"],
     searchPlaceholder: "Buscar por tipo o descripción...",
     filters: [{ key: "tipo", label: "Tipo" }],
+  },
+  "unidades-frl-emc": {
+    holderSlug: "unidades-frl-emc",
+    specsKey: "unidadesFrlEMC",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion", "tipo", "codigo"],
+    searchPlaceholder: "Buscar por modelo, tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
+  "unidades-frl-midman": {
+    holderSlug: "unidades-frl-midman",
+    specsKey: "unidadesFrlMidman",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion", "tipo", "codigo"],
+    searchPlaceholder: "Buscar por modelo, tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
+  "unidades-frl-fluidtec": {
+    holderSlug: "unidades-frl-fluidtec",
+    specsKey: "unidadesFrlFluidtec",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion", "tipo", "codigo"],
+    searchPlaceholder: "Buscar por modelo, tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
+  "unidades-frl-dynafluid": {
+    holderSlug: "unidades-frl-dynafluid",
+    specsKey: "unidadesFrlDynafluid",
+    columns: [
+      { key: "modelo", label: "Modelo" },
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion", "tipo", "codigo"],
+    searchPlaceholder: "Buscar por modelo, tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
+  // Instrumentación -> Medición de Temperatura / Manómetros / Transmisores de Presión: primer
+  // inventario real cargado ahí (Tel-Tru, vía WECH Autocontroles), mismo patrón Tipo -> Marca.
+  "temperatura-teltru": {
+    holderSlug: "temperatura-teltru",
+    specsKey: "temperaturaTeltru",
+    columns: [
+      { key: "modelo", label: "Código" },
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion", "tipo"],
+    searchPlaceholder: "Buscar por código, tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
+  "manometros-teltru": {
+    holderSlug: "manometros-teltru",
+    specsKey: "manometrosTeltru",
+    columns: [
+      { key: "modelo", label: "Código" },
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion", "tipo"],
+    searchPlaceholder: "Buscar por código, tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
+  "transmisores-presion-teltru": {
+    holderSlug: "transmisores-presion-teltru",
+    specsKey: "transmisoresPresionTeltru",
+    columns: [
+      { key: "modelo", label: "Código" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por código o descripción...",
+  },
+  // Controles Eléctricos -> Arrancadores Manuales / Unidades Térmicas: primer inventario real
+  // cargado ahí (Telemecanique/Schneider TeSys, vía WECH Autocontroles).
+  "arrancadores-manuales-telemecanique": {
+    holderSlug: "arrancadores-manuales-telemecanique",
+    specsKey: "arrancadoresTelemecanique",
+    columns: [
+      { key: "modelo", label: "Código" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por código o amperaje...",
+  },
+  "unidades-termicas-telemecanique": {
+    holderSlug: "unidades-termicas-telemecanique",
+    specsKey: "termicasTelemecanique",
+    columns: [
+      { key: "modelo", label: "Código" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion"],
+    searchPlaceholder: "Buscar por código o amperaje...",
   },
   "interruptores-presion-smc": {
     holderSlug: "interruptores-presion-smc",
