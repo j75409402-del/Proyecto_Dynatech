@@ -1,9 +1,19 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
 import { getSiteSettings } from "@/lib/siteSettings";
 import { AdminSettingsForm } from "@/components/admin/AdminSettingsForm";
 
 export default async function AdminConfigPage() {
+  // El proxy (src/proxy.ts) ya redirige /admin/* sin sesión a /admin/login — esto es
+  // defensa en profundidad por si la página se renderiza fuera de ese camino.
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/admin/login");
+
   const settings = await getSiteSettings();
 
   return (

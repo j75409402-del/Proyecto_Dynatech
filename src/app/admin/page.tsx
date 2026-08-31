@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { LogOut, Settings } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { AdminProductList } from "@/components/admin/AdminProductList";
@@ -10,6 +11,10 @@ export default async function AdminPage() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  // El proxy (src/proxy.ts) ya redirige /admin/* sin sesión a /admin/login — esto es
+  // defensa en profundidad por si la página se renderiza fuera de ese camino.
+  if (!user) redirect("/admin/login");
 
   const { data: products } = await supabase
     .from("products")

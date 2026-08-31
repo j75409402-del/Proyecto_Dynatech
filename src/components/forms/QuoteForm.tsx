@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -33,6 +34,8 @@ type QuoteFormData = z.infer<typeof quoteSchema>;
 export function QuoteForm() {
   const { items: cartItems, clearCart } = useCart();
   const appliedCartRef = useRef(false);
+  const searchParams = useSearchParams();
+  const nombreParam = searchParams.get("nombre");
 
   const [state, setState] = useState<
     { status: "idle" | "submitting" } |
@@ -58,6 +61,18 @@ export function QuoteForm() {
     replace(cartItems.map((it) => ({ sku: "", name: it.name, quantity: it.quantity, notes: "" })));
     appliedCartRef.current = true;
   }, [cartItems, replace]);
+
+  // Si venimos de un link tipo "Solicitar cotización" fuera del catálogo (ej. servicio de
+  // reparación de cilindros, /cotizacion?nombre=...) y no hay carrito, precargamos el ítem
+  // con ese nombre — antes este parámetro se leía en el link pero nunca en el formulario,
+  // así que se perdía silenciosamente el contexto de qué se quería cotizar.
+  useEffect(() => {
+    if (appliedCartRef.current) return;
+    if (cartItems.length > 0) return;
+    if (!nombreParam) return;
+    replace([{ sku: "", name: nombreParam, quantity: 1, notes: "" }]);
+    appliedCartRef.current = true;
+  }, [cartItems, nombreParam, replace]);
 
   const onSubmit = async (data: QuoteFormData) => {
     setState({ status: "submitting" });

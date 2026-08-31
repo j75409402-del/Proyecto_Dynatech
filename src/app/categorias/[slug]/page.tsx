@@ -289,7 +289,9 @@ export default async function CategoryPage({ params }: { params: Params }) {
     .select("*, category:categories(*)")
     .eq("active", true)
     .eq("category_id", category.id)
-    .limit(60);
+    // Mismo margen que /productos (ver auditoría pre-lanzamiento) — Fusibles Gould ya
+    // tiene 27 productos individuales en una sola categoría hoja, 60 era ajustado.
+    .limit(500);
   const products = sortByFeaturedThenName(
     (productsRaw ?? []).filter((p) => !isProductOutOfStock(p)),
   );

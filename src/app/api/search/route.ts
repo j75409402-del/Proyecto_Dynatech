@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { sanitizeSearchWord } from "@/lib/searchSanitize";
 
 // A propósito NO incluye "sku" — la respuesta de esta API es pública y el
 // código interno/de fabricante no debe viajar al navegador. El filtro por SKU
@@ -17,7 +18,9 @@ export async function GET(req: Request) {
   const words = q.split(/\s+/).filter((w) => w.length >= 2);
 
   let searchQuery = supabase.from("products").select(SELECT).eq("active", true);
-  for (const word of words.length > 0 ? words : [q]) {
+  for (const rawWord of words.length > 0 ? words : [q]) {
+    const word = sanitizeSearchWord(rawWord);
+    if (!word) continue;
     searchQuery = searchQuery.or(
       `name.ilike.%${word}%,sku.ilike.%${word}%,search_tags.ilike.%${word}%`,
     );

@@ -138,7 +138,10 @@ export function Navbar({ catalogPdfUrl }: Props) {
           open ? "max-h-[32rem] opacity-100" : "max-h-0 opacity-0",
         )}
       >
-        <nav className="container-max py-6 flex flex-col gap-1">
+        {/* max-h propio + scroll: el wrapper de afuera ya anima su max-height para el efecto
+            de despliegue, pero si el contenido real supera esa altura (viewport bajo, ej.
+            celular en horizontal) esto evita que quede contenido recortado e inalcanzable. */}
+        <nav className="container-max py-6 flex flex-col gap-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
           <SearchAutocomplete className="mb-3" onNavigate={() => setOpen(false)} />
 
           {NAV.main.map((item) => (

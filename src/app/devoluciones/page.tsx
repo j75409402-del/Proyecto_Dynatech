@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { LegalPage } from "@/components/legal/LegalPage";
 import { CONTACT } from "@/lib/constants";
 
@@ -41,9 +42,9 @@ export default function DevolucionesPage() {
           body: (
             <p>
               Si el producto llega con un defecto de fabricación, se gestiona bajo nuestra{" "}
-              <a href="/garantias" className="text-signal hover:underline">
+              <Link href="/garantias" className="text-signal hover:underline">
                 política de garantías
-              </a>{" "}
+              </Link>{" "}
               en lugar de esta política de devoluciones — sin costo para ti.
             </p>
           ),

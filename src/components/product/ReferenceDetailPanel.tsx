@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -73,6 +73,16 @@ export function ReferenceDetailPanel({
     ? row.voltajes_disponibles.split(",").map((v) => v.trim()).filter(Boolean)
     : [];
   const [selectedVoltage, setSelectedVoltage] = useState<string | null>(null);
+
+  // Bloquea el scroll del fondo mientras la ficha está abierta (mismo patrón que
+  // MobileFilters) — antes se podía scrollear la página detrás en mobile.
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, []);
   // Con selector de voltaje, el texto fijo "Seleccionar voltaje" del campo voltaje no debe
   // repetirse como spec estática — el selector interactivo lo reemplaza.
   const entries = Object.entries(row).filter(

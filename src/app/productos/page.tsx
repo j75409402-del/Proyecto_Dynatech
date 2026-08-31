@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { ProductCard } from "@/components/product/ProductCard";
 import { ProductFilters } from "@/components/product/ProductFilters";
@@ -9,6 +10,7 @@ import { computeCatalogCounts } from "@/lib/catalogCounts";
 import { computeCatalogFilterGroups, productMatchesCatalogFilters } from "@/lib/catalogFilters";
 import { whatsappImportRequest } from "@/lib/whatsapp";
 import { isProductOutOfStock } from "@/lib/stock";
+import { sanitizeSearchWord } from "@/lib/searchSanitize";
 import type { ProductWithRelations, Category } from "@/types";
 
 export const metadata: Metadata = {
@@ -76,21 +78,30 @@ export default async function ProductosPage({
     // como substring exacto. La coincidencia por categoría sigue siendo una
     // alternativa independiente (OR), no una condición adicional sobre el texto.
     const words = params.q.split(/\s+/).filter((w) => w.length >= 2);
-    const terms = words.length > 0 ? words : [params.q];
+    const terms = (words.length > 0 ? words : [params.q])
+      .map(sanitizeSearchWord)
+      .filter(Boolean);
     const wordClauses = terms.map(
       (word) => `or(name.ilike.%${word}%,sku.ilike.%${word}%,search_tags.ilike.%${word}%)`,
     );
     const textClause = terms.length > 1 ? `and(${wordClauses.join(",")})` : wordClauses[0];
 
-    const orParts = [textClause];
-    if (matchedCatIds.size > 0) {
-      orParts.push(`category_id.in.(${Array.from(matchedCatIds).join(",")})`);
+    // terms puede quedar vacío si el término de búsqueda era solo caracteres reservados
+    // de PostgREST (,()) que sanitizeSearchWord saca — en ese caso no hay cláusula de
+    // texto válida, así que no se filtra por texto (evita mandar "undefined" al .or()).
+    const orParts = [textClause, ...(matchedCatIds.size > 0 ? [`category_id.in.(${Array.from(matchedCatIds).join(",")})`] : [])].filter(
+      (part): part is string => Boolean(part),
+    );
+    if (orParts.length > 0) {
+      query = query.or(orParts.join(","));
     }
-    query = query.or(orParts.join(","));
   }
 
   const [{ data: products }, categoriesRes, allActiveRes] = await Promise.all([
-    query.order("featured", { ascending: false }).order("created_at", { ascending: false }).limit(60),
+    // Límite generoso (no paginación real todavía): el catálogo hoy tiene ~70 productos
+    // activos, así que 60 ya estaba cortando resultados de verdad — se detectó en la
+    // auditoría pre-lanzamiento. 500 da margen amplio de crecimiento sin truncar.
+    query.order("featured", { ascending: false }).order("created_at", { ascending: false }).limit(500),
     supabase.from("categories").select("*").is("parent_id", null).order("sort_order"),
     supabase.from("products").select("category_id").eq("active", true),
   ]);
@@ -294,9 +305,9 @@ function EmptyState() {
           WhatsApp
         </a>{" "}
         o por{" "}
-        <a href="/cotizacion" className="text-signal hover:underline">
+        <Link href="/cotizacion" className="text-signal hover:underline">
           formulario de cotización
-        </a>{" "}
+        </Link>{" "}
         y lo conseguimos.
       </p>
     </div>
