@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Paperclip, Send, CheckCircle2, AlertCircle, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,6 +13,20 @@ type Props = {
   sku: string;
   productName: string;
 };
+
+// Mismo nivel de validación que ContactForm/QuoteForm (zod + react-hook-form) — antes este
+// formulario solo tenía `required` nativo de HTML, sin mensajes de error por campo ni
+// validación de formato (ver auditoría pre-lanzamiento).
+const productQuoteSchema = z.object({
+  nombre: z.string().min(2, "Tu nombre es requerido"),
+  empresa: z.string().min(2, "Nombre de empresa requerido"),
+  correo: z.string().email("Email inválido"),
+  telefono: z.string().min(8, "Teléfono requerido"),
+  cantidad: z.coerce.number().int("Cantidad inválida").min(1, "Mínimo 1"),
+  comentario: z.string().optional(),
+});
+
+type ProductQuoteFormData = z.infer<typeof productQuoteSchema>;
 
 type State =
   | { status: "idle" }
@@ -21,11 +38,13 @@ export function ProductQuoteForm({ sku, productName }: Props) {
   const [state, setState] = useState<State>({ status: "idle" });
   const [file, setFile] = useState<File | null>(null);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setState({ status: "submitting" });
+  const { register, handleSubmit, formState: { errors } } = useForm<ProductQuoteFormData>({
+    resolver: zodResolver(productQuoteSchema),
+    defaultValues: { cantidad: 1 },
+  });
 
-    const form = new FormData(e.currentTarget);
+  const onSubmit = async (data: ProductQuoteFormData) => {
+    setState({ status: "submitting" });
 
     try {
       let attachmentUrl: string | null = null;
@@ -38,10 +57,7 @@ export function ProductQuoteForm({ sku, productName }: Props) {
         attachmentUrl = uploadJson.url;
       }
 
-      const message = [
-        String(form.get("comentario") ?? "").trim(),
-        attachmentUrl ? `Adjunto: ${attachmentUrl}` : null,
-      ]
+      const message = [data.comentario?.trim(), attachmentUrl ? `Adjunto: ${attachmentUrl}` : null]
         .filter(Boolean)
         .join("\n\n");
 
@@ -49,11 +65,11 @@ export function ProductQuoteForm({ sku, productName }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          company_name: form.get("empresa"),
-          contact_name: form.get("nombre"),
-          email: form.get("correo"),
-          phone: form.get("telefono"),
-          items: [{ sku, name: productName, quantity: Number(form.get("cantidad")) || 1 }],
+          company_name: data.empresa,
+          contact_name: data.nombre,
+          email: data.correo,
+          phone: data.telefono,
+          items: [{ sku, name: productName, quantity: data.cantidad }],
           message,
         }),
       });
@@ -66,7 +82,7 @@ export function ProductQuoteForm({ sku, productName }: Props) {
         message: err instanceof Error ? err.message : "Error desconocido",
       });
     }
-  }
+  };
 
   if (state.status === "success") {
     return (
@@ -81,23 +97,27 @@ export function ProductQuoteForm({ sku, productName }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="pq-nombre">Nombre *</Label>
-          <Input id="pq-nombre" name="nombre" required placeholder="Juan Pérez" />
+          <Input id="pq-nombre" {...register("nombre")} placeholder="Juan Pérez" />
+          {errors.nombre && <FieldError msg={errors.nombre.message!} />}
         </div>
         <div>
           <Label htmlFor="pq-empresa">Empresa *</Label>
-          <Input id="pq-empresa" name="empresa" required placeholder="Industrias XYZ SRL" />
+          <Input id="pq-empresa" {...register("empresa")} placeholder="Industrias XYZ SRL" />
+          {errors.empresa && <FieldError msg={errors.empresa.message!} />}
         </div>
         <div>
           <Label htmlFor="pq-correo">Correo *</Label>
-          <Input id="pq-correo" name="correo" type="email" required placeholder="compras@empresa.do" />
+          <Input id="pq-correo" type="email" {...register("correo")} placeholder="compras@empresa.do" />
+          {errors.correo && <FieldError msg={errors.correo.message!} />}
         </div>
         <div>
           <Label htmlFor="pq-telefono">Teléfono *</Label>
-          <Input id="pq-telefono" name="telefono" type="tel" required placeholder="(809) 555-1234" />
+          <Input id="pq-telefono" type="tel" {...register("telefono")} placeholder="(809) 555-1234" />
+          {errors.telefono && <FieldError msg={errors.telefono.message!} />}
         </div>
         <div>
           <Label htmlFor="pq-producto">Producto</Label>
@@ -105,13 +125,14 @@ export function ProductQuoteForm({ sku, productName }: Props) {
         </div>
         <div>
           <Label htmlFor="pq-cantidad">Cantidad *</Label>
-          <Input id="pq-cantidad" name="cantidad" type="number" min="1" defaultValue={1} required />
+          <Input id="pq-cantidad" type="number" min="1" {...register("cantidad")} />
+          {errors.cantidad && <FieldError msg={errors.cantidad.message!} />}
         </div>
       </div>
 
       <div>
         <Label htmlFor="pq-comentario">Comentario</Label>
-        <Textarea id="pq-comentario" name="comentario" rows={3} placeholder="Aplicación, urgencia, especificaciones..." />
+        <Textarea id="pq-comentario" {...register("comentario")} rows={3} placeholder="Aplicación, urgencia, especificaciones..." />
       </div>
 
       <div>
@@ -158,4 +179,8 @@ export function ProductQuoteForm({ sku, productName }: Props) {
       </button>
     </form>
   );
+}
+
+function FieldError({ msg }: { msg: string }) {
+  return <p className="mt-1 text-xs text-signal font-mono">{msg}</p>;
 }
