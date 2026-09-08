@@ -95,6 +95,60 @@ export const TABLE_CATEGORIES: Record<
     searchKeys: ["modelo", "descripcion"],
     searchPlaceholder: "Buscar por color o tipo...",
   },
+  // Instrumentación -> Termocuplas y RTD: Pyromation (marca real) y Genéricas (el cliente las
+  // describió como "termocuplas chinas lisas"/"tornillos", sin marca propia — incluye también
+  // los conectores para termocupla, que no traen marca).
+  "termocuplas-pyromation": {
+    holderSlug: "termocuplas-pyromation",
+    specsKey: "termocuplasPyromation",
+    columns: [
+      { key: "modelo", label: "Código" },
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion", "tipo"],
+    searchPlaceholder: "Buscar por código, tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
+  "termocuplas-genericas": {
+    holderSlug: "termocuplas-genericas",
+    specsKey: "termocuplasGenericas",
+    columns: [
+      { key: "modelo", label: "Código" },
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion", "tipo"],
+    searchPlaceholder: "Buscar por código, tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
+  // Materiales industriales -> Alambre y Resistencia Eléctrica: sin marca conocida, primer
+  // contenido real de esta categoría (antes vacía).
+  "alambre-resistencia-electrica": {
+    holderSlug: "alambre-resistencia-electrica",
+    specsKey: "alambreResistencia",
+    columns: [
+      { key: "modelo", label: "Código" },
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion", "tipo"],
+    searchPlaceholder: "Buscar por código, calibre o tipo...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
+  // Controles Eléctricos -> Finales de Carrera -> Elemec (limit switch / micro switch).
+  "finales-de-carrera-elemec": {
+    holderSlug: "finales-de-carrera-elemec",
+    specsKey: "finalesCarreraElemec",
+    columns: [
+      { key: "modelo", label: "Código" },
+      { key: "tipo", label: "Tipo" },
+      { key: "descripcion", label: "Descripción" },
+    ],
+    searchKeys: ["modelo", "descripcion", "tipo"],
+    searchPlaceholder: "Buscar por código, tipo o descripción...",
+    filters: [{ key: "tipo", label: "Tipo" }],
+  },
   // Inductivos, Capacitivos, Fotoeléctricos y Amplificadores Autonics se unificaron en una
   // sola categoría/tabla "Sensores Autonics" (pedido del cliente: un solo tile, un solo
   // listado). Las categorías "sensores-inductivos/capacitivos/fotoelectricos" siguen
