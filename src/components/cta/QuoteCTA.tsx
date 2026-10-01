@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Clock, Mail } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { whatsappCylinderService } from "@/lib/whatsapp";
+import { CONTACT } from "@/lib/constants";
 
 type Props = {
   eyebrow?: string;
@@ -58,7 +59,7 @@ export function QuoteCTA({
           <p className="text-white/60 mb-10 max-w-xl mx-auto">
             {text}
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
             <Link href={quoteHref(quoteItem, quoteTipo)} className="btn-primary px-8 py-4 text-sm">
               {ctaLabel}
               <ArrowRight className="h-4 w-4" />
@@ -72,6 +73,13 @@ export function QuoteCTA({
             >
               <WhatsAppIcon className="h-4 w-4" />
               WhatsApp
+            </a>
+            <a
+              href={`mailto:${CONTACT.email}?subject=${encodeURIComponent("Consulta sobre soluciones industriales")}`}
+              className="inline-flex items-center justify-center gap-2 border border-white/20 px-8 py-4 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white/40"
+            >
+              <Mail className="h-4 w-4" />
+              Correo
             </a>
           </div>
           <p className="mt-8 flex items-center justify-center gap-2 text-xs text-white/40 font-mono uppercase tracking-techno">
