@@ -28,8 +28,8 @@ function CilindrosDestacado() {
             <div className="absolute -top-2 -left-2 h-4 w-4 border-l-2 border-t-2 border-signal z-10" />
             <div className="absolute -bottom-2 -right-2 h-4 w-4 border-r-2 border-b-2 border-signal z-10" />
             <Image
-              src="/products/cilindros-neumaticos.jpg"
-              alt="Cilindros neumáticos"
+              src="/banners/neumatica-industrial.webp"
+              alt="Fotografía editorial de cilindros y componentes neumáticos industriales"
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-contain p-6"
