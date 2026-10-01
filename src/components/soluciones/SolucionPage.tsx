@@ -50,33 +50,34 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
 
       {/* HERO */}
       <section className="border-b border-black/5">
-        <div className="container-max py-12 sm:py-16">
+        <div className="container-max pt-7 sm:pt-9">
           <Breadcrumbs items={[{ label: s.name }]} />
-
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center mt-8">
+        </div>
+        <div className="overflow-hidden bg-surface text-white">
+          <div className="container-max grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-12 lg:gap-12 lg:py-20">
             <div className="lg:col-span-6">
-              <div className="eyebrow mb-4">
+              <div className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-white/55">
                 Soluciones industriales · {String(index).padStart(2, "0")}
               </div>
-              <h1 className="font-display text-display-xl text-surface mb-6">{s.title}</h1>
-              <p className="text-lg sm:text-xl text-steel-200 leading-relaxed mb-8 max-w-xl">{s.description}</p>
+              <h1 className="mb-6 font-display text-display-xl text-white">{s.title}</h1>
+              <p className="mb-8 max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">{s.description}</p>
               <div className="flex flex-wrap gap-3">
                 <Link href={quoteHref(s.name, s.name)} className="btn-primary">
                   Solicitar cotización
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                <a href={whatsappSolucion(s.name)} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                <a href={whatsappSolucion(s.name)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-5 py-3 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10">
                   <WhatsAppIcon className="h-4 w-4" />
                   WhatsApp
                 </a>
               </div>
-              <p className="mt-6 font-mono text-[10px] uppercase tracking-techno text-steel-400">
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-techno text-white/50">
                 Bajo cotización · Respuesta en menos de 24 horas hábiles
               </p>
             </div>
 
             <div className="lg:col-span-6">
-              <div className="relative border border-black/10 bg-white">
+              <div className="relative border border-white/15 bg-white shadow-[0_30px_80px_-40px_rgba(0,0,0,0.85)]">
                 <div className="absolute -top-2 -left-2 h-4 w-4 border-l-2 border-t-2 border-signal z-10" />
                 <div className="absolute -bottom-2 -right-2 h-4 w-4 border-r-2 border-b-2 border-signal z-10" />
                 <Image
