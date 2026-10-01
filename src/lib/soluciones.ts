@@ -66,11 +66,11 @@ export const SOLUCIONES: Solucion[] = [
       "Cilindros, válvulas, actuadores, unidades FRL y accesorios para sistemas de aire comprimido. Además, fabricamos, reparamos y reconstruimos cilindros neumáticos.",
     metaDescription:
       "Neumática industrial en República Dominicana: cilindros, válvulas, racores, unidades FRL, mangueras y accesorios bajo cotización. Fabricación y reparación de cilindros.",
-    image: "/banners/neumatica-industrial.jpg",
-    imageWidth: 1402,
-    imageHeight: 1122,
+    image: "/banners/neumatica-industrial.webp",
+    imageWidth: 512,
+    imageHeight: 512,
     ctaTitle: "¿Necesitas un componente neumático?",
-    imageAlt: "Componentes de neumática industrial: cilindros, válvulas, racores y unidades FRL",
+    imageAlt: "Fotografía editorial de cilindros y componentes neumáticos industriales",
     ejemplos: ["Cilindros neumáticos", "Válvulas", "Racores", "Unidades FRL", "Kits de sellos"],
     subcategorias: [
       {
@@ -146,11 +146,11 @@ export const SOLUCIONES: Solucion[] = [
       "Contactores, relés, protecciones y componentes de tablero para el control y la protección de máquinas y motores.",
     metaDescription:
       "Control eléctrico industrial en República Dominicana: contactores, relés, breakers, fusibles, pulsadores, temporizadores y finales de carrera bajo cotización.",
-    image: "/banners/controles-electricos.jpg",
-    imageWidth: 1290,
-    imageHeight: 1025,
+    image: "/banners/control-electrico.webp",
+    imageWidth: 512,
+    imageHeight: 512,
     ctaTitle: "¿Necesitas componentes de control eléctrico?",
-    imageAlt: "Componentes de control eléctrico industrial para tablero",
+    imageAlt: "Fotografía editorial de un tablero de control eléctrico industrial",
     ejemplos: ["Contactores", "Relés", "Breakers", "Fusibles", "Pulsadores"],
     subcategorias: [
       {
@@ -218,11 +218,11 @@ export const SOLUCIONES: Solucion[] = [
       "Sensores inductivos, capacitivos, fotoeléctricos, magnéticos y de proximidad para detectar piezas, posición y presencia en procesos automatizados.",
     metaDescription:
       "Sensores industriales en República Dominicana: inductivos, capacitivos, fotoeléctricos, fotoceldas, magnéticos, de presión y de temperatura bajo cotización.",
-    image: "/banners/sensores-fotoceldas.jpg",
-    imageWidth: 1290,
-    imageHeight: 945,
+    image: "/banners/sensores-fotoceldas.webp",
+    imageWidth: 512,
+    imageHeight: 512,
     ctaTitle: "¿Necesitas un sensor industrial?",
-    imageAlt: "Sensores industriales inductivos y fotoeléctricos",
+    imageAlt: "Fotografía editorial de sensores fotoeléctricos industriales junto a una banda transportadora",
     ejemplos: ["Inductivos", "Fotoeléctricos", "Capacitivos", "Fotoceldas", "Presión"],
     subcategorias: [
       {
@@ -292,11 +292,11 @@ export const SOLUCIONES: Solucion[] = [
     description: "Medición de presión, temperatura, flujo y nivel para procesos industriales.",
     metaDescription:
       "Instrumentación industrial en República Dominicana: manómetros, interruptores y transmisores de presión, termómetros, termopozos y medición de flujo y nivel bajo cotización.",
-    image: "/banners/instrumentacion-procesos.jpg",
-    imageWidth: 1290,
-    imageHeight: 1009,
+    image: "/banners/instrumentacion-procesos.webp",
+    imageWidth: 512,
+    imageHeight: 512,
     ctaTitle: "¿Necesitas un instrumento de medición?",
-    imageAlt: "Instrumentos de medición de presión para procesos industriales",
+    imageAlt: "Fotografía editorial de instrumentos de medición en un proceso industrial",
     ejemplos: ["Manómetros", "Termómetros", "Interruptores de presión", "Flujo", "Nivel"],
     subcategorias: [
       {
@@ -352,11 +352,11 @@ export const SOLUCIONES: Solucion[] = [
       "Resistencias de cartucho de alta densidad para el calentamiento de cilindros en máquinas de inyección y procesos industriales, junto con termocuplas, RTD y alambre de resistencia. Cotizamos también según tu especificación.",
     metaDescription:
       "Resistencias eléctricas industriales en República Dominicana: resistencias de cartucho, termocuplas, RTD y alambre de resistencia. Cotización bajo especificación.",
-    image: "/banners/resistencias-electricas-industriales.jpg",
-    imageWidth: 1254,
-    imageHeight: 1254,
+    image: "/banners/resistencias-electricas-industriales.webp",
+    imageWidth: 512,
+    imageHeight: 512,
     ctaTitle: "¿Necesitas una resistencia eléctrica?",
-    imageAlt: "Resistencias de cartucho industriales",
+    imageAlt: "Fotografía editorial de resistencias de cartucho y sondas de temperatura industriales",
     ejemplos: ["Resistencias de cartucho", "Termocuplas", "RTD", "Alambre de resistencia"],
     subcategorias: [
       {
