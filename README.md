@@ -5,6 +5,7 @@ Sitio B2B de **Dynatech Ingeniería SRL** (Santo Domingo, República Dominicana)
 Producción: `https://www.dynatech.com.do` (Vercel).
 
 **Antes de cambiar algo, lee:**
+- `AGENTS.md`: reglas para agentes de programación (Codex las lee automáticamente).
 - `HANDOFF.md`: resumen para continuar el proyecto.
 - `PROJECT_CONTEXT.md`: cómo está construido.
 - `AUDITORIA_COMPLETA.md`: estado real, pruebas y pendientes.
