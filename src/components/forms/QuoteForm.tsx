@@ -173,7 +173,7 @@ export function QuoteForm() {
             <select
               id="tipo"
               {...register("tipo")}
-              className="block w-full bg-carbon-800 border border-black/10 px-4 py-2.5 text-sm text-surface
+              className="block w-full bg-carbon-800 border border-black/10 px-4 py-2.5 text-base text-surface
                          focus:border-signal focus:ring-1 focus:ring-signal focus:outline-none rounded-xs transition-colors"
             >
               <option value="">Elige una opción…</option>

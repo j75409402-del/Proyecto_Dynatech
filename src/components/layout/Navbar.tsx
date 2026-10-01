@@ -210,6 +210,7 @@ export function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-label="Menú"
             aria-expanded={open}
+            aria-controls="mobile-navigation"
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -218,6 +219,9 @@ export function Navbar() {
 
       {/* Panel mobile */}
       <div
+        id="mobile-navigation"
+        aria-hidden={!open}
+        inert={!open}
         className={cn(
           "lg:hidden overflow-hidden bg-carbon transition-[max-height,opacity] duration-300 ease-out border-b border-black/10",
           open ? "max-h-[48rem] opacity-100" : "max-h-0 opacity-0",

@@ -61,7 +61,14 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     locale: "es_DO",
     type: "website",
+    images: [{
+      url: "/industrial-editorial.webp",
+      width: 1536,
+      height: 1024,
+      alt: "Imagen editorial de maquinaria industrial",
+    }],
   },
+  twitter: { card: "summary_large_image" },
   robots: {
     index: true,
     follow: true,

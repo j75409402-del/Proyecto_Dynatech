@@ -88,28 +88,47 @@ export default function ServiciosPage() {
 
       {/* HERO */}
       <section className="border-b border-black/5">
-        <div className="container-max py-14 sm:py-20">
+        <div className="container-max pt-7 sm:pt-9">
           <Breadcrumbs items={[{ label: "Servicios" }]} />
-          <Reveal className="max-w-3xl mt-8">
-            <div className="eyebrow mb-4">Servicios</div>
-            <h1 className="font-display text-display-xl text-surface mb-6">
-              Fabricación, reparación y <span className="text-signal">reconstrucción</span>
-            </h1>
-            <p className="text-xl text-steel-200 leading-relaxed mb-8 max-w-2xl">
-              Recuperamos cilindros dañados y fabricamos nuevos a partir de tu plano, una muestra o
-              tus medidas.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/cotizacion" className="btn-primary">
-                Solicitar cotización
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-secondary">
-                <WhatsAppIcon className="h-4 w-4" />
-                WhatsApp
-              </a>
+        </div>
+        <div className="overflow-hidden bg-surface text-white">
+          <div className="container-max grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-12 lg:gap-12 lg:py-20">
+            <Reveal className="lg:col-span-6">
+              <div className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-white/55">Cilindros neumáticos · Servicios</div>
+              <h1 className="mb-6 font-display text-display-xl text-white">
+                Fabricación, reparación y <span className="text-signal">reconstrucción</span>
+              </h1>
+              <p className="mb-8 max-w-2xl text-lg leading-relaxed text-white/75 sm:text-xl">
+                Recuperamos cilindros dañados y fabricamos nuevos a partir de tu plano, una muestra o
+                tus medidas.
+              </p>
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <Link href="/cotizacion" className="btn-primary min-h-12 px-6">
+                  Solicitar cotización
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-6 py-3 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10">
+                  <WhatsAppIcon className="h-4 w-4" />
+                  WhatsApp
+                </a>
+              </div>
+            </Reveal>
+            <div className="lg:col-span-6">
+              <div className="relative aspect-[4/3] overflow-hidden border border-white/15 bg-carbon-800 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.85)]">
+                <Image
+                  src="/banners/cilindros-taller-wide.webp"
+                  alt="Imagen editorial de un cilindro neumático completo en reparación"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-surface/45 via-transparent to-transparent" />
+                <div aria-hidden className="absolute -left-1 -top-1 h-5 w-5 border-l-2 border-t-2 border-signal" />
+                <div aria-hidden className="absolute -bottom-1 -right-1 h-5 w-5 border-b-2 border-r-2 border-signal" />
+              </div>
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 

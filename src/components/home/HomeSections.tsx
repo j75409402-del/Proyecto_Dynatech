@@ -35,19 +35,25 @@ export function SolucionesIndustriales() {
             >
               <TiltCard max={3} className="h-full">
                 <article className="group relative flex h-full flex-col border border-black/10 bg-carbon hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-shadow duration-300">
-                  <Link href={`/${s.slug}`} className="relative block aspect-[16/10] overflow-hidden border-b border-black/10 bg-white" tabIndex={-1} aria-hidden>
+                  <Link href={`/${s.slug}`} aria-label={`Ver línea de ${s.name}`} className="relative block aspect-[16/10] overflow-hidden border-b border-black/10 bg-surface">
                     <Image
                       src={s.image}
-                      alt=""
+                      alt={s.imageAlt}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
+                    className="object-contain object-center transition-transform duration-500 group-hover:scale-[1.02]"
                     />
+                    <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-surface/75 via-surface/5 to-transparent" />
+                    <span className="absolute bottom-4 left-5 font-mono text-[10px] uppercase tracking-[0.18em] text-white/80">
+                      Línea {String(i + 1).padStart(2, "0")} / 05
+                    </span>
                   </Link>
                   <div className="flex flex-1 flex-col p-6">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="font-mono text-xs text-signal tracking-techno">{String(i + 1).padStart(2, "0")}</span>
-                      <s.icon className="h-4 w-4 text-signal" />
+                      <span className="grid h-9 w-9 place-items-center bg-signal-soft text-signal">
+                        <s.icon className="h-4 w-4" />
+                      </span>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-steel-400">Bajo cotización</span>
                     </div>
                     <h3 className="font-display text-2xl text-surface mb-2">
                       <Link href={`/${s.slug}`} className="hover:text-signal transition-colors">
@@ -55,7 +61,7 @@ export function SolucionesIndustriales() {
                       </Link>
                     </h3>
                     <p className="text-sm text-steel-300 leading-relaxed mb-4">{s.short}</p>
-                    <ul className="flex flex-wrap gap-1.5 mb-6" aria-label={`Ejemplos de ${s.name}`}>
+                    <ul className="mb-6 flex flex-wrap gap-1.5" aria-label={`Ejemplos de ${s.name}`}>
                       {s.ejemplos.slice(0, 4).map((e) => (
                         <li key={e} className="border border-black/10 bg-carbon-800 px-2 py-0.5 text-xs text-steel-300">
                           {e}
@@ -65,14 +71,14 @@ export function SolucionesIndustriales() {
                     <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3">
                       <Link
                         href={quoteHref(s.name, s.name)}
-                        className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
+                        className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal transition-all hover:gap-2.5"
                       >
                         Solicitar cotización
                         <ArrowRight className="h-3.5 w-3.5" />
                       </Link>
                       <Link
                         href={`/${s.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-steel-300 hover:text-signal transition-colors"
+                        className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-steel-300 transition-colors hover:text-signal"
                       >
                         Ver {s.name.toLowerCase()}
                         <ArrowUpRight className="h-3.5 w-3.5" />
@@ -122,8 +128,8 @@ export function CilindrosDestacados() {
               >
                 <div className="relative aspect-[3/2] bg-white border-b border-black/10 overflow-hidden">
                   <Image
-                    src="/products/cilindros-neumaticos.jpg"
-                    alt="Cilindros neumáticos"
+                    src="/banners/neumatica-industrial.webp"
+                    alt="Fotografía editorial de cilindros y componentes neumáticos industriales"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-contain p-6 group-hover:scale-[1.03] transition-transform duration-500"
