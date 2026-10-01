@@ -41,19 +41,6 @@ Quedo pendiente. Gracias.`;
 }
 
 /**
- * Link pa' solicitar la importación de un producto que no está en catálogo.
- */
-export function whatsappImportRequest(): string {
-  const msg = `Hola Dynatech, no encontré en el catálogo un producto que necesito y quisiera que me ayuden a importarlo.
-
-Número de parte / modelo / fabricante:
-(o adjunto una foto del producto)
-
-Cantidad:`;
-  return whatsappLink(msg);
-}
-
-/**
  * Link pa' consultar sobre reparación/fabricación de cilindros neumáticos.
  */
 export function whatsappCylinderService(): string {
@@ -68,5 +55,5 @@ Problema o especificación:`;
  * Link genérico "quiero cotizar".
  */
 export function whatsappGeneral(): string {
-  return whatsappLink(`Hola Dynatech, me interesa recibir información sobre sus productos. Vengo desde ${SITE.url}`);
+  return whatsappLink(`Hola Dynatech, quisiera cotizar un trabajo de cilindros neumáticos. Vengo desde ${SITE.url}`);
 }

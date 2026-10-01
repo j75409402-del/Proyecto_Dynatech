@@ -1,42 +1,19 @@
 import type { MetadataRoute } from "next";
-import { createClient } from "@/lib/supabase/server";
 import { SITE } from "@/lib/constants";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const supabase = await createClient();
-
-  const [{ data: products }, { data: categories }] = await Promise.all([
-    supabase.from("products").select("slug, updated_at").eq("active", true),
-    supabase.from("categories").select("slug"),
-  ]);
-
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${SITE.url}/`, changeFrequency: "weekly", priority: 1 },
-    { url: `${SITE.url}/productos`, changeFrequency: "daily", priority: 0.9 },
-    { url: `${SITE.url}/reparacion-cilindros-neumaticos`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE.url}/nosotros`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${SITE.url}/contacto`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${SITE.url}/cotizacion`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE.url}/faq`, changeFrequency: "monthly", priority: 0.4 },
+// Lista fija: el sitio ya no tiene catálogo dinámico, así que el sitemap no consulta Supabase.
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    { url: `${SITE.url}/`, changeFrequency: "monthly", priority: 1 },
+    { url: `${SITE.url}/cilindros-neumaticos`, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${SITE.url}/servicios`, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${SITE.url}/sellos-y-componentes`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE.url}/cotizacion`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE.url}/nosotros`, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${SITE.url}/contacto`, changeFrequency: "yearly", priority: 0.5 },
     { url: `${SITE.url}/garantias`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE.url}/devoluciones`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE.url}/privacidad`, changeFrequency: "yearly", priority: 0.2 },
     { url: `${SITE.url}/terminos`, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${SITE.url}/mapa-del-sitio`, changeFrequency: "monthly", priority: 0.3 },
   ];
-
-  const productRoutes: MetadataRoute.Sitemap = (products ?? []).map((p) => ({
-    url: `${SITE.url}/productos/${p.slug}`,
-    lastModified: p.updated_at ?? undefined,
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
-
-  const categoryRoutes: MetadataRoute.Sitemap = (categories ?? []).map((c) => ({
-    url: `${SITE.url}/categorias/${c.slug}`,
-    changeFrequency: "weekly",
-    priority: 0.6,
-  }));
-
-  return [...staticRoutes, ...productRoutes, ...categoryRoutes];
 }

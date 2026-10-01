@@ -4,7 +4,7 @@ import { CONTACT } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Garantías",
-  description: "Condiciones de garantía de los productos distribuidos por Dynatech Ingeniería SRL.",
+  description: "Condiciones de garantía de los trabajos y piezas de Dynatech Ingeniería SRL.",
 };
 
 export default function GarantiasPage() {
@@ -13,15 +13,15 @@ export default function GarantiasPage() {
       eyebrow="Soporte"
       title="Garantías"
       updated="julio 2026"
-      intro="Dynatech Ingeniería traslada a cada cliente la garantía de fábrica del fabricante correspondiente, y gestiona el proceso de reclamo en representación tuya."
+      intro="Todo trabajo de fabricación o reparación realizado por Dynatech Ingeniería incluye garantía, con el alcance específico confirmado en la cotización. En piezas importadas, trasladamos la garantía del fabricante y gestionamos el reclamo en representación tuya."
       sections={[
         {
           heading: "Cobertura",
           body: (
             <p>
-              Los productos cubren defectos de fabricación, materiales o funcionamiento bajo
-              condiciones normales de uso, según el plazo y términos que defina cada fabricante.
-              El plazo específico de cada producto se confirma al momento de la cotización.
+              La garantía cubre defectos de fabricación, materiales o funcionamiento bajo
+              condiciones normales de uso. El plazo y alcance específicos de cada trabajo o pieza
+              se confirman al momento de la cotización.
             </p>
           ),
         },
@@ -48,7 +48,7 @@ export default function GarantiasPage() {
               <a href={`mailto:${CONTACT.email}`} className="text-signal hover:underline">
                 {CONTACT.email}
               </a>{" "}
-              con el SKU o nombre del producto, tu número de factura u orden de compra, y una
+              con la descripción del trabajo o la pieza, tu número de factura u orden de compra, y una
               breve descripción del problema (foto o video ayuda). Un ingeniero evalúa el caso y
               te confirma los siguientes pasos — reemplazo, reparación o gestión directa con el
               fabricante, según corresponda.

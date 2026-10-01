@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { CartProvider } from "@/components/cart/CartContext";
 import { SITE, CONTACT } from "@/lib/constants";
-import { getSiteSettings } from "@/lib/siteSettings";
 import "./globals.css";
 
 const organizationJsonLd = {
@@ -45,12 +43,12 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   keywords: [
-    "neumática República Dominicana",
-    "automatización industrial RD",
-    "componentes industriales Santo Domingo",
-    "sensores industriales",
-    "instrumentación",
-    "piezas industriales",
+    "cilindros neumáticos República Dominicana",
+    "fabricación de cilindros neumáticos",
+    "reparación de cilindros neumáticos",
+    "reconstrucción de cilindros neumáticos",
+    "kits de sellos para cilindros",
+    "vástagos cromados",
     "Dynatech",
   ],
   authors: [{ name: SITE.name }],
@@ -68,13 +66,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await getSiteSettings();
-
   return (
     <html
       lang="es"
@@ -85,11 +81,9 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
-        <CartProvider>
-          <Navbar catalogPdfUrl={settings.catalog_pdf_url} />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </CartProvider>
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

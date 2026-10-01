@@ -1,37 +1,29 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, Clock, FileDown } from "lucide-react";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { CONTACT, SITE, SOCIAL } from "@/lib/constants";
 import { Reveal } from "@/components/motion/Reveal";
-import { getSiteSettings } from "@/lib/siteSettings";
 
-const categoryLinks = [
-  { label: "Neumática",                          href: "/categorias/neumatica" },
-  { label: "Instrumentación",                    href: "/categorias/instrumentacion" },
-  { label: "Sensores y fotoceldas",               href: "/categorias/sensores" },
-  { label: "Controles eléctricos",                href: "/categorias/electrica" },
-  { label: "Resistencias Eléctricas Industriales", href: "/categorias/resistencias-maquinas-inyeccion-plastico" },
-  { label: "Fusibles",                             href: "/categorias/fusibles" },
+const solutionLinks = [
+  { label: "Cilindros neumáticos", href: "/cilindros-neumaticos" },
+  { label: "Servicios",            href: "/servicios" },
+  { label: "Sellos y componentes", href: "/sellos-y-componentes" },
 ];
 
 const companyLinks = [
-  { label: "Nosotros",     href: "/nosotros" },
-  { label: "Catálogo",     href: "/productos" },
-  { label: "Cotización",   href: "/cotizacion" },
-  { label: "Contacto",     href: "/contacto" },
+  { label: "Nosotros",               href: "/nosotros" },
+  { label: "Solicita tu cotización", href: "/cotizacion" },
+  { label: "Contacto",               href: "/contacto" },
 ];
 
 const legalLinks = [
-  { label: "Preguntas frecuentes", href: "/faq" },
   { label: "Garantías",            href: "/garantias" },
   { label: "Devoluciones",         href: "/devoluciones" },
   { label: "Privacidad",           href: "/privacidad" },
   { label: "Términos y condiciones", href: "/terminos" },
 ];
 
-export async function Footer() {
-  const settings = await getSiteSettings();
-
+export function Footer() {
   return (
     <footer className="bg-carbon-900 border-t border-black/5 mt-24">
       <div className="container-max py-16">
@@ -60,11 +52,11 @@ export async function Footer() {
             </p>
           </div>
 
-          {/* Categorías */}
+          {/* Soluciones */}
           <div>
-            <div className="eyebrow mb-4">Catálogo</div>
+            <div className="eyebrow mb-4">Soluciones</div>
             <ul className="space-y-2">
-              {categoryLinks.map((link) => (
+              {solutionLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -91,19 +83,6 @@ export async function Footer() {
                   </Link>
                 </li>
               ))}
-              {settings.catalog_pdf_url && (
-                <li>
-                  <a
-                    href={settings.catalog_pdf_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm text-steel-200 hover:text-signal transition-colors"
-                  >
-                    <FileDown className="h-3.5 w-3.5" />
-                    Descargar catálogo
-                  </a>
-                </li>
-              )}
             </ul>
           </div>
 
@@ -165,9 +144,6 @@ export async function Footer() {
             © {new Date().getFullYear()} {SITE.name} SRL · RNC {SITE.rnc} · Santo Domingo, RD
           </p>
           <div className="flex gap-4 text-sm">
-            <Link href="/mapa-del-sitio" className="text-steel-400 hover:text-signal transition-colors">
-              Mapa del sitio
-            </Link>
             <a
               href={SOCIAL.instagram}
               target="_blank"

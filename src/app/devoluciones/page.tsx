@@ -30,9 +30,9 @@ export default function DevolucionesPage() {
           heading: "Productos que no aplican a devolución",
           body: (
             <ul className="list-disc pl-5 space-y-1.5">
-              <li>Productos cortados, ensamblados o modificados a pedido (ej. mangueras cortadas a medida).</li>
+              <li>Productos cortados, ensamblados o modificados a pedido (ej. cilindros o vástagos fabricados a medida).</li>
               <li>Productos de importación especial o pedidos directos a fábrica bajo especificación del cliente.</li>
-              <li>Consumibles y piezas de desgaste una vez instalados (sellos, empaques, resistencias usadas).</li>
+              <li>Consumibles y piezas de desgaste una vez instalados (sellos, empaques, kits de sellos).</li>
               <li>Productos dañados por mal uso o instalación incorrecta.</li>
             </ul>
           ),
