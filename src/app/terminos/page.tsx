@@ -19,22 +19,20 @@ export default function TerminosPage() {
           heading: "Objeto del sitio",
           body: (
             <p>
-              {SITE.name} SRL (RNC {SITE.rnc}) distribuye piezas y componentes industriales en
-              República Dominicana. Este sitio funciona como catálogo técnico y canal de
-              solicitud de cotización — no procesa pagos ni ventas en línea. Los precios,
-              cuando se muestran, son referenciales y no constituyen una oferta vinculante hasta
-              ser confirmados por escrito en una cotización formal.
+              {SITE.name} SRL (RNC {SITE.rnc}) fabrica, repara y suministra cilindros neumáticos y sus
+              componentes para la industria en República Dominicana. Este sitio es un canal
+              informativo y de solicitud de cotización — no procesa pagos ni ventas en línea ni
+              publica precios. Toda oferta se formaliza por escrito en una cotización.
             </p>
           ),
         },
         {
-          heading: "Uso del catálogo y del carrito de cotización",
+          heading: "Solicitudes de cotización",
           body: (
             <p>
-              El &quot;carrito de cotización&quot; es una herramienta para armar tu lista de
-              productos de interés y enviarla en una sola solicitud. Agregar un producto al
-              carrito no genera ningún compromiso de compra ni de venta; el pedido se formaliza
-              únicamente cuando ambas partes confirman precio, cantidad y condiciones.
+              Enviar una solicitud de cotización no genera ningún compromiso de compra ni de
+              venta; el trabajo se formaliza únicamente cuando ambas partes confirman precio,
+              cantidad, tiempo de entrega y condiciones.
             </p>
           ),
         },
@@ -44,7 +42,7 @@ export default function TerminosPage() {
             <p>
               Nos esforzamos por mantener descripciones, especificaciones e imágenes precisas.
               Sin embargo, especificaciones de fabricantes pueden cambiar sin previo aviso.
-              Ante cualquier duda técnica antes de comprar, confírmala con nuestro equipo.
+              Ante cualquier duda técnica, confírmala con nuestro equipo.
             </p>
           ),
         },

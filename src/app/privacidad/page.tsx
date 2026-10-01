@@ -19,10 +19,10 @@ export default function PrivacidadPage() {
           heading: "Qué información recopilamos",
           body: (
             <p>
-              Cuando completas el carrito de cotización, el formulario de contacto o nos
+              Cuando completas el formulario de cotización o nos
               escribes por WhatsApp, recopilamos los datos que nos proporcionas voluntariamente:
-              nombre, empresa, RNC, correo electrónico, teléfono, ciudad, y el detalle de los
-              productos que te interesan. No solicitamos ni almacenamos datos de tarjetas de
+              nombre, empresa, RNC, correo electrónico, teléfono, ciudad, el detalle
+              de lo que necesitas cotizar y los archivos que adjuntes (planos o fotos). No solicitamos ni almacenamos datos de tarjetas de
               pago ni información financiera a través del sitio.
             </p>
           ),
@@ -34,7 +34,7 @@ export default function PrivacidadPage() {
               <li>Responder tu solicitud de cotización o consulta.</li>
               <li>Coordinar entregas y facturación de pedidos confirmados.</li>
               <li>Contactarte sobre el estado de tu solicitud (por correo o WhatsApp).</li>
-              <li>Mejorar nuestro catálogo y servicio al cliente.</li>
+              <li>Mejorar nuestro servicio al cliente.</li>
             </ul>
           ),
         },
@@ -77,7 +77,7 @@ export default function PrivacidadPage() {
           body: (
             <p>
               Este sitio puede usar cookies técnicas o de analítica básica para entender cómo se
-              usa el catálogo y mejorar la experiencia de navegación. No usamos esta información
+              usa el sitio y mejorar la experiencia de navegación. No usamos esta información
               para publicidad de terceros.
             </p>
           ),
