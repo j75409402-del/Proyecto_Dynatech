@@ -5,7 +5,22 @@ import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { whatsappGeneral } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
+  title: "Proveedor industrial B2B en República Dominicana",
+  description:
+    "Neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización. Fabricación y reparación de cilindros neumáticos.",
   alternates: { canonical: "/" },
+  openGraph: {
+    title: "Soluciones industriales B2B · Dynatech Ingeniería",
+    description:
+      "Cinco líneas industriales bajo cotización y fabricación, reparación y reconstrucción de cilindros neumáticos.",
+    url: "/",
+    images: [{
+      url: "/industrial-editorial.webp",
+      width: 1536,
+      height: 1024,
+      alt: "Imagen editorial de maquinaria industrial",
+    }],
+  },
 };
 
 export default function HomePage() {
