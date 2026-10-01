@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { isAdminEmail } from "@/lib/adminEmails";
 
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
@@ -32,12 +33,15 @@ export async function updateSession(request: NextRequest) {
   const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
   const isLoginRoute = request.nextUrl.pathname === "/admin/login";
 
-  if (isAdminRoute && !isLoginRoute && !user) {
+  const authorized = !!user && isAdminEmail(user.email);
+
+  if (isAdminRoute && !isLoginRoute && !authorized) {
     const loginUrl = new URL("/admin/login", request.url);
+    if (user) loginUrl.searchParams.set("error", "no-autorizado");
     return NextResponse.redirect(loginUrl);
   }
 
-  if (isLoginRoute && user) {
+  if (isLoginRoute && authorized) {
     return NextResponse.redirect(new URL("/admin", request.url));
   }
 

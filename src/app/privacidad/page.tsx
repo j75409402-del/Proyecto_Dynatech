@@ -5,6 +5,7 @@ import { CONTACT, SITE } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Política de privacidad",
   description: "Cómo Dynatech Ingeniería SRL recopila, usa y protege los datos que compartes en este sitio.",
+  alternates: { canonical: "/privacidad" },
 };
 
 export default function PrivacidadPage() {

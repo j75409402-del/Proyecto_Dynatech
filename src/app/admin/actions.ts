@@ -3,97 +3,44 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient, createServiceClient } from "@/lib/supabase/server";
-
-const VALID_STATUSES = ["en_stock", "bajo_pedido", "consultar", "agotado"] as const;
-type StockStatus = (typeof VALID_STATUSES)[number];
+import { getAdminUser } from "@/lib/adminAuth";
+import { QUOTE_STATUSES } from "@/lib/leads";
 
 async function requireAdmin() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("No autenticado");
+  const user = await getAdminUser();
+  if (!user) throw new Error("No autorizado");
   return user;
 }
 
-export async function updateStockStatus(productId: string, status: string) {
+export async function updateQuoteStatus(formData: FormData) {
   await requireAdmin();
-
-  if (!VALID_STATUSES.includes(status as StockStatus)) {
-    throw new Error("Estado de stock inválido");
+  const id = String(formData.get("id") ?? "");
+  const status = String(formData.get("status") ?? "");
+  if (!id || !(QUOTE_STATUSES as readonly string[]).includes(status)) {
+    throw new Error("Datos inválidos");
   }
 
   const supabase = createServiceClient();
   const { error } = await supabase
-    .from("products")
-    .update({ stock_status: status })
-    .eq("id", productId);
-
-  if (error) throw new Error("No se pudo actualizar el stock");
-
-  revalidatePath("/admin");
-  revalidatePath("/productos");
-}
-
-export async function updateStockQuantity(productId: string, quantity: number | null) {
-  await requireAdmin();
-
-  if (quantity !== null && (!Number.isInteger(quantity) || quantity < 0)) {
-    throw new Error("Cantidad de stock inválida");
-  }
-
-  const supabase = createServiceClient();
-  const { error } = await supabase
-    .from("products")
-    .update({ stock_quantity: quantity })
-    .eq("id", productId);
-
-  if (error) throw new Error("No se pudo actualizar la cantidad de stock");
+    .from("quotes")
+    .update({ status, updated_at: new Date().toISOString() })
+    .eq("id", id);
+  if (error) throw new Error("No se pudo actualizar la cotización");
 
   revalidatePath("/admin");
-  revalidatePath("/productos");
 }
 
-export async function toggleFeatured(productId: string, featured: boolean) {
+export async function toggleMessageHandled(formData: FormData) {
   await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  const handled = formData.get("handled") === "true";
+  if (!id) throw new Error("Datos inválidos");
 
   const supabase = createServiceClient();
-  const { error } = await supabase
-    .from("products")
-    .update({ featured })
-    .eq("id", productId);
-
-  if (error) throw new Error("No se pudo actualizar el producto destacado");
+  const { error } = await supabase.from("contact_messages").update({ handled }).eq("id", id);
+  if (error) throw new Error("No se pudo actualizar el mensaje");
 
   revalidatePath("/admin");
-  revalidatePath("/");
-  revalidatePath("/productos");
-}
-
-const SETTINGS_KEYS = [
-  "catalog_pdf_url",
-  "stat_productos",
-  "stat_marcas",
-  "stat_clientes",
-  "stat_respuesta",
-] as const;
-
-export async function updateSiteSettings(values: Record<string, string>) {
-  await requireAdmin();
-
-  const rows = SETTINGS_KEYS.filter((key) => key in values).map((key) => ({
-    key,
-    value: values[key],
-    updated_at: new Date().toISOString(),
-  }));
-
-  const supabase = createServiceClient();
-  const { error } = await supabase.from("site_settings").upsert(rows, { onConflict: "key" });
-
-  if (error) throw new Error("No se pudo guardar la configuración");
-
-  revalidatePath("/admin/configuracion");
-  revalidatePath("/");
 }
 
 export async function signOutAdmin() {

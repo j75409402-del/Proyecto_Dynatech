@@ -8,6 +8,7 @@ import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 export const metadata: Metadata = {
   title: "Contacto",
   description: "Contáctanos. Estamos en Santo Domingo, República Dominicana.",
+  alternates: { canonical: "/contacto" },
 };
 
 export default function ContactoPage() {
@@ -21,7 +22,7 @@ export default function ContactoPage() {
             Hablemos.
           </h1>
           <p className="text-lg text-steel-300 leading-relaxed mb-10 max-w-lg">
-            Si es urgente, WhatsApp o teléfono son el camino más rápido. El formulario está bien pa'
+            Si es urgente, WhatsApp o teléfono son el camino más rápido. El formulario está bien pa&apos;
             consultas que no corren.
           </p>
 

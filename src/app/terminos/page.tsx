@@ -5,6 +5,7 @@ import { CONTACT, SITE } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Términos y condiciones",
   description: "Condiciones de uso del sitio web y del proceso de cotización de Dynatech Ingeniería SRL.",
+  alternates: { canonical: "/terminos" },
 };
 
 export default function TerminosPage() {
@@ -19,8 +20,9 @@ export default function TerminosPage() {
           heading: "Objeto del sitio",
           body: (
             <p>
-              {SITE.name} SRL (RNC {SITE.rnc}) fabrica, repara y reconstruye cilindros
-              neumáticos en República Dominicana. Este sitio funciona como canal de solicitud de
+              {SITE.name} SRL (RNC {SITE.rnc}) suministra soluciones industriales (neumática,
+              control eléctrico, sensores, instrumentación y resistencias eléctricas) y fabrica,
+              repara y reconstruye cilindros neumáticos en República Dominicana. Este sitio funciona como canal de solicitud de
               cotización — no procesa pagos ni ventas en línea, ni publica precios. Todo trabajo
               se formaliza por escrito en una cotización.
             </p>

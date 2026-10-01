@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type BaseSyntheticEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,7 +11,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { whatsappQuoteRequest } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { TIPOS_DE_SOLICITUD } from "@/lib/servicios";
+import { HONEYPOT_FIELD } from "@/lib/antispam";
+import { uploadAdjunto } from "@/lib/uploadAdjunto";
+import { GRUPOS_DE_SOLICITUD, TIPOS_DE_SOLICITUD } from "@/lib/servicios";
 
 /** Información con la que el cliente puede iniciar la cotización. */
 const INFO_DISPONIBLE = ["Plano", "Muestra física", "Medidas", "Fotos", "Especificaciones"] as const;
@@ -40,12 +42,18 @@ type State =
   | { status: "success"; quoteNumber: string; whatsappLink: string }
   | { status: "error"; message: string; whatsappLink: string };
 
-function initialValues(nombre: string | null): Partial<QuoteFormData> {
+function initialValues(nombre: string | null, tipo: string | null): Partial<QuoteFormData> {
   const base = { cantidad: 1, info: [] as string[], tipo: "", descripcion: "" };
+  const opciones = TIPOS_DE_SOLICITUD as readonly string[];
+  // ?tipo= (opcional) preselecciona la línea y ?nombre= queda como punto de partida de la
+  // descripción (ej. tipo "Sensores" + nombre "Sensores inductivos").
+  if (tipo && opciones.includes(tipo)) {
+    return { ...base, tipo, descripcion: nombre && nombre !== tipo ? nombre : "" };
+  }
   if (!nombre) return base;
   // Los botones "Solicitar cotización" del sitio mandan el nombre del servicio; si coincide
   // con una opción se preselecciona, si no, se usa como punto de partida de la descripción.
-  if ((TIPOS_DE_SOLICITUD as readonly string[]).includes(nombre)) return { ...base, tipo: nombre };
+  if (opciones.includes(nombre)) return { ...base, tipo: nombre };
   return { ...base, tipo: "Otro", descripcion: nombre };
 }
 
@@ -54,10 +62,11 @@ export function QuoteForm() {
   const [state, setState] = useState<State>({ status: "idle" });
   const [files, setFiles] = useState<File[]>([]);
   const [fileError, setFileError] = useState<string | null>(null);
+  const [startedAt] = useState(() => Date.now());
 
   const { register, handleSubmit, formState: { errors } } = useForm<QuoteFormData>({
     resolver: zodResolver(quoteSchema),
-    defaultValues: initialValues(searchParams.get("nombre")),
+    defaultValues: initialValues(searchParams.get("nombre"), searchParams.get("tipo")),
   });
 
   function addFiles(list: FileList | null) {
@@ -82,7 +91,7 @@ export function QuoteForm() {
     return [{ sku: "", name: data.tipo || "Solicitud de cotización", quantity: data.cantidad || 1, notes: data.descripcion }];
   }
 
-  const onSubmit = async (data: QuoteFormData) => {
+  const onSubmit = async (data: QuoteFormData, event?: BaseSyntheticEvent) => {
     setState({ status: "submitting" });
     const items = buildItems(data);
     const whatsappLink = whatsappQuoteRequest(items, data.company_name);
@@ -90,12 +99,7 @@ export function QuoteForm() {
     try {
       const urls: string[] = [];
       for (const file of files) {
-        const fd = new FormData();
-        fd.append("file", file);
-        const res = await fetch("/api/upload-adjunto", { method: "POST", body: fd });
-        const json = await res.json();
-        if (!res.ok) throw new Error(json.error ?? `No se pudo subir "${file.name}"`);
-        urls.push(json.url);
+        urls.push(await uploadAdjunto(file));
       }
 
       const message = [
@@ -117,6 +121,9 @@ export function QuoteForm() {
           city: data.city,
           items,
           message: message || undefined,
+          // Anti-spam (ver src/lib/antispam.ts): campo trampa y momento en que se cargó el form.
+          [HONEYPOT_FIELD]: honeypotValue(event),
+          _t: startedAt,
         }),
       });
       if (!res.ok) throw new Error("No se pudo enviar la solicitud");
@@ -151,6 +158,11 @@ export function QuoteForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
+      {/* Campo trampa: invisible para personas, los bots lo llenan. */}
+      <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor={HONEYPOT_FIELD}>No llenar este campo</label>
+        <input id={HONEYPOT_FIELD} name={HONEYPOT_FIELD} type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       {/* 01 · Qué necesitas */}
       <fieldset className="space-y-4">
         <legend className="eyebrow mb-4 pb-2 border-b border-black/10 w-full">01 · ¿Qué necesitas?</legend>
@@ -165,9 +177,14 @@ export function QuoteForm() {
                          focus:border-signal focus:ring-1 focus:ring-signal focus:outline-none rounded-xs transition-colors"
             >
               <option value="">Elige una opción…</option>
-              {TIPOS_DE_SOLICITUD.map((t) => (
-                <option key={t} value={t}>{t}</option>
+              {GRUPOS_DE_SOLICITUD.map((g) => (
+                <optgroup key={g.label} label={g.label}>
+                  {g.options.map((t) => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </optgroup>
               ))}
+              <option value="Otro">Otro</option>
             </select>
             {errors.tipo && <FieldError msg={errors.tipo.message!} />}
           </div>
@@ -184,7 +201,7 @@ export function QuoteForm() {
             id="descripcion"
             {...register("descripcion")}
             rows={4}
-            placeholder="Ej.: cilindro doble efecto, diámetro 32 mm, carrera 100 mm. Código si lo tienes, aplicación y urgencia."
+            placeholder="Qué necesitas: producto o servicio, código o referencia si la tienes, medidas, aplicación y urgencia."
           />
           {errors.descripcion && <FieldError msg={errors.descripcion.message!} />}
         </div>
@@ -238,7 +255,7 @@ export function QuoteForm() {
                          hover:border-signal/40 hover:text-signal transition-colors cursor-pointer"
             >
               <Paperclip className="h-4 w-4" />
-              Elegir archivos (PDF, JPG, PNG — máx. 10 MB c/u)
+              Elegir archivos (PDF, JPG, PNG o WEBP — máx. 10 MB c/u)
             </label>
           )}
           <input
@@ -323,6 +340,13 @@ export function QuoteForm() {
       </button>
     </form>
   );
+}
+
+/** Valor del campo trampa, leído del formulario al enviar. */
+function honeypotValue(event?: BaseSyntheticEvent): string {
+  const form = event?.target;
+  if (!(form instanceof HTMLFormElement)) return "";
+  return String(new FormData(form).get(HONEYPOT_FIELD) ?? "");
 }
 
 function FieldError({ msg }: { msg: string }) {

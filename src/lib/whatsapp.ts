@@ -55,5 +55,16 @@ Problema o especificación:`;
  * Link genérico "quiero cotizar".
  */
 export function whatsappGeneral(): string {
-  return whatsappLink(`Hola Dynatech, quisiera cotizar un trabajo de cilindros neumáticos. Vengo desde ${SITE.url}`);
+  return whatsappLink(`Hola Dynatech, quisiera solicitar una cotización. Vengo desde ${SITE.url}`);
+}
+
+/**
+ * Link pa' cotizar dentro de una línea industrial (Neumática, Sensores, etc.).
+ */
+export function whatsappSolucion(linea: string): string {
+  const msg = `Hola Dynatech, necesito cotizar una solución de ${linea.toLowerCase()}.
+
+Producto, código o descripción:
+Cantidad:`;
+  return whatsappLink(msg);
 }

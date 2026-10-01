@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
+import { whatsappGeneral } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Nosotros",
-  description: `Conoce a ${SITE.name}: fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana.`,
+  description: `Conoce a ${SITE.name}: proveedor industrial B2B y taller de cilindros neumáticos en República Dominicana.`,
   alternates: { canonical: "/nosotros" },
 };
 
@@ -32,13 +33,15 @@ export default function NosotrosPage() {
           <Breadcrumbs items={[{ label: "Nosotros" }]} />
           <div className="eyebrow mb-3 mt-8">Nosotros</div>
           <h1 className="font-display text-display-xl text-surface mb-6">
-            La medida exacta.<br />
+            La referencia exacta.<br />
             <span className="text-signal">No la más parecida.</span>
           </h1>
           <p className="text-xl text-steel-200 leading-relaxed max-w-3xl">
-            Dynatech Ingeniería SRL fabrica, repara y reconstruye cilindros neumáticos para la
-            industria en República Dominicana. Trabajamos bajo cotización: nos envías las
-            especificaciones, cotizamos, fabricamos o importamos, y entregamos.
+            Dynatech Ingeniería SRL es un proveedor industrial B2B en República Dominicana:
+            neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas, y
+            fabricación, reparación y reconstrucción de cilindros neumáticos. Trabajamos bajo
+            cotización: nos envías las especificaciones, cotizamos, fabricamos o importamos, y
+            entregamos.
           </p>
         </div>
       </section>
@@ -54,7 +57,12 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      <QuoteCTA />
+      <QuoteCTA
+        eyebrow="Proveedor industrial B2B"
+        title="¿Qué necesita tu planta?"
+        text="Envíanos el código, una foto, el plano o la descripción y te cotizamos."
+        whatsappHref={whatsappGeneral()}
+      />
     </>
   );
 }

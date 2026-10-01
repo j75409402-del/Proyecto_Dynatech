@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type BaseSyntheticEvent } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -8,6 +8,9 @@ import { CheckCircle2, Send, AlertCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { HONEYPOT_FIELD } from "@/lib/antispam";
+import { whatsappLink } from "@/lib/whatsapp";
 
 const contactSchema = z.object({
   name:    z.string().min(2, "Tu nombre es requerido"),
@@ -26,17 +29,24 @@ export function ContactForm() {
     { status: "error"; message: string }
   >({ status: "idle" });
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactFormData>({
+  const [startedAt] = useState(() => Date.now());
+
+  const { register, handleSubmit, getValues, formState: { errors }, reset } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async (data: ContactFormData, event?: BaseSyntheticEvent) => {
     setState({ status: "submitting" });
     try {
       const res = await fetch("/api/contacto", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          // Anti-spam (ver src/lib/antispam.ts).
+          [HONEYPOT_FIELD]: honeypotValue(event),
+          _t: startedAt,
+        }),
       });
       if (!res.ok) throw new Error("No se pudo enviar el mensaje");
       setState({ status: "success" });
@@ -61,6 +71,11 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      {/* Campo trampa: invisible para personas, los bots lo llenan. */}
+      <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor={HONEYPOT_FIELD}>No llenar este campo</label>
+        <input id={HONEYPOT_FIELD} name={HONEYPOT_FIELD} type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="name">Nombre *</Label>
@@ -98,7 +113,16 @@ export function ContactForm() {
           <AlertCircle className="h-5 w-5 text-signal shrink-0 mt-0.5" />
           <div>
             <div className="font-medium text-surface mb-1">No se pudo enviar</div>
-            <div className="text-sm text-steel-300">{state.message}</div>
+            <div className="text-sm text-steel-300 mb-3">{state.message}. Puedes escribirnos por WhatsApp.</div>
+            <a
+              href={whatsappLink(`Hola Dynatech, soy ${getValues("name") || ""}. ${getValues("message") || ""}`.trim())}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-signal hover:underline"
+            >
+              <WhatsAppIcon className="h-4 w-4" />
+              Enviar por WhatsApp
+            </a>
           </div>
         </div>
       )}
@@ -113,6 +137,13 @@ export function ContactForm() {
       </button>
     </form>
   );
+}
+
+/** Valor del campo trampa, leído del formulario al enviar. */
+function honeypotValue(event?: BaseSyntheticEvent): string {
+  const form = event?.target;
+  if (!(form instanceof HTMLFormElement)) return "";
+  return String(new FormData(form).get(HONEYPOT_FIELD) ?? "");
 }
 
 function FieldError({ msg }: { msg: string }) {

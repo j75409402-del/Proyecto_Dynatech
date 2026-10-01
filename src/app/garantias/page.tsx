@@ -5,6 +5,7 @@ import { CONTACT } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Garantías",
   description: "Condiciones de garantía de los trabajos y piezas de Dynatech Ingeniería SRL.",
+  alternates: { canonical: "/garantias" },
 };
 
 export default function GarantiasPage() {

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createServiceClient } from "@/lib/supabase/server";
+import { badOrigin, clientIp, looksLikeBot, rateLimited } from "@/lib/antispam";
+import { notifyLead } from "@/lib/notify";
 
 const bodySchema = z.object({
   name:    z.string().min(2),
@@ -12,11 +14,23 @@ const bodySchema = z.object({
 });
 
 export async function POST(req: Request) {
+  if (badOrigin(req)) {
+    return NextResponse.json({ error: "Origen no permitido" }, { status: 403 });
+  }
+  if (rateLimited(`contacto:${clientIp(req)}`, 5, 10 * 60 * 1000)) {
+    return NextResponse.json({ error: "Demasiados envíos. Intenta en unos minutos o escríbenos por WhatsApp." }, { status: 429 });
+  }
+
   let payload: unknown;
   try {
     payload = await req.json();
   } catch {
     return NextResponse.json({ error: "Body inválido" }, { status: 400 });
+  }
+
+  // Bot detectado: respondemos como si todo saliera bien, sin guardar nada.
+  if (looksLikeBot(payload)) {
+    return NextResponse.json({ ok: true }, { status: 201 });
   }
 
   const parsed = bodySchema.safeParse(payload);
@@ -28,7 +42,13 @@ export async function POST(req: Request) {
   }
 
   const data = parsed.data;
-  const supabase = createServiceClient();
+  let supabase;
+  try {
+    supabase = createServiceClient();
+  } catch (err) {
+    console.error("Supabase sin configurar:", err);
+    return NextResponse.json({ error: "Servicio no disponible" }, { status: 503 });
+  }
 
   const { error } = await supabase.from("contact_messages").insert({
     name:    data.name,
@@ -60,6 +80,16 @@ export async function POST(req: Request) {
       console.error("Webhook contacto falló:", err);
     }
   }
+
+  await notifyLead(`Nuevo mensaje de contacto · ${data.name}`, [
+    `Nombre: ${data.name}`,
+    `Empresa: ${data.company || "-"}`,
+    `Email: ${data.email}`,
+    `Teléfono: ${data.phone || "-"}`,
+    `Asunto: ${data.subject || "-"}`,
+    "",
+    data.message,
+  ]);
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }

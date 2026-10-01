@@ -9,11 +9,26 @@ type Props = {
   title?: string;
   /** Texto con el que se precarga el formulario de cotización (?nombre=). */
   quoteItem?: string;
+  /** Opción del formulario a preseleccionar (?tipo=). */
+  quoteTipo?: string;
   ctaLabel?: string;
+  /** Texto bajo el título. */
+  text?: string;
+  /** Enlace de WhatsApp con mensaje propio (por defecto, el de cilindros). */
+  whatsappHref?: string;
 };
 
-export function quoteHref(item?: string) {
-  return item ? `/cotizacion?nombre=${encodeURIComponent(item)}` : "/cotizacion";
+/**
+ * Enlace al formulario de cotización precargado. `item` va como ?nombre= (lo que se quiere
+ * cotizar); `tipo`, si se pasa, es la opción del formulario a preseleccionar (ej. la línea
+ * "Sensores" cuando el ítem es "Sensores inductivos").
+ */
+export function quoteHref(item?: string, tipo?: string) {
+  const params = new URLSearchParams();
+  if (item) params.set("nombre", item);
+  if (tipo) params.set("tipo", tipo);
+  const qs = params.toString();
+  return qs ? `/cotizacion?${qs}` : "/cotizacion";
 }
 
 /**
@@ -24,7 +39,10 @@ export function QuoteCTA({
   eyebrow = "Fabricación · Reparación · Reconstrucción",
   title = "¿Necesitas fabricar o reparar un cilindro neumático?",
   quoteItem,
+  quoteTipo,
   ctaLabel = "Solicita tu cotización",
+  text = "Envíanos el plano, la muestra, las medidas, fotos o las especificaciones y te cotizamos.",
+  whatsappHref,
 }: Props) {
   return (
     <section className="bg-surface relative overflow-hidden">
@@ -38,15 +56,15 @@ export function QuoteCTA({
           </div>
           <h2 className="font-display text-display-xl text-white mb-4 max-w-3xl mx-auto">{title}</h2>
           <p className="text-white/60 mb-10 max-w-xl mx-auto">
-            Envíanos el plano, la muestra, las medidas, fotos o las especificaciones y te cotizamos.
+            {text}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href={quoteHref(quoteItem)} className="btn-primary px-8 py-4 text-sm">
+            <Link href={quoteHref(quoteItem, quoteTipo)} className="btn-primary px-8 py-4 text-sm">
               {ctaLabel}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <a
-              href={whatsappCylinderService()}
+              href={whatsappHref ?? whatsappCylinderService()}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40

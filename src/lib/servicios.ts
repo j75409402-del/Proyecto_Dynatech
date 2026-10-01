@@ -1,3 +1,4 @@
+import { SOLUCIONES } from "@/lib/soluciones";
 import { Factory, Wrench, RotateCcw, FileText, ShieldCheck, Ruler, PackageCheck, Settings2, type LucideIcon } from "lucide-react";
 
 export type Oferta = {
@@ -75,10 +76,20 @@ export const COMPONENTES: Oferta[] = [
   },
 ];
 
-/** Opciones del formulario de cotización (mismo orden que la oferta comercial). */
-export const TIPOS_DE_SOLICITUD = [
-  ...SERVICIOS.map((s) => s.title),
-  ...COMPONENTES.map((c) => c.title),
-  "Componentes bajo medida (camisa, tapa, pistón)",
+/** Opciones del formulario de cotización, agrupadas (mismo orden que la oferta comercial). */
+export const GRUPOS_DE_SOLICITUD = [
+  {
+    label: "Cilindros neumáticos",
+    options: [
+      ...SERVICIOS.map((s) => s.title),
+      ...COMPONENTES.map((c) => c.title),
+      "Componentes bajo medida (camisa, tapa, pistón)",
+    ],
+  },
+  { label: "Soluciones industriales", options: SOLUCIONES.map((s) => s.name) },
+];
+
+export const TIPOS_DE_SOLICITUD: readonly string[] = [
+  ...GRUPOS_DE_SOLICITUD.flatMap((g) => g.options),
   "Otro",
-] as const;
+];

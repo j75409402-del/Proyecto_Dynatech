@@ -2,15 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { CONTACT, SITE, SOCIAL } from "@/lib/constants";
+import { SOLUCIONES } from "@/lib/soluciones";
 import { Reveal } from "@/components/motion/Reveal";
 
-const solutionLinks = [
-  { label: "Cilindros neumáticos", href: "/cilindros-neumaticos" },
-  { label: "Servicios",            href: "/servicios" },
-  { label: "Sellos y componentes", href: "/sellos-y-componentes" },
-];
+const solutionLinks = SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}` }));
 
 const companyLinks = [
+  { label: "Cilindros neumáticos",   href: "/cilindros-neumaticos" },
+  { label: "Servicios",              href: "/servicios" },
+  { label: "Sellos y componentes",   href: "/sellos-y-componentes" },
   { label: "Nosotros",               href: "/nosotros" },
   { label: "Solicita tu cotización", href: "/cotizacion" },
   { label: "Contacto",               href: "/contacto" },
@@ -25,7 +25,7 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-carbon-900 border-t border-black/5 mt-24">
+    <footer className="bg-carbon-900 border-t border-black/5">
       <div className="container-max py-16">
         <Reveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
           {/* Brand + tagline */}

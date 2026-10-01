@@ -1,14 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AlertCircle, LogIn } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={<div className="container-max py-24 max-w-sm min-h-[420px]" />}>
+      <AdminLogin />
+    </Suspense>
+  );
+}
+
+function AdminLogin() {
   const router = useRouter();
+  const noAutorizado = useSearchParams().get("error") === "no-autorizado";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
@@ -63,6 +72,13 @@ export default function AdminLoginPage() {
             autoComplete="current-password"
           />
         </div>
+
+        {noAutorizado && status !== "error" && (
+          <div className="flex items-start gap-3 border border-signal/40 bg-signal/5 p-4">
+            <AlertCircle className="h-5 w-5 text-signal shrink-0 mt-0.5" />
+            <div className="text-sm text-steel-300">Esta cuenta no tiene acceso al panel.</div>
+          </div>
+        )}
 
         {status === "error" && (
           <div className="flex items-start gap-3 border border-signal/40 bg-signal/5 p-4">

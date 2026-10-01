@@ -4,7 +4,8 @@ import { QuoteForm } from "@/components/forms/QuoteForm";
 
 export const metadata: Metadata = {
   title: "Solicitar cotización",
-  description: "Cotiza la fabricación, reparación o reconstrucción de tu cilindro neumático. Respuesta en menos de 24 horas hábiles.",
+  description: "Solicita tu cotización de neumática, control eléctrico, sensores, instrumentación, resistencias o cilindros neumáticos. Respuesta en menos de 24 horas hábiles.",
+  alternates: { canonical: "/cotizacion" },
 };
 
 export default function CotizacionPage() {
@@ -22,7 +23,7 @@ export default function CotizacionPage() {
           </p>
         </div>
 
-        <Suspense fallback={<div className="text-steel-400">Cargando formulario…</div>}>
+        <Suspense fallback={<div className="min-h-[1100px] sm:min-h-[900px] text-steel-400">Cargando formulario…</div>}>
           <QuoteForm />
         </Suspense>
       </div>

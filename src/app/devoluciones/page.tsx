@@ -6,6 +6,7 @@ import { CONTACT } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Política de devoluciones",
   description: "Condiciones para devolución o cambio de productos comprados a Dynatech Ingeniería SRL.",
+  alternates: { canonical: "/devoluciones" },
 };
 
 export default function DevolucionesPage() {

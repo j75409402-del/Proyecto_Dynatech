@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createServiceClient } from "@/lib/supabase/server";
+import { badOrigin, clientIp, looksLikeBot, rateLimited } from "@/lib/antispam";
+import { notifyLead } from "@/lib/notify";
 
 const bodySchema = z.object({
   company_name: z.string().min(2),
@@ -19,11 +21,23 @@ const bodySchema = z.object({
 });
 
 export async function POST(req: Request) {
+  if (badOrigin(req)) {
+    return NextResponse.json({ error: "Origen no permitido" }, { status: 403 });
+  }
+  if (rateLimited(`cotizacion:${clientIp(req)}`, 5, 10 * 60 * 1000)) {
+    return NextResponse.json({ error: "Demasiadas solicitudes. Intenta en unos minutos o escríbenos por WhatsApp." }, { status: 429 });
+  }
+
   let payload: unknown;
   try {
     payload = await req.json();
   } catch {
     return NextResponse.json({ error: "Body inválido" }, { status: 400 });
+  }
+
+  // Bot detectado: respondemos como si todo saliera bien, sin guardar nada.
+  if (looksLikeBot(payload)) {
+    return NextResponse.json({ quote_number: "COT-RECIBIDA" }, { status: 201 });
   }
 
   const parsed = bodySchema.safeParse(payload);
@@ -35,7 +49,13 @@ export async function POST(req: Request) {
   }
 
   const data = parsed.data;
-  const supabase = createServiceClient();
+  let supabase;
+  try {
+    supabase = createServiceClient();
+  } catch (err) {
+    console.error("Supabase sin configurar:", err);
+    return NextResponse.json({ error: "Servicio no disponible" }, { status: 503 });
+  }
 
   const { data: quote, error } = await supabase
     .from("quotes")
@@ -79,6 +99,21 @@ export async function POST(req: Request) {
       console.error("Webhook cotización falló:", err);
     }
   }
+
+  await notifyLead(`Nueva cotización ${quote.quote_number} · ${data.company_name}`, [
+    `Cotización: ${quote.quote_number}`,
+    `Empresa: ${data.company_name}${data.rnc ? ` (RNC ${data.rnc})` : ""}`,
+    `Contacto: ${data.contact_name}`,
+    `Email: ${data.email}`,
+    `Teléfono: ${data.phone}`,
+    `Ciudad: ${data.city || "-"}`,
+    "",
+    ...data.items.map(
+      (it, i) => `${i + 1}. ${it.name} · Cant. ${it.quantity}${it.notes ? `
+   ${it.notes}` : ""}`,
+    ),
+    ...(data.message ? ["", data.message] : []),
+  ]);
 
   return NextResponse.json({ quote_number: quote.quote_number }, { status: 201 });
 }

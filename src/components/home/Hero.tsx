@@ -6,12 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import { HeroScene } from "@/components/motion/HeroScene";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { whatsappCylinderService } from "@/lib/whatsapp";
-
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
-};
+import { whatsappGeneral } from "@/lib/whatsapp";
 
 const item: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -19,7 +14,7 @@ const item: Variants = {
 };
 
 /** A partir de qué información podemos cotizar — dato del cliente, no se agregan otros. */
-const PUNTOS_DE_PARTIDA = ["Plano", "Muestra", "Medidas", "Fotos", "Especificaciones del cliente"];
+const PUNTOS_DE_PARTIDA = ["Código o referencia", "Plano", "Muestra", "Medidas", "Fotos", "Especificaciones del cliente"];
 
 export function Hero() {
   return (
@@ -32,23 +27,26 @@ export function Hero() {
 
       <div className="container-max relative py-16 sm:py-20 w-full">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-          {/* IZQUIERDA — copy */}
-          <motion.div className="lg:col-span-6" variants={container} initial="hidden" animate="show">
-            <motion.div variants={item} className="flex items-center gap-3 mb-6">
+          {/* IZQUIERDA — copy. Sin opacity:0 inicial: el H1 es el LCP y debe pintarse con el
+              HTML del servidor, sin esperar a que cargue la animación. */}
+          <div className="lg:col-span-6">
+            <div className="flex items-center gap-3 mb-6">
               <div className="h-px w-8 bg-signal" />
-              <span className="eyebrow">Dynatech Ingeniería · Santo Domingo</span>
-            </motion.div>
+              <span className="eyebrow">Proveedor industrial B2B · Santo Domingo</span>
+            </div>
 
-            <motion.h1 variants={item} className="font-display text-display-xl text-surface uppercase mb-6">
-              Cilindros neumáticos <span className="text-signal">a la medida</span>
-            </motion.h1>
+            <h1 className="font-display text-display-xl text-surface mb-6">
+              Soluciones industriales para{" "}
+              <span className="text-signal">empresas que no pueden detenerse</span>
+            </h1>
 
-            <motion.p variants={item} className="text-lg sm:text-xl text-steel-200 max-w-xl mb-8 leading-relaxed">
-              Fabricación, reparación y reconstrucción de cilindros neumáticos para aplicaciones
-              industriales.
-            </motion.p>
+            <p className="text-lg sm:text-xl text-steel-200 max-w-xl mb-8 leading-relaxed">
+              Neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas para
+              empresas, fábricas y zonas francas. Además, fabricamos, reparamos y reconstruimos
+              cilindros neumáticos.
+            </p>
 
-            <motion.div variants={item} className="flex flex-wrap gap-3 mb-10">
+            <div className="flex flex-wrap gap-3 mb-10">
               <Link
                 href="/cotizacion"
                 className="btn-primary group/btn px-7 py-4 text-sm shadow-[0_10px_40px_-8px_rgba(228,0,43,0.55)]
@@ -58,7 +56,7 @@ export function Hero() {
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
               </Link>
               <a
-                href={whatsappCylinderService()}
+                href={whatsappGeneral()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary px-7 py-4 hover:-translate-y-0.5 transition-transform"
@@ -66,11 +64,11 @@ export function Hero() {
                 <WhatsAppIcon className="h-4 w-4" />
                 WhatsApp
               </a>
-            </motion.div>
+            </div>
 
-            <motion.div variants={item}>
+            <motion.div variants={item} initial="hidden" animate="show">
               <div className="font-mono text-[10px] uppercase tracking-techno text-steel-400 mb-3">
-                Trabajamos a partir de
+                Cotizamos a partir de
               </div>
               <ul className="flex flex-wrap gap-2">
                 {PUNTOS_DE_PARTIDA.map((p) => (
@@ -83,13 +81,13 @@ export function Hero() {
                 ))}
               </ul>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* DERECHA — una sola imagen grande y real del taller */}
           <div className="lg:col-span-6">
             <motion.div
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ scale: 0.97 }}
+              animate={{ scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
               className="relative aspect-[4/3] border border-black/10 bg-carbon-800"
             >
@@ -101,7 +99,7 @@ export function Hero() {
               <div className="absolute inset-0 overflow-hidden">
                 <Image
                   src="/cilindros/taller-reparando.jpg"
-                  alt="Técnico de Dynatech reconstruyendo un cilindro neumático en el taller"
+                  alt="Técnico de Dynatech trabajando en el taller"
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
