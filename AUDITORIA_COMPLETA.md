@@ -165,6 +165,7 @@ Nada se marca como resuelto si no se comprobó.
 | V3 | Aviso en el build: `middleware` deprecado | Esperado. Se usa `middleware.ts` en vez de `proxy.ts` porque el adaptador de Cloudflare no soporta el proxy en Node. No afecta a Vercel |
 | V4 | Aviso de npm por scripts de instalación (`unrs-resolver`) | ✅ Resuelto con `allowScripts` en `package.json` (esbuild, workerd, unrs-resolver) |
 | V5 | Variables de entorno | Ver PROJECT_CONTEXT §12. Parcialmente NO VERIFICADO |
+| V6 | Aviso solo en la PC del dueño: "Next.js ignored package-lock.json in C:\Users\senm1" | Hay un `package-lock.json` suelto fuera del repo. No afecta a Vercel ni a Cloudflare. Si el dueño confirma que no lo usa, se puede borrar ese archivo suelto |
 
 ## 8. Panel `/admin`
 
