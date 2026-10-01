@@ -104,7 +104,7 @@ export function Navbar() {
                   solucionesActive || menuOpen ? "text-signal" : "text-steel-200 hover:text-signal",
                 )}
               >
-                Soluciones
+                Productos
                 <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", menuOpen && "rotate-180")} />
               </button>
 
@@ -116,7 +116,7 @@ export function Navbar() {
               >
                 <div className="grid grid-cols-5 border border-black/10 bg-carbon shadow-[0_24px_60px_-24px_rgba(0,0,0,0.3)]">
                   <div className="col-span-3 p-5">
-                    <div className="eyebrow mb-3">Soluciones industriales</div>
+                    <div className="eyebrow mb-3">Líneas de productos</div>
                     <ul className="space-y-1">
                       {SOLUCIONES.map((s) => (
                         <li key={s.slug}>
@@ -224,7 +224,7 @@ export function Navbar() {
         )}
       >
         <nav className="container-max py-5 flex flex-col max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Menú móvil">
-          <div className="eyebrow mb-1">Soluciones industriales</div>
+          <div className="eyebrow mb-1">Productos</div>
           {SOLUCIONES.map((s) => (
             <Link
               key={s.slug}

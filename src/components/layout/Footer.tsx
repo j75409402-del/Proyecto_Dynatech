@@ -52,9 +52,9 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Soluciones */}
+          {/* Productos */}
           <div>
-            <div className="eyebrow mb-4">Soluciones</div>
+            <div className="eyebrow mb-4">Productos</div>
             <ul className="space-y-2">
               {solutionLinks.map((link) => (
                 <li key={link.href}>
