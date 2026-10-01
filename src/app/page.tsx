@@ -2,23 +2,23 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
 import { SolucionesIndustriales, CilindrosDestacados, ComoTrabajamos } from "@/components/home/HomeSections";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
-import { whatsappGeneral } from "@/lib/whatsapp";
+import { whatsappCylinderService } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
-  title: "Proveedor industrial B2B en República Dominicana",
+  title: "Cilindros neumáticos: fabricación y reparación",
   description:
-    "Neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización. Fabricación y reparación de cilindros neumáticos.",
+    "Fabricación, reparación y reconstrucción de cilindros neumáticos, sellos y vástagos cromados en República Dominicana. Cotización por WhatsApp.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Soluciones industriales B2B · Dynatech Ingeniería",
+    title: "Cilindros neumáticos · Dynatech Ingeniería",
     description:
-      "Cinco líneas industriales bajo cotización y fabricación, reparación y reconstrucción de cilindros neumáticos.",
+      "Fabricación y reparación de cilindros neumáticos, sellos y vástagos cromados bajo cotización.",
     url: "/",
     images: [{
-      url: "/industrial-editorial.webp",
-      width: 1536,
-      height: 1024,
-      alt: "Imagen editorial de maquinaria industrial",
+      url: "/cilindros/taller-reparando.jpg",
+      width: 1280,
+      height: 850,
+      alt: "Técnico trabajando en la reparación de un cilindro neumático",
     }],
   },
 };
@@ -27,14 +27,15 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <SolucionesIndustriales />
       <CilindrosDestacados />
+      <SolucionesIndustriales />
       <ComoTrabajamos />
       <QuoteCTA
-        eyebrow="Neumática · Control eléctrico · Sensores · Instrumentación · Resistencias"
-        title="¿Qué necesita tu planta?"
-        text="Envíanos el código, una foto, el plano o la descripción y te cotizamos."
-        whatsappHref={whatsappGeneral()}
+        eyebrow="Cilindros neumáticos · Sellos · Vástagos cromados"
+        title="¿Necesitas fabricar o reparar un cilindro?"
+        text="Envíanos el código, una foto, el plano o las medidas por WhatsApp y te cotizamos."
+        quoteItem="Fabricación y reparación de cilindros neumáticos"
+        whatsappHref={whatsappCylinderService()}
       />
     </>
   );

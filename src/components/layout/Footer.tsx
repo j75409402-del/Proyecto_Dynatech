@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import { CONTACT, SITE, SOCIAL } from "@/lib/constants";
+import { CONTACT, SITE, SOCIAL, emailHref } from "@/lib/constants";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { Reveal } from "@/components/motion/Reveal";
+import { whatsappCylinderService } from "@/lib/whatsapp";
 
 const solutionLinks = SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}` }));
 
@@ -12,7 +13,6 @@ const companyLinks = [
   { label: "Servicios",              href: "/servicios" },
   { label: "Sellos y componentes",   href: "/sellos-y-componentes" },
   { label: "Nosotros",               href: "/nosotros" },
-  { label: "Solicita tu cotización", href: "/cotizacion" },
   { label: "Contacto",               href: "/contacto" },
 ];
 
@@ -44,6 +44,9 @@ export function Footer() {
                 </div>
                 <div className="font-mono text-[9px] uppercase tracking-techno text-steel-400 mt-0.5">
                   Ingeniería · SRL
+                </div>
+                <div className="mt-1 font-mono text-[8px] uppercase tracking-[0.14em] text-steel-500">
+                  {SITE.brandTagline}
                 </div>
               </div>
             </div>
@@ -83,6 +86,16 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <a
+                  href={whatsappCylinderService()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-steel-200 hover:text-signal transition-colors"
+                >
+                  Cotiza tu cilindro por WhatsApp
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -123,7 +136,7 @@ export function Footer() {
               <li className="flex items-start gap-2.5">
                 <Mail className="h-4 w-4 text-signal shrink-0 mt-0.5" />
                 <a
-                  href={`mailto:${CONTACT.email}`}
+                  href={emailHref()}
                   className="hover:text-surface transition-colors"
                 >
                   {CONTACT.email}

@@ -1,16 +1,15 @@
-import Link from "next/link";
-import { ArrowRight, Clock, Mail } from "lucide-react";
+import { Clock, Mail } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { whatsappCylinderService } from "@/lib/whatsapp";
-import { CONTACT } from "@/lib/constants";
+import { whatsappCylinderService, whatsappLink } from "@/lib/whatsapp";
+import { emailHref } from "@/lib/constants";
 
 type Props = {
   eyebrow?: string;
   title?: string;
-  /** Texto con el que se precarga el formulario de cotización (?nombre=). */
+  /** Elemento que se agrega al mensaje de WhatsApp. */
   quoteItem?: string;
-  /** Opción del formulario a preseleccionar (?tipo=). */
+  /** Línea que se agrega al mensaje de WhatsApp. */
   quoteTipo?: string;
   ctaLabel?: string;
   /** Texto bajo el título. */
@@ -20,16 +19,12 @@ type Props = {
 };
 
 /**
- * Enlace al formulario de cotización precargado. `item` va como ?nombre= (lo que se quiere
- * cotizar); `tipo`, si se pasa, es la opción del formulario a preseleccionar (ej. la línea
- * "Sensores" cuando el ítem es "Sensores inductivos").
+ * Enlace a WhatsApp con el elemento y la línea que el cliente quiere cotizar.
  */
 export function quoteHref(item?: string, tipo?: string) {
-  const params = new URLSearchParams();
-  if (item) params.set("nombre", item);
-  if (tipo) params.set("tipo", tipo);
-  const qs = params.toString();
-  return qs ? `/cotizacion?${qs}` : "/cotizacion";
+  const details = [item, tipo && tipo !== item ? `Línea: ${tipo}` : undefined].filter(Boolean);
+  const context = details.length ? ` sobre ${details.join(" · ")}` : "";
+  return whatsappLink(`Hola Dynatech, solicito cotización${context}.\n\nCantidad o especificaciones:\n`);
 }
 
 /**
@@ -41,7 +36,7 @@ export function QuoteCTA({
   title = "¿Necesitas fabricar o reparar un cilindro neumático?",
   quoteItem,
   quoteTipo,
-  ctaLabel = "Solicita tu cotización",
+  ctaLabel = "Cotizar por WhatsApp",
   text = "Envíanos el plano, la muestra, las medidas, fotos o las especificaciones y te cotizamos.",
   whatsappHref,
 }: Props) {
@@ -60,22 +55,12 @@ export function QuoteCTA({
             {text}
           </p>
           <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-            <Link href={quoteHref(quoteItem, quoteTipo)} className="btn-primary px-8 py-4 text-sm">
+            <a href={whatsappHref ?? (quoteItem ? quoteHref(quoteItem, quoteTipo) : whatsappCylinderService())} target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-4 text-sm">
               {ctaLabel}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a
-              href={whatsappHref ?? whatsappCylinderService()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40
-                         text-white font-medium px-8 py-4 text-sm uppercase tracking-wider transition-colors"
-            >
               <WhatsAppIcon className="h-4 w-4" />
-              WhatsApp
             </a>
             <a
-              href={`mailto:${CONTACT.email}?subject=${encodeURIComponent("Consulta sobre soluciones industriales")}`}
+              href={emailHref("Consulta sobre soluciones industriales")}
               className="inline-flex items-center justify-center gap-2 border border-white/20 px-8 py-4 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white/40"
             >
               <Mail className="h-4 w-4" />

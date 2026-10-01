@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { CONTACT } from "@/lib/constants";
+import { CONTACT, emailHref } from "@/lib/constants";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
@@ -44,7 +44,7 @@ export default function ContactoPage() {
               icon={<Mail className="h-5 w-5" />}
               label="Email"
               value={CONTACT.email}
-              href={`mailto:${CONTACT.email}`}
+              href={emailHref()}
             />
             <ContactBlock
               icon={<MapPin className="h-5 w-5" />}

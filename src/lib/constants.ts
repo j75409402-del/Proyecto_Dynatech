@@ -1,12 +1,19 @@
 export const SITE = {
   name: "Dynatech Ingeniería",
   shortName: "Dynatech",
-  tagline: "Soluciones industriales B2B",
+  tagline: "Cilindros neumáticos · Fabricación y reparación",
+  brandTagline: "Excellent Under Pressure.",
   description:
-    "Proveedor industrial B2B en República Dominicana: neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización, y fabricación y reparación de cilindros neumáticos.",
+    "Fabricación, reparación y reconstrucción de cilindros neumáticos; sellos y vástagos cromados bajo cotización. También soluciones de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.dynatech.com.do",
   rnc: "133-45350-9",
 } as const;
+
+/** Enlace uniforme al correo de contacto publicado por la empresa. */
+export function emailHref(subject?: string) {
+  const query = subject ? `?subject=${encodeURIComponent(subject)}` : "";
+  return `mailto:${CONTACT.email}${query}`;
+}
 
 export const CONTACT = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "18092844336",
@@ -36,5 +43,5 @@ export const NAV = {
     { label: "Fabricación y reparación", href: "/servicios" },
     { label: "Sellos y componentes", href: "/sellos-y-componentes" },
   ],
-  cta: { label: "Solicita tu cotización", href: "/cotizacion" },
+  cta: { label: "Cotiza por WhatsApp", href: "/cotizacion" },
 } as const;

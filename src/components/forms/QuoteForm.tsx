@@ -51,8 +51,7 @@ function initialValues(nombre: string | null, tipo: string | null): Partial<Quot
     return { ...base, tipo, descripcion: nombre && nombre !== tipo ? nombre : "" };
   }
   if (!nombre) return base;
-  // Los botones "Solicitar cotización" del sitio mandan el nombre del servicio; si coincide
-  // con una opción se preselecciona, si no, se usa como punto de partida de la descripción.
+  // Permite abrir el formulario con ?nombre= y ?tipo= precargados.
   if (opciones.includes(nombre)) return { ...base, tipo: nombre };
   return { ...base, tipo: "Otro", descripcion: nombre };
 }
@@ -336,7 +335,7 @@ export function QuoteForm() {
         className="btn-primary w-full sm:w-auto px-8 py-4"
       >
         <Send className="h-4 w-4" />
-        {state.status === "submitting" ? "Enviando..." : "Solicitar cotización"}
+        {state.status === "submitting" ? "Enviando..." : "Enviar solicitud"}
       </button>
     </form>
   );

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SOLUCIONES } from "@/lib/soluciones";
+import { whatsappGeneral } from "@/lib/whatsapp";
 
 export default function NotFound() {
   return (
@@ -12,10 +13,10 @@ export default function NotFound() {
           Puede que el enlace sea viejo. Elige una línea o envíanos tu solicitud directamente.
         </p>
         <div className="flex flex-wrap gap-3 mb-12">
-          <Link href="/cotizacion" className="btn-primary">
+          <a href={whatsappGeneral()} target="_blank" rel="noopener noreferrer" className="btn-primary">
             Solicita tu cotización
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </a>
           <Link href="/" className="btn-secondary">Ir al inicio</Link>
         </div>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-black/5 border border-black/5">

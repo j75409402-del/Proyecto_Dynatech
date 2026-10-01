@@ -86,6 +86,16 @@ export function Navbar() {
 
           {/* Nav desktop */}
           <nav className="hidden lg:flex items-center gap-5 xl:gap-7" aria-label="Principal">
+            <Link
+              href="/cilindros-neumaticos"
+              aria-current={isActive(pathname, "/cilindros-neumaticos") ? "page" : undefined}
+              className={cn(
+                "py-1 text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
+                isActive(pathname, "/cilindros-neumaticos") ? "text-signal" : "text-steel-200 hover:text-signal",
+              )}
+            >
+              Cilindros
+            </Link>
             <div
               ref={menuRef}
               className="relative"
@@ -153,20 +163,22 @@ export function Navbar() {
                         </li>
                       ))}
                     </ul>
-                    <Link
-                      href={NAV.cta.href}
+                    <a
+                      href={whatsappGeneral()}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       onClick={() => setMenuOpen(false)}
                       className="mt-auto inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
                       {NAV.cta.label}
                       <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            {NAV.main.map((item) => (
+            {NAV.main.slice(1).map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -193,15 +205,17 @@ export function Navbar() {
             >
               <WhatsAppIcon className="h-4 w-4" />
             </a>
-            <Link
-              href={NAV.cta.href}
+            <a
+              href={whatsappGeneral()}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
                          text-white font-medium py-2.5 px-4 xl:px-5 rounded-xs text-xs uppercase tracking-wider
                          transition-colors whitespace-nowrap"
             >
               {NAV.cta.label}
               <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            </a>
           </div>
 
           {/* Menú mobile / tablet */}
@@ -228,7 +242,19 @@ export function Navbar() {
         )}
       >
         <nav className="container-max py-5 flex flex-col max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Menú móvil">
-          <div className="eyebrow mb-1">Productos</div>
+          <div className="eyebrow mb-1">Línea principal</div>
+          <Link
+            href="/cilindros-neumaticos"
+            onClick={() => setOpen(false)}
+            aria-current={isActive(pathname, "/cilindros-neumaticos") ? "page" : undefined}
+            className={cn(
+              "py-2.5 border-b border-black/5 text-sm font-medium",
+              isActive(pathname, "/cilindros-neumaticos") ? "text-signal" : "text-steel-200 hover:text-signal",
+            )}
+          >
+            Cilindros neumáticos
+          </Link>
+          <div className="eyebrow mt-5 mb-1">Líneas complementarias</div>
           {SOLUCIONES.map((s) => (
             <Link
               key={s.slug}
@@ -243,9 +269,8 @@ export function Navbar() {
               {s.name}
             </Link>
           ))}
-          <div className="eyebrow mt-5 mb-1">Cilindros y empresa</div>
+          <div className="eyebrow mt-5 mb-1">Empresa</div>
           {[
-            NAV.main[0],
             NAV.main[1],
             { label: "Sellos y componentes", short: "Sellos", href: "/sellos-y-componentes" },
             ...NAV.main.slice(2),
@@ -263,25 +288,16 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href={NAV.cta.href}
+          <a
+            href={whatsappGeneral()}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setOpen(false)}
             className="inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
                        text-white font-medium py-3 rounded-xs text-sm uppercase tracking-wider transition-colors mt-5"
           >
             {NAV.cta.label}
             <ArrowRight className="h-4 w-4" />
-          </Link>
-          <a
-            href={whatsappGeneral()}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
-            className="inline-flex items-center justify-center gap-2 border border-black/15 hover:border-signal/40
-                       text-surface font-medium py-3 rounded-xs text-sm uppercase tracking-wider transition-colors mt-2"
-          >
-            <WhatsAppIcon className="h-4 w-4" />
-            WhatsApp
           </a>
         </nav>
       </div>

@@ -29,6 +29,9 @@ export type Subcategoria = {
   href?: string;
   /** CTA alternativo (por defecto "Solicitar cotización"). */
   cta?: "Solicitar cotización" | "Consultar disponibilidad" | "Enviar especificaciones";
+  /** Fotografía del tipo de componente; no representa una promesa de existencia. */
+  image?: string;
+  imageAlt?: string;
 };
 
 export type Solucion = {
@@ -61,23 +64,25 @@ export const SOLUCIONES: Solucion[] = [
     icon: Wind,
     name: "Neumática",
     title: "Neumática industrial",
-    short: "Cilindros, válvulas, racores, unidades FRL y accesorios para aire comprimido.",
+    short: "Cilindros, válvulas, conexiones, unidades FRL y accesorios para aire comprimido.",
     description:
       "Cilindros, válvulas, actuadores, unidades FRL y accesorios para sistemas de aire comprimido. Además, fabricamos, reparamos y reconstruimos cilindros neumáticos.",
     metaDescription:
-      "Neumática industrial en República Dominicana: cilindros, válvulas, racores, unidades FRL, mangueras y accesorios bajo cotización. Fabricación y reparación de cilindros.",
-    image: "/banners/neumatica-industrial.webp",
+      "Neumática industrial en República Dominicana: cilindros, válvulas, conectores, conexiones, unidades FRL, mangueras y accesorios bajo cotización. Fabricación y reparación de cilindros.",
+    image: "/banners/neumatica-industrial-conectores.webp",
     imageWidth: 512,
     imageHeight: 512,
     ctaTitle: "¿Necesitas un componente neumático?",
-    imageAlt: "Fotografía editorial de cilindros y componentes neumáticos industriales",
-    ejemplos: ["Cilindros neumáticos", "Válvulas", "Racores", "Unidades FRL", "Kits de sellos"],
+    imageAlt: "Componentes neumáticos: cilindros, conectores push-in, válvulas y filtro regulador",
+    ejemplos: ["Cilindros neumáticos", "Válvulas", "Conectores", "Conexiones", "Unidades FRL", "Kits de sellos"],
     subcategorias: [
       {
         id: "cilindros",
         icon: Cylinder,
         title: "Cilindros neumáticos",
         desc: "Doble y simple efecto, compactos e ISO, en medidas métricas y en pulgadas. También a la medida.",
+        image: "/products/cilindros-neumaticos.jpg",
+        imageAlt: "Cilindros neumáticos industriales",
         href: "/cilindros-neumaticos",
       },
       {
@@ -85,20 +90,26 @@ export const SOLUCIONES: Solucion[] = [
         icon: GitFork,
         title: "Válvulas neumáticas",
         desc: "Válvulas direccionales y solenoides para controlar el paso del aire.",
+        image: "/products/valvulas-neumaticas-todas.jpg",
+        imageAlt: "Válvulas neumáticas industriales",
         ejemplos: ["2/2", "3/2", "5/2", "5/3", "Descarga rápida", "Cheque"],
       },
       {
-        id: "racores",
+        id: "conexiones",
         icon: Cable,
-        title: "Racores y conexiones",
+        title: "Conexiones",
         desc: "Conectores, codos, tés, reguladores de flujo y demás accesorios push-in.",
-        ejemplos: ["Conector recto", "Codo", "Unión T", "Unión Y", "Bulkhead", "Regulador de flujo", "Silenciador", "Tapón"],
+        image: "/products/fittings-neumaticos.jpg",
+        imageAlt: "Conexiones neumáticas: conectores rectos, codos y uniones",
+        ejemplos: ["Conectores", "Conector recto", "Codo", "Unión T", "Unión Y", "Bulkhead", "Regulador de flujo", "Silenciador", "Tapón"],
       },
       {
         id: "frl",
         icon: SlidersHorizontal,
         title: "Unidades FRL y reguladores",
         desc: "Filtros, reguladores y lubricadores para preparar el aire comprimido.",
+        image: "/products/unidades-frl-smc.jpg",
+        imageAlt: "Unidad de preparación de aire neumático",
         ejemplos: ["Unidad FRL", "Unidad FR", "Regulador", "Filtro", "Lubricador"],
       },
       {
@@ -106,12 +117,16 @@ export const SOLUCIONES: Solucion[] = [
         icon: Waves,
         title: "Mangueras neumáticas",
         desc: "Mangueras de poliuretano, nylon y PVC para sistemas neumáticos.",
+        image: "/products/manguera-pu.jpg",
+        imageAlt: "Manguera azul para sistemas neumáticos",
       },
       {
         id: "accesorios",
         icon: Boxes,
         title: "Accesorios neumáticos",
         desc: "Componentes de apoyo para cilindros y sistemas neumáticos.",
+        image: "/products/accesorios-neumaticos-smc.jpg",
+        imageAlt: "Accesorios para cilindros y sistemas neumáticos",
         ejemplos: ["Actuadores", "Amortiguadores", "Generadores de vacío", "Bases y soportes", "Bobinas", "Manifolds", "Sensores para cilindro"],
       },
       {

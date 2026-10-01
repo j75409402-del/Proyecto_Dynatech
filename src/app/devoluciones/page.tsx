@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage } from "@/components/legal/LegalPage";
-import { CONTACT } from "@/lib/constants";
+import { CONTACT, emailHref } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Política de devoluciones",
@@ -59,7 +59,7 @@ export default function DevolucionesPage() {
                 {CONTACT.whatsappDisplay}
               </a>{" "}
               o a{" "}
-              <a href={`mailto:${CONTACT.email}`} className="text-signal hover:underline">
+              <a href={emailHref()} className="text-signal hover:underline">
                 {CONTACT.email}
               </a>{" "}
               con tu número de factura y el motivo de la devolución. Te confirmamos si aplica y

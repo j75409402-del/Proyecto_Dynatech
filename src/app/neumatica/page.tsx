@@ -28,8 +28,8 @@ function CilindrosDestacado() {
             <div className="absolute -top-2 -left-2 h-4 w-4 border-l-2 border-t-2 border-signal z-10" />
             <div className="absolute -bottom-2 -right-2 h-4 w-4 border-r-2 border-b-2 border-signal z-10" />
             <Image
-              src="/banners/neumatica-industrial.webp"
-              alt="Fotografía editorial de cilindros y componentes neumáticos industriales"
+              src="/banners/neumatica-industrial-conectores.webp"
+              alt="Componentes neumáticos: cilindros, conectores push-in, válvulas y filtro regulador"
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"
               className="object-contain p-6"
@@ -54,10 +54,10 @@ function CilindrosDestacado() {
             ))}
           </ul>
           <div className="flex flex-wrap gap-3">
-            <Link href={quoteHref("Fabricación de cilindros neumáticos")} className="btn-primary">
+            <a href={quoteHref("Fabricación de cilindros neumáticos")} target="_blank" rel="noopener noreferrer" className="btn-primary">
               Cotizar cilindro
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </a>
             <Link href="/cilindros-neumaticos" className="btn-secondary">
               Ver cilindros neumáticos
             </Link>

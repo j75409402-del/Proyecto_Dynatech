@@ -1,19 +1,18 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { CONTACT } from "@/lib/constants";
-import { whatsappGeneral } from "@/lib/whatsapp";
+import { emailHref } from "@/lib/constants";
+import { whatsappCylinderService } from "@/lib/whatsapp";
 
 /** Información disponible para preparar una cotización. */
-const PUNTOS_DE_PARTIDA = ["Código o referencia", "Plano", "Muestra", "Medidas", "Fotos", "Especificaciones del cliente"];
+const PUNTOS_DE_PARTIDA = ["Sellos", "Vástagos cromados", "Fabricación", "Reparación", "Plano o muestra"];
 
 export function Hero() {
   return (
     <section className="relative isolate flex min-h-[min(760px,calc(100svh-4rem))] items-center overflow-hidden bg-surface text-white">
       <Image
-        src="/industrial-editorial.webp"
-        alt=""
+        src="/cilindros/taller-reparando.jpg"
+        alt="Técnico trabajando en la reparación de un cilindro neumático"
         fill
         priority
         sizes="100vw"
@@ -28,37 +27,27 @@ export function Hero() {
           <div className="mb-6 flex items-center gap-3">
             <span className="h-px w-9 bg-signal" />
             <span className="font-mono text-xs uppercase tracking-[0.18em] text-white/65">
-              Proveedor industrial B2B · Santo Domingo
+              Cilindros neumáticos · fabricación y reparación
             </span>
           </div>
 
           <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Soluciones industriales para{" "}
-            <span className="text-signal">empresas que no pueden detenerse</span>
+            Cilindros neumáticos{" "}
+            <span className="text-signal">a la medida</span>
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/75 sm:text-xl">
-            Neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas para
-            empresas, fábricas y zonas francas. Además, fabricamos, reparamos y reconstruimos
-            cilindros neumáticos.
+            Fabricamos, reparamos y reconstruimos cilindros neumáticos. También cotizamos sellos,
+            vástagos cromados y componentes para mantener tu equipo en operación.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Link href="/cotizacion" className="btn-primary min-h-12 px-6 text-sm sm:px-7">
-              Solicita tu cotización
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a
-              href={whatsappGeneral()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-6 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10 sm:px-7"
-            >
+            <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-primary min-h-12 px-6 text-sm sm:px-7">
+              Cotiza tu cilindro por WhatsApp
               <WhatsAppIcon className="h-4 w-4" />
-              WhatsApp
             </a>
             <a
-              href={`mailto:${CONTACT.email}?subject=${encodeURIComponent("Consulta sobre soluciones industriales")}`}
+              href={emailHref("Consulta sobre soluciones industriales")}
               className="inline-flex min-h-12 items-center justify-center gap-2 px-4 text-sm font-medium text-white/80 transition-colors hover:text-white"
             >
               <Mail className="h-4 w-4" />

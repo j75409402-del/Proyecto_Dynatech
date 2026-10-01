@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/LegalPage";
-import { CONTACT, SITE } from "@/lib/constants";
+import { CONTACT, SITE, emailHref } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Términos y condiciones",
@@ -88,7 +88,7 @@ export default function TerminosPage() {
           body: (
             <p>
               Preguntas sobre estos términos:{" "}
-              <a href={`mailto:${CONTACT.email}`} className="text-signal hover:underline">
+              <a href={emailHref()} className="text-signal hover:underline">
                 {CONTACT.email}
               </a>
               .

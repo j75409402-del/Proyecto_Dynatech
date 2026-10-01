@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -103,10 +102,10 @@ export default function ServiciosPage() {
                 tus medidas.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link href="/cotizacion" className="btn-primary min-h-12 px-6">
+                <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-primary min-h-12 px-6">
                   Solicitar cotización
                   <ArrowRight className="h-4 w-4" />
-                </Link>
+                </a>
                 <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-6 py-3 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10">
                   <WhatsAppIcon className="h-4 w-4" />
                   WhatsApp
@@ -151,13 +150,15 @@ export default function ServiciosPage() {
                     <s.icon className="h-5 w-5 text-signal mb-4" />
                     <h3 className="font-display text-lg text-surface mb-2">{s.title}</h3>
                     <p className="text-sm text-steel-300 leading-relaxed mb-5 flex-1">{s.desc}</p>
-                    <Link
+                    <a
                       href={quoteHref(s.title)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
                       Solicitar cotización
                       <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
+                    </a>
                   </div>
                 </TiltCard>
               </Reveal>

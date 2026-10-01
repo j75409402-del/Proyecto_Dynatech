@@ -62,17 +62,17 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
               <h1 className="mb-6 font-display text-display-xl text-white">{s.title}</h1>
               <p className="mb-8 max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">{s.description}</p>
               <div className="flex flex-wrap gap-3">
-                <Link href={quoteHref(s.name, s.name)} className="btn-primary">
+                <a href={quoteHref(s.name, s.name)} target="_blank" rel="noopener noreferrer" className="btn-primary">
                   Solicitar cotización
                   <ArrowRight className="h-4 w-4" />
-                </Link>
+                </a>
                 <a href={whatsappSolucion(s.name)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-5 py-3 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10">
                   <WhatsAppIcon className="h-4 w-4" />
                   WhatsApp
                 </a>
               </div>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-techno text-white/50">
-                Bajo cotización · Respuesta en menos de 24 horas hábiles
+                  Bajo cotización · Disponibilidad confirmada al responder
               </p>
             </div>
 
@@ -117,6 +117,17 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
                     className="scroll-mt-24 group flex h-full flex-col border border-black/10 bg-carbon p-6
                                hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)] transition-shadow duration-300"
                   >
+                    {sub.image && (
+                      <div className="relative -mx-6 -mt-6 mb-5 aspect-[16/9] overflow-hidden border-b border-black/10 bg-white">
+                        <Image
+                          src={sub.image}
+                          alt={sub.imageAlt ?? sub.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-contain p-3"
+                        />
+                      </div>
+                    )}
                     <span className="grid h-10 w-10 place-items-center bg-signal-soft text-signal mb-5">
                       <sub.icon className="h-5 w-5" />
                     </span>
@@ -141,13 +152,15 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
                           <ArrowUpRight className="h-3.5 w-3.5" />
                         </Link>
                       ) : (
-                        <Link
+                        <a
                           href={quoteHref(sub.title, s.name)}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                         >
                           {sub.cta ?? "Solicitar cotización"}
                           <ArrowRight className="h-3.5 w-3.5" />
-                        </Link>
+                        </a>
                       )}
                     </div>
                   </div>

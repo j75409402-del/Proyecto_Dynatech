@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Ruler, Cog } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
+import { whatsappCylinderService } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Sellos y componentes para cilindros neumáticos",
@@ -54,13 +54,13 @@ export default function SellosYComponentesPage() {
                 una foto o la muestra y te cotizamos.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Link href={quoteHref("Kits de sellos")} className="btn-primary">
+                <a href={quoteHref("Kits de sellos")} target="_blank" rel="noopener noreferrer" className="btn-primary">
                   Consultar disponibilidad
                   <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link href="/cotizacion" className="btn-secondary">
+                </a>
+                <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-secondary">
                   Enviar especificaciones
-                </Link>
+                </a>
               </div>
             </Reveal>
 
@@ -113,13 +113,15 @@ export default function SellosYComponentesPage() {
                       </span>
                       {b.necesitamos}
                     </p>
-                    <Link
+                    <a
                       href={quoteHref(b.item)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
                       {b.cta}
                       <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
+                    </a>
                   </div>
                 </TiltCard>
               </Reveal>

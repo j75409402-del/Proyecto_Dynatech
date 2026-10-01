@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, FileText, Box, Ruler, Camera, Hash, Factory, Wrench } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -55,10 +54,10 @@ export default function CilindrosNeumaticosPage() {
                 Cilindros estándar y a la medida, a partir de tu plano, una muestra o tus medidas.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Link href={quoteHref("Fabricación de cilindros neumáticos")} className="btn-primary">
+                <a href={quoteHref("Fabricación de cilindros neumáticos")} target="_blank" rel="noopener noreferrer" className="btn-primary">
                   Solicitar cotización
                   <ArrowRight className="h-4 w-4" />
-                </Link>
+                </a>
                 <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-secondary">
                   <WhatsAppIcon className="h-4 w-4" />
                   WhatsApp
@@ -142,13 +141,15 @@ export default function CilindrosNeumaticosPage() {
                         </li>
                       ))}
                     </ul>
-                    <Link
+                    <a
                       href={quoteHref(b.cta)}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
                       Solicitar cotización
                       <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
+                    </a>
                   </div>
                 </TiltCard>
               </Reveal>
@@ -158,12 +159,14 @@ export default function CilindrosNeumaticosPage() {
           <Reveal className="mt-8">
             <p className="text-steel-300">
               ¿Buscas un cilindro estándar? Envíanos su código o medidas y te confirmamos disponibilidad.{" "}
-              <Link
+              <a
                 href={quoteHref("Cilindro neumático estándar")}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-signal font-medium hover:underline whitespace-nowrap"
               >
                 Consultar disponibilidad →
-              </Link>
+              </a>
             </p>
           </Reveal>
         </div>
@@ -193,10 +196,10 @@ export default function CilindrosNeumaticosPage() {
           </div>
 
           <Reveal className="mt-10">
-            <Link href="/cotizacion" className="btn-primary">
+            <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-primary">
               Enviar especificaciones
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </a>
           </Reveal>
         </div>
       </section>

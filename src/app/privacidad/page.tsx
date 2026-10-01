@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal/LegalPage";
-import { CONTACT, SITE } from "@/lib/constants";
+import { CONTACT, SITE, emailHref } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Política de privacidad",
@@ -67,7 +67,7 @@ export default function PrivacidadPage() {
             <p>
               Puedes solicitarnos en cualquier momento acceder, corregir o eliminar tus datos
               personales escribiéndonos a{" "}
-              <a href={`mailto:${CONTACT.email}`} className="text-signal hover:underline">
+              <a href={emailHref()} className="text-signal hover:underline">
                 {CONTACT.email}
               </a>
               .

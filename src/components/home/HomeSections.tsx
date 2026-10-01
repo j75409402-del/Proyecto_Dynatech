@@ -7,6 +7,7 @@ import { quoteHref } from "@/components/cta/QuoteCTA";
 import { SERVICIOS, COMPONENTES } from "@/lib/servicios";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { cn } from "@/lib/utils";
+import { whatsappCylinderService } from "@/lib/whatsapp";
 
 /** 5 líneas industriales: 3 tarjetas arriba y 2 más anchas abajo en escritorio. */
 export function SolucionesIndustriales() {
@@ -15,14 +16,14 @@ export function SolucionesIndustriales() {
       <div className="container-max">
         <Reveal className="flex items-end justify-between mb-12 gap-6 flex-wrap">
           <div>
-            <div className="eyebrow mb-3">01 · Soluciones industriales</div>
+            <div className="eyebrow mb-3">Líneas complementarias</div>
             <h2 className="font-display text-display-lg text-surface max-w-2xl">
-              Un solo proveedor para tu planta
+              Otras soluciones industriales
             </h2>
           </div>
           <p className="text-steel-300 max-w-md">
-            Elige la línea que necesitas y solicita tu cotización. Sin precios publicados: te
-            respondemos con disponibilidad y tiempo de entrega.
+            Además de cilindros neumáticos, ofrecemos neumática, control eléctrico, sensores,
+            instrumentación y resistencias eléctricas bajo cotización.
           </p>
         </Reveal>
 
@@ -69,13 +70,15 @@ export function SolucionesIndustriales() {
                       ))}
                     </ul>
                     <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3">
-                      <Link
+                      <a
                         href={quoteHref(s.name, s.name)}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal transition-all hover:gap-2.5"
                       >
                         Solicitar cotización
                         <ArrowRight className="h-3.5 w-3.5" />
-                      </Link>
+                      </a>
                       <Link
                         href={`/${s.slug}`}
                         className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-steel-300 transition-colors hover:text-signal"
@@ -104,7 +107,7 @@ export function CilindrosDestacados() {
       <div className="container-max">
         <Reveal className="flex items-end justify-between mb-12 gap-6 flex-wrap">
           <div>
-            <div className="eyebrow mb-3">02 · Línea destacada</div>
+            <div className="eyebrow mb-3">Línea principal · Cilindros neumáticos</div>
             <h2 className="font-display text-display-lg text-surface max-w-2xl uppercase">
               Cilindros neumáticos <span className="text-signal">a la medida</span>
             </h2>
@@ -119,7 +122,7 @@ export function CilindrosDestacados() {
           </Link>
         </Reveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           <Reveal className="h-full">
             <TiltCard max={3} className="h-full">
               <Link
@@ -128,10 +131,10 @@ export function CilindrosDestacados() {
               >
                 <div className="relative aspect-[3/2] bg-white border-b border-black/10 overflow-hidden">
                   <Image
-                    src="/banners/neumatica-industrial.webp"
-                    alt="Fotografía editorial de cilindros y componentes neumáticos industriales"
+                    src="/products/cilindros-neumaticos.jpg"
+                    alt="Cilindro neumático industrial"
                     fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
                     className="object-contain p-6 group-hover:scale-[1.03] transition-transform duration-500"
                   />
                 </div>
@@ -144,6 +147,36 @@ export function CilindrosDestacados() {
                   </p>
                   <span className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal group-hover:gap-2.5 transition-all">
                     Ver cilindros neumáticos
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </div>
+              </Link>
+            </TiltCard>
+          </Reveal>
+
+          <Reveal delay={0.16} className="h-full">
+            <TiltCard max={3} className="h-full">
+              <Link
+                href="/sellos-y-componentes"
+                className="group flex h-full flex-col border border-black/10 bg-carbon hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] transition-shadow duration-300"
+              >
+                <div className="relative aspect-[3/2] overflow-hidden border-b border-black/10 bg-white">
+                  <Image
+                    src="/products/kit-sello-cilindro-neumatico.jpg"
+                    alt="Sellos para mantenimiento de cilindros neumáticos"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-contain p-6 group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-8">
+                  <div className="eyebrow mb-3">Sellos y componentes</div>
+                  <h3 className="font-display text-2xl text-surface mb-3">Sellos y vástagos cromados</h3>
+                  <p className="text-steel-300 leading-relaxed mb-6 flex-1">
+                    Kits de sellos, vástagos y componentes para cilindros neumáticos.
+                  </p>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal group-hover:gap-2.5 transition-all">
+                    Ver sellos y componentes
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>
                 </div>
@@ -251,10 +284,10 @@ export function ComoTrabajamos() {
         </div>
 
         <Reveal className="mt-10">
-          <Link href="/cotizacion" className="btn-primary">
+          <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-primary">
             Enviar especificaciones
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </a>
         </Reveal>
       </div>
     </section>
