@@ -5,7 +5,7 @@ const config = [
   ...nextCoreWebVitals,
   ...nextTypescript,
   {
-    ignores: [".next/**", "node_modules/**", "next-env.d.ts", "Claude outputs/**", "supabase/**"],
+    ignores: ["custom-worker.ts", "cloudflare/**", "open-next.config.ts", ".next/**", ".open-next/**", ".wrangler/**", "node_modules/**", "cloudflare-env.d.ts", "next-env.d.ts", "Claude outputs/**", "supabase/**"],
   },
 ];
 

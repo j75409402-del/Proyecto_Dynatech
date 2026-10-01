@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Hosting en Cloudflare Workers vía OpenNext (reemplazo de Vercel, oct-2026).
+  "name": "dynatech-web",
+  "main": "custom-worker.ts",
+  "compatibility_date": "2026-09-30",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "dynatech-web"
+    }
+  ],
+  // Optimización de imágenes de next/image con Cloudflare Images.
+  "images": {
+    "binding": "IMAGES"
+  },
+  // Tarea diaria 13:00 UTC (9:00 AM RD): mantiene activo Supabase Free (ver custom-worker.ts).
+  "triggers": {
+    "crons": ["0 13 * * *"]
+  },
+  "observability": {
+    "enabled": true
+  }
+}
