@@ -3,11 +3,14 @@ import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SITE, CONTACT } from "@/lib/constants";
+import { CommercialTracking } from "@/components/CommercialTracking";
 import "./globals.css";
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "LocalBusiness",
+  "@id": `${SITE.url}/#business`,
+  legalName: SITE.legalName,
   name: SITE.name,
   url: SITE.url,
   logo: `${SITE.url}/logo-mark.png`,
@@ -16,7 +19,8 @@ const organizationJsonLd = {
   telephone: CONTACT.phone,
   address: {
     "@type": "PostalAddress",
-    streetAddress: CONTACT.address,
+    streetAddress: CONTACT.streetAddress,
+    addressLocality: CONTACT.locality,
     addressCountry: "DO",
   },
 };
@@ -82,7 +86,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="es"
+      lang="es-DO"
       className={`${plexSans.variable} ${plexMono.variable}`}
     >
       <body className="bg-carbon text-surface antialiased flex min-h-screen flex-col">
@@ -90,6 +94,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <CommercialTracking />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

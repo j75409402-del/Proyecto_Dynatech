@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { CONTACT, SITE, SOCIAL, emailHref } from "@/lib/constants";
+import { SERVICIOS_ADICIONALES } from "@/lib/servicios";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { Reveal } from "@/components/motion/Reveal";
 import { whatsappCylinderService } from "@/lib/whatsapp";
@@ -9,6 +10,7 @@ import { whatsappCylinderService } from "@/lib/whatsapp";
 const solutionLinks = SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}` }));
 
 const companyLinks = [
+  ...SERVICIOS_ADICIONALES.map((s) => ({ label: s.name, href: `/${s.slug}` })),
   { label: "Cilindros neumáticos",   href: "/cilindros-neumaticos" },
   { label: "Servicios",              href: "/servicios" },
   { label: "Sellos y componentes",   href: "/sellos-y-componentes" },

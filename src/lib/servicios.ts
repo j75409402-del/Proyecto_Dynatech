@@ -76,6 +76,30 @@ export const COMPONENTES: Oferta[] = [
   },
 ];
 
+/** Oferta confirmada por el dueño el 2-oct-2026. No implica capacidad, stock ni plazo específico. */
+export const SERVICIOS_ADICIONALES = [
+  {
+    slug: "cilindros-hidraulicos",
+    name: "Cilindros hidráulicos",
+    title: "Fabricación y reparación de cilindros hidráulicos en República Dominicana",
+    description: "Solicita cotización para fabricar o reparar un cilindro hidráulico. Comparte fotos, plano o muestra, las medidas disponibles y la aplicación del equipo.",
+    intro: "¿Necesitas reparar un cilindro hidráulico o cotizar su fabricación? En Dynatech Ingeniería SRL recibimos solicitudes de empresas, industrias y zonas francas en República Dominicana. Cuéntanos qué necesita tu equipo para evaluar el trabajo y preparar la cotización.",
+    situations: ["Reparación de un cilindro hidráulico existente", "Fabricación de un cilindro hidráulico a partir de la información de tu proyecto"],
+    information: ["Fotos del cilindro completo, sus conexiones y puntos de montaje", "Descripción de la falla o del trabajo que necesitas", "Plano, muestra o medidas disponibles, indicando las unidades", "Aplicación del equipo y condiciones de operación conocidas", "Cantidad, ciudad y fecha en que necesitas el trabajo"],
+    note: "Si el cilindro presenta fugas o dejó de funcionar, describe lo que observas. La reparación necesaria y su alcance se confirman después de evaluar el caso; las fotos por sí solas no sustituyen una inspección.",
+  },
+  {
+    slug: "mecanizado",
+    name: "Mecanizado",
+    title: "Mecanizado industrial en República Dominicana",
+    description: "Cotiza trabajos de mecanizado industrial con Dynatech. Envía plano, muestra, medidas y cantidad para evaluar tu solicitud en República Dominicana.",
+    intro: "Cotiza el mecanizado de una pieza para tu empresa o industria. Envíanos la información disponible del trabajo: el plano o la muestra, las medidas, la cantidad y la aplicación. Evaluamos cada solicitud antes de confirmar su alcance.",
+    situations: ["Un trabajo de mecanizado definido en un plano", "Una pieza de referencia o muestra para evaluar el trabajo requerido"],
+    information: ["Plano o fotos de la pieza y una referencia de tamaño", "Medidas y unidades; tolerancias solo si están definidas en tu plano", "Material requerido, si lo conoces o está especificado", "Cantidad de piezas y aplicación", "Ciudad y fecha requerida para coordinar la solicitud"],
+    note: "Si no tienes plano, comparte fotos y explica qué función cumple la pieza. Confirmaremos qué información adicional o muestra hace falta antes de cotizar; el proceso y la viabilidad se evalúan según el trabajo.",
+  },
+] as const;
+
 /** Opciones del formulario de cotización, agrupadas (mismo orden que la oferta comercial). */
 export const GRUPOS_DE_SOLICITUD = [
   {
@@ -87,6 +111,7 @@ export const GRUPOS_DE_SOLICITUD = [
     ],
   },
   { label: "Soluciones industriales", options: SOLUCIONES.map((s) => s.name) },
+  { label: "Otros servicios industriales", options: SERVICIOS_ADICIONALES.map((s) => s.name) },
 ];
 
 export const TIPOS_DE_SOLICITUD: readonly string[] = [

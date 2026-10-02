@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { commercialMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { ArrowRight, FileText, Box, Ruler, Camera, Hash, Factory, Wrench } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -9,6 +10,7 @@ import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
+  ...commercialMetadata("Cilindros neumáticos en República Dominicana", "Fabricación y reparación de cilindros neumáticos bajo cotización. Comparte plano, muestra o medidas para tu solicitud.", "/cilindros-neumaticos"),
   title: "Cilindros neumáticos a la medida",
   description:
     "Cilindros neumáticos de doble y simple efecto, compactos, ISO y especiales, en medidas métricas y en pulgadas. Fabricación y reparación bajo cotización en República Dominicana.",

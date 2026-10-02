@@ -1,5 +1,9 @@
 # Auditoría técnica — Sitio web de Dynatech Ingeniería SRL
 
+**SEO y captación, 2-oct-2026:** mejoras locales de categorías, metadatos, LocalBusiness, páginas de hidráulicos/mecanizado y eventos comerciales. Typecheck, lint (un aviso conocido), build, cinco pruebas de correo y 54 comprobaciones de páginas/tamaños correctos. Formularios probados con API simulada; admin y entrega real NO VERIFICADOS en esta copia sin variables locales. Sin publicar ni conectar colector de analítica. Evidencia y pendientes en `docs/SEO_CONVERSIONES.md`.
+
+**Correo, 2-oct-2026:** DNS de envío añadidos y dominio verificado por Resend; clave limitada al dominio y variables guardadas en Vercel. Nueva ruta `/cotizacion/correo` y botón contextual preparados sobre producción `73c0956`. Sin publicación ni prueba de entrega real todavía. Ver `docs/CORREO_SOLICITUDES.md` y resultados de validación antes de publicar.
+
 **Versión de este documento:** 1-oct-2026 (actualiza la auditoría del 30-sep-2026 hecha sobre `75f0337`).
 **Código auditado:** `main` en `00ba341`, idéntico a `origin/main` y desplegado en Vercel. Este documento se agrega en un commit posterior que solo contiene documentación.
 **Convenciones:**

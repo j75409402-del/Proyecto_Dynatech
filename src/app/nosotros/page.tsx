@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { commercialMetadata } from "@/lib/seo";
 import { SITE } from "@/lib/constants";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { whatsappGeneral } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
+  ...commercialMetadata("Dynatech Ingeniería SRL en República Dominicana", "Conoce a Dynatech Ingeniería SRL: servicios de cilindros neumáticos y suministros industriales bajo cotización.", "/nosotros"),
   title: "Nosotros",
   description: `Conoce a ${SITE.name}: proveedor industrial B2B y taller de cilindros neumáticos en República Dominicana.`,
   alternates: { canonical: "/nosotros" },

@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { whatsappQuoteRequest } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { trackCommercialEvent } from "@/lib/conversions";
 import { HONEYPOT_FIELD } from "@/lib/antispam";
 import { uploadAdjunto } from "@/lib/uploadAdjunto";
 import { GRUPOS_DE_SOLICITUD, TIPOS_DE_SOLICITUD } from "@/lib/servicios";
@@ -127,6 +128,8 @@ export function QuoteForm() {
       });
       if (!res.ok) throw new Error("No se pudo enviar la solicitud");
       const json = await res.json();
+      if (typeof json.quote_number !== "string" || !json.quote_number) throw new Error("No se pudo confirmar la solicitud");
+      if (json.quote_number !== "COT-RECIBIDA") trackCommercialEvent("generate_lead", "quote_form");
       setFiles([]);
       setState({ status: "success", quoteNumber: json.quote_number, whatsappLink });
     } catch (err) {

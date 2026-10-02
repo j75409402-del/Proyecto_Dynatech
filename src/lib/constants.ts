@@ -1,10 +1,11 @@
 export const SITE = {
   name: "Dynatech Ingeniería",
+  legalName: "Dynatech Ingeniería SRL",
   shortName: "Dynatech",
   tagline: "Cilindros neumáticos · Fabricación y reparación",
   brandTagline: "Excellent Under Pressure.",
   description:
-    "Fabricación, reparación y reconstrucción de cilindros neumáticos; sellos y vástagos cromados bajo cotización. También soluciones de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas.",
+    "Fabricación y reparación de cilindros neumáticos e hidráulicos, mecanizado y suministros industriales en República Dominicana: neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.dynatech.com.do",
   rnc: "133-45350-9",
 } as const;
@@ -21,6 +22,8 @@ export const CONTACT = {
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "dynatechsrl@outlook.com",
   phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+1 (809) 284-4336",
   address: "Av. Rómulo Betancourt, Santo Domingo, República Dominicana",
+  streetAddress: "Av. Rómulo Betancourt",
+  locality: "Santo Domingo",
   hours: "Lunes a Viernes · 8:30 AM - 5:00 PM",
 } as const;
 

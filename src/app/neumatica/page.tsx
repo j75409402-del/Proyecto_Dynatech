@@ -11,10 +11,11 @@ import { SERVICIOS, COMPONENTES } from "@/lib/servicios";
 const solucion = getSolucion("neumatica");
 
 export const metadata: Metadata = {
-  title: solucion.title,
+  title: `${solucion.title} en República Dominicana`,
   description: solucion.metaDescription,
+  twitter: { card: "summary_large_image", title: `${solucion.title} en República Dominicana`, description: solucion.metaDescription, images: [solucion.image] },
   alternates: { canonical: "/neumatica" },
-  openGraph: { title: solucion.title, description: solucion.metaDescription, url: "/neumatica", images: [solucion.image] },
+  openGraph: { title: `${solucion.title} en República Dominicana`, description: solucion.metaDescription, url: "/neumatica", images: [solucion.image] },
 };
 
 /** Cilindros: línea destacada dentro de Neumática (mismo contenido que /servicios y /sellos-y-componentes). */

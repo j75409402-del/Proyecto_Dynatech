@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { commercialMetadata } from "@/lib/seo";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { CONTACT, emailHref } from "@/lib/constants";
@@ -6,8 +7,9 @@ import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 export const metadata: Metadata = {
-  title: "Contacto",
-  description: "Contáctanos. Estamos en Santo Domingo, República Dominicana.",
+  ...commercialMetadata("Contacta a Dynatech Ingeniería SRL", "Contacta a Dynatech en Santo Domingo para cotizar servicios y suministros industriales en República Dominicana.", "/contacto"),
+  title: "Contacto y cotizaciones industriales en Santo Domingo",
+  description: "Contacta a Dynatech Ingeniería SRL en Santo Domingo. Cotiza servicios y suministros industriales para empresas y zonas francas en República Dominicana.",
   alternates: { canonical: "/contacto" },
 };
 
@@ -22,15 +24,15 @@ export default function ContactoPage() {
             Hablemos.
           </h1>
           <p className="text-lg text-steel-300 leading-relaxed mb-10 max-w-lg">
-            Si es urgente, WhatsApp o teléfono son el camino más rápido. El formulario está bien pa&apos;
-            consultas que no corren.
+            Cotiza servicios y suministros para tu empresa o zona franca. Envíanos la referencia,
+            cantidad, aplicación y ciudad por WhatsApp o mediante el formulario.
           </p>
 
           <div className="space-y-6">
             <ContactBlock
               icon={<WhatsAppIcon className="h-5 w-5" />}
               label="WhatsApp"
-              value="Respuesta inmediata"
+              value="Enviar consulta por WhatsApp"
               href={whatsappGeneral()}
               external
             />

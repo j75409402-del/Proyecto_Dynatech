@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { commercialMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { ArrowRight, Ruler, Cog } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -8,6 +9,7 @@ import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
+  ...commercialMetadata("Sellos y componentes para cilindros neumáticos", "Cotiza kits de sellos, vástagos y componentes bajo medida para cilindros neumáticos en República Dominicana.", "/sellos-y-componentes"),
   title: "Sellos y componentes para cilindros neumáticos",
   description:
     "Kits de sellos, vástagos y barras cromadas, y componentes bajo medida para cilindros neumáticos. Cotiza con el código, una foto o la muestra.",

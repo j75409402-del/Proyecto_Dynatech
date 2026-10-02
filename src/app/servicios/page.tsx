@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { commercialMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
@@ -8,11 +9,13 @@ import { AccordionItem } from "@/components/ui/Accordion";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { SITE } from "@/lib/constants";
-import { SERVICIOS } from "@/lib/servicios";
+import Link from "next/link";
+import { SERVICIOS_ADICIONALES, SERVICIOS } from "@/lib/servicios";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
-  title: "Fabricación y reparación de cilindros neumáticos",
+  ...commercialMetadata("Reparación de cilindros neumáticos en RD", "Cotiza fabricación, reparación y reconstrucción de cilindros neumáticos para tu empresa en República Dominicana.", "/servicios"),
+  title: "Reparación y fabricación de cilindros neumáticos en RD",
   description:
     "Fabricación, reparación y reconstrucción de cilindros neumáticos, fabricación bajo muestra o plano, cambio de sellos y cilindros personalizados en República Dominicana.",
   keywords: [
@@ -64,7 +67,7 @@ const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: "Fabricación, reparación y reconstrucción de cilindros neumáticos",
-  provider: { "@type": "Organization", name: SITE.name, url: SITE.url },
+  provider: { "@id": `${SITE.url}/#business` },
   areaServed: "República Dominicana",
   description: SITE.description,
 };
@@ -95,7 +98,7 @@ export default function ServiciosPage() {
             <Reveal className="lg:col-span-6">
               <div className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-white/55">Cilindros neumáticos · Servicios</div>
               <h1 className="mb-6 font-display text-display-xl text-white">
-                Fabricación, reparación y <span className="text-signal">reconstrucción</span>
+                Fabricación, reparación y <span className="text-signal">reconstrucción de cilindros neumáticos</span>
               </h1>
               <p className="mb-8 max-w-2xl text-lg leading-relaxed text-white/75 sm:text-xl">
                 Recuperamos cilindros dañados y fabricamos nuevos a partir de tu plano, una muestra o
@@ -167,6 +170,7 @@ export default function ServiciosPage() {
         </div>
       </section>
 
+      <section className="container-max py-12 sm:py-16"><h2 className="font-display text-display-lg mb-6">Otros servicios industriales</h2><div className="grid gap-4 sm:grid-cols-2">{SERVICIOS_ADICIONALES.map((s) => <Link key={s.slug} href={`/${s.slug}`} className="card p-6 border border-black/10"><h3 className="font-display text-xl mb-3">{s.name}</h3><p className="text-steel-300 mb-4">{s.description}</p><span className="text-signal">Ver información para cotizar →</span></Link>)}</div></section>
       {/* ANTES Y DESPUÉS */}
       <section className="section-pad border-b border-black/5 bg-carbon-900">
         <div className="container-max">

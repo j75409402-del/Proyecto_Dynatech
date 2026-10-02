@@ -9,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { HONEYPOT_FIELD } from "@/lib/antispam";
+import { trackCommercialEvent } from "@/lib/conversions";
+import { HONEYPOT_FIELD, looksLikeBot } from "@/lib/antispam";
 import { whatsappLink } from "@/lib/whatsapp";
 
 const contactSchema = z.object({
@@ -36,6 +37,7 @@ export function ContactForm() {
   });
 
   const onSubmit = async (data: ContactFormData, event?: BaseSyntheticEvent) => {
+    const botLike = looksLikeBot({ [HONEYPOT_FIELD]: honeypotValue(event), _t: startedAt });
     setState({ status: "submitting" });
     try {
       const res = await fetch("/api/contacto", {
@@ -49,6 +51,7 @@ export function ContactForm() {
         }),
       });
       if (!res.ok) throw new Error("No se pudo enviar el mensaje");
+      if (!botLike) trackCommercialEvent("generate_lead", "contact_form");
       setState({ status: "success" });
       reset();
     } catch (err) {

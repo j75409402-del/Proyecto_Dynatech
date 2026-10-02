@@ -58,6 +58,15 @@ export type Solucion = {
   aplicaciones: string[];
 };
 
+/** Información para evaluar solicitudes, sin prometer especificaciones ni disponibilidad. */
+export const DATOS_PARA_COTIZAR: Record<string, readonly string[]> = {
+  neumatica: ["Código o foto del componente", "Medidas de conexión y rosca, si las conoces", "Aplicación y presión de trabajo conocida"],
+  "control-electrico": ["Referencia o foto de la etiqueta", "Tensión y corriente indicadas en el componente", "Función del repuesto en tu equipo o tablero"],
+  sensores: ["Referencia y foto de la etiqueta", "Alimentación, conexión y tipo de salida, si los conoces", "Qué detecta el sensor y dónde está instalado"],
+  instrumentacion: ["Variable a medir: presión, temperatura, flujo o nivel", "Rango y unidades requeridos, si están definidos", "Foto, referencia y conexión al proceso"],
+  "resistencias-electricas": ["Fotos, forma y dimensiones", "Voltaje y potencia indicados, si los conoces", "Aplicación y cantidad requerida"],
+};
+
 export const SOLUCIONES: Solucion[] = [
   {
     slug: "neumatica",

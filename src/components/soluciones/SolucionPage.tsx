@@ -8,7 +8,7 @@ import { TiltCard } from "@/components/motion/TiltCard";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { SITE } from "@/lib/constants";
-import { SOLUCIONES, type Solucion } from "@/lib/soluciones";
+import { SOLUCIONES, DATOS_PARA_COTIZAR, type Solucion } from "@/lib/soluciones";
 import { whatsappSolucion } from "@/lib/whatsapp";
 
 type Props = {
@@ -32,7 +32,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
     serviceType: s.name,
     description: s.description,
     url: `${SITE.url}/${s.slug}`,
-    provider: { "@type": "Organization", name: SITE.name, url: SITE.url },
+    provider: { "@id": `${SITE.url}/#business` },
     areaServed: "República Dominicana",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -189,6 +189,13 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         </div>
       </section>
 
+      <section className="container-max py-12">
+        <h2 className="font-display text-display-lg mb-4">Cotiza para tu empresa o zona franca</h2>
+        <p className="text-steel-300 leading-relaxed mb-4">Atendemos solicitudes industriales en República Dominicana. Para cotizar {s.name.toLowerCase()}, comparte los datos disponibles de tu componente:</p>
+        <ul className="list-disc pl-5 space-y-2 text-steel-300 mb-5">{DATOS_PARA_COTIZAR[s.slug]?.map((item) => <li key={item}>{item}</li>)}</ul>
+        <p className="text-steel-300 mb-6">Indica también cantidad y ciudad. La disponibilidad y condiciones se confirman al responder.</p>
+        <a href={quoteHref(s.name, s.name)} target="_blank" rel="noopener noreferrer" className="btn-primary">Enviar solicitud por WhatsApp</a>
+      </section>
       {/* OTRAS LÍNEAS */}
       <section className="py-12 border-b border-black/5">
         <div className="container-max">
