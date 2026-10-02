@@ -2,7 +2,6 @@ import { Clock, Mail } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { whatsappCylinderService, whatsappLink } from "@/lib/whatsapp";
-import { emailHref } from "@/lib/constants";
 
 type Props = {
   eyebrow?: string;
@@ -40,6 +39,11 @@ export function QuoteCTA({
   text = "Envíanos el plano, la muestra, las medidas, fotos o las especificaciones y te cotizamos.",
   whatsappHref,
 }: Props) {
+  const emailParams = new URLSearchParams();
+  if (quoteItem) emailParams.set("nombre", quoteItem);
+  if (quoteTipo) emailParams.set("tipo", quoteTipo);
+  const emailQuery = emailParams.toString();
+  const emailQuoteHref = `/cotizacion/correo${emailQuery ? `?${emailQuery}` : ""}`;
   return (
     <section className="bg-surface relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(228,0,43,0.18),transparent_60%)]" />
@@ -60,11 +64,11 @@ export function QuoteCTA({
               <WhatsAppIcon className="h-4 w-4" />
             </a>
             <a
-              href={emailHref("Consulta sobre soluciones industriales")}
+              href={emailQuoteHref}
               className="inline-flex items-center justify-center gap-2 border border-white/20 px-8 py-4 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white/40"
             >
               <Mail className="h-4 w-4" />
-              Correo
+              Cotizar por correo
             </a>
           </div>
           <p className="mt-8 flex items-center justify-center gap-2 text-xs text-white/40 font-mono uppercase tracking-techno">

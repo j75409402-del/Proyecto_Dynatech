@@ -93,6 +93,7 @@ export async function POST(req: Request) {
           quote_number: quote.quote_number,
           ...data,
         }),
+        signal: AbortSignal.timeout(8000),
       });
     } catch (err) {
       // No bloqueamos la respuesta al cliente si el webhook falla
@@ -113,7 +114,7 @@ export async function POST(req: Request) {
    ${it.notes}` : ""}`,
     ),
     ...(data.message ? ["", data.message] : []),
-  ]);
+  ], data.email);
 
   return NextResponse.json({ quote_number: quote.quote_number }, { status: 201 });
 }

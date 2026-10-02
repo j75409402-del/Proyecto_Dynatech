@@ -75,6 +75,7 @@ export async function POST(req: Request) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "contact.created", ...data }),
+        signal: AbortSignal.timeout(8000),
       });
     } catch (err) {
       console.error("Webhook contacto falló:", err);
@@ -89,7 +90,7 @@ export async function POST(req: Request) {
     `Asunto: ${data.subject || "-"}`,
     "",
     data.message,
-  ]);
+  ], data.email);
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }
