@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
-import { NAV, SITE } from "@/lib/constants";
+import { NAV, SITE, CONTACT } from "@/lib/constants";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -54,6 +54,12 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 transition-all duration-300">
+      <div className="hidden bg-surface py-2 text-white md:block">
+        <div className="container-max flex items-center justify-between gap-6 text-xs">
+          <span className="text-white/70">{CONTACT.locality}, República Dominicana · Soluciones industriales bajo cotización</span>
+          <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="font-mono text-white/85 hover:text-white">{CONTACT.phone}</a>
+        </div>
+      </div>
       <div
         className={cn(
           "border-b border-black/10 bg-carbon transition-shadow duration-300",
@@ -63,7 +69,7 @@ export function Navbar() {
         <div
           className={cn(
             "container-max flex items-center justify-between gap-6 transition-[height] duration-300",
-            scrolled ? "h-14" : "h-16",
+            scrolled ? "h-16" : "h-[72px]",
           )}
         >
           {/* Brand */}
@@ -71,13 +77,13 @@ export function Navbar() {
             <Image
               src="/logo-mark.png"
               alt=""
-              width={32}
-              height={32}
+              width={40}
+              height={40}
               priority
-              className="h-8 w-8 shrink-0 transition-transform duration-300 group-hover:scale-105 group-hover:[transform:rotateY(18deg)]"
+              className="h-10 w-10 shrink-0"
             />
             <div>
-              <div className="font-display font-semibold text-signal leading-none">{SITE.shortName}</div>
+              <div className="font-display text-xl font-semibold tracking-tight text-surface leading-none">{SITE.shortName}</div>
               <div className="font-mono text-[9px] uppercase tracking-techno text-steel-400 mt-0.5">
                 Ingeniería · SRL
               </div>
@@ -94,7 +100,7 @@ export function Navbar() {
                 isActive(pathname, "/cilindros-neumaticos") ? "text-signal" : "text-steel-200 hover:text-signal",
               )}
             >
-              Cilindros
+              Neumáticos
             </Link>
             <div
               ref={menuRef}
@@ -170,7 +176,8 @@ export function Navbar() {
                       onClick={() => setMenuOpen(false)}
                       className="mt-auto inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
-                      {NAV.cta.label}
+                      <WhatsAppIcon className="h-4 w-4" />
+              {NAV.cta.label}
                       <ArrowRight className="h-3.5 w-3.5" />
                     </a>
                   </div>
@@ -199,20 +206,11 @@ export function Navbar() {
               href={whatsappGeneral()}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Escríbenos por WhatsApp"
-              className="grid h-10 w-10 place-items-center rounded-xs border border-black/10 text-steel-200
-                         hover:text-signal hover:border-signal/40 transition-colors"
-            >
-              <WhatsAppIcon className="h-4 w-4" />
-            </a>
-            <a
-              href={whatsappGeneral()}
-              target="_blank"
-              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
                          text-white font-medium py-2.5 px-4 xl:px-5 rounded-xs text-xs uppercase tracking-wider
                          transition-colors whitespace-nowrap"
             >
+              <WhatsAppIcon className="h-4 w-4" />
               {NAV.cta.label}
               <ArrowRight className="h-3.5 w-3.5" />
             </a>

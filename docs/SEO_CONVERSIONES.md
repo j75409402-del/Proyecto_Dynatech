@@ -4,6 +4,8 @@ Implementado sobre el proyecto existente y recuperado en `C:/Users/senm1/Dynatec
 
 ## Diagnóstico y cambios
 
+- Prioridad confirmada de nuevo por el dueño: **cilindros neumáticos como línea principal**. Los hidráulicos y el mecanizado son servicios complementarios. Inicio mantiene hero, bloque destacado y CTA centrados en neumáticos; títulos y descripción de empresa refuerzan esa prioridad, y el pie de página enlaza primero la línea neumática.
+
 - La web pública y el proyecto destacan cilindros neumáticos y cinco líneas complementarias. Se conservaron hero, identidad, imágenes, categorías, enlaces de WhatsApp y redirecciones históricas.
 - Faltaban páginas para cilindros hidráulicos y mecanizado. El dueño confirmó esos servicios en su petición actual. Se añadieron `/cilindros-hidraulicos` y `/mecanizado` con solicitudes distintas, información para cotizar y límites de evaluación. No se añadieron marcas, capacidades de máquinas, tolerancias ofrecidas, stock, certificaciones ni promesas de entrega.
 - Se enlazaron desde inicio, servicios y pie de página. Se añadieron al sitemap y al selector del formulario. Toda la oferta nueva reside en `src/lib/servicios.ts`.
@@ -53,3 +55,14 @@ Evidencia: `docs/seo-verificacion/resultados.json`, `rendimiento-movil.json` y c
 6. Obtener métricas de campo después de publicar para decidir optimizaciones de móvil. Medir clic → conversación calificada → cotización → venta con el seguimiento comercial de la empresa.
 
 No se puede afirmar un aumento de clientes, tráfico o ventas todavía: las mejoras no están publicadas y no existe una comparación de conversiones.
+
+
+## Rediseño autorizado para revisión (2 de octubre de 2026)
+
+El propietario amplió el alcance a un diseño profesional, con imágenes, y pidió ver el resultado antes de publicarlo. La portada ahora prioriza cilindros neumáticos con un hero dividido, fotografías existentes, bloques de fabricación/reparación/componentes y una explicación de cómo solicitar cotización. Hidráulicos y mecanizado permanecen como servicios complementarios. Navegación, cierre comercial y pie de página se ajustaron al mismo sistema visual. Las categorías cuentan con alternativas diferenciadas de WhatsApp y formulario por correo.
+
+Se conservaron las imágenes existentes; no se añadieron clientes, marcas, certificaciones, inventario ni nuevas fotografías presentadas como trabajos reales. La imagen del hero se describe como referencia en su texto alternativo. Antes de publicar conviene sustituir las referencias editoriales por fotografías propias autorizadas si se dispone de ellas.
+
+La vista previa se entrega localmente, sin push ni despliegue. Las comprobaciones comerciales se repitieron con 54 combinaciones de ruta/tamaño sin errores JavaScript ni desbordamiento; las pruebas de correo son simuladas. Capturas: diseno-desktop.png, diseno-mobile.png y diseno-completo.png.
+
+Validación final del rediseño: typecheck y build correctos; lint sin errores (aviso preexistente de postcss). Muestra móvil local CPU 4x y red 1.6 Mbps/150 ms: LCP inicio 1.020 s, sensores 0.996 s, hidráulicos 0.968 s; CLS 0. Las cifras corresponden a la vista previa local, no a rendimiento de campo ni a resultados comerciales.

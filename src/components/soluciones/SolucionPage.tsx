@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Mail } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
+import { QuoteCTA, quoteHref, emailQuoteHref } from "@/components/cta/QuoteCTA";
 import { SITE } from "@/lib/constants";
 import { SOLUCIONES, DATOS_PARA_COTIZAR, type Solucion } from "@/lib/soluciones";
 import { whatsappSolucion } from "@/lib/whatsapp";
@@ -53,41 +53,39 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         <div className="container-max pt-7 sm:pt-9">
           <Breadcrumbs items={[{ label: s.name }]} />
         </div>
-        <div className="overflow-hidden bg-surface text-white">
+        <div className="overflow-hidden bg-[#F4F5F6] text-surface">
           <div className="container-max grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-12 lg:gap-12 lg:py-20">
             <div className="lg:col-span-6">
-              <div className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-white/55">
+              <div className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-steel-400">
                 Soluciones industriales · {String(index).padStart(2, "0")}
               </div>
-              <h1 className="mb-6 font-display text-display-xl text-white">{s.title}</h1>
-              <p className="mb-8 max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">{s.description}</p>
+              <h1 className="mb-6 font-display text-display-xl text-surface">{s.title}</h1>
+              <p className="mb-8 max-w-xl text-lg leading-relaxed text-steel-300 sm:text-xl">{s.description}</p>
               <div className="flex flex-wrap gap-3">
                 <a href={quoteHref(s.name, s.name)} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                  Solicitar cotización
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a href={whatsappSolucion(s.name)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-5 py-3 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10">
+                  Cotizar por WhatsApp
                   <WhatsAppIcon className="h-4 w-4" />
-                  WhatsApp
                 </a>
+                <Link href={emailQuoteHref(s.name, s.name)} className="btn-secondary">
+                  <Mail className="h-4 w-4" /> Cotizar por correo
+                </Link>
               </div>
-              <p className="mt-6 font-mono text-[10px] uppercase tracking-techno text-white/50">
+              <p className="mt-6 font-mono text-[10px] uppercase tracking-techno text-steel-400">
                   Bajo cotización · Disponibilidad confirmada al responder
               </p>
             </div>
 
             <div className="lg:col-span-6">
-              <div className="relative border border-white/15 bg-white shadow-[0_30px_80px_-40px_rgba(0,0,0,0.85)]">
+              <div className="relative aspect-[4/3] border border-black/10 bg-white">
                 <div className="absolute -top-2 -left-2 h-4 w-4 border-l-2 border-t-2 border-signal z-10" />
                 <div className="absolute -bottom-2 -right-2 h-4 w-4 border-r-2 border-b-2 border-signal z-10" />
                 <Image
                   src={s.image}
                   alt={s.imageAlt}
-                  width={s.imageWidth}
-                  height={s.imageHeight}
+                  fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="w-full h-auto"
+                  className="object-contain p-6"
                 />
               </div>
             </div>

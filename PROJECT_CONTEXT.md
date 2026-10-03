@@ -1,5 +1,7 @@
 # PROJECT_CONTEXT.md — Dynatech Web
 
+> Prioridad comercial confirmada por el dueño, 2-oct-2026: cilindros neumáticos primero; cilindros hidráulicos y mecanizado como servicios complementarios. Mantener esa jerarquía en inicio, SEO, CTA y enlaces.
+
 > SEO y captación, 2-oct-2026: páginas `/cilindros-hidraulicos` y `/mecanizado` basadas en oferta confirmada por el dueño; enlaces, sitemap de 18 URLs y opciones del formulario. Metadatos comerciales locales, LocalBusiness y eventos comerciales sin datos personales. Cambios locales probados, no publicados. El dueño no tiene cuenta GA4/GTM; hay que crearla para estadísticas persistentes. Ver `docs/SEO_CONVERSIONES.md`. Repositorio recuperado en `C:/Users/senm1/Dynatech/web-recuperada-20261002`, rama `mejora-captacion-20261002`, base `origin/main` en `73c0956`. Se preservaron los cambios previos del formulario y avisos de correo.
 
 > Correo, 2-oct-2026: preparada la ruta `/cotizacion/correo` con el formulario existente; QuoteCTA enlaza allí conservando el contexto. Resend tiene el dominio verificado y las variables de producción guardadas en Vercel para enviar a `dynatechsrl@outlook.com`. Publicación y prueba real pendientes. APIs/webhooks mantienen su contrato; se añadió Reply-To validado y timeout en webhooks. Ver `docs/CORREO_SOLICITUDES.md`.

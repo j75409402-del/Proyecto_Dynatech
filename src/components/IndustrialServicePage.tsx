@@ -17,7 +17,7 @@ export function IndustrialServicePage({ service: s }: { service: (typeof SERVICI
       <section className="container-max py-12 sm:py-16">
         <Breadcrumbs items={[{ label: "Servicios", href: "/servicios" }, { label: s.name }]} />
         <div className="max-w-3xl">
-          <p className="eyebrow mb-4">Servicios industriales · Bajo cotización</p>
+          <p className="eyebrow mb-4">Servicios complementarios · Bajo cotización</p>
           <h1 className="font-display text-display-xl mb-6">{s.title}</h1>
           <p className="text-lg text-steel-300 leading-relaxed mb-8">{s.intro}</p>
           <a href={quoteHref(s.name)} target="_blank" rel="noopener noreferrer" className="btn-primary">Cotiza {s.name.toLowerCase()} por WhatsApp</a>

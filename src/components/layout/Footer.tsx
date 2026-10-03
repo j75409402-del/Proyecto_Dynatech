@@ -10,10 +10,10 @@ import { whatsappCylinderService } from "@/lib/whatsapp";
 const solutionLinks = SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}` }));
 
 const companyLinks = [
-  ...SERVICIOS_ADICIONALES.map((s) => ({ label: s.name, href: `/${s.slug}` })),
   { label: "Cilindros neumáticos",   href: "/cilindros-neumaticos" },
   { label: "Servicios",              href: "/servicios" },
   { label: "Sellos y componentes",   href: "/sellos-y-componentes" },
+  ...SERVICIOS_ADICIONALES.map((s) => ({ label: s.name, href: `/${s.slug}` })),
   { label: "Nosotros",               href: "/nosotros" },
   { label: "Contacto",               href: "/contacto" },
 ];
@@ -27,7 +27,7 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-carbon-900 border-t border-black/5">
+    <footer className="site-footer bg-surface text-white border-t border-white/10">
       <div className="container-max py-16">
         <Reveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
           {/* Brand + tagline */}

@@ -22,6 +22,10 @@
     overflow-x: hidden;
   }
 
+  html {
+    scroll-padding-top: 7rem;
+  }
+
   /* Selección con signal red */
   ::selection {
     background: theme("colors.signal.DEFAULT");
@@ -116,6 +120,43 @@
   /* Section padding standard */
   .section-pad {
     @apply py-16 sm:py-20 lg:py-28;
+  }
+
+  .home-hero {
+    background: #F4F5F6;
+  }
+
+  .hero-title {
+    font-size: clamp(3.25rem, 5.6vw, 5.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.055em;
+  }
+
+  .section-heading {
+    @apply flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-12;
+  }
+
+  .site-footer .text-surface {
+    color: white;
+  }
+
+  .site-footer .text-steel-200,
+  .site-footer .text-steel-300 {
+    color: rgb(255 255 255 / 0.7);
+  }
+
+  .site-footer .text-steel-400,
+  .site-footer .text-steel-500,
+  .site-footer .eyebrow {
+    color: rgb(255 255 255 / 0.5);
+  }
+
+  .site-footer .hairline {
+    background: rgb(255 255 255 / 0.12);
+  }
+
+  .site-footer a:hover {
+    color: white;
   }
 }
 

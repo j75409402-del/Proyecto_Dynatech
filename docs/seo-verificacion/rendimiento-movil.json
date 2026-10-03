@@ -3,17 +3,17 @@
   "results": [
     {
       "route": "/",
-      "lcpMs": 1392,
+      "lcpMs": 1020,
       "cls": 0
     },
     {
       "route": "/sensores",
-      "lcpMs": 1076,
+      "lcpMs": 996,
       "cls": 0
     },
     {
       "route": "/cilindros-hidraulicos",
-      "lcpMs": 1020,
+      "lcpMs": 968,
       "cls": 0
     }
   ]
