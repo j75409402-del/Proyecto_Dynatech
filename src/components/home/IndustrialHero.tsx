@@ -21,11 +21,14 @@ export function Hero() {
         </div>
         <div className="relative">
           <div className="relative aspect-square overflow-hidden bg-surface sm:aspect-[6/5] lg:aspect-square">
-            <Image src="/cilindros/taller-reparando.jpg" alt="Imagen de referencia de un técnico trabajando en un cilindro neumático" fill priority sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover object-[58%_center]" />
+            <Image src="/cilindros/taller-portada-v2.webp" alt="Imagen de referencia de un técnico trabajando en un cilindro neumático" fill priority sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover object-center" />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-6 pb-6 pt-20 text-white sm:px-8 sm:pb-8"><p className="mb-2 font-mono text-[11px] uppercase tracking-techno text-white/70">Nuestra línea principal</p><p className="font-display text-2xl font-medium sm:text-3xl">Fabricación. Reparación.<br />Reconstrucción.</p></div>
           </div>
           <div className="absolute -right-2 -top-2 h-12 w-12 border-r-4 border-t-4 border-signal sm:-right-3 sm:-top-3" aria-hidden />
-          <span className="absolute left-6 top-6 border border-white/30 bg-black/30 px-3 py-2 font-mono text-[10px] uppercase tracking-techno text-white backdrop-blur-sm">Dynatech Ingeniería SRL</span>
+          <div className="absolute left-4 top-4 flex items-center gap-3 border border-black/10 bg-white px-4 py-3 shadow-sm sm:left-6 sm:top-6">
+            <Image src="/logo-mark.png" alt="" width={52} height={52} className="h-11 w-11 sm:h-[52px] sm:w-[52px]" />
+            <div><p className="font-display text-xl font-semibold tracking-tight text-surface sm:text-2xl">Dynatech</p><p className="mt-1 font-mono text-[9px] uppercase tracking-techno text-steel-300 sm:text-[10px]">Ingeniería · SRL</p></div>
+          </div>
         </div>
       </div>
       <div className="border-t border-black/10 bg-white"><div className="container-max grid grid-cols-2 gap-x-6 gap-y-5 py-6 lg:grid-cols-4">{["Fabricación bajo plano o muestra", "Reparación y reconstrucción", "Sellos y vástagos cromados", "Empresas e industrias en RD"].map((item) => <div key={item} className="flex items-start gap-3 text-sm font-medium text-steel-300"><span aria-hidden className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-signal" />{item}</div>)}</div></div>

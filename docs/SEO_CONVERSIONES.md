@@ -66,3 +66,8 @@ Se conservaron las imágenes existentes; no se añadieron clientes, marcas, cert
 La vista previa se entrega localmente, sin push ni despliegue. Las comprobaciones comerciales se repitieron con 54 combinaciones de ruta/tamaño sin errores JavaScript ni desbordamiento; las pruebas de correo son simuladas. Capturas: diseno-desktop.png, diseno-mobile.png y diseno-completo.png.
 
 Validación final del rediseño: typecheck y build correctos; lint sin errores (aviso preexistente de postcss). Muestra móvil local CPU 4x y red 1.6 Mbps/150 ms: LCP inicio 1.020 s, sensores 0.996 s, hidráulicos 0.968 s; CLS 0. Las cifras corresponden a la vista previa local, no a rendimiento de campo ni a resultados comerciales.
+
+
+### Portada v2 solicitada por el propietario
+
+Se sustituyó la imagen del técnico por una nueva ilustración fotográfica generada con IA, usando la portada anterior como referencia. No representa un empleado, instalación ni trabajo real verificado. Se conserva el texto alternativo de imagen de referencia. El logo original se compone en HTML con su archivo existente y texto legible, separado de la imagen, evitando deformaciones generativas. Asset optimizado: public/cilindros/taller-portada-v2.webp. Se conserva la fotografía anterior. Typecheck, lint sin errores y build correctos; imagen cargada y sin desbordamiento a 390/1440 px. Capturas portada-v2-390.png y portada-v2-1440.png. Publicación pendiente de aprobación expresa del propietario.
