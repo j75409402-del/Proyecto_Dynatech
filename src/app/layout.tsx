@@ -4,7 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SITE, CONTACT } from "@/lib/constants";
 import { CommercialTracking } from "@/components/CommercialTracking";
-import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { CookielessAnalytics } from "@/components/CookielessAnalytics";
 import "./globals.css";
 
 const organizationJsonLd = {
@@ -96,7 +96,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <CommercialTracking />
-        <GoogleAnalytics />
+        <CookielessAnalytics websiteId="4bbea860-f2e7-4268-9476-190563eeab0a" scriptUrl="https://cloud.umami.is/script.js" />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

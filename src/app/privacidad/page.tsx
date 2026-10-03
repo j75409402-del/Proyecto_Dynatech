@@ -78,15 +78,16 @@ export default function PrivacidadPage() {
           heading: "Cookies y analítica",
           body: (
             <p>
-              Usamos Google Analytics solo si aceptas la analítica en el aviso del sitio.
-              Google recibe datos técnicos de navegación, páginas visitadas y eventos como
-              clics en WhatsApp o solicitudes enviadas. No enviamos nombres, correos,
-              teléfonos, mensajes, adjuntos ni contenidos de formularios a Analytics.
-              La analítica puede usar cookies y Google procesa los datos para prestar el servicio.
-              No activamos funciones publicitarias. Puedes rechazarla o retirar tu permiso
-              en «Preferencias de analítica». La elección se guarda en tu navegador.
+              Usamos Umami Cloud para medir visitas, páginas consultadas y acciones como
+              clics en WhatsApp, teléfono, correo o solicitudes enviadas. Esta medición no usa
+              cookies de analítica ni seguimiento entre sitios. No enviamos nombres, correos,
+              teléfonos, mensajes, adjuntos ni contenidos de formularios al panel.
+              Umami procesa datos técnicos de navegación para ofrecer estadísticas; el servicio
+              está alojado en Estados Unidos y este plan conserva las estadísticas durante seis meses.
+              No activamos publicidad ni grabaciones de sesiones. Respetamos la señal
+              «No rastrear» del navegador y el rechazo de analítica guardado anteriormente.
               Las cookies técnicas necesarias para el funcionamiento son independientes.
-              Consulta la política de Google en policies.google.com/privacy.
+              Puedes consultar la <a href="https://umami.is/privacy" className="text-signal hover:underline">política de privacidad de Umami</a>.
             </p>
           ),
         },

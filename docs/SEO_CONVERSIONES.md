@@ -84,3 +84,12 @@ Pruebas: tests/analytics.test.mjs (etiqueta simulada) verifica carga solo tras c
 Referencias técnicas: https://developers.google.com/analytics/devguides/collection/ga4/views y https://developers.google.com/tag-platform/gtagjs/reference.
 
 Validación de publicación: commit d9cdeff desplegado correctamente por Vercel. En el dominio público, sin consentimiento no se observó ningún collect; tras aceptar, page_view y whatsapp_click se enviaron a G-9JET3799ZE y ambos recibieron HTTP 204 de Google. Se interceptó la navegación de WhatsApp para no abrir conversaciones. El informe en tiempo real seguía sin datos visibles al revisar inmediatamente; el HTTP 204 confirma recepción técnica, no resultados comerciales ni disponibilidad inmediata en informes. Captura analytics-publicado-390.png.
+
+
+## Medición sin cookies — 3-oct-2026
+
+Por solicitud del propietario, se sustituye la carga de GA4 y su aviso por Umami Cloud. Cuenta del propietario; plan Hobby: $0, 100.000 eventos/mes, un sitio y seis meses de retención, región Estados Unidos. Sitio real creado: `4bbea860-f2e7-4268-9476-190563eeab0a`; script oficial `https://cloud.umami.is/script.js`. Sin prueba de pago ni tarjeta. La cuenta GA4 anterior permanece disponible, pero no se carga en la web.
+
+`CookielessAnalytics.tsx` manda vistas manuales y los cinco eventos existentes. Desactiva seguimiento automático para evitar duplicados y parámetros privados. Rutas y referrer sin query/hash; campos del formulario, adjuntos, texto de WhatsApp y URLs de contacto no se envían. Excluye admin y respeta DNT y rechazos anteriores. No publicidad, identificación de usuarios ni grabaciones. Privacidad actualizada con proveedor y retención.
+
+Verificación local: typecheck, lint (solo aviso preexistente de postcss), build; 54 combinaciones de páginas y tamaños; prueba de analítica con colector simulado: una vista por navegación, un evento por clic, sin cookies ni datos privados, sin aviso, DNT/rechazo/admin y funcionamiento si se bloquea el colector. La aceptación técnica y las cifras del panel en producción deben verificarse después del despliegue. Los clics indican intención; no demuestran conversación ni venta. Entrega real del correo y seguimiento comercial siguen pendientes de prueba con el dueño.

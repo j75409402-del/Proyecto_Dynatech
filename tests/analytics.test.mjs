@@ -1,15 +1,35 @@
 import assert from 'node:assert/strict';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'file:///C:/Users/senm1/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs');
-const b=await chromium.launch({channel:'msedge',headless:true});const p=await b.newPage({viewport:{width:390,height:844}});let loads=0;await p.route('https://www.googletagmanager.com/**',async r=>{loads++;await r.fulfill({contentType:'application/javascript',body:''});});
+const b=await chromium.launch({channel:'msedge',headless:true});
 const base=process.env.TEST_BASE_URL||'http://localhost:3199';
-const commands=()=>p.evaluate(()=>[...(window.dataLayer||[])].filter(x=>x&&typeof x.length==='number').map(x=>Array.from(x)));
-try{
-await p.goto(base+'/cotizacion/correo?nombre=PRIVADO&email=private@example.com#secreto',{waitUntil:'networkidle'});assert.equal(loads,0);await p.getByRole('button',{name:'Rechazar',exact:true}).click();assert.equal(loads,0);
-await p.getByRole('button',{name:'Preferencias de analítica'}).click();await p.getByRole('button',{name:'Aceptar analítica'}).click();await p.waitForFunction(()=>document.getElementById('dynatech-ga4'));assert.equal(loads,1);let queue=await commands();assert.equal(queue.filter(x=>x[0]==='event'&&x[1]==='page_view').length,1);assert.ok(!JSON.stringify(queue).includes('PRIVADO'));assert.ok(!JSON.stringify(queue).includes('private@example.com'));assert.ok(!JSON.stringify(queue).includes('secreto'));
-await p.locator('a[href="/servicios"]').first().evaluate(a=>a.click());await p.waitForURL('**/servicios');await p.waitForTimeout(200);queue=await commands();assert.equal(queue.filter(x=>x[0]==='event'&&x[1]==='page_view').length,2);
-await p.evaluate(()=>{const a=document.querySelector('a[href*="wa.me"]');a.addEventListener('click',e=>e.preventDefault(),{once:true});a.click();});queue=await commands();assert.equal(queue.filter(x=>x[0]==='event'&&x[1]==='whatsapp_click').length,1);assert.ok(!JSON.stringify(queue).includes('wa.me'));assert.ok(!JSON.stringify(queue).includes('Cantidad o especificaciones'));
-await p.getByRole('button',{name:'Preferencias de analítica'}).click();await p.getByRole('button',{name:'Rechazar',exact:true}).click();const before=(await commands()).length;await p.evaluate(()=>window.dispatchEvent(new CustomEvent('dynatech:conversion',{detail:{event:'generate_lead',channel:'quote_form'}})));assert.equal((await commands()).length,before);
-await p.goto(base+'/admin/login',{waitUntil:'networkidle'});assert.equal(await p.locator('#dynatech-ga4').count(),0);assert.equal(await p.getByRole('button',{name:'Aceptar analítica'}).count(),0);
-await p.goto(base+'/',{waitUntil:'networkidle'});assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await p.getByRole('button',{name:'Preferencias de analítica'}).click();await p.screenshot({path:'docs/seo-verificacion/analytics-consent-390.png'});
-console.log('OK: consentimiento, rechazo, retirada, navegación SPA, un evento por acción, sin query ni mensajes, admin excluido y móvil');
-}finally{await b.close();}
+let loads=0;
+const context=await b.newContext({viewport:{width:390,height:844}});
+await context.route('https://cloud.umami.is/script.js',async r=>{loads++;await r.fulfill({contentType:'application/javascript',body:'window.hits=[];window.umami={track:async payload=>{window.hits.push(payload)}};'});});
+await context.route('https://www.googletagmanager.com/**',()=>{throw Error('Google Analytics must not load');});
+const p=await context.newPage();
+const hits=()=>p.evaluate(()=>window.hits||[]);
+try {
+await p.goto(base+'/cotizacion/correo?nombre=PRIVADO&email=private@example.com#secreto',{waitUntil:'networkidle'});
+assert.equal(loads,1);assert.equal((await hits()).length,1);
+assert.equal(await p.getByRole('button',{name:'Aceptar analítica'}).count(),0);
+assert.ok(!JSON.stringify(await hits()).match(/PRIVADO|private@example|secreto/));
+assert.equal((await hits())[0].website,'4bbea860-f2e7-4268-9476-190563eeab0a');
+await p.locator('a[href="/servicios"]').first().evaluate(a=>a.click());await p.waitForURL('**/servicios');await p.waitForFunction(()=>window.hits.length===2);
+await p.evaluate(()=>{const a=document.querySelector('a[href*="wa.me"]');a.addEventListener('click',e=>e.preventDefault(),{once:true});a.click();});
+assert.equal((await hits()).filter(x=>x.name==='whatsapp_click').length,1);
+await p.evaluate(()=>window.dispatchEvent(new CustomEvent('dynatech:conversion',{detail:{event:'generate_lead',channel:'quote_form',email:'private@example.com',message:'PRIVADO'}})));
+assert.equal((await hits()).filter(x=>x.name==='generate_lead').length,1);
+assert.ok(!JSON.stringify(await hits()).match(/PRIVADO|private@example|wa.me/));
+assert.equal((await context.cookies()).length,0);
+await p.screenshot({path:'docs/seo-verificacion/analytics-sin-aviso-390.png'});
+const before=(await hits()).length;
+await p.evaluate(()=>{localStorage.setItem('dynatech.analytics-consent.v1','rejected');window.dispatchEvent(new Event('dynatech:analytics-consent'));});
+await p.evaluate(()=>window.dispatchEvent(new CustomEvent('dynatech:conversion',{detail:{event:'whatsapp_click',channel:'whatsapp'}})));
+assert.equal((await hits()).length,before);
+await p.goto(base+'/',{waitUntil:'networkidle'});assert.equal(await p.locator('#dynatech-umami').count(),0);
+await p.evaluate(()=>localStorage.clear());
+await p.goto(base+'/admin/login',{waitUntil:'networkidle'});assert.equal(await p.locator('#dynatech-umami').count(),0);
+const dnt=await b.newContext();await dnt.addInitScript(()=>Object.defineProperty(navigator,'doNotTrack',{value:'1'}));const dp=await dnt.newPage();await dp.goto(base+'/',{waitUntil:'networkidle'});assert.equal(await dp.locator('#dynatech-umami').count(),0);await dnt.close();
+const blocked=await b.newContext();await blocked.route('https://cloud.umami.is/**',r=>r.abort());const bp=await blocked.newPage();await bp.goto(base+'/',{waitUntil:'networkidle'});assert.ok(await bp.locator('a[href*="wa.me"]').count());assert.equal(await bp.locator('h1').count(),1);await blocked.close();
+console.log('OK: sin aviso ni cookies, SPA sin duplicados, WhatsApp y lead, sin datos privados, rechazo anterior y DNT, admin excluido, web funcional con analítica bloqueada');
+} finally {await b.close();}
