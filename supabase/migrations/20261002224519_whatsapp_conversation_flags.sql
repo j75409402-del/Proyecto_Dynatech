@@ -1,0 +1,1 @@
+alter table public.whatsapp_bot_deliveries add column if not exists context_key text, add column if not exists conversation jsonb; create index if not exists whatsapp_bot_context_recent on public.whatsapp_bot_deliveries (context_key, updated_at desc) where state='sent';
