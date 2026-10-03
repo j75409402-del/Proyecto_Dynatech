@@ -71,3 +71,14 @@ Validación final del rediseño: typecheck y build correctos; lint sin errores (
 ### Portada v2 solicitada por el propietario
 
 Se sustituyó la imagen del técnico por una nueva ilustración fotográfica generada con IA, usando la portada anterior como referencia. No representa un empleado, instalación ni trabajo real verificado. Se conserva el texto alternativo de imagen de referencia. El logo original se compone en HTML con su archivo existente y texto legible, separado de la imagen, evitando deformaciones generativas. Asset optimizado: public/cilindros/taller-portada-v2.webp. Se conserva la fotografía anterior. Typecheck, lint sin errores y build correctos; imagen cargada y sin desbordamiento a 390/1440 px. Capturas portada-v2-390.png y portada-v2-1440.png. Publicación pendiente de aprobación expresa del propietario.
+
+
+## Conexión GA4 autorizada
+
+Se creó la cuenta Dynatech Ingeniería SRL y propiedad Dynatech · www.dynatech.com.do con el correo original del propietario. Cuenta 410564641, propiedad 557207605, flujo 15976146436, ID público G-9JET3799ZE. Horario República Dominicana, moneda RD$. Google Analytics recibe page_view y los cinco eventos comerciales después de aceptar analítica; antes de aceptar o después de rechazar no carga la etiqueta. La preferencia puede cambiarse y se conserva localmente. No se activan funciones publicitarias ni Google Signals.
+
+Medición mejorada desactivada en la interfaz de GA4: no recolección automática de URLs de WhatsApp, formularios ni navegación duplicada. Rutas y referrer enviados sin query/hash; sin texto de formularios o mensajes; admin excluido. generate_lead se marcó como evento clave, contado por evento y sin valor monetario predeterminado. Los clics de WhatsApp son intención, no conversaciones ni ventas. La política de privacidad describe Google y la opción de rechazo.
+
+Pruebas: tests/analytics.test.mjs (etiqueta simulada) verifica carga solo tras consentimiento, rechazo, retirada, rutas SPA, un evento por acción, ausencia de query y mensajes, exclusión de admin y ausencia de overflow a 390 px. Typecheck, lint sin errores y build correctos; prueba comercial 54 combinaciones correcta. Captura analytics-consent-390.png. No se hicieron envíos reales de formularios en estas pruebas.
+
+Referencias técnicas: https://developers.google.com/analytics/devguides/collection/ga4/views y https://developers.google.com/tag-platform/gtagjs/reference.

@@ -13,7 +13,7 @@ export default function PrivacidadPage() {
     <LegalPage
       eyebrow="Legal"
       title="Política de privacidad"
-      updated="julio 2026"
+      updated="octubre 2026"
       intro={`Este es un documento de referencia general — si tu empresa requiere una versión revisada por asesoría legal, contáctanos y la actualizamos. En Dynatech Ingeniería SRL ("Dynatech", "nosotros") respetamos la privacidad de quienes visitan ${SITE.url} y usan nuestros formularios de cotización y contacto.`}
       sections={[
         {
@@ -78,9 +78,15 @@ export default function PrivacidadPage() {
           heading: "Cookies y analítica",
           body: (
             <p>
-              Este sitio puede usar cookies técnicas o de analítica básica para entender cómo se
-              usa el sitio y mejorar la experiencia de navegación. No usamos esta información
-              para publicidad de terceros.
+              Usamos Google Analytics solo si aceptas la analítica en el aviso del sitio.
+              Google recibe datos técnicos de navegación, páginas visitadas y eventos como
+              clics en WhatsApp o solicitudes enviadas. No enviamos nombres, correos,
+              teléfonos, mensajes, adjuntos ni contenidos de formularios a Analytics.
+              La analítica puede usar cookies y Google procesa los datos para prestar el servicio.
+              No activamos funciones publicitarias. Puedes rechazarla o retirar tu permiso
+              en «Preferencias de analítica». La elección se guarda en tu navegador.
+              Las cookies técnicas necesarias para el funcionamiento son independientes.
+              Consulta la política de Google en policies.google.com/privacy.
             </p>
           ),
         },

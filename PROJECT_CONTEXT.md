@@ -1,3 +1,5 @@
+> GA4 conectado por solicitud del propietario: G-9JET3799ZE, GoogleAnalytics.tsx con consentimiento opcional y eventos comerciales controlados. Ver docs/SEO_CONVERSIONES.md.
+
 # PROJECT_CONTEXT.md — Dynatech Web
 
 > Prioridad comercial confirmada por el dueño, 2-oct-2026: cilindros neumáticos primero; cilindros hidráulicos y mecanizado como servicios complementarios. Mantener esa jerarquía en inicio, SEO, CTA y enlaces.

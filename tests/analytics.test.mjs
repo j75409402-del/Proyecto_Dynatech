@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'file:///C:/Users/senm1/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs');
+const b=await chromium.launch({channel:'msedge',headless:true});const p=await b.newPage({viewport:{width:390,height:844}});let loads=0;await p.route('https://www.googletagmanager.com/**',async r=>{loads++;await r.fulfill({contentType:'application/javascript',body:''});});
+const base=process.env.TEST_BASE_URL||'http://localhost:3199';
+const commands=()=>p.evaluate(()=>[...(window.dataLayer||[])].filter(x=>x&&typeof x.length==='number').map(x=>Array.from(x)));
+try{
+await p.goto(base+'/cotizacion/correo?nombre=PRIVADO&email=private@example.com#secreto',{waitUntil:'networkidle'});assert.equal(loads,0);await p.getByRole('button',{name:'Rechazar',exact:true}).click();assert.equal(loads,0);
+await p.getByRole('button',{name:'Preferencias de analítica'}).click();await p.getByRole('button',{name:'Aceptar analítica'}).click();await p.waitForFunction(()=>document.getElementById('dynatech-ga4'));assert.equal(loads,1);let queue=await commands();assert.equal(queue.filter(x=>x[0]==='event'&&x[1]==='page_view').length,1);assert.ok(!JSON.stringify(queue).includes('PRIVADO'));assert.ok(!JSON.stringify(queue).includes('private@example.com'));assert.ok(!JSON.stringify(queue).includes('secreto'));
+await p.locator('a[href="/servicios"]').first().evaluate(a=>a.click());await p.waitForURL('**/servicios');await p.waitForTimeout(200);queue=await commands();assert.equal(queue.filter(x=>x[0]==='event'&&x[1]==='page_view').length,2);
+await p.evaluate(()=>{const a=document.querySelector('a[href*="wa.me"]');a.addEventListener('click',e=>e.preventDefault(),{once:true});a.click();});queue=await commands();assert.equal(queue.filter(x=>x[0]==='event'&&x[1]==='whatsapp_click').length,1);assert.ok(!JSON.stringify(queue).includes('wa.me'));assert.ok(!JSON.stringify(queue).includes('Cantidad o especificaciones'));
+await p.getByRole('button',{name:'Preferencias de analítica'}).click();await p.getByRole('button',{name:'Rechazar',exact:true}).click();const before=(await commands()).length;await p.evaluate(()=>window.dispatchEvent(new CustomEvent('dynatech:conversion',{detail:{event:'generate_lead',channel:'quote_form'}})));assert.equal((await commands()).length,before);
+await p.goto(base+'/admin/login',{waitUntil:'networkidle'});assert.equal(await p.locator('#dynatech-ga4').count(),0);assert.equal(await p.getByRole('button',{name:'Aceptar analítica'}).count(),0);
+await p.goto(base+'/',{waitUntil:'networkidle'});assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await p.getByRole('button',{name:'Preferencias de analítica'}).click();await p.screenshot({path:'docs/seo-verificacion/analytics-consent-390.png'});
+console.log('OK: consentimiento, rechazo, retirada, navegación SPA, un evento por acción, sin query ni mensajes, admin excluido y móvil');
+}finally{await b.close();}
