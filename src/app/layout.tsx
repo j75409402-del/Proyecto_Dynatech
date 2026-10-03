@@ -18,6 +18,13 @@ const organizationJsonLd = {
   description: SITE.description,
   email: CONTACT.email,
   telephone: CONTACT.phone,
+  areaServed: { "@type": "Country", name: "República Dominicana" },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "08:30",
+    closes: "17:00",
+  },
   address: {
     "@type": "PostalAddress",
     streetAddress: CONTACT.streetAddress,

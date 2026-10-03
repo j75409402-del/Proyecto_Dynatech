@@ -354,3 +354,6 @@ Los archivos usan CRLF en Windows. Con un git sin `core.autocrlf` pueden aparece
     - Si van en el menú, agregarlas a `NAV` o `SOLUCIONES`.
     - Los CTA de cotización deben usar `quoteHref()`.
 12. Textos en español de RD, tuteo.
+# SEO orgánico, 3-oct-2026
+
+Primera ejecución completa de investigación y mapa en `docs/SEO_ORGANICO_20261003.md`. Copia aislada desde `33e3a6b`; se conservan Umami, las cinco líneas y servicios actuales. Se prepara `/valvulas-neumaticas` como detalle de una subcategoría existente, navegación de subcategorías, metadata plural de controles, enlaces y horario de LocalBusiness. Sin nuevos modelos, inventario, servicios integrales ni cambios de APIs/datos/hosting. Publicación pendiente de revisión del propietario; ver pruebas y límites en el informe.

@@ -1,0 +1,420 @@
+{
+  "checks": [
+    {
+      "route": "/",
+      "width": 390,
+      "status": 200,
+      "title": "Cilindros neumáticos: fabricación y reparación en RD",
+      "overflow": false
+    },
+    {
+      "route": "/cilindros-hidraulicos",
+      "width": 390,
+      "status": 200,
+      "title": "Cilindros hidráulicos: fabricación y reparación en RD · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/mecanizado",
+      "width": 390,
+      "status": 200,
+      "title": "Mecanizado industrial en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/neumatica",
+      "width": 390,
+      "status": 200,
+      "title": "Neumática industrial en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/control-electrico",
+      "width": 390,
+      "status": 200,
+      "title": "Controles eléctricos industriales en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/sensores",
+      "width": 390,
+      "status": 200,
+      "title": "Sensores industriales en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/instrumentacion",
+      "width": 390,
+      "status": 200,
+      "title": "Instrumentación industrial en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/resistencias-electricas",
+      "width": 390,
+      "status": 200,
+      "title": "Resistencias eléctricas industriales en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/cilindros-neumaticos",
+      "width": 390,
+      "status": 200,
+      "title": "Cilindros neumáticos a la medida · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/valvulas-neumaticas",
+      "width": 390,
+      "status": 200,
+      "title": "Válvulas neumáticas en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/servicios",
+      "width": 390,
+      "status": 200,
+      "title": "Reparación y fabricación de cilindros neumáticos en RD · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/sellos-y-componentes",
+      "width": 390,
+      "status": 200,
+      "title": "Sellos y componentes para cilindros neumáticos · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/nosotros",
+      "width": 390,
+      "status": 200,
+      "title": "Nosotros · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/contacto",
+      "width": 390,
+      "status": 200,
+      "title": "Contacto y cotizaciones industriales en Santo Domingo · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/cotizacion/correo",
+      "width": 390,
+      "status": 200,
+      "title": "Solicitar cotización por correo · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/garantias",
+      "width": 390,
+      "status": 200,
+      "title": "Garantías · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/devoluciones",
+      "width": 390,
+      "status": 200,
+      "title": "Política de devoluciones · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/privacidad",
+      "width": 390,
+      "status": 200,
+      "title": "Política de privacidad · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/terminos",
+      "width": 390,
+      "status": 200,
+      "title": "Términos y condiciones · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 768,
+      "status": 200,
+      "title": "Cilindros neumáticos: fabricación y reparación en RD",
+      "overflow": false
+    },
+    {
+      "route": "/cilindros-hidraulicos",
+      "width": 768,
+      "status": 200,
+      "title": "Cilindros hidráulicos: fabricación y reparación en RD · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/mecanizado",
+      "width": 768,
+      "status": 200,
+      "title": "Mecanizado industrial en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/neumatica",
+      "width": 768,
+      "status": 200,
+      "title": "Neumática industrial en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/control-electrico",
+      "width": 768,
+      "status": 200,
+      "title": "Controles eléctricos industriales en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/sensores",
+      "width": 768,
+      "status": 200,
+      "title": "Sensores industriales en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/instrumentacion",
+      "width": 768,
+      "status": 200,
+      "title": "Instrumentación industrial en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/resistencias-electricas",
+      "width": 768,
+      "status": 200,
+      "title": "Resistencias eléctricas industriales en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/cilindros-neumaticos",
+      "width": 768,
+      "status": 200,
+      "title": "Cilindros neumáticos a la medida · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/valvulas-neumaticas",
+      "width": 768,
+      "status": 200,
+      "title": "Válvulas neumáticas en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/servicios",
+      "width": 768,
+      "status": 200,
+      "title": "Reparación y fabricación de cilindros neumáticos en RD · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/sellos-y-componentes",
+      "width": 768,
+      "status": 200,
+      "title": "Sellos y componentes para cilindros neumáticos · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/nosotros",
+      "width": 768,
+      "status": 200,
+      "title": "Nosotros · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/contacto",
+      "width": 768,
+      "status": 200,
+      "title": "Contacto y cotizaciones industriales en Santo Domingo · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/cotizacion/correo",
+      "width": 768,
+      "status": 200,
+      "title": "Solicitar cotización por correo · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/garantias",
+      "width": 768,
+      "status": 200,
+      "title": "Garantías · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/devoluciones",
+      "width": 768,
+      "status": 200,
+      "title": "Política de devoluciones · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/privacidad",
+      "width": 768,
+      "status": 200,
+      "title": "Política de privacidad · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/terminos",
+      "width": 768,
+      "status": 200,
+      "title": "Términos y condiciones · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "status": 200,
+      "title": "Cilindros neumáticos: fabricación y reparación en RD",
+      "overflow": false
+    },
+    {
+      "route": "/cilindros-hidraulicos",
+      "width": 1440,
+      "status": 200,
+      "title": "Cilindros hidráulicos: fabricación y reparación en RD · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/mecanizado",
+      "width": 1440,
+      "status": 200,
+      "title": "Mecanizado industrial en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/neumatica",
+      "width": 1440,
+      "status": 200,
+      "title": "Neumática industrial en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/control-electrico",
+      "width": 1440,
+      "status": 200,
+      "title": "Controles eléctricos industriales en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/sensores",
+      "width": 1440,
+      "status": 200,
+      "title": "Sensores industriales en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/instrumentacion",
+      "width": 1440,
+      "status": 200,
+      "title": "Instrumentación industrial en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/resistencias-electricas",
+      "width": 1440,
+      "status": 200,
+      "title": "Resistencias eléctricas industriales en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/cilindros-neumaticos",
+      "width": 1440,
+      "status": 200,
+      "title": "Cilindros neumáticos a la medida · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/valvulas-neumaticas",
+      "width": 1440,
+      "status": 200,
+      "title": "Válvulas neumáticas en República Dominicana · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/servicios",
+      "width": 1440,
+      "status": 200,
+      "title": "Reparación y fabricación de cilindros neumáticos en RD · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/sellos-y-componentes",
+      "width": 1440,
+      "status": 200,
+      "title": "Sellos y componentes para cilindros neumáticos · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/nosotros",
+      "width": 1440,
+      "status": 200,
+      "title": "Nosotros · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/contacto",
+      "width": 1440,
+      "status": 200,
+      "title": "Contacto y cotizaciones industriales en Santo Domingo · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/cotizacion/correo",
+      "width": 1440,
+      "status": 200,
+      "title": "Solicitar cotización por correo · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/garantias",
+      "width": 1440,
+      "status": 200,
+      "title": "Garantías · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/devoluciones",
+      "width": 1440,
+      "status": 200,
+      "title": "Política de devoluciones · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/privacidad",
+      "width": 1440,
+      "status": 200,
+      "title": "Política de privacidad · Dynatech Ingeniería",
+      "overflow": false
+    },
+    {
+      "route": "/terminos",
+      "width": 1440,
+      "status": 200,
+      "title": "Términos y condiciones · Dynatech Ingeniería",
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "admin": {
+    "status": 500,
+    "verified": false,
+    "note": "NO VERIFICADO: faltan variables locales de Supabase"
+  },
+  "additional": [
+    "redirecciones",
+    "404",
+    "login noindex",
+    "clic WhatsApp sin datos personales",
+    "formulario hidráulico precargado",
+    "fallo y respaldo WhatsApp",
+    "conversiones con API simulada",
+    "menú móvil",
+    "contenido sin JavaScript"
+  ]
+}

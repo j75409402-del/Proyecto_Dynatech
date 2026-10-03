@@ -1,0 +1,1103 @@
+{
+  "date": "2026-10-03",
+  "method": "Intenciones basadas en oferta actual; no representa demanda ni volumen medido. Un fragmento # no es una página indexable independiente.",
+  "rows": [
+    {
+      "line": "Neumática",
+      "intention": "Neumática industrial",
+      "target": "/neumatica",
+      "variants": [
+        "Neumática industrial"
+      ],
+      "decision": "Mejorar página existente",
+      "priority": "P1",
+      "localVariants": [
+        "Neumática industrial República Dominicana",
+        "Neumática industrial Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Neumática",
+      "intention": "Cilindros neumáticos",
+      "target": "/cilindros-neumaticos",
+      "variants": [
+        "cilindro neumático",
+        "cilindros neumáticos",
+        "cilindro neumático a medida"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "cilindro neumático República Dominicana",
+        "cilindro neumático Santo Domingo",
+        "cilindros neumáticos República Dominicana",
+        "cilindros neumáticos Santo Domingo",
+        "cilindro neumático a medida República Dominicana",
+        "cilindro neumático a medida Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Neumática",
+      "intention": "Válvulas neumáticas",
+      "target": "/valvulas-neumaticas",
+      "variants": [
+        "válvula neumática",
+        "válvulas neumáticas",
+        "electroválvula neumática",
+        "válvula solenoide neumática",
+        "válvula neumática 5/2",
+        "válvula neumática 3/2"
+      ],
+      "decision": "Página propia preparada; publicar tras revisión",
+      "priority": "P1",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "válvula neumática República Dominicana",
+        "válvula neumática Santo Domingo",
+        "válvulas neumáticas República Dominicana",
+        "válvulas neumáticas Santo Domingo",
+        "electroválvula neumática República Dominicana",
+        "electroválvula neumática Santo Domingo",
+        "válvula solenoide neumática República Dominicana",
+        "válvula solenoide neumática Santo Domingo",
+        "válvula neumática 5/2 República Dominicana",
+        "válvula neumática 5/2 Santo Domingo",
+        "válvula neumática 3/2 República Dominicana",
+        "válvula neumática 3/2 Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Neumática",
+      "intention": "Conexiones",
+      "target": "/neumatica#conexiones",
+      "variants": [
+        "conector neumático",
+        "conectores neumáticos",
+        "conexiones neumáticas",
+        "fittings neumáticos",
+        "racores neumáticos"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "conector neumático República Dominicana",
+        "conector neumático Santo Domingo",
+        "conectores neumáticos República Dominicana",
+        "conectores neumáticos Santo Domingo",
+        "conexiones neumáticas República Dominicana",
+        "conexiones neumáticas Santo Domingo",
+        "fittings neumáticos República Dominicana",
+        "fittings neumáticos Santo Domingo",
+        "racores neumáticos República Dominicana",
+        "racores neumáticos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Neumática",
+      "intention": "Unidades FRL y reguladores",
+      "target": "/neumatica#frl",
+      "variants": [
+        "unidad FRL",
+        "unidades FRL",
+        "filtro regulador lubricador",
+        "regulador neumático"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "unidad FRL República Dominicana",
+        "unidad FRL Santo Domingo",
+        "unidades FRL República Dominicana",
+        "unidades FRL Santo Domingo",
+        "filtro regulador lubricador República Dominicana",
+        "filtro regulador lubricador Santo Domingo",
+        "regulador neumático República Dominicana",
+        "regulador neumático Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Neumática",
+      "intention": "Mangueras neumáticas",
+      "target": "/neumatica#mangueras",
+      "variants": [
+        "manguera neumática",
+        "mangueras neumáticas",
+        "manguera de poliuretano",
+        "manguera nylon"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "manguera neumática República Dominicana",
+        "manguera neumática Santo Domingo",
+        "mangueras neumáticas República Dominicana",
+        "mangueras neumáticas Santo Domingo",
+        "manguera de poliuretano República Dominicana",
+        "manguera de poliuretano Santo Domingo",
+        "manguera nylon República Dominicana",
+        "manguera nylon Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Neumática",
+      "intention": "Accesorios neumáticos",
+      "target": "/neumatica#accesorios",
+      "variants": [
+        "accesorios neumáticos"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "accesorios neumáticos República Dominicana",
+        "accesorios neumáticos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Neumática",
+      "intention": "Kits de sellos y vástagos cromados",
+      "target": "/sellos-y-componentes",
+      "variants": [
+        "kits de sellos y vástagos cromados"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "kits de sellos y vástagos cromados República Dominicana",
+        "kits de sellos y vástagos cromados Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Neumática",
+      "intention": "Fabricación y reparación de cilindros",
+      "target": "/servicios",
+      "variants": [
+        "fabricación y reparación de cilindros"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "fabricación y reparación de cilindros República Dominicana",
+        "fabricación y reparación de cilindros Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Control eléctrico",
+      "intention": "Control eléctrico industrial",
+      "target": "/control-electrico",
+      "variants": [
+        "control eléctrico industrial",
+        "controles eléctricos industriales",
+        "componentes eléctricos industriales"
+      ],
+      "decision": "Mejorar página existente",
+      "priority": "P1",
+      "localVariants": [
+        "control eléctrico industrial República Dominicana",
+        "control eléctrico industrial Santo Domingo",
+        "controles eléctricos industriales República Dominicana",
+        "controles eléctricos industriales Santo Domingo",
+        "componentes eléctricos industriales República Dominicana",
+        "componentes eléctricos industriales Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Control eléctrico",
+      "intention": "Contactores y relés",
+      "target": "/control-electrico#contactores-y-reles",
+      "variants": [
+        "contactor industrial",
+        "contactores industriales",
+        "relé de control",
+        "relés térmicos"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P1",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "contactor industrial República Dominicana",
+        "contactor industrial Santo Domingo",
+        "contactores industriales República Dominicana",
+        "contactores industriales Santo Domingo",
+        "relé de control República Dominicana",
+        "relé de control Santo Domingo",
+        "relés térmicos República Dominicana",
+        "relés térmicos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Control eléctrico",
+      "intention": "Breakers y protección",
+      "target": "/control-electrico#proteccion",
+      "variants": [
+        "breaker industrial",
+        "breakers industriales",
+        "interruptor termomagnético",
+        "arrancador manual"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "breaker industrial República Dominicana",
+        "breaker industrial Santo Domingo",
+        "breakers industriales República Dominicana",
+        "breakers industriales Santo Domingo",
+        "interruptor termomagnético República Dominicana",
+        "interruptor termomagnético Santo Domingo",
+        "arrancador manual República Dominicana",
+        "arrancador manual Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Control eléctrico",
+      "intention": "Fusibles y portafusibles",
+      "target": "/control-electrico#fusibles",
+      "variants": [
+        "fusible industrial",
+        "fusibles industriales",
+        "fusibles NH",
+        "portafusibles"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "fusible industrial República Dominicana",
+        "fusible industrial Santo Domingo",
+        "fusibles industriales República Dominicana",
+        "fusibles industriales Santo Domingo",
+        "fusibles NH República Dominicana",
+        "fusibles NH Santo Domingo",
+        "portafusibles República Dominicana",
+        "portafusibles Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Control eléctrico",
+      "intention": "Pulsadores, selectores y luces piloto",
+      "target": "/control-electrico#mando-y-senalizacion",
+      "variants": [
+        "pulsador industrial",
+        "pulsadores industriales",
+        "selector industrial",
+        "luces piloto"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "pulsador industrial República Dominicana",
+        "pulsador industrial Santo Domingo",
+        "pulsadores industriales República Dominicana",
+        "pulsadores industriales Santo Domingo",
+        "selector industrial República Dominicana",
+        "selector industrial Santo Domingo",
+        "luces piloto República Dominicana",
+        "luces piloto Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Control eléctrico",
+      "intention": "Temporizadores, contadores y controladores",
+      "target": "/control-electrico#temporizadores",
+      "variants": [
+        "temporizador industrial",
+        "temporizadores industriales",
+        "contador industrial",
+        "controlador de temperatura"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "temporizador industrial República Dominicana",
+        "temporizador industrial Santo Domingo",
+        "temporizadores industriales República Dominicana",
+        "temporizadores industriales Santo Domingo",
+        "contador industrial República Dominicana",
+        "contador industrial Santo Domingo",
+        "controlador de temperatura República Dominicana",
+        "controlador de temperatura Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Control eléctrico",
+      "intention": "Finales de carrera e interruptores",
+      "target": "/control-electrico#interruptores",
+      "variants": [
+        "final de carrera",
+        "finales de carrera",
+        "limit switch industrial",
+        "micro switch"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "final de carrera República Dominicana",
+        "final de carrera Santo Domingo",
+        "finales de carrera República Dominicana",
+        "finales de carrera Santo Domingo",
+        "limit switch industrial República Dominicana",
+        "limit switch industrial Santo Domingo",
+        "micro switch República Dominicana",
+        "micro switch Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Control eléctrico",
+      "intention": "Conectores industriales",
+      "target": "/control-electrico#conectores",
+      "variants": [
+        "conectores industriales"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "conectores industriales República Dominicana",
+        "conectores industriales Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Sensores",
+      "intention": "Sensores industriales",
+      "target": "/sensores",
+      "variants": [
+        "Sensores industriales"
+      ],
+      "decision": "Mejorar página existente",
+      "priority": "P2",
+      "localVariants": [
+        "Sensores industriales República Dominicana",
+        "Sensores industriales Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Sensores",
+      "intention": "Sensores inductivos",
+      "target": "/sensores#inductivos",
+      "variants": [
+        "sensor inductivo",
+        "sensores inductivos"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "sensor inductivo República Dominicana",
+        "sensor inductivo Santo Domingo",
+        "sensores inductivos República Dominicana",
+        "sensores inductivos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Sensores",
+      "intention": "Sensores capacitivos",
+      "target": "/sensores#capacitivos",
+      "variants": [
+        "sensor capacitivo",
+        "sensores capacitivos"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "sensor capacitivo República Dominicana",
+        "sensor capacitivo Santo Domingo",
+        "sensores capacitivos República Dominicana",
+        "sensores capacitivos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Sensores",
+      "intention": "Sensores fotoeléctricos y fotoceldas",
+      "target": "/sensores#fotoelectricos",
+      "variants": [
+        "sensor fotoeléctrico",
+        "sensores fotoeléctricos",
+        "fotocelda industrial",
+        "fotoceldas industriales"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "sensor fotoeléctrico República Dominicana",
+        "sensor fotoeléctrico Santo Domingo",
+        "sensores fotoeléctricos República Dominicana",
+        "sensores fotoeléctricos Santo Domingo",
+        "fotocelda industrial República Dominicana",
+        "fotocelda industrial Santo Domingo",
+        "fotoceldas industriales República Dominicana",
+        "fotoceldas industriales Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Sensores",
+      "intention": "Sensores magnéticos y de proximidad",
+      "target": "/sensores#magneticos",
+      "variants": [
+        "sensor magnético para cilindro",
+        "sensores magnéticos",
+        "sensor de proximidad"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "sensor magnético para cilindro República Dominicana",
+        "sensor magnético para cilindro Santo Domingo",
+        "sensores magnéticos República Dominicana",
+        "sensores magnéticos Santo Domingo",
+        "sensor de proximidad República Dominicana",
+        "sensor de proximidad Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Sensores",
+      "intention": "Sensores de presión",
+      "target": "/sensores#presion",
+      "variants": [
+        "sensor de presión",
+        "sensores de presión"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "sensor de presión República Dominicana",
+        "sensor de presión Santo Domingo",
+        "sensores de presión República Dominicana",
+        "sensores de presión Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Sensores",
+      "intention": "Sensores de temperatura",
+      "target": "/resistencias-electricas#termocuplas",
+      "variants": [
+        "sensores de temperatura"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "sensores de temperatura República Dominicana",
+        "sensores de temperatura Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Sensores",
+      "intention": "Sensores de nivel y flujo",
+      "target": "/instrumentacion",
+      "variants": [
+        "sensores de nivel y flujo"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "sensores de nivel y flujo República Dominicana",
+        "sensores de nivel y flujo Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Sensores",
+      "intention": "Amplificadores, módulos y accesorios",
+      "target": "/sensores#accesorios",
+      "variants": [
+        "amplificadores, módulos y accesorios"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "amplificadores, módulos y accesorios República Dominicana",
+        "amplificadores, módulos y accesorios Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Instrumentación",
+      "intention": "Instrumentación industrial",
+      "target": "/instrumentacion",
+      "variants": [
+        "Instrumentación industrial"
+      ],
+      "decision": "Mejorar página existente",
+      "priority": "P2",
+      "localVariants": [
+        "Instrumentación industrial República Dominicana",
+        "Instrumentación industrial Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Instrumentación",
+      "intention": "Instrumentación de presión",
+      "target": "/instrumentacion#presion",
+      "variants": [
+        "manómetro industrial",
+        "manómetros industriales",
+        "transmisor de presión",
+        "interruptor de presión"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "manómetro industrial República Dominicana",
+        "manómetro industrial Santo Domingo",
+        "manómetros industriales República Dominicana",
+        "manómetros industriales Santo Domingo",
+        "transmisor de presión República Dominicana",
+        "transmisor de presión Santo Domingo",
+        "interruptor de presión República Dominicana",
+        "interruptor de presión Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Instrumentación",
+      "intention": "Instrumentación de temperatura",
+      "target": "/instrumentacion#temperatura",
+      "variants": [
+        "termómetro industrial",
+        "termómetros industriales",
+        "termopozo",
+        "termopozos"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "termómetro industrial República Dominicana",
+        "termómetro industrial Santo Domingo",
+        "termómetros industriales República Dominicana",
+        "termómetros industriales Santo Domingo",
+        "termopozo República Dominicana",
+        "termopozo Santo Domingo",
+        "termopozos República Dominicana",
+        "termopozos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Instrumentación",
+      "intention": "Medición de flujo",
+      "target": "/instrumentacion#flujo",
+      "variants": [
+        "caudalímetro industrial",
+        "caudalímetros industriales",
+        "medidor de flujo",
+        "medición de caudal"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "caudalímetro industrial República Dominicana",
+        "caudalímetro industrial Santo Domingo",
+        "caudalímetros industriales República Dominicana",
+        "caudalímetros industriales Santo Domingo",
+        "medidor de flujo República Dominicana",
+        "medidor de flujo Santo Domingo",
+        "medición de caudal República Dominicana",
+        "medición de caudal Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Instrumentación",
+      "intention": "Medición de nivel",
+      "target": "/instrumentacion#nivel",
+      "variants": [
+        "medición de nivel industrial",
+        "medidor de nivel para tanque"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "medición de nivel industrial República Dominicana",
+        "medición de nivel industrial Santo Domingo",
+        "medidor de nivel para tanque República Dominicana",
+        "medidor de nivel para tanque Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Instrumentación",
+      "intention": "Medición y control",
+      "target": "/control-electrico#temporizadores",
+      "variants": [
+        "medición y control"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "medición y control República Dominicana",
+        "medición y control Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Resistencias eléctricas",
+      "intention": "Resistencias eléctricas industriales",
+      "target": "/resistencias-electricas",
+      "variants": [
+        "Resistencias eléctricas industriales"
+      ],
+      "decision": "Mejorar página existente",
+      "priority": "P2",
+      "localVariants": [
+        "Resistencias eléctricas industriales República Dominicana",
+        "Resistencias eléctricas industriales Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Resistencias eléctricas",
+      "intention": "Resistencias de cartucho",
+      "target": "/resistencias-electricas#cartucho",
+      "variants": [
+        "resistencia de cartucho",
+        "resistencias de cartucho"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "resistencia de cartucho República Dominicana",
+        "resistencia de cartucho Santo Domingo",
+        "resistencias de cartucho República Dominicana",
+        "resistencias de cartucho Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Resistencias eléctricas",
+      "intention": "Termocuplas y RTD",
+      "target": "/resistencias-electricas#termocuplas",
+      "variants": [
+        "termocupla industrial",
+        "termocuplas industriales",
+        "termopar industrial",
+        "sonda RTD"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "termocupla industrial República Dominicana",
+        "termocupla industrial Santo Domingo",
+        "termocuplas industriales República Dominicana",
+        "termocuplas industriales Santo Domingo",
+        "termopar industrial República Dominicana",
+        "termopar industrial Santo Domingo",
+        "sonda RTD República Dominicana",
+        "sonda RTD Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Resistencias eléctricas",
+      "intention": "Alambre de resistencia",
+      "target": "/resistencias-electricas#alambre",
+      "variants": [
+        "alambre de resistencia",
+        "resistencias planas"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "alambre de resistencia República Dominicana",
+        "alambre de resistencia Santo Domingo",
+        "resistencias planas República Dominicana",
+        "resistencias planas Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Resistencias eléctricas",
+      "intention": "Bajo especificación",
+      "target": "/resistencias-electricas#a-la-medida",
+      "variants": [
+        "bajo especificación"
+      ],
+      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
+      "priority": "P2",
+      "source": "src/lib/soluciones.ts",
+      "localVariants": [
+        "bajo especificación República Dominicana",
+        "bajo especificación Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Fabricación de cilindros neumáticos",
+      "target": "/servicios#fabricacion",
+      "variants": [
+        "fabricación de cilindros neumáticos",
+        "fabricante de cilindros neumáticos"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P1",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "fabricación de cilindros neumáticos República Dominicana",
+        "fabricación de cilindros neumáticos Santo Domingo",
+        "fabricante de cilindros neumáticos República Dominicana",
+        "fabricante de cilindros neumáticos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Reparación de cilindros neumáticos",
+      "target": "/servicios#reparacion",
+      "variants": [
+        "reparación de cilindro neumático",
+        "reparación de cilindros neumáticos"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P1",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "reparación de cilindro neumático República Dominicana",
+        "reparación de cilindro neumático Santo Domingo",
+        "reparación de cilindros neumáticos República Dominicana",
+        "reparación de cilindros neumáticos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Reconstrucción de cilindros",
+      "target": "/servicios#reconstruccion",
+      "variants": [
+        "reconstrucción de cilindros neumáticos"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P2",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "reconstrucción de cilindros neumáticos República Dominicana",
+        "reconstrucción de cilindros neumáticos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Fabricación bajo muestra o plano",
+      "target": "/servicios#bajo-muestra-o-plano",
+      "variants": [
+        "cilindros neumáticos bajo plano",
+        "cilindros neumáticos bajo muestra"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P2",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "cilindros neumáticos bajo plano República Dominicana",
+        "cilindros neumáticos bajo plano Santo Domingo",
+        "cilindros neumáticos bajo muestra República Dominicana",
+        "cilindros neumáticos bajo muestra Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Cambio de sellos",
+      "target": "/servicios#cambio-de-sellos",
+      "variants": [
+        "cambio de sellos cilindro neumático"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P2",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "cambio de sellos cilindro neumático República Dominicana",
+        "cambio de sellos cilindro neumático Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Cilindros personalizados",
+      "target": "/servicios#personalizados",
+      "variants": [
+        "cilindro neumático personalizado",
+        "cilindros neumáticos a medida"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P2",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "cilindro neumático personalizado República Dominicana",
+        "cilindro neumático personalizado Santo Domingo",
+        "cilindros neumáticos a medida República Dominicana",
+        "cilindros neumáticos a medida Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Kits de sellos",
+      "target": "/sellos-y-componentes#kits-de-sellos",
+      "variants": [
+        "kit de sellos cilindro neumático",
+        "kits de sellos para cilindros neumáticos"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P2",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "kit de sellos cilindro neumático República Dominicana",
+        "kit de sellos cilindro neumático Santo Domingo",
+        "kits de sellos para cilindros neumáticos República Dominicana",
+        "kits de sellos para cilindros neumáticos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Vástagos cromados",
+      "target": "/sellos-y-componentes#vastagos",
+      "variants": [
+        "vástago cromado",
+        "vástagos cromados",
+        "barras cromadas para cilindros"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P2",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "vástago cromado República Dominicana",
+        "vástago cromado Santo Domingo",
+        "vástagos cromados República Dominicana",
+        "vástagos cromados Santo Domingo",
+        "barras cromadas para cilindros República Dominicana",
+        "barras cromadas para cilindros Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Componentes bajo medida",
+      "target": "/sellos-y-componentes",
+      "variants": [
+        "componentes de cilindros bajo medida",
+        "camisa tapa pistón cilindro neumático"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P2",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "componentes de cilindros bajo medida República Dominicana",
+        "componentes de cilindros bajo medida Santo Domingo",
+        "camisa tapa pistón cilindro neumático República Dominicana",
+        "camisa tapa pistón cilindro neumático Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Cilindros hidráulicos",
+      "target": "/cilindros-hidraulicos",
+      "variants": [
+        "cilindro hidráulico",
+        "cilindros hidráulicos",
+        "reparación de cilindros hidráulicos",
+        "fabricación de cilindros hidráulicos"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P2",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "cilindro hidráulico República Dominicana",
+        "cilindro hidráulico Santo Domingo",
+        "cilindros hidráulicos República Dominicana",
+        "cilindros hidráulicos Santo Domingo",
+        "reparación de cilindros hidráulicos República Dominicana",
+        "reparación de cilindros hidráulicos Santo Domingo",
+        "fabricación de cilindros hidráulicos República Dominicana",
+        "fabricación de cilindros hidráulicos Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    },
+    {
+      "line": "Servicios y componentes",
+      "intention": "Mecanizado",
+      "target": "/mecanizado",
+      "variants": [
+        "mecanizado industrial",
+        "mecanizado de piezas industriales"
+      ],
+      "decision": "Mejorar contenido existente con casos y medidas confirmados; no duplicar por ciudad",
+      "priority": "P2",
+      "source": "src/lib/servicios.ts",
+      "localVariants": [
+        "mecanizado industrial República Dominicana",
+        "mecanizado industrial Santo Domingo",
+        "mecanizado de piezas industriales República Dominicana",
+        "mecanizado de piezas industriales Santo Domingo"
+      ],
+      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
+      "volume": "NO VERIFICADO",
+      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
+    }
+  ],
+  "exclusions": [
+    {
+      "intention": "Motores eléctricos",
+      "status": "NO VERIFICADO como suministro; no crear página"
+    },
+    {
+      "intention": "Gabinetes/tableros eléctricos completos",
+      "status": "NO VERIFICADO como suministro; componentes de tablero sí confirmados"
+    },
+    {
+      "intention": "Automatización industrial integral / programación PLC",
+      "status": "NO VERIFICADO como servicio; usar contexto de aplicación de componentes"
+    },
+    {
+      "intention": "Hidráulica general, bombas y mangueras hidráulicas",
+      "status": "NO VERIFICADO; oferta confirmada limitada a cilindros hidráulicos"
+    },
+    {
+      "intention": "Marcas, distribución oficial, grado marino",
+      "status": "No ampliar oferta actual sin validar catálogo y decisiones comerciales vigentes"
+    }
+  ]
+}

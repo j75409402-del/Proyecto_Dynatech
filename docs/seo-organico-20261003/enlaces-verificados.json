@@ -1,0 +1,234 @@
+{
+  "results": [
+    {
+      "target": "/neumatica",
+      "status": 200,
+      "fragmentVerified": false
+    },
+    {
+      "target": "/cilindros-neumaticos",
+      "status": 200,
+      "fragmentVerified": false
+    },
+    {
+      "target": "/valvulas-neumaticas",
+      "status": 200,
+      "fragmentVerified": false
+    },
+    {
+      "target": "/neumatica#conexiones",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/neumatica#frl",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/neumatica#mangueras",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/neumatica#accesorios",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/sellos-y-componentes",
+      "status": 200,
+      "fragmentVerified": false
+    },
+    {
+      "target": "/servicios",
+      "status": 200,
+      "fragmentVerified": false
+    },
+    {
+      "target": "/control-electrico",
+      "status": 200,
+      "fragmentVerified": false
+    },
+    {
+      "target": "/control-electrico#contactores-y-reles",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/control-electrico#proteccion",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/control-electrico#fusibles",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/control-electrico#mando-y-senalizacion",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/control-electrico#temporizadores",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/control-electrico#interruptores",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/control-electrico#conectores",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/sensores",
+      "status": 200,
+      "fragmentVerified": false
+    },
+    {
+      "target": "/sensores#inductivos",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/sensores#capacitivos",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/sensores#fotoelectricos",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/sensores#magneticos",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/sensores#presion",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/resistencias-electricas#termocuplas",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/instrumentacion",
+      "status": 200,
+      "fragmentVerified": false
+    },
+    {
+      "target": "/sensores#accesorios",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/instrumentacion#presion",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/instrumentacion#temperatura",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/instrumentacion#flujo",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/instrumentacion#nivel",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/resistencias-electricas",
+      "status": 200,
+      "fragmentVerified": false
+    },
+    {
+      "target": "/resistencias-electricas#cartucho",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/resistencias-electricas#alambre",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/resistencias-electricas#a-la-medida",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/servicios#fabricacion",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/servicios#reparacion",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/servicios#reconstruccion",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/servicios#bajo-muestra-o-plano",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/servicios#cambio-de-sellos",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/servicios#personalizados",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/sellos-y-componentes#kits-de-sellos",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/sellos-y-componentes#vastagos",
+      "status": 200,
+      "fragmentVerified": true
+    },
+    {
+      "target": "/cilindros-hidraulicos",
+      "status": 200,
+      "fragmentVerified": false
+    },
+    {
+      "target": "/mecanizado",
+      "status": 200,
+      "fragmentVerified": false
+    }
+  ],
+  "widths": [
+    390,
+    768,
+    1440
+  ],
+  "canonical": true,
+  "indexable": true,
+  "jsonLd": "JSON parseado y relaciones verificadas; no Rich Results Test",
+  "cta": true,
+  "withoutJavaScript": true
+}
