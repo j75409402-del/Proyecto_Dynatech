@@ -1,12 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDownRight, ArrowRight, MapPin } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Box, MapPin } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 
 export function Hero() {
   return (
     <section className="home-hero border-b border-black/10">
+      <Link href="/cilindros-neumaticos" className="group block bg-[#0b1016] text-white transition-colors hover:bg-[#17222d] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-signal">
+        <span className="container-max flex min-h-16 items-center justify-between gap-4 py-3">
+          <span className="flex items-center gap-3 sm:gap-4">
+            <Box className="h-5 w-5 shrink-0 text-signal" aria-hidden="true" />
+            <span className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-5">
+              <span className="text-sm font-medium sm:text-base">Cilindros en 3D</span>
+              <span className="text-xs text-white/65 sm:text-sm">Gira, desmonta y explora cada pieza.</span>
+            </span>
+          </span>
+          <ArrowUpRight className="h-5 w-5 shrink-0 transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5" aria-hidden="true" />
+        </span>
+      </Link>
       <div className="container-max grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-2 lg:gap-12 lg:py-20">
         <div>
           <div className="mb-7 flex items-center gap-3"><span className="h-2 w-2 bg-signal" aria-hidden /><p className="eyebrow">Ingeniería industrial · República Dominicana</p></div>

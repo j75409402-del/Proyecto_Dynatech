@@ -241,3 +241,10 @@ Auditoría HTTP actual: 18 rutas de producción con 200, un H1, metadatos y cano
 ## Publicación autorizada de Cilindros — 2026-10-04
 
 El propietario aprobó la dirección Dynatech 3D v1 y autorizó expresamente publicar solo Cilindros con marca de agua de Dynatech. Entrega aislada desde `4daf297`; conserva la web pública de las demás categorías. Se mantienen rutas, datos comerciales, APIs, formularios, analítica, SEO y configuración de hosting. El encabezado oscuro se aplica exclusivamente a `/cilindros-neumaticos`. La prueba física en móvil continúa pendiente. Ver `docs/experiencia-3d/PUBLICACION-CILINDROS-V1.md` para validación.
+
+
+### Acceso a Cilindros desde la portada — 2026-10-04
+
+El propietario señaló que no encontraba la experiencia publicada desde la portada real. Se añade una entrada visible de Cilindros en 3D inmediatamente bajo el encabezado de inicio, y se identifica claramente el enlace en los menús desktop y móvil. Se conserva el hero comercial, WhatsApp, formularios, rutas y la experiencia 3D aprobada. No se incorpora ninguna escena nueva a otras categorías.
+
+Validado antes de publicar: typecheck, lint (solo aviso previo), build; acceso desde la portada visible sin desplazar y enlaces de menú en 320, 390, 768, 1024 y 1440 px; llegada a Cilindros también sin JavaScript y con reduced-motion; 57 combinaciones comerciales y suite de analytics correctas. Evidencia en `docs/cilindros-premium/acceso-portada/local/verificacion.json`.

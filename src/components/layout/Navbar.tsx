@@ -100,7 +100,7 @@ export function Navbar() {
                 isActive(pathname, "/cilindros-neumaticos") ? "text-signal" : "text-steel-200 hover:text-signal",
               )}
             >
-              Neumáticos
+              Cilindros 3D
             </Link>
             <div
               ref={menuRef}
@@ -250,7 +250,7 @@ export function Navbar() {
               isActive(pathname, "/cilindros-neumaticos") ? "text-signal" : "text-steel-200 hover:text-signal",
             )}
           >
-            Cilindros neumáticos
+            Cilindros neumáticos · 3D
           </Link>
           <div className="eyebrow mt-5 mb-1">Líneas complementarias</div>
           {SOLUCIONES.map((s) => (
