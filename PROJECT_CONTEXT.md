@@ -357,3 +357,8 @@ Los archivos usan CRLF en Windows. Con un git sin `core.autocrlf` pueden aparece
 # SEO orgánico, 3-oct-2026
 
 Primera ejecución completa de investigación y mapa en `docs/SEO_ORGANICO_20261003.md`. Copia aislada desde `33e3a6b`; se conservan Umami, las cinco líneas y servicios actuales. Se prepara `/valvulas-neumaticas` como detalle de una subcategoría existente, navegación de subcategorías, metadata plural de controles, enlaces y horario de LocalBusiness. Sin nuevos modelos, inventario, servicios integrales ni cambios de APIs/datos/hosting. Publicación pendiente de revisión del propietario; ver pruebas y límites en el informe.
+
+
+## Publicación autorizada de Cilindros — 2026-10-04
+
+El propietario aprobó la dirección Dynatech 3D v1 y autorizó expresamente publicar solo Cilindros con marca de agua de Dynatech. Entrega aislada desde `4daf297`; conserva la web pública de las demás categorías. Se mantienen rutas, datos comerciales, APIs, formularios, analítica, SEO y configuración de hosting. El encabezado oscuro se aplica exclusivamente a `/cilindros-neumaticos`. La prueba física en móvil continúa pendiente. Ver `docs/experiencia-3d/PUBLICACION-CILINDROS-V1.md` para validación.

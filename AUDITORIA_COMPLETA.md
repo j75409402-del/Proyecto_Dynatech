@@ -236,3 +236,8 @@ Verificación local: typecheck, lint (solo aviso preexistente de postcss), build
 # SEO orgánico, 3-oct-2026
 
 Auditoría HTTP actual: 18 rutas de producción con 200, un H1, metadatos y canonical. Mapa de 48 intenciones y una página de válvulas preparada sobre oferta existente; mejoras conservadoras de navegación y datos estructurados. Ver `docs/SEO_ORGANICO_20261003.md` y su evidencia. Sin afirmar nuevas posiciones o ventas; métricas actuales de Search Console/Umami no obtenidas. Publicación pendiente de revisión.
+
+
+## Publicación autorizada de Cilindros — 2026-10-04
+
+El propietario aprobó la dirección Dynatech 3D v1 y autorizó expresamente publicar solo Cilindros con marca de agua de Dynatech. Entrega aislada desde `4daf297`; conserva la web pública de las demás categorías. Se mantienen rutas, datos comerciales, APIs, formularios, analítica, SEO y configuración de hosting. El encabezado oscuro se aplica exclusivamente a `/cilindros-neumaticos`. La prueba física en móvil continúa pendiente. Ver `docs/experiencia-3d/PUBLICACION-CILINDROS-V1.md` para validación.

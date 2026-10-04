@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
+import { CylinderExperience } from "@/components/industrial/CylinderExperience";
 import { commercialMetadata } from "@/lib/seo";
-import Image from "next/image";
 import { ArrowRight, FileText, Box, Ruler, Camera, Hash, Factory, Wrench } from "lucide-react";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 
@@ -40,53 +38,10 @@ const NECESITAMOS = [
 
 export default function CilindrosNeumaticosPage() {
   return (
-    <div>
-      {/* HERO */}
-      <section className="relative border-b border-black/5 overflow-hidden">
-        <div className="container-max py-14 sm:py-20">
-          <Breadcrumbs items={[{ label: "Cilindros neumáticos" }]} />
+    <div className="industrial-detail cylinder-page">
+      <CylinderExperience />
 
-          <div className="grid lg:grid-cols-12 gap-12 items-center mt-8">
-            <Reveal className="lg:col-span-6">
-              <div className="eyebrow mb-4">Cilindros neumáticos</div>
-              <h1 className="font-display text-display-xl text-surface mb-6">
-                Fabricamos y reparamos <span className="text-signal">el cilindro que tu máquina necesita</span>
-              </h1>
-              <p className="text-xl text-steel-200 leading-relaxed mb-8 max-w-xl">
-                Cilindros estándar y a la medida, a partir de tu plano, una muestra o tus medidas.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <a href={quoteHref("Fabricación de cilindros neumáticos")} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                  Solicitar cotización
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-secondary">
-                  <WhatsAppIcon className="h-4 w-4" />
-                  WhatsApp
-                </a>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.15} className="lg:col-span-6">
-              <div className="relative aspect-[3/2] border border-black/10 bg-white">
-                <div className="absolute -top-2 -left-2 h-4 w-4 border-l-2 border-t-2 border-signal z-10" />
-                <div className="absolute -bottom-2 -right-2 h-4 w-4 border-r-2 border-b-2 border-signal z-10" />
-                <Image
-                  src="/banners/cilindros-taller-wide.webp"
-                  alt="Imagen editorial de un cilindro neumático completo en reparación"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-contain p-6"
-                />
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* TIPOS */}
-      <section className="section-pad border-b border-black/5">
+      <section className="section-pad border-b border-black/5 cylinder-types">
         <div className="container-max">
           <Reveal className="max-w-2xl mb-12">
             <div className="eyebrow mb-3">01 · Qué cilindros trabajamos</div>
@@ -108,7 +63,7 @@ export default function CilindrosNeumaticosPage() {
       </section>
 
       {/* FABRICAR O REPARAR */}
-      <section className="section-pad border-b border-black/5 bg-carbon-900">
+      <section className="section-pad border-b border-black/5 bg-carbon-900 cylinder-services">
         <div className="container-max">
           <Reveal className="max-w-2xl mb-12">
             <div className="eyebrow mb-3">02 · Fabricar o reparar</div>
@@ -175,7 +130,7 @@ export default function CilindrosNeumaticosPage() {
       </section>
 
       {/* QUÉ NECESITAMOS */}
-      <section className="section-pad">
+      <section className="section-pad cylinder-quote-inputs">
         <div className="container-max">
           <Reveal className="max-w-2xl mb-12">
             <div className="eyebrow mb-3">03 · Para cotizar</div>

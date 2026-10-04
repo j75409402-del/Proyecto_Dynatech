@@ -1,0 +1,59 @@
+[
+  {
+    "width": 1440,
+    "errors": [],
+    "scrollChapters": 3,
+    "selection": true,
+    "manualOverride": true,
+    "idleRenderer": true,
+    "overflow": false
+  },
+  {
+    "width": 1024,
+    "errors": [],
+    "scrollChapters": 3,
+    "selection": true,
+    "manualOverride": true,
+    "idleRenderer": true,
+    "overflow": false
+  },
+  {
+    "width": 768,
+    "errors": [],
+    "scrollChapters": 3,
+    "selection": true,
+    "manualOverride": true,
+    "idleRenderer": true,
+    "overflow": false
+  },
+  {
+    "width": 390,
+    "errors": [],
+    "scrollChapters": 3,
+    "selection": true,
+    "manualOverride": true,
+    "idleRenderer": true,
+    "overflow": false
+  },
+  {
+    "width": 320,
+    "errors": [],
+    "scrollChapters": 3,
+    "selection": true,
+    "manualOverride": true,
+    "idleRenderer": true,
+    "overflow": false
+  },
+  {
+    "fallback": "no-js",
+    "contentAndCtaVisible": true
+  },
+  {
+    "fallback": "reduced-motion",
+    "contentAndCtaVisible": true
+  },
+  {
+    "fallback": "context-loss",
+    "contentAndCtaVisible": true
+  }
+]

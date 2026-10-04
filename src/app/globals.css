@@ -183,3 +183,272 @@
     scroll-behavior: auto !important;
   }
 }
+
+.industrial-stage { position: relative; height: 100%; min-height: 380px; overflow: hidden; background: radial-gradient(ellipse at 55% 42%, #303741 0, #151a21 45%, #0f1318 80%); color: #f2f4f8; }
+.industrial-stage::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(#ffffff06 1px, transparent 1px), linear-gradient(90deg, #ffffff06 1px, transparent 1px); background-size: 64px 64px; pointer-events: none; }
+.stage-fallback, .stage-canvas { position: absolute; inset: 0; }
+.stage-fallback > div { position: absolute; inset: 0; background: linear-gradient(0deg, #11161be6, #11161b55); }
+.stage-fallback { opacity: 1; transition: opacity .4s; }
+.is-ready .stage-fallback { opacity: 0; pointer-events: none; }
+.stage-canvas { opacity: 0; transition: opacity .4s; }
+.is-ready .stage-canvas { opacity: 1; }
+.stage-canvas canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; }
+.stage-canvas.interactive canvas { cursor: grab; }
+.stage-topline { position: absolute; top: 24px; left: 28px; right: 28px; display: flex; justify-content: space-between; font: 10px var(--font-mono); text-transform: uppercase; letter-spacing: .15em; pointer-events: none; }
+.stage-cross { position: absolute; top: 50%; right: 28px; color: #697483; pointer-events: none; }
+.stage-caption { position: absolute; left: 28px; right: 28px; bottom: 22px; font: 10px/1.6 var(--font-mono); color: #b2bdca; pointer-events: none; }
+.stage-controls { position: absolute; left: 28px; right: 28px; bottom: 60px; display: flex; align-items: start; flex-wrap: wrap; gap: 8px; max-height: 60%; overflow-y: auto; padding: 8px; background: #11161bd9; border: 1px solid #ffffff22; backdrop-filter: blur(12px); }
+.stage-controls button { min-height: 44px; padding: 9px 12px; border: 1px solid #ffffff33; font-size: 12px; background: #1c232b; }
+.stage-controls button[aria-pressed=true] { border-color: #e4002b; background: #401922; }
+.stage-controls label { min-width: 130px; flex: 1; padding: 8px; font-size: 12px; display: grid; gap: 5px; }
+.stage-controls input { width: 100%; accent-color: #e4002b; min-height: 30px; }
+.part-selector { width: 100%; display: flex; flex-wrap: wrap; gap: 6px; }
+.stage-controls p { width: 100%; font-size: 12px; color: #c3cdd8; line-height: 1.5; padding: 8px; }
+.industrial-preview { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 40px; padding-top: 60px; padding-bottom: 60px; }
+.industrial-preview .industrial-stage { height: 480px; }
+.preview-heading p:last-child { color: #53606c; margin-top: 20px; line-height: 1.7; }
+.preview-heading .eyebrow { margin-bottom: 20px; }
+@media (max-width: 900px) {
+  .journey-visual { top: 100px; width: 100%; margin-left: 0; height: 36svh; min-height: 240px; max-height: 360px; border-bottom: 1px solid #ffffff20; }
+  .journey-content { width: 100%; margin-top: 0; padding: 0 24px; }
+  .journey-chapter { min-height: 65svh; padding: 48px 0; scroll-margin-top: calc(36svh + 125px); }
+  .journey-hero { min-height: auto; padding-top: 32px; }
+  .journey-chapter h1 { font-size: clamp(2.8rem, 8vw, 4.5rem); }
+  .journey-chapter h2 { font-size: clamp(2.3rem, 6vw, 3.4rem); }
+  .journey-index { scroll-margin-top: calc(36svh + 125px); }
+  .journey-lead { font-size: 1rem; }
+  .journey-scroll { margin-top: 24px; }
+  .industrial-stage { min-height: 240px; }
+  .stage-topline { top: 12px; left: 16px; right: 16px; font-size: 9px; }
+  .stage-caption { left: 16px; right: 16px; bottom: 10px; font-size: 9px; }
+  .stage-controls { left: 10px; right: 10px; bottom: 34px; max-height: 75%; padding: 4px; }
+  .stage-controls label { min-width: 110px; }
+  .industrial-preview { grid-template-columns: 1fr; gap: 24px; }
+  .industrial-preview .industrial-stage { height: 420px; }
+  .journey-visual .industrial-stage:has(.stage-canvas.interactive) { position: absolute; top: 0; left: 0; right: 0; height: min(650px, 72svh); box-shadow: 0 24px 40px #0008; }
+  .industrial-preview .industrial-stage:has(.stage-canvas.interactive) { height: min(680px, 80svh); }
+  .stage-canvas.interactive { bottom: 260px; }
+  .industrial-stage:has(.stage-canvas.interactive) .stage-controls { max-height: 240px; }
+}
+@media (prefers-reduced-motion: reduce) { .journey-visual { position: relative; top: 0; width: 100%; margin-left: 0; height: 400px; min-height: 240px; } .journey-content { margin-top: 0; width: 100%; max-width: 1280px; margin-inline: auto; } .journey-chapter { min-height: auto; } .stage-canvas { display: none; } .stage-fallback { opacity: 1 !important; } }
+.cylinder-page { background: #151a21; color: #f1f4f7; }
+.cylinder-page .text-surface { color: #f1f4f7; }
+.cylinder-page .text-steel-200, .cylinder-page .text-steel-300, .cylinder-page .text-steel-400, .cylinder-page .eyebrow, .cylinder-page .preview-heading p:last-child { color: #b4bfcd; }
+.cylinder-page .bg-carbon, .cylinder-page .bg-carbon-800, .cylinder-page .bg-carbon-900 { background-color: #1d242e; }
+.cylinder-page .bg-\[\#F4F5F6\] { background-color: #151a21; }
+.cylinder-page .border-black\/5, .cylinder-page .border-black\/10, .cylinder-page .border-black\/15 { border-color: #ffffff20; }
+.cylinder-page .btn-secondary { color: #f1f4f7; border-color: #ffffff40; }
+.cylinder-page .bg-white { background-color: #e7eaee; }
+.cylinder-page .card:hover { border-color: #e4002b; }
+.industrial-navbar .bg-carbon { background-color: #11161b; }
+.industrial-navbar .bg-carbon-800 { background-color: #202731; }
+.industrial-navbar .text-surface, .industrial-navbar .text-steel-200 { color: #edf1f5; }
+.industrial-navbar .text-steel-400, .industrial-navbar .eyebrow { color: #b0bcc9; }
+.industrial-navbar .border-black\/5, .industrial-navbar .border-black\/10 { border-color: #ffffff20; }
+.industrial-navbar a:hover, .industrial-navbar button:hover { color: #ffffff; }
+@media (hover:hover) and (prefers-reduced-motion:no-preference) { .cylinder-page .group\/tilt { transition: transform .35s; transform-style: preserve-3d; } .cylinder-page .group\/tilt:hover { transform: perspective(1000px) rotateY(-2deg) translateY(-4px); } }
+
+/* Cylinder presentation: controls remain outside the product silhouette. */
+.industrial-stage[data-active-scene="cilindros"] {background:radial-gradient(ellipse at 50% 40%,#28313c 0%,#10161e 48%,#090d12 85%);border:0;}
+.industrial-stage[data-active-scene="cilindros"] .stage-canvas {bottom:190px;pointer-events:auto;touch-action:pan-y;cursor:grab;}
+.industrial-stage[data-active-scene="cilindros"] .stage-canvas:active {cursor:grabbing;}
+.industrial-stage[data-active-scene="cilindros"] .stage-cross {display:none;}
+.cylinder-controls {position:absolute;bottom:48px;left:6%;right:6%;color:#e5eaf0;}
+.cylinder-toolbar {display:flex;gap:8px;align-items:center;justify-content:flex-end;margin-bottom:22px;}
+.cylinder-toolbar>span {margin-right:auto;font-size:11px;color:#9ba7b6;}
+.cylinder-toolbar button {border:1px solid #ffffff26;border-radius:24px;padding:9px 14px;background:#ffffff06;font-size:12px;}
+.cylinder-toolbar button:last-child {background:#e4002b;border-color:#e4002b;}
+.cylinder-parts {display:flex;justify-content:space-between;border-bottom:1px solid #ffffff20;gap:5px;}
+.cylinder-parts button {padding:10px 0;font-size:12px;border-bottom:2px solid transparent;color:#8e9bab;}
+.cylinder-parts button[aria-pressed="true"] {color:white;border-color:#e4002b;}
+.cylinder-parts button span {font-size:9px;margin-right:6px;color:#687789;}
+.cylinder-controls p {margin-top:14px;display:flex;gap:16px;font-size:12px;line-height:1.5;min-height:36px;}
+.cylinder-controls p span {color:#9ba7b6;}
+.industrial-preview:has([data-active-scene="cilindros"]) {max-width:none;padding:80px 0 0;background:#090d12;}
+.industrial-preview:has([data-active-scene="cilindros"]) .preview-heading {max-width:1280px;margin:auto;padding:0 6%;}
+.industrial-preview:has([data-active-scene="cilindros"]) .industrial-stage {height:82svh;min-height:650px;}
+@media(max-width:600px) {
+.cylinder-controls {left:5%;right:5%;bottom:45px;}
+.cylinder-toolbar {flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.cylinder-toolbar>span {width:100%;font-size:10px;}
+.cylinder-parts button {font-size:10px;}.cylinder-parts button span {display:block;margin:0;}
+.cylinder-controls p {font-size:11px;gap:10px;}
+.industrial-stage[data-active-scene="cilindros"] .stage-canvas {bottom:205px;}
+.industrial-preview:has([data-active-scene="cilindros"]) .industrial-stage {min-height:580px;height:76svh;}
+}
+.industrial-preview:has([data-active-scene="cilindros"]) {grid-template-columns:1fr;gap:0;} .industrial-stage[data-active-scene="cilindros"]::before {display:none;}
+
+/* Final cylinder visual pass: restrained depth and a light control hierarchy. */
+.industrial-stage[data-active-scene="cilindros"] {
+  background: radial-gradient(ellipse at 49% 34%, #263340 0%, #121b24 44%, #090e14 82%);
+}
+.industrial-stage[data-active-scene="cilindros"]::before {
+  content: ""; display: block; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(#b7cfe909 1px, transparent 1px), linear-gradient(90deg,#b7cfe909 1px,transparent 1px);
+  background-size: 88px 88px; mask-image: radial-gradient(ellipse at 50% 45%, #0009, transparent 65%); opacity: .42;
+}
+.cylinder-controls { max-width: 1140px; margin-inline: auto; }
+.cylinder-toolbar { margin-bottom: 17px; }
+.cylinder-toolbar>span { font-size: 12px; letter-spacing: .025em; color: #aab9c8; }
+.cylinder-toolbar button { min-width: 40px; min-height: 40px; font-size: 14px; border-color: #b6cde133; transition: background .2s, border-color .2s; }
+.cylinder-toolbar button:hover { background: #dbe9f114; border-color: #c4d8e66b; }
+.cylinder-toolbar button:last-child { padding-inline: 22px; font-weight: 500; background: #d50029; }
+.cylinder-toolbar button:last-child:hover { background: #ed0633; }
+.cylinder-parts { border-color: #c7daed21; }
+.cylinder-parts button { min-height: 46px; font-size: 14px; color: #a8b7c6; transition: color .25s, border-color .25s; }
+.cylinder-parts button:hover { color: #fff; }
+.cylinder-parts button span { font-size: 10px; color: #7e94a7; margin-right: 9px; }
+.cylinder-controls p { margin-top: 16px; font-size: 13px; min-height: 40px; }
+.cylinder-controls p strong { min-width: 135px; font-weight: 500; color: #dce6ed; }
+.cylinder-controls p span { color: #a8b8c6; }
+.cylinder-controls p.has-selection strong { color: #fff; }
+.cylinder-controls button:focus-visible { outline: 2px solid #b3cfdf; outline-offset: 4px; }
+@media(max-width:600px) {
+  .cylinder-toolbar { margin-bottom: 8px; }
+  .cylinder-toolbar>span { font-size: 11px; }
+  .cylinder-toolbar button { min-width: 40px; min-height: 40px; font-size: 12px; }
+  .cylinder-parts button { font-size: 12px; min-height: 50px; }
+  .cylinder-parts button span { font-size: 9px; margin: 0; }
+  .cylinder-controls p { font-size: 12px; line-height: 1.45; margin-top: 12px; gap: 5px; flex-direction: column; min-height: 53px; }
+  .industrial-stage[data-active-scene="cilindros"] .stage-canvas { bottom: 230px; }
+}
+.industrial-stage[data-active-scene="cilindros"] .stage-canvas { bottom: 220px; }
+@media(max-width:600px) { .industrial-stage[data-active-scene="cilindros"] .stage-canvas { bottom: 260px; } }
+/* Cylinders / editorial product launch. Scoped to the existing cylinder route. */
+.cylinder-page {
+ /* Dynatech 3D v1: scoped tokens consumed by the approved cylinder presentation. */
+ --d3-surface:#0b1016; --d3-text:#f0f2f2; --d3-secondary:#bac6d0;
+ --d3-muted:#9bafbf; --d3-accent:#e4002b; --d3-line:#c7daed33;
+ --d3-gutter:6%; --d3-ease:cubic-bezier(.22,.8,.25,1);
+ --d3-fade:.65s; --d3-enter:.85s;
+ background:var(--d3-surface);
+}
+.cylinder-experience { --story-progress:0; position:relative; height:calc(100svh - 100px); min-height:700px; isolation:isolate; background:var(--d3-surface); }
+.cylinder-experience:has(.industrial-stage.is-ready) { height:260svh; }
+.cylinder-experience:not(:has(.industrial-stage.is-ready)) .cylinder-chapters,.cylinder-experience:not(:has(.industrial-stage.is-ready)) a[href="#interior-cilindro"] { display:none; }
+.cylinder-sticky { position:sticky; top:100px; height:calc(100svh - 100px); min-height:700px; overflow:hidden; background:radial-gradient(ellipse at 72% 43%,#29323b 0%,#151d25 35%,#0b1016 72%); }
+.cylinder-sticky::after { content:""; position:absolute; inset:0; background:linear-gradient(90deg,#0b101648,transparent 55%); pointer-events:none; }
+.cylinder-wordmark { position:absolute; top:34%; left:-.5%; width:101%; font-size:18.7vw; line-height:1; font-weight:600; letter-spacing:-.065em; color:#c6d4df07; -webkit-text-stroke:1px #bdcfdf12; pointer-events:none; }
+.cylinder-experience .industrial-stage { position:absolute; inset:0; min-height:0; height:100%; background:transparent; }
+.cylinder-experience .industrial-stage::before { opacity:.2; background-size:110px 110px; }
+.cylinder-experience .stage-topline { display:none; }
+.cylinder-experience .industrial-stage .stage-canvas { top:70px; bottom:170px; }
+.cylinder-experience .stage-caption { left:auto; right:var(--d3-gutter); bottom:16px; font-size:9px; color:var(--d3-muted); z-index:4; }
+.cylinder-experience .stage-fallback { left:37%; mask-image:linear-gradient(90deg,transparent,#000 20%); }
+.cylinder-experience .stage-fallback img { object-fit:contain; }
+.cylinder-experience .stage-fallback>div { background:linear-gradient(0deg,#0b1016,#0b101611 40%,#0b101644); }
+.cylinder-editorial { position:relative; height:100%; z-index:3; pointer-events:none; }
+.cylinder-editorial a { pointer-events:auto; }
+.cylinder-breadcrumb { position:absolute; left:var(--d3-gutter); top:26px; opacity:.8; font-size:11px; }
+.cylinder-copy { position:absolute; left:var(--d3-gutter); top:15%; width:31%; max-width:445px; }
+.cylinder-story { position:absolute; top:0; left:0; width:100%; opacity:0; visibility:hidden; transform:translateY(24px); transition:opacity var(--d3-fade),transform var(--d3-enter) var(--d3-ease),visibility var(--d3-fade); }
+.cylinder-experience[data-phase="0"] .cylinder-story-0,.cylinder-experience[data-phase="1"] .cylinder-story-1,.cylinder-experience[data-phase="2"] .cylinder-story-2 { opacity:1; visibility:visible; transform:translateY(0); }
+.cylinder-kicker { display:block; font-family:var(--font-mono); font-size:10px!important; line-height:1.6!important; letter-spacing:.12em; text-transform:uppercase; color:#a6b6c5!important; margin-bottom:23px!important; font-weight:400; }
+.cylinder-copy h1,.cylinder-copy h2 { font-size:clamp(45px,4.55vw,72px); letter-spacing:-.057em; line-height:1.035; font-weight:500; color:var(--d3-text); }
+.cylinder-period { color:var(--d3-accent); }
+.cylinder-copy article>p:not(.cylinder-kicker) { max-width:360px; color:var(--d3-secondary); font-size:15px; line-height:1.75; margin-top:27px; }
+.cylinder-story-actions { display:flex; align-items:flex-start; gap:16px; flex-direction:column; margin-top:30px; }
+.cylinder-story-actions .btn-primary { min-height:46px; font-size:11px; letter-spacing:.065em; padding-inline:20px; }
+.cylinder-text-link { display:inline-flex; align-items:center; gap:13px; color:#d8e0e6; font-size:12px; min-height:34px; text-decoration:underline; text-underline-offset:5px; }
+.cylinder-copy-note { display:block; font-size:11px; line-height:1.6; color:var(--d3-muted); margin-top:23px; }
+.cylinder-chapters { position:absolute; bottom:53px; left:var(--d3-gutter); width:31%; max-width:405px; display:flex; gap:21px; }
+.cylinder-chapters::before { content:""; position:absolute; top:-18px; left:0; width:100%; height:1px; background:#ccddeb23; }
+.cylinder-chapters::after { content:""; position:absolute; top:-18px; left:0; width:calc(10% + var(--story-progress)*90%); height:1px; background:var(--d3-accent); }
+.cylinder-chapters a { display:flex; flex-direction:column; gap:8px; font-size:11px; color:var(--d3-muted); }
+.cylinder-chapters a span { font:9px var(--font-mono); }
+.cylinder-experience[data-phase="0"] .cylinder-chapters a:nth-child(1),.cylinder-experience[data-phase="1"] .cylinder-chapters a:nth-child(2),.cylinder-experience[data-phase="2"] .cylinder-chapters a:nth-child(3) { color:#f0f4f7; }
+.cylinder-marker { position:absolute; left:0; width:1px; height:1px; pointer-events:none; scroll-margin-top:100px; }
+.cylinder-marker-interior { top:calc(80svh + 50px); }
+.cylinder-marker-application { top:calc(145svh + 90px); }
+.cylinder-experience .cylinder-controls { z-index:4; left:47%; right:var(--d3-gutter); bottom:43px; max-width:none; }
+.cylinder-experience .cylinder-toolbar { gap:6px; margin-bottom:9px; }
+.cylinder-experience .cylinder-toolbar>span { font-size:10px; color:var(--d3-muted); }
+.cylinder-experience .cylinder-toolbar button { min-width:34px; min-height:34px; font-size:12px; padding:7px 11px; background:#13202b55; border-color:#abc7dd28; }
+.cylinder-experience .cylinder-toolbar button:last-child { background:#edf2f4; color:#14202a; border-color:transparent; padding-inline:17px; font-weight:500; }
+.cylinder-experience .cylinder-toolbar button:last-child:hover { background:#fff; }
+.cylinder-experience .cylinder-parts { gap:12px; border-color:var(--d3-line); }
+.cylinder-experience .cylinder-parts button { position:relative; font-size:12px; min-height:40px; color:var(--d3-secondary); }
+.cylinder-experience .cylinder-parts button[aria-pressed="true"] { color:#fff; border-color:var(--d3-accent); background:linear-gradient(0deg,#e4002b16,transparent 70%); }
+.cylinder-experience .cylinder-parts button[aria-pressed="true"]::after { content:""; position:absolute; top:4px; right:1px; width:4px; height:4px; border-radius:50%; background:currentColor; }
+.cylinder-experience .cylinder-controls p span { color:var(--d3-secondary); }
+.cylinder-experience .cylinder-parts button span { font-size:8px; margin-right:6px; }
+.cylinder-experience .cylinder-controls p { font-size:11px; min-height:33px; line-height:1.5; gap:10px; margin-top:10px; }
+.cylinder-experience .cylinder-controls p strong { min-width:110px; }
+.cylinder-types { background:#e8edee; color:#14212b; padding-block:100px; }
+.cylinder-types .container-max { display:grid; grid-template-columns:.8fr 1.2fr; gap:80px; }
+.cylinder-types .text-surface,.cylinder-types .text-steel-300,.cylinder-types .eyebrow { color:#243845!important; }
+.cylinder-types .container-max>.grid { grid-template-columns:repeat(2,minmax(0,1fr)); background:transparent; border-color:#18324222; }
+.cylinder-types .bg-carbon { background:transparent; border-bottom:1px solid #18324222; }
+.cylinder-types .bg-carbon:hover { background:#dde5e7; }
+.cylinder-types h2,.cylinder-services h2 { letter-spacing:-.045em; font-weight:500; }
+.cylinder-services { padding-block:110px; background:var(--d3-surface)!important; }
+.cylinder-services .bg-carbon { background:#111922; }
+.cylinder-services .group\/tilt { transform:none!important; }
+.cylinder-quote-inputs { border-top:1px solid #dbe8f01c; background:#101820; }
+@media(min-width:1024px) { .cylinder-experience[data-phase="1"] .cylinder-copy { width:27%; max-width:375px; } }
+@media(min-width:1600px) { .cylinder-copy { top:18%; } .cylinder-experience .industrial-stage .stage-canvas { top:40px; } }
+@media(max-width:1023px) {
+ .cylinder-sticky { top:64px; height:calc(100svh - 64px); min-height:730px; }
+ .cylinder-experience { height:calc(100svh - 64px); min-height:730px; }
+ .cylinder-experience:has(.industrial-stage.is-ready) { height:230svh; }
+ .cylinder-copy { top:76px; left:var(--d3-gutter); width:74%; max-width:580px; }
+ .cylinder-copy h1,.cylinder-copy h2 { font-size:46px; }
+ .cylinder-kicker { margin-bottom:13px!important; font-size:9px!important; }
+ .cylinder-copy article>p:not(.cylinder-kicker) { max-width:450px; font-size:13px; line-height:1.6; margin-top:17px; }
+ .cylinder-story-actions { margin-top:17px; gap:10px; flex-direction:row; align-items:center; }
+ .cylinder-story-actions .btn-primary { min-height:42px; font-size:10px; padding-inline:14px; }
+ .cylinder-text-link { font-size:11px; }
+ .cylinder-experience .industrial-stage .stage-canvas { top:300px; bottom:185px; }
+ .cylinder-wordmark { top:47%; font-size:19vw; }
+ .cylinder-experience .cylinder-controls { left:var(--d3-gutter); right:var(--d3-gutter); bottom:40px; }
+ .cylinder-experience .cylinder-toolbar>span { width:auto; margin-right:auto; font-size:10px; }
+ .cylinder-experience .cylinder-controls p { min-height:33px; flex-direction:row; }
+ .cylinder-chapters { display:none; }
+ .cylinder-breadcrumb { top:24px; }
+ .cylinder-marker-interior { top:70svh; }
+ .cylinder-marker-application { top:125svh; }
+ .cylinder-experience .stage-fallback { left:0; top:300px; bottom:200px; mask-image:none; }
+ .cylinder-types .container-max { display:block; }
+ .cylinder-types,.cylinder-services { padding-block:64px; }
+}
+@media(max-width:600px) {
+ .cylinder-sticky,.cylinder-experience { min-height:640px; }
+ .cylinder-copy { top:65px; width:88%; }
+ .cylinder-copy h1,.cylinder-copy h2 { font-size:clamp(36px,10.2vw,48px); }
+ .cylinder-copy article>p:not(.cylinder-kicker) { max-width:335px; font-size:13px; line-height:1.6; margin-top:16px; }
+ .cylinder-copy .cylinder-kicker { font-size:8px!important; letter-spacing:.09em; }
+ .cylinder-copy-note { font-size:11px; margin-top:13px; }
+ .cylinder-experience .industrial-stage .stage-canvas { top:305px; bottom:222px; }
+ .cylinder-experience .cylinder-controls { bottom:39px; }
+ .cylinder-experience .cylinder-controls p { flex-direction:column; font-size:12px; min-height:60px; gap:4px; }
+ .cylinder-experience .cylinder-controls p strong { font-size:12px; }
+ .cylinder-experience .cylinder-toolbar>span { width:100%; font-size:11px; margin-bottom:3px; }
+ .cylinder-experience .cylinder-toolbar button:last-child { margin-left:auto; }
+ .cylinder-experience .cylinder-toolbar button { min-width:40px; min-height:40px; }
+ .cylinder-experience .cylinder-parts button { font-size:12px; min-height:44px; }
+ .cylinder-experience .cylinder-parts button span { display:none; }
+ .cylinder-experience .stage-caption { left:var(--d3-gutter); right:var(--d3-gutter); font-size:9px; bottom:12px; }
+ .cylinder-story-actions { gap:10px; }
+ .cylinder-story-actions .btn-primary { letter-spacing:.02em; }
+ .cylinder-types .container-max>.grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(prefers-reduced-motion:reduce) {
+ .cylinder-experience,.cylinder-experience:has(.industrial-stage.is-ready) { height:calc(100svh - 100px); }
+ .cylinder-sticky { position:relative; top:0; }
+ .cylinder-experience .cylinder-story { transition:none; }
+}
+
+@media(max-width:360px) {
+ .cylinder-story-actions .btn-primary { white-space:nowrap; flex-shrink:0; }
+ .cylinder-experience .cylinder-toolbar>span { width:100%; margin-bottom:3px; }
+ .cylinder-experience .cylinder-toolbar button:last-child { margin-left:auto; }
+}
+
+/* Brand signature: decorative, static, and transparent to all product gestures. */
+.cylinder-watermark { position:absolute; z-index:2; top:28px; right:var(--d3-gutter); display:flex; flex-direction:column; gap:3px; color:#c4d0d9; opacity:.38; pointer-events:none; user-select:none; }
+.cylinder-watermark span { font-size:18px; font-weight:600; line-height:1; letter-spacing:-.035em; }
+.cylinder-watermark small { font:7px/1.4 var(--font-mono); letter-spacing:.13em; text-transform:uppercase; }
+@media(max-width:1023px) { .cylinder-watermark { top:327px; } .cylinder-watermark span { font-size:15px; } .cylinder-watermark small { font-size:6px; } }
+
+/* Clip overflow only on Cylinders so its sticky presentation can follow scroll. */
+html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }

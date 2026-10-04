@@ -53,7 +53,7 @@ export function Navbar() {
   const solucionesActive = SOLUCIONES_HREFS.some((h) => h !== "/cilindros-neumaticos" && h !== "/servicios" && isActive(pathname, h));
 
   return (
-    <header className="sticky top-0 z-40 transition-all duration-300">
+    <header className={cn("sticky top-0 z-40 transition-all duration-300", pathname === "/cilindros-neumaticos" && "industrial-navbar")}>
       <div className="hidden bg-surface py-2 text-white md:block">
         <div className="container-max flex items-center justify-between gap-6 text-xs">
           <span className="text-white/70">{CONTACT.locality}, República Dominicana · Soluciones industriales bajo cotización</span>
