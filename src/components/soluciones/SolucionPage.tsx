@@ -40,6 +40,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
       itemListElement: s.subcategorias.map((sub) => ({
         "@type": "OfferCatalog",
         name: sub.title,
+        url: `${SITE.url}${sub.href ?? `/${s.slug}#${sub.id}`}`,
       })),
     },
   };
@@ -94,6 +95,20 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
       </section>
 
       {destacado}
+
+      <nav className="container-max py-7" aria-label={`Subcategorías de ${s.name}`}>
+        <p className="eyebrow mb-4">Busca tu componente</p>
+        <ul className="flex flex-wrap gap-2">
+          {s.subcategorias.map((sub) => (
+            <li key={sub.id}>
+              <Link href={sub.href ?? `#${sub.id}`} className="inline-flex border border-black/15 px-3 py-2 text-sm text-surface hover:border-signal hover:text-signal">
+                {sub.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
 
       {/* SUBCATEGORÍAS */}
       <section className="section-pad border-b border-black/5">

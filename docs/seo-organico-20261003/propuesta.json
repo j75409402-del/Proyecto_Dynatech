@@ -1,0 +1,1723 @@
+{
+  "date": "2026-10-04T00:38:52.697Z",
+  "base": "http://localhost:3203",
+  "sitemapCount": 19,
+  "robots": "User-Agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin\n\nSitemap: https://www.dynatech.com.do/sitemap.xml\n",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "Cilindros neumáticos: fabricación y reparación en RD",
+      "description": "Fabricación y reparación de cilindros neumáticos en República Dominicana. También hidráulicos, mecanizado y suministros industriales. Cotiza por WhatsApp.",
+      "canonical": "https://www.dynatech.com.do",
+      "robots": "index, follow",
+      "h1": [
+        "Cilindrosneumáticosa la medida."
+      ],
+      "ogTitle": "Cilindros neumáticos: fabricación y reparación en RD",
+      "ogUrl": "https://www.dynatech.com.do",
+      "schemaTypes": [
+        "LocalBusiness"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo?nombre=Fabricaci%C3%B3n%20y%20reparaci%C3%B3n%20de%20cilindros%20neum%C3%A1ticos",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/cotizacion/correo?nombre=Fabricaci%C3%B3n+y+reparaci%C3%B3n+de+cilindros+neum%C3%A1ticos",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/cilindros-hidraulicos",
+      "status": 200,
+      "title": "Cilindros hidráulicos: fabricación y reparación en RD · Dynatech Ingeniería",
+      "description": "Solicita cotización para fabricar o reparar un cilindro hidráulico. Comparte fotos, plano o muestra, las medidas disponibles y la aplicación del equipo.",
+      "canonical": "https://www.dynatech.com.do/cilindros-hidraulicos",
+      "robots": "index, follow",
+      "h1": [
+        "Fabricación y reparación de cilindros hidráulicos en República Dominicana"
+      ],
+      "ogTitle": "Cilindros hidráulicos: fabricación y reparación en RD",
+      "ogUrl": "https://www.dynatech.com.do/cilindros-hidraulicos",
+      "schemaTypes": [
+        "LocalBusiness",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/mecanizado",
+        "/cotizacion/correo?nombre=Cilindros+hidr%C3%A1ulicos",
+        "/cilindros-hidraulicos",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/mecanizado",
+      "status": 200,
+      "title": "Mecanizado industrial en República Dominicana · Dynatech Ingeniería",
+      "description": "Cotiza trabajos de mecanizado industrial con Dynatech. Envía plano, muestra, medidas y cantidad para evaluar tu solicitud en República Dominicana.",
+      "canonical": "https://www.dynatech.com.do/mecanizado",
+      "robots": "index, follow",
+      "h1": [
+        "Mecanizado industrial en República Dominicana"
+      ],
+      "ogTitle": "Mecanizado industrial en República Dominicana",
+      "ogUrl": "https://www.dynatech.com.do/mecanizado",
+      "schemaTypes": [
+        "LocalBusiness",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cilindros-hidraulicos",
+        "/cotizacion/correo?nombre=Mecanizado",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/neumatica",
+      "status": 200,
+      "title": "Neumática industrial en República Dominicana · Dynatech Ingeniería",
+      "description": "Neumática industrial en República Dominicana: cilindros, válvulas, conectores, conexiones, unidades FRL, mangueras y accesorios bajo cotización. Fabricación y reparación de cilindros.",
+      "canonical": "https://www.dynatech.com.do/neumatica",
+      "robots": "index, follow",
+      "h1": [
+        "Neumática industrial"
+      ],
+      "ogTitle": "Neumática industrial en República Dominicana",
+      "ogUrl": "https://www.dynatech.com.do/neumatica",
+      "schemaTypes": [
+        "LocalBusiness",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo?nombre=Neum%C3%A1tica&amp;tipo=Neum%C3%A1tica",
+        "/valvulas-neumaticas",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/control-electrico",
+      "status": 200,
+      "title": "Controles eléctricos industriales en República Dominicana · Dynatech Ingeniería",
+      "description": "Controles eléctricos industriales en República Dominicana: cotiza contactores, relés, breakers, fusibles, pulsadores y temporizadores con referencia o foto.",
+      "canonical": "https://www.dynatech.com.do/control-electrico",
+      "robots": "index, follow",
+      "h1": [
+        "Control eléctrico industrial"
+      ],
+      "ogTitle": "Controles eléctricos industriales en República Dominicana",
+      "ogUrl": "https://www.dynatech.com.do/control-electrico",
+      "schemaTypes": [
+        "LocalBusiness",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo?nombre=Control+el%C3%A9ctrico&amp;tipo=Control+el%C3%A9ctrico",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/sensores",
+      "status": 200,
+      "title": "Sensores industriales en República Dominicana · Dynatech Ingeniería",
+      "description": "Sensores industriales en República Dominicana: inductivos, capacitivos, fotoeléctricos, fotoceldas, magnéticos, de presión y de temperatura bajo cotización.",
+      "canonical": "https://www.dynatech.com.do/sensores",
+      "robots": "index, follow",
+      "h1": [
+        "Sensores industriales"
+      ],
+      "ogTitle": "Sensores industriales en República Dominicana",
+      "ogUrl": "https://www.dynatech.com.do/sensores",
+      "schemaTypes": [
+        "LocalBusiness",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo?nombre=Sensores&amp;tipo=Sensores",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/instrumentacion",
+      "status": 200,
+      "title": "Instrumentación industrial en República Dominicana · Dynatech Ingeniería",
+      "description": "Instrumentación industrial en República Dominicana: manómetros, interruptores y transmisores de presión, termómetros, termopozos y medición de flujo y nivel bajo cotización.",
+      "canonical": "https://www.dynatech.com.do/instrumentacion",
+      "robots": "index, follow",
+      "h1": [
+        "Instrumentación industrial"
+      ],
+      "ogTitle": "Instrumentación industrial en República Dominicana",
+      "ogUrl": "https://www.dynatech.com.do/instrumentacion",
+      "schemaTypes": [
+        "LocalBusiness",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo?nombre=Instrumentaci%C3%B3n&amp;tipo=Instrumentaci%C3%B3n",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/resistencias-electricas",
+      "status": 200,
+      "title": "Resistencias eléctricas industriales en República Dominicana · Dynatech Ingeniería",
+      "description": "Resistencias eléctricas industriales en República Dominicana: resistencias de cartucho, termocuplas, RTD y alambre de resistencia. Cotización bajo especificación.",
+      "canonical": "https://www.dynatech.com.do/resistencias-electricas",
+      "robots": "index, follow",
+      "h1": [
+        "Resistencias eléctricas industriales"
+      ],
+      "ogTitle": "Resistencias eléctricas industriales en República Dominicana",
+      "ogUrl": "https://www.dynatech.com.do/resistencias-electricas",
+      "schemaTypes": [
+        "LocalBusiness",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo?nombre=Resistencias+el%C3%A9ctricas&amp;tipo=Resistencias+el%C3%A9ctricas",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/cilindros-neumaticos",
+      "status": 200,
+      "title": "Cilindros neumáticos a la medida · Dynatech Ingeniería",
+      "description": "Cilindros neumáticos de doble y simple efecto, compactos, ISO y especiales, en medidas métricas y en pulgadas. Fabricación y reparación bajo cotización en República Dominicana.",
+      "canonical": "https://www.dynatech.com.do/cilindros-neumaticos",
+      "robots": "index, follow",
+      "h1": [
+        "Fabricamos y reparamos el cilindro que tu máquina necesita"
+      ],
+      "ogTitle": "Cilindros neumáticos en República Dominicana",
+      "ogUrl": "https://www.dynatech.com.do/cilindros-neumaticos",
+      "schemaTypes": [
+        "LocalBusiness",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo?nombre=Fabricaci%C3%B3n+de+cilindros+neum%C3%A1ticos",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/valvulas-neumaticas",
+      "status": 200,
+      "title": "Válvulas neumáticas en República Dominicana · Dynatech Ingeniería",
+      "description": "Cotiza válvulas neumáticas direccionales y solenoides con Dynatech en Santo Domingo. Envía referencia, foto, conexiones y datos de tu aplicación industrial.",
+      "canonical": "https://www.dynatech.com.do/valvulas-neumaticas",
+      "robots": "index, follow",
+      "h1": [
+        "Válvulas neumáticas en República Dominicana"
+      ],
+      "ogTitle": "Válvulas neumáticas en República Dominicana",
+      "ogUrl": "https://www.dynatech.com.do/valvulas-neumaticas",
+      "schemaTypes": [
+        "LocalBusiness",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo?nombre=V%C3%A1lvulas+neum%C3%A1ticas&amp;tipo=Neum%C3%A1tica",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/servicios",
+      "status": 200,
+      "title": "Reparación y fabricación de cilindros neumáticos en RD · Dynatech Ingeniería",
+      "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos, fabricación bajo muestra o plano, cambio de sellos y cilindros personalizados en República Dominicana.",
+      "canonical": "https://www.dynatech.com.do/servicios",
+      "robots": "index, follow",
+      "h1": [
+        "Fabricación, reparación y reconstrucción de cilindros neumáticos"
+      ],
+      "ogTitle": "Reparación de cilindros neumáticos en RD",
+      "ogUrl": "https://www.dynatech.com.do/servicios",
+      "schemaTypes": [
+        "LocalBusiness",
+        "Service",
+        "FAQPage",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/cotizacion/correo?nombre=Reparaci%C3%B3n+de+cilindros+neum%C3%A1ticos",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/sellos-y-componentes",
+      "status": 200,
+      "title": "Sellos y componentes para cilindros neumáticos · Dynatech Ingeniería",
+      "description": "Kits de sellos, vástagos y barras cromadas, y componentes bajo medida para cilindros neumáticos. Cotiza con el código, una foto o la muestra.",
+      "canonical": "https://www.dynatech.com.do/sellos-y-componentes",
+      "robots": "index, follow",
+      "h1": [
+        "Las piezas que mantienen tu cilindro sellado"
+      ],
+      "ogTitle": "Sellos y componentes para cilindros neumáticos",
+      "ogUrl": "https://www.dynatech.com.do/sellos-y-componentes",
+      "schemaTypes": [
+        "LocalBusiness",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo?nombre=Kits+de+sellos",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/nosotros",
+      "status": 200,
+      "title": "Nosotros · Dynatech Ingeniería",
+      "description": "Conoce a Dynatech Ingeniería: proveedor industrial B2B y taller de cilindros neumáticos en República Dominicana.",
+      "canonical": "https://www.dynatech.com.do/nosotros",
+      "robots": "index, follow",
+      "h1": [
+        "La referencia exacta.No la más parecida."
+      ],
+      "ogTitle": "Dynatech Ingeniería SRL en República Dominicana",
+      "ogUrl": "https://www.dynatech.com.do/nosotros",
+      "schemaTypes": [
+        "LocalBusiness",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/contacto",
+      "status": 200,
+      "title": "Contacto y cotizaciones industriales en Santo Domingo · Dynatech Ingeniería",
+      "description": "Contacta a Dynatech Ingeniería SRL en Santo Domingo. Cotiza servicios y suministros industriales para empresas y zonas francas en República Dominicana.",
+      "canonical": "https://www.dynatech.com.do/contacto",
+      "robots": "index, follow",
+      "h1": [
+        "Hablemos."
+      ],
+      "ogTitle": "Contacta a Dynatech Ingeniería SRL",
+      "ogUrl": "https://www.dynatech.com.do/contacto",
+      "schemaTypes": [
+        "LocalBusiness"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/cotizacion/correo",
+      "status": 200,
+      "title": "Solicitar cotización por correo · Dynatech Ingeniería",
+      "description": "Envía a Dynatech tu solicitud de cotización con los datos de tu empresa, referencias, cantidades y adjuntos.",
+      "canonical": "https://www.dynatech.com.do/cotizacion/correo",
+      "robots": "index, follow",
+      "h1": [
+        "Cuéntanos qué necesitas."
+      ],
+      "ogTitle": "Solicitar cotización por correo",
+      "ogUrl": "https://www.dynatech.com.do/cotizacion/correo",
+      "schemaTypes": [
+        "LocalBusiness",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cotizacion/correo",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/garantias",
+      "status": 200,
+      "title": "Garantías · Dynatech Ingeniería",
+      "description": "Condiciones de garantía de los trabajos y piezas de Dynatech Ingeniería SRL.",
+      "canonical": "https://www.dynatech.com.do/garantias",
+      "robots": "index, follow",
+      "h1": [
+        "Garantías"
+      ],
+      "ogTitle": "Dynatech Ingeniería",
+      "ogUrl": "https://www.dynatech.com.do",
+      "schemaTypes": [
+        "LocalBusiness",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/devoluciones",
+      "status": 200,
+      "title": "Política de devoluciones · Dynatech Ingeniería",
+      "description": "Condiciones para devolución o cambio de productos comprados a Dynatech Ingeniería SRL.",
+      "canonical": "https://www.dynatech.com.do/devoluciones",
+      "robots": "index, follow",
+      "h1": [
+        "Política de devoluciones"
+      ],
+      "ogTitle": "Dynatech Ingeniería",
+      "ogUrl": "https://www.dynatech.com.do",
+      "schemaTypes": [
+        "LocalBusiness",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/garantias",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/privacidad",
+      "status": 200,
+      "title": "Política de privacidad · Dynatech Ingeniería",
+      "description": "Cómo Dynatech Ingeniería SRL recopila, usa y protege los datos que compartes en este sitio.",
+      "canonical": "https://www.dynatech.com.do/privacidad",
+      "robots": "index, follow",
+      "h1": [
+        "Política de privacidad"
+      ],
+      "ogTitle": "Dynatech Ingeniería",
+      "ogUrl": "https://www.dynatech.com.do",
+      "schemaTypes": [
+        "LocalBusiness",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    },
+    {
+      "path": "/terminos",
+      "status": 200,
+      "title": "Términos y condiciones · Dynatech Ingeniería",
+      "description": "Condiciones de uso del sitio web y del proceso de cotización de Dynatech Ingeniería SRL.",
+      "canonical": "https://www.dynatech.com.do/terminos",
+      "robots": "index, follow",
+      "h1": [
+        "Términos y condiciones"
+      ],
+      "ogTitle": "Dynatech Ingeniería",
+      "ogUrl": "https://www.dynatech.com.do",
+      "schemaTypes": [
+        "LocalBusiness",
+        "BreadcrumbList"
+      ],
+      "business": {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://www.dynatech.com.do/#business",
+        "legalName": "Dynatech Ingeniería SRL",
+        "name": "Dynatech Ingeniería",
+        "url": "https://www.dynatech.com.do",
+        "logo": "https://www.dynatech.com.do/logo-mark.png",
+        "description": "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+        "email": "dynatechsrl@outlook.com",
+        "telephone": "+1 (809) 284-4336",
+        "areaServed": {
+          "@type": "Country",
+          "name": "República Dominicana"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Rómulo Betancourt",
+          "addressLocality": "Santo Domingo",
+          "addressCountry": "DO"
+        }
+      },
+      "internalLinks": [
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
+        "/",
+        "/cilindros-neumaticos",
+        "/neumatica",
+        "/control-electrico",
+        "/sensores",
+        "/instrumentacion",
+        "/resistencias-electricas",
+        "/servicios",
+        "/sellos-y-componentes",
+        "/nosotros",
+        "/contacto",
+        "/cilindros-hidraulicos",
+        "/mecanizado",
+        "/garantias",
+        "/devoluciones",
+        "/privacidad",
+        "/terminos"
+      ],
+      "imagesWithoutAlt": 0,
+      "umami": true
+    }
+  ]
+}

@@ -98,6 +98,7 @@ export const SOLUCIONES: Solucion[] = [
         id: "valvulas",
         icon: GitFork,
         title: "Válvulas neumáticas",
+        href: "/valvulas-neumaticas",
         desc: "Válvulas direccionales y solenoides para controlar el paso del aire.",
         image: "/products/valvulas-neumaticas-todas.jpg",
         imageAlt: "Válvulas neumáticas industriales",
@@ -169,7 +170,7 @@ export const SOLUCIONES: Solucion[] = [
     description:
       "Contactores, relés, protecciones y componentes de tablero para el control y la protección de máquinas y motores.",
     metaDescription:
-      "Control eléctrico industrial en República Dominicana: contactores, relés, breakers, fusibles, pulsadores, temporizadores y finales de carrera bajo cotización.",
+      "Controles eléctricos industriales en República Dominicana: cotiza contactores, relés, breakers, fusibles, pulsadores y temporizadores con referencia o foto.",
     image: "/banners/control-electrico.webp",
     imageWidth: 512,
     imageHeight: 512,
@@ -291,7 +292,7 @@ export const SOLUCIONES: Solucion[] = [
         icon: Activity,
         title: "Sensores de nivel y flujo",
         desc: "Medición de nivel y caudal para procesos industriales.",
-        href: "/instrumentacion#flujo",
+        href: "/instrumentacion",
       },
       {
         id: "accesorios",

@@ -5,6 +5,8 @@ const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'file:///C:/U
 const base = process.env.TEST_BASE_URL || 'http://localhost:3198';
 const browser = await chromium.launch({ ...(process.env.BROWSER_EXECUTABLE ? { executablePath: process.env.BROWSER_EXECUTABLE } : { channel: 'msedge' }), headless: true });
 const page = await browser.newPage();
+// Las verificaciones locales no deben contaminar la analítica del negocio.
+await page.route('https://cloud.umami.is/**', route => route.abort());
 const errors = [];
 const checks = [];
 page.on('pageerror', e => errors.push(e.message));
@@ -12,7 +14,7 @@ await mkdir('docs/seo-verificacion', { recursive: true });
 try {
   const sitemap = await (await page.request.get(`${base}/sitemap.xml`)).text();
   const routes = [...sitemap.matchAll(/<loc>https:\/\/www\.dynatech\.com\.do([^<]*)<\/loc>/g)].map(m => m[1] || '/');
-  assert.equal(routes.length, 18);
+  assert.equal(routes.length, 19);
   for (const width of [390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of routes) {
