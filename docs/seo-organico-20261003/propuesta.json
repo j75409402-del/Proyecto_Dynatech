@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-03T23:21:01.497Z",
+  "date": "2026-10-04T00:38:52.697Z",
   "base": "http://localhost:3203",
   "sitemapCount": 19,
   "robots": "User-Agent: *\nAllow: /\nDisallow: /api/\nDisallow: /admin\n\nSitemap: https://www.dynatech.com.do/sitemap.xml\n",
@@ -34,18 +34,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -54,9 +64,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -112,18 +126,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -132,9 +156,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -189,18 +217,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -209,9 +247,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -266,18 +308,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -286,9 +338,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -344,18 +400,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -364,9 +430,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -421,18 +491,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -441,9 +521,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -498,18 +582,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -518,9 +612,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -575,18 +673,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -595,9 +703,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -651,18 +763,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -671,9 +793,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -728,18 +854,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -748,9 +884,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -806,18 +946,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -826,9 +976,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -882,18 +1036,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -902,9 +1066,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -958,18 +1126,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -978,9 +1156,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -1033,18 +1215,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -1053,9 +1245,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -1108,18 +1304,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -1128,9 +1334,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -1184,18 +1394,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -1204,9 +1424,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -1259,18 +1483,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -1279,9 +1513,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -1334,18 +1572,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -1354,9 +1602,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",
@@ -1409,18 +1661,28 @@
           "@type": "Country",
           "name": "República Dominicana"
         },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "08:30",
-          "closes": "17:00"
-        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "17:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "12:00"
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Av. Rómulo Betancourt",
@@ -1429,9 +1691,13 @@
         }
       },
       "internalLinks": [
-        "/_next/static/css/1896c10459891ebc.css",
-        "/_next/static/chunks/webpack-278ce1d8ca954867.js",
-        "/icon.png?7d66856f67bf20b4",
+        "/_next/static/media/03fc1b4a8d284b5e-s.p.0wiir8udbzjvx.woff2",
+        "/_next/static/media/23b7a97ae3b5c134-s.p.226pwps5o-gq_.woff2",
+        "/_next/static/media/99e609270109b47d-s.p.40sczeszzbjw1.woff2",
+        "/_next/static/media/effe91970fc4db64-s.p.0oace-s_gkfks.woff2",
+        "/_next/static/chunks/02lmhfei2cu-m.css",
+        "/_next/static/chunks/00d5p9xirx44k.js",
+        "/icon.png?icon.2fsycybnquc38.png",
         "/",
         "/cilindros-neumaticos",
         "/neumatica",

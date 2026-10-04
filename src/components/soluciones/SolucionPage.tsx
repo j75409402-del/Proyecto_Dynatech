@@ -101,7 +101,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         <ul className="flex flex-wrap gap-2">
           {s.subcategorias.map((sub) => (
             <li key={sub.id}>
-              <Link href={`#${sub.id}`} className="inline-flex border border-black/15 px-3 py-2 text-sm text-surface hover:border-signal hover:text-signal">
+              <Link href={sub.href ?? `#${sub.id}`} className="inline-flex border border-black/15 px-3 py-2 text-sm text-surface hover:border-signal hover:text-signal">
                 {sub.title}
               </Link>
             </li>

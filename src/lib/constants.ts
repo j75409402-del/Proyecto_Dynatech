@@ -24,7 +24,7 @@ export const CONTACT = {
   address: "Av. Rómulo Betancourt, Santo Domingo, República Dominicana",
   streetAddress: "Av. Rómulo Betancourt",
   locality: "Santo Domingo",
-  hours: "Lunes a Viernes · 8:30 AM - 5:00 PM",
+  hours: "Lunes a Viernes · 8:00 AM - 5:00 PM · Sábado · 8:00 AM - 12:00 PM",
 } as const;
 
 export const SOCIAL = {

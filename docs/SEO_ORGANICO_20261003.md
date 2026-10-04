@@ -82,14 +82,14 @@ No hay evidencia para afirmar cuáles son los mayores competidores por facturaci
 - Navegación de subcategorías en las cinco líneas para facilitar acceso sin cambiar sus URLs.
 - Título y descripción de controles eléctricos con variante comercial plural; Open Graph y Twitter consistentes.
 - Enlace de sensores de nivel/flujo hacia Instrumentación completa, en lugar de solo el bloque de flujo.
-- Catálogos de datos estructurados con URLs reales de detalle/ancla; LocalBusiness con país atendido y horario publicado lunes-viernes 08:30–17:00.
+- Catálogos de datos estructurados con URLs reales de detalle/ancla; LocalBusiness con país atendido y horario confirmado por el propietario lunes-viernes 08:00–17:00 y sábado 08:00–12:00 (corrección del PR #2).
 - Línea base HTTP, mapa y scripts de verificación. Analítica real conservada; pruebas locales bloquean Umami para no contaminar estadísticas.
 
 No se alteraron formularios/API, Supabase, cron, secretos, hosting, dominio, imágenes existentes, redirecciones ni prioridad de la home. Los cambios de código están en una copia aislada y **no publicados**.
 
 ## 7. SEO local y autorizaciones pendientes
 
-Nombre legal, teléfono +1 (809) 284-4336, WhatsApp `wa.me/18092844336`, correo y horario son consistentes en el código y web actual. La web omite el número de Av. Rómulo Betancourt. En una revisión anterior del perfil se vio **2158**; no se volvió a comprobar el perfil en esta ejecución, por fallo de conexión. No se modificó la dirección. Verificar contra el perfil/ubicación real antes de publicarla.
+Nombre legal, teléfono +1 (809) 284-4336, WhatsApp `wa.me/18092844336`, y correo se conservan. El horario del PR se corrigió según confirmación directa del propietario: lunes-viernes 08:00–17:00 y sábado 08:00–12:00, en JSON-LD y texto visible; la producción todavía conserva su versión anterior. La web omite el número de Av. Rómulo Betancourt. En una revisión anterior del perfil se vio **2158**; no se volvió a comprobar el perfil en esta ejecución, por fallo de conexión. No se modificó la dirección. Verificar contra el perfil/ubicación real antes de publicarla.
 
 Estado del perfil documentado previamente, **no confirmado de nuevo ahora**: categoría principal proveedor de equipos industriales, reparación hidráulica secundaria, fabricante de partes para maquinarias solicitado, servicios y WhatsApp configurados, web con UTM. Revisar aceptación de categoría pendiente, horario, servicios y enlace actual cuando la conexión funcione. No cambiar el nombre para añadir keywords ni crear sucursales.
 
@@ -100,10 +100,10 @@ Para autoridad local: mantener un solo NAP completo, responder reseñas auténti
 ## 8. Pruebas
 
 - TypeScript: correcto. ESLint: cero errores, un aviso preexistente de `postcss.config.mjs`.
-- Build de producción Next.js: **Turbopack y webpack correctos**, incluida la nueva ruta estática. El primer intento Turbopack falló por el enlace local de node_modules fuera de su raíz; el intento final pasó ajustando temporalmente la raíz local al directorio padre. `next.config.mjs` se restauró exactamente al terminar, sin cambios de configuración para desplegar. Webpack produjo avisos relacionados con middleware/Edge/Supabase; Turbopack mantuvo el aviso de middleware. No se alteró ese código.
+- Build de producción Next.js: **Turbopack correcto en esta revisión**, incluida la nueva ruta estática. Webpack pasó en la versión previa del PR y no se repitió en esta corrección. El primer intento Turbopack falló por el enlace local de node_modules fuera de su raíz; el intento final pasó ajustando temporalmente la raíz local al directorio padre. `next.config.mjs` se restauró exactamente al terminar, sin cambios de configuración para desplegar. Webpack produjo avisos relacionados con middleware/Edge/Supabase; Turbopack mantuvo el aviso de middleware. No se alteró ese código.
 - Auditoría HTTP de la propuesta compilada: 19 rutas, todas 200, un H1 y metadatos/canonical. `seo-organico-20261003/propuesta.json`.
 - `tests/commercial.test.mjs`: **57 combinaciones** de página/tamaño (390, 768, 1440), sin desbordamiento ni errores JavaScript. Canonical, títulos, descriptions y JSON-LD; redirecciones, 404, login noindex, menú móvil, contactos y formularios **con API simulada**. Evidencia en `pruebas-comerciales.json`. Admin autenticado, entrega de correo y persistencia de solicitudes reales no verificados en esta copia sin secretos.
-- `tests/seo-organic.test.mjs`: **44 destinos únicos** del mapa con status/fragmentos correctos; nueva página a tres anchos, canonical e index/follow, relaciones Service/BreadcrumbList/LocalBusiness, WhatsApp/correo contextual y contenido/CTA visible sin JavaScript. Capturas `valvulas-390.png`, `valvulas-768.png`, `valvulas-1440.png` y `enlaces-verificados.json`.
+- `tests/seo-organic.test.mjs`: **44 destinos únicos** del mapa con status/fragmentos correctos; **32 enlaces de navegación de subcategorías** verificados contra el catálogo, clic a /valvulas-neumaticas y horario exacto de ambas franjas; nueva página a tres anchos, canonical e index/follow, relaciones Service/BreadcrumbList/LocalBusiness, WhatsApp/correo contextual y contenido/CTA visible sin JavaScript. Capturas `valvulas-390.png`, `valvulas-768.png`, `valvulas-1440.png` y `enlaces-verificados.json`.
 - Datos estructurados parseados y referencias verificadas: no equivale a elegibilidad de resultados enriquecidos ni a una aprobación de Google Rich Results Test. Indexabilidad técnica tampoco prueba indexación actual de la nueva URL, que todavía no está publicada.
 - La revisión de main al terminar mostró `45bf6ee`, con seis archivos de migraciones nuevos respecto a la base. No hay solapamiento con los archivos SEO; se conservan para la integración. No se ejecutaron migraciones ni se cambiaron datos.
 
@@ -126,3 +126,8 @@ Plantilla `seo-organico-20261003/seguimiento.csv`: vacía hasta tener datos real
 ## 10. Próxima acción
 
 Revisar la vista previa y publicar el paquete probado; después comprobar la nueva URL en producción y Search Console. Continuar con controles eléctricos/contactores según consultas reales y añadir casos propios de cilindros. Usar las fotos/videos suministrados solo con descripción comprobada del trabajo; no convertir una foto del torno en prueba de un tipo de cilindro/material/capacidad no confirmado.
+
+
+## Correcciones del PR #2 solicitadas por el propietario
+
+Únicamente se corrigieron el horario estructurado/visible y el destino de navegación según sub.href, manteniendo anclas sin página propia. Se repitieron TypeScript, lint, build Turbopack, auditoría HTTP y pruebas SEO/comerciales sobre esta versión. No se modificaron nombre, dirección, teléfonos, productos, marcas, disponibilidad ni capacidades. Se conservó la documentación/evidencia histórica de producción. PR en borrador; sin merge ni publicación en producción.
