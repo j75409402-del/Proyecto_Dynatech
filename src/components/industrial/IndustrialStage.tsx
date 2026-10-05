@@ -38,6 +38,7 @@ export function IndustrialStage({scene="ecosistema",narrative=false,presentation
   // Filtro previo barato (ahorro de datos, equipos muy limitados). La calidad real se decide por FPS medidos.
   const constrained=nav.connection?.saveData || navigator.hardwareConcurrency<=2 || (nav.deviceMemory??8)<=1;
   const off=()=>{if(!disposed){setDisabled(true);setReady(false);setTier("static");}};
+  if(constrained){off();}
   const init=async()=>{if(!visible||loading||engine.current||motion.matches||constrained||!host.current)return;loading=true;try{
    // 1) Sin WebGL no se descarga three (≈162 KB gz).
    if(!hasWebGL()){off();return;}

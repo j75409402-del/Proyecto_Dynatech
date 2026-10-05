@@ -359,7 +359,7 @@
 .cylinder-legend p { font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--d3-muted); margin-bottom:10px; }
 .cylinder-legend ol { display:flex; flex-wrap:wrap; gap:8px 18px; border-top:1px solid var(--d3-line); padding-top:12px; }
 .cylinder-legend li { display:flex; align-items:baseline; gap:7px; font-size:14px; }
-.cylinder-legend li span { font:11px var(--font-mono),ui-monospace,monospace; color:var(--d3-accent); }
+.cylinder-legend li span { font:12px var(--font-mono),ui-monospace,monospace; color:var(--d3-accent); }
 /* Controles 3D */
 .cylinder-experience .cylinder-controls { z-index:4; left:47%; right:var(--d3-gutter); bottom:43px; max-width:none; }
 .cylinder-experience .cylinder-toolbar { gap:6px; margin-bottom:9px; }
