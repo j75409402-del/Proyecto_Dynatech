@@ -29,7 +29,8 @@ export const CONTACT = {
 
 /** Umami Cloud (sin cookies). El ID es público; el envío servidor de /cotizacion usa la API /api/send. */
 export const ANALYTICS = {
-  umamiWebsiteId: "4bbea860-f2e7-4268-9476-190563eeab0a",
+  // NEXT_PUBLIC_DISABLE_ANALYTICS=1 (solo vistas previas locales) evita contaminar las métricas de producción.
+  umamiWebsiteId: process.env.NEXT_PUBLIC_DISABLE_ANALYTICS === "1" ? "" : "4bbea860-f2e7-4268-9476-190563eeab0a",
   umamiScriptUrl: "https://cloud.umami.is/script.js",
   umamiApiUrl: process.env.UMAMI_API_URL ?? "https://cloud.umami.is/api/send",
 } as const;
