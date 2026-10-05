@@ -1,27 +1,31 @@
 import type { Metadata } from "next";
 import { commercialMetadata } from "@/lib/seo";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
-import { TiltCard } from "@/components/motion/TiltCard";
 import { AccordionItem } from "@/components/ui/Accordion";
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
-import { SITE } from "@/lib/constants";
+import { PageHero } from "@/components/page/PageHero";
+import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, Steps } from "@/components/page/Blocks";
+import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
+import { CONTACT, SITE } from "@/lib/constants";
 import Link from "next/link";
-import { SERVICIOS_ADICIONALES, SERVICIOS } from "@/lib/servicios";
+import { ArrowUpRight, Cog, Droplets } from "lucide-react";
+import { SERVICIOS } from "@/lib/servicios";
 import { whatsappCylinderService } from "@/lib/whatsapp";
-import { CylinderRelated } from "@/components/industrial/CylinderRelated";
 
+const DESCRIPTION = "Reparación y reconstrucción de cilindros neumáticos en RD: cambio de sellos, vástagos y componentes, con prueba de funcionamiento antes de entregar.";
+
+/**
+ * /servicios = REPARACIÓN y reconstrucción de cilindros neumáticos (mapa de intención WEB-010).
+ * La fabricación a la medida vive en /cilindros-neumaticos: aquí solo se enlaza.
+ * Se conservan las anclas #fabricacion, #reparacion, #reconstruccion, #bajo-muestra-o-plano,
+ * #cambio-de-sellos, #personalizados y #preguntas-frecuentes (destino de /faq).
+ */
 export const metadata: Metadata = {
-  ...commercialMetadata("Reparación de cilindros neumáticos en RD", "Cotiza fabricación, reparación y reconstrucción de cilindros neumáticos para tu empresa en República Dominicana.", "/servicios"),
+  ...commercialMetadata("Reparación de cilindros neumáticos en RD", DESCRIPTION, "/servicios"),
   title: "Reparación y fabricación de cilindros neumáticos en RD",
-  description:
-    "Fabricación, reparación y reconstrucción de cilindros neumáticos, fabricación bajo muestra o plano, cambio de sellos y cilindros personalizados en República Dominicana.",
+  description: DESCRIPTION,
   keywords: [
     "reparación de cilindros neumáticos",
-    "fabricación de cilindros neumáticos",
     "reconstrucción de cilindros neumáticos",
     "cambio de sellos",
     "cilindros neumáticos en República Dominicana",
@@ -83,138 +87,104 @@ const faqJsonLd = {
   })),
 };
 
+const REPARACION_IDS = ["reparacion", "reconstruccion", "cambio-de-sellos"];
+const FABRICACION_IDS = ["fabricacion", "bajo-muestra-o-plano", "personalizados"];
+const REPARACION_MEDIA: Record<string, { image: string; imageAlt: string; imageFit?: "cover" | "contain" }> = {
+  reparacion: { image: "/cilindros/taller-reparando.jpg", imageAlt: "Técnico reparando un cilindro neumático en el taller", imageFit: "cover" },
+  reconstruccion: { image: "/banners/cilindros-taller-wide.webp", imageAlt: "Cilindro neumático desarmado con sus componentes sobre el banco", imageFit: "cover" },
+  "cambio-de-sellos": { image: "/products/kit-sello-cilindro-neumatico.jpg", imageAlt: "Kit de sellos para cilindro neumático" },
+};
+
+const PROCESO = [
+  { title: "Fotos y datos", text: "Compartes fotos del cilindro, su placa y la falla por WhatsApp." },
+  { title: "Diagnóstico", text: "Desarmamos y revisamos camisa, pistón, vástago, tapas y sellos." },
+  { title: "Reemplazo", text: "Cambiamos lo dañado. Si no hay repuesto original, fabricamos el componente bajo medida." },
+  { title: "Ensamblaje y prueba", text: "Ensamblamos y probamos el funcionamiento antes de entregar." },
+];
+
 export default function ServiciosPage() {
+  const reparacion = SERVICIOS.filter((s) => REPARACION_IDS.includes(s.id));
+  const fabricacion = SERVICIOS.filter((s) => FABRICACION_IDS.includes(s.id));
   return (
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 
-      {/* HERO */}
-      <section className="border-b border-black/5">
-        <div className="container-max pt-7 sm:pt-9">
-          <Breadcrumbs items={[{ label: "Servicios" }]} />
-        </div>
-        <div className="overflow-hidden bg-surface text-white">
-          <div className="container-max grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-12 lg:gap-12 lg:py-20">
-            <Reveal className="lg:col-span-6">
-              <div className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-white/55">Cilindros neumáticos · Servicios</div>
-              <h1 className="mb-6 font-display text-display-xl text-white">
-                Fabricación, reparación y <span className="text-signal">reconstrucción de cilindros neumáticos</span>
-              </h1>
-              <p className="mb-8 max-w-2xl text-lg leading-relaxed text-white/75 sm:text-xl">
-                Recuperamos cilindros dañados y fabricamos nuevos a partir de tu plano, una muestra o
-                tus medidas.
-              </p>
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
-                  <WhatsAppIcon className="h-4 w-4" />
-                  Cotizar por WhatsApp
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <Link href="/cilindros-neumaticos" className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-6 py-3 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10">
-                  Ver tipos de cilindro
-                </Link>
-              </div>
-            </Reveal>
-            <div className="lg:col-span-6">
-              <div className="relative aspect-[4/3] overflow-hidden border border-white/15 bg-carbon-800 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.85)]">
-                <Image
-                  src="/banners/cilindros-taller-wide.webp"
-                  alt="Imagen editorial de un cilindro neumático completo en reparación"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-                <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-surface/45 via-transparent to-transparent" />
-                <div aria-hidden className="absolute -left-1 -top-1 h-5 w-5 border-l-2 border-t-2 border-signal" />
-                <div aria-hidden className="absolute -bottom-1 -right-1 h-5 w-5 border-b-2 border-r-2 border-signal" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: "Servicios" }]}
+        kicker="Taller · Reparación de cilindros"
+        title={<>Reparación y reconstrucción de <span className="text-signal">cilindros neumáticos</span></>}
+        lead={<p>Recuperamos cilindros con fugas, desgaste o golpes: cambio de sellos, vástagos y componentes, incluso cuando el repuesto original ya no está disponible.</p>}
+        quoteHref={whatsappCylinderService()}
+        secondary={{ href: "#proceso", label: "Ver el proceso" }}
+        note="Desarmamos, cambiamos lo dañado y probamos el cilindro antes de entregarlo."
+        image={{ src: "/cilindros/taller-portada-v2.webp", alt: "Técnico revisando un cilindro neumático en el banco del taller" }}
+        trust="cilindros"
+      />
 
-      {/* SERVICIOS */}
-      <section className="section-pad border-b border-black/5">
-        <div className="container-max">
-          <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">01 · Qué hacemos</div>
-            <h2 className="font-display text-display-lg text-surface">Nuestros servicios</h2>
-          </Reveal>
+      <Band tone="white" id="proceso" labelledBy="proceso-titulo">
+        <SectionHead kicker="01 · Cómo reparamos" id="proceso-titulo" title="Del diagnóstico a la prueba" intro="El alcance de cada reparación se confirma después de revisar el cilindro. Las fotos ayudan a orientar, pero no sustituyen la inspección." />
+        <Steps items={PROCESO} />
+      </Band>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {SERVICIOS.map((s, i) => (
-              <Reveal key={s.id} delay={i * 0.04} className="h-full">
-                <TiltCard max={4} className="h-full">
-                  <div
-                    id={s.id}
-                    className="scroll-mt-24 flex h-full flex-col border border-black/10 bg-carbon p-6 hover:shadow-[0_16px_40px_-16px_rgba(0,0,0,0.18)] transition-shadow duration-300"
-                  >
-                    <s.icon className="h-5 w-5 text-signal mb-4" />
-                    <h3 className="font-display text-lg text-surface mb-2">{s.title}</h3>
-                    <p className="text-sm text-steel-300 leading-relaxed mb-5 flex-1">{s.desc}</p>
-                    <a
-                      href={quoteHref(s.title)}
-                      target="_blank"
-                      rel="noopener"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
-                    >
-                      Cotizar por WhatsApp
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </a>
-                  </div>
-                </TiltCard>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="container-max py-12 sm:py-16"><h2 className="font-display text-display-lg mb-6">Otros servicios industriales</h2><div className="grid gap-4 sm:grid-cols-2">{SERVICIOS_ADICIONALES.map((s) => <Link key={s.slug} href={`/${s.slug}`} className="card p-6 border border-black/10"><h3 className="font-display text-xl mb-3">{s.name}</h3><p className="text-steel-300 mb-4">{s.description}</p><span className="text-signal">Ver información para cotizar →</span></Link>)}</div></section>
-      {/* ANTES Y DESPUÉS */}
-      <section className="section-pad border-b border-black/5 bg-carbon-900">
-        <div className="container-max">
-          <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">02 · Resultados</div>
-            <h2 className="font-display text-display-lg text-surface">Antes y después</h2>
-            <p className="text-steel-300 mt-4">Cilindro ISO 32 mm recuperado en nuestro taller.</p>
-          </Reveal>
-
-          <Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-black/10 border border-black/10">
-              <div className="relative aspect-[3/1] bg-white">
-                <Image
-                  src="/cilindros/antes-cilindro-iso-32mm.jpg"
-                  alt="Antes · Cilindro ISO 32 mm"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-contain"
-                />
-              </div>
-              <div className="relative aspect-[3/1] bg-white">
-                <Image
-                  src="/cilindros/despues-cilindro-iso-32mm.jpg"
-                  alt="Después · Cilindro ISO 32 mm"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-contain"
-                />
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="preguntas-frecuentes" className="section-pad scroll-mt-16">
-        <div className="container-max max-w-3xl">
-          <Reveal className="mb-4">
-            <div className="eyebrow mb-3">03 · Preguntas frecuentes</div>
-            <h2 className="font-display text-display-lg text-surface">Preguntas frecuentes</h2>
-          </Reveal>
-
+      <Band tone="light" labelledBy="servicios-titulo">
+        <SectionHead kicker="02 · Qué hacemos" id="servicios-titulo" title="Reparación, reconstrucción y sellos" />
+        <OfferGrid
+          items={reparacion.map((s) => ({ id: s.id, title: s.title, desc: s.desc, icon: s.icon, ...REPARACION_MEDIA[s.id], quote: quoteHref(s.title) }))}
+        />
+        <Reveal className="fab-aside">
           <div>
+            <p className="section-kicker">¿Necesitas uno nuevo?</p>
+            <p className="fab-aside-text">La fabricación de cilindros a la medida, bajo plano o muestra, tiene su propia página.</p>
+          </div>
+          <ul>
+            {fabricacion.map((s) => (
+              <li key={s.id} id={s.id} className="scroll-mt-28">
+                <Link href="/cilindros-neumaticos" className="group">
+                  <s.icon className="h-4 w-4 shrink-0 text-signal" aria-hidden="true" />
+                  <span>{s.title}</span>
+                  <ArrowUpRight className="ml-auto h-4 w-4 shrink-0" aria-hidden="true" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      </Band>
+
+      <Band tone="white" labelledBy="antes-despues-servicios">
+        <SectionHead kicker="03 · Trabajo de taller" id="antes-despues-servicios" title="Antes y después" intro="Cilindro ISO 32 mm recuperado en nuestro taller. Desliza para comparar." />
+        <Reveal>
+          <BeforeAfterSlider
+            before={{ src: "/cilindros/antes-cilindro-iso-32mm.jpg", alt: "Antes · Cilindro ISO 32 mm" }}
+            after={{ src: "/cilindros/despues-cilindro-iso-32mm.jpg", alt: "Después · Cilindro ISO 32 mm recuperado" }}
+          />
+          <p className="mt-5 max-w-3xl text-sm leading-relaxed text-steel-300">Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar.</p>
+        </Reveal>
+      </Band>
+
+      <QuoteChecklist
+        kicker="04 · Para cotizar"
+        title="Qué enviar para cotizar una reparación"
+        intro="Con fotos del cilindro y su placa podemos empezar. Añade lo que tengas:"
+        items={[
+          { title: "Fotos del cilindro completo y de su placa" },
+          { title: "Qué falla", text: "Fuga de aire, vástago rayado o doblado, golpe, no avanza o no retrocede." },
+          { title: "Diámetro x carrera", text: "En mm o pulgadas, si los conoces." },
+          { title: "Marca, modelo o código", text: "Si la placa es legible." },
+          { title: "Cantidad y ciudad de entrega" },
+        ]}
+        quoteHref={whatsappCylinderService()}
+        note={`Atención por WhatsApp: ${CONTACT.hours}.`}
+      />
+
+      {/* FAQ (destino de /faq → /servicios#preguntas-frecuentes) */}
+      <Band tone="white" id="preguntas-frecuentes" labelledBy="faq-titulo">
+        <div className="grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <p className="section-kicker">05 · Preguntas frecuentes</p>
+            <h2 id="faq-titulo" className="section-title">Preguntas frecuentes</h2>
+          </div>
+          <div className="lg:col-span-8">
             {FAQS.map((faq, i) => (
               <AccordionItem key={faq.q} question={faq.q} defaultOpen={i === 0}>
                 {faq.a}
@@ -222,11 +192,26 @@ export default function ServiciosPage() {
             ))}
           </div>
         </div>
-      </section>
+      </Band>
 
-      <CylinderRelated current="/servicios" />
+      <RelatedGrid
+        kicker="Relacionado"
+        title="Más sobre cilindros"
+        id="cilindros-relacionado"
+        items={[
+          { href: "/cilindros-neumaticos", title: "Cilindros neumáticos a la medida", desc: "Tipos de cilindro y fabricación bajo plano, muestra o medidas.", image: "/products/cilindros-neumaticos.jpg", label: "Ver tipos de cilindro" },
+          { href: "/sellos-y-componentes", title: "Sellos y componentes", desc: "Kits de sellos, vástagos y piezas para tu cilindro.", image: "/products/kit-sello-cilindro-neumatico.jpg", label: "Ver sellos y componentes" },
+          { href: "/cilindros-hidraulicos", title: "Cilindros hidráulicos", desc: "Fabricación y reparación bajo cotización.", icon: Droplets, label: "Ver cilindros hidráulicos" },
+          { href: "/mecanizado", title: "Mecanizado", desc: "Piezas bajo plano o muestra.", icon: Cog, label: "Ver mecanizado" },
+        ]}
+      />
 
-      <QuoteCTA quoteItem="Reparación de cilindros neumáticos" />
+      <QuoteCTA
+        eyebrow="Reparación · Reconstrucción · Cambio de sellos"
+        title="¿Tu cilindro tiene fugas o dejó de funcionar?"
+        text="Envía fotos del cilindro y su placa por WhatsApp. Te confirmamos alcance y condiciones en la cotización."
+        quoteItem="Reparación de cilindros neumáticos"
+      />
     </div>
   );
 }

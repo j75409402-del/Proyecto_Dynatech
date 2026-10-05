@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/home/IndustrialHero";
 import { SolucionesIndustriales, CilindrosDestacados, ComoTrabajamos, ServiciosComplementarios, AntesDespues } from "@/components/home/IndustrialSections";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
-import { whatsappCylinderService } from "@/lib/whatsapp";
+import { whatsappGeneral } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Cilindros neumáticos: fabricación y reparación en RD",
@@ -33,11 +33,11 @@ export default function HomePage() {
       <SolucionesIndustriales />
       <ServiciosComplementarios />
       <QuoteCTA
-        eyebrow="Cilindros neumáticos · Sellos · Vástagos cromados"
-        title="¿Necesitas fabricar o reparar un cilindro neumático?"
+        eyebrow="Taller · Suministro industrial"
+        title="¿Un cilindro que reparar o una pieza que conseguir?"
         text="Envíanos el código, una foto, el plano o las medidas por WhatsApp y te cotizamos."
         quoteItem="Fabricación y reparación de cilindros neumáticos"
-        whatsappHref={whatsappCylinderService()}
+        whatsappHref={whatsappGeneral()}
       />
     </>
   );

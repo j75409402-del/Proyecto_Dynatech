@@ -63,11 +63,11 @@ export function Navbar() {
   const solucionesActive = SOLUCIONES_HREFS.some((h) => h !== "/cilindros-neumaticos" && h !== "/servicios" && isActive(pathname, h));
 
   return (
-    <header className={cn("sticky top-0 z-40 transition-all duration-300", pathname === "/cilindros-neumaticos" && "industrial-navbar")}>
+    <header className="industrial-navbar sticky top-0 z-40 transition-all duration-300">
       <div className="hidden bg-surface py-2 text-white md:block">
         <div className="container-max flex items-center justify-between gap-6 text-xs">
           <span className="text-white/70">{CONTACT.locality}, República Dominicana · Soluciones industriales bajo cotización</span>
-          <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="font-mono text-white/85 hover:text-white">{CONTACT.phone}</a>
+          <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="-my-2 inline-flex min-h-10 items-center font-mono text-white/85 hover:text-white">{CONTACT.phone}</a>
         </div>
       </div>
       <div
@@ -94,7 +94,7 @@ export function Navbar() {
             />
             <div>
               <div className="font-display text-xl font-semibold tracking-tight text-surface leading-none">{SITE.shortName}</div>
-              <div className="font-mono text-[9px] uppercase tracking-techno text-steel-400 mt-0.5">
+              <div className="font-mono text-xs uppercase tracking-[0.08em] text-steel-400 mt-0.5">
                 Ingeniería · SRL
               </div>
             </div>
@@ -106,7 +106,7 @@ export function Navbar() {
               href="/cilindros-neumaticos"
               aria-current={isActive(pathname, "/cilindros-neumaticos") ? "page" : undefined}
               className={cn(
-                "py-1 text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
+                "inline-flex min-h-10 items-center text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
                 isActive(pathname, "/cilindros-neumaticos") ? "text-signal" : "text-steel-200 hover:text-signal",
               )}
             >
@@ -126,7 +126,7 @@ export function Navbar() {
                 aria-expanded={menuOpen}
                 aria-controls="menu-soluciones"
                 className={cn(
-                  "flex items-center gap-1 py-1 text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
+                  "flex min-h-10 items-center gap-1 text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
                   solucionesActive || menuOpen ? "text-signal" : "text-steel-200 hover:text-signal",
                 )}
               >
@@ -172,7 +172,7 @@ export function Navbar() {
                           <Link
                             href={c.href}
                             onClick={() => setMenuOpen(false)}
-                            className="block py-1.5 text-sm text-steel-200 hover:text-signal transition-colors"
+                            className="flex min-h-10 items-center text-sm text-steel-200 hover:text-signal transition-colors"
                           >
                             {c.label}
                           </Link>
@@ -184,7 +184,7 @@ export function Navbar() {
                       target="_blank"
                       rel="noopener"
                       onClick={() => setMenuOpen(false)}
-                      className="mt-auto inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
+                      className="mt-auto inline-flex min-h-10 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
                       <WhatsAppIcon className="h-4 w-4" />
                       {NAV.cta.label}
@@ -201,7 +201,7 @@ export function Navbar() {
                 href={item.href}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
                 className={cn(
-                  "py-1 text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
+                  "inline-flex min-h-10 items-center text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
                   isActive(pathname, item.href) ? "text-signal" : "text-steel-200 hover:text-signal",
                 )}
               >
@@ -217,7 +217,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener"
               className="inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
-                         text-white font-medium py-2.5 px-4 xl:px-5 rounded-xs text-xs uppercase tracking-wider
+                         text-white font-medium min-h-11 py-2.5 px-4 xl:px-5 rounded-xs text-xs uppercase tracking-wider
                          transition-colors whitespace-nowrap"
             >
               <WhatsAppIcon className="h-4 w-4" />

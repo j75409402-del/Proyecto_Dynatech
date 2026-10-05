@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { commercialMetadata } from "@/lib/seo";
 import { LegalPage } from "@/components/legal/LegalPage";
 import { CONTACT, emailHref } from "@/lib/constants";
 
-export const metadata: Metadata = {
-  title: "Política de devoluciones",
-  description: "Condiciones para devolución o cambio de productos comprados a Dynatech Ingeniería SRL.",
-  alternates: { canonical: "/devoluciones" },
-};
+export const metadata: Metadata = commercialMetadata("Política de devoluciones", "Condiciones para devolución o cambio de productos comprados a Dynatech Ingeniería SRL.", "/devoluciones");
 
 export default function DevolucionesPage() {
   return (

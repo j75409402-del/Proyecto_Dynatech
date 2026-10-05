@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { commercialMetadata } from "@/lib/seo";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ArrowUpRight } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { CONTACT, emailHref } from "@/lib/constants";
+import { CONTACT, SITE, emailHref } from "@/lib/constants";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { PageHero } from "@/components/page/PageHero";
+import { Band } from "@/components/page/Blocks";
+import { shortHours } from "@/components/page/TrustStrip";
 
 export const metadata: Metadata = {
   ...commercialMetadata("Contacta a Dynatech Ingeniería SRL", "Contacta a Dynatech en Santo Domingo para cotizar servicios y suministros industriales en República Dominicana.", "/contacto"),
@@ -13,101 +16,73 @@ export const metadata: Metadata = {
   alternates: { canonical: "/contacto" },
 };
 
-export default function ContactoPage() {
+/** Canales de contacto (datos tal como están en constants.ts). WhatsApp es el canal principal de cotización. */
+function ContactPanel() {
   return (
-    <div className="container-max py-12 sm:py-16">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-        {/* Info */}
-        <div>
-          <div className="eyebrow mb-3">Contacto</div>
-          <h1 className="font-display text-display-lg text-surface mb-4">
-            Hablemos.
-          </h1>
-          <p className="text-lg text-steel-300 leading-relaxed mb-10 max-w-lg">
-            Cotiza servicios y suministros para tu empresa o zona franca. Envíanos la referencia,
-            cantidad, aplicación y ciudad por WhatsApp o mediante el formulario.
-          </p>
-
-          <div className="space-y-6">
-            <ContactBlock
-              icon={<WhatsAppIcon className="h-5 w-5" />}
-              label="WhatsApp"
-              value="Enviar consulta por WhatsApp"
-              href={whatsappGeneral()}
-              external
-            />
-            <ContactBlock
-              icon={<Phone className="h-5 w-5" />}
-              label="Teléfono"
-              value={CONTACT.phone}
-              href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-            />
-            <ContactBlock
-              icon={<Mail className="h-5 w-5" />}
-              label="Email"
-              value={CONTACT.email}
-              href={emailHref()}
-            />
-            <ContactBlock
-              icon={<MapPin className="h-5 w-5" />}
-              label="Dirección"
-              value={CONTACT.address}
-            />
-            <ContactBlock
-              icon={<Clock className="h-5 w-5" />}
-              label="Horario"
-              value={CONTACT.hours}
-            />
-          </div>
-        </div>
-
-        {/* Form */}
-        <div className="border border-black/10 p-6 sm:p-8 bg-carbon-800">
-          <div className="eyebrow mb-4 pb-2 border-b border-black/10">Formulario</div>
-          <ContactForm />
-        </div>
-      </div>
+    <div className="contact-panel">
+      <a href={whatsappGeneral()} target="_blank" rel="noopener" className="contact-main">
+        <WhatsAppIcon className="h-7 w-7 shrink-0" />
+        <span>
+          <span className="contact-label">WhatsApp · canal principal</span>
+          <span className="contact-value">{CONTACT.whatsappDisplay}</span>
+        </span>
+        <ArrowUpRight className="ml-auto h-5 w-5 shrink-0" aria-hidden="true" />
+      </a>
+      <ul>
+        <li>
+          <Phone className="h-5 w-5" aria-hidden="true" />
+          <span><span className="contact-label">Teléfono</span><a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="contact-value">{CONTACT.phone}</a></span>
+        </li>
+        <li>
+          <Mail className="h-5 w-5" aria-hidden="true" />
+          <span><span className="contact-label">Correo</span><a href={emailHref()} className="contact-value [overflow-wrap:anywhere]">{CONTACT.email}</a></span>
+        </li>
+        <li>
+          <Clock className="h-5 w-5" aria-hidden="true" />
+          <span><span className="contact-label">Horario</span><span className="contact-value">{CONTACT.hours}</span></span>
+        </li>
+        <li>
+          <MapPin className="h-5 w-5" aria-hidden="true" />
+          {/* PENDIENTE CAPITÁN: número exacto en Av. Rómulo Betancourt y enlace de Google Maps. */}
+          <span><span className="contact-label">Dirección</span><span className="contact-value">{CONTACT.address}</span></span>
+        </li>
+      </ul>
     </div>
   );
 }
 
-function ContactBlock({
-  icon,
-  label,
-  value,
-  href,
-  external,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  href?: string;
-  external?: boolean;
-}) {
-  const content = (
-    <div className="flex items-start gap-4 py-3 border-b border-black/5 group">
-      <div className="text-signal shrink-0 mt-0.5">{icon}</div>
-      <div>
-        <div className="font-mono text-[10px] uppercase tracking-techno text-steel-400 mb-0.5">
-          {label}
+export default function ContactoPage() {
+  return (
+    <div>
+      <PageHero
+        crumbs={[{ label: "Contacto" }]}
+        kicker={`${SITE.legalName} · RNC ${SITE.rnc}`}
+        title="Contacta a Dynatech Ingeniería"
+        lead={<p>Para cotizar, escríbenos por WhatsApp: es nuestro canal principal. Envía la referencia, la cantidad, la aplicación y tu ciudad. También puedes llamar, escribir un correo o usar el formulario.</p>}
+        quoteHref={whatsappGeneral()}
+        secondary={{ href: "#formulario", label: "Usar el formulario" }}
+        note={`Atención: ${shortHours()}.`}
+        visual={<ContactPanel />}
+        trust={false}
+      />
+
+      <Band tone="light" id="formulario" labelledBy="formulario-titulo">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <p className="section-kicker">Formulario</p>
+            <h2 id="formulario-titulo" className="section-title">¿Prefieres escribirnos?</h2>
+            <p className="mt-5 max-w-md leading-relaxed text-steel-300">Déjanos tu mensaje y te respondemos por correo o teléfono. Para cotizaciones, WhatsApp es la vía directa.</p>
+            <ul className="mt-8 space-y-3 text-[15px] text-steel-200">
+              <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 bg-signal" aria-hidden="true" />Referencia, código o foto de la placa</li>
+              <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 bg-signal" aria-hidden="true" />Plano, muestra o medidas (mm o pulgadas)</li>
+              <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 bg-signal" aria-hidden="true" />Cantidad, aplicación y ciudad</li>
+            </ul>
+          </div>
+          <div className="border border-black/10 bg-white p-6 sm:p-8 lg:col-span-7">
+            <ContactForm />
+          </div>
         </div>
-        <div className="text-surface group-hover:text-signal transition-colors">
-          {value}
-        </div>
-      </div>
+      </Band>
     </div>
   );
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        target={external ? "_blank" : undefined}
-        rel={external ? "noopener noreferrer" : undefined}
-      >
-        {content}
-      </a>
-    );
-  }
-  return content;
 }

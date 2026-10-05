@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
+import { commercialMetadata } from "@/lib/seo";
 import { LegalPage } from "@/components/legal/LegalPage";
 import { CONTACT, SITE, emailHref } from "@/lib/constants";
 
-export const metadata: Metadata = {
-  title: "Términos y condiciones",
-  description: "Condiciones de uso del sitio web y del proceso de cotización de Dynatech Ingeniería SRL.",
-  alternates: { canonical: "/terminos" },
-};
+export const metadata: Metadata = commercialMetadata("Términos y condiciones", "Condiciones de uso del sitio web y del proceso de cotización de Dynatech Ingeniería SRL.", "/terminos");
 
 export default function TerminosPage() {
   return (

@@ -50,7 +50,7 @@ export const NAV = {
   /** Grupo de cilindros dentro del desplegable. */
   cilindros: [
     { label: "Cilindros neumáticos", href: "/cilindros-neumaticos" },
-    { label: "Fabricación y reparación", href: "/servicios" },
+    { label: "Reparación de cilindros", href: "/servicios" },
     { label: "Sellos y componentes", href: "/sellos-y-componentes" },
   ],
   /** Servicios industriales y especialidades con página propia (menú y pie). */

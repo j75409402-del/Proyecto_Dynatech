@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
+import { commercialMetadata } from "@/lib/seo";
 import { LegalPage } from "@/components/legal/LegalPage";
 import { CONTACT, SITE, emailHref } from "@/lib/constants";
 
-export const metadata: Metadata = {
-  title: "Política de privacidad",
-  description: "Cómo Dynatech Ingeniería SRL recopila, usa y protege los datos que compartes en este sitio.",
-  alternates: { canonical: "/privacidad" },
-};
+export const metadata: Metadata = commercialMetadata("Política de privacidad", "Cómo Dynatech Ingeniería SRL recopila, usa y protege los datos que compartes en este sitio.", "/privacidad");
 
 export default function PrivacidadPage() {
   return (

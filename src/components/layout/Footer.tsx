@@ -11,7 +11,7 @@ const solutionLinks = SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}`
 /** Cilindros y servicios industriales (antes mezclados en "Empresa"). */
 const serviceLinks = [
   { label: "Cilindros neumáticos",   href: "/cilindros-neumaticos" },
-  { label: "Fabricación y reparación", href: "/servicios" },
+  { label: "Reparación de cilindros", href: "/servicios" },
   { label: "Sellos y componentes",   href: "/sellos-y-componentes" },
   ...NAV.especialidades,
 ];
@@ -47,10 +47,10 @@ export function Footer() {
                 <div className="font-display font-semibold text-surface leading-none">
                   {SITE.shortName}
                 </div>
-                <div className="font-mono text-[9px] uppercase tracking-techno text-steel-400 mt-0.5">
+                <div className="font-mono text-xs uppercase tracking-[0.08em] text-steel-400 mt-0.5">
                   Ingeniería · SRL
                 </div>
-                <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-steel-500" lang="en">
+                <div className="mt-1 font-mono text-xs uppercase tracking-[0.1em] text-steel-500" lang="en">
                   {SITE.brandTagline}
                 </div>
               </div>
@@ -68,7 +68,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-9 items-center text-sm text-steel-200 hover:text-signal transition-colors"
+                    className="inline-flex min-h-10 items-center text-sm text-steel-200 hover:text-signal transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -85,7 +85,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-9 items-center text-sm text-steel-200 hover:text-signal transition-colors"
+                    className="inline-flex min-h-10 items-center text-sm text-steel-200 hover:text-signal transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -96,9 +96,9 @@ export function Footer() {
                   href={whatsappCylinderService()}
                   target="_blank"
                   rel="noopener"
-                  className="inline-flex min-h-9 items-center text-sm text-steel-200 hover:text-signal transition-colors"
+                  className="inline-flex min-h-10 items-center text-sm text-steel-200 hover:text-signal transition-colors"
                 >
-                  Cotiza tu cilindro por WhatsApp
+                  Cotizar cilindro por WhatsApp
                 </a>
               </li>
             </ul>
@@ -112,7 +112,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-9 items-center text-sm text-steel-200 hover:text-signal transition-colors"
+                    className="inline-flex min-h-10 items-center text-sm text-steel-200 hover:text-signal transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -133,7 +133,7 @@ export function Footer() {
                 <Phone className="h-4 w-4 text-signal shrink-0 mt-0.5" />
                 <a
                   href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-                  className="font-mono hover:text-surface transition-colors"
+                  className="-my-2.5 inline-flex min-h-10 items-center font-mono hover:text-surface transition-colors"
                 >
                   {CONTACT.phone}
                 </a>

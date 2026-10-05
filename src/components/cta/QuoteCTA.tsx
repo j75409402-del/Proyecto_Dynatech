@@ -43,14 +43,14 @@ export function QuoteCTA({
     <section className="border-t-4 border-signal bg-surface text-white">
       <div className="container-max grid gap-8 py-16 sm:py-20 lg:grid-cols-12 lg:items-center lg:gap-16">
         <div className="lg:col-span-8">
-          <div className="mb-5 flex items-center gap-3"><div className="h-px w-8 bg-signal" /><span className="font-mono text-[11px] uppercase tracking-techno text-white/60">{eyebrow}</span></div>
+          <div className="mb-5 flex items-center gap-3"><div className="h-px w-8 bg-signal" /><span className="font-mono text-xs uppercase tracking-techno text-white/60">{eyebrow}</span></div>
           <h2 className="max-w-3xl font-display text-display-lg text-white">{title}</h2>
           <p className="mt-5 max-w-xl leading-relaxed text-white/70">{text}</p>
         </div>
         <div className="lg:col-span-4">
           <div className="flex flex-col gap-3">
             <a href={whatsappHref ?? (quoteItem ? quoteHref(quoteItem, quoteTipo) : whatsappCylinderService())} target="_blank" rel="noopener" className="btn-primary min-h-14 px-6"><WhatsAppIcon className="h-5 w-5" />{ctaLabel}<ArrowUpRight className="h-4 w-4" /></a>
-            <p className="text-sm text-white/70">WhatsApp Business: <a href={quoteBridgeHref()} target="_blank" rel="noopener" className="font-medium text-white underline decoration-white/30 underline-offset-4 hover:text-signal">{CONTACT.whatsappDisplay}</a></p>
+            <p className="text-sm text-white/70">WhatsApp Business: <a href={quoteBridgeHref()} target="_blank" rel="noopener" className="inline-flex min-h-10 items-center font-medium text-white underline decoration-white/30 underline-offset-4 hover:text-signal">{CONTACT.whatsappDisplay}</a></p>
           </div>
           <p className="mt-5 flex items-center gap-2 text-xs leading-relaxed text-white/55"><Clock className="h-4 w-4 shrink-0" />{CONTACT.hours}</p>
         </div>

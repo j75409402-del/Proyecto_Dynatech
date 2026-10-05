@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
+import { commercialMetadata } from "@/lib/seo";
 import { LegalPage } from "@/components/legal/LegalPage";
 import { CONTACT, emailHref } from "@/lib/constants";
 
-export const metadata: Metadata = {
-  title: "Garantías",
-  description: "Condiciones de garantía de los trabajos y piezas de Dynatech Ingeniería SRL.",
-  alternates: { canonical: "/garantias" },
-};
+export const metadata: Metadata = commercialMetadata("Garantías", "Condiciones de garantía de los trabajos y piezas de Dynatech Ingeniería SRL.", "/garantias");
 
 export default function GarantiasPage() {
   return (

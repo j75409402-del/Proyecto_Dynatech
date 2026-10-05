@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { CylinderExperience } from "@/components/industrial/CylinderExperience";
 import { commercialMetadata } from "@/lib/seo";
+import Link from "next/link";
 import { ArrowRight, FileText, Box, Ruler, Camera, Hash, Factory, Wrench } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
-import { TiltCard } from "@/components/motion/TiltCard";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
@@ -12,10 +12,10 @@ import { CylinderRelated } from "@/components/industrial/CylinderRelated";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  ...commercialMetadata("Cilindros neumáticos en República Dominicana", "Fabricación y reparación de cilindros neumáticos bajo cotización. Comparte plano, muestra o medidas para tu solicitud.", "/cilindros-neumaticos"),
+  ...commercialMetadata("Cilindros neumáticos en República Dominicana", "Fabricación de cilindros neumáticos a la medida bajo cotización. Comparte plano, muestra o medidas para tu solicitud.", "/cilindros-neumaticos"),
   title: "Cilindros neumáticos a la medida",
   description:
-    "Cilindros neumáticos de doble y simple efecto, compactos, ISO y especiales, en medidas métricas y en pulgadas. Fabricación y reparación bajo cotización en República Dominicana.",
+    "Fabricación de cilindros neumáticos a la medida en RD: doble y simple efecto, compactos, ISO y especiales, en mm o pulgadas. Cotiza con plano o muestra.",
   alternates: { canonical: "/cilindros-neumaticos" },
 };
 
@@ -78,56 +78,44 @@ export default function CilindrosNeumaticosPage() {
         </div>
       </section>
 
-      {/* FABRICAR O REPARAR */}
+      {/* FABRICACIÓN (la reparación vive en /servicios: mapa de intención WEB-010) */}
       <section className="section-pad border-b border-black/5 bg-carbon-900 cylinder-services">
         <div className="container-max">
           <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">02 · Fabricar o reparar</div>
-            <h2 className="font-display text-display-lg text-surface">Tú decides, nosotros lo resolvemos</h2>
+            <div className="eyebrow mb-3">02 · Fabricación</div>
+            <h2 className="font-display text-display-lg text-surface">Un cilindro nuevo, a tu medida</h2>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                icon: Factory,
-                title: "Fabricación",
-                items: ["Cilindros nuevos a la medida", "Fabricación bajo muestra o plano", "Cilindros personalizados"],
-                cta: "Fabricación de cilindros neumáticos",
-              },
-              {
-                icon: Wrench,
-                title: "Reparación y reconstrucción",
-                items: ["Cambio de sellos", "Reemplazo de vástagos y componentes", "Prueba de funcionamiento antes de entregar"],
-                cta: "Reparación de cilindros neumáticos",
-              },
-            ].map((b, i) => (
-              <Reveal key={b.title} delay={i * 0.08} className="h-full">
-                <TiltCard max={3} className="h-full">
-                  <div className="flex h-full flex-col border border-black/10 bg-carbon p-8">
-                    <b.icon className="h-6 w-6 text-signal mb-5" />
-                    <h3 className="font-display text-2xl text-surface mb-5">{b.title}</h3>
-                    <ul className="space-y-3 mb-8 flex-1">
-                      {b.items.map((it) => (
-                        <li key={it} className="flex items-start gap-3 text-steel-200">
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-signal" />
-                          {it}
-                        </li>
-                      ))}
-                    </ul>
-                    <a
-                      href={quoteHref(b.cta)}
-                      target="_blank"
-                      rel="noopener"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
-                    >
-                      <WhatsAppIcon className="h-3.5 w-3.5" />
-                      Cotizar por WhatsApp
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </a>
-                  </div>
-                </TiltCard>
-              </Reveal>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+            <Reveal className="h-full md:col-span-3">
+              <div className="flex h-full flex-col border border-black/10 bg-carbon p-8">
+                <Factory className="h-6 w-6 text-signal mb-5" />
+                <h3 className="font-display text-2xl text-surface mb-5">Fabricación a la medida</h3>
+                <ul className="space-y-3 mb-8 flex-1">
+                  {["Cilindros nuevos a la medida", "Fabricación bajo muestra o plano", "Cilindros personalizados", "Medidas en milímetros o en pulgadas"].map((it) => (
+                    <li key={it} className="flex items-start gap-3 text-steel-200">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-signal" />
+                      {it}
+                    </li>
+                  ))}
+                </ul>
+                <a href={quoteHref("Fabricación de cilindros neumáticos")} target="_blank" rel="noopener" className="btn-primary min-h-12 self-start">
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Cotizar por WhatsApp
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            </Reveal>
+            <Reveal delay={0.08} className="h-full md:col-span-2">
+              <div className="flex h-full flex-col border border-black/10 bg-carbon p-8">
+                <Wrench className="h-6 w-6 text-signal mb-5" />
+                <h3 className="font-display text-2xl text-surface mb-3">¿Tu cilindro está dañado?</h3>
+                <p className="text-steel-300 leading-relaxed mb-8 flex-1">La reparación, la reconstrucción y el cambio de sellos tienen su propia página.</p>
+                <Link href="/servicios" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium uppercase tracking-wider text-surface hover:text-signal">
+                  Ver reparación de cilindros <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </Reveal>
           </div>
 
           <Reveal className="mt-8">
@@ -137,7 +125,7 @@ export default function CilindrosNeumaticosPage() {
                 href={quoteHref("Cilindro neumático estándar")}
                 target="_blank"
                 rel="noopener"
-                className="text-signal font-medium hover:underline whitespace-nowrap"
+                className="inline-flex min-h-11 items-center gap-1 text-signal font-medium hover:underline whitespace-nowrap"
               >
                 Cotizar por WhatsApp <ArrowRight className="inline h-3.5 w-3.5" aria-hidden="true" />
               </a>
@@ -170,7 +158,7 @@ export default function CilindrosNeumaticosPage() {
           </div>
 
           <Reveal className="mt-10">
-            <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary">
+            <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12">
               <WhatsAppIcon className="h-4 w-4" />
               Cotizar por WhatsApp
               <ArrowRight className="h-4 w-4" />
@@ -192,14 +180,14 @@ export default function CilindrosNeumaticosPage() {
               before={{ src: "/cilindros/antes-cilindro-iso-32mm.jpg", alt: "Antes · Cilindro ISO 32 mm" }}
               after={{ src: "/cilindros/despues-cilindro-iso-32mm.jpg", alt: "Después · Cilindro ISO 32 mm recuperado" }}
             />
-            <p className="text-sm text-steel-300 mt-5 max-w-3xl">Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar.</p>
+            <p className="text-sm text-steel-300 mt-5 max-w-3xl">Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar. <Link href="/servicios" className="inline-flex min-h-10 items-center font-medium text-surface underline decoration-signal underline-offset-4 hover:text-signal">Ver reparación de cilindros</Link></p>
           </Reveal>
         </div>
       </section>
 
       <CylinderRelated current="/cilindros-neumaticos" />
 
-      <QuoteCTA quoteItem="Fabricación de cilindros neumáticos" />
+      <QuoteCTA eyebrow="Fabricación · Bajo plano o muestra" title="¿Necesitas un cilindro neumático a la medida?" text="Envía el plano, la muestra, las medidas o fotos del cilindro y su placa. Te confirmamos alcance y condiciones en la cotización." quoteItem="Fabricación de cilindros neumáticos" />
     </div>
   );
 }

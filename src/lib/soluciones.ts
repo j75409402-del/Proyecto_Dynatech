@@ -32,6 +32,8 @@ export type Subcategoria = {
   /** Fotografía del tipo de componente; no representa una promesa de existencia. */
   image?: string;
   imageAlt?: string;
+  /** "contain" (por defecto) para fotos de catálogo con fondo blanco; "cover" para fotos de ambiente. */
+  imageFit?: "contain" | "cover";
 };
 
 export type Solucion = {
@@ -75,9 +77,9 @@ export const SOLUCIONES: Solucion[] = [
     title: "Neumática industrial",
     short: "Cilindros, válvulas, conexiones, unidades FRL y accesorios para aire comprimido.",
     description:
-      "Cilindros, válvulas, actuadores, unidades FRL y accesorios para sistemas de aire comprimido. Además, fabricamos, reparamos y reconstruimos cilindros neumáticos.",
+      "Válvulas, conexiones, unidades FRL, mangueras, actuadores y accesorios para sistemas de aire comprimido. Cotizamos con la referencia, una foto o la descripción del componente.",
     metaDescription:
-      "Neumática industrial en República Dominicana: cilindros, válvulas, conectores, conexiones, unidades FRL, mangueras y accesorios bajo cotización. Fabricación y reparación de cilindros.",
+      "Neumática industrial en República Dominicana: válvulas, conectores, conexiones, unidades FRL, mangueras, cilindros y accesorios bajo cotización.",
     image: "/banners/neumatica-industrial-conectores.webp",
     imageWidth: 512,
     imageHeight: 512,
@@ -135,7 +137,7 @@ export const SOLUCIONES: Solucion[] = [
         icon: Boxes,
         title: "Accesorios neumáticos",
         desc: "Componentes de apoyo para cilindros y sistemas neumáticos.",
-        image: "/products/accesorios-neumaticos-smc.jpg",
+        image: "/products/accesorios-neumaticos-todos.jpg",
         imageAlt: "Accesorios para cilindros y sistemas neumáticos",
         ejemplos: ["Actuadores", "Amortiguadores", "Generadores de vacío", "Bases y soportes", "Bobinas", "Manifolds", "Sensores para cilindro"],
       },
@@ -145,13 +147,18 @@ export const SOLUCIONES: Solucion[] = [
         title: "Kits de sellos y vástagos cromados",
         desc: "Repuestos para mantener y recuperar cilindros neumáticos.",
         href: "/sellos-y-componentes",
+        image: "/products/kit-sello-cilindro-neumatico.jpg",
+        imageAlt: "Kit de sellos para cilindro neumático",
       },
       {
         id: "servicio-cilindros",
         icon: Hammer,
-        title: "Fabricación y reparación de cilindros",
-        desc: "Fabricación, reparación y reconstrucción, también bajo muestra o plano.",
+        title: "Reparación de cilindros",
+        desc: "Reparación y reconstrucción de cilindros neumáticos, con prueba de funcionamiento antes de entregar.",
         href: "/servicios",
+        image: "/cilindros/taller-portada-v2.webp",
+        imageAlt: "Técnico revisando un cilindro neumático en el banco de trabajo",
+        imageFit: "cover",
       },
     ],
     aplicaciones: [
@@ -183,6 +190,8 @@ export const SOLUCIONES: Solucion[] = [
         icon: ToggleRight,
         title: "Contactores y relés",
         desc: "Contactores para arranque y control de motores, relés de control y relés térmicos.",
+        image: "/products/contactor-trifasico.jpg",
+        imageAlt: "Contactor trifásico para control de motores",
         ejemplos: ["Contactores", "Relés de control", "Unidades térmicas"],
       },
       {
@@ -190,6 +199,8 @@ export const SOLUCIONES: Solucion[] = [
         icon: ShieldAlert,
         title: "Breakers y protección",
         desc: "Interruptores termomagnéticos, arrancadores manuales y protección de circuitos.",
+        image: "/products/arrancadores-manuales-telemecanique.jpg",
+        imageAlt: "Arrancadores manuales para protección de motores",
         ejemplos: ["Breakers", "Arrancadores manuales"],
       },
       {
@@ -197,6 +208,8 @@ export const SOLUCIONES: Solucion[] = [
         icon: Zap,
         title: "Fusibles y portafusibles",
         desc: "Fusibles industriales, fusibles tipo NH y bases portafusibles.",
+        image: "/products/fusibles-tipo-nh.jpg",
+        imageAlt: "Fusibles industriales tipo NH",
         ejemplos: ["Fusibles industriales", "Fusibles NH", "Bases portafusibles"],
         cta: "Consultar disponibilidad",
       },
@@ -205,12 +218,16 @@ export const SOLUCIONES: Solucion[] = [
         icon: CircleDot,
         title: "Pulsadores, selectores y luces piloto",
         desc: "Mando y señalización para tableros de control.",
+        image: "/products/pulsadores-selectores-autonics.jpg",
+        imageAlt: "Pulsadores, selectores y paro de emergencia para tablero",
       },
       {
         id: "temporizadores",
         icon: Timer,
         title: "Temporizadores, contadores y controladores",
         desc: "Temporizadores, contadores y controladores de temperatura para tablero.",
+        image: "/products/temporizadores-autonics.jpg",
+        imageAlt: "Temporizador analógico para tablero de control",
       },
       {
         id: "interruptores",
@@ -224,6 +241,8 @@ export const SOLUCIONES: Solucion[] = [
         icon: Plug,
         title: "Conectores industriales",
         desc: "Clavijas y conectores para conexión de equipos en planta.",
+        image: "/products/conectores-industriales-harting.jpg",
+        imageAlt: "Clavijas y bases de conexión industrial",
       },
     ],
     aplicaciones: [
@@ -255,30 +274,40 @@ export const SOLUCIONES: Solucion[] = [
         icon: CircleDot,
         title: "Sensores inductivos",
         desc: "Detectan objetos metálicos sin contacto. Ideales para posición de piezas y partes de máquina.",
+        image: "/products/sensores-inductivos.jpg",
+        imageAlt: "Sensor inductivo cilíndrico con cable",
       },
       {
         id: "capacitivos",
         icon: Droplets,
         title: "Sensores capacitivos",
         desc: "Detectan materiales metálicos y no metálicos, como plásticos, líquidos o granulados.",
+        image: "/products/sensor-capacitivo.png",
+        imageAlt: "Sensor capacitivo de cuerpo roscado",
       },
       {
         id: "fotoelectricos",
         icon: ScanLine,
         title: "Sensores fotoeléctricos y fotoceldas",
         desc: "Detectan presencia mediante un haz de luz. Incluye fotoceldas y barreras ópticas.",
+        image: "/products/sensores-fotoelectricos.jpg",
+        imageAlt: "Sensores fotoeléctricos de emisor y receptor",
       },
       {
         id: "magneticos",
         icon: Magnet,
         title: "Sensores magnéticos y de proximidad",
         desc: "Detectan la posición del pistón en cilindros y actuadores.",
+        image: "/products/sensor-magnetico.png",
+        imageAlt: "Sensor magnético para ranura de cilindro",
       },
       {
         id: "presion",
         icon: Gauge,
         title: "Sensores de presión",
         desc: "Switches y transmisores para supervisar la presión del proceso.",
+        image: "/products/interruptores-presion-smc.jpg",
+        imageAlt: "Interruptor de presión digital",
       },
       {
         id: "temperatura",
@@ -299,6 +328,8 @@ export const SOLUCIONES: Solucion[] = [
         icon: Cpu,
         title: "Amplificadores, módulos y accesorios",
         desc: "Amplificadores, módulos, conectores, cables y soportes para sensores.",
+        image: "/products/accesorios-sensores.jpg",
+        imageAlt: "Cables, conectores y soportes para sensores",
       },
     ],
     aplicaciones: [
@@ -316,7 +347,7 @@ export const SOLUCIONES: Solucion[] = [
     short: "Medición de presión, temperatura, flujo y nivel para procesos.",
     description: "Medición de presión, temperatura, flujo y nivel para procesos industriales.",
     metaDescription:
-      "Instrumentación industrial en República Dominicana: manómetros, interruptores y transmisores de presión, termómetros, termopozos y medición de flujo y nivel bajo cotización.",
+      "Instrumentación industrial en República Dominicana: manómetros, transmisores e interruptores de presión, termómetros, termopozos, flujo y nivel.",
     image: "/banners/instrumentacion-procesos.webp",
     imageWidth: 512,
     imageHeight: 512,
@@ -329,6 +360,8 @@ export const SOLUCIONES: Solucion[] = [
         icon: Gauge,
         title: "Instrumentación de presión",
         desc: "Manómetros tipo Bourdon, interruptores y transmisores de presión.",
+        image: "/products/brand-wika-manometro.png",
+        imageAlt: "Manómetro tipo Bourdon con conexión inferior",
         ejemplos: ["Manómetros", "Interruptores de presión", "Transmisores de presión"],
       },
       {
@@ -336,6 +369,8 @@ export const SOLUCIONES: Solucion[] = [
         icon: Thermometer,
         title: "Instrumentación de temperatura",
         desc: "Termómetros, termómetros de bolsillo y termopozos.",
+        image: "/products/temperatura-teltru.jpg",
+        imageAlt: "Termómetros bimetálicos y termómetro de bolsillo",
         ejemplos: ["Termómetros", "Termopozos", "Termómetros de bolsillo"],
       },
       {
@@ -357,6 +392,8 @@ export const SOLUCIONES: Solucion[] = [
         icon: Cpu,
         title: "Medición y control",
         desc: "Controladores de temperatura para tablero.",
+        image: "/products/controladores-temperatura-autonics.jpg",
+        imageAlt: "Controlador digital de temperatura para tablero",
         href: "/control-electrico#temporizadores",
       },
     ],
@@ -376,7 +413,7 @@ export const SOLUCIONES: Solucion[] = [
     description:
       "Resistencias de cartucho de alta densidad para el calentamiento de cilindros en máquinas de inyección y procesos industriales, junto con termocuplas, RTD y alambre de resistencia. Cotizamos también según tu especificación.",
     metaDescription:
-      "Resistencias eléctricas industriales en República Dominicana: resistencias de cartucho, termocuplas, RTD y alambre de resistencia. Cotización bajo especificación.",
+      "Resistencias eléctricas industriales en República Dominicana: de cartucho, termocuplas, RTD y alambre de resistencia. Cotización bajo especificación.",
     image: "/banners/resistencias-electricas-industriales.webp",
     imageWidth: 512,
     imageHeight: 512,
@@ -389,6 +426,8 @@ export const SOLUCIONES: Solucion[] = [
         icon: Flame,
         title: "Resistencias de cartucho",
         desc: "Alta densidad, para calentamiento de cilindros en máquinas de inyección de plástico.",
+        image: "/products/resistencia-de-cartucho-real.jpg",
+        imageAlt: "Resistencia de cartucho con cables de salida",
       },
       {
         id: "termocuplas",
@@ -408,6 +447,9 @@ export const SOLUCIONES: Solucion[] = [
         icon: Ruler,
         title: "Bajo especificación",
         desc: "Envíanos voltaje, potencia, medidas o una muestra y te cotizamos.",
+        image: "/products/resistencia-cartucho-mediana.jpg",
+        imageAlt: "Resistencia de cartucho sobre la mesa de trabajo",
+        imageFit: "cover",
         cta: "Enviar especificaciones",
       },
     ],

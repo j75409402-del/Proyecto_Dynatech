@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { commercialMetadata } from "@/lib/seo";
-import { SITE } from "@/lib/constants";
-import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { CONTACT, SITE, emailHref } from "@/lib/constants";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
+import { PageHero } from "@/components/page/PageHero";
+import { Band, SectionHead, Steps } from "@/components/page/Blocks";
+import { Reveal } from "@/components/motion/Reveal";
+import { SOLUCIONES } from "@/lib/soluciones";
 import { whatsappGeneral } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
@@ -12,52 +17,105 @@ export const metadata: Metadata = {
   alternates: { canonical: "/nosotros" },
 };
 
+const TALLER = [
+  { href: "/servicios", label: "Reparación de cilindros neumáticos" },
+  { href: "/cilindros-neumaticos", label: "Cilindros neumáticos a la medida" },
+  { href: "/sellos-y-componentes", label: "Sellos y componentes" },
+  { href: "/cilindros-hidraulicos", label: "Cilindros hidráulicos" },
+  { href: "/mecanizado", label: "Mecanizado" },
+];
+
+const PROCESO = [
+  { title: "Compartes tu necesidad", text: "Referencia, fotos, plano, muestra o medidas, por WhatsApp." },
+  { title: "Evaluamos la solicitud", text: "Revisamos la aplicación y los datos de tu equipo." },
+  { title: "Recibes la cotización", text: "Con alcance, condiciones y disponibilidad confirmados." },
+  { title: "Coordinamos tu pedido", text: "Fabricamos, reparamos o conseguimos la pieza y coordinamos la entrega." },
+];
+
 const PRINCIPIOS = [
-  {
-    title: "01 · Ingeniería primero",
-    body: "Detrás de cada cotización hay un ingeniero que comprende la aplicación, no un vendedor leyendo hojas de datos. Evaluamos y recomendamos con criterio técnico.",
-  },
-  {
-    title: "02 · A la medida",
-    body: "Trabajamos a partir de lo que tengas: plano, muestra, medidas, fotos o especificaciones. Si el repuesto original ya no existe, lo fabricamos.",
-  },
-  {
-    title: "03 · Local, no lento",
-    body: "Taller y equipo en Santo Domingo. Lo que no fabricamos, lo importamos bajo pedido, con tiempos de entrega definidos en la cotización.",
-  },
+  { title: "La referencia exacta", body: "Evaluamos cada solicitud con los datos de tu equipo: referencia, fotos, plano o muestra. Buscamos la pieza correcta, no la más parecida." },
+  { title: "A la medida", body: "Trabajamos a partir de lo que tengas. Si el repuesto original de un cilindro ya no existe, fabricamos el componente." },
+  { title: "Local", body: "Taller en Santo Domingo. Lo que no fabricamos, lo conseguimos bajo pedido, con el plazo confirmado en la cotización." },
 ];
 
 export default function NosotrosPage() {
   return (
     <>
-      <section className="border-b border-black/5">
-        <div className="container-max max-w-4xl py-14 sm:py-20">
-          <Breadcrumbs items={[{ label: "Nosotros" }]} />
-          <div className="eyebrow mb-3 mt-8">Nosotros</div>
-          <h1 className="font-display text-display-xl text-surface mb-6">
-            La referencia exacta.<br />
-            <span className="text-signal">No la más parecida.</span>
-          </h1>
-          <p className="text-xl text-steel-200 leading-relaxed max-w-3xl">
-            Dynatech Ingeniería SRL es un proveedor industrial B2B en República Dominicana:
-            neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas, y
-            fabricación, reparación y reconstrucción de cilindros neumáticos. Trabajamos bajo
-            cotización: nos envías las especificaciones, cotizamos, fabricamos o importamos, y
-            entregamos.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        crumbs={[{ label: "Nosotros" }]}
+        kicker={`${SITE.legalName} · ${CONTACT.locality}`}
+        title={<>La referencia exacta. <span className="text-signal">No la más parecida.</span></>}
+        lead={<p>{SITE.legalName} es un proveedor industrial B2B y taller de cilindros neumáticos en República Dominicana. Reparamos y fabricamos cilindros, y cotizamos neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas.</p>}
+        quoteHref={whatsappGeneral()}
+        secondary={{ href: "#empresa", label: "Ver datos de la empresa" }}
+        note="Trabajamos bajo cotización: nos envías las especificaciones, cotizamos y coordinamos la entrega."
+        // PENDIENTE CAPITÁN: sustituir por una foto real de la fachada, el taller o el equipo (hoy es imagen de referencia).
+        image={{ src: "/cilindros/taller-portada-v2.webp", alt: "Imagen de referencia de un técnico trabajando en un cilindro neumático" }}
+        caption={{ label: "Imagen de referencia", text: "Taller de cilindros · Suministro industrial" }}
+        trust="lineas"
+      />
 
-      <section className="section-pad">
-        <div className="container-max grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl">
-          {PRINCIPIOS.map((p) => (
-            <div key={p.title} className="border-l-2 border-signal pl-6">
-              <div className="eyebrow mb-4">{p.title}</div>
-              <p className="text-steel-200 leading-relaxed">{p.body}</p>
+      <Band tone="light" labelledBy="que-hacemos">
+        <SectionHead kicker="01 · Qué hacemos" id="que-hacemos" title="Taller de cilindros y suministro industrial" intro="Atendemos a empresas y zonas francas en República Dominicana." />
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Reveal className="h-full">
+            <div className="h-full bg-[#0b1016] p-6 text-white sm:p-8">
+              <h3 className="text-xl font-semibold">Taller</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-[#bcc8d2]">Reparación, reconstrucción y fabricación de cilindros neumáticos, sellos y componentes, y servicios complementarios.</p>
+              <ul className="mt-6 grid border-t border-white/10">
+                {TALLER.map((t) => (
+                  <li key={t.href} className="border-b border-white/10"><Link href={t.href} className="group flex min-h-12 items-center justify-between gap-3 text-[15px] hover:text-[#ff5a75]">{t.label}<ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" /></Link></li>
+                ))}
+              </ul>
             </div>
+          </Reveal>
+          <Reveal delay={0.08} className="h-full">
+            <div className="h-full border border-black/10 bg-white p-6 sm:p-8">
+              <h3 className="text-xl font-semibold">Suministro industrial</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-steel-300">Componentes para mantenimiento y automatización, cotizados con la referencia o una foto.</p>
+              <ul className="mt-6 grid border-t border-black/10">
+                {SOLUCIONES.map((s) => (
+                  <li key={s.slug} className="border-b border-black/10"><Link href={`/${s.slug}`} className="group flex min-h-12 items-center justify-between gap-3 text-[15px] hover:text-signal"><span className="flex items-center gap-3"><s.icon className="h-4 w-4 text-signal" aria-hidden="true" />{s.name}</span><ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" /></Link></li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        </div>
+      </Band>
+
+      <Band tone="white" labelledBy="como-trabajamos">
+        <SectionHead kicker="02 · Cómo trabajamos" id="como-trabajamos" title="Bajo cotización, paso a paso" />
+        <Steps items={PROCESO} />
+        <div className="mt-12 grid gap-8 lg:grid-cols-3">
+          {PRINCIPIOS.map((p) => (
+            <Reveal key={p.title} className="border-l-2 border-signal pl-6">
+              <h3 className="text-lg font-semibold">{p.title}</h3>
+              <p className="mt-2 leading-relaxed text-steel-300">{p.body}</p>
+            </Reveal>
           ))}
         </div>
-      </section>
+        {/* PENDIENTE CAPITÁN: años en el mercado / año de constitución de la SRL. No publicar hasta confirmarlo. */}
+        {/* PENDIENTE CAPITÁN: industrias o clientes atendidos, solo con permiso escrito. */}
+      </Band>
+
+      <Band tone="light" id="empresa" labelledBy="empresa-titulo">
+        <div className="grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <p className="section-kicker">03 · Datos de la empresa</p>
+            <h2 id="empresa-titulo" className="section-title">Dónde estamos</h2>
+          </div>
+          <dl className="fact-list lg:col-span-8">
+            <div><dt>Razón social</dt><dd>{SITE.legalName}</dd></div>
+            <div><dt>RNC</dt><dd>{SITE.rnc}</dd></div>
+            {/* PENDIENTE CAPITÁN: número en Av. Rómulo Betancourt y enlace de Google Maps. */}
+            <div><dt>Dirección</dt><dd>{CONTACT.address}</dd></div>
+            <div><dt>Horario</dt><dd>{CONTACT.hours}</dd></div>
+            <div><dt>WhatsApp</dt><dd><a href={whatsappGeneral()} target="_blank" rel="noopener">{CONTACT.whatsappDisplay}</a></dd></div>
+            <div><dt>Teléfono</dt><dd><a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}>{CONTACT.phone}</a></dd></div>
+            <div><dt>Correo</dt><dd><a href={emailHref()} className="[overflow-wrap:anywhere]">{CONTACT.email}</a></dd></div>
+          </dl>
+        </div>
+      </Band>
 
       <QuoteCTA
         eyebrow="Proveedor industrial B2B"
