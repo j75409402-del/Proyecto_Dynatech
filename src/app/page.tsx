@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/home/IndustrialHero";
-import { SolucionesIndustriales, CilindrosDestacados, ComoTrabajamos, ServiciosComplementarios } from "@/components/home/IndustrialSections";
+import { SolucionesIndustriales, CilindrosDestacados, ComoTrabajamos, ServiciosComplementarios, AntesDespues } from "@/components/home/IndustrialSections";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 
@@ -28,6 +28,7 @@ export default function HomePage() {
     <>
       <Hero />
       <CilindrosDestacados />
+      <AntesDespues />
       <ComoTrabajamos />
       <SolucionesIndustriales />
       <ServiciosComplementarios />

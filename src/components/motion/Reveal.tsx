@@ -1,13 +1,25 @@
 type Props = {
   children: React.ReactNode;
   className?: string;
-  /** Se conserva por compatibilidad con las llamadas actuales; el contenido ya no se oculta al hidratar. */
+  /** Retardo de entrada en segundos (se limita a 0.3 s en CSS para no frenar la lectura). */
   delay?: number;
   y?: number;
   once?: boolean;
 };
 
-/** Contenedor estático: el contenido queda visible desde el HTML inicial y no depende de hidratación. */
-export function Reveal({ children, className }: Props) {
-  return <div className={className}>{children}</div>;
+/**
+ * Contenedor con entrada sobria. El contenido es visible en el HTML inicial: solo
+ * `RevealObserver` (en layout) marca como pendientes los bloques que están bajo el pliegue
+ * y los muestra al entrar en pantalla. Sin JS o con prefers-reduced-motion no se anima nada.
+ */
+export function Reveal({ children, className, delay }: Props) {
+  return (
+    <div
+      className={className}
+      data-reveal=""
+      style={delay ? ({ "--reveal-delay": `${Math.min(delay, 0.3)}s` } as React.CSSProperties) : undefined}
+    >
+      {children}
+    </div>
+  );
 }

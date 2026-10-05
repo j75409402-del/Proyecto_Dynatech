@@ -4,14 +4,19 @@ import { premiumCylinder } from "./premium-cylinder";
 import { APPROVED_MODELS, type SceneId, type PartId } from "@/lib/industrial-scenes";
 
 type Controls = { manual?: boolean; exploded: boolean; rotation: number; zoom: number; part: PartId | null; detection: number; interactive: boolean };
-export type StageEngine = { setVisible(value: boolean): void; setMotion(value: boolean): void; setChapter(scene: SceneId, progress: number): void; setControls(value: Controls): void; dispose(): void };
+/** Calidad 3D: "high" (sombras, DPR ≤1.75), "medium" (sin sombras dinámicas, DPR ≤1.25) o "static" (imagen fija). */
+export type StageTier = "high" | "medium" | "static";
+export type StageEngine = { warmup(): Promise<StageTier>; setVisible(value: boolean): void; setMotion(value: boolean): void; setChapter(scene: SceneId, progress: number): void; setControls(value: Controls): void; dispose(): void };
+
+const PART_LABELS: Record<PartId, string> = { camisa: "Camisa", tapas: "Tapas", piston: "Pistón", vastago: "Vástago", sellos: "Sellos" };
 
 /** One canvas, shared geometries/materials, demand rendering; no permanent animation loop. */
-export async function createStage(host: HTMLElement, initial: SceneId, select: (id: PartId) => void, failure: () => void): Promise<StageEngine> {
+export async function createStage(host: HTMLElement, initial: SceneId, select: (id: PartId) => void, failure: () => void, options: { quality?: "high" | "medium" } = {}): Promise<StageEngine> {
   const presentation = host.dataset.presentation === "cinematic";
-  const low = innerWidth < 900 || navigator.hardwareConcurrency <= 4;
+  let tier: StageTier = options.quality ?? (innerWidth < 900 || navigator.hardwareConcurrency <= 4 ? "medium" : "high");
+  const low = tier !== "high";
   const segments = low ? 12 : 28;
-  const renderer = new T.WebGLRenderer({ alpha: true, antialias: !low, powerPreference: "low-power" });
+  const renderer = new T.WebGLRenderer({ alpha: true, antialias: !low, powerPreference: low ? "low-power" : "default" });
   renderer.setPixelRatio(Math.min(devicePixelRatio, low ? 1.25 : 1.75));
   renderer.outputColorSpace = T.SRGBColorSpace;
   renderer.toneMapping = T.ACESFilmicToneMapping;
@@ -39,13 +44,21 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
   const assembly = new T.Group(); world.add(assembly);
   let premium: ReturnType<typeof premiumCylinder> | null = null;
   let environment: T.WebGLRenderTarget | null = null;
+  // Etiquetas de la vista explotada: HTML sobre el canvas (el host es aria-hidden; la lista
+  // accesible de piezas vive en los controles). Se posicionan proyectando cada pieza.
+  const labelLayer = document.createElement("div"); labelLayer.className = "cylinder-labels";
+  const labels = new Map<PartId, HTMLSpanElement>();
+  for (const id of Object.keys(PART_LABELS) as PartId[]) { const el = document.createElement("span"); el.textContent = PART_LABELS[id]; el.dataset.part = id; labelLayer.appendChild(el); labels.set(id, el); }
+  const projected = new T.Vector3();
   function prepareCylinder() {
     if(premium)return;
     premium=premiumCylinder(low);assembly.add(premium.root);
+    // Luz de estudio procedural (RoomEnvironment + PMREM): sin archivos HDR externos.
     const pmrem=new T.PMREMGenerator(renderer),studio=new RoomEnvironment();
-    environment=pmrem.fromScene(studio,.04);studio.dispose();pmrem.dispose();
+    environment=pmrem.fromScene(studio,.035);studio.dispose();pmrem.dispose();
+    if (presentation) host.appendChild(labelLayer);
   }
-  renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.VSMShadowMap;
+  renderer.shadowMap.enabled = tier === "high"; renderer.shadowMap.type = T.VSMShadowMap;
   key.castShadow = true; key.shadow.mapSize.set(low ? 512 : 1024, low ? 512 : 1024);
   key.shadow.camera.left=-8; key.shadow.camera.right=8; key.shadow.camera.top=8; key.shadow.camera.bottom=-8;
   key.shadow.normalBias=.035; key.shadow.radius=4; key.shadow.blurSamples=8;
@@ -94,7 +107,8 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
   const dot = new T.Mesh(new T.SphereGeometry(0.065, 8, 6), light); geometries.push(dot.geometry); world.add(dot);
   const raycaster = new T.Raycaster();
   let scene = initial, progress = 0.3, visible = true, motion = true, disposed = false, frame = 0;
-  let transitionFrames = 0, renderedFrames = 0, lastFrame = 0;
+  let transitionFrames = 0, renderedFrames = 0, lastFrame = 0, warmed = false;
+  const lookTarget = new T.Vector3(0, .03, 0), lookGoal = new T.Vector3();
   const positionTarget = new T.Vector3();
   const scaleTarget = new T.Vector3();
   let controls: Controls = { exploded: false, rotation: 25, zoom: 1, part: "camisa", detection: 0, interactive: false };
@@ -102,14 +116,14 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
   let yaw = 0, pitch = 0;
   const focusMap: Partial<Record<SceneId, string>> = { neumatica: "valve", hidraulica: "cylinder", cilindros: "cylinder", servicios: "cylinder", "control-electrico": "control", sensores: "sensor", instrumentacion: "gauge", "resistencias-electricas": "heater" };
   const rest: Record<string, [number, number, number]> = { cylinder: [-0.6, 0.4, 0], valve: [1.9, -1, 0.4], sensor: [-1.6, -1.25, 0.8], gauge: [1.9, 1.5, -0.3], control: [-2.2, 1.8, -0.6], heater: [0, -2.05, -0.5] };
-  function draw(now: number) {
+  function draw(now: number, force = false) {
     frame = 0;
-    if (disposed || !visible || document.hidden || !motion) return;
+    if (disposed || (!force && (!warmed || !visible || document.hidden || !motion))) return;
     const delta = Math.min(.05, lastFrame ? (now - lastFrame) / 1000 : 1 / 60); lastFrame = now;
     const premiumActive = scene === "cilindros";
     if(premiumActive)prepareCylinder();
-    renderer.shadowMap.enabled=premiumActive;
-    if(premium)premium.root.visible = premiumActive; floor.visible = premiumActive;
+    renderer.shadowMap.enabled=premiumActive && tier === "high";
+    if(premium)premium.root.visible = premiumActive; floor.visible = premiumActive && tier === "high";
     world.environment = premiumActive ? environment?.texture ?? null : null;
     key.intensity = premiumActive ? 3.7 : 5; rim.intensity = premiumActive ? 0 : 2;
     hemisphere.intensity = premiumActive ? 1.2 : 3; cylinderRim.visible = premiumActive;
@@ -140,12 +154,23 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
       ? presentation ? Math.max(7.8, 23.5 / camera.aspect) : Math.max(8.6, 11.2 / camera.aspect)
       : Math.max(presentation ? 6.7 : 9.2, (presentation ? 14.8 : 12.7) / camera.aspect);
     const targetDistance = premiumActive ? baseDistance * (1 + opening * (desktop ? (presentation ? .4 : .25) : .48)) / controls.zoom : 11 / controls.zoom;
-    camera.position.z = premiumActive ? T.MathUtils.damp(camera.position.z, targetDistance, 9, delta) : targetDistance;
-    camera.position.y = premiumActive ? (presentation ? .68 : .85) + opening * .14 : 1;
-    camera.lookAt(0, premiumActive ? .03 : 0, 0);
-    const fov = premiumActive && (desktop || presentation) ? 30 + opening * 2 : 36;
-    if (camera.fov !== fov) { camera.fov = fov; camera.updateProjectionMatrix(); }
-    const cameraSettling = premiumActive && Math.abs(camera.position.z - targetDistance) > .003;
+    // Cámara con amortiguación (easing exponencial): distancia, altura, foco y FOV convergen suave.
+    const focusPart = premiumActive && controls.part && opening > .5 ? premium?.anchor(controls.part) : null;
+    const focusX = focusPart ? T.MathUtils.clamp(focusPart.getWorldPosition(projected).x * .35, -1.2, 1.2) : 0;
+    const goalZ = targetDistance * (focusPart ? .92 : 1);
+    const goalY = premiumActive ? (presentation ? .68 : .85) + opening * .14 : 1;
+    lookGoal.set(focusX, premiumActive ? .03 : 0, 0);
+    if (premiumActive && warmed) {
+      camera.position.z = T.MathUtils.damp(camera.position.z, goalZ, 5.5, delta);
+      camera.position.y = T.MathUtils.damp(camera.position.y, goalY, 5.5, delta);
+      lookTarget.x = T.MathUtils.damp(lookTarget.x, lookGoal.x, 4.5, delta); lookTarget.y = lookGoal.y;
+    } else { camera.position.z = goalZ; camera.position.y = goalY; lookTarget.copy(lookGoal); }
+    camera.position.x = lookTarget.x;
+    camera.lookAt(lookTarget);
+    const fovGoal = premiumActive && (desktop || presentation) ? 30 + opening * 2 : 36;
+    const fov = warmed ? T.MathUtils.damp(camera.fov, fovGoal, 6, delta) : fovGoal;
+    if (Math.abs(camera.fov - fov) > .0005) { camera.fov = fov; camera.updateProjectionMatrix(); }
+    const cameraSettling = premiumActive && (Math.abs(camera.position.z - goalZ) > .003 || Math.abs(camera.position.y - goalY) > .002 || Math.abs(lookTarget.x - lookGoal.x) > .002 || Math.abs(camera.fov - fovGoal) > .01);
     flow.visible = dot.visible = !premiumActive;
     const explode = controls.exploded || (scene === "servicios" && progress > 0.35);
     for (const [id, group] of parts) for (const object of group) {
@@ -159,11 +184,51 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
     heat.emissiveIntensity = 0.1 + progress * 0.6;
     dot.position.copy(flowCurve.getPointAt(progress));
     renderer.render(world, camera);
+    if (premium && presentation) placeLabels(premiumActive ? opening : 0);
     if(premiumActive)host.dataset.renderedFrames=String(++renderedFrames);
     if (transitionFrames > 0) { transitionFrames--; invalidate(); }
     if (premiumActive && (cylinderState?.settling || cameraSettling)) invalidate();
   }
-  function invalidate() { if (!frame && !disposed) frame = requestAnimationFrame(draw); }
+  function placeLabels(opening: number) {
+    const show = T.MathUtils.smoothstep(opening, .45, .85);
+    labelLayer.style.opacity = String(show);
+    if (show <= 0 || !premium) return;
+    const width = host.clientWidth, height = host.clientHeight;
+    for (const [id, el] of labels) {
+      const anchor = premium.anchor(id); if (!anchor) continue;
+      anchor.getWorldPosition(projected); projected.y += id === "piston" || id === "vastago" ? -.62 : .78; projected.project(camera);
+      const x = (projected.x + 1) / 2 * width, y = (1 - projected.y) / 2 * height;
+      el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) translate(-50%,-50%)`;
+      el.dataset.below = id === "piston" || id === "vastago" ? "true" : "false";
+      el.dataset.active = String(controls.part === id);
+    }
+  }
+  function invalidate() { if (!frame && !disposed && warmed) frame = requestAnimationFrame(draw); }
+  const nextFrame = () => new Promise<number>((resolve) => requestAnimationFrame(resolve));
+  function setTier(next: StageTier) {
+    tier = next;
+    if (tier === "medium") { renderer.setPixelRatio(Math.min(devicePixelRatio, 1.25)); renderer.setSize(host.clientWidth, host.clientHeight, false); }
+  }
+  /** Compila shaders (asíncrono si el driver lo permite) y mide FPS reales en los primeros frames. */
+  async function warmup(): Promise<StageTier> {
+    if (initial === "cilindros") prepareCylinder();
+    draw(performance.now(), true); // aplica estado de escena (materiales, entorno, sombras)
+    try { await renderer.compileAsync(world, camera); } catch { /* compileAsync no disponible: compila en el primer render */ }
+    if (disposed) return "static";
+    const measure = async (frames: number) => {
+      let last = await nextFrame(); const deltas: number[] = [];
+      for (let i = 0; i < frames && !disposed; i++) { draw(last, true); const now = await nextFrame(); deltas.push(now - last); last = now; }
+      deltas.sort((a, b) => a - b); return deltas[Math.floor(deltas.length / 2)] ?? 1000;
+    };
+    await measure(2); // primeros frames: subida de texturas y sombras
+    let median = await measure(8);
+    if (tier === "high" && median > 1000 / 40) { setTier("medium"); try { await renderer.compileAsync(world, camera); } catch {} median = await measure(8); }
+    if (median > 1000 / 24) tier = "static";
+    host.dataset.tier = tier;
+    host.dataset.fps = String(Math.round(1000 / Math.max(1, median)));
+    if (tier !== "static") { warmed = true; invalidate(); }
+    return tier;
+  }
   const resize = new ResizeObserver(() => { const width = host.clientWidth, height = host.clientHeight; if (!width || !height) return; renderer.setSize(width, height); camera.aspect = width / height; camera.updateProjectionMatrix(); invalidate(); }); resize.observe(host);
   const visibility = () => invalidate(); document.addEventListener("visibilitychange", visibility);
   const down = (event: PointerEvent) => { if (!controls.interactive && scene !== "cilindros") return; drag = { x: event.clientX, y: event.clientY, moved: false }; renderer.domElement.setPointerCapture(event.pointerId); };
@@ -184,12 +249,12 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
     const bounds = new T.Box3().setFromObject(model.scene); const center = bounds.getCenter(new T.Vector3()); const size = bounds.getSize(new T.Vector3());
     model.scene.position.sub(center); model.scene.scale.setScalar(4 / Math.max(size.x, size.y, size.z)); assembly.clear(); assembly.add(model.scene);
   }
-  invalidate();
   return {
+    warmup,
     setVisible(value) { visible = value; if (value) invalidate(); },
     setMotion(value) { motion = value; if (value) invalidate(); },
     setChapter(id, value) { if (scene !== id) transitionFrames = low ? 14 : 24; scene = id; progress = value; invalidate(); },
     setControls(value) { if (!value.interactive && scene !== "cilindros") { yaw = 0; pitch = 0; } controls = value; invalidate(); },
-    dispose() { disposed = true; cancelAnimationFrame(frame); resize.disconnect(); document.removeEventListener("visibilitychange", visibility); renderer.domElement.removeEventListener("pointerdown", down); renderer.domElement.removeEventListener("pointermove", move); renderer.domElement.removeEventListener("pointerup", up); renderer.domElement.removeEventListener("pointercancel", up); renderer.domElement.removeEventListener("pointerleave", leave); renderer.domElement.removeEventListener("webglcontextlost", lost); renderer.domElement.removeEventListener("webglcontextrestored", restored); premium?.dispose(); environment?.dispose(); floorGeo.dispose(); floorMat.dispose(); geometries.forEach((g) => g.dispose()); materials.forEach((m) => m.dispose()); renderer.dispose(); renderer.domElement.remove(); },
+    dispose() { disposed = true; cancelAnimationFrame(frame); resize.disconnect(); document.removeEventListener("visibilitychange", visibility); renderer.domElement.removeEventListener("pointerdown", down); renderer.domElement.removeEventListener("pointermove", move); renderer.domElement.removeEventListener("pointerup", up); renderer.domElement.removeEventListener("pointercancel", up); renderer.domElement.removeEventListener("pointerleave", leave); renderer.domElement.removeEventListener("webglcontextlost", lost); renderer.domElement.removeEventListener("webglcontextrestored", restored); premium?.dispose(); environment?.dispose(); labelLayer.remove(); floorGeo.dispose(); floorMat.dispose(); geometries.forEach((g) => g.dispose()); materials.forEach((m) => m.dispose()); renderer.dispose(); renderer.domElement.remove(); },
   };
 }

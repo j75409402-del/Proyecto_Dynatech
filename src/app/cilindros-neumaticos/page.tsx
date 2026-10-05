@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { whatsappCylinderService } from "@/lib/whatsapp";
-import Image from "next/image";
+import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { CylinderRelated } from "@/components/industrial/CylinderRelated";
 import { SITE } from "@/lib/constants";
@@ -185,17 +185,14 @@ export default function CilindrosNeumaticosPage() {
           <Reveal className="max-w-2xl mb-12">
             <div className="eyebrow mb-3">04 · Trabajo real</div>
             <h2 className="font-display text-display-lg text-surface">Antes y después</h2>
-            <p className="text-steel-300 mt-4">Cilindro ISO 32 mm recuperado en nuestro taller.</p>
+            <p className="text-steel-300 mt-4">Cilindro ISO 32 mm recuperado en nuestro taller. Desliza para comparar.</p>
           </Reveal>
           <Reveal>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-black/10 border border-black/10">
-              <div className="relative aspect-[3/1] bg-white">
-                <Image src="/cilindros/antes-cilindro-iso-32mm.jpg" alt="Antes · Cilindro ISO 32 mm" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain" />
-              </div>
-              <div className="relative aspect-[3/1] bg-white">
-                <Image src="/cilindros/despues-cilindro-iso-32mm.jpg" alt="Después · Cilindro ISO 32 mm" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain" />
-              </div>
-            </div>
+            <BeforeAfterSlider
+              before={{ src: "/cilindros/antes-cilindro-iso-32mm.jpg", alt: "Antes · Cilindro ISO 32 mm" }}
+              after={{ src: "/cilindros/despues-cilindro-iso-32mm.jpg", alt: "Después · Cilindro ISO 32 mm recuperado" }}
+            />
+            <p className="text-sm text-steel-300 mt-5 max-w-3xl">Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar.</p>
           </Reveal>
         </div>
       </section>

@@ -3,19 +3,56 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { CYLINDER_PARTS, type SceneId, type PartId } from "@/lib/industrial-scenes";
 type Props = { presentation?: boolean; scene?: SceneId; narrative?: boolean; image?: string; imageAlt?: string };
+type Tier = import("./scene-engine").StageTier | "pending";
+
+/** WebGL disponible (sin descargar three). Libera el contexto de prueba de inmediato. */
+function hasWebGL() {
+ try {
+  const canvas = document.createElement("canvas");
+  const gl = (canvas.getContext("webgl2") || canvas.getContext("webgl")) as WebGLRenderingContext | null;
+  if (!gl) return false;
+  gl.getExtension("WEBGL_lose_context")?.loseContext();
+  return true;
+ } catch { return false; }
+}
+/** Espera a un momento ocioso del hilo principal (con tope para no esperar indefinidamente). */
+function idle(timeout = 1500) {
+ return new Promise<void>((resolve) => {
+  if ("requestIdleCallback" in window) window.requestIdleCallback(() => resolve(), { timeout });
+  else setTimeout(resolve, 200);
+ });
+}
 export function IndustrialStage({scene="ecosistema",narrative=false,presentation=false,image="/industrial-editorial.webp",imageAlt="Imagen editorial industrial"}:Props) {
  const root=useRef<HTMLDivElement>(null),host=useRef<HTMLDivElement>(null);
  const engine=useRef<import("./scene-engine").StageEngine|null>(null);
  const [active,setActive]=useState(scene),[ready,setReady]=useState(false),[disabled,setDisabled]=useState(false);
  const [exploded,setExploded]=useState(false),[rotation,setRotation]=useState(25),[zoom,setZoom]=useState(1),[part,setPart]=useState<PartId>("camisa"),[detection,setDetection]=useState(0),[interactive,setInteractive]=useState(false);
  const [cylinderSelected,setCylinderSelected]=useState<PartId|null>(null);
+ const [tier,setTier]=useState<Tier>("pending");
  const [manualOpening,setManualOpening]=useState(false),[scrollOpening,setScrollOpening]=useState(false);
  const effectiveExploded=presentation&&!manualOpening?scrollOpening:exploded;
  useEffect(()=>{
   let disposed=false,loading=false,visible=false;
   const motion=matchMedia("(prefers-reduced-motion: reduce)");
-  const constrained=(navigator as Navigator & {connection?:{saveData?:boolean}}).connection?.saveData || navigator.hardwareConcurrency<=2;
-  const init=async()=>{if(!visible||loading||engine.current||motion.matches||constrained||!host.current)return;loading=true;try{await document.fonts.ready;const {createStage}=await import("./scene-engine");if(disposed)return;const instance=await createStage(host.current,scene,(id)=>{setPart(id);setCylinderSelected(current=>current===id?null:id);},()=>{setDisabled(true);setReady(false);});if(disposed){instance.dispose();return;}engine.current=instance;setReady(true);}catch{if(!disposed)setDisabled(true);}};
+  const nav=navigator as Navigator & {connection?:{saveData?:boolean};deviceMemory?:number};
+  // Filtro previo barato (ahorro de datos, equipos muy limitados). La calidad real se decide por FPS medidos.
+  const constrained=nav.connection?.saveData || navigator.hardwareConcurrency<=2 || (nav.deviceMemory??8)<=1;
+  const off=()=>{if(!disposed){setDisabled(true);setReady(false);setTier("static");}};
+  const init=async()=>{if(!visible||loading||engine.current||motion.matches||constrained||!host.current)return;loading=true;try{
+   // 1) Sin WebGL no se descarga three (≈162 KB gz).
+   if(!hasWebGL()){off();return;}
+   await idle();await document.fonts.ready;if(disposed||!host.current)return;
+   const {createStage}=await import("./scene-engine");if(disposed||!host.current)return;
+   const instance=await createStage(host.current,scene,(id)=>{setPart(id);setCylinderSelected(current=>current===id?null:id);},off,{quality:innerWidth>=1024&&navigator.hardwareConcurrency>4?"high":"medium"});
+   if(disposed){instance.dispose();return;}
+   // 2) Compilar shaders en un momento ocioso y medir FPS: alto, medio o imagen fija.
+   await idle();if(disposed){instance.dispose();return;}
+   const measured=await instance.warmup();
+   if(disposed){instance.dispose();return;}
+   if(measured==="static"){instance.dispose();off();return;}
+   // 3) El canvas se muestra solo con el primer frame listo.
+   engine.current=instance;setTier(measured);setReady(true);
+  }catch{off();}};
   const observer=new IntersectionObserver(([e])=>{visible=e.isIntersecting;engine.current?.setVisible(visible);void init();},{rootMargin:"150px"});if(root.current)observer.observe(root.current);
   const change=()=>{engine.current?.setMotion(!motion.matches);setReady(!motion.matches&&!!engine.current);if(!motion.matches)void init();};motion.addEventListener("change",change);
   return()=>{disposed=true;observer.disconnect();motion.removeEventListener("change",change);engine.current?.dispose();engine.current=null;};
@@ -23,10 +60,16 @@ export function IndustrialStage({scene="ecosistema",narrative=false,presentation
  useEffect(()=>{
   if(presentation){
     const experience=root.current?.closest<HTMLElement>(".cylinder-experience");let frame=0;
-    const update=()=>{frame=0;if(!experience)return;if(!ready||disabled){experience.dataset.phase="0";experience.style.setProperty("--story-progress","0");return;}const rect=experience.getBoundingClientRect(),sticky=experience.querySelector<HTMLElement>(".cylinder-sticky");if(!sticky)return;
-      const top=parseFloat(getComputedStyle(sticky).top)||0;
-      const p=Math.max(0,Math.min(1,(top-rect.top)/Math.max(1,rect.height-sticky.clientHeight)));
-      experience.dataset.phase=String(p<.29?0:p<.78?1:2);
+    // Los capítulos están en el flujo normal (siempre visibles y legibles). La fase y el
+    // progreso se calculan con la posición de cada capítulo respecto a una línea de lectura.
+    const update=()=>{frame=0;if(!experience)return;if(!ready||disabled){experience.dataset.phase="0";experience.style.setProperty("--story-progress","0");return;}
+      const stories=Array.from(experience.querySelectorAll<HTMLElement>("[data-story]")),sticky=experience.querySelector<HTMLElement>(".cylinder-sticky");if(!stories.length||!sticky)return;
+      const stuck=sticky.getBoundingClientRect(),desktop=innerWidth>=1024;
+      const anchor=desktop?innerHeight*.55:Math.min(innerHeight-40,stuck.bottom+Math.max(60,(innerHeight-stuck.bottom)*.45));
+      let phase=0;stories.forEach((story,i)=>{if(story.getBoundingClientRect().top<anchor)phase=i;});
+      const r=stories[phase].getBoundingClientRect(),t=Math.max(0,Math.min(1,(anchor-r.top)/Math.max(1,r.height)));
+      const p=phase===0?.3*t:phase===1?.3+.48*t:.78+.22*t;
+      experience.dataset.phase=String(phase);
       experience.style.setProperty("--story-progress",String(p));
       setScrollOpening(p>.33&&p<.85);engine.current?.setChapter("cilindros",p);
     };
@@ -43,11 +86,12 @@ export function IndustrialStage({scene="ecosistema",narrative=false,presentation
  },[narrative,ready,disabled,scene,presentation]);
  useEffect(()=>{engine.current?.setControls({exploded:effectiveExploded,manual:manualOpening,rotation,zoom,part:active==="cilindros"?cylinderSelected:part,detection,interactive});},[effectiveExploded,manualOpening,rotation,zoom,part,cylinderSelected,detection,interactive,ready,active]);
  const cylinder=active==="cilindros"||active==="servicios"||active==="hidraulica";
- return <div ref={root} className={`industrial-stage ${ready&&!disabled?"is-ready":""}`} data-active-scene={active} data-presentation={presentation?"cinematic":undefined} data-exploded={effectiveExploded}>
+ return <div ref={root} className={`industrial-stage ${ready&&!disabled?"is-ready":""}`} data-tier={tier} data-active-scene={active} data-presentation={presentation?"cinematic":undefined} data-exploded={effectiveExploded}>
  <div className="stage-fallback"><Image src={image} alt={imageAlt} fill priority={presentation} sizes={presentation?"100vw":"(max-width: 900px) 100vw, 55vw"} className="object-cover"/><div/></div>
  <div ref={host} data-presentation={presentation?"cinematic":undefined} className={`stage-canvas ${interactive||active==="cilindros"?"interactive":""}`} aria-hidden="true"/>
  <div className="stage-topline"><span>Dynatech / Ingeniería</span><span>RD</span></div><div className="stage-cross" aria-hidden="true">+</div>
- <div className="stage-caption">{ready&&!disabled?(presentation?"Modelo ilustrativo · Configuración bajo cotización":"Representación 3D conceptual · No es un producto específico"):"Referencia editorial · Explora las líneas y servicios"}</div>
+ <div className="stage-caption">{ready&&!disabled?(presentation?"Modelo ilustrativo · Configuración bajo cotización":"Representación 3D conceptual · No es un producto específico"):"Imagen de referencia"}</div>
+ {presentation&&!(ready&&!disabled)&&<div className="cylinder-legend"><p>Piezas de un cilindro neumático</p><ol>{CYLINDER_PARTS.map((item,i)=><li key={item.id}><span>0{i+1}</span>{item.name}</li>)}</ol></div>}
  {ready&&!disabled&&(active==="cilindros"?<div className="cylinder-controls">
  <div className="cylinder-toolbar"><span>Arrastra para girar · 360°</span><button type="button" onClick={()=>setZoom(Math.max(.85,zoom-.1))} aria-label="Alejar cilindro">−</button><button type="button" onClick={()=>setZoom(Math.min(presentation?1.12:1.25,zoom+.1))} aria-label="Acercar cilindro">+</button><button type="button" aria-pressed={effectiveExploded} onClick={()=>{setExploded(!effectiveExploded);setManualOpening(true);}}>{effectiveExploded?"Ensamblar":"Explorar el interior"}</button></div>
  <div className="cylinder-parts" aria-label="Componentes del cilindro">{CYLINDER_PARTS.map((item,i)=><button type="button" key={item.id} aria-pressed={cylinderSelected===item.id} onClick={()=>setCylinderSelected(current=>current===item.id?null:item.id)}><span>0{i+1}</span>{item.name}</button>)}</div>

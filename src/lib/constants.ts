@@ -42,7 +42,7 @@ export const SOCIAL = {
 export const NAV = {
   /** Va después del desplegable "Soluciones" (que se arma desde src/lib/soluciones.ts). */
   main: [
-    { label: "Cilindros neumáticos", short: "Cilindros", href: "/cilindros-neumaticos" },
+    { label: "Cilindros", short: "Cilindros", href: "/cilindros-neumaticos" },
     { label: "Servicios",            short: "Servicios", href: "/servicios" },
     { label: "Nosotros",             short: "Nosotros",  href: "/nosotros" },
     { label: "Contacto",             short: "Contacto",  href: "/contacto" },
@@ -53,5 +53,11 @@ export const NAV = {
     { label: "Fabricación y reparación", href: "/servicios" },
     { label: "Sellos y componentes", href: "/sellos-y-componentes" },
   ],
-  cta: { label: "Cotiza por WhatsApp", href: "/cotizacion" },
+  /** Servicios industriales y especialidades con página propia (menú y pie). */
+  especialidades: [
+    { label: "Válvulas neumáticas", href: "/valvulas-neumaticas" },
+    { label: "Cilindros hidráulicos", href: "/cilindros-hidraulicos" },
+    { label: "Mecanizado", href: "/mecanizado" },
+  ],
+  cta: { label: "Cotizar por WhatsApp", href: "/cotizacion" },
 } as const;

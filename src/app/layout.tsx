@@ -5,6 +5,8 @@ import { Footer } from "@/components/layout/Footer";
 import { SITE, CONTACT, ANALYTICS } from "@/lib/constants";
 import { CommercialTracking } from "@/components/CommercialTracking";
 import { CookielessAnalytics } from "@/components/CookielessAnalytics";
+import { MobileQuoteFab } from "@/components/layout/MobileQuoteFab";
+import { RevealObserver } from "@/components/motion/RevealObserver";
 import "./globals.css";
 
 const organizationJsonLd = {
@@ -112,6 +114,8 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <MobileQuoteFab />
+        <RevealObserver />
       </body>
     </html>
   );

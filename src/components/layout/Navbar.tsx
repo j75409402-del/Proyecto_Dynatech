@@ -15,7 +15,7 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname.startsWith(href);
 }
 
-const SOLUCIONES_HREFS = [...SOLUCIONES.map((s) => `/${s.slug}`), ...NAV.cilindros.map((c) => c.href)];
+const SOLUCIONES_HREFS = [...SOLUCIONES.map((s) => `/${s.slug}`), ...NAV.cilindros.map((c) => c.href), ...NAV.especialidades.map((e) => e.href)];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -32,6 +32,16 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Menú móvil: Escape lo cierra.
+  useEffect(() => {
+    if (!open) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
 
   // Desplegable: se cierra con Escape o al hacer clic fuera.
   useEffect(() => {
@@ -100,7 +110,7 @@ export function Navbar() {
                 isActive(pathname, "/cilindros-neumaticos") ? "text-signal" : "text-steel-200 hover:text-signal",
               )}
             >
-              Cilindros 3D
+              {NAV.main[0].label}
             </Link>
             <div
               ref={menuRef}
@@ -128,7 +138,7 @@ export function Navbar() {
               <div
                 id="menu-soluciones"
                 hidden={!menuOpen}
-                className="absolute left-0 top-full pt-4 w-[min(640px,calc(100vw-2rem))]"
+                className="absolute left-0 top-full pt-4 w-[min(680px,calc(100vw-2rem))]"
               >
                 <div className="grid grid-cols-5 border border-black/10 bg-carbon shadow-[0_24px_60px_-24px_rgba(0,0,0,0.3)]">
                   <div className="col-span-3 p-5">
@@ -155,9 +165,9 @@ export function Navbar() {
                     </ul>
                   </div>
                   <div className="col-span-2 border-l border-black/10 bg-carbon-800 p-5 flex flex-col">
-                    <div className="eyebrow mb-3">Línea destacada</div>
+                    <div className="eyebrow mb-3">Cilindros y servicios</div>
                     <ul className="space-y-1 mb-4">
-                      {NAV.cilindros.map((c) => (
+                      {[...NAV.cilindros, ...NAV.especialidades].map((c) => (
                         <li key={c.href}>
                           <Link
                             href={c.href}
@@ -177,7 +187,7 @@ export function Navbar() {
                       className="mt-auto inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
                       <WhatsAppIcon className="h-4 w-4" />
-              {NAV.cta.label}
+                      {NAV.cta.label}
                       <ArrowRight className="h-3.5 w-3.5" />
                     </a>
                   </div>
@@ -218,9 +228,9 @@ export function Navbar() {
 
           {/* Menú mobile / tablet */}
           <button
-            className="lg:hidden text-surface p-2 -mr-2"
+            className="lg:hidden grid h-11 w-11 place-items-center text-surface -mr-2"
             onClick={() => setOpen((v) => !v)}
-            aria-label="Menú"
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
             aria-controls="mobile-navigation"
           >
@@ -239,63 +249,82 @@ export function Navbar() {
           open ? "max-h-[48rem] opacity-100" : "max-h-0 opacity-0",
         )}
       >
-        <nav className="container-max py-5 flex flex-col max-h-[calc(100vh-4rem)] overflow-y-auto" aria-label="Menú móvil">
-          <div className="eyebrow mb-1">Línea principal</div>
-          <Link
-            href="/cilindros-neumaticos"
+        <nav className="container-max pb-6 flex flex-col max-h-[calc(100svh-4.5rem)] overflow-y-auto overscroll-contain" aria-label="Menú móvil">
+          {/* CTA primero: visible sin desplazarse dentro del menú. */}
+          <a
+            href={whatsappGeneral()}
+            target="_blank"
+            rel="noopener"
             onClick={() => setOpen(false)}
-            aria-current={isActive(pathname, "/cilindros-neumaticos") ? "page" : undefined}
-            className={cn(
-              "py-2.5 border-b border-black/5 text-sm font-medium",
-              isActive(pathname, "/cilindros-neumaticos") ? "text-signal" : "text-steel-200 hover:text-signal",
-            )}
+            className="sticky top-0 z-10 -mx-4 mb-2 flex min-h-14 items-center justify-center gap-2 bg-signal px-4 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:bg-signal-hover sm:-mx-6"
           >
-            Cilindros neumáticos · 3D
-          </Link>
-          <div className="eyebrow mt-5 mb-1">Líneas complementarias</div>
-          {SOLUCIONES.map((s) => (
-            <Link
-              key={s.slug}
-              href={`/${s.slug}`}
-              onClick={() => setOpen(false)}
-              className={cn(
-                "flex items-center gap-3 py-2.5 border-b border-black/5 text-sm font-medium",
-                isActive(pathname, `/${s.slug}`) ? "text-signal" : "text-steel-200 hover:text-signal",
-              )}
-            >
-              <s.icon className="h-4 w-4 text-signal" />
-              {s.name}
-            </Link>
-          ))}
-          <div className="eyebrow mt-5 mb-1">Empresa</div>
-          {[
-            NAV.main[1],
-            { label: "Sellos y componentes", short: "Sellos", href: "/sellos-y-componentes" },
-            ...NAV.main.slice(2),
-          ].map((item) => (
+            <WhatsAppIcon className="h-5 w-5" />
+            {NAV.cta.label}
+            <ArrowRight className="h-4 w-4" />
+          </a>
+          <div className="eyebrow mt-4 mb-1">Línea principal</div>
+          {NAV.cilindros.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
               aria-current={isActive(pathname, item.href) ? "page" : undefined}
               className={cn(
-                "py-2.5 border-b border-black/5 text-sm font-medium",
+                "flex min-h-11 items-center border-b border-black/5 text-sm font-medium",
                 isActive(pathname, item.href) ? "text-signal" : "text-steel-200 hover:text-signal",
               )}
             >
               {item.label}
             </Link>
           ))}
-          <a
-            href={whatsappGeneral()}
-            target="_blank"
-            rel="noopener"
-            onClick={() => setOpen(false)}
-            className="inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
-                       text-white font-medium py-3 rounded-xs text-sm uppercase tracking-wider transition-colors mt-5"
-          >
-            {NAV.cta.label}
-            <ArrowRight className="h-4 w-4" />
+          <div className="eyebrow mt-5 mb-1">Servicios industriales</div>
+          {NAV.especialidades.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              aria-current={isActive(pathname, item.href) ? "page" : undefined}
+              className={cn(
+                "flex min-h-11 items-center border-b border-black/5 text-sm font-medium",
+                isActive(pathname, item.href) ? "text-signal" : "text-steel-200 hover:text-signal",
+              )}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <div className="eyebrow mt-5 mb-1">Líneas de productos</div>
+          {SOLUCIONES.map((s) => (
+            <Link
+              key={s.slug}
+              href={`/${s.slug}`}
+              onClick={() => setOpen(false)}
+              aria-current={isActive(pathname, `/${s.slug}`) ? "page" : undefined}
+              className={cn(
+                "flex min-h-11 items-center gap-3 border-b border-black/5 text-sm font-medium",
+                isActive(pathname, `/${s.slug}`) ? "text-signal" : "text-steel-200 hover:text-signal",
+              )}
+            >
+              <s.icon className="h-4 w-4 text-signal" aria-hidden="true" />
+              {s.name}
+            </Link>
+          ))}
+          <div className="eyebrow mt-5 mb-1">Empresa</div>
+          {NAV.main.slice(2).map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              aria-current={isActive(pathname, item.href) ? "page" : undefined}
+              className={cn(
+                "flex min-h-11 items-center border-b border-black/5 text-sm font-medium",
+                isActive(pathname, item.href) ? "text-signal" : "text-steel-200 hover:text-signal",
+              )}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="mt-5 flex min-h-11 items-center font-mono text-sm text-steel-400 hover:text-signal">
+            {CONTACT.phone}
           </a>
         </nav>
       </div>

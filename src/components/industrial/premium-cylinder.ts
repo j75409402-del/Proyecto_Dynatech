@@ -4,25 +4,29 @@ import * as T from "three";
 export function premiumCylinder(low: boolean) {
   const root = new T.Group();
   const groups: { object: T.Group; base: number; offset: T.Vector3; tilt: number; delay: number }[] = [];
-  const steel = new T.MeshStandardMaterial({ color: 0xa4b2c0, metalness: .98, roughness: .28, envMapIntensity: 1.1 });
-  const chrome = new T.MeshStandardMaterial({ color: 0xe4eaf0, metalness: 1, roughness: .105, envMapIntensity: 1.2 });
-  const alloy = new T.MeshStandardMaterial({ color: 0x91a0ad, metalness: .78, roughness: .44, envMapIntensity: .82 });
-  const seal = new T.MeshStandardMaterial({ color: 0x202830, metalness: 0, roughness: .86, envMapIntensity: .35 });
-  const fastener = new T.MeshStandardMaterial({ color: 0x606d7b, metalness: .96, roughness: .23, envMapIntensity: 1.05 });
-  // A small shared roughness texture breaks up perfectly uniform metal reflections.
-  // UVs follow the machined axis; seals and the polished shaft remain untextured.
-  const grainData = new Uint8Array(64 * 64 * 4);
-  for (let y = 0; y < 64; y++) for (let x = 0; x < 64; x++) {
-    const grain = 232 + ((x * 73) % 13);
-    const i = (y * 64 + x) * 4;
-    grainData[i] = grainData[i + 1] = grainData[i + 2] = grain;
-    grainData[i + 3] = 255;
+  // PBR (metal/rugosidad) pensado para el entorno de estudio RoomEnvironment + PMREM:
+  // camisa y tapas en aluminio anodizado, vástago en cromo duro, tirantes en acero
+  // cepillado, juntas en caucho negro y tornillería pavonada.
+  const steel = new T.MeshStandardMaterial({ color: 0xc4ccd4, metalness: .9, roughness: .36, envMapIntensity: 1.05 }); // camisa: aluminio anodizado natural
+  const chrome = new T.MeshStandardMaterial({ color: 0xf1f4f7, metalness: 1, roughness: .07, envMapIntensity: 1.35 }); // vástago: cromo duro
+  const alloy = new T.MeshStandardMaterial({ color: 0x8a96a3, metalness: .82, roughness: .42, envMapIntensity: .9 }); // tapas y pistón: anodizado satinado
+  const rodSteel = new T.MeshStandardMaterial({ color: 0xd9dee4, metalness: 1, roughness: .24, envMapIntensity: 1.15 }); // tirantes: acero cepillado
+  const seal = new T.MeshStandardMaterial({ color: 0x14171b, metalness: 0, roughness: .82, envMapIntensity: .3 }); // juntas: caucho negro
+  const fastener = new T.MeshStandardMaterial({ color: 0x2c3138, metalness: .75, roughness: .36, envMapIntensity: .9 }); // tornillería pavonada
+  // Textura de rugosidad "cepillada": rayas finas a lo largo del eje (UV u = perímetro).
+  // Generada en código (128x4 px): sin descargas ni coste apreciable.
+  const W = 128, H = 4, grainData = new Uint8Array(W * H * 4);
+  let seed = 7; const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const rows: number[] = []; for (let x = 0; x < W; x++) rows.push(205 + rand() * 50);
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const i = (y * W + x) * 4; const v = Math.round(rows[x]);
+    grainData[i] = grainData[i + 1] = grainData[i + 2] = v; grainData[i + 3] = 255;
   }
-  const grain = new T.DataTexture(grainData, 64, 64);
-  grain.wrapS = grain.wrapT = T.RepeatWrapping;
+  const grain = new T.DataTexture(grainData, W, H);
+  grain.wrapS = grain.wrapT = T.RepeatWrapping; grain.repeat.set(3, 1);
   grain.magFilter = T.LinearFilter; grain.minFilter = T.LinearMipmapLinearFilter;
   grain.generateMipmaps = true; grain.needsUpdate = true;
-  steel.roughness = .32; steel.roughnessMap = grain;
+  steel.roughnessMap = grain; rodSteel.roughnessMap = grain; alloy.roughnessMap = grain;
 
   const n = low ? 32 : 64;
   function group(id: string, x: number, offset: number, y = 0, z = 0, tilt = 0, delay = 0) {
@@ -55,7 +59,7 @@ export function premiumCylinder(low: boolean) {
   }
   const rods=group("tapas",-.65,-.5,.04,-.05,0,.03);
   for(const y of [-.49,.49]) for(const z of [-.49,.49]) {
-    const rod=lathe(rods,[[0,-1.38],[.035,-1.38],[.035,1.38],[0,1.38]],chrome);rod.position.y=y;rod.position.z=z;
+    const rod=lathe(rods,[[0,-1.38],[.035,-1.38],[.035,1.38],[0,1.38]],rodSteel);rod.position.y=y;rod.position.z=z;
   }
   const piston=group("piston",.12,1.22,.12,.14,0,.06);
   lathe(piston,[[.16,-.19],[.42,-.19],[.47,-.15],[.47,-.1],[.435,-.085],[.435,-.025],[.47,-.01],[.47,.08],[.435,.09],[.435,.14],[.47,.15],[.42,.2],[.16,.2],[.16,-.19]],alloy);
@@ -75,8 +79,11 @@ export function premiumCylinder(low: boolean) {
     surfaces.push({ material: object.material, part: id, color: object.material.color.clone(), environment: object.material.envMapIntensity, emphasis: 0 });
   });
   let amount = 0, from = 0, destination = 0, elapsed = 1.25;
+  // Punto de referencia por pieza (etiquetas y foco de cámara).
+  const anchors: Record<string, T.Object3D> = { camisa: barrel, tapas: front, piston, vastago: shaft, sellos: seals };
   return {
     root,
+    anchor(id: string) { return anchors[id] ?? null; },
     update(target: number, selected: string | null, delta: number, scrub = false) {
       if (!scrub && target !== destination) { from = amount; destination = target; elapsed = 0; }
       elapsed = Math.min(1.25, elapsed + delta);
@@ -106,7 +113,7 @@ export function premiumCylinder(low: boolean) {
     },
     dispose() {
       root.traverse(object => { if (object instanceof T.Mesh) { object.geometry.dispose(); if (object.material instanceof T.Material) object.material.dispose(); } });
-      [steel, chrome, alloy, fastener, seal].forEach(material => material.dispose());
+      [steel, chrome, alloy, rodSteel, fastener, seal].forEach(material => material.dispose());
       grain.dispose();
     }
   };
