@@ -346,6 +346,8 @@
 .cylinder-kicker { display:block; font-family:var(--font-mono); font-size:10px!important; line-height:1.6!important; letter-spacing:.12em; text-transform:uppercase; color:#a6b6c5!important; margin-bottom:23px!important; font-weight:400; }
 .cylinder-copy h1,.cylinder-copy h2 { font-size:clamp(45px,4.55vw,72px); letter-spacing:-.057em; line-height:1.035; font-weight:500; color:var(--d3-text); }
 .cylinder-period { color:var(--d3-accent); }
+.cylinder-copy .cylinder-trust { margin-top:18px!important; font-family:var(--font-mono); font-size:10px!important; letter-spacing:.1em; text-transform:uppercase; color:#a6b6c5!important; }
+@media(max-width:600px) { .cylinder-copy .cylinder-trust { display:none; } }
 .cylinder-copy article>p:not(.cylinder-kicker) { max-width:360px; color:var(--d3-secondary); font-size:15px; line-height:1.75; margin-top:27px; }
 .cylinder-story-actions { display:flex; align-items:flex-start; gap:16px; flex-direction:column; margin-top:30px; }
 .cylinder-story-actions .btn-primary { min-height:46px; font-size:11px; letter-spacing:.065em; padding-inline:20px; }

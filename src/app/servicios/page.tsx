@@ -12,6 +12,7 @@ import { SITE } from "@/lib/constants";
 import Link from "next/link";
 import { SERVICIOS_ADICIONALES, SERVICIOS } from "@/lib/servicios";
 import { whatsappCylinderService } from "@/lib/whatsapp";
+import { CylinderRelated } from "@/components/industrial/CylinderRelated";
 
 export const metadata: Metadata = {
   ...commercialMetadata("Reparación de cilindros neumáticos en RD", "Cotiza fabricación, reparación y reconstrucción de cilindros neumáticos para tu empresa en República Dominicana.", "/servicios"),
@@ -106,13 +107,13 @@ export default function ServiciosPage() {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
-                  Solicitar cotización
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Cotizar por WhatsApp
                   <ArrowRight className="h-4 w-4" />
                 </a>
-                <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-6 py-3 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10">
-                  <WhatsAppIcon className="h-4 w-4" />
-                  WhatsApp
-                </a>
+                <Link href="/cilindros-neumaticos" className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-6 py-3 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10">
+                  Ver tipos de cilindro
+                </Link>
               </div>
             </Reveal>
             <div className="lg:col-span-6">
@@ -159,7 +160,7 @@ export default function ServiciosPage() {
                       rel="noopener"
                       className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
-                      Solicitar cotización
+                      Cotizar por WhatsApp
                       <ArrowRight className="h-3.5 w-3.5" />
                     </a>
                   </div>
@@ -222,6 +223,8 @@ export default function ServiciosPage() {
           </div>
         </div>
       </section>
+
+      <CylinderRelated current="/servicios" />
 
       <QuoteCTA quoteItem="Reparación de cilindros neumáticos" />
     </div>

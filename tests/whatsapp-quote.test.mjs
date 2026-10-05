@@ -32,6 +32,7 @@ try {
   assert.ok(r.location.startsWith(`https://wa.me/${OFFICIAL}?text=`), r.location);
   assert.match(text(r.location), /^Hola Dynatech, solicito cotización sobre Cilindros hidráulicos\./);
   assert.match(text(r.location), /\(Desde www\.dynatech\.com\.do\/cilindros-hidraulicos\)/);
+  assert.match(text(r.location), /¿Fabricar o reparar\?:\nDiámetro x carrera/);
   await waitEvents(1);
   assert.equal(received.length, 1);
   const ev = received[0].payload;
@@ -50,9 +51,10 @@ try {
   // 3) Plantilla de cilindros y línea
   r = await hit('/cotizacion?tpl=cilindro');
   assert.match(text(r.location), /reparación \/ fabricación de un cilindro neumático/);
+  assert.match(text(r.location), /Diámetro x carrera/); assert.match(text(r.location), /foto, plano o placa/);
   await waitEvents(3); assert.equal(received[2].payload.data.product, 'cilindros_neumaticos'); assert.equal(received[2].payload.data.source_page, 'direct');
   r = await hit('/cotizacion?linea=Sensores&tpl=solucion');
-  assert.match(text(r.location), /solicito cotización sobre Sensores\./);
+  assert.match(text(r.location), /solicito cotización sobre Sensores\./); assert.ok(!/Diámetro/.test(text(r.location)));
   await waitEvents(4); assert.equal(received[3].payload.data.product, 'sensores');
   ok('plantillas cilindro y línea');
 

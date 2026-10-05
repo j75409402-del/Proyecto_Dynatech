@@ -6,6 +6,10 @@ import { Reveal } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { whatsappCylinderService } from "@/lib/whatsapp";
+import Image from "next/image";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { CylinderRelated } from "@/components/industrial/CylinderRelated";
+import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   ...commercialMetadata("Cilindros neumáticos en República Dominicana", "Fabricación y reparación de cilindros neumáticos bajo cotización. Comparte plano, muestra o medidas para tu solicitud.", "/cilindros-neumaticos"),
@@ -36,9 +40,21 @@ const NECESITAMOS = [
   { icon: Hash, title: "Código", desc: "La referencia del cilindro, si la tienes." },
 ];
 
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Cilindros neumáticos a la medida",
+  serviceType: "Fabricación y reparación de cilindros neumáticos",
+  provider: { "@id": `${SITE.url}/#business` },
+  areaServed: "República Dominicana",
+  url: `${SITE.url}/cilindros-neumaticos`,
+  description: "Fabricación de cilindros neumáticos a la medida (doble y simple efecto, compactos, ISO y especiales, métricos y en pulgadas) y reparación bajo cotización.",
+};
+
 export default function CilindrosNeumaticosPage() {
   return (
     <div className="industrial-detail cylinder-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <CylinderExperience />
 
       <section className="section-pad border-b border-black/5 cylinder-types">
@@ -104,7 +120,8 @@ export default function CilindrosNeumaticosPage() {
                       rel="noopener"
                       className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
-                      Solicitar cotización
+                      <WhatsAppIcon className="h-3.5 w-3.5" />
+                      Cotizar por WhatsApp
                       <ArrowRight className="h-3.5 w-3.5" />
                     </a>
                   </div>
@@ -122,7 +139,7 @@ export default function CilindrosNeumaticosPage() {
                 rel="noopener"
                 className="text-signal font-medium hover:underline whitespace-nowrap"
               >
-                Consultar disponibilidad →
+                Cotizar por WhatsApp <ArrowRight className="inline h-3.5 w-3.5" aria-hidden="true" />
               </a>
             </p>
           </Reveal>
@@ -135,7 +152,7 @@ export default function CilindrosNeumaticosPage() {
           <Reveal className="max-w-2xl mb-12">
             <div className="eyebrow mb-3">03 · Para cotizar</div>
             <h2 className="font-display text-display-lg text-surface">Qué necesitamos de ti</h2>
-            <p className="text-steel-300 mt-4">Con cualquiera de estos datos podemos empezar.</p>
+            <p className="text-steel-300 mt-4">Con cualquiera de estos datos podemos empezar. Lo mínimo: diámetro x carrera o una foto del cilindro y su placa.</p>
           </Reveal>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -154,12 +171,36 @@ export default function CilindrosNeumaticosPage() {
 
           <Reveal className="mt-10">
             <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary">
-              Enviar especificaciones
+              <WhatsAppIcon className="h-4 w-4" />
+              Cotizar por WhatsApp
               <ArrowRight className="h-4 w-4" />
             </a>
           </Reveal>
         </div>
       </section>
+
+      {/* ANTES Y DESPUÉS (fotos ya publicadas en /servicios) */}
+      <section className="section-pad border-t border-black/5 bg-carbon-900">
+        <div className="container-max">
+          <Reveal className="max-w-2xl mb-12">
+            <div className="eyebrow mb-3">04 · Trabajo real</div>
+            <h2 className="font-display text-display-lg text-surface">Antes y después</h2>
+            <p className="text-steel-300 mt-4">Cilindro ISO 32 mm recuperado en nuestro taller.</p>
+          </Reveal>
+          <Reveal>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-black/10 border border-black/10">
+              <div className="relative aspect-[3/1] bg-white">
+                <Image src="/cilindros/antes-cilindro-iso-32mm.jpg" alt="Antes · Cilindro ISO 32 mm" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain" />
+              </div>
+              <div className="relative aspect-[3/1] bg-white">
+                <Image src="/cilindros/despues-cilindro-iso-32mm.jpg" alt="Después · Cilindro ISO 32 mm" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain" />
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <CylinderRelated current="/cilindros-neumaticos" />
 
       <QuoteCTA quoteItem="Fabricación de cilindros neumáticos" />
     </div>

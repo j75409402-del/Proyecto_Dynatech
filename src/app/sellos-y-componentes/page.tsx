@@ -6,7 +6,9 @@ import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
-import { whatsappCylinderService } from "@/lib/whatsapp";
+import Link from "next/link";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { CylinderRelated } from "@/components/industrial/CylinderRelated";
 
 export const metadata: Metadata = {
   ...commercialMetadata("Sellos y componentes para cilindros neumáticos", "Cotiza kits de sellos, vástagos y componentes bajo medida para cilindros neumáticos en República Dominicana.", "/sellos-y-componentes"),
@@ -23,7 +25,7 @@ const BLOQUES = [
     title: "Vástagos y barras cromadas",
     desc: "Vástagos cromados fabricados a medida, con el acabado y la tolerancia del original.",
     necesitamos: "Diámetro y largo, un plano o el vástago de muestra.",
-    cta: "Enviar especificaciones",
+    cta: "Cotizar por WhatsApp",
     item: "Vástagos y barras cromadas",
   },
   {
@@ -32,7 +34,7 @@ const BLOQUES = [
     title: "Componentes bajo medida",
     desc: "Camisas, tapas y pistones fabricados bajo medida cuando no hay repuesto original disponible.",
     necesitamos: "La pieza original o el plano.",
-    cta: "Enviar especificaciones",
+    cta: "Cotizar por WhatsApp",
     item: "Componentes bajo medida (camisa, tapa, pistón)",
   },
 ];
@@ -57,12 +59,13 @@ export default function SellosYComponentesPage() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <a href={quoteHref("Kits de sellos")} target="_blank" rel="noopener" className="btn-primary">
-                  Consultar disponibilidad
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Cotizar por WhatsApp
                   <ArrowRight className="h-4 w-4" />
                 </a>
-                <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-secondary">
-                  Enviar especificaciones
-                </a>
+                <Link href="/servicios" className="btn-secondary">
+                  Reparación de cilindros
+                </Link>
               </div>
             </Reveal>
 
@@ -131,6 +134,8 @@ export default function SellosYComponentesPage() {
           </div>
         </div>
       </section>
+
+      <CylinderRelated current="/sellos-y-componentes" />
 
       <QuoteCTA
         eyebrow="Sellos · Vástagos · Componentes"

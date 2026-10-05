@@ -62,12 +62,15 @@ export function buildQuoteMessage(opts: { tpl: QuoteTemplate; item?: string; lin
   const item = cleanText(opts.item);
   const linea = cleanText(opts.linea);
   const origin = opts.sourcePage ? `\n\n(Desde ${SITE.url.replace(/^https?:\/\//, "")}${opts.sourcePage === "/" ? "" : opts.sourcePage})` : "";
+  // Cilindros (AP-007): pedir los datos mínimos para cotizar en el primer mensaje.
+  const cylinderFields = `¿Fabricar o reparar?:\nDiámetro x carrera (mm o pulg.):\nMarca/modelo (si lo tengo):\nCantidad:\n\nLes envío foto, plano o placa a continuación.`;
   if (opts.tpl === "cilindro" && !item) {
-    return `Hola Dynatech, necesito cotizar la reparación / fabricación de un cilindro neumático.\n\nMarca/modelo (si lo tengo):\nProblema o especificación:\nCantidad:${origin}`;
+    return `Hola Dynatech, necesito cotizar la reparación / fabricación de un cilindro neumático.\n\n${cylinderFields}${origin}`;
   }
   if (item || linea) {
     const details = item ? [item, linea && linea !== item ? `Línea: ${linea}` : ""].filter(Boolean).join(" · ") : linea;
-    return `Hola Dynatech, solicito cotización sobre ${details}.\n\nProducto, código o especificaciones:\nCantidad:${origin}`;
+    const fields = /cilindro/i.test(details) ? cylinderFields : `Producto, código o especificaciones:\nCantidad:`;
+    return `Hola Dynatech, solicito cotización sobre ${details}.\n\n${fields}${origin}`;
   }
   return `Hola Dynatech, quisiera solicitar una cotización.\n\nProducto o servicio:\nCantidad:${origin}`;
 }
