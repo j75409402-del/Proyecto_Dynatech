@@ -152,8 +152,8 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
     const desktop = innerWidth >= 1024;
     const baseDistance = desktop
       ? presentation ? Math.max(7.8, 23.5 / camera.aspect) : Math.max(8.6, 11.2 / camera.aspect)
-      : Math.max(presentation ? 6.7 : 9.2, (presentation ? 14.8 : 12.7) / camera.aspect);
-    const targetDistance = premiumActive ? baseDistance * (1 + opening * (desktop ? (presentation ? .4 : .25) : .48)) / controls.zoom : 11 / controls.zoom;
+      : Math.max(presentation ? 6.2 : 9.2, (presentation ? 13.6 : 12.7) / camera.aspect);
+    const targetDistance = premiumActive ? baseDistance * (1 + opening * (desktop ? (presentation ? .4 : .25) : .45)) / controls.zoom : 11 / controls.zoom;
     // Cámara con amortiguación (easing exponencial): distancia, altura, foco y FOV convergen suave.
     const focusPart = premiumActive && controls.part && opening > .5 ? premium?.anchor(controls.part) : null;
     const focusX = focusPart ? T.MathUtils.clamp(focusPart.getWorldPosition(projected).x * .35, -1.2, 1.2) : 0;
@@ -201,6 +201,8 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
       el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) translate(-50%,-50%)`;
       el.dataset.below = id === "piston" || id === "vastago" ? "true" : "false";
       el.dataset.active = String(controls.part === id);
+      // En pantallas estrechas solo se rotulan piezas alternas (o la seleccionada) para no encimarlas.
+      el.style.visibility = width >= 600 || controls.part === id || (!controls.part && (id === "camisa" || id === "piston" || id === "tapas")) ? "visible" : "hidden";
     }
   }
   function invalidate() { if (!frame && !disposed && warmed) frame = requestAnimationFrame(draw); }
@@ -211,16 +213,26 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
   }
   /** Compila shaders (asíncrono si el driver lo permite) y mide FPS reales en los primeros frames. */
   async function warmup(): Promise<StageTier> {
+    // Tamaño real antes de medir (el ResizeObserver es asíncrono): FPS representativos.
+    if (host.clientWidth && host.clientHeight) { renderer.setSize(host.clientWidth, host.clientHeight); camera.aspect = host.clientWidth / host.clientHeight; camera.updateProjectionMatrix(); }
     if (initial === "cilindros") prepareCylinder();
     draw(performance.now(), true); // aplica estado de escena (materiales, entorno, sombras)
     try { await renderer.compileAsync(world, camera); } catch { /* compileAsync no disponible: compila en el primer render */ }
     if (disposed) return "static";
+    // Tiempo real por frame (CPU + GPU): readPixels de 1 px obliga a terminar el frame, así el
+    // trabajo de la GPU no queda oculto en la cola. Solo durante la prueba (≈10 frames).
+    const gl = renderer.getContext(), pixel = new Uint8Array(4);
     const measure = async (frames: number) => {
-      let last = await nextFrame(); const deltas: number[] = [];
-      for (let i = 0; i < frames && !disposed; i++) { draw(last, true); const now = await nextFrame(); deltas.push(now - last); last = now; }
-      deltas.sort((a, b) => a - b); return deltas[Math.floor(deltas.length / 2)] ?? 1000;
+      const costs: number[] = [];
+      for (let i = 0; i < frames && !disposed; i++) {
+        const start = await nextFrame();
+        draw(start, true); gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
+        const cost = performance.now() - start; costs.push(cost);
+        if (cost > 250) return cost; // equipo claramente lento: no seguir bloqueando el hilo principal
+      }
+      costs.sort((a, b) => a - b); return costs[Math.floor(costs.length / 2)] ?? 1000;
     };
-    await measure(2); // primeros frames: subida de texturas y sombras
+    if (await measure(2) > 1000) { tier = "static"; host.dataset.tier = tier; return tier; } // primeros frames: subida de texturas y sombras
     let median = await measure(8);
     if (tier === "high" && median > 1000 / 40) { setTier("medium"); try { await renderer.compileAsync(world, camera); } catch {} median = await measure(8); }
     if (median > 1000 / 24) tier = "static";

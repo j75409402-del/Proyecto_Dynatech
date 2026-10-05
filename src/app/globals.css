@@ -512,3 +512,4 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 }
 @media(max-width:639px){ .home-hero-kicker { letter-spacing:.08em; } }
 .cylinder-experience .stage-caption { font-family:var(--font-mono),ui-monospace,monospace; }
+@media(max-width:600px){ .cylinder-experience .caption-extra { display:none; } }

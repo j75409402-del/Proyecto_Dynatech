@@ -68,7 +68,7 @@ export function IndustrialStage({scene="ecosistema",narrative=false,presentation
       const anchor=desktop?innerHeight*.55:Math.min(innerHeight-40,stuck.bottom+Math.max(60,(innerHeight-stuck.bottom)*.45));
       let phase=0;stories.forEach((story,i)=>{if(story.getBoundingClientRect().top<anchor)phase=i;});
       const r=stories[phase].getBoundingClientRect(),t=Math.max(0,Math.min(1,(anchor-r.top)/Math.max(1,r.height)));
-      const p=phase===0?.3*t:phase===1?.3+.48*t:.78+.22*t;
+      const p=phase===0?.22*t:phase===1?.3+.48*t:.78+.22*t;
       experience.dataset.phase=String(phase);
       experience.style.setProperty("--story-progress",String(p));
       setScrollOpening(p>.33&&p<.85);engine.current?.setChapter("cilindros",p);
@@ -90,7 +90,7 @@ export function IndustrialStage({scene="ecosistema",narrative=false,presentation
  <div className="stage-fallback"><Image src={image} alt={imageAlt} fill priority={presentation} sizes={presentation?"100vw":"(max-width: 900px) 100vw, 55vw"} className="object-cover"/><div/></div>
  <div ref={host} data-presentation={presentation?"cinematic":undefined} className={`stage-canvas ${interactive||active==="cilindros"?"interactive":""}`} aria-hidden="true"/>
  <div className="stage-topline"><span>Dynatech / Ingeniería</span><span>RD</span></div><div className="stage-cross" aria-hidden="true">+</div>
- <div className="stage-caption">{ready&&!disabled?(presentation?"Modelo ilustrativo · Configuración bajo cotización":"Representación 3D conceptual · No es un producto específico"):"Imagen de referencia"}</div>
+ <div className="stage-caption">{ready&&!disabled?(presentation?<>Modelo ilustrativo<span className="caption-extra"> · Configuración bajo cotización</span></>:"Representación 3D conceptual · No es un producto específico"):"Imagen de referencia"}</div>
  {presentation&&!(ready&&!disabled)&&<div className="cylinder-legend"><p>Piezas de un cilindro neumático</p><ol>{CYLINDER_PARTS.map((item,i)=><li key={item.id}><span>0{i+1}</span>{item.name}</li>)}</ol></div>}
  {ready&&!disabled&&(active==="cilindros"?<div className="cylinder-controls">
  <div className="cylinder-toolbar"><span>Arrastra para girar · 360°</span><button type="button" onClick={()=>setZoom(Math.max(.85,zoom-.1))} aria-label="Alejar cilindro">−</button><button type="button" onClick={()=>setZoom(Math.min(presentation?1.12:1.25,zoom+.1))} aria-label="Acercar cilindro">+</button><button type="button" aria-pressed={effectiveExploded} onClick={()=>{setExploded(!effectiveExploded);setManualOpening(true);}}>{effectiveExploded?"Ensamblar":"Explorar el interior"}</button></div>
