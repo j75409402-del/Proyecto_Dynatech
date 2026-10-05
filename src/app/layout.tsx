@@ -16,7 +16,7 @@ const organizationJsonLd = {
   legalName: SITE.legalName,
   name: SITE.name,
   url: SITE.url,
-  logo: `${SITE.url}/logo-mark.png`,
+  logo: `${SITE.url}/brand/dynatech-logo.png`,
   description: SITE.description,
   email: CONTACT.email,
   telephone: CONTACT.phone,

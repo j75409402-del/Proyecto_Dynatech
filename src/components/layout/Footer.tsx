@@ -38,7 +38,7 @@ export function Footer() {
           <div className="col-span-2 lg:col-span-3">
             <div className="flex items-center gap-2.5 mb-4">
               <Image
-                src="/logo-mark.png"
+                src="/brand/dynatech-badge.png"
                 alt=""
                 width={36}
                 height={36}

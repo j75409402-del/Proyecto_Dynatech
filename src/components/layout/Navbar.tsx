@@ -90,7 +90,7 @@ export function Navbar() {
           {/* Brand */}
           <Link href="/" className="flex items-center gap-2.5 group [perspective:400px] shrink-0">
             <Image
-              src="/logo-mark.png"
+              src="/brand/dynatech-badge.png"
               alt=""
               width={40}
               height={40}
