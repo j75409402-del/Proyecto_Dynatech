@@ -97,11 +97,12 @@ try {
       await ctx.route('https://wa.me/**', route => route.fulfill({ status: 200, contentType: 'text/html', body: '<title>WhatsApp (simulado)</title>' }));
       const page = await ctx.newPage();
       const errors = []; page.on('pageerror', e => errors.push(e.message));
-      for (const [path, linkName, product] of [['/cilindros-hidraulicos?utm_source=facebook&utm_medium=social&utm_campaign=hidraulicos', 'Cotiza cilindros hidráulicos por WhatsApp', 'cilindros_hidraulicos'], ['/valvulas-neumaticas', 'Cotizar válvula por WhatsApp', null], ['/servicios', null, null]]) {
+      for (const [path, linkName, product] of [['/cilindros-hidraulicos?utm_source=facebook&utm_medium=social&utm_campaign=hidraulicos', 'Cotizar por WhatsApp', 'cilindros_hidraulicos'], ['/valvulas-neumaticas', 'Cotizar por WhatsApp', null], ['/servicios', null, null]]) {
         await page.goto(base + path, { waitUntil: 'load' });
         assert.equal(await page.locator('a[href*="/cotizacion/correo"]').count(), 0, `sin CTA de correo en ${path}`);
         assert.equal(await page.getByText('Cotizar por correo', { exact: false }).count(), 0, `sin texto de correo en ${path}`);
-        const link = linkName ? page.getByRole('link', { name: linkName, exact: true }).first() : page.locator('main a[href^="/cotizacion"]').first();
+        // WEB-010: texto único de CTA "Cotizar por WhatsApp" (MENSAJES-Y-SEO D4); se busca dentro de <main> (no el del menú).
+        const link = linkName ? page.locator('main').getByRole('link', { name: linkName, exact: true }).first() : page.locator('main a[href^="/cotizacion"]').first();
         assert.ok(await link.isVisible(), `CTA WhatsApp visible en ${path} (${label})`);
         const n = opened.length;
         const [popup] = await Promise.all([ctx.waitForEvent('page', { timeout: 10000 }), link.click()]);

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, CheckList, type OfferItem } from "@/components/page/Blocks";
@@ -91,7 +92,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         <nav aria-label={`Subcategorías de ${s.name}`} className="mb-8">
           <ul className="chip-nav">
             {s.subcategorias.map((sub) => (
-              <li key={sub.id}><a href={`#${sub.id}`}>{sub.title}</a></li>
+              <li key={sub.id}>{sub.href ? <Link href={sub.href}>{sub.title}</Link> : <a href={`#${sub.id}`}>{sub.title}</a>}</li>
             ))}
           </ul>
         </nav>

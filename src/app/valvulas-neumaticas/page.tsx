@@ -53,6 +53,7 @@ export default function ValvulasNeumaticasPage() {
         title="Válvulas neumáticas direccionales y solenoides"
         lead={<p>Cotiza válvulas para controlar el paso del aire en tus equipos. Recibimos solicitudes de empresas y zonas francas en República Dominicana desde Santo Domingo.</p>}
         quoteHref={quoteHref(sub.title, linea)}
+        quoteLabel="Cotizar válvula por WhatsApp"
         secondary={{ href: "#tipos", label: "Ver catálogo de la línea" }}
         note="Envía la referencia o una foto de la placa. Te confirmamos disponibilidad y condiciones en la cotización."
         image={{ src: sub.image!, alt: sub.imageAlt ?? sub.title, fit: "contain" }}

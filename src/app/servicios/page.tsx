@@ -201,7 +201,7 @@ export default function ServiciosPage() {
         items={[
           { href: "/cilindros-neumaticos", title: "Cilindros neumáticos a la medida", desc: "Tipos de cilindro y fabricación bajo plano, muestra o medidas.", image: "/products/cilindros-neumaticos.jpg", label: "Ver tipos de cilindro" },
           { href: "/sellos-y-componentes", title: "Sellos y componentes", desc: "Kits de sellos, vástagos y piezas para tu cilindro.", image: "/products/kit-sello-cilindro-neumatico.jpg", label: "Ver sellos y componentes" },
-          { href: "/cilindros-hidraulicos", title: "Cilindros hidráulicos", desc: "Fabricación y reparación bajo cotización.", icon: Droplets, label: "Ver cilindros hidráulicos" },
+          { href: "/cilindros-hidraulicos", title: "Cilindros hidráulicos", desc: "Fabricación y reparación de cilindros hidráulicos.", icon: Droplets, label: "Ver cilindros hidráulicos" },
           { href: "/mecanizado", title: "Mecanizado", desc: "Piezas bajo plano o muestra.", icon: Cog, label: "Ver mecanizado" },
         ]}
       />
