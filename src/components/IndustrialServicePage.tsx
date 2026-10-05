@@ -1,10 +1,11 @@
 import { Box, Cog, Droplets, Factory, FileText, Wrench } from "lucide-react";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
+import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, type RelatedItem } from "@/components/page/Blocks";
 import { HydraulicCylinderDrawing, MachinedPartDrawing } from "@/components/page/TechDrawings";
 import { Reveal } from "@/components/motion/Reveal";
-import { CONTACT, SITE } from "@/lib/constants";
+import { SITE } from "@/lib/constants";
 import { SERVICIOS_ADICIONALES } from "@/lib/servicios";
 
 type Service = (typeof SERVICIOS_ADICIONALES)[number];
@@ -46,7 +47,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
       />
 
       <Band tone="light" labelledBy="que-cotizamos">
-        <SectionHead kicker="01 · Qué cotizamos" id="que-cotizamos" title={`${s.name}: qué podemos evaluar`} intro="Cada solicitud se evalúa antes de confirmar su alcance." />
+        <SectionHead kicker="01 · Qué cotizamos" id="que-cotizamos" title={`${s.name}: qué podemos evaluar`} />
         <OfferGrid columns={2} compact items={s.situations.map((t, i) => ({ title: t, desc: s.situationDescs[i], icon: situationIcons[i], quote: quoteHref(t, s.name) }))} />
       </Band>
 
@@ -57,16 +58,20 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
           intro="Comparte la información disponible. Si te falta algún dato, te diremos qué hace falta."
           items={s.information.map((t) => ({ title: t }))}
           quoteHref={quoteHref(s.name)}
-          note={`Atención por WhatsApp: ${CONTACT.hours}.`}
+          note={`Atención por WhatsApp: ${shortHours()}.`}
         />
       </div>
 
       <Band tone="white" labelledBy="evaluacion">
-        <Reveal className="max-w-3xl">
-          <p className="section-kicker">03 · Evaluación</p>
-          <h2 id="evaluacion" className="section-title">Evaluamos tu solicitud</h2>
-          <p className="mt-6 text-lg leading-relaxed text-steel-300">{s.note}</p>
-          <p className="mt-4 leading-relaxed text-steel-300">Indica si solicitas la cotización para mantenimiento, compras o un proyecto de tu empresa. El alcance, plazo y condiciones se confirman al responder tu solicitud.</p>
+        <Reveal className="grid gap-6 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <p className="section-kicker">03 · Evaluación</p>
+            <h2 id="evaluacion" className="section-title">Evaluamos tu solicitud</h2>
+          </div>
+          <div className="lg:col-span-7 lg:pt-8">
+            <p className="text-lg leading-relaxed text-steel-300">{s.note}</p>
+            <p className="mt-4 leading-relaxed text-steel-300">Indica si solicitas la cotización para mantenimiento, compras o un proyecto de tu empresa. El alcance, plazo y condiciones se confirman al responder tu solicitud.</p>
+          </div>
         </Reveal>
       </Band>
 

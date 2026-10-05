@@ -22,7 +22,7 @@ type Props = {
   /** Texto bajo el CTA (MENSAJES-Y-SEO D2). */
   note?: ReactNode;
   /** Visual: imagen real de public/ o un nodo (p. ej. esquema técnico SVG). */
-  image?: { src: string; alt: string; fit?: "cover" | "contain" };
+  image?: { src: string; alt: string; fit?: "cover" | "contain"; /** object-position para fotos verticales (p. ej. "center 35%"). */ position?: string };
   visual?: ReactNode;
   caption?: { label: string; text: string };
   trust?: "cilindros" | "lineas" | false;
@@ -60,7 +60,7 @@ export function PageHero({ crumbs, kicker, title, lead, quoteHref, quoteLabel = 
         </div>
         <figure className={`home-hero-visual ${visual ? "is-drawing" : image?.fit === "contain" ? "is-catalog" : ""}`}>
           {visual ?? (image && (
-            <Image src={image.src} alt={image.alt} fill priority sizes="(max-width: 1023px) 100vw, 50vw" className={image.fit === "contain" ? "object-contain p-6" : "object-cover"} />
+            <Image src={image.src} alt={image.alt} fill priority sizes="(max-width: 1023px) 100vw, 50vw" className={image.fit === "contain" ? "object-contain p-6" : "object-cover"} style={image.position ? { objectPosition: image.position } : undefined} />
           ))}
           {caption && <figcaption><span>{caption.label}</span>{caption.text}</figcaption>}
         </figure>

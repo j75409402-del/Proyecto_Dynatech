@@ -7,7 +7,7 @@ import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { PageHero } from "@/components/page/PageHero";
 import { Band } from "@/components/page/Blocks";
-import { shortHours } from "@/components/page/TrustStrip";
+import { hoursLines, shortHours } from "@/components/page/TrustStrip";
 
 export const metadata: Metadata = {
   ...commercialMetadata("Contacta a Dynatech Ingeniería SRL", "Contacta a Dynatech en Santo Domingo para cotizar servicios y suministros industriales en República Dominicana.", "/contacto"),
@@ -39,7 +39,7 @@ function ContactPanel() {
         </li>
         <li>
           <Clock className="h-5 w-5" aria-hidden="true" />
-          <span><span className="contact-label">Horario</span><span className="contact-value">{CONTACT.hours}</span></span>
+          <span><span className="contact-label">Horario</span><span className="contact-value">{hoursLines().map((l) => <span key={l} className="block">{l}</span>)}</span></span>
         </li>
         <li>
           <MapPin className="h-5 w-5" aria-hidden="true" />

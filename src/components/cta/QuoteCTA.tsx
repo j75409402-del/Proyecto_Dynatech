@@ -1,8 +1,9 @@
-import { ArrowUpRight, Clock } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import { CONTACT } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 import { quoteBridgeHref } from "@/lib/quote";
+import { shortHours } from "@/components/page/TrustStrip";
 
 type Props = {
   eyebrow?: string;
@@ -49,10 +50,10 @@ export function QuoteCTA({
         </div>
         <div className="lg:col-span-4">
           <div className="flex flex-col gap-3">
-            <a href={whatsappHref ?? (quoteItem ? quoteHref(quoteItem, quoteTipo) : whatsappCylinderService())} target="_blank" rel="noopener" className="btn-primary min-h-14 px-6"><WhatsAppIcon className="h-5 w-5" />{ctaLabel}<ArrowUpRight className="h-4 w-4" /></a>
+            <a href={whatsappHref ?? (quoteItem ? quoteHref(quoteItem, quoteTipo) : whatsappCylinderService())} target="_blank" rel="noopener" className="btn-primary min-h-14 px-6"><WhatsAppIcon className="h-5 w-5" />{ctaLabel}<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
             <p className="text-sm text-white/70">WhatsApp Business: <a href={quoteBridgeHref()} target="_blank" rel="noopener" className="inline-flex min-h-10 items-center font-medium text-white underline decoration-white/30 underline-offset-4 hover:text-signal">{CONTACT.whatsappDisplay}</a></p>
           </div>
-          <p className="mt-5 flex items-center gap-2 text-xs leading-relaxed text-white/55"><Clock className="h-4 w-4 shrink-0" />{CONTACT.hours}</p>
+          <p className="mt-4 flex items-center gap-2 text-sm leading-relaxed text-white/60"><Clock className="h-4 w-4 shrink-0" aria-hidden="true" />Atención: {shortHours()}</p>
         </div>
       </div>
     </section>

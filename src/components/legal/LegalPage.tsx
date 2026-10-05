@@ -16,7 +16,7 @@ export function LegalPage({ eyebrow, title, updated, intro, sections }: Props) {
   return (
     <div>
       <section className="home-hero page-hero" aria-labelledby="legal-title">
-        <div className="container-max page-hero-crumbs"><Breadcrumbs items={[{ label: title }]} /></div>
+        <div className="container-max page-hero-crumbs max-w-3xl"><Breadcrumbs items={[{ label: title }]} /></div>
         <div className="container-max max-w-3xl pb-12 pt-6 sm:pb-16">
           <p className="home-hero-kicker"><span aria-hidden="true" />{eyebrow}</p>
           <h1 id="legal-title" className="home-hero-title">{title}</h1>

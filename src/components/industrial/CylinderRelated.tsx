@@ -1,4 +1,4 @@
-import { Cog, Droplets } from "lucide-react";
+import { Cog, Droplets, Wrench } from "lucide-react";
 import { RelatedGrid, type RelatedItem } from "@/components/page/Blocks";
 
 /** Enlazado interno entre las páginas de cilindros (AP-007 / WEB-010). Cada página se excluye a sí misma. */
@@ -11,5 +11,8 @@ const PAGES: RelatedItem[] = [
 ];
 
 export function CylinderRelated({ current, limit = 3 }: { current: string; limit?: number }) {
-  return <RelatedGrid kicker="Relacionado" title="Más sobre cilindros" id="cilindros-relacionado" items={PAGES.filter((p) => p.href !== current).slice(0, limit)} />;
+  // En /cilindros-neumaticos la foto "después" ya está en el antes/después de la página: icono en su lugar.
+  const items = PAGES.filter((p) => p.href !== current).slice(0, limit)
+    .map((p) => (current === "/cilindros-neumaticos" && p.href === "/servicios" ? { ...p, image: undefined, icon: Wrench } : p));
+  return <RelatedGrid kicker="Relacionado" title="Más sobre cilindros" id="cilindros-relacionado" items={items} />;
 }

@@ -18,13 +18,14 @@ export function CilindrosDestacados() {
     <section className="section-pad border-b border-black/10">
       <div className="container-max">
         <div className="section-heading mb-12">
-          <div><p className="eyebrow mb-4">01 / Nuestra línea principal</p><h2 className="font-display text-display-lg">Cilindros neumáticos.<br /><span className="text-steel-500">De principio a fin.</span></h2></div>
+          <div><p className="section-kicker">01 · Nuestra línea principal</p><h2 className="section-title">Cilindros neumáticos.<br /><span className="text-steel-500">De principio a fin.</span></h2></div>
           <p className="max-w-md text-steel-300 leading-relaxed">Fabricación a medida, reparación y componentes para mantener tu equipo en operación. Trabajamos a partir de la información de tu aplicación.</p>
         </div>
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           <Link href="/cilindros-neumaticos" className="cyl-preview group" aria-label="Explorar el cilindro neumático en 3D: piezas y funciones">
             <span className="cyl-preview-stage">
               <Image src="/banners/cilindros-taller-wide.webp" alt="" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover" />
+              <span className="img-note">Imagen de referencia</span>
               <span className="cyl-preview-badge"><Box className="h-4 w-4" aria-hidden="true" />Visor 3D</span>
             </span>
             <span className="cyl-preview-body">
@@ -56,14 +57,14 @@ export function ComoTrabajamos() {
     <section className="bg-surface text-white">
       <div className="container-max grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p className="eyebrow mb-5 text-white/60">02 / Tu solicitud, paso a paso</p>
-          <h2 className="font-display text-display-lg">Una foto. Un plano.<br /><span className="text-white/55">El primer paso.</span></h2>
+          <p className="section-kicker !text-[#a9b7c4]">03 · Tu solicitud, paso a paso</p>
+          <h2 className="section-title">Una foto. Un plano.<br /><span className="text-white/55">El primer paso.</span></h2>
           <p className="mt-6 max-w-lg leading-relaxed text-white/70">Envíanos lo que tengas: referencia, fotos, plano, muestra o medidas. Evaluamos tu solicitud y confirmamos alcance, condiciones y disponibilidad en la cotización.</p>
           <div className="my-8 grid grid-cols-3 gap-3">{[{ icon: Camera, name: "Fotos" }, { icon: FileText, name: "Plano o muestra" }, { icon: Ruler, name: "Medidas" }].map((item) => <div key={item.name} className="border border-white/15 p-4"><item.icon className="mb-3 h-5 w-5 text-signal" /><p className="text-sm text-white/80">{item.name}</p></div>)}</div>
           <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-14"><WhatsAppIcon className="h-5 w-5" /> Cotizar por WhatsApp <ArrowRight className="h-4 w-4" /></a>
         </div>
         <div className="flex flex-col justify-center">
-          <div className="relative aspect-[3/2] overflow-hidden border border-white/15"><Image src="/cilindros/cilindros-nuevos.jpg" alt="Cilindro neumático sobre el banco del taller" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover object-[center_68%]" /></div>
+          <div className="relative aspect-[3/2] overflow-hidden border border-white/15 bg-white"><Image src="/products/cilindros-smc-2.jpg" alt="Imagen de referencia: cilindros neumáticos de distintos tipos y tamaños" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-contain p-6" /><span className="img-note">Imagen de referencia</span></div>
           <ol className="mt-5 grid grid-cols-3 gap-px border border-white/15 bg-white/15">{["Comparte tu necesidad", "Recibe la cotización", "Coordina tu pedido"].map((step, i) => <li key={step} className="bg-surface px-4 py-5"><span className="mb-2 block font-mono text-xs text-[#ff6b84]">0{i + 1}</span><span className="text-sm text-white/80">{step}</span></li>)}</ol>
         </div>
       </div>
@@ -75,7 +76,7 @@ export function SolucionesIndustriales() {
   return (
     <section id="soluciones" className="section-pad scroll-mt-28 border-b border-black/10 bg-[#F4F5F6]">
       <div className="container-max">
-        <div className="section-heading mb-10"><div><p className="eyebrow mb-4">03 / Líneas complementarias</p><h2 className="font-display text-display-lg">Más soluciones<br />para tu industria.</h2></div><p className="max-w-md leading-relaxed text-steel-300">Además de cilindros neumáticos, cotizamos componentes de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas.</p></div>
+        <div className="section-heading mb-10"><div><p className="section-kicker">04 · Líneas complementarias</p><h2 className="section-title">Más soluciones<br />para tu industria.</h2></div><p className="max-w-md leading-relaxed text-steel-300">Además de cilindros neumáticos, cotizamos componentes de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas.</p></div>
         <div className="grid gap-4 lg:grid-cols-2" data-fab-hide="">
           {SOLUCIONES.map((s) => (
             <article key={s.slug} className="group flex gap-4 border border-black/10 bg-white p-4 transition-colors hover:border-black/25 sm:gap-6 sm:p-6 last:lg:col-span-2">
@@ -92,7 +93,7 @@ export function SolucionesIndustriales() {
 export function ServiciosComplementarios() {
   return (
     <section className="container-max py-12 sm:py-16">
-      <div className="grid gap-8 lg:grid-cols-3" data-fab-hide=""><div><p className="eyebrow mb-4">También bajo cotización</p><h2 className="font-display text-display-md">Servicios<br />complementarios.</h2><p className="mt-4 text-sm leading-relaxed text-steel-300">Los cilindros neumáticos son nuestra línea principal. También evaluamos solicitudes de hidráulicos y mecanizado.</p></div>{SERVICIOS_ADICIONALES.map((s) => <Link key={s.slug} href={`/${s.slug}`} className="group flex flex-col border border-black/10 p-6 transition-colors hover:border-signal/40 sm:p-8"><h3 className="mb-3 font-display text-2xl">{s.name}</h3><p className="mb-6 text-sm leading-relaxed text-steel-300">{s.description}</p><span className="mt-auto inline-flex min-h-11 items-center gap-2 text-sm font-medium text-signal">Ver {s.name.toLowerCase()} <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span></Link>)}</div>
+      <div className="grid gap-8 lg:grid-cols-3" data-fab-hide=""><div><p className="section-kicker">05 · También bajo cotización</p><h2 className="section-title">Servicios<br />complementarios.</h2><p className="mt-4 text-sm leading-relaxed text-steel-300">Los cilindros neumáticos son nuestra línea principal. También evaluamos solicitudes de hidráulicos y mecanizado.</p></div>{SERVICIOS_ADICIONALES.map((s) => <Link key={s.slug} href={`/${s.slug}`} className="group flex flex-col border border-black/10 p-6 transition-colors hover:border-signal/40 sm:p-8"><h3 className="mb-3 font-display text-2xl">{s.name}</h3><p className="mb-6 text-sm leading-relaxed text-steel-300">{s.description}</p><span className="mt-auto inline-flex min-h-11 items-center gap-2 text-sm font-medium text-signal">Ver {s.name.toLowerCase()} <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span></Link>)}</div>
     </section>
   );
 }
@@ -103,7 +104,7 @@ export function AntesDespues() {
     <section className="section-pad border-b border-black/10 bg-[#F4F5F6]" aria-labelledby="antes-despues-inicio">
       <div className="container-max">
         <Reveal className="section-heading mb-10">
-          <div><p className="eyebrow mb-4">Trabajo de taller</p><h2 id="antes-despues-inicio" className="font-display text-display-lg">Antes y después.</h2></div>
+          <div><p className="section-kicker">02 · Trabajo de taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después.</h2></div>
           <p className="max-w-md leading-relaxed text-steel-300">Cilindro ISO 32 mm recuperado en nuestro taller. Desliza para comparar.</p>
         </Reveal>
         <Reveal>

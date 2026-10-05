@@ -283,7 +283,7 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <div className="eyebrow mt-5 mb-1">Servicios industriales</div>
+          <div className="eyebrow mt-5 mb-1">Especialidades</div>
           {NAV.especialidades.map((item) => (
             <Link
               key={item.href}

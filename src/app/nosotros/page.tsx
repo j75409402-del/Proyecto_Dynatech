@@ -9,6 +9,7 @@ import { Band, SectionHead, Steps } from "@/components/page/Blocks";
 import { Reveal } from "@/components/motion/Reveal";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { whatsappGeneral } from "@/lib/whatsapp";
+import { hoursLines } from "@/components/page/TrustStrip";
 
 export const metadata: Metadata = {
   ...commercialMetadata("Dynatech Ingeniería SRL en República Dominicana", "Conoce a Dynatech Ingeniería SRL: servicios de cilindros neumáticos y suministros industriales bajo cotización.", "/nosotros"),
@@ -33,7 +34,7 @@ const PROCESO = [
 ];
 
 const PRINCIPIOS = [
-  { title: "La referencia exacta", body: "Evaluamos cada solicitud con los datos de tu equipo: referencia, fotos, plano o muestra. Buscamos la pieza correcta, no la más parecida." },
+  { title: "Con los datos de tu equipo", body: "Evaluamos cada solicitud con la referencia, las fotos, el plano o la muestra que nos compartas, antes de cotizar." },
   { title: "A la medida", body: "Trabajamos a partir de lo que tengas. Si el repuesto original de un cilindro ya no existe, fabricamos el componente." },
   { title: "Local", body: "Taller en Santo Domingo. Lo que no fabricamos, lo conseguimos bajo pedido, con el plazo confirmado en la cotización." },
 ];
@@ -50,7 +51,8 @@ export default function NosotrosPage() {
         secondary={{ href: "#empresa", label: "Ver datos de la empresa" }}
         note="Trabajamos bajo cotización: nos envías las especificaciones, cotizamos y coordinamos la entrega."
         // PENDIENTE CAPITÁN: sustituir por una foto real de la fachada, el taller o el equipo (hoy es imagen de referencia).
-        image={{ src: "/cilindros/taller-portada-v2.webp", alt: "Imagen de referencia de un técnico trabajando en un cilindro neumático" }}
+        // WEB-011: distinta del hero de /servicios (antes compartían taller-portada-v2).
+        image={{ src: "/cilindros/cilindros-nuevos.jpg", alt: "Imagen de referencia: cilindro neumático sobre el banco de un taller", position: "center 6%" }}
         caption={{ label: "Imagen de referencia", text: "Taller de cilindros · Suministro industrial" }}
         trust="lineas"
       />
@@ -109,7 +111,7 @@ export default function NosotrosPage() {
             <div><dt>RNC</dt><dd>{SITE.rnc}</dd></div>
             {/* PENDIENTE CAPITÁN: número en Av. Rómulo Betancourt y enlace de Google Maps. */}
             <div><dt>Dirección</dt><dd>{CONTACT.address}</dd></div>
-            <div><dt>Horario</dt><dd>{CONTACT.hours}</dd></div>
+            <div><dt>Horario</dt><dd>{hoursLines().map((l) => <span key={l} className="block">{l}</span>)}</dd></div>
             <div><dt>WhatsApp</dt><dd><a href={whatsappGeneral()} target="_blank" rel="noopener">{CONTACT.whatsappDisplay}</a></dd></div>
             <div><dt>Teléfono</dt><dd><a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}>{CONTACT.phone}</a></dd></div>
             <div><dt>Correo</dt><dd><a href={emailHref()} className="[overflow-wrap:anywhere]">{CONTACT.email}</a></dd></div>

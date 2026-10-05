@@ -2,8 +2,9 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
+import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, CheckList, type OfferItem } from "@/components/page/Blocks";
-import { CONTACT, SITE } from "@/lib/constants";
+import { SITE } from "@/lib/constants";
 import { SOLUCIONES, DATOS_PARA_COTIZAR, type Solucion } from "@/lib/soluciones";
 import { whatsappSolucion } from "@/lib/whatsapp";
 
@@ -106,7 +107,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         intro={`Para cotizar ${s.name.toLowerCase()}, comparte los datos que tengas. No hace falta completarlos todos: con una foto legible de la placa o la referencia podemos empezar.`}
         items={datos}
         quoteHref={whatsappSolucion(s.name)}
-        note={`Atención por WhatsApp: ${CONTACT.hours}.`}
+        note={`Atención por WhatsApp: ${shortHours()}.`}
       />
 
       <Band tone="white" labelledBy="aplicaciones-titulo">

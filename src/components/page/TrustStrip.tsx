@@ -10,6 +10,13 @@ export function shortHours(hours: string = CONTACT.hours) {
   return `${abbr(weekdays)} ${clean(weekdayHours)} · ${abbr(saturday)} ${clean(saturdayHours)}`;
 }
 
+/** Horario en dos partes (días laborables / sábado) para mostrarlo sin cortes raros. */
+export function hoursLines(hours: string = CONTACT.hours): string[] {
+  const parts = hours.split(" · ");
+  if (parts.length !== 4) return [hours];
+  return [`${parts[0]} · ${parts[1]}`, `${parts[2]} · ${parts[3]}`];
+}
+
 /**
  * Franja de confianza (solo datos verificables de `constants.ts`, MENSAJES-Y-SEO D1).
  * - `cilindros`: añade "Prueba de funcionamiento antes de entregar" (solo aplica a reparación de cilindros).

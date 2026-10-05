@@ -483,7 +483,7 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .cyl-preview-title { font-size:24px; line-height:1.15; font-weight:500; letter-spacing:-.02em; }
 .cyl-preview-text { font-size:15px; line-height:1.6; color:#b7c3cd; }
 .cyl-preview-parts { display:flex; flex-wrap:wrap; gap:6px 16px; padding-top:12px; border-top:1px solid #ffffff1a; font-size:13px; color:#d6dee5; }
-.cyl-preview-parts b { margin-right:6px; font:400 11px var(--font-mono),ui-monospace,monospace; color:#E4002B; }
+.cyl-preview-parts b { margin-right:6px; font:400 12px var(--font-mono),ui-monospace,monospace; color:#E4002B; }
 .cyl-preview-cta { margin-top:auto; padding-top:8px; display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:500; text-transform:uppercase; letter-spacing:.06em; color:#fff; }
 /* Antes / después */
 .before-after { position:relative; overflow:hidden; background:#e7eaee; border:1px solid #0b0d101a; touch-action:pan-y; user-select:none; -webkit-user-select:none; cursor:ew-resize; }
@@ -581,7 +581,8 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 /* Relacionados */
 .related-grid { display:grid; gap:12px; }
 @media(min-width:640px){ .related-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media(min-width:1024px){ .related-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } .related-grid.cols-4 { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+/* 4 relacionados: 2×2 (en 4 columnas el título y el enlace quedaban comprimidos a ~160 px). */
+@media(min-width:1024px){ .related-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } .related-grid.cols-4 { grid-template-columns:repeat(2,minmax(0,1fr)); } .related-grid.cols-4 .related-thumb { width:88px; height:88px; } }
 .related-card { display:flex; height:100%; gap:16px; padding:16px; background:#fff; border:1px solid #0b0d101a; transition:border-color .25s; }
 .related-card:hover { border-color:#E4002B; }
 .related-thumb { position:relative; flex:none; width:72px; height:72px; overflow:hidden; background:#151d25; }
@@ -596,7 +597,8 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .check-list li { display:flex; gap:12px; align-items:flex-start; padding:18px; background:#fff; font-size:15px; line-height:1.5; color:#1e2832; }
 .check-list li span { margin-top:7px; width:8px; height:8px; flex:none; background:#E4002B; }
 .steps { display:grid; gap:12px; }
-@media(min-width:768px){ .steps { grid-template-columns:repeat(var(--steps,4),minmax(0,1fr)); } }
+@media(min-width:640px){ .steps { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(min-width:1024px){ .steps { grid-template-columns:repeat(var(--steps,4),minmax(0,1fr)); } }
 .step { height:100%; padding:20px; border:1px solid #0b0d101a; background:#fff; }
 .band-dark .step { background:#121a22; border-color:#ffffff1a; }
 .step-num { display:block; margin-bottom:14px; font-family:var(--font-mono),ui-monospace,monospace; font-size:13px; color:#E4002B; }
@@ -685,3 +687,20 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .contact-main .contact-label { color:#fff; }
 .cyl-preview-parts b { font-size:12px; color:#ff6b84; }
 .mobile-quote-fab:focus-visible { outline:3px solid #fff; outline-offset:3px; box-shadow:0 0 0 7px #0b1016; }
+/* WEB-011 QA: tarjeta huérfana al final de una rejilla → horizontal a todo el ancho (sin hueco vacío). */
+@media(min-width:640px) and (max-width:1023px){
+  .offer-grid > :last-child:nth-child(odd) { grid-column:1 / -1; }
+  .offer-grid > :last-child:nth-child(odd) .offer-card:has(.offer-media) { flex-direction:row; }
+  .offer-grid > :last-child:nth-child(odd) .offer-media { width:42%; flex:none; aspect-ratio:auto; min-height:220px; border-bottom:0; border-right:1px solid #0b0d1014; }
+  .offer-grid > :last-child:nth-child(odd) .offer-card:has(.offer-media) .offer-body { justify-content:center; }
+  .offer-grid > :last-child:nth-child(odd) .offer-card:has(.offer-media) .offer-actions { margin-top:8px; }
+}
+@media(min-width:1024px){
+  .offer-grid.cols-3 > :last-child:nth-child(3n+1) { grid-column:1 / -1; }
+  .offer-grid.cols-3 > :last-child:nth-child(3n+1) .offer-card:has(.offer-media) { flex-direction:row; }
+  .offer-grid.cols-3 > :last-child:nth-child(3n+1) .offer-media { width:calc((100% - 32px) / 3); flex:none; aspect-ratio:auto; min-height:240px; border-bottom:0; border-right:1px solid #0b0d1014; }
+  .offer-grid.cols-3 > :last-child:nth-child(3n+1) .offer-body { justify-content:center; padding:28px 32px; max-width:44rem; }
+  .offer-grid.cols-3 > :last-child:nth-child(3n+1) .offer-actions { margin-top:8px; }
+}
+/* Rótulo "Imagen de referencia" sobre fotos sueltas (misma pieza que .img-note de las tarjetas). */
+.img-note.is-top { bottom:auto; top:10px; left:auto; right:10px; }

@@ -4,9 +4,10 @@ import { Reveal } from "@/components/motion/Reveal";
 import { AccordionItem } from "@/components/ui/Accordion";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
+import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, Steps } from "@/components/page/Blocks";
 import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
-import { CONTACT, SITE } from "@/lib/constants";
+import { SITE } from "@/lib/constants";
 import Link from "next/link";
 import { ArrowUpRight, Cog, Droplets } from "lucide-react";
 import { SERVICIOS } from "@/lib/servicios";
@@ -91,8 +92,8 @@ const REPARACION_IDS = ["reparacion", "reconstruccion", "cambio-de-sellos"];
 const FABRICACION_IDS = ["fabricacion", "bajo-muestra-o-plano", "personalizados"];
 const REPARACION_MEDIA: Record<string, { image: string; imageAlt: string; imageFit?: "cover" | "contain"; imageNote?: string }> = {
   reparacion: { image: "/cilindros/taller-reparando.jpg", imageAlt: "Imagen de referencia: técnico reparando un cilindro neumático", imageFit: "cover", imageNote: "Imagen de referencia" },
-  reconstruccion: { image: "/banners/cilindros-taller-wide.webp", imageAlt: "Cilindro neumático desarmado con sus componentes sobre el banco", imageFit: "cover" },
-  "cambio-de-sellos": { image: "/products/kit-sello-cilindro-neumatico.jpg", imageAlt: "Kit de sellos para cilindro neumático" },
+  reconstruccion: { image: "/banners/cilindros-taller-wide.webp", imageAlt: "Imagen de referencia: cilindro neumático con sus componentes sobre el banco", imageFit: "cover", imageNote: "Imagen de referencia" },
+  "cambio-de-sellos": { image: "/products/kits-sello-smc.jpg", imageAlt: "Kits de sellos de reemplazo para cilindros neumáticos" },
 };
 
 const PROCESO = [
@@ -175,7 +176,7 @@ export default function ServiciosPage() {
           { title: "Cantidad y ciudad de entrega" },
         ]}
         quoteHref={whatsappCylinderService()}
-        note={`Atención por WhatsApp: ${CONTACT.hours}.`}
+        note={`Atención por WhatsApp: ${shortHours()}.`}
       />
 
       {/* FAQ (destino de /faq → /servicios#preguntas-frecuentes) */}

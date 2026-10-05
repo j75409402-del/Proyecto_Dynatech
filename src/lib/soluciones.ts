@@ -158,10 +158,10 @@ export const SOLUCIONES: Solucion[] = [
         title: "Reparación de cilindros",
         desc: "Reparación y reconstrucción de cilindros neumáticos, con prueba de funcionamiento antes de entregar.",
         href: "/servicios",
-        image: "/cilindros/taller-portada-v2.webp",
-        imageAlt: "Imagen de referencia: técnico revisando un cilindro neumático en el banco",
+        // WEB-011: foto real del caso antes/después (antes era el hero de /servicios).
+        image: "/cilindros/antes-cilindro-iso-32mm.jpg",
+        imageAlt: "Cilindro neumático ISO 32 mm con corrosión, antes de su reparación en el taller",
         imageFit: "cover",
-        imageNote: "Imagen de referencia",
       },
     ],
     aplicaciones: [

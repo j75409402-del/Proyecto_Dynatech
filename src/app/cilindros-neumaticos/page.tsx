@@ -120,12 +120,12 @@ export default function CilindrosNeumaticosPage() {
 
           <Reveal className="mt-8">
             <p className="text-steel-300">
-              ¿Buscas un cilindro estándar? Envíanos su código o medidas y te confirmamos disponibilidad.{" "}
+              ¿Buscas un cilindro estándar? Envíanos su código o medidas y te confirmamos disponibilidad.
               <a
                 href={quoteHref("Cilindro neumático estándar")}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex min-h-11 items-center gap-1 text-signal font-medium hover:underline whitespace-nowrap"
+                className="mt-1 flex min-h-11 w-fit items-center gap-1 text-signal font-medium hover:underline whitespace-nowrap"
               >
                 Cotizar por WhatsApp <ArrowRight className="inline h-3.5 w-3.5" aria-hidden="true" />
               </a>
@@ -145,7 +145,7 @@ export default function CilindrosNeumaticosPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {NECESITAMOS.map((n, i) => (
-              <Reveal key={n.title} delay={i * 0.05} className="h-full">
+              <Reveal key={n.title} delay={i * 0.05} className="h-full last:col-span-2 md:last:col-span-1">
                 <div className="h-full border border-black/10 bg-carbon p-6">
                   <span className="grid h-10 w-10 place-items-center bg-signal-soft text-signal mb-4">
                     <n.icon className="h-5 w-5" />

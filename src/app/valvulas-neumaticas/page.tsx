@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
+import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid } from "@/components/page/Blocks";
-import { CONTACT, SITE } from "@/lib/constants";
+import { SITE } from "@/lib/constants";
 import { getSolucion } from "@/lib/soluciones";
 
 const neumatica = getSolucion("neumatica");
@@ -76,7 +77,7 @@ export default function ValvulasNeumaticasPage() {
         intro="Envía los datos que tengas. No es necesario completar los que desconoces."
         items={information}
         quoteHref={quoteHref(sub.title, linea)}
-        note={`Atención por WhatsApp: ${CONTACT.hours}.`}
+        note={`Atención por WhatsApp: ${shortHours()}.`}
       />
 
       <RelatedGrid

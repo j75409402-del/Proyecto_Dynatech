@@ -5,6 +5,7 @@ import { CONTACT, NAV, SITE, SOCIAL, emailHref } from "@/lib/constants";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { Reveal } from "@/components/motion/Reveal";
 import { whatsappCylinderService } from "@/lib/whatsapp";
+import { hoursLines } from "@/components/page/TrustStrip";
 
 const solutionLinks = SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}` }));
 
@@ -32,9 +33,9 @@ export function Footer() {
   return (
     <footer className="site-footer bg-surface text-white border-t border-white/10">
       <div className="container-max py-16">
-        <Reveal className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+        <Reveal className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-12 lg:gap-8">
           {/* Brand + tagline */}
-          <div className="sm:col-span-2 lg:col-span-3">
+          <div className="col-span-2 lg:col-span-3">
             <div className="flex items-center gap-2.5 mb-4">
               <Image
                 src="/logo-mark.png"
@@ -122,7 +123,7 @@ export function Footer() {
           </div>
 
           {/* Contacto */}
-          <div className="min-w-0 lg:col-span-3">
+          <div className="col-span-2 min-w-0 sm:col-span-1 lg:col-span-3">
             <div className="eyebrow mb-4">Contacto</div>
             <ul className="space-y-3 text-sm text-steel-200">
               <li className="flex items-start gap-2.5">
@@ -133,7 +134,7 @@ export function Footer() {
                 <Phone className="h-4 w-4 text-signal shrink-0 mt-0.5" />
                 <a
                   href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-                  className="-my-2.5 inline-flex min-h-10 items-center font-mono hover:text-surface transition-colors"
+                  className="-my-2.5 inline-flex min-h-10 items-center hover:text-surface transition-colors"
                 >
                   {CONTACT.phone}
                 </a>
@@ -149,7 +150,7 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <Clock className="h-4 w-4 text-signal shrink-0 mt-0.5" />
-                <span>{CONTACT.hours}</span>
+                <span>{hoursLines().map((l) => <span key={l} className="block">{l}</span>)}</span>
               </li>
             </ul>
           </div>
@@ -166,7 +167,7 @@ export function Footer() {
               href={SOCIAL.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-steel-400 hover:text-signal transition-colors"
+              className="inline-flex min-h-10 items-center text-steel-400 hover:text-signal transition-colors"
             >
               Instagram
             </a>
@@ -174,7 +175,7 @@ export function Footer() {
               href={SOCIAL.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-steel-400 hover:text-signal transition-colors"
+              className="inline-flex min-h-10 items-center text-steel-400 hover:text-signal transition-colors"
             >
               LinkedIn
             </a>

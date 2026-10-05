@@ -33,14 +33,16 @@ function CilindrosDestacado() {
     <Band tone="dark" labelledBy="neumatica-destacado">
       <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
         <Reveal className="lg:col-span-5">
-          <div className="relative aspect-[4/3] overflow-hidden border border-white/10 bg-[#151d25] lg:aspect-[4/5]">
+          {/* WEB-011: foto de catálogo (antes cilindros-nuevos.jpg, que ahora es el hero de /nosotros). */}
+          <div className="relative aspect-[4/3] overflow-hidden border border-white/10 bg-white lg:aspect-[4/5]">
             <Image
-              src="/cilindros/cilindros-nuevos.jpg"
-              alt="Cilindro neumático nuevo sobre el banco del taller"
+              src="/products/cilindros-smc.jpg"
+              alt="Imagen de referencia: cilindros neumáticos compactos, ISO y de vástago guiado"
               fill
               sizes="(max-width: 1023px) 100vw, 40vw"
-              className="object-cover object-[center_70%]"
+              className="object-contain p-6"
             />
+            <span className="img-note">Imagen de referencia</span>
           </div>
         </Reveal>
         <Reveal delay={0.08} className="lg:col-span-7">
