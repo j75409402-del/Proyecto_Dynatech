@@ -23,6 +23,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     function onScroll() {
@@ -37,7 +38,11 @@ export function Navbar() {
   useEffect(() => {
     if (!open) return;
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        // Accesibilidad: el foco vuelve al botón que abrió el menú.
+        menuButtonRef.current?.focus();
+      }
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -228,6 +233,7 @@ export function Navbar() {
 
           {/* Menú mobile / tablet */}
           <button
+            ref={menuButtonRef}
             className="lg:hidden grid h-11 w-11 place-items-center text-surface -mr-2"
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Cerrar menú" : "Abrir menú"}

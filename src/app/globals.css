@@ -680,3 +680,8 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .cylinder-page .related-more { color:#ff5a75; }
 .cylinder-page .text-steel-300 a.text-surface { color:#f1f4f7; }
 .offer-icon { display:grid; place-items:center; width:52px; height:52px; margin-bottom:16px; background:#0d141b; color:#ff5a75; }
+/* Auditoría WEB-010 (H-W2…H-W6) */
+.img-note { position:absolute; left:10px; bottom:10px; padding:4px 8px; background:#0b1016d9; color:#fff; font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; pointer-events:none; }
+.contact-main .contact-label { color:#fff; }
+.cyl-preview-parts b { font-size:12px; color:#ff6b84; }
+.mobile-quote-fab:focus-visible { outline:3px solid #fff; outline-offset:3px; box-shadow:0 0 0 7px #0b1016; }

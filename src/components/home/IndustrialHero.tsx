@@ -21,7 +21,7 @@ export function Hero() {
       secondary={{ href: "#soluciones", label: "Ver líneas industriales" }}
       note="Envía foto, código, plano o medidas. Te confirmamos alcance y condiciones en la cotización."
       image={{ src: "/cilindros/taller-reparando.jpg", alt: "Imagen de referencia: técnico reparando un cilindro neumático en el taller" }}
-      caption={{ label: "Taller y suministro", text: "Reparación · Fabricación · Suministro" }}
+      caption={{ label: "Imagen de referencia", text: "Reparación · Fabricación · Suministro" }}
       trust="cilindros"
     />
   );

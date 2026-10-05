@@ -89,8 +89,8 @@ const faqJsonLd = {
 
 const REPARACION_IDS = ["reparacion", "reconstruccion", "cambio-de-sellos"];
 const FABRICACION_IDS = ["fabricacion", "bajo-muestra-o-plano", "personalizados"];
-const REPARACION_MEDIA: Record<string, { image: string; imageAlt: string; imageFit?: "cover" | "contain" }> = {
-  reparacion: { image: "/cilindros/taller-reparando.jpg", imageAlt: "Técnico reparando un cilindro neumático en el taller", imageFit: "cover" },
+const REPARACION_MEDIA: Record<string, { image: string; imageAlt: string; imageFit?: "cover" | "contain"; imageNote?: string }> = {
+  reparacion: { image: "/cilindros/taller-reparando.jpg", imageAlt: "Imagen de referencia: técnico reparando un cilindro neumático", imageFit: "cover", imageNote: "Imagen de referencia" },
   reconstruccion: { image: "/banners/cilindros-taller-wide.webp", imageAlt: "Cilindro neumático desarmado con sus componentes sobre el banco", imageFit: "cover" },
   "cambio-de-sellos": { image: "/products/kit-sello-cilindro-neumatico.jpg", imageAlt: "Kit de sellos para cilindro neumático" },
 };
@@ -118,7 +118,8 @@ export default function ServiciosPage() {
         quoteHref={whatsappCylinderService()}
         secondary={{ href: "#proceso", label: "Ver el proceso" }}
         note="Desarmamos, cambiamos lo dañado y probamos el cilindro antes de entregarlo."
-        image={{ src: "/cilindros/taller-portada-v2.webp", alt: "Técnico revisando un cilindro neumático en el banco del taller" }}
+        image={{ src: "/cilindros/taller-portada-v2.webp", alt: "Imagen de referencia: técnico revisando un cilindro neumático en el banco" }}
+        caption={{ label: "Imagen de referencia", text: "Reparación · Reconstrucción · Sellos" }}
         trust="cilindros"
       />
 

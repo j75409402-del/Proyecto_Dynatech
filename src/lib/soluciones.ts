@@ -34,6 +34,8 @@ export type Subcategoria = {
   imageAlt?: string;
   /** "contain" (por defecto) para fotos de catálogo con fondo blanco; "cover" para fotos de ambiente. */
   imageFit?: "contain" | "cover";
+  /** Rótulo visible sobre la foto (p. ej. "Imagen de referencia"). */
+  imageNote?: string;
 };
 
 export type Solucion = {
@@ -157,8 +159,9 @@ export const SOLUCIONES: Solucion[] = [
         desc: "Reparación y reconstrucción de cilindros neumáticos, con prueba de funcionamiento antes de entregar.",
         href: "/servicios",
         image: "/cilindros/taller-portada-v2.webp",
-        imageAlt: "Técnico revisando un cilindro neumático en el banco de trabajo",
+        imageAlt: "Imagen de referencia: técnico revisando un cilindro neumático en el banco",
         imageFit: "cover",
+        imageNote: "Imagen de referencia",
       },
     ],
     aplicaciones: [

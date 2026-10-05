@@ -36,7 +36,7 @@ export function CilindrosDestacados() {
               <span className="cyl-preview-cta">Abrir la experiencia <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" /></span>
             </span>
           </Link>
-          <div className="divide-y divide-black/10 border-t border-black/10">
+          <div className="divide-y divide-black/10 border-t border-black/10" data-fab-hide="">
             {principales.map((s, i) => (
               <article key={s.id} className="py-7">
                 <div className="mb-3 flex items-center gap-3"><span className="font-mono text-xs text-signal">0{i + 1}</span><s.icon className="h-5 w-5 shrink-0 text-signal" /><h3 className="font-display text-xl font-medium sm:text-2xl">{s.title}</h3></div>
@@ -64,7 +64,7 @@ export function ComoTrabajamos() {
         </div>
         <div className="flex flex-col justify-center">
           <div className="relative aspect-[3/2] overflow-hidden border border-white/15"><Image src="/cilindros/cilindros-nuevos.jpg" alt="Cilindro neumático sobre el banco del taller" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover object-[center_68%]" /></div>
-          <ol className="mt-5 grid grid-cols-3 gap-px border border-white/15 bg-white/15">{["Comparte tu necesidad", "Recibe la cotización", "Coordina tu pedido"].map((step, i) => <li key={step} className="bg-surface px-4 py-5"><span className="mb-2 block font-mono text-xs text-signal">0{i + 1}</span><span className="text-sm text-white/80">{step}</span></li>)}</ol>
+          <ol className="mt-5 grid grid-cols-3 gap-px border border-white/15 bg-white/15">{["Comparte tu necesidad", "Recibe la cotización", "Coordina tu pedido"].map((step, i) => <li key={step} className="bg-surface px-4 py-5"><span className="mb-2 block font-mono text-xs text-[#ff6b84]">0{i + 1}</span><span className="text-sm text-white/80">{step}</span></li>)}</ol>
         </div>
       </div>
     </section>
@@ -76,7 +76,7 @@ export function SolucionesIndustriales() {
     <section id="soluciones" className="section-pad scroll-mt-28 border-b border-black/10 bg-[#F4F5F6]">
       <div className="container-max">
         <div className="section-heading mb-10"><div><p className="eyebrow mb-4">03 / Líneas complementarias</p><h2 className="font-display text-display-lg">Más soluciones<br />para tu industria.</h2></div><p className="max-w-md leading-relaxed text-steel-300">Además de cilindros neumáticos, cotizamos componentes de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas.</p></div>
-        <div className="grid gap-4 lg:grid-cols-2">
+        <div className="grid gap-4 lg:grid-cols-2" data-fab-hide="">
           {SOLUCIONES.map((s) => (
             <article key={s.slug} className="group flex gap-4 border border-black/10 bg-white p-4 transition-colors hover:border-black/25 sm:gap-6 sm:p-6 last:lg:col-span-2">
               <Link href={`/${s.slug}`} className="relative block h-28 w-24 shrink-0 overflow-hidden bg-[#F4F5F6] sm:h-36 sm:w-36" aria-label={`Ver línea de ${s.name}`}><Image src={s.image} alt={s.imageAlt} fill sizes="(max-width: 639px) 96px, 144px" className="object-contain transition-transform duration-300 group-hover:scale-105" /></Link>
@@ -92,7 +92,7 @@ export function SolucionesIndustriales() {
 export function ServiciosComplementarios() {
   return (
     <section className="container-max py-12 sm:py-16">
-      <div className="grid gap-8 lg:grid-cols-3"><div><p className="eyebrow mb-4">También bajo cotización</p><h2 className="font-display text-display-md">Servicios<br />complementarios.</h2><p className="mt-4 text-sm leading-relaxed text-steel-300">Los cilindros neumáticos son nuestra línea principal. También evaluamos solicitudes de hidráulicos y mecanizado.</p></div>{SERVICIOS_ADICIONALES.map((s) => <Link key={s.slug} href={`/${s.slug}`} className="group flex flex-col border border-black/10 p-6 transition-colors hover:border-signal/40 sm:p-8"><h3 className="mb-3 font-display text-2xl">{s.name}</h3><p className="mb-6 text-sm leading-relaxed text-steel-300">{s.description}</p><span className="mt-auto inline-flex min-h-11 items-center gap-2 text-sm font-medium text-signal">Ver {s.name.toLowerCase()} <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span></Link>)}</div>
+      <div className="grid gap-8 lg:grid-cols-3" data-fab-hide=""><div><p className="eyebrow mb-4">También bajo cotización</p><h2 className="font-display text-display-md">Servicios<br />complementarios.</h2><p className="mt-4 text-sm leading-relaxed text-steel-300">Los cilindros neumáticos son nuestra línea principal. También evaluamos solicitudes de hidráulicos y mecanizado.</p></div>{SERVICIOS_ADICIONALES.map((s) => <Link key={s.slug} href={`/${s.slug}`} className="group flex flex-col border border-black/10 p-6 transition-colors hover:border-signal/40 sm:p-8"><h3 className="mb-3 font-display text-2xl">{s.name}</h3><p className="mb-6 text-sm leading-relaxed text-steel-300">{s.description}</p><span className="mt-auto inline-flex min-h-11 items-center gap-2 text-sm font-medium text-signal">Ver {s.name.toLowerCase()} <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span></Link>)}</div>
     </section>
   );
 }

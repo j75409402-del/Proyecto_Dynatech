@@ -56,6 +56,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
     image: sub.image,
     imageAlt: sub.imageAlt,
     imageFit: sub.imageFit,
+    imageNote: sub.imageNote,
     ejemplos: sub.ejemplos,
     ...(sub.href
       ? { link: { href: sub.href, label: linkLabel(sub.href, sub.title) } }
@@ -89,7 +90,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
           title={<>Catálogo de {s.name.toLowerCase()}</>}
           intro="Si no ves lo que buscas, envíanos el código, una foto o la descripción. Las fotos son de referencia del tipo de componente."
         />
-        <nav aria-label={`Subcategorías de ${s.name}`} className="mb-8">
+        <nav aria-label={`Subcategorías de ${s.name}`} className="mb-8" data-fab-hide="">
           <ul className="chip-nav">
             {s.subcategorias.map((sub) => (
               <li key={sub.id}>{sub.href ? <Link href={sub.href}>{sub.title}</Link> : <a href={`#${sub.id}`}>{sub.title}</a>}</li>

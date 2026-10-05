@@ -25,7 +25,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
   const situationIcons = hidraulico ? [Wrench, Factory] : [FileText, Box];
   const related: RelatedItem[] = [
     ...SERVICIOS_ADICIONALES.filter((o) => o.slug !== s.slug).map((o) => ({ href: `/${o.slug}`, title: o.name, desc: o.slug === "mecanizado" ? "Piezas bajo plano o muestra." : "Fabricación y reparación de cilindros hidráulicos.", icon: o.slug === "mecanizado" ? Cog : Droplets, label: `Ver ${o.name.toLowerCase()}` })),
-    { href: "/servicios", title: "Reparación de cilindros neumáticos", desc: "Reparación y reconstrucción, con prueba antes de entregar.", image: "/cilindros/taller-reparando.jpg", label: "Ver reparación de cilindros" },
+    { href: "/servicios", title: "Reparación de cilindros neumáticos", desc: "Reparación y reconstrucción, con prueba antes de entregar.", image: "/cilindros/despues-cilindro-iso-32mm.jpg", label: "Ver reparación de cilindros" },
     { href: "/sellos-y-componentes", title: "Sellos y componentes", desc: "Kits de sellos, vástagos y componentes bajo medida.", image: "/products/kit-sello-cilindro-neumatico.jpg", label: "Ver sellos y componentes" },
   ];
   return (

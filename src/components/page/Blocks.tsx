@@ -53,6 +53,8 @@ export type OfferItem = {
   imageAlt?: string;
   /** Fotos de catálogo con fondo blanco: se muestran completas. */
   imageFit?: "contain" | "cover";
+  /** Rótulo visible sobre la foto (imágenes de referencia). */
+  imageNote?: string;
   ejemplos?: readonly string[];
   /** Línea "Necesitamos: …" (datos mínimos para cotizar). */
   need?: string;
@@ -65,7 +67,7 @@ export type OfferItem = {
 /** Tarjetas con imagen real (o panel técnico con icono si no hay foto). */
 export function OfferGrid({ items, columns = 3, compact = false }: { items: OfferItem[]; columns?: 2 | 3 | 4; /** Sin fotos: icono pequeño en lugar del panel 16:10. */ compact?: boolean }) {
   return (
-    <div className={`offer-grid cols-${columns}`}>
+    <div className={`offer-grid cols-${columns}`} data-fab-hide="">
       {items.map((it, i) => (
         <Reveal key={it.id ?? it.title} delay={(i % 3) * 0.05} className="h-full">
           <article id={it.id} className="offer-card scroll-mt-28">
@@ -75,6 +77,7 @@ export function OfferGrid({ items, columns = 3, compact = false }: { items: Offe
               ) : it.icon ? (
                 <it.icon className="h-16 w-16" aria-hidden="true" strokeWidth={1.2} />
               ) : null}
+              {it.image && it.imageNote && <span className="img-note">{it.imageNote}</span>}
             </div>}
             <div className="offer-body">
               {compact && !it.image && it.icon && <span className="offer-icon"><it.icon className="h-6 w-6" aria-hidden="true" /></span>}
@@ -139,7 +142,7 @@ export function RelatedGrid({ kicker = "Relacionado", title, items, id = "relaci
   return (
     <Band tone="light" labelledBy={id}>
       <SectionHead kicker={kicker} title={title} id={id} />
-      <ul className={`related-grid ${items.length >= 4 ? "cols-4" : ""}`}>
+      <ul className={`related-grid ${items.length >= 4 ? "cols-4" : ""}`} data-fab-hide="">
         {items.map((it) => (
           <li key={it.href}>
             <Link href={it.href} className="related-card group">
