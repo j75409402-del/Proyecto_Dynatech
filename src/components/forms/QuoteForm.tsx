@@ -1,3 +1,5 @@
+// LEGADO desde 4-oct-2026 (AP-004): ya no hay CTA hacia este formulario; /cotizacion/correo redirige a /cotizacion.
+// Retirar tras 30 días sin filas nuevas en `quotes`. Ver docs/WHATSAPP_COTIZACION.md.
 "use client";
 
 import { useState, type BaseSyntheticEvent } from "react";

@@ -20,7 +20,7 @@ export function IndustrialServicePage({ service: s }: { service: (typeof SERVICI
           <p className="eyebrow mb-4">Servicios complementarios · Bajo cotización</p>
           <h1 className="font-display text-display-xl mb-6">{s.title}</h1>
           <p className="text-lg text-steel-300 leading-relaxed mb-8">{s.intro}</p>
-          <a href={quoteHref(s.name)} target="_blank" rel="noopener noreferrer" className="btn-primary">Cotiza {s.name.toLowerCase()} por WhatsApp</a>
+          <a href={quoteHref(s.name)} target="_blank" rel="noopener" className="btn-primary">Cotiza {s.name.toLowerCase()} por WhatsApp</a>
         </div>
       </section>
       <section className="section-pad bg-carbon-900 border-y border-black/5">

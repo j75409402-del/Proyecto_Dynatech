@@ -4,7 +4,7 @@ import ts from 'typescript';
 import { readFile, writeFile } from 'node:fs/promises';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE || 'file:///C:/Users/senm1/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs');
 const base=process.env.TEST_BASE_URL || 'http://localhost:3203';
-const browser=await chromium.launch({channel:'msedge',headless:true});
+const browser=await chromium.launch({...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{channel:'msedge'}),headless:true});
 const context=await browser.newContext();
 await context.route('https://cloud.umami.is/**',r=>r.abort());
 const page=await context.newPage();
@@ -33,11 +33,14 @@ try{
       {'@type':'OpeningHoursSpecification',dayOfWeek:['Monday','Tuesday','Wednesday','Thursday','Friday'],opens:'08:00',closes:'17:00'},
       {'@type':'OpeningHoursSpecification',dayOfWeek:['Saturday'],opens:'08:00',closes:'12:00'}
     ]);
-    const whatsapp=new URL(await page.getByRole('link',{name:'Cotizar válvula por WhatsApp',exact:true}).getAttribute('href'));
+    // AP-004: el CTA pasa por /cotizacion (medición) y termina en wa.me con el contexto.
+    const quote=new URL(await page.getByRole('link',{name:'Cotizar válvula por WhatsApp',exact:true}).getAttribute('href'),base);
+    assert.equal(quote.pathname,'/cotizacion');assert.equal(quote.searchParams.get('linea'),'Neumática');
+    const redirect=await page.request.get(quote.href,{maxRedirects:0,headers:{dnt:'1'}});
+    const whatsapp=new URL(redirect.headers().location);
     assert.equal(whatsapp.hostname,'wa.me');assert.equal(whatsapp.pathname,'/18092844336');
     assert.ok(whatsapp.searchParams.get('text').includes('Válvulas neumáticas'));
-    const email=await page.getByRole('link',{name:'Cotizar por correo',exact:true}).first().getAttribute('href');
-    assert.equal(new URL(email,base).searchParams.get('tipo'),'Neumática');
+    assert.equal(await page.getByRole('link',{name:'Cotizar por correo',exact:true}).count(),0);
     await page.screenshot({path:`docs/seo-organico-20261003/valvulas-${width}.png`,fullPage:true});
   }
   await page.goto(base+'/neumatica');

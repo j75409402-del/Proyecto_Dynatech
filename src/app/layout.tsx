@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SITE, CONTACT } from "@/lib/constants";
+import { SITE, CONTACT, ANALYTICS } from "@/lib/constants";
 import { CommercialTracking } from "@/components/CommercialTracking";
 import { CookielessAnalytics } from "@/components/CookielessAnalytics";
 import "./globals.css";
@@ -108,7 +108,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
         <CommercialTracking />
-        <CookielessAnalytics websiteId="4bbea860-f2e7-4268-9476-190563eeab0a" scriptUrl="https://cloud.umami.is/script.js" />
+        <CookielessAnalytics websiteId={ANALYTICS.umamiWebsiteId} scriptUrl={ANALYTICS.umamiScriptUrl} />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

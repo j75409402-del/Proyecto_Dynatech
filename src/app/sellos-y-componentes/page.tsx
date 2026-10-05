@@ -56,11 +56,11 @@ export default function SellosYComponentesPage() {
                 una foto o la muestra y te cotizamos.
               </p>
               <div className="flex flex-wrap gap-3">
-                <a href={quoteHref("Kits de sellos")} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                <a href={quoteHref("Kits de sellos")} target="_blank" rel="noopener" className="btn-primary">
                   Consultar disponibilidad
                   <ArrowRight className="h-4 w-4" />
                 </a>
-                <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-secondary">
                   Enviar especificaciones
                 </a>
               </div>
@@ -118,7 +118,7 @@ export default function SellosYComponentesPage() {
                     <a
                       href={quoteHref(b.item)}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener"
                       className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
                       {b.cta}

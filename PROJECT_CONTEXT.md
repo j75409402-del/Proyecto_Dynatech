@@ -1,3 +1,5 @@
+> **Cotización por WhatsApp, 4-oct-2026 (AP-004 aprobado por el dueño):** `/cotizacion` redirige a WhatsApp Business con mensaje precargado y mide `quote_whatsapp_click` (source_page, product, UTM) en Umami desde el servidor. El formulario por correo salió del flujo (`/cotizacion/correo` → 307 `/cotizacion`) y queda como legado. Ver `docs/WHATSAPP_COTIZACION.md`.
+
 > Analítica actual, 3-oct-2026: Umami Cloud Hobby gratuito, sin cookies de analítica ni aviso. ID público 4bbea860-f2e7-4268-9476-190563eeab0a. GA4 dejó de cargarse; cuenta conservada. Eventos manuales, sin query/hash ni datos de formularios, admin excluido, DNT y rechazo anterior respetados. Ver docs/SEO_CONVERSIONES.md.
 
 > GA4 conectado por solicitud del propietario: G-9JET3799ZE, GoogleAnalytics.tsx con consentimiento opcional y eventos comerciales controlados. Ver docs/SEO_CONVERSIONES.md.

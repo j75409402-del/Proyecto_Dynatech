@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'file:///C:/Users/senm1/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs');
-const b=await chromium.launch({channel:'msedge',headless:true});
+const b=await chromium.launch({...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{channel:'msedge'}),headless:true});
 const base=process.env.TEST_BASE_URL||'http://localhost:3199';
 let loads=0;
 const context=await b.newContext({viewport:{width:390,height:844}});
@@ -9,14 +9,16 @@ await context.route('https://www.googletagmanager.com/**',()=>{throw Error('Goog
 const p=await context.newPage();
 const hits=()=>p.evaluate(()=>window.hits||[]);
 try {
-await p.goto(base+'/cotizacion/correo?nombre=PRIVADO&email=private@example.com#secreto',{waitUntil:'networkidle'});
+await p.goto(base+'/contacto?nombre=PRIVADO&email=private@example.com#secreto',{waitUntil:'networkidle'});
 assert.equal(loads,1);assert.equal((await hits()).length,1);
 assert.equal(await p.getByRole('button',{name:'Aceptar analítica'}).count(),0);
 assert.ok(!JSON.stringify(await hits()).match(/PRIVADO|private@example|secreto/));
 assert.equal((await hits())[0].website,'4bbea860-f2e7-4268-9476-190563eeab0a');
 await p.locator('a[href="/servicios"]').first().evaluate(a=>a.click());await p.waitForURL('**/servicios');await p.waitForFunction(()=>window.hits.length===2);
-await p.evaluate(()=>{const a=document.querySelector('a[href*="wa.me"]');a.addEventListener('click',e=>e.preventDefault(),{once:true});a.click();});
-assert.equal((await hits()).filter(x=>x.name==='whatsapp_click').length,1);
+await p.evaluate(()=>{const a=document.querySelector('main a[href^="/cotizacion"]');a.addEventListener('click',e=>e.preventDefault(),{once:true});a.click();});
+// quote_whatsapp_click lo cuenta el servidor en /cotizacion; el cliente no lo duplica en Umami.
+assert.equal((await hits()).filter(x=>x.name==='quote_whatsapp_click'||x.name==='whatsapp_click').length,0);
+assert.equal(await p.evaluate(()=>window.dataLayer.filter(e=>e.event==='quote_whatsapp_click').length),1);
 await p.evaluate(()=>window.dispatchEvent(new CustomEvent('dynatech:conversion',{detail:{event:'generate_lead',channel:'quote_form',email:'private@example.com',message:'PRIVADO'}})));
 assert.equal((await hits()).filter(x=>x.name==='generate_lead').length,1);
 assert.ok(!JSON.stringify(await hits()).match(/PRIVADO|private@example|wa.me/));
@@ -30,6 +32,6 @@ await p.goto(base+'/',{waitUntil:'networkidle'});assert.equal(await p.locator('#
 await p.evaluate(()=>localStorage.clear());
 await p.goto(base+'/admin/login',{waitUntil:'networkidle'});assert.equal(await p.locator('#dynatech-umami').count(),0);
 const dnt=await b.newContext();await dnt.addInitScript(()=>Object.defineProperty(navigator,'doNotTrack',{value:'1'}));const dp=await dnt.newPage();await dp.goto(base+'/',{waitUntil:'networkidle'});assert.equal(await dp.locator('#dynatech-umami').count(),0);await dnt.close();
-const blocked=await b.newContext();await blocked.route('https://cloud.umami.is/**',r=>r.abort());const bp=await blocked.newPage();await bp.goto(base+'/',{waitUntil:'networkidle'});assert.ok(await bp.locator('a[href*="wa.me"]').count());assert.equal(await bp.locator('h1').count(),1);await blocked.close();
+const blocked=await b.newContext();await blocked.route('https://cloud.umami.is/**',r=>r.abort());const bp=await blocked.newPage();await bp.goto(base+'/',{waitUntil:'networkidle'});assert.ok(await bp.locator('a[href^="/cotizacion"]').count());assert.equal(await bp.locator('h1').count(),1);await blocked.close();
 console.log('OK: sin aviso ni cookies, SPA sin duplicados, WhatsApp y lead, sin datos privados, rechazo anterior y DNT, admin excluido, web funcional con analítica bloqueada');
 } finally {await b.close();}

@@ -19,7 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE.url}/sellos-y-componentes`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE.url}/nosotros`, changeFrequency: "yearly", priority: 0.5 },
     { url: `${SITE.url}/contacto`, changeFrequency: "yearly", priority: 0.5 },
-    { url: `${SITE.url}/cotizacion/correo`, changeFrequency: "yearly", priority: 0.6 },
     { url: `${SITE.url}/garantias`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE.url}/devoluciones`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE.url}/privacidad`, changeFrequency: "yearly", priority: 0.2 },

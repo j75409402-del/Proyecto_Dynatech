@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { QuoteCTA, quoteHref, emailQuoteHref } from "@/components/cta/QuoteCTA";
+import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { SITE } from "@/lib/constants";
 import { getSolucion } from "@/lib/soluciones";
 
@@ -48,8 +48,7 @@ export default function ValvulasNeumaticasPage() {
             <h1 className="font-display text-display-xl mb-6">{title}</h1>
             <p className="text-lg leading-relaxed text-steel-300 mb-6">Cotiza válvulas direccionales y solenoides para controlar el paso del aire en tus equipos. En Dynatech Ingeniería SRL, en Santo Domingo, recibimos solicitudes de componentes neumáticos para empresas de República Dominicana.</p>
             <div className="flex flex-wrap gap-3">
-              <a href={quoteHref(sub.title, "Neumática")} target="_blank" rel="noopener noreferrer" className="btn-primary">Cotizar válvula por WhatsApp</a>
-              <Link href={emailQuoteHref(sub.title, "Neumática")} className="btn-secondary">Cotizar por correo</Link>
+              <a href={quoteHref(sub.title, "Neumática")} target="_blank" rel="noopener" className="btn-primary">Cotizar válvula por WhatsApp</a>
             </div>
             <p className="mt-5 text-sm text-steel-400">La disponibilidad, compatibilidad y condiciones se confirman al evaluar tu solicitud.</p>
           </div>

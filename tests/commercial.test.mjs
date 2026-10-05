@@ -14,7 +14,7 @@ await mkdir('docs/seo-verificacion', { recursive: true });
 try {
   const sitemap = await (await page.request.get(`${base}/sitemap.xml`)).text();
   const routes = [...sitemap.matchAll(/<loc>https:\/\/www\.dynatech\.com\.do([^<]*)<\/loc>/g)].map(m => m[1] || '/');
-  assert.equal(routes.length, 19);
+  assert.equal(routes.length, 18); // /cotizacion/correo salió del sitemap (AP-004)
   for (const width of [390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of routes) {
@@ -65,8 +65,10 @@ try {
   await page.evaluate(() => document.addEventListener('click', e => { if (e.target.closest('a')) e.preventDefault(); }));
   await page.getByRole('link', { name: 'Cotiza cilindros hidráulicos por WhatsApp', exact: true }).click();
   const events = await page.evaluate(() => window.dataLayer);
-  assert.equal(events.filter(e => e.event === 'whatsapp_click').length, 1);
+  assert.equal(events.filter(e => e.event === 'quote_whatsapp_click').length, 1);
   assert.equal(events[0].page_path, '/cilindros-hidraulicos');
+  assert.equal(events[0].source_page, '/cilindros-hidraulicos');
+  assert.equal(events[0].product, 'cilindros_hidraulicos');
   assert.ok(!JSON.stringify(events).includes('text='));
 
   await page.goto(base + '/contacto');
@@ -74,29 +76,12 @@ try {
   await page.locator('main a[href^="tel:"]').click();
   await page.locator('main a[href^="mailto:"]').click();
   assert.deepEqual(await page.evaluate(() => window.dataLayer.map(e => e.event)), ['phone_click', 'email_click']);
+  // AP-004: sin formulario de cotización compitiendo con WhatsApp.
   await page.goto(base + '/mecanizado');
-  await page.evaluate(() => document.addEventListener('click', e => { if (e.target.closest('a')) e.preventDefault(); }));
-  await page.getByRole('link', { name: 'Cotizar por correo', exact: true }).click();
-  assert.equal(await page.evaluate(() => window.dataLayer[0].event), 'quote_form_open');
-
-  await page.goto(base + '/cotizacion/correo?nombre=Cilindros%20hidr%C3%A1ulicos');
-  await page.waitForSelector('#tipo');
-  assert.equal(await page.locator('#tipo').inputValue(), 'Cilindros hidráulicos');
-  await page.locator('#descripcion').fill('Reparación de cilindro para equipo industrial de prueba');
-  await page.locator('#company_name').fill('Empresa de prueba');
-  await page.locator('#contact_name').fill('Contacto de prueba');
-  await page.locator('#email').fill('prueba@example.com');
-  await page.locator('#phone').fill('8090000000');
-  let mode = 'error';
-  await page.route('**/api/cotizacion', route => route.fulfill({ status: mode === 'error' ? 500 : 201, contentType: 'application/json', body: mode === 'error' ? '{}' : JSON.stringify({ quote_number: 'COT-PRUEBA' }) }));
-  await page.getByRole('button', { name: 'Enviar solicitud', exact: true }).click();
-  await page.getByText('No se pudo enviar', { exact: true }).waitFor();
-  assert.equal(await page.evaluate(() => (window.dataLayer || []).filter(e => e.event === 'generate_lead').length), 0);
-  assert.ok((await page.getByRole('link', { name: 'Enviar por WhatsApp', exact: true }).getAttribute('href')).includes('wa.me/'));
-  mode = 'success';
-  await page.getByRole('button', { name: 'Enviar solicitud', exact: true }).click();
-  await page.getByText('Solicitud recibida', { exact: true }).waitFor();
-  assert.equal(await page.evaluate(() => window.dataLayer.filter(e => e.event === 'generate_lead' && e.channel === 'quote_form').length), 1);
+  assert.equal(await page.getByRole('link', { name: 'Cotizar por correo', exact: true }).count(), 0);
+  const correo = await page.request.get(base + '/cotizacion/correo', { maxRedirects: 0 });
+  assert.equal(correo.status(), 307);
+  assert.equal(correo.headers().location, '/cotizacion');
 
   await page.goto(base + '/contacto');
   await page.locator('#name').fill('Contacto de prueba');
@@ -119,6 +104,6 @@ try {
   assert.ok(await staticPage.getByRole('link', { name: 'Cotiza mecanizado por WhatsApp', exact: true }).isVisible());
   await noJS.close();
   assert.deepEqual(errors, []);
-  await writeFile('docs/seo-verificacion/resultados.json', JSON.stringify({ checks, errors, admin: { status: adminStatus, verified: adminStatus === 307, note: adminStatus === 307 ? 'Redirección sin sesión' : 'NO VERIFICADO: faltan variables locales de Supabase' }, additional: ['redirecciones', '404', 'login noindex', 'clic WhatsApp sin datos personales', 'formulario hidráulico precargado', 'fallo y respaldo WhatsApp', 'conversiones con API simulada', 'menú móvil', 'contenido sin JavaScript'] }, null, 2));
+  await writeFile('docs/seo-verificacion/resultados.json', JSON.stringify({ checks, errors, admin: { status: adminStatus, verified: adminStatus === 307, note: adminStatus === 307 ? 'Redirección sin sesión' : 'NO VERIFICADO: faltan variables locales de Supabase' }, additional: ['redirecciones', '404', 'login noindex', 'clic WhatsApp sin datos personales', 'formulario por correo retirado del flujo (307)', 'conversión de contacto con API simulada', 'menú móvil', 'contenido sin JavaScript'] }, null, 2));
   console.log(JSON.stringify({ pagesAndViewports: checks.length, errors, result: 'OK' }));
 } finally { await browser.close(); }

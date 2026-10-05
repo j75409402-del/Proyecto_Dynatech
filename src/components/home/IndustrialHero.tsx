@@ -25,10 +25,9 @@ export function Hero() {
           <h1 className="hero-title font-display font-semibold text-surface">Cilindros<br />neumáticos<br /><span className="text-signal">a la medida.</span></h1>
           <p className="mt-6 max-w-lg text-lg leading-relaxed text-steel-300">Fabricamos, reparamos y reconstruimos cilindros neumáticos. Del plano o la muestra a la solución que necesita tu equipo.</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-primary min-h-14 px-6"><WhatsAppIcon className="h-5 w-5" />Cotizar por WhatsApp<ArrowRight className="h-4 w-4" /></a>
+            <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-14 px-6"><WhatsAppIcon className="h-5 w-5" />Cotizar por WhatsApp<ArrowRight className="h-4 w-4" /></a>
             <Link href="/servicios" className="btn-secondary min-h-14 px-6">Ver servicios <ArrowDownRight className="h-4 w-4" /></Link>
           </div>
-          <div className="mt-5 text-sm text-steel-400">¿Prefieres escribirnos?{" "}<Link href="/cotizacion/correo?nombre=Fabricaci%C3%B3n%20y%20reparaci%C3%B3n%20de%20cilindros%20neum%C3%A1ticos" className="font-medium text-surface underline decoration-black/25 underline-offset-4 hover:text-signal">Solicita cotización por correo</Link></div>
           <p className="mt-9 flex items-center gap-2 text-sm text-steel-400"><MapPin className="h-4 w-4 text-signal" /> Santo Domingo · Bajo cotización</p>
         </div>
         <div className="relative">

@@ -73,7 +73,7 @@ export function SolucionesIndustriales() {
                       <a
                         href={quoteHref(s.name, s.name)}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener"
                         className="inline-flex min-h-11 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal transition-all hover:gap-2.5"
                       >
                         Solicitar cotización
@@ -284,7 +284,7 @@ export function ComoTrabajamos() {
         </div>
 
         <Reveal className="mt-10">
-          <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-primary">
+          <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary">
             Enviar especificaciones
             <ArrowRight className="h-4 w-4" />
           </a>

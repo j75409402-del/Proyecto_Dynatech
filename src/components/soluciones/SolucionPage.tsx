@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Check, Mail } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { QuoteCTA, quoteHref, emailQuoteHref } from "@/components/cta/QuoteCTA";
+import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { SITE } from "@/lib/constants";
 import { SOLUCIONES, DATOS_PARA_COTIZAR, type Solucion } from "@/lib/soluciones";
 import { whatsappSolucion } from "@/lib/whatsapp";
@@ -63,13 +63,10 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
               <h1 className="mb-6 font-display text-display-xl text-surface">{s.title}</h1>
               <p className="mb-8 max-w-xl text-lg leading-relaxed text-steel-300 sm:text-xl">{s.description}</p>
               <div className="flex flex-wrap gap-3">
-                <a href={quoteHref(s.name, s.name)} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                <a href={quoteHref(s.name, s.name)} target="_blank" rel="noopener" className="btn-primary">
                   Cotizar por WhatsApp
                   <WhatsAppIcon className="h-4 w-4" />
                 </a>
-                <Link href={emailQuoteHref(s.name, s.name)} className="btn-secondary">
-                  <Mail className="h-4 w-4" /> Cotizar por correo
-                </Link>
               </div>
               <p className="mt-6 font-mono text-[10px] uppercase tracking-techno text-steel-400">
                   Bajo cotización · Disponibilidad confirmada al responder
@@ -168,7 +165,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
                         <a
                           href={quoteHref(sub.title, s.name)}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel="noopener"
                           className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                         >
                           {sub.cta ?? "Solicitar cotización"}
@@ -207,7 +204,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         <p className="text-steel-300 leading-relaxed mb-4">Atendemos solicitudes industriales en República Dominicana. Para cotizar {s.name.toLowerCase()}, comparte los datos disponibles de tu componente:</p>
         <ul className="list-disc pl-5 space-y-2 text-steel-300 mb-5">{DATOS_PARA_COTIZAR[s.slug]?.map((item) => <li key={item}>{item}</li>)}</ul>
         <p className="text-steel-300 mb-6">Indica también cantidad y ciudad. La disponibilidad y condiciones se confirman al responder.</p>
-        <a href={quoteHref(s.name, s.name)} target="_blank" rel="noopener noreferrer" className="btn-primary">Enviar solicitud por WhatsApp</a>
+        <a href={quoteHref(s.name, s.name)} target="_blank" rel="noopener" className="btn-primary">Enviar solicitud por WhatsApp</a>
       </section>
       {/* OTRAS LÍNEAS */}
       <section className="py-12 border-b border-black/5">

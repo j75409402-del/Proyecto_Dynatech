@@ -101,7 +101,7 @@ export default function CilindrosNeumaticosPage() {
                     <a
                       href={quoteHref(b.cta)}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener"
                       className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
                       Solicitar cotización
@@ -119,7 +119,7 @@ export default function CilindrosNeumaticosPage() {
               <a
                 href={quoteHref("Cilindro neumático estándar")}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 className="text-signal font-medium hover:underline whitespace-nowrap"
               >
                 Consultar disponibilidad →
@@ -153,7 +153,7 @@ export default function CilindrosNeumaticosPage() {
           </div>
 
           <Reveal className="mt-10">
-            <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-primary">
+            <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary">
               Enviar especificaciones
               <ArrowRight className="h-4 w-4" />
             </a>

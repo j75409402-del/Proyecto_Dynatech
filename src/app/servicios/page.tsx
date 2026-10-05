@@ -105,11 +105,11 @@ export default function ServiciosPage() {
                 tus medidas.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-primary min-h-12 px-6">
+                <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
                   Solicitar cotización
                   <ArrowRight className="h-4 w-4" />
                 </a>
-                <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-6 py-3 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10">
+                <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/35 px-6 py-3 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:border-white hover:bg-white/10">
                   <WhatsAppIcon className="h-4 w-4" />
                   WhatsApp
                 </a>
@@ -156,7 +156,7 @@ export default function ServiciosPage() {
                     <a
                       href={quoteHref(s.title)}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener"
                       className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
                       Solicitar cotización

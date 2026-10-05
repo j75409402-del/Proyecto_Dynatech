@@ -1,3 +1,5 @@
+> 4-oct-2026 — AP-004: cotización directa por WhatsApp con medición `quote_whatsapp_click` (servidor, Umami). Auditoría independiente: PASS (sin hallazgos críticos/altos). Formulario por correo legado. Pruebas: `tests/whatsapp-quote.test.mjs` + commercial/analytics/seo-organic actualizados. Detalle: `docs/WHATSAPP_COTIZACION.md`.
+
 # Auditoría técnica — Sitio web de Dynatech Ingeniería SRL
 
 **SEO y captación, 2-oct-2026:** mejoras locales de categorías, metadatos, LocalBusiness, páginas de hidráulicos/mecanizado y eventos comerciales. Typecheck, lint (un aviso conocido), build, cinco pruebas de correo y 54 comprobaciones de páginas/tamaños correctos. Formularios probados con API simulada; admin y entrega real NO VERIFICADOS en esta copia sin variables locales. Sin publicar ni conectar colector de analítica. Evidencia y pendientes en `docs/SEO_CONVERSIONES.md`.

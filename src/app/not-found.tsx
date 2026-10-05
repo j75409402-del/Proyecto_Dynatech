@@ -13,7 +13,7 @@ export default function NotFound() {
           Puede que el enlace sea viejo. Elige una línea o envíanos tu solicitud directamente.
         </p>
         <div className="flex flex-wrap gap-3 mb-12">
-          <a href={whatsappGeneral()} target="_blank" rel="noopener noreferrer" className="btn-primary">
+          <a href={whatsappGeneral()} target="_blank" rel="noopener" className="btn-primary">
             Solicita tu cotización
             <ArrowRight className="h-4 w-4" />
           </a>

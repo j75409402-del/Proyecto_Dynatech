@@ -92,7 +92,7 @@ export function Footer() {
                 <a
                   href={whatsappCylinderService()}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                   className="text-sm text-steel-200 hover:text-signal transition-colors"
                 >
                   Cotiza tu cilindro por WhatsApp

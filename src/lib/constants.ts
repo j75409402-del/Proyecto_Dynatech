@@ -27,6 +27,13 @@ export const CONTACT = {
   hours: "Lunes a Viernes · 8:00 AM - 5:00 PM · Sábado · 8:00 AM - 12:00 PM",
 } as const;
 
+/** Umami Cloud (sin cookies). El ID es público; el envío servidor de /cotizacion usa la API /api/send. */
+export const ANALYTICS = {
+  umamiWebsiteId: "4bbea860-f2e7-4268-9476-190563eeab0a",
+  umamiScriptUrl: "https://cloud.umami.is/script.js",
+  umamiApiUrl: process.env.UMAMI_API_URL ?? "https://cloud.umami.is/api/send",
+} as const;
+
 export const SOCIAL = {
   instagram: "https://www.instagram.com/dynatech_ingenieria",
   linkedin: "https://linkedin.com/company/dynatech-do",

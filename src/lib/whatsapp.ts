@@ -1,4 +1,5 @@
-import { CONTACT, SITE } from "./constants";
+import { CONTACT } from "./constants";
+import { quoteBridgeHref } from "./quote";
 
 /**
  * Genera un link de wa.me con mensaje pre-cargado.
@@ -40,31 +41,17 @@ Quedo pendiente. Gracias.`;
   return whatsappLink(msg);
 }
 
-/**
- * Link pa' consultar sobre reparación/fabricación de cilindros neumáticos.
- */
+/** Cotización de cilindros: pasa por /cotizacion (medición) y abre WhatsApp. */
 export function whatsappCylinderService(): string {
-  const msg = `Hola Dynatech, tengo un cilindro neumático que necesito reparar / fabricar.
-
-Marca/modelo (si lo tengo):
-Problema o especificación:`;
-  return whatsappLink(msg);
+  return quoteBridgeHref({ tpl: "cilindro" });
 }
 
-/**
- * Link genérico "quiero cotizar".
- */
+/** "Quiero cotizar" genérico: pasa por /cotizacion. */
 export function whatsappGeneral(): string {
-  return whatsappLink(`Hola Dynatech, quisiera solicitar una cotización. Vengo desde ${SITE.url}`);
+  return quoteBridgeHref();
 }
 
-/**
- * Link pa' cotizar dentro de una línea industrial (Neumática, Sensores, etc.).
- */
+/** Cotizar dentro de una línea industrial (Neumática, Sensores, etc.). */
 export function whatsappSolucion(linea: string): string {
-  const msg = `Hola Dynatech, necesito cotizar una solución de ${linea.toLowerCase()}.
-
-Producto, código o descripción:
-Cantidad:`;
-  return whatsappLink(msg);
+  return quoteBridgeHref({ linea, tpl: "solucion" });
 }

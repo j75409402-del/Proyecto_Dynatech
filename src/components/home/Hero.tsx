@@ -42,7 +42,7 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <a href={whatsappCylinderService()} target="_blank" rel="noopener noreferrer" className="btn-primary min-h-12 px-6 text-sm sm:px-7">
+            <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6 text-sm sm:px-7">
               Cotiza tu cilindro por WhatsApp
               <WhatsAppIcon className="h-4 w-4" />
             </a>

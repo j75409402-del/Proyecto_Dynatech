@@ -55,7 +55,7 @@ function CilindrosDestacado() {
             ))}
           </ul>
           <div className="flex flex-wrap gap-3">
-            <a href={quoteHref("Fabricación de cilindros neumáticos")} target="_blank" rel="noopener noreferrer" className="btn-primary">
+            <a href={quoteHref("Fabricación de cilindros neumáticos")} target="_blank" rel="noopener" className="btn-primary">
               Cotizar cilindro
               <ArrowRight className="h-4 w-4" />
             </a>

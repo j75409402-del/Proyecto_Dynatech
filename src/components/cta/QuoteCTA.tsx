@@ -1,7 +1,8 @@
-import { ArrowUpRight, Clock, Mail } from "lucide-react";
+import { ArrowUpRight, Clock } from "lucide-react";
 import { CONTACT } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { whatsappCylinderService, whatsappLink } from "@/lib/whatsapp";
+import { whatsappCylinderService } from "@/lib/whatsapp";
+import { quoteBridgeHref } from "@/lib/quote";
 
 type Props = {
   eyebrow?: string;
@@ -18,21 +19,11 @@ type Props = {
 };
 
 /**
- * Enlace a WhatsApp con el elemento y la línea que el cliente quiere cotizar.
+ * Cotización por WhatsApp con el elemento y la línea: pasa por /cotizacion, que mide el
+ * clic (quote_whatsapp_click) y redirige a WhatsApp Business con el mensaje precargado.
  */
 export function quoteHref(item?: string, tipo?: string) {
-  const details = [item, tipo && tipo !== item ? `Línea: ${tipo}` : undefined].filter(Boolean);
-  const context = details.length ? ` sobre ${details.join(" · ")}` : "";
-  return whatsappLink(`Hola Dynatech, solicito cotización${context}.\n\nCantidad o especificaciones:\n`);
-}
-
-/** Formulario alternativo con el mismo contexto comercial del enlace de WhatsApp. */
-export function emailQuoteHref(item?: string, tipo?: string) {
-  const params = new URLSearchParams();
-  if (item) params.set("nombre", item);
-  if (tipo) params.set("tipo", tipo);
-  const query = params.toString();
-  return `/cotizacion/correo${query ? `?${query}` : ""}`;
+  return quoteBridgeHref({ item, linea: tipo && tipo !== item ? tipo : undefined });
 }
 
 /**
@@ -58,8 +49,8 @@ export function QuoteCTA({
         </div>
         <div className="lg:col-span-4">
           <div className="flex flex-col gap-3">
-            <a href={whatsappHref ?? (quoteItem ? quoteHref(quoteItem, quoteTipo) : whatsappCylinderService())} target="_blank" rel="noopener noreferrer" className="btn-primary min-h-14 px-6"><WhatsAppIcon className="h-5 w-5" />{ctaLabel}<ArrowUpRight className="h-4 w-4" /></a>
-            <a href={emailQuoteHref(quoteItem, quoteTipo)} className="inline-flex min-h-14 items-center justify-center gap-2 border border-white/25 px-6 py-4 text-sm font-medium text-white transition-colors hover:border-white/60"><Mail className="h-4 w-4" />Cotizar por correo</a>
+            <a href={whatsappHref ?? (quoteItem ? quoteHref(quoteItem, quoteTipo) : whatsappCylinderService())} target="_blank" rel="noopener" className="btn-primary min-h-14 px-6"><WhatsAppIcon className="h-5 w-5" />{ctaLabel}<ArrowUpRight className="h-4 w-4" /></a>
+            <p className="text-sm text-white/70">WhatsApp Business: <a href={quoteBridgeHref()} target="_blank" rel="noopener" className="font-medium text-white underline decoration-white/30 underline-offset-4 hover:text-signal">{CONTACT.whatsappDisplay}</a></p>
           </div>
           <p className="mt-5 flex items-center gap-2 text-xs leading-relaxed text-white/55"><Clock className="h-4 w-4 shrink-0" />{CONTACT.hours}</p>
         </div>

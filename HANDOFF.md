@@ -1,3 +1,5 @@
+> 4-oct-2026: flujo principal de cotización = WhatsApp (AP-004). Ver `docs/WHATSAPP_COTIZACION.md`. Formulario por correo legado; no restaurarlo como CTA sin pedido del dueño.
+
 # HANDOFF — Dynatech Web (1-oct-2026)
 
 Resumen para el próximo agente. El detalle está en `PROJECT_CONTEXT.md` y `AUDITORIA_COMPLETA.md`.

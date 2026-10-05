@@ -172,7 +172,7 @@ export function Navbar() {
                     <a
                       href={whatsappGeneral()}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener"
                       onClick={() => setMenuOpen(false)}
                       className="mt-auto inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
@@ -205,7 +205,7 @@ export function Navbar() {
             <a
               href={whatsappGeneral()}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
               className="inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
                          text-white font-medium py-2.5 px-4 xl:px-5 rounded-xs text-xs uppercase tracking-wider
                          transition-colors whitespace-nowrap"
@@ -289,7 +289,7 @@ export function Navbar() {
           <a
             href={whatsappGeneral()}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener"
             onClick={() => setOpen(false)}
             className="inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
                        text-white font-medium py-3 rounded-xs text-sm uppercase tracking-wider transition-colors mt-5"

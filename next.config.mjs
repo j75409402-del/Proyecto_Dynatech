@@ -26,6 +26,10 @@ const nextConfig = {
       { source: "/reparacion-cilindros-neumaticos", destination: "/servicios", permanent: true },
       { source: "/faq", destination: "/servicios#preguntas-frecuentes", permanent: true },
       { source: "/carrito", destination: "/cotizacion", permanent: true },
+      // 4-oct-2026 (AP-004): la cotización principal es WhatsApp. El formulario por correo queda
+      // como código legado (QuoteForm, /api/cotizacion, /api/upload-adjunto) hasta confirmar 30 días sin uso.
+      // Temporal (307) a propósito: revertir = borrar esta línea.
+      { source: "/cotizacion/correo", destination: "/cotizacion", permanent: false },
       { source: "/mapa-del-sitio", destination: "/", permanent: true },
 
       { source: "/categorias/:slug(cil.*)", destination: cilindros, permanent: true },
