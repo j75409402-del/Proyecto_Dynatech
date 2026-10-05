@@ -105,10 +105,10 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Empresa + ayuda / legal */}
-          <div className="lg:col-span-2">
+          {/* Empresa + ayuda / legal (móvil: a todo el ancho en 2 columnas, sin hueco al lado) */}
+          <div className="col-span-2 sm:col-span-1 lg:col-span-2">
             <div className="eyebrow mb-4">Empresa</div>
-            <ul className="space-y-1">
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-1 sm:block sm:space-y-1">
               {[...companyLinks, ...legalLinks].map((link) => (
                 <li key={link.href}>
                   <Link

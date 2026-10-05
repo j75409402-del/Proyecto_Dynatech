@@ -93,7 +93,7 @@ const FABRICACION_IDS = ["fabricacion", "bajo-muestra-o-plano", "personalizados"
 const REPARACION_MEDIA: Record<string, { image: string; imageAlt: string; imageFit?: "cover" | "contain"; imageNote?: string }> = {
   reparacion: { image: "/cilindros/taller-reparando.jpg", imageAlt: "Imagen de referencia: técnico reparando un cilindro neumático", imageFit: "cover", imageNote: "Imagen de referencia" },
   reconstruccion: { image: "/banners/cilindros-taller-wide.webp", imageAlt: "Imagen de referencia: cilindro neumático con sus componentes sobre el banco", imageFit: "cover", imageNote: "Imagen de referencia" },
-  "cambio-de-sellos": { image: "/products/kits-sello-smc.jpg", imageAlt: "Kits de sellos de reemplazo para cilindros neumáticos" },
+  "cambio-de-sellos": { image: "/products/kits-sello-smc.jpg", imageAlt: "Imagen de catálogo: kits de sellos de reemplazo para cilindros neumáticos", imageNote: "Imagen de catálogo" },
 };
 
 const PROCESO = [

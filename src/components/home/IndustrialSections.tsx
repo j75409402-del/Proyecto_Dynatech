@@ -64,7 +64,7 @@ export function ComoTrabajamos() {
           <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-14"><WhatsAppIcon className="h-5 w-5" /> Cotizar por WhatsApp <ArrowRight className="h-4 w-4" /></a>
         </div>
         <div className="flex flex-col justify-center">
-          <div className="relative aspect-[3/2] overflow-hidden border border-white/15 bg-white"><Image src="/products/cilindros-smc-2.jpg" alt="Imagen de referencia: cilindros neumáticos de distintos tipos y tamaños" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-contain p-6" /><span className="img-note">Imagen de referencia</span></div>
+          <div className="relative aspect-[3/2] overflow-hidden border border-white/15 bg-white"><Image src="/products/cilindros-smc-2.jpg" alt="Imagen de catálogo: cilindros neumáticos de distintos tipos y tamaños" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-contain p-6" /><span className="img-note">Imagen de catálogo</span></div>
           <ol className="mt-5 grid grid-cols-3 gap-px border border-white/15 bg-white/15">{["Comparte tu necesidad", "Recibe la cotización", "Coordina tu pedido"].map((step, i) => <li key={step} className="bg-surface px-4 py-5"><span className="mb-2 block font-mono text-xs text-[#ff6b84]">0{i + 1}</span><span className="text-sm text-white/80">{step}</span></li>)}</ol>
         </div>
       </div>

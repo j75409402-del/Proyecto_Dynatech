@@ -51,8 +51,8 @@ export default function NosotrosPage() {
         secondary={{ href: "#empresa", label: "Ver datos de la empresa" }}
         note="Trabajamos bajo cotización: nos envías las especificaciones, cotizamos y coordinamos la entrega."
         // PENDIENTE CAPITÁN: sustituir por una foto real de la fachada, el taller o el equipo (hoy es imagen de referencia).
-        // WEB-011: distinta del hero de /servicios (antes compartían taller-portada-v2).
-        image={{ src: "/cilindros/cilindros-nuevos.jpg", alt: "Imagen de referencia: cilindro neumático sobre el banco de un taller", position: "center 6%" }}
+        // WEB-011: distinta del hero de /servicios. Sin escena de taller IA ni marcas de terceros (auditoría V2).
+        image={{ src: "/products/cilindros-neumaticos.jpg", alt: "Imagen de referencia: cilindros neumáticos de distintos tipos y tamaños", fit: "contain" }}
         caption={{ label: "Imagen de referencia", text: "Taller de cilindros · Suministro industrial" }}
         trust="lineas"
       />
