@@ -4,7 +4,8 @@ import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, CheckList, type OfferItem } from "@/components/page/Blocks";
-import { SITE } from "@/lib/constants";
+import { CONTACT, SITE } from "@/lib/constants";
+import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import { SOLUCIONES, DATOS_PARA_COTIZAR, type Solucion } from "@/lib/soluciones";
 import { whatsappSolucion } from "@/lib/whatsapp";
 
@@ -66,6 +67,8 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
 
   const datos = [...(DATOS_PARA_COTIZAR[s.slug] ?? []).map((t) => ({ title: t })), { title: "Cantidad y ciudad de entrega" }];
 
+  const faqs = landingFaqs({ name: s.name, datos: datos.map((d) => d.title), address: CONTACT.address, hours: CONTACT.hours });
+
   return (
     <div>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
@@ -79,6 +82,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         secondary={{ href: "#catalogo", label: "Ver catálogo de la línea" }}
         note="Envía la referencia o una foto de la placa. Te confirmamos disponibilidad y condiciones en la cotización."
         image={{ src: s.image, alt: s.imageAlt }}
+        caption={{ label: "Imagen de referencia", text: s.ejemplos.slice(0, 3).join(" · ") }}
         trust="lineas"
       />
 
@@ -114,6 +118,8 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         <SectionHead kicker="03 · Aplicaciones" id="aplicaciones-titulo" title="Dónde se usan" intro="Atendemos solicitudes de empresas y zonas francas en República Dominicana." />
         <CheckList items={s.aplicaciones} />
       </Band>
+
+      <FaqBlock items={faqs} kicker="04 · Preguntas frecuentes" title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
 
       <RelatedGrid
         kicker="Otras líneas"

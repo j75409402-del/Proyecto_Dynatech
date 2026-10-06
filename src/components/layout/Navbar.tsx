@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { NAV, SITE, CONTACT } from "@/lib/constants";
 import { SOLUCIONES } from "@/lib/soluciones";
-import { whatsappGeneral } from "@/lib/whatsapp";
+import { whatsappChat, whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { cn } from "@/lib/utils";
 
@@ -191,7 +191,6 @@ export function Navbar() {
                       onClick={() => setMenuOpen(false)}
                       className="mt-auto inline-flex min-h-10 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
-                      <WhatsAppIcon className="h-4 w-4" />
                       {NAV.cta.label}
                       <ArrowRight className="h-3.5 w-3.5" />
                     </a>
@@ -216,7 +215,18 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
+            <a
+              href={whatsappChat()}
+              target="_blank"
+              rel="noopener"
+              aria-label="Escribir por WhatsApp"
+              title="Escribir por WhatsApp"
+              className="inline-flex min-h-11 items-center justify-center gap-2 border border-white/20 px-3 text-xs font-medium uppercase tracking-wider text-steel-200 transition-colors hover:border-signal hover:text-signal"
+            >
+              <WhatsAppIcon className="h-4 w-4" />
+              <span className="hidden xl:inline">WhatsApp</span>
+            </a>
             <a
               href={whatsappGeneral()}
               target="_blank"
@@ -225,7 +235,6 @@ export function Navbar() {
                          text-white font-medium min-h-11 py-2.5 px-4 xl:px-5 rounded-xs text-xs uppercase tracking-wider
                          transition-colors whitespace-nowrap"
             >
-              <WhatsAppIcon className="h-4 w-4" />
               {NAV.cta.label}
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
@@ -264,9 +273,18 @@ export function Navbar() {
             onClick={() => setOpen(false)}
             className="sticky top-0 z-10 -mx-4 mb-2 flex min-h-14 items-center justify-center gap-2 bg-signal px-4 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:bg-signal-hover sm:-mx-6"
           >
-            <WhatsAppIcon className="h-5 w-5" />
             {NAV.cta.label}
             <ArrowRight className="h-4 w-4" />
+          </a>
+          <a
+            href={whatsappChat()}
+            target="_blank"
+            rel="noopener"
+            onClick={() => setOpen(false)}
+            className="mb-2 flex min-h-12 items-center justify-center gap-2 border border-white/20 text-sm font-medium uppercase tracking-wider text-steel-200 hover:border-signal hover:text-signal"
+          >
+            <WhatsAppIcon className="h-5 w-5" />
+            Escribir por WhatsApp
           </a>
           <div className="eyebrow mt-4 mb-1">Línea principal</div>
           {NAV.cilindros.map((item) => (

@@ -68,6 +68,7 @@ export const DATOS_PARA_COTIZAR: Record<string, readonly string[]> = {
   "control-electrico": ["Referencia o foto de la etiqueta", "Tensión y corriente indicadas en el componente", "Función del repuesto en tu equipo o tablero"],
   sensores: ["Referencia y foto de la etiqueta", "Alimentación, conexión y tipo de salida, si los conoces", "Qué detecta el sensor y dónde está instalado"],
   instrumentacion: ["Variable a medir: presión, temperatura, flujo o nivel", "Rango y unidades requeridos, si están definidos", "Foto, referencia y conexión al proceso"],
+  "gabinetes-electricos": ["Medidas: alto × ancho × fondo", "Material y grado de protección (IP o NEMA), si están definidos", "Uso: interior o exterior, y qué va a alojar"],
   "resistencias-electricas": ["Fotos, forma y dimensiones", "Voltaje y potencia indicados, si los conoces", "Aplicación y cantidad requerida"],
 };
 
@@ -253,6 +254,49 @@ export const SOLUCIONES: Solucion[] = [
       "Tableros de control de máquinas",
       "Mantenimiento eléctrico de planta",
       "Señalización y mando de procesos",
+    ],
+  },
+  {
+    // WEB-020 (05-oct-2026): el Capitán confirmó SOLO el suministro de gabinetes (no fabricación ni armado).
+    slug: "gabinetes-electricos",
+    icon: Boxes,
+    name: "Gabinetes eléctricos",
+    title: "Gabinetes eléctricos para tableros",
+    short: "Suministro de gabinetes y cajas eléctricas para tableros de control y distribución.",
+    description:
+      "Suministramos gabinetes y cajas eléctricas para alojar tableros de control, protección y distribución. Envíanos las medidas y el uso, y te cotizamos.",
+    metaDescription:
+      "Suministro de gabinetes eléctricos en República Dominicana: cajas y gabinetes para tableros de control y distribución. Cotiza con medidas y uso.",
+    image: "/banners/control-electrico.webp",
+    imageWidth: 512,
+    imageHeight: 512,
+    ctaTitle: "¿Necesitas un gabinete eléctrico?",
+    imageAlt: "Imagen de referencia: gabinete eléctrico con componentes de control montados",
+    ejemplos: ["Gabinetes para tablero", "Cajas eléctricas"],
+    subcategorias: [
+      {
+        id: "gabinetes-para-tablero",
+        icon: Boxes,
+        title: "Gabinetes para tableros",
+        desc: "Gabinetes para alojar tableros de control, protección o distribución de máquinas y planta.",
+        image: "/banners/control-electrico.webp",
+        imageAlt: "Imagen de referencia: interior de un gabinete de tablero de control",
+        imageFit: "cover",
+        imageNote: "Imagen de referencia",
+      },
+      {
+        id: "cajas-electricas",
+        icon: Plug,
+        title: "Cajas eléctricas",
+        desc: "Cajas para conexión, paso o mando en campo, según las medidas y el uso que nos indiques.",
+        cta: "Enviar especificaciones",
+      },
+    ],
+    aplicaciones: [
+      "Tableros de control de máquinas",
+      "Distribución y protección eléctrica en planta",
+      "Reemplazo de gabinetes dañados",
+      "Ampliaciones de tableros existentes",
     ],
   },
   {

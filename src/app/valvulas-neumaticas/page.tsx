@@ -3,7 +3,8 @@ import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid } from "@/components/page/Blocks";
-import { SITE } from "@/lib/constants";
+import { CONTACT, SITE } from "@/lib/constants";
+import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import { getSolucion } from "@/lib/soluciones";
 
 const neumatica = getSolucion("neumatica");
@@ -54,7 +55,7 @@ export default function ValvulasNeumaticasPage() {
         title="Válvulas neumáticas direccionales y solenoides"
         lead={<p>Cotiza válvulas para controlar el paso del aire en tus equipos. Recibimos solicitudes de empresas y zonas francas en República Dominicana desde Santo Domingo.</p>}
         quoteHref={quoteHref(sub.title, linea)}
-        quoteLabel="Cotizar válvula por WhatsApp"
+        quoteLabel="Solicitar cotización"
         secondary={{ href: "#tipos", label: "Ver catálogo de la línea" }}
         note="Envía la referencia o una foto de la placa. Te confirmamos disponibilidad y condiciones en la cotización."
         image={{ src: sub.image!, alt: sub.imageAlt ?? sub.title, fit: "contain" }}
@@ -79,6 +80,8 @@ export default function ValvulasNeumaticasPage() {
         quoteHref={quoteHref(sub.title, linea)}
         note={`Atención por WhatsApp: ${shortHours()}.`}
       />
+
+      <FaqBlock items={landingFaqs({ name: "Válvulas neumáticas", datos: information.map((i) => i.title), address: CONTACT.address, hours: CONTACT.hours })} kicker="Preguntas frecuentes" title="Sobre válvulas neumáticas" tone="light" />
 
       <RelatedGrid
         kicker="Tu sistema neumático"

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { CONTACT } from "@/lib/constants";
+import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import Link from "next/link";
 import { ArrowUpRight, Cog, Ruler } from "lucide-react";
 import { commercialMetadata } from "@/lib/seo";
@@ -94,6 +96,8 @@ export default function SellosYComponentesPage() {
       </Band>
 
       <CylinderRelated current="/sellos-y-componentes" />
+
+      <FaqBlock items={landingFaqs({ name: "Sellos y componentes", datos: MEDIDAS.map((m) => `${m.pieza}: ${m.minimo.charAt(0).toLowerCase()}${m.minimo.slice(1).replace(/\.$/, "")}`), address: CONTACT.address, hours: CONTACT.hours })} kicker="Preguntas frecuentes" title="Sobre sellos y componentes" tone="light" />
 
       <QuoteCTA
         eyebrow="Sellos · Vástagos · Componentes"

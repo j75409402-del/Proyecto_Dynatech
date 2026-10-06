@@ -11,7 +11,7 @@ export default function GarantiasPage() {
       eyebrow="Soporte"
       title="Garantías"
       updated="julio 2026"
-      intro="Todo trabajo de fabricación o reparación realizado por Dynatech Ingeniería incluye garantía, con el alcance específico confirmado en la cotización. En piezas importadas, trasladamos la garantía del fabricante y gestionamos el reclamo en representación tuya."
+      intro="Las condiciones de garantía de cada trabajo de fabricación o reparación, cuando aplican, se confirman por escrito en la cotización. En piezas importadas, trasladamos la garantía del fabricante y gestionamos el reclamo en representación tuya."
       sections={[
         {
           heading: "Cobertura",

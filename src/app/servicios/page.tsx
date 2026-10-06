@@ -49,15 +49,11 @@ const FAQS = [
   },
   {
     q: "¿Qué incluye el cambio de sellos?",
-    a: "Desarme completo del cilindro, reemplazo de sellos por repuesto de calidad, limpieza y rectificación si el componente lo requiere, y prueba de funcionamiento antes de la entrega.",
+    a: "Desarme completo del cilindro, reemplazo de sellos por repuesto de calidad, limpieza y prueba de funcionamiento antes de la entrega.",
   },
   {
     q: "¿Trabajan con todos los cilindros neumáticos industriales?",
     a: "Reparamos y fabricamos componentes compatibles con cilindros neumáticos industriales estándar, sin importar el fabricante de origen.",
-  },
-  {
-    q: "¿El trabajo tiene garantía?",
-    a: "Sí, todo trabajo de reparación o fabricación realizado por Dynatech Ingeniería incluye garantía — te confirmamos el alcance específico al momento de la cotización.",
   },
   {
     q: "¿Hacen envíos fuera de Santo Domingo?",
@@ -65,7 +61,7 @@ const FAQS = [
   },
   {
     q: "¿Qué formas de pago aceptan?",
-    a: "Trabajamos con transferencia bancaria y crédito corporativo para clientes recurrentes con cuenta abierta. Los detalles se confirman al formalizar cada cotización.",
+    a: "Trabajamos con transferencia bancaria. Los detalles se confirman al formalizar cada cotización.",
   },
 ];
 

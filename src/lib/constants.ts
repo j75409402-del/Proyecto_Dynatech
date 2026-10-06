@@ -60,5 +60,5 @@ export const NAV = {
     { label: "Cilindros hidráulicos", href: "/cilindros-hidraulicos" },
     { label: "Mecanizado", href: "/mecanizado" },
   ],
-  cta: { label: "Cotizar por WhatsApp", href: "/cotizacion" },
+  cta: { label: "Solicitar cotización", href: "/cotizacion" },
 } as const;

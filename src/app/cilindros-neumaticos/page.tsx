@@ -7,9 +7,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { CylinderRelated } from "@/components/industrial/CylinderRelated";
-import { SITE } from "@/lib/constants";
+import { CONTACT, SITE } from "@/lib/constants";
+import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 
 export const metadata: Metadata = {
   ...commercialMetadata("Cilindros neumáticos en República Dominicana", "Fabricación de cilindros neumáticos a la medida bajo cotización. Comparte plano, muestra o medidas para tu solicitud.", "/cilindros-neumaticos"),
@@ -38,6 +38,16 @@ const NECESITAMOS = [
   { icon: Ruler, title: "Medidas", desc: "Diámetro y carrera, como mínimo." },
   { icon: Camera, title: "Fotos", desc: "Del cilindro, su placa y su montaje." },
   { icon: Hash, title: "Código", desc: "La referencia del cilindro, si la tienes." },
+];
+
+/** Solo hechos ya publicados en esta página y en /servicios (WEB-020). */
+const FAQS: Faq[] = [
+  { q: "¿Qué datos necesito enviar?", a: "Con cualquiera de estos datos podemos empezar: plano, muestra, medidas, fotos o el código. Lo mínimo: diámetro x carrera o una foto del cilindro y su placa." },
+  { q: "¿Fabrican en milímetros y en pulgadas?", a: "Sí. Fabricamos el cilindro a partir de tu plano, una muestra o tus medidas, en milímetros o en pulgadas." },
+  { q: "¿Pueden fabricarlo si el original ya no se consigue?", a: "Sí. Fabricamos cilindros completos a medida, incluso cuando el original ya no está disponible." },
+  { q: "¿Y si mi cilindro está dañado?", a: "Lo evaluamos para repararlo o reconstruirlo: desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar. Ver la página de reparación de cilindros." },
+  { q: "¿Atienden empresas y zonas francas?", a: "Sí. Atendemos solicitudes de empresas del sector privado y de zonas francas en República Dominicana." },
+  { q: "¿Dónde están y en qué horario atienden?", a: `En ${CONTACT.address}. Horario: ${CONTACT.hours.replace(/ · /g, " ")}.` },
 ];
 
 const serviceJsonLd = {
@@ -100,8 +110,7 @@ export default function CilindrosNeumaticosPage() {
                   ))}
                 </ul>
                 <a href={quoteHref("Fabricación de cilindros neumáticos")} target="_blank" rel="noopener" className="btn-primary min-h-12 self-start">
-                  <WhatsAppIcon className="h-4 w-4" />
-                  Cotizar por WhatsApp
+                  Solicitar cotización
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
@@ -127,7 +136,7 @@ export default function CilindrosNeumaticosPage() {
                 rel="noopener"
                 className="mt-1 flex min-h-11 w-fit items-center gap-1 text-signal font-medium hover:underline whitespace-nowrap"
               >
-                Cotizar por WhatsApp <ArrowRight className="inline h-3.5 w-3.5" aria-hidden="true" />
+                Solicitar cotización <ArrowRight className="inline h-3.5 w-3.5" aria-hidden="true" />
               </a>
             </p>
           </Reveal>
@@ -159,8 +168,7 @@ export default function CilindrosNeumaticosPage() {
 
           <Reveal className="mt-10">
             <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12">
-              <WhatsAppIcon className="h-4 w-4" />
-              Cotizar por WhatsApp
+              Solicitar cotización
               <ArrowRight className="h-4 w-4" />
             </a>
           </Reveal>
@@ -186,6 +194,8 @@ export default function CilindrosNeumaticosPage() {
       </section>
 
       <CylinderRelated current="/cilindros-neumaticos" />
+
+      <FaqBlock items={FAQS} kicker="Preguntas frecuentes" title="Sobre cilindros a la medida" tone="white" />
 
       <QuoteCTA eyebrow="Fabricación · Bajo plano o muestra" title="¿Necesitas un cilindro neumático a la medida?" text="Envía el plano, la muestra, las medidas o fotos del cilindro y su placa. Te confirmamos alcance y condiciones en la cotización." quoteItem="Fabricación de cilindros neumáticos" />
     </div>

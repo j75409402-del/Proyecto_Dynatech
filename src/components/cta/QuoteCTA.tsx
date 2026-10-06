@@ -1,7 +1,7 @@
 import { ArrowRight, Clock } from "lucide-react";
 import { CONTACT } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { whatsappCylinderService } from "@/lib/whatsapp";
+import { whatsappChat, whatsappCylinderService } from "@/lib/whatsapp";
 import { quoteBridgeHref } from "@/lib/quote";
 import { shortHours } from "@/components/page/TrustStrip";
 
@@ -36,7 +36,7 @@ export function QuoteCTA({
   title = "¿Necesitas fabricar o reparar un cilindro neumático?",
   quoteItem,
   quoteTipo,
-  ctaLabel = "Cotizar por WhatsApp",
+  ctaLabel = "Solicitar cotización",
   text = "Envíanos el plano, la muestra, las medidas, fotos o las especificaciones y te cotizamos.",
   whatsappHref,
 }: Props) {
@@ -50,8 +50,9 @@ export function QuoteCTA({
         </div>
         <div className="lg:col-span-4">
           <div className="flex flex-col gap-3">
-            <a href={whatsappHref ?? (quoteItem ? quoteHref(quoteItem, quoteTipo) : whatsappCylinderService())} target="_blank" rel="noopener" className="btn-primary min-h-14 px-6"><WhatsAppIcon className="h-5 w-5" />{ctaLabel}<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
-            <p className="text-sm text-white/70">WhatsApp Business: <a href={quoteBridgeHref()} target="_blank" rel="noopener" className="inline-flex min-h-10 items-center font-medium text-white underline decoration-white/30 underline-offset-4 hover:text-signal">{CONTACT.whatsappDisplay}</a></p>
+            <a href={whatsappHref ?? (quoteItem ? quoteHref(quoteItem, quoteTipo) : whatsappCylinderService())} target="_blank" rel="noopener" className="btn-primary min-h-14 px-6">{ctaLabel}<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
+            <a href={whatsappChat()} target="_blank" rel="noopener" className="btn-secondary home-hero-secondary home-hero-wa min-h-14 px-6"><WhatsAppIcon className="h-5 w-5" />WhatsApp {CONTACT.whatsappDisplay}</a>
+            <p className="text-sm text-white/60">«Solicitar cotización» abre WhatsApp con tu solicitud lista para enviar.</p>
           </div>
           <p className="mt-4 flex items-center gap-2 text-sm leading-relaxed text-white/60"><Clock className="h-4 w-4 shrink-0" aria-hidden="true" />Atención: {shortHours()}</p>
         </div>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { whatsappChat } from "@/lib/whatsapp";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { TrustStrip } from "./TrustStrip";
 
@@ -35,8 +36,9 @@ type Props = {
  * Hero oscuro compartido (portada y páginas internas): texto → CTA → visual en móvil, dos
  * columnas en escritorio. La imagen lleva `priority` porque suele ser el LCP.
  * El CTA principal es un <a href="/cotizacion…"> (lo mide CommercialTracking), nunca <Link>.
+ * WEB-020: CTA principal "Solicitar cotización" + secundario "WhatsApp" (chat directo, whatsapp_click).
  */
-export function PageHero({ crumbs, kicker, title, lead, quoteHref, quoteLabel = "Cotizar por WhatsApp", secondary, note, image, visual, caption, trust = "lineas", size = "page", titleId = "page-hero-title" }: Props) {
+export function PageHero({ crumbs, kicker, title, lead, quoteHref, quoteLabel = "Solicitar cotización", secondary, note, image, visual, caption, trust = "lineas", size = "page", titleId = "page-hero-title" }: Props) {
   const SecondaryTag = secondary?.href.startsWith("#") ? "a" : Link;
   return (
     <section className={`home-hero ${size === "page" ? "page-hero" : ""}`} aria-labelledby={titleId}>
@@ -48,14 +50,17 @@ export function PageHero({ crumbs, kicker, title, lead, quoteHref, quoteLabel = 
           <div className="home-hero-lead">{lead}</div>
           <div className="home-hero-actions" data-fab-hide="">
             <a href={quoteHref} target="_blank" rel="noopener" className="btn-primary min-h-14 px-6">
-              <WhatsAppIcon className="h-5 w-5" />{quoteLabel}<ArrowRight className="h-4 w-4" aria-hidden="true" />
+              {quoteLabel}<ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
-            {secondary && (
-              <SecondaryTag href={secondary.href} className="btn-secondary home-hero-secondary min-h-14 px-6">
-                {secondary.label} <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </SecondaryTag>
-            )}
+            <a href={whatsappChat()} target="_blank" rel="noopener" className="btn-secondary home-hero-secondary home-hero-wa min-h-14 px-6">
+              <WhatsAppIcon className="h-5 w-5" />WhatsApp
+            </a>
           </div>
+          {secondary && (
+            <SecondaryTag href={secondary.href} className="home-hero-textlink">
+              {secondary.label} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </SecondaryTag>
+          )}
           {note && <p className="home-hero-note">{note}</p>}
         </div>
         <figure className={`home-hero-visual ${visual ? "is-drawing" : image?.fit === "contain" ? "is-catalog" : ""}`}>

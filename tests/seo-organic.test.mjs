@@ -34,7 +34,7 @@ try{
       {'@type':'OpeningHoursSpecification',dayOfWeek:['Saturday'],opens:'08:00',closes:'12:00'}
     ]);
     // AP-004: el CTA pasa por /cotizacion (medición) y termina en wa.me con el contexto.
-    const quote=new URL(await page.getByRole('link',{name:'Cotizar válvula por WhatsApp',exact:true}).getAttribute('href'),base);
+    const quote=new URL(await page.locator('main').getByRole('link',{name:'Solicitar cotización',exact:true}).first().getAttribute('href'),base);
     assert.equal(quote.pathname,'/cotizacion');assert.equal(quote.searchParams.get('linea'),'Neumática');
     const redirect=await page.request.get(quote.href,{maxRedirects:0,headers:{dnt:'1'}});
     const whatsapp=new URL(redirect.headers().location);
@@ -65,7 +65,7 @@ try{
   const noJS=await browser.newContext({javaScriptEnabled:false});
   const staticPage=await noJS.newPage();await staticPage.goto(base+'/valvulas-neumaticas');
   assert.ok(await staticPage.locator('h1').isVisible());
-  assert.ok(await staticPage.getByRole('link',{name:'Cotizar válvula por WhatsApp',exact:true}).isVisible());
+  assert.ok(await staticPage.locator('main').getByRole('link',{name:'Solicitar cotización',exact:true}).first().isVisible());
   await noJS.close();
   await writeFile('docs/seo-organico-20261003/enlaces-verificados.json',JSON.stringify({results,navigationLinks,hoursVerified:true,widths:[390,768,1440],canonical:true,indexable:true,jsonLd:'JSON parseado y relaciones verificadas; no Rich Results Test',cta:true,withoutJavaScript:true},null,2));
   console.log(JSON.stringify({links:results.length,navigationLinks,widths:3,result:'OK'}));

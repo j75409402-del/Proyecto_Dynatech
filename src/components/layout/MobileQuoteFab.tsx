@@ -73,7 +73,7 @@ export function MobileQuoteFab() {
       aria-hidden={!visible}
       tabIndex={visible ? undefined : -1}
       data-visible={visible}
-      aria-label="Cotizar por WhatsApp"
+      aria-label="Solicitar cotización"
       className="mobile-quote-fab md:hidden"
     >
       <WhatsAppIcon className="h-5 w-5 shrink-0" />

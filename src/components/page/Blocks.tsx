@@ -8,7 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
 /**
  * Bloques compartidos del sistema visual WEB-010 (todas las páginas internas).
  * Reglas: CTAs de cotizar = <a href> de lib/quote.ts / lib/whatsapp.ts con el texto único
- * "Cotizar por WhatsApp"; enlaces internos con <Link> y textos que NO contienen "cotiz".
+ * "Solicitar cotización"; enlaces internos con <Link> y textos que NO contienen "cotiz".
  */
 
 type Tone = "light" | "white" | "dark";
@@ -36,7 +36,7 @@ export function SectionHead({ kicker, title, intro, id, aside }: { kicker: strin
 }
 
 /** Botón de cotización estándar (rojo). `href` siempre de lib/quote.ts / lib/whatsapp.ts. */
-export function QuoteButton({ href, label = "Cotizar por WhatsApp", className = "" }: { href: string; label?: string; className?: string }) {
+export function QuoteButton({ href, label = "Solicitar cotización", className = "" }: { href: string; label?: string; className?: string }) {
   return (
     <a href={href} target="_blank" rel="noopener" className={`btn-primary min-h-12 px-6 ${className}`}>
       <WhatsAppIcon className="h-4 w-4" />{label}<ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -92,7 +92,7 @@ export function OfferGrid({ items, columns = 3, compact = false }: { items: Offe
               <div className="offer-actions">
                 {it.quote && (
                   <a href={it.quote} target="_blank" rel="noopener" className="offer-quote">
-                    <WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: {it.title}</span>
+                    Solicitar cotización<span className="sr-only">: {it.title}</span>
                   </a>
                 )}
                 {it.link && (

@@ -704,3 +704,72 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 }
 /* Rótulo "Imagen de referencia" sobre fotos sueltas (misma pieza que .img-note de las tarjetas). */
 .img-note.is-top { bottom:auto; top:10px; left:auto; right:10px; }
+
+/* ---------- WEB-020: portada de conversión, CTA dobles, categorías, sectores y FAQ ---------- */
+/* CTA secundario WhatsApp: contorno, icono verde de WhatsApp para distinguirlo del CTA principal. */
+.home-hero-wa svg { color:#25D366; }
+.home-hero-wa { gap:10px; }
+.home-hero-textlink { margin-top:14px; display:inline-flex; align-items:center; gap:8px; min-height:44px; font-size:14px; font-weight:500; color:#d5dde4; text-decoration:underline; text-decoration-color:#ffffff40; text-underline-offset:5px; }
+.home-hero-textlink:hover { color:#fff; text-decoration-color:#E4002B; }
+.band-light .home-hero-wa, .band-white .home-hero-wa { color:#0b0d10; border-color:#0b0d1033; }
+
+/* Hero de portada a sangre (foto de referencia sin personas ni logotipos). */
+.hx { position:relative; isolation:isolate; background:#0b1016; color:#f0f3f5; overflow:hidden; }
+.hx-media { position:absolute; inset:0; z-index:-2; opacity:.55; }
+.hx-shade { position:absolute; inset:0; z-index:-1; background:linear-gradient(180deg,#0b1016f2 0%,#0b1016d9 45%,#0b1016 100%); }
+.hx-inner { display:grid; gap:32px; padding-top:32px; padding-bottom:32px; }
+.hx-title { margin-top:18px; font-size:clamp(2.2rem,9vw,2.9rem); line-height:1.03; letter-spacing:-.045em; font-weight:600; color:#f7f9fa; text-wrap:balance; }
+.hx-lead { margin-top:18px; max-width:38rem; font-size:16px; line-height:1.65; color:#c7d2db; }
+.hx-actions { margin-top:26px; display:flex; flex-direction:column; gap:12px; }
+.hx-paths { border:1px solid #ffffff1f; background:#0b1016b3; backdrop-filter:blur(6px); }
+.hx-paths-title { padding:14px 18px; border-bottom:1px solid #ffffff1a; font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#a9b7c4; }
+.hx-paths ul { display:grid; }
+.hx-paths li + li { border-top:1px solid #ffffff14; }
+.hx-path { display:flex; align-items:center; gap:14px; min-height:64px; padding:12px 18px; transition:background .2s; }
+.hx-path:hover { background:#ffffff0d; }
+.hx-path b { display:block; font-size:16px; font-weight:500; color:#f5f7f9; }
+.hx-path small { display:block; margin-top:2px; font-size:13px; color:#a9b7c4; }
+.hx-path span { flex:1; min-width:0; }
+.hx-path-arrow { color:#7f8d9a; transition:transform .2s, color .2s; }
+.hx-path:hover .hx-path-arrow { color:#E4002B; transform:translate(2px,-2px); }
+.hx-note { padding-bottom:10px; text-align:right; }
+.hx-note span { font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#8796a3; }
+@media(min-width:640px){ .hx-actions { flex-direction:row; flex-wrap:wrap; } .hx-paths ul { grid-template-columns:1fr 1fr; } .hx-paths li + li { border-top:0; } .hx-paths li { border-top:1px solid #ffffff14; } .hx-paths li:nth-child(-n+2) { border-top:0; } .hx-paths li:nth-child(odd) { border-right:1px solid #ffffff14; } }
+@media(min-width:1024px){
+ .hx-media { opacity:.9; }
+ .hx-shade { background:linear-gradient(90deg,#0b1016 0%,#0b1016f0 38%,#0b101699 62%,#0b101633 100%); }
+ .hx-inner { grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr); align-items:end; gap:64px; padding-top:88px; padding-bottom:56px; min-height:min(640px,calc(100svh - 150px)); }
+ .hx-title { font-size:clamp(3rem,4.4vw,4.4rem); }
+ .hx-lead { font-size:18px; }
+ .hx-paths ul { grid-template-columns:1fr; }
+ .hx-paths li:nth-child(odd) { border-right:0; }
+ .hx-paths li + li { border-top:1px solid #ffffff14; }
+ .hx-paths li:nth-child(2) { border-top:1px solid #ffffff14; }
+}
+
+/* Categorías */
+.cat-groups { display:grid; gap:28px; }
+.cat-group-title { margin-bottom:10px; font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#5b6875; }
+.cat-list { display:grid; gap:8px; }
+.cat-item { display:flex; align-items:center; gap:14px; min-height:72px; padding:14px 16px; background:#fff; border:1px solid #0b0d1014; transition:border-color .2s, transform .2s, box-shadow .2s; }
+.cat-item:hover { border-color:#E4002B66; box-shadow:0 14px 30px -22px #0b0d1066; transform:translateY(-1px); }
+.cat-icon { display:grid; place-items:center; width:42px; height:42px; flex:none; background:#FEE7EB; color:#E4002B; }
+.cat-text { flex:1; min-width:0; }
+.cat-text b { display:block; font-size:16px; font-weight:600; color:#0b0d10; letter-spacing:-.01em; }
+.cat-text small { display:block; margin-top:3px; font-size:14px; line-height:1.45; color:#4a5663; }
+.cat-arrow { color:#8a96a3; }
+.cat-item:hover .cat-arrow { color:#E4002B; }
+@media(min-width:1024px){ .cat-groups { grid-template-columns:1fr 1fr; gap:40px; } }
+
+/* Sectores */
+.sector-grid { display:grid; gap:16px; }
+.sector-card { height:100%; padding:28px; border:1px solid #0b0d101a; background:#fff; }
+.sector-card h3 { margin-top:18px; font-size:20px; font-weight:600; letter-spacing:-.015em; color:#0b0d10; }
+.sector-card p { margin-top:10px; font-size:15px; line-height:1.6; color:#4a5663; }
+@media(min-width:768px){ .sector-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+
+/* FAQ */
+.faq-layout { display:grid; gap:8px; }
+.faq-layout .section-head { margin-bottom:12px; }
+.faq-list { border-top:1px solid #0b0d101a; }
+@media(min-width:1024px){ .faq-layout { grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:64px; align-items:start; } .faq-layout .section-head { flex-direction:column; align-items:flex-start; } }

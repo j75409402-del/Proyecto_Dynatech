@@ -5,7 +5,8 @@ import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, type RelatedItem } from "@/components/page/Blocks";
 import { HydraulicCylinderDrawing, MachinedPartDrawing } from "@/components/page/TechDrawings";
 import { Reveal } from "@/components/motion/Reveal";
-import { SITE } from "@/lib/constants";
+import { CONTACT, SITE } from "@/lib/constants";
+import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import { SERVICIOS_ADICIONALES } from "@/lib/servicios";
 
 type Service = (typeof SERVICIOS_ADICIONALES)[number];
@@ -74,6 +75,8 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
           </div>
         </Reveal>
       </Band>
+
+      <FaqBlock items={landingFaqs({ name: s.name, datos: s.information, referencePhotos: false, address: CONTACT.address, hours: CONTACT.hours })} kicker="04 · Preguntas frecuentes" title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
 
       <RelatedGrid kicker="Relacionado" title="Otros servicios del taller" id="servicio-relacionado" items={related} />
 

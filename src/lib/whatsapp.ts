@@ -55,3 +55,12 @@ export function whatsappGeneral(): string {
 export function whatsappSolucion(linea: string): string {
   return quoteBridgeHref({ linea, tpl: "solucion" });
 }
+
+/**
+ * CTA secundario "WhatsApp" (WEB-020, decisión del Capitán 05-oct): chat directo para consultas.
+ * Es wa.me con el número oficial de CONTACT; CommercialTracking lo mide como `whatsapp_click`.
+ * El CTA principal "Solicitar cotización" sigue pasando por /cotizacion (quote_whatsapp_click).
+ */
+export function whatsappChat(): string {
+  return whatsappLink("Hola Dynatech, tengo una consulta.");
+}

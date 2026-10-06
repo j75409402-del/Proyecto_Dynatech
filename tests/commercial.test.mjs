@@ -14,7 +14,7 @@ await mkdir('docs/seo-verificacion', { recursive: true });
 try {
   const sitemap = await (await page.request.get(`${base}/sitemap.xml`)).text();
   const routes = [...sitemap.matchAll(/<loc>https:\/\/www\.dynatech\.com\.do([^<]*)<\/loc>/g)].map(m => m[1] || '/');
-  assert.equal(routes.length, 18); // /cotizacion/correo salió del sitemap (AP-004)
+  assert.equal(routes.length, 19); // /cotizacion/correo salió del sitemap (AP-004); +/gabinetes-electricos (WEB-020)
   for (const width of [390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of routes) {
