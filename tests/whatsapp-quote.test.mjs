@@ -119,7 +119,8 @@ try {
         await popup.close();
       }
       // UTM de primera visita se conserva en la navegación interna
-      await page.goto(base + '/servicios', { waitUntil: 'load' });
+      // 'networkidle': CommercialTracking añade UTM/from al hidratar; con 'load' el clic sintético llegaba antes (carrera del test, no del sitio).
+      await page.goto(base + '/servicios', { waitUntil: 'networkidle' });
       const href = await page.evaluate(() => { const a = document.querySelector('main a[href^="/cotizacion"]'); a.addEventListener('click', e => e.preventDefault(), { once: true }); a.click(); return a.href; });
       assert.ok(href.includes('utm_source=facebook') && href.includes('from=%2Fservicios'), href);
       // Sin JS / Referer: el CTA envía Referer (sin noreferrer)
