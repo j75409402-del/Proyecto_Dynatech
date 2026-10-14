@@ -34,6 +34,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/servicios" },
 };
 
+/** Oct-2026: se retiraron, pendientes de confirmación del dueño, las respuestas sobre formas de
+ * pago (transferencia), envíos nacionales y compatibilidad «sin importar el fabricante». */
 const FAQS = [
   {
     q: "¿Cuánto tiempo toma reparar un cilindro neumático?",
@@ -50,18 +52,6 @@ const FAQS = [
   {
     q: "¿Qué incluye el cambio de sellos?",
     a: "Desarme completo del cilindro, reemplazo de sellos por repuesto de calidad, limpieza y prueba de funcionamiento antes de la entrega.",
-  },
-  {
-    q: "¿Trabajan con todos los cilindros neumáticos industriales?",
-    a: "Reparamos y fabricamos componentes compatibles con cilindros neumáticos industriales estándar, sin importar el fabricante de origen.",
-  },
-  {
-    q: "¿Hacen envíos fuera de Santo Domingo?",
-    a: "Sí, coordinamos envíos a todo el territorio nacional. El costo y tiempo de envío se confirman junto con tu cotización según el destino y volumen del pedido.",
-  },
-  {
-    q: "¿Qué formas de pago aceptan?",
-    a: "Trabajamos con transferencia bancaria. Los detalles se confirman al formalizar cada cotización.",
   },
 ];
 

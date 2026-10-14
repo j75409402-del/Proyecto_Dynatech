@@ -795,10 +795,5 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .taller-links a:hover { color:#E4002B; }
 @media(min-width:900px){ .taller-grid { grid-template-columns:1.2fr 1fr 1fr; } }
 
-/* Rótulo de fotos reales (antes/después) frente a imágenes de referencia o catálogo. */
-.before-after-real { margin-top:12px; display:flex; align-items:center; gap:8px; font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#0f7a3d; }
-.before-after-real span { width:8px; height:8px; border-radius:50%; background:#16a34a; }
-.cylinder-page .before-after-real { color:#5fd38d; }
-
 /* CTA único con icono de WhatsApp: el icono hereda el blanco del botón rojo. */
 .btn-primary svg { flex-shrink:0; }

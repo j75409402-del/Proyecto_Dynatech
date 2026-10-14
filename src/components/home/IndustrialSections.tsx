@@ -106,7 +106,7 @@ export function AntesDespues() {
     <section className="section-pad border-b border-black/10 bg-[#F4F5F6]" aria-labelledby="antes-despues-inicio">
       <div className="container-max">
         <Reveal className="section-heading mb-10">
-          <div><p className="section-kicker">02 · Trabajo real</p><h2 id="antes-despues-inicio" className="section-title">Antes y después.</h2></div>
+          <div><p className="section-kicker">02 · Trabajo de taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después.</h2></div>
           <p className="max-w-md leading-relaxed text-steel-300">Cilindro ISO 32 mm recuperado en nuestro taller. Desliza para comparar.</p>
         </Reveal>
         <Reveal>
