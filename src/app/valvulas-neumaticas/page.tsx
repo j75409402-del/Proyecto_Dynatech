@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
+import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid } from "@/components/page/Blocks";
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import { getSolucion } from "@/lib/soluciones";
+import { whatsappService } from "@/lib/whatsapp";
 
 const neumatica = getSolucion("neumatica");
 const sub = neumatica.subcategorias.find((item) => item.id === "valvulas")!;
@@ -28,7 +29,6 @@ const information = [
   { title: "Cantidad y ciudad de entrega" },
 ];
 
-const linea = "Neumática";
 const TIPOS = [
   { id: "direccionales", title: "Válvulas direccionales", desc: "Controlan el paso y la dirección del aire hacia cilindros y actuadores.", ejemplos: ["2/2", "3/2", "5/2", "5/3"], image: "/products/valvulas-smc.jpg", imageAlt: "Válvulas neumáticas direccionales de distintas configuraciones" },
   { id: "solenoides", title: "Electroválvulas y bobinas", desc: "Válvulas de accionamiento eléctrico y bobinas de reemplazo. Comparte la etiqueta de la bobina.", image: "/products/bobinas-smc.jpg", imageAlt: "Bobinas para electroválvulas neumáticas" },
@@ -54,10 +54,9 @@ export default function ValvulasNeumaticasPage() {
         kicker="Neumática industrial · Válvulas"
         title="Válvulas neumáticas direccionales y solenoides"
         lead={<p>Cotiza válvulas para controlar el paso del aire en tus equipos. Recibimos solicitudes de empresas y zonas francas en República Dominicana desde Santo Domingo.</p>}
-        quoteHref={quoteHref(sub.title, linea)}
-        quoteLabel="Solicitar cotización"
+        quoteHref={whatsappService("componente", sub.title)}
         secondary={{ href: "#tipos", label: "Ver catálogo de la línea" }}
-        note="Envía la referencia o una foto de la placa. Te confirmamos disponibilidad y condiciones en la cotización."
+        note="Envía el código o una foto de la etiqueta. Si no lo tienes, una foto de la válvula y sus conexiones basta para empezar."
         image={{ src: sub.image!, alt: sub.imageAlt ?? sub.title, fit: "contain" }}
         trust="lineas"
       />
@@ -69,7 +68,7 @@ export default function ValvulasNeumaticasPage() {
           title="Configuraciones y tipos"
           intro="Para un reemplazo, comparte la referencia del componente existente: la apariencia por sí sola no confirma que dos válvulas sean compatibles."
         />
-        <OfferGrid columns={4} items={TIPOS.map((t) => ({ ...t, quote: quoteHref(t.title, linea) }))} />
+        <OfferGrid columns={4} items={TIPOS.map((t) => ({ ...t, quote: whatsappService("componente", t.title) }))} />
       </Band>
 
       <QuoteChecklist
@@ -77,7 +76,7 @@ export default function ValvulasNeumaticasPage() {
         title="Qué enviar para cotizar una válvula"
         intro="Envía los datos que tengas. No es necesario completar los que desconoces."
         items={information}
-        quoteHref={quoteHref(sub.title, linea)}
+        quoteHref={whatsappService("componente", sub.title)}
         note={`Atención por WhatsApp: ${shortHours()}.`}
       />
 
@@ -95,7 +94,7 @@ export default function ValvulasNeumaticasPage() {
         ]}
       />
 
-      <QuoteCTA eyebrow="Válvulas neumáticas · República Dominicana" title="Envía la referencia de la válvula que necesitas" text="Comparte código, fotos y datos disponibles de la aplicación. Evaluamos tu solicitud y confirmamos las condiciones en la cotización." quoteItem={sub.title} quoteTipo={linea} />
+      <QuoteCTA eyebrow="Válvulas neumáticas · República Dominicana" title="Envía la referencia de la válvula que necesitas" text="Comparte el código, fotos y los datos que tengas de la aplicación. Te respondemos con disponibilidad y condiciones en la cotización." whatsappHref={whatsappService("componente", sub.title)} />
     </div>
   );
 }

@@ -773,3 +773,32 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .faq-layout .section-head { margin-bottom:12px; }
 .faq-list { border-top:1px solid #0b0d101a; }
 @media(min-width:1024px){ .faq-layout { grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:64px; align-items:start; } .faq-layout .section-head { flex-direction:column; align-items:flex-start; } }
+
+/* ── Mejora de conversión (oct-2026) ─────────────────────────────────────────────
+   Taller principal en la portada: tres trabajos con «qué enviar» y cotización por servicio. */
+.taller-grid { display:grid; gap:16px; }
+.taller-card { display:flex; flex-direction:column; height:100%; padding:28px; background:#fff; border:1px solid #0b0d101a; transition:border-color .25s, box-shadow .25s; }
+.taller-card:hover { border-color:#E4002B55; box-shadow:0 18px 40px -30px #0b0d1066; }
+.taller-card:first-child { border-top:3px solid #E4002B; }
+.taller-card-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.taller-tag { padding:4px 8px; background:#E4002B; color:#fff; font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
+.taller-card h3 { margin-top:18px; font-size:22px; font-weight:600; letter-spacing:-.02em; color:#0b0d10; }
+.taller-card > p { margin-top:10px; font-size:15px; line-height:1.6; color:#4a5663; }
+.taller-card .taller-send { margin-top:16px; padding-top:12px; border-top:1px dashed #0b0d1026; font-size:14px; line-height:1.5; color:#2b3540; }
+.taller-send span { display:block; margin-bottom:2px; font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#c40024; }
+.taller-actions { margin-top:auto; padding-top:20px; display:flex; flex-wrap:wrap; gap:10px; }
+.taller-quote { display:inline-flex; flex:1 1 auto; min-height:48px; align-items:center; justify-content:center; gap:8px; padding:0 18px; background:#E4002B; color:#fff; font-size:14px; font-weight:600; letter-spacing:.02em; transition:background .2s; }
+.taller-quote:hover { background:#C40024; }
+.taller-quote:focus-visible { outline:3px solid #0b1016; outline-offset:2px; }
+.taller-links { margin-top:8px; display:flex; flex-wrap:wrap; gap:4px 18px; }
+.taller-links a { display:inline-flex; min-height:44px; align-items:center; gap:6px; font-size:14px; font-weight:500; color:#0b0d10; }
+.taller-links a:hover { color:#E4002B; }
+@media(min-width:900px){ .taller-grid { grid-template-columns:1.2fr 1fr 1fr; } }
+
+/* Rótulo de fotos reales (antes/después) frente a imágenes de referencia o catálogo. */
+.before-after-real { margin-top:12px; display:flex; align-items:center; gap:8px; font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#0f7a3d; }
+.before-after-real span { width:8px; height:8px; border-radius:50%; background:#16a34a; }
+.cylinder-page .before-after-real { color:#5fd38d; }
+
+/* CTA único con icono de WhatsApp: el icono hereda el blanco del botón rojo. */
+.btn-primary svg { flex-shrink:0; }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { quoteBridgeHref } from "@/lib/quote";
+import { quoteBridgeHref, SERVICE_BY_PATH } from "@/lib/quote";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 /**
@@ -65,19 +65,22 @@ export function MobileQuoteFab() {
     };
   }, [pathname]);
 
+  // Mensaje según la página: reparar en /servicios, fabricar en /cilindros-neumaticos, etc.
+  const svc = SERVICE_BY_PATH[pathname];
+  const href = svc ? quoteBridgeHref({ svc }) : quoteBridgeHref();
   return (
     <a
-      href={quoteBridgeHref()}
+      href={href}
       target="_blank"
       rel="noopener"
       aria-hidden={!visible}
       tabIndex={visible ? undefined : -1}
       data-visible={visible}
-      aria-label="Solicitar cotización"
+      aria-label="Cotizar por WhatsApp"
       className="mobile-quote-fab md:hidden"
     >
       <WhatsAppIcon className="h-5 w-5 shrink-0" />
-      <span>Cotizar</span>
+      <span>Cotizar por WhatsApp</span>
     </a>
   );
 }

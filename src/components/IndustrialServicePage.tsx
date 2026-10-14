@@ -1,5 +1,5 @@
 import { Box, Cog, Droplets, Factory, FileText, Wrench } from "lucide-react";
-import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
+import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, type RelatedItem } from "@/components/page/Blocks";
@@ -8,11 +8,12 @@ import { Reveal } from "@/components/motion/Reveal";
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import { SERVICIOS_ADICIONALES } from "@/lib/servicios";
+import { whatsappService } from "@/lib/whatsapp";
 
 type Service = (typeof SERVICIOS_ADICIONALES)[number];
 
 /**
- * Plantilla de servicios complementarios (cilindros hidráulicos, mecanizado). No hay fotos
+ * Plantilla de cilindros hidráulicos y mecanizado (prioridad comercial, oct-2026). No hay fotos
  * propias de estos trabajos: el visual es un esquema técnico SVG honesto (sin fotos de stock ni
  * 3D), con las cotas que pedimos para cotizar. Sin capacidades, máquinas ni plazos.
  */
@@ -25,6 +26,8 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
     areaServed: { "@type": "Country", name: "República Dominicana" },
   };
   const situationIcons = hidraulico ? [Wrench, Factory] : [FileText, Box];
+  // Hidráulicos: CTA principal sin elegir aún (reparar/fabricar se elige abajo); mecanizado: directo.
+  const mainQuote = whatsappService(hidraulico ? "hidraulico" : "mecanizado");
   const related: RelatedItem[] = [
     ...SERVICIOS_ADICIONALES.filter((o) => o.slug !== s.slug).map((o) => ({ href: `/${o.slug}`, title: o.name, desc: o.slug === "mecanizado" ? "Piezas bajo plano o muestra." : "Fabricación y reparación de cilindros hidráulicos.", icon: o.slug === "mecanizado" ? Cog : Droplets, label: `Ver ${o.name.toLowerCase()}` })),
     { href: "/servicios", title: "Reparación de cilindros neumáticos", desc: "Reparación y reconstrucción, con prueba antes de entregar.", image: "/cilindros/despues-cilindro-iso-32mm.jpg", label: "Ver reparación de cilindros" },
@@ -35,12 +38,12 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHero
         crumbs={[{ label: "Servicios", href: "/servicios" }, { label: s.name }]}
-        kicker="Servicio complementario · Bajo cotización"
+        kicker={hidraulico ? "Taller · Hidráulica" : "Taller · Mecanizado"}
         title={s.h1}
         lead={<p>{s.intro}</p>}
-        quoteHref={quoteHref(s.name)}
+        quoteHref={mainQuote}
         secondary={{ href: "#datos", label: "Ver qué datos enviar" }}
-        note="Envía foto, plano, muestra o medidas. Te confirmamos alcance y condiciones en la cotización."
+        note={s.lead}
         visual={hidraulico
           ? <HydraulicCylinderDrawing title="Esquema de un cilindro hidráulico en corte con las medidas que pedimos: diámetro interior, diámetro del vástago, carrera y montajes" />
           : <MachinedPartDrawing title="Esquema de una pieza mecanizada con las medidas que pedimos: largo total, diámetros, rosca y patrón de agujeros" />}
@@ -48,8 +51,8 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
       />
 
       <Band tone="light" labelledBy="que-cotizamos">
-        <SectionHead kicker="01 · Qué cotizamos" id="que-cotizamos" title={`${s.name}: qué podemos evaluar`} />
-        <OfferGrid columns={2} compact items={s.situations.map((t, i) => ({ title: t, desc: s.situationDescs[i], icon: situationIcons[i], quote: quoteHref(t, s.name) }))} />
+        <SectionHead kicker="01 · Qué hacemos" id="que-cotizamos" title={hidraulico ? "¿Reparar o fabricar?" : "Con plano o con muestra"} />
+        <OfferGrid columns={2} compact items={s.situations.map((t, i) => ({ title: t, desc: s.situationDescs[i], icon: situationIcons[i], quote: whatsappService(s.services[i]) }))} />
       </Band>
 
       <div id="datos" className="scroll-mt-28">
@@ -58,7 +61,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
           title="Información para tu cotización"
           intro="Comparte la información disponible. Si te falta algún dato, te diremos qué hace falta."
           items={s.information.map((t) => ({ title: t }))}
-          quoteHref={quoteHref(s.name)}
+          quoteHref={mainQuote}
           note={`Atención por WhatsApp: ${shortHours()}.`}
         />
       </div>
@@ -66,12 +69,12 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
       <Band tone="white" labelledBy="evaluacion">
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <p className="section-kicker">03 · Evaluación</p>
-            <h2 id="evaluacion" className="section-title">Evaluamos tu solicitud</h2>
+            <p className="section-kicker">03 · La cotización</p>
+            <h2 id="evaluacion" className="section-title">Qué confirmamos al cotizar</h2>
           </div>
           <div className="lg:col-span-7 lg:pt-8">
             <p className="text-lg leading-relaxed text-steel-300">{s.note}</p>
-            <p className="mt-4 leading-relaxed text-steel-300">Indica si solicitas la cotización para mantenimiento, compras o un proyecto de tu empresa. El alcance, plazo y condiciones se confirman al responder tu solicitud.</p>
+            <p className="mt-4 leading-relaxed text-steel-300">En la cotización te confirmamos por escrito el alcance del trabajo, el plazo y las condiciones.</p>
           </div>
         </Reveal>
       </Band>
@@ -80,7 +83,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
 
       <RelatedGrid kicker="Relacionado" title="Otros servicios del taller" id="servicio-relacionado" items={related} />
 
-      <QuoteCTA eyebrow={`${s.name} · Bajo cotización`} title={`Solicita tu cotización de ${s.name.toLowerCase()}`} text="Comparte las fotos, plano o descripción disponibles, la cantidad y tu ciudad." quoteItem={s.name} />
+      <QuoteCTA eyebrow={`${s.name} · Taller Dynatech`} title={hidraulico ? "¿Un cilindro hidráulico que reparar o fabricar?" : "¿Una pieza que mecanizar?"} text={s.lead} whatsappHref={mainQuote} />
     </>
   );
 }

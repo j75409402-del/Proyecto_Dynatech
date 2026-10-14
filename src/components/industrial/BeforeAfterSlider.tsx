@@ -10,6 +10,8 @@ type Props = {
   ratio?: number;
   sizes?: string;
   className?: string;
+  /** Rótulo bajo el comparador: distingue fotos reales de imágenes de referencia. */
+  caption?: string;
 };
 
 /**
@@ -19,7 +21,7 @@ type Props = {
  *   funcionando gracias a `touch-action: pan-y`).
  * - Sin JS: se ve mitad y mitad (posición inicial en CSS).
  */
-export function BeforeAfterSlider({ before, after, ratio = 1290 / 435, sizes = "(max-width: 1023px) 100vw, 1100px", className }: Props) {
+export function BeforeAfterSlider({ before, after, ratio = 1290 / 435, sizes = "(max-width: 1023px) 100vw, 1100px", className, caption = "Fotos reales · trabajo de nuestro taller" }: Props) {
   const [value, setValue] = useState(50);
   const frame = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
@@ -65,6 +67,7 @@ export function BeforeAfterSlider({ before, after, ratio = 1290 / 435, sizes = "
           className="before-after-range"
         />
       </div>
+      {caption && <p className="before-after-real"><span aria-hidden="true" />{caption}</p>}
     </div>
   );
 }

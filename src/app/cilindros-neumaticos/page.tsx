@@ -5,7 +5,8 @@ import Link from "next/link";
 import { ArrowRight, FileText, Box, Ruler, Camera, Hash, Factory, Wrench } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
-import { whatsappCylinderService } from "@/lib/whatsapp";
+import { whatsappService } from "@/lib/whatsapp";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
 import { CylinderRelated } from "@/components/industrial/CylinderRelated";
 import { CONTACT, SITE } from "@/lib/constants";
@@ -45,7 +46,7 @@ const FAQS: Faq[] = [
   { q: "¿Qué datos necesito enviar?", a: "Con cualquiera de estos datos podemos empezar: plano, muestra, medidas, fotos o el código. Lo mínimo: diámetro x carrera o una foto del cilindro y su placa." },
   { q: "¿Fabrican en milímetros y en pulgadas?", a: "Sí. Fabricamos el cilindro a partir de tu plano, una muestra o tus medidas, en milímetros o en pulgadas." },
   { q: "¿Pueden fabricarlo si el original ya no se consigue?", a: "Sí. Fabricamos cilindros completos a medida, incluso cuando el original ya no está disponible." },
-  { q: "¿Y si mi cilindro está dañado?", a: "Lo evaluamos para repararlo o reconstruirlo: desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar. Ver la página de reparación de cilindros." },
+  { q: "¿Y si mi cilindro está dañado?", a: "Lo reparamos o reconstruimos: desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar. Ver la página de reparación de cilindros." },
   { q: "¿Atienden empresas y zonas francas?", a: "Sí. Atendemos solicitudes de empresas del sector privado y de zonas francas en República Dominicana." },
   { q: "¿Dónde están y en qué horario atienden?", a: `En ${CONTACT.address}. Horario: ${CONTACT.hours.replace(/ · /g, " ")}.` },
 ];
@@ -109,9 +110,10 @@ export default function CilindrosNeumaticosPage() {
                     </li>
                   ))}
                 </ul>
-                <a href={quoteHref("Fabricación de cilindros neumáticos")} target="_blank" rel="noopener" className="btn-primary min-h-12 self-start">
-                  Solicitar cotización
-                  <ArrowRight className="h-4 w-4" />
+                <a href={whatsappService("neumatico-fabricar")} target="_blank" rel="noopener" className="btn-primary min-h-12 self-start">
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Cotizar por WhatsApp
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </a>
               </div>
             </Reveal>
@@ -136,7 +138,7 @@ export default function CilindrosNeumaticosPage() {
                 rel="noopener"
                 className="mt-1 flex min-h-11 w-fit items-center gap-1 text-signal font-medium hover:underline whitespace-nowrap"
               >
-                Solicitar cotización <ArrowRight className="inline h-3.5 w-3.5" aria-hidden="true" />
+                <WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp <ArrowRight className="inline h-3.5 w-3.5" aria-hidden="true" />
               </a>
             </p>
           </Reveal>
@@ -149,7 +151,7 @@ export default function CilindrosNeumaticosPage() {
           <Reveal className="max-w-2xl mb-12">
             <div className="eyebrow mb-3">03 · Para cotizar</div>
             <h2 className="font-display text-display-lg text-surface">Qué necesitamos de ti</h2>
-            <p className="text-steel-300 mt-4">Con cualquiera de estos datos podemos empezar. Lo mínimo: diámetro x carrera o una foto del cilindro y su placa.</p>
+            <p className="text-steel-300 mt-4">Con cualquiera de estos datos empezamos. No necesitas todas las medidas: basta una foto del cilindro y su placa, o el diámetro x carrera.</p>
           </Reveal>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -167,9 +169,10 @@ export default function CilindrosNeumaticosPage() {
           </div>
 
           <Reveal className="mt-10">
-            <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12">
-              Solicitar cotización
-              <ArrowRight className="h-4 w-4" />
+            <a href={whatsappService("neumatico-fabricar")} target="_blank" rel="noopener" className="btn-primary min-h-12">
+              <WhatsAppIcon className="h-4 w-4" />
+              Cotizar por WhatsApp
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </Reveal>
         </div>
@@ -197,7 +200,7 @@ export default function CilindrosNeumaticosPage() {
 
       <FaqBlock items={FAQS} kicker="Preguntas frecuentes" title="Sobre cilindros a la medida" tone="white" />
 
-      <QuoteCTA eyebrow="Fabricación · Bajo plano o muestra" title="¿Necesitas un cilindro neumático a la medida?" text="Envía el plano, la muestra, las medidas o fotos del cilindro y su placa. Te confirmamos alcance y condiciones en la cotización." quoteItem="Fabricación de cilindros neumáticos" />
+      <QuoteCTA eyebrow="Fabricación · Bajo plano o muestra" title="¿Necesitas un cilindro neumático a la medida?" text="Envía el plano, la muestra, las medidas o fotos del cilindro y su placa. Te confirmamos alcance, plazo y condiciones en la cotización." whatsappHref={whatsappService("neumatico-fabricar")} />
     </div>
   );
 }

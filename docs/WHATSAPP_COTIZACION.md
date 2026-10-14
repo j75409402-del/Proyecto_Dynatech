@@ -9,11 +9,27 @@ Decisión del dueño: el prospecto va **directo a WhatsApp Business** (+1 809-28
 4. Sin JavaScript también funciona (redirección de servidor; origen por `Referer`, que los CTA internos envían porque usan `rel="noopener"` sin `noreferrer`). Clic central (`auxclick`) también añade origen/UTM.
 5. Limitaciones conocidas: peticiones HEAD de escáneres con agente de navegador y dobles clics cuentan; el envío servidor a Umami usa la IP del servidor (geografía/sesión aproximadas). Verificar en el panel de Umami tras el primer despliegue.
 
+## Cotización por necesidad (oct-2026)
+`/cotizacion?svc=<clave>` arma un mensaje corto propio y mide el servicio. Claves (`QUOTE_SERVICES` en `src/lib/quote.ts`):
+
+| `svc` | Mensaje empieza con | `product` |
+|---|---|---|
+| `neumatico-reparar` | quiero cotizar la reparación de un cilindro neumático | `reparacion_cilindro_neumatico` |
+| `neumatico-fabricar` | … la fabricación de un cilindro neumático | `fabricacion_cilindro_neumatico` |
+| `hidraulico` | … un cilindro hidráulico (¿reparar o fabricar?) | `cilindro_hidraulico` |
+| `hidraulico-reparar` / `hidraulico-fabricar` | … reparación / fabricación de un cilindro hidráulico | `reparacion_…` / `fabricacion_cilindro_hidraulico` |
+| `mecanizado` | … el mecanizado de una pieza | `mecanizado` |
+| `componente` | busco un componente neumático (válvula, conexión, FRL u otro) | `componente_neumatico` |
+| `foto` | no tengo la referencia. Les envío fotos de la pieza… | `identificar_por_foto` |
+
+Todos invitan a empezar con una foto y piden como máximo dos datos; el resto se pregunta en la conversación. `item` opcional se añade como «Sobre: …». Un `svc` desconocido se ignora (mensaje general). El botón flotante móvil elige el `svc` según la página (`SERVICE_BY_PATH`). CTA único en todo el sitio: «Cotizar por WhatsApp» (se retiró el botón contiguo «WhatsApp» que abría el mismo canal).
+
 ## Medición (Umami → evento `quote_whatsapp_click`, propiedades)
 | Propiedad | Origen |
 |---|---|
 | `source_page` | `from` (clic) o `Referer`; `direct` si no hay |
-| `product` | `item` → `linea` → plantilla → ruta de origen (`PRODUCT_BY_PATH`) |
+| `product` | `svc` → `item` → `linea` → plantilla → ruta de origen (`PRODUCT_BY_PATH`) |
+| `service` | clave `svc`, si el CTA la lleva |
 | `line` | `linea` si existe |
 | `utm_source/medium/campaign/term/content` | URL de /cotizacion o primera visita de la sesión |
 | `channel` | `whatsapp` |
@@ -28,3 +44,15 @@ Reglas: enlazar `/cotizacion` siempre con `<a>`, nunca con `<Link>` (el prefetch
 
 ## Pruebas
 `tests/whatsapp-quote.test.mjs` (servidor + navegador escritorio/móvil, Umami simulado vía `UMAMI_API_URL`), y actualizados `commercial`, `analytics`, `seo-organic`.
+
+## Embudo: qué cuenta cada cifra (oct-2026)
+No mezclar etapas: un clic no es una conversación ni una cotización.
+
+| Etapa | Fuente | Cómo se cuenta |
+|---|---|---|
+| 1. Clic de cotización | Umami, evento `quote_whatsapp_click` (servidor) | Por `source_page`, `product`, `service` y UTM. Incluye a quien abre WhatsApp y no escribe. |
+| 2. Conversación real | WhatsApp Business | Mensaje recibido que conserva la línea «(Desde www.dynatech.com.do/…)». Etiquetar el chat «Web» y el servicio. |
+| 3. Cotización enviada | Registro comercial (hoja o /admin) | Una fila por cotización: fecha, servicio, origen (web/Ads/correo), monto. Sin datos de contacto en la analítica. |
+| 4. Venta cobrada | Contabilidad | Factura cobrada vinculada a la fila de la cotización; margen y comisión se calculan aquí. |
+
+Umami se mantiene como fuente de clics; no se añade otra herramienta. Si más adelante se usa Google Ads, importar solo el evento de clic (etapa 1) y no sumarlo a Umami en el mismo informe.

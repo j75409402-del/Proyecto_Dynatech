@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { trackCommercialEvent, type CommercialExtra } from "@/lib/conversions";
-import { cleanText, productFor, UTM_KEYS, type QuoteTemplate } from "@/lib/quote";
+import { cleanText, isQuoteService, productFor, UTM_KEYS, type QuoteTemplate } from "@/lib/quote";
 
 const UTM_STORE = "dynatech.utm.v1";
 
@@ -42,7 +42,9 @@ export function CommercialTracking() {
         const item = cleanText(url.searchParams.get("item"));
         const linea = cleanText(url.searchParams.get("linea"));
         const tpl = (url.searchParams.get("tpl") ?? (item ? "item" : "general")) as QuoteTemplate;
-        const extra: CommercialExtra = { source_page: window.location.pathname, product: productFor(item, linea, window.location.pathname, tpl), ...(linea ? { line: linea } : {}), ...utm };
+        const svcParam = url.searchParams.get("svc");
+        const svc = isQuoteService(svcParam) ? svcParam : null;
+        const extra: CommercialExtra = { source_page: window.location.pathname, product: productFor(item, linea, window.location.pathname, tpl, svc), ...(svc ? { service: svc } : {}), ...(linea ? { line: linea } : {}), ...utm };
         trackCommercialEvent("quote_whatsapp_click", "whatsapp", placement, extra);
       } else if (url.protocol === "https:" && url.hostname === "wa.me") {
         trackCommercialEvent("whatsapp_click", "whatsapp", placement, { source_page: window.location.pathname, ...storedUtm() });

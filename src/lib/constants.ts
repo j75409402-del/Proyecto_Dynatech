@@ -5,7 +5,7 @@ export const SITE = {
   tagline: "Cilindros neumáticos · Fabricación y reparación",
   brandTagline: "Excellent Under Pressure.",
   description:
-    "Fabricación, reparación y reconstrucción de cilindros neumáticos en República Dominicana. Como servicios complementarios, cilindros hidráulicos, mecanizado y suministros de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+    "Fabricación y reparación de cilindros neumáticos e hidráulicos y mecanizado de piezas en República Dominicana. Suministro de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.dynatech.com.do",
   rnc: "133-45350-9",
 } as const;
@@ -48,17 +48,17 @@ export const NAV = {
     { label: "Nosotros",             short: "Nosotros",  href: "/nosotros" },
     { label: "Contacto",             short: "Contacto",  href: "/contacto" },
   ],
-  /** Grupo de cilindros dentro del desplegable. */
+  /** Taller (oct-2026: lo que más se quiere vender hoy, agrupado por necesidad). */
   cilindros: [
-    { label: "Cilindros neumáticos", href: "/cilindros-neumaticos" },
     { label: "Reparación de cilindros", href: "/servicios" },
-    { label: "Sellos y componentes", href: "/sellos-y-componentes" },
+    { label: "Cilindros neumáticos a la medida", href: "/cilindros-neumaticos" },
+    { label: "Cilindros hidráulicos", href: "/cilindros-hidraulicos" },
+    { label: "Mecanizado de piezas", href: "/mecanizado" },
   ],
-  /** Servicios industriales y especialidades con página propia (menú y pie). */
+  /** Componentes neumáticos con página propia (menú y pie). */
   especialidades: [
     { label: "Válvulas neumáticas", href: "/valvulas-neumaticas" },
-    { label: "Cilindros hidráulicos", href: "/cilindros-hidraulicos" },
-    { label: "Mecanizado", href: "/mecanizado" },
+    { label: "Sellos y componentes", href: "/sellos-y-componentes" },
   ],
-  cta: { label: "Solicitar cotización", href: "/cotizacion" },
+  cta: { label: "Cotizar por WhatsApp", href: "/cotizacion" },
 } as const;

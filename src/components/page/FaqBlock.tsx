@@ -33,8 +33,8 @@ export function FaqBlock({ items, kicker = "Preguntas frecuentes", title = "Ante
 /** FAQ común de las landings: solo hechos del sitio (constants.ts) y del flujo de cotización. */
 export function landingFaqs({ name, datos, referencePhotos = true, address, hours }: { name: string; datos: readonly string[]; referencePhotos?: boolean; address: string; hours: string }): Faq[] {
   return [
-    { q: `¿Cómo hago mi solicitud de ${name.toLowerCase()}?`, a: "Pulsa «Solicitar cotización»: se abre WhatsApp con un mensaje listo. Agrega la referencia, fotos o la descripción y la cantidad, y envíalo." },
-    { q: "¿Qué datos necesitan?", a: `${datos.join("; ")}. Con una foto legible o la referencia podemos empezar.` },
+    { q: `¿Cómo hago mi solicitud de ${name.toLowerCase()}?`, a: "Pulsa «Cotizar por WhatsApp»: se abre WhatsApp con un mensaje listo. Adjunta fotos, el código o el plano, indica la cantidad y envíalo." },
+    { q: "¿Qué datos necesitan?", a: `${datos.join("; ")}. No hace falta tenerlo todo: con una foto legible o la referencia empezamos.` },
     { q: "¿Atienden empresas y zonas francas?", a: "Sí. Atendemos solicitudes de empresas del sector privado y de zonas francas en República Dominicana." },
     ...(referencePhotos ? [{ q: "¿Las fotos son de productos en inventario?", a: "No. Son imágenes de referencia. Marca, disponibilidad y plazo se confirman en la cotización." }] : []),
     { q: "¿Dónde están y en qué horario atienden?", a: `En ${address}. Horario: ${hours.replace(/ · /g, " ")}.` },

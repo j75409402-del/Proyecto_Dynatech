@@ -1,3 +1,4 @@
+> **Conversión por necesidad, 14-oct-2026 (rama `mejora/conversion-cotizacion-whatsapp`, pendiente de aprobación):** CTA único «Cotizar por WhatsApp» en todo el sitio (se retiró el botón contiguo «WhatsApp» del encabezado, menú móvil, heros, cierres y experiencia 3D). `/cotizacion` acepta `svc` (reparar/fabricar neumático, hidráulico, mecanizado, componente, foto) con mensaje corto propio y propiedad `service` en Umami; el contrato anterior (`item`, `linea`, `tpl`, `from`, UTM) sigue igual. Portada: H1 de cilindros neumáticos e hidráulicos + mecanizado, accesos por necesidad, bloque «Taller», antes/después rotulado como foto real. Menú y pie agrupan «Taller» y «Componentes neumáticos». Ver `docs/WHATSAPP_COTIZACION.md`.
 > **Cotización por WhatsApp, 4-oct-2026 (AP-004 aprobado por el dueño):** `/cotizacion` redirige a WhatsApp Business con mensaje precargado y mide `quote_whatsapp_click` (source_page, product, UTM) en Umami desde el servidor. El formulario por correo salió del flujo (`/cotizacion/correo` → 307 `/cotizacion`) y queda como legado. Ver `docs/WHATSAPP_COTIZACION.md`.
 
 > Analítica actual, 3-oct-2026: Umami Cloud Hobby gratuito, sin cookies de analítica ni aviso. ID público 4bbea860-f2e7-4268-9476-190563eeab0a. GA4 dejó de cargarse; cuenta conservada. Eventos manuales, sin query/hash ni datos de formularios, admin excluido, DNT y rechazo anterior respetados. Ver docs/SEO_CONVERSIONES.md.
@@ -145,7 +146,7 @@ Ninguna página pública consulta Supabase al navegar.
 
 | Componente | Notas |
 |---|---|
-| `Navbar` | Sticky. Desde `lg` (1024 px): desplegable **"Productos"** (5 líneas + grupo de cilindros), Cilindros neumáticos, Servicios, Nosotros, Contacto, botón WhatsApp y botón rojo "Solicita tu cotización". Debajo de 1024 px: menú hamburguesa. |
+| `Navbar` | Sticky. Desde `lg` (1024 px): desplegable **"Productos"** (5 líneas + grupo «Taller y componentes»), Cilindros, Servicios, Nosotros, Contacto y un solo botón rojo «Cotizar por WhatsApp» (oct-2026). Debajo de 1024 px: menú hamburguesa con el mismo CTA arriba, luego «Taller» y «Componentes neumáticos». |
 | `Footer` | Columnas Productos / Empresa / Ayuda / Contacto, RNC, Instagram, LinkedIn. |
 | `Hero` | H1 "Soluciones industriales para empresas que no pueden detenerse" (sin `opacity:0` inicial, por LCP), foto del taller, chips "Cotizamos a partir de". |
 | `SolucionPage` | Plantilla de línea: Hero (banner) → bloque destacado opcional → subcategorías → aplicaciones → otras líneas → QuoteCTA. JSON-LD Service. |

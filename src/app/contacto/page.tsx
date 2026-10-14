@@ -58,7 +58,7 @@ export default function ContactoPage() {
         crumbs={[{ label: "Contacto" }]}
         kicker={`${SITE.legalName} · RNC ${SITE.rnc}`}
         title="Contacta a Dynatech Ingeniería"
-        lead={<p>Para cotizar, escríbenos por WhatsApp: es nuestro canal principal. Envía la referencia, la cantidad, la aplicación y tu ciudad. También puedes llamar, escribir un correo o usar el formulario.</p>}
+        lead={<p>Para cotizar, escríbenos por WhatsApp: es nuestro canal principal. Puedes empezar con una foto, el código o el plano. También puedes llamar, escribir un correo o usar el formulario.</p>}
         quoteHref={whatsappGeneral()}
         secondary={{ href: "#formulario", label: "Usar el formulario" }}
         note={`Atención: ${shortHours()}.`}

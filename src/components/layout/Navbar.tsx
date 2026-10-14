@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { NAV, SITE, CONTACT } from "@/lib/constants";
 import { SOLUCIONES } from "@/lib/soluciones";
-import { whatsappChat, whatsappGeneral } from "@/lib/whatsapp";
+import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { cn } from "@/lib/utils";
 
@@ -71,7 +71,7 @@ export function Navbar() {
     <header className="industrial-navbar sticky top-0 z-40 transition-all duration-300">
       <div className="hidden bg-surface py-2 text-white md:block">
         <div className="container-max flex items-center justify-between gap-6 text-xs">
-          <span className="text-white/70">{CONTACT.locality}, República Dominicana · Soluciones industriales bajo cotización</span>
+          <span className="text-white/70">{CONTACT.locality}, República Dominicana · Taller de cilindros, mecanizado y neumática industrial</span>
           <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="-my-2 inline-flex min-h-10 items-center font-mono text-white/85 hover:text-white">{CONTACT.phone}</a>
         </div>
       </div>
@@ -170,7 +170,7 @@ export function Navbar() {
                     </ul>
                   </div>
                   <div className="col-span-2 border-l border-black/10 bg-carbon-800 p-5 flex flex-col">
-                    <div className="eyebrow mb-3">Cilindros y servicios</div>
+                    <div className="eyebrow mb-3">Taller y componentes</div>
                     <ul className="space-y-1 mb-4">
                       {[...NAV.cilindros, ...NAV.especialidades].map((c) => (
                         <li key={c.href}>
@@ -217,17 +217,6 @@ export function Navbar() {
 
           <div className="hidden lg:flex items-center gap-2 shrink-0">
             <a
-              href={whatsappChat()}
-              target="_blank"
-              rel="noopener"
-              aria-label="Escribir por WhatsApp"
-              title="Escribir por WhatsApp"
-              className="inline-flex min-h-11 items-center justify-center gap-2 border border-white/20 px-3 text-xs font-medium uppercase tracking-wider text-steel-200 transition-colors hover:border-signal hover:text-signal"
-            >
-              <WhatsAppIcon className="h-4 w-4" />
-              <span className="hidden xl:inline">WhatsApp</span>
-            </a>
-            <a
               href={whatsappGeneral()}
               target="_blank"
               rel="noopener"
@@ -235,6 +224,7 @@ export function Navbar() {
                          text-white font-medium min-h-11 py-2.5 px-4 xl:px-5 rounded-xs text-xs uppercase tracking-wider
                          transition-colors whitespace-nowrap"
             >
+              <WhatsAppIcon className="h-4 w-4" />
               {NAV.cta.label}
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
@@ -273,20 +263,12 @@ export function Navbar() {
             onClick={() => setOpen(false)}
             className="sticky top-0 z-10 -mx-4 mb-2 flex min-h-14 items-center justify-center gap-2 bg-signal px-4 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:bg-signal-hover sm:-mx-6"
           >
+            <WhatsAppIcon className="h-5 w-5" />
             {NAV.cta.label}
             <ArrowRight className="h-4 w-4" />
           </a>
-          <a
-            href={whatsappChat()}
-            target="_blank"
-            rel="noopener"
-            onClick={() => setOpen(false)}
-            className="mb-2 flex min-h-12 items-center justify-center gap-2 border border-white/20 text-sm font-medium uppercase tracking-wider text-steel-200 hover:border-signal hover:text-signal"
-          >
-            <WhatsAppIcon className="h-5 w-5" />
-            Escribir por WhatsApp
-          </a>
-          <div className="eyebrow mt-4 mb-1">Línea principal</div>
+          <p className="mb-2 text-center text-sm text-[#a9b7c4]">Puedes empezar con una foto de la pieza o de su placa.</p>
+          <div className="eyebrow mt-4 mb-1">Taller</div>
           {NAV.cilindros.map((item) => (
             <Link
               key={item.href}
@@ -301,7 +283,7 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <div className="eyebrow mt-5 mb-1">Especialidades</div>
+          <div className="eyebrow mt-5 mb-1">Componentes neumáticos</div>
           {NAV.especialidades.map((item) => (
             <Link
               key={item.href}

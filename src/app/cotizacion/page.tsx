@@ -2,7 +2,7 @@ import { after } from "next/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { ANALYTICS, SITE } from "@/lib/constants";
-import { buildQuoteMessage, cleanPath, cleanText, productFor, UTM_KEYS, whatsappUrl, type QuoteTemplate } from "@/lib/quote";
+import { buildQuoteMessage, cleanPath, cleanText, isQuoteService, productFor, UTM_KEYS, whatsappUrl, type QuoteTemplate } from "@/lib/quote";
 
 /**
  * /cotizacion → WhatsApp Business (flujo principal aprobado por el dueño, AP-004, 4-oct-2026).
@@ -41,14 +41,18 @@ export default async function CotizacionPage({ searchParams }: Props) {
   const linea = cleanText(p.get("linea") ?? p.get("tipo"));
   const tpl: QuoteTemplate = tplParam === "cilindro" || tplParam === "solucion" ? tplParam : item ? "item" : "general";
   const sourcePage = cleanPath(p.get("from")) || cleanPath(h.get("referer")) || "";
-  const message = buildQuoteMessage({ tpl, item, linea, sourcePage });
+  // Servicio elegido (svc): solo claves conocidas de QUOTE_SERVICES; cualquier otro valor se ignora.
+  const svcParam = p.get("svc");
+  const svc = isQuoteService(svcParam) ? svcParam : null;
+  const message = buildQuoteMessage({ tpl, item, linea, sourcePage, svc });
   const destination = whatsappUrl(message);
 
   if (trackingAllowed(h, p) && ANALYTICS.umamiWebsiteId) {
     const data: Record<string, string> = {
       channel: "whatsapp",
       source_page: sourcePage || "direct",
-      product: productFor(item, linea, sourcePage, tpl),
+      product: productFor(item, linea, sourcePage, tpl, svc),
+      ...(svc ? { service: svc } : {}),
       ...(linea ? { line: linea.slice(0, 60) } : {}),
     };
     for (const key of UTM_KEYS) { const v = cleanText(p.get(key), 80); if (v) data[key] = v; }

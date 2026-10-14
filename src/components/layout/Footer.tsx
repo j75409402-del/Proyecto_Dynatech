@@ -10,12 +10,7 @@ import { hoursLines } from "@/components/page/TrustStrip";
 const solutionLinks = SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}` }));
 
 /** Cilindros y servicios industriales (antes mezclados en "Empresa"). */
-const serviceLinks = [
-  { label: "Cilindros neumáticos",   href: "/cilindros-neumaticos" },
-  { label: "Reparación de cilindros", href: "/servicios" },
-  { label: "Sellos y componentes",   href: "/sellos-y-componentes" },
-  ...NAV.especialidades,
-];
+const serviceLinks = [...NAV.cilindros, ...NAV.especialidades];
 
 const companyLinks = [
   { label: "Nosotros",               href: "/nosotros" },
@@ -80,7 +75,7 @@ export function Footer() {
 
           {/* Cilindros y servicios */}
           <div className="lg:col-span-2">
-            <div className="eyebrow mb-4">Cilindros y servicios</div>
+            <div className="eyebrow mb-4">Taller y componentes</div>
             <ul className="space-y-1">
               {serviceLinks.map((link) => (
                 <li key={link.href}>
@@ -99,7 +94,7 @@ export function Footer() {
                   rel="noopener"
                   className="inline-flex min-h-10 items-center text-sm text-steel-200 hover:text-signal transition-colors"
                 >
-                  Cotizar cilindro por WhatsApp
+                  Cotizar por WhatsApp
                 </a>
               </li>
             </ul>
