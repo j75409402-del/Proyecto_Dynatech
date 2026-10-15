@@ -1,0 +1,138 @@
+{
+  "base": "http://localhost:3197",
+  "fecha": "2026-10-15T00:51:18.893Z",
+  "casos": [
+    {
+      "caso": "1 · Clic pagado (google/cpc) en /mecanizado",
+      "pagina": "/mecanizado",
+      "mensaje": "Hola Dynatech, quiero cotizar el mecanizado de una pieza. Les envío el plano o fotos de la muestra con una referencia de tamaño.\n\nMaterial (si lo sé):\nCantidad:\n\n(Desde www.dynatech.com.do/mecanizado)\n\nVengo de un anuncio de Google",
+      "frase_ads": true,
+      "eventos_servidor": 1,
+      "eventos": [
+        {
+          "name": "quote_whatsapp_click",
+          "data": {
+            "channel": "whatsapp",
+            "source_page": "/mecanizado",
+            "product": "mecanizado",
+            "service": "mecanizado",
+            "utm_source": "google",
+            "utm_medium": "cpc",
+            "utm_campaign": "prueba_medicion"
+          }
+        }
+      ],
+      "eventos_cliente_umami": []
+    },
+    {
+      "caso": "2 · Misma sesión pagada, otra página (/servicios)",
+      "pagina": "/servicios",
+      "mensaje": "Hola Dynatech, quiero cotizar la reparación de un cilindro neumático. Les envío fotos del cilindro y de su placa.\n\nQué falla (fuga, golpe, no avanza…):\nCantidad:\n\n(Desde www.dynatech.com.do/servicios)\n\nVengo de un anuncio de Google",
+      "frase_ads": true,
+      "eventos_servidor": 1,
+      "eventos": [
+        {
+          "name": "quote_whatsapp_click",
+          "data": {
+            "channel": "whatsapp",
+            "source_page": "/servicios",
+            "product": "reparacion_cilindro_neumatico",
+            "service": "neumatico-reparar",
+            "utm_source": "google",
+            "utm_medium": "cpc",
+            "utm_campaign": "prueba_medicion"
+          }
+        }
+      ],
+      "eventos_cliente_umami": []
+    },
+    {
+      "caso": "3 · Pestaña nueva sin parámetros (/cilindros-hidraulicos)",
+      "pagina": "/cilindros-hidraulicos",
+      "mensaje": "Hola Dynatech, quiero cotizar un cilindro hidráulico. Les envío fotos del cilindro o el plano.\n\n¿Reparar o fabricar?:\nCantidad:\n\n(Desde www.dynatech.com.do/cilindros-hidraulicos)",
+      "frase_ads": false,
+      "eventos_servidor": 1,
+      "eventos": [
+        {
+          "name": "quote_whatsapp_click",
+          "data": {
+            "channel": "whatsapp",
+            "source_page": "/cilindros-hidraulicos",
+            "product": "cilindro_hidraulico",
+            "service": "hidraulico"
+          }
+        }
+      ],
+      "eventos_cliente_umami": []
+    },
+    {
+      "caso": "4 · Orgánica de Google, sin UTM (/mecanizado)",
+      "pagina": "/mecanizado",
+      "mensaje": "Hola Dynatech, quiero cotizar el mecanizado de una pieza. Les envío el plano o fotos de la muestra con una referencia de tamaño.\n\nMaterial (si lo sé):\nCantidad:\n\n(Desde www.dynatech.com.do/mecanizado)",
+      "frase_ads": false,
+      "eventos_servidor": 1,
+      "eventos": [
+        {
+          "name": "quote_whatsapp_click",
+          "data": {
+            "channel": "whatsapp",
+            "source_page": "/mecanizado",
+            "product": "mecanizado",
+            "service": "mecanizado"
+          }
+        }
+      ],
+      "eventos_cliente_umami": []
+    },
+    {
+      "caso": "4b · Google con utm_medium=organic (/mecanizado)",
+      "pagina": "/mecanizado",
+      "mensaje": "Hola Dynatech, quiero cotizar el mecanizado de una pieza. Les envío el plano o fotos de la muestra con una referencia de tamaño.\n\nMaterial (si lo sé):\nCantidad:\n\n(Desde www.dynatech.com.do/mecanizado)",
+      "frase_ads": false,
+      "eventos_servidor": 1,
+      "eventos": [
+        {
+          "name": "quote_whatsapp_click",
+          "data": {
+            "channel": "whatsapp",
+            "source_page": "/mecanizado",
+            "product": "mecanizado",
+            "service": "mecanizado",
+            "utm_source": "google",
+            "utm_medium": "organic",
+            "utm_campaign": "prueba_medicion"
+          }
+        }
+      ],
+      "eventos_cliente_umami": []
+    },
+    {
+      "caso": "5 · Sin parámetros (/cilindros-neumaticos)",
+      "pagina": "/cilindros-neumaticos",
+      "mensaje": "Hola Dynatech, quiero cotizar la fabricación de un cilindro neumático. Les envío el plano, una foto o la muestra.\n\nDiámetro x carrera (si lo tengo):\nCantidad:\n\n(Desde www.dynatech.com.do/cilindros-neumaticos)",
+      "frase_ads": false,
+      "eventos_servidor": 1,
+      "eventos": [
+        {
+          "name": "quote_whatsapp_click",
+          "data": {
+            "channel": "whatsapp",
+            "source_page": "/cilindros-neumaticos",
+            "product": "fabricacion_cilindro_neumatico",
+            "service": "neumatico-fabricar"
+          }
+        }
+      ],
+      "eventos_cliente_umami": []
+    },
+    {
+      "caso": "6 · Clic pagado con analítica rechazada (/mecanizado)",
+      "pagina": "/mecanizado",
+      "mensaje": "Hola Dynatech, quiero cotizar el mecanizado de una pieza. Les envío el plano o fotos de la muestra con una referencia de tamaño.\n\nMaterial (si lo sé):\nCantidad:\n\n(Desde www.dynatech.com.do/mecanizado)\n\nVengo de un anuncio de Google",
+      "frase_ads": true,
+      "eventos_servidor": 0,
+      "eventos": [],
+      "eventos_cliente_umami": []
+    }
+  ]
+}

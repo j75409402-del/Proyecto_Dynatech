@@ -1,15 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Box, Camera, FileText, Ruler } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { quoteHref } from "@/components/cta/QuoteCTA";
 import { SERVICIOS, COMPONENTES, SERVICIOS_ADICIONALES } from "@/lib/servicios";
 import { SOLUCIONES } from "@/lib/soluciones";
-import { whatsappCylinderService } from "@/lib/whatsapp";
+import { whatsappService } from "@/lib/whatsapp";
+import type { QuoteService } from "@/lib/quote";
 import { CYLINDER_PARTS } from "@/lib/industrial-scenes";
 import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
+import { RealWorkPhoto } from "@/components/industrial/RealWorkPhoto";
 import { Reveal } from "@/components/motion/Reveal";
 
 const DETALLE: Record<string, string> = { fabricacion: "Ver tipos de cilindro", reparacion: "Ver reparación de cilindros", "kits-de-sellos": "Ver sellos y componentes" };
+const SVC: Record<string, QuoteService> = { fabricacion: "neumatico-fabricar", reparacion: "neumatico-reparar", "kits-de-sellos": "componente" };
 
 export function CilindrosDestacados() {
   const principales = [SERVICIOS[0], SERVICIOS[1], COMPONENTES[0]];
@@ -17,7 +21,7 @@ export function CilindrosDestacados() {
     <section className="section-pad border-b border-black/10">
       <div className="container-max">
         <div className="section-heading mb-12">
-          <div><p className="section-kicker">02 · Nuestra línea principal</p><h2 className="section-title">Cilindros neumáticos.<br /><span className="text-steel-500">De principio a fin.</span></h2></div>
+          <div><p className="section-kicker">03 · Neumática, nuestra especialidad</p><h2 className="section-title">Cilindros neumáticos.<br /><span className="text-steel-500">De principio a fin.</span></h2></div>
           <p className="max-w-md text-steel-300 leading-relaxed">Fabricación a medida, reparación y componentes para mantener tu equipo en operación. Trabajamos a partir de la información de tu aplicación.</p>
         </div>
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
@@ -41,7 +45,7 @@ export function CilindrosDestacados() {
               <article key={s.id} className="py-7">
                 <div className="mb-3 flex items-center gap-3"><span className="font-mono text-xs text-signal">0{i + 1}</span><s.icon className="h-5 w-5 shrink-0 text-signal" /><h3 className="font-display text-xl font-medium sm:text-2xl">{s.title}</h3></div>
                 <p className="mb-4 text-sm leading-relaxed text-steel-300 sm:text-base">{s.desc}</p>
-                <div className="flex flex-wrap items-center gap-x-6 gap-y-2"><a href={quoteHref(s.title)} target="_blank" rel="noopener" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-signal">Solicitar cotización <ArrowRight className="h-4 w-4" /></a><Link href={s.href} className="inline-flex min-h-11 items-center gap-2 text-sm text-steel-400 hover:text-signal">{DETALLE[s.id] ?? "Ver página"} <ArrowUpRight className="h-4 w-4" /></Link></div>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-2"><a href={SVC[s.id] ? whatsappService(SVC[s.id], SVC[s.id] === "componente" ? s.title : undefined) : quoteHref(s.title)} target="_blank" rel="noopener" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-signal"><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: {s.title}</span></a><Link href={s.href} className="inline-flex min-h-11 items-center gap-2 text-sm text-steel-400 hover:text-signal">{DETALLE[s.id] ?? "Ver página"} <ArrowUpRight className="h-4 w-4" /></Link></div>
               </article>
             ))}
           </div>
@@ -56,11 +60,11 @@ export function ComoTrabajamos() {
     <section className="bg-surface text-white">
       <div className="container-max grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:gap-16">
         <div>
-          <p className="section-kicker !text-[#a9b7c4]">04 · Tu solicitud, paso a paso</p>
-          <h2 className="section-title">Una foto. Un plano.<br /><span className="text-white/55">El primer paso.</span></h2>
-          <p className="mt-6 max-w-lg leading-relaxed text-white/70">Envíanos lo que tengas: referencia, fotos, plano, muestra o medidas. Evaluamos tu solicitud y confirmamos alcance, condiciones y disponibilidad en la cotización.</p>
+          <p className="section-kicker !text-[#a9b7c4]">05 · Tu solicitud, paso a paso</p>
+          <h2 className="section-title">Una foto basta<br /><span className="text-white/55">para empezar.</span></h2>
+          <p className="mt-6 max-w-lg leading-relaxed text-white/70">Envía lo que tengas: fotos, el código, el plano, una muestra o las medidas. Si falta algún dato, te lo pedimos por el mismo chat. En la cotización confirmamos alcance, plazo y condiciones.</p>
           <div className="my-8 grid grid-cols-3 gap-3">{[{ icon: Camera, name: "Fotos" }, { icon: FileText, name: "Plano o muestra" }, { icon: Ruler, name: "Medidas" }].map((item) => <div key={item.name} className="border border-white/15 p-4"><item.icon className="mb-3 h-5 w-5 text-signal" /><p className="text-sm text-white/80">{item.name}</p></div>)}</div>
-          <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-14"> Solicitar cotización <ArrowRight className="h-4 w-4" /></a>
+          <a href={whatsappService("foto")} target="_blank" rel="noopener" className="btn-primary min-h-14"><WhatsAppIcon className="h-5 w-5" />Cotizar por WhatsApp<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
         </div>
         <div className="flex flex-col justify-center">
           <div className="relative aspect-[3/2] overflow-hidden border border-white/15 bg-white"><Image src="/products/cilindros-smc-2.jpg" alt="Imagen de catálogo: cilindros neumáticos de distintos tipos y tamaños" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-contain p-6" /><span className="img-note">Imagen de catálogo</span></div>
@@ -103,7 +107,7 @@ export function AntesDespues() {
     <section className="section-pad border-b border-black/10 bg-[#F4F5F6]" aria-labelledby="antes-despues-inicio">
       <div className="container-max">
         <Reveal className="section-heading mb-10">
-          <div><p className="section-kicker">03 · Trabajo de taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después.</h2></div>
+          <div><p className="section-kicker">02 · Trabajo de taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después.</h2></div>
           <p className="max-w-md leading-relaxed text-steel-300">Cilindro ISO 32 mm recuperado en nuestro taller. Desliza para comparar.</p>
         </Reveal>
         <Reveal>
@@ -111,7 +115,19 @@ export function AntesDespues() {
             before={{ src: "/cilindros/antes-cilindro-iso-32mm.jpg", alt: "Antes · Cilindro ISO 32 mm" }}
             after={{ src: "/cilindros/despues-cilindro-iso-32mm.jpg", alt: "Después · Cilindro ISO 32 mm recuperado" }}
           />
-          <p className="mt-5 max-w-3xl text-sm leading-relaxed text-steel-300">Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar.</p>
+          <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-2xl text-sm leading-relaxed text-steel-300">Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar.</p>
+            <a href={whatsappService("neumatico-reparar")} target="_blank" rel="noopener" className="btn-primary min-h-12 shrink-0 px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: reparación de cilindro neumático</span></a>
+          </div>
+        </Reveal>
+        <Reveal className="real-work">
+          <RealWorkPhoto />
+          <div className="real-work-text">
+            <p className="section-kicker">Fabricación</p>
+            <h3>Cilindros neumáticos del taller</h3>
+            <p>Fabricamos cilindros neumáticos a partir de tu plano, una muestra o tus medidas, en milímetros o en pulgadas. Envía una foto del cilindro que necesitas reemplazar.</p>
+            <a href={whatsappService("neumatico-fabricar")} target="_blank" rel="noopener" className="btn-primary min-h-12 self-start px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: fabricación de cilindro neumático</span></a>
+          </div>
         </Reveal>
       </div>
     </section>

@@ -76,7 +76,10 @@ export const COMPONENTES: Oferta[] = [
   },
 ];
 
-/** Oferta confirmada por el dueño el 2-oct-2026. No implica capacidad, stock ni plazo específico. */
+/**
+ * Oferta confirmada por el dueño el 2-oct-2026; en oct-2026 pasa a ser prioridad comercial junto a
+ * los cilindros neumáticos. No implica capacidad, stock, tolerancias ni plazo específico.
+ */
 export const SERVICIOS_ADICIONALES = [
   {
     slug: "cilindros-hidraulicos",
@@ -84,24 +87,28 @@ export const SERVICIOS_ADICIONALES = [
     title: "Fabricación y reparación de cilindros hidráulicos en República Dominicana",
     /** H1 corto (el title SEO no cambia). */
     h1: "Cilindros hidráulicos: fabricación y reparación",
-    description: "Solicita cotización para fabricar o reparar un cilindro hidráulico. Comparte fotos, plano o muestra, las medidas disponibles y la aplicación del equipo.",
-    intro: "¿Necesitas reparar un cilindro hidráulico o cotizar su fabricación? En Dynatech Ingeniería SRL recibimos solicitudes de empresas, industrias y zonas francas en República Dominicana. Cuéntanos qué necesita tu equipo para evaluar el trabajo y preparar la cotización.",
-    situations: ["Reparación de un cilindro hidráulico existente", "Fabricación de un cilindro hidráulico a partir de la información de tu proyecto"],
-    situationDescs: ["Describe la falla que observas y envía fotos del cilindro completo, sus conexiones y puntos de montaje.", "Comparte el plano, la muestra o las medidas con sus unidades, y la aplicación del equipo."],
-    information: ["Fotos del cilindro completo, sus conexiones y puntos de montaje", "Descripción de la falla o del trabajo que necesitas", "Plano, muestra o medidas disponibles, indicando las unidades", "Aplicación del equipo y condiciones de operación conocidas", "Cantidad, ciudad y fecha en que necesitas el trabajo"],
-    note: "Si el cilindro presenta fugas o dejó de funcionar, describe lo que observas. La reparación necesaria y su alcance se confirman después de evaluar el caso; las fotos por sí solas no sustituyen una inspección.",
+    description: "Reparación y fabricación de cilindros hidráulicos en República Dominicana. Envía fotos, plano o muestra por WhatsApp y te cotizamos.",
+    intro: "Reparamos cilindros hidráulicos con fugas o daños y fabricamos cilindros nuevos a partir de tu plano, una muestra o tus medidas. Atendemos empresas, industrias y zonas francas en República Dominicana.",
+    lead: "Empieza con fotos del cilindro o el plano. Si falta algún dato, te lo pedimos por el mismo chat.",
+    situations: ["Reparar un cilindro hidráulico", "Fabricar un cilindro hidráulico"],
+    situationDescs: ["Cuéntanos qué falla y envía fotos del cilindro completo, sus conexiones y puntos de montaje.", "Envía el plano, la muestra o las medidas con sus unidades, y para qué equipo es."],
+    services: ["hidraulico-reparar", "hidraulico-fabricar"],
+    information: ["Fotos del cilindro completo, sus conexiones y puntos de montaje", "Qué falla o qué trabajo necesitas", "Plano, muestra o medidas disponibles, con sus unidades", "Equipo o aplicación donde trabaja", "Cantidad, ciudad y fecha en que lo necesitas"],
+    note: "Con las fotos orientamos la cotización. El alcance exacto de una reparación se confirma al revisar el cilindro en el taller.",
   },
   {
     slug: "mecanizado",
     name: "Mecanizado",
     title: "Mecanizado industrial en República Dominicana",
     h1: "Mecanizado industrial bajo plano o muestra",
-    description: "Cotiza trabajos de mecanizado industrial con Dynatech. Envía plano, muestra, medidas y cantidad para evaluar tu solicitud en República Dominicana.",
-    intro: "Cotiza el mecanizado de una pieza para tu empresa o industria. Envíanos la información disponible del trabajo: el plano o la muestra, las medidas, la cantidad y la aplicación. Evaluamos cada solicitud antes de confirmar su alcance.",
-    situations: ["Un trabajo de mecanizado definido en un plano", "Una pieza de referencia o muestra para evaluar el trabajo requerido"],
-    situationDescs: ["Envía el plano con medidas y unidades; material y tolerancias, si están definidos.", "Comparte fotos con una referencia de tamaño y explica qué función cumple la pieza."],
-    information: ["Plano o fotos de la pieza y una referencia de tamaño", "Medidas y unidades; tolerancias solo si están definidas en tu plano", "Material requerido, si lo conoces o está especificado", "Cantidad de piezas y aplicación", "Ciudad y fecha requerida para coordinar la solicitud"],
-    note: "Si no tienes plano, comparte fotos y explica qué función cumple la pieza. Confirmaremos qué información adicional o muestra hace falta antes de cotizar; el proceso y la viabilidad se evalúan según el trabajo.",
+    description: "Mecanizado de piezas industriales bajo plano o muestra en República Dominicana. Envía el plano o fotos de la pieza por WhatsApp y te cotizamos.",
+    intro: "Mecanizamos piezas industriales a partir de tu plano o de una muestra, en la cantidad que necesitas.",
+    lead: "Envía el plano, o fotos de la pieza con una referencia de tamaño, y la cantidad.",
+    situations: ["Tengo el plano", "Tengo la pieza o una muestra"],
+    situationDescs: ["Envía el plano con medidas y unidades; material y tolerancias, si están definidos.", "Envía fotos con una referencia de tamaño y cuéntanos qué función cumple la pieza."],
+    services: ["mecanizado", "mecanizado"],
+    information: ["Plano, o fotos de la pieza con una referencia de tamaño", "Medidas y unidades; tolerancias solo si están definidas en tu plano", "Material, si lo conoces o está especificado", "Cantidad de piezas y para qué equipo son", "Ciudad y fecha en que las necesitas"],
+    note: "Si no tienes plano, con fotos y la descripción de la función empezamos. Si hace falta la muestra física u otra medida, te lo decimos antes de cotizar.",
   },
 ] as const;
 

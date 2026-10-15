@@ -7,7 +7,7 @@ import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, CheckList, t
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import { SOLUCIONES, DATOS_PARA_COTIZAR, type Solucion } from "@/lib/soluciones";
-import { whatsappSolucion } from "@/lib/whatsapp";
+import { whatsappService, whatsappSolucion } from "@/lib/whatsapp";
 
 type Props = {
   solucion: Solucion;
@@ -29,6 +29,10 @@ function linkLabel(href: string, title: string) {
  */
 export function SolucionPage({ solucion: s, destacado }: Props) {
   const otras = SOLUCIONES.filter((x) => x.slug !== s.slug);
+  // Neumática (especialidad): mensaje «busco un componente neumático… código o foto» y medición
+  // como componente_neumatico. Las demás líneas mantienen su mensaje por línea.
+  const neumatica = s.slug === "neumatica";
+  const lineQuote = neumatica ? whatsappService("componente") : whatsappSolucion(s.name);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -62,7 +66,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
     ejemplos: sub.ejemplos,
     ...(sub.href
       ? { link: { href: sub.href, label: linkLabel(sub.href, sub.title) } }
-      : { quote: quoteHref(sub.title, s.name) }),
+      : { quote: neumatica ? whatsappService("componente", sub.title) : quoteHref(sub.title, s.name) }),
   }));
 
   const datos = [...(DATOS_PARA_COTIZAR[s.slug] ?? []).map((t) => ({ title: t })), { title: "Cantidad y ciudad de entrega" }];
@@ -78,9 +82,9 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         kicker={`Línea industrial · ${s.name}`}
         title={s.title}
         lead={<p>{s.description}</p>}
-        quoteHref={quoteHref(s.name, s.name)}
+        quoteHref={neumatica ? lineQuote : quoteHref(s.name, s.name)}
         secondary={{ href: "#catalogo", label: "Ver catálogo de la línea" }}
-        note="Envía la referencia o una foto de la placa. Te confirmamos disponibilidad y condiciones en la cotización."
+        note="Envía el código o una foto de la placa; si no conoces la referencia, una foto de la pieza basta para empezar."
         image={{ src: s.image, alt: s.imageAlt }}
         caption={{ label: "Imagen de referencia", text: s.ejemplos.slice(0, 3).join(" · ") }}
         trust="lineas"
@@ -110,7 +114,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         title="Qué datos necesitamos"
         intro={`Para cotizar ${s.name.toLowerCase()}, comparte los datos que tengas. No hace falta completarlos todos: con una foto legible de la placa o la referencia podemos empezar.`}
         items={datos}
-        quoteHref={whatsappSolucion(s.name)}
+        quoteHref={lineQuote}
         note={`Atención por WhatsApp: ${shortHours()}.`}
       />
 
@@ -134,7 +138,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         text="Envíanos el código, una foto, la muestra o la descripción y te cotizamos."
         quoteItem={s.name}
         quoteTipo={s.name}
-        whatsappHref={whatsappSolucion(s.name)}
+        whatsappHref={lineQuote}
       />
     </div>
   );

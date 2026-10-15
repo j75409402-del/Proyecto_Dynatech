@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { commercialMetadata } from "@/lib/seo";
 import { Phone, Mail, MapPin, Clock, ArrowUpRight } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { CONTACT, SITE, emailHref } from "@/lib/constants";
+import { CALL_PHONES, CONTACT, SITE, emailHref, telHref } from "@/lib/constants";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { PageHero } from "@/components/page/PageHero";
@@ -31,7 +31,7 @@ function ContactPanel() {
       <ul>
         <li>
           <Phone className="h-5 w-5" aria-hidden="true" />
-          <span><span className="contact-label">Teléfono</span><a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="contact-value">{CONTACT.phone}</a></span>
+          <span><span className="contact-label">Teléfonos</span>{CALL_PHONES.map((p) => <a key={p} href={telHref(p)} className="contact-value block">{p}</a>)}</span>
         </li>
         <li>
           <Mail className="h-5 w-5" aria-hidden="true" />
@@ -58,7 +58,7 @@ export default function ContactoPage() {
         crumbs={[{ label: "Contacto" }]}
         kicker={`${SITE.legalName} · RNC ${SITE.rnc}`}
         title="Contacta a Dynatech Ingeniería"
-        lead={<p>Para cotizar, escríbenos por WhatsApp: es nuestro canal principal. Envía la referencia, la cantidad, la aplicación y tu ciudad. También puedes llamar, escribir un correo o usar el formulario.</p>}
+        lead={<p>Para cotizar, escríbenos por WhatsApp: es nuestro canal principal. Puedes empezar con una foto, el código o el plano. También puedes llamar, escribir un correo o usar el formulario.</p>}
         quoteHref={whatsappGeneral()}
         secondary={{ href: "#formulario", label: "Usar el formulario" }}
         note={`Atención: ${shortHours()}.`}

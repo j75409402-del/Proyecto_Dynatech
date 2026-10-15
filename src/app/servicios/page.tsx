@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { commercialMetadata } from "@/lib/seo";
 import { Reveal } from "@/components/motion/Reveal";
 import { AccordionItem } from "@/components/ui/Accordion";
-import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
+import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, Steps } from "@/components/page/Blocks";
@@ -11,7 +11,7 @@ import { SITE } from "@/lib/constants";
 import Link from "next/link";
 import { ArrowUpRight, Cog, Droplets } from "lucide-react";
 import { SERVICIOS } from "@/lib/servicios";
-import { whatsappCylinderService } from "@/lib/whatsapp";
+import { whatsappService } from "@/lib/whatsapp";
 
 const DESCRIPTION = "Reparación y reconstrucción de cilindros neumáticos en RD: cambio de sellos, vástagos y componentes, con prueba de funcionamiento antes de entregar.";
 
@@ -34,6 +34,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/servicios" },
 };
 
+/** Oct-2026: se retiraron, pendientes de confirmación del dueño, las respuestas sobre formas de
+ * pago (transferencia), envíos nacionales y compatibilidad «sin importar el fabricante». */
 const FAQS = [
   {
     q: "¿Cuánto tiempo toma reparar un cilindro neumático?",
@@ -50,18 +52,6 @@ const FAQS = [
   {
     q: "¿Qué incluye el cambio de sellos?",
     a: "Desarme completo del cilindro, reemplazo de sellos por repuesto de calidad, limpieza y prueba de funcionamiento antes de la entrega.",
-  },
-  {
-    q: "¿Trabajan con todos los cilindros neumáticos industriales?",
-    a: "Reparamos y fabricamos componentes compatibles con cilindros neumáticos industriales estándar, sin importar el fabricante de origen.",
-  },
-  {
-    q: "¿Hacen envíos fuera de Santo Domingo?",
-    a: "Sí, coordinamos envíos a todo el territorio nacional. El costo y tiempo de envío se confirman junto con tu cotización según el destino y volumen del pedido.",
-  },
-  {
-    q: "¿Qué formas de pago aceptan?",
-    a: "Trabajamos con transferencia bancaria. Los detalles se confirman al formalizar cada cotización.",
   },
 ];
 
@@ -112,9 +102,9 @@ export default function ServiciosPage() {
         kicker="Taller · Reparación de cilindros"
         title={<>Reparación y reconstrucción de <span className="text-signal">cilindros neumáticos</span></>}
         lead={<p>Recuperamos cilindros con fugas, desgaste o golpes: cambio de sellos, vástagos y componentes, incluso cuando el repuesto original ya no está disponible.</p>}
-        quoteHref={whatsappCylinderService()}
+        quoteHref={whatsappService("neumatico-reparar")}
         secondary={{ href: "#proceso", label: "Ver el proceso" }}
-        note="Desarmamos, cambiamos lo dañado y probamos el cilindro antes de entregarlo."
+        note={<>Empieza con fotos del cilindro y su placa. ¿Es hidráulico? <Link href="/cilindros-hidraulicos" className="font-medium text-white underline decoration-signal underline-offset-4 hover:text-signal">Ver cilindros hidráulicos</Link></>}
         image={{ src: "/cilindros/taller-portada-v2.webp", alt: "Imagen de referencia: técnico revisando un cilindro neumático en el banco" }}
         caption={{ label: "Imagen de referencia", text: "Reparación · Reconstrucción · Sellos" }}
         trust="cilindros"
@@ -128,7 +118,7 @@ export default function ServiciosPage() {
       <Band tone="light" labelledBy="servicios-titulo">
         <SectionHead kicker="02 · Qué hacemos" id="servicios-titulo" title="Reparación, reconstrucción y sellos" />
         <OfferGrid
-          items={reparacion.map((s) => ({ id: s.id, title: s.title, desc: s.desc, icon: s.icon, ...REPARACION_MEDIA[s.id], quote: quoteHref(s.title) }))}
+          items={reparacion.map((s) => ({ id: s.id, title: s.title, desc: s.desc, icon: s.icon, ...REPARACION_MEDIA[s.id], quote: whatsappService("neumatico-reparar", s.title) }))}
         />
         <Reveal className="fab-aside">
           <div>
@@ -171,7 +161,7 @@ export default function ServiciosPage() {
           { title: "Marca, modelo o código", text: "Si la placa es legible." },
           { title: "Cantidad y ciudad de entrega" },
         ]}
-        quoteHref={whatsappCylinderService()}
+        quoteHref={whatsappService("neumatico-reparar")}
         note={`Atención por WhatsApp: ${shortHours()}.`}
       />
 
@@ -207,8 +197,8 @@ export default function ServiciosPage() {
       <QuoteCTA
         eyebrow="Reparación · Reconstrucción · Cambio de sellos"
         title="¿Tu cilindro tiene fugas o dejó de funcionar?"
-        text="Envía fotos del cilindro y su placa por WhatsApp. Te confirmamos alcance y condiciones en la cotización."
-        quoteItem="Reparación de cilindros neumáticos"
+        text="Envía fotos del cilindro y su placa por WhatsApp. Te confirmamos alcance, plazo y condiciones en la cotización."
+        whatsappHref={whatsappService("neumatico-reparar")}
       />
     </div>
   );

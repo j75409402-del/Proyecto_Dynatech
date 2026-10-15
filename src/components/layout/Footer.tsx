@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import { CONTACT, NAV, SITE, SOCIAL, emailHref } from "@/lib/constants";
+import { CALL_PHONES, CONTACT, NAV, SITE, SOCIAL, emailHref, telHref } from "@/lib/constants";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { Reveal } from "@/components/motion/Reveal";
 import { whatsappCylinderService } from "@/lib/whatsapp";
@@ -10,12 +10,7 @@ import { hoursLines } from "@/components/page/TrustStrip";
 const solutionLinks = SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}` }));
 
 /** Cilindros y servicios industriales (antes mezclados en "Empresa"). */
-const serviceLinks = [
-  { label: "Cilindros neumáticos",   href: "/cilindros-neumaticos" },
-  { label: "Reparación de cilindros", href: "/servicios" },
-  { label: "Sellos y componentes",   href: "/sellos-y-componentes" },
-  ...NAV.especialidades,
-];
+const serviceLinks = [...NAV.cilindros, ...NAV.especialidades];
 
 const companyLinks = [
   { label: "Nosotros",               href: "/nosotros" },
@@ -80,7 +75,7 @@ export function Footer() {
 
           {/* Cilindros y servicios */}
           <div className="lg:col-span-2">
-            <div className="eyebrow mb-4">Cilindros y servicios</div>
+            <div className="eyebrow mb-4">Taller y componentes</div>
             <ul className="space-y-1">
               {serviceLinks.map((link) => (
                 <li key={link.href}>
@@ -99,7 +94,7 @@ export function Footer() {
                   rel="noopener"
                   className="inline-flex min-h-10 items-center text-sm text-steel-200 hover:text-signal transition-colors"
                 >
-                  Cotizar cilindro por WhatsApp
+                  Cotizar por WhatsApp
                 </a>
               </li>
             </ul>
@@ -132,12 +127,17 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <Phone className="h-4 w-4 text-signal shrink-0 mt-0.5" />
-                <a
-                  href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-                  className="-my-2.5 inline-flex min-h-10 items-center hover:text-surface transition-colors"
-                >
-                  {CONTACT.phone}
-                </a>
+                <span className="flex flex-col">
+                  {CALL_PHONES.map((p) => (
+                    <a
+                      key={p}
+                      href={telHref(p)}
+                      className="-my-2.5 inline-flex min-h-10 items-center hover:text-surface transition-colors"
+                    >
+                      {p}
+                    </a>
+                  ))}
+                </span>
               </li>
               <li className="flex items-start gap-2.5">
                 <Mail className="h-4 w-4 text-signal shrink-0 mt-0.5" />

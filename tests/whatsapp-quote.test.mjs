@@ -32,7 +32,7 @@ try {
   assert.ok(r.location.startsWith(`https://wa.me/${OFFICIAL}?text=`), r.location);
   assert.match(text(r.location), /^Hola Dynatech, solicito cotización sobre Cilindros hidráulicos\./);
   assert.match(text(r.location), /\(Desde www\.dynatech\.com\.do\/cilindros-hidraulicos\)/);
-  assert.match(text(r.location), /¿Fabricar o reparar\?:\nDiámetro x carrera/);
+  assert.match(text(r.location), /¿Fabricar o reparar\?:\nCantidad:/); // oct-2026: preguntas mínimas, se empieza con una foto
   await waitEvents(1);
   assert.equal(received.length, 1);
   const ev = received[0].payload;
@@ -40,23 +40,40 @@ try {
   assert.equal(ev.name, 'quote_whatsapp_click');
   assert.equal(ev.website, '4bbea860-f2e7-4268-9476-190563eeab0a');
   assert.deepEqual(ev.data, { channel: 'whatsapp', source_page: '/cilindros-hidraulicos', product: 'cilindros_hidraulicos', utm_source: 'google', utm_medium: 'cpc', utm_campaign: 'cilindros-oct' });
+  assert.ok(text(r.location).endsWith('\n\nVengo de un anuncio de Google'), 'google/cpc lleva la frase de anuncio');
   ok('redirección + evento servidor con source_page, product y UTM');
 
   // 2) Sin parámetros: origen por Referer, producto por ruta
   r = await hit('/cotizacion', { referer: 'https://www.dynatech.com.do/neumatica?x=1' });
   assert.equal(r.status, 307); assert.ok(r.location.startsWith(`https://wa.me/${OFFICIAL}?text=`));
   await waitEvents(2); assert.equal(received[1].payload.data.source_page, '/neumatica'); assert.equal(received[1].payload.data.product, 'neumatica');
+  assert.ok(!text(r.location).includes('Vengo de un anuncio'), 'sin UTM no hay frase de anuncio');
   ok('origen por Referer');
 
   // 3) Plantilla de cilindros y línea
   r = await hit('/cotizacion?tpl=cilindro');
-  assert.match(text(r.location), /reparación \/ fabricación de un cilindro neumático/);
-  assert.match(text(r.location), /Diámetro x carrera/); assert.match(text(r.location), /foto, plano o placa/);
+  assert.match(text(r.location), /reparación o fabricación de un cilindro neumático/);
+  assert.match(text(r.location), /fotos del cilindro y su placa, o el plano/);
   await waitEvents(3); assert.equal(received[2].payload.data.product, 'cilindros_neumaticos'); assert.equal(received[2].payload.data.source_page, 'direct');
   r = await hit('/cotizacion?linea=Sensores&tpl=solucion');
   assert.match(text(r.location), /solicito cotización sobre Sensores\./); assert.ok(!/Diámetro/.test(text(r.location)));
   await waitEvents(4); assert.equal(received[3].payload.data.product, 'sensores');
   ok('plantillas cilindro y línea');
+
+  // 3b) Cotización por necesidad (oct-2026): mensaje propio y servicio medido; valores desconocidos se ignoran
+  const SVC = { 'neumatico-reparar': [/reparación de un cilindro neumático/, 'reparacion_cilindro_neumatico'], 'neumatico-fabricar': [/fabricación de un cilindro neumático/, 'fabricacion_cilindro_neumatico'], hidraulico: [/un cilindro hidráulico/, 'cilindro_hidraulico'], 'hidraulico-reparar': [/reparación de un cilindro hidráulico/, 'reparacion_cilindro_hidraulico'], 'hidraulico-fabricar': [/fabricación de un cilindro hidráulico/, 'fabricacion_cilindro_hidraulico'], mecanizado: [/mecanizado de una pieza/, 'mecanizado'], componente: [/componente neumático/, 'componente_neumatico'], foto: [/no tengo la referencia/, 'identificar_por_foto'] };
+  for (const [svc, [re, product]] of Object.entries(SVC)) {
+    const n = received.length;
+    r = await hit(`/cotizacion?svc=${svc}&from=%2Fmecanizado`);
+    assert.equal(r.status, 307); assert.match(text(r.location), re); assert.match(text(r.location), /foto|plano/);
+    await waitEvents(n + 1); assert.equal(received.at(-1).payload.data.service, svc); assert.equal(received.at(-1).payload.data.product, product);
+  }
+  r = await hit('/cotizacion?svc=componente&item=V%C3%A1lvulas%20direccionales&nt=1');
+  assert.match(text(r.location), /componente neumático[\s\S]*Sobre: Válvulas direccionales\n\nCantidad:/);
+  const n0 = received.length;
+  r = await hit('/cotizacion?svc=%3Cx%3E&from=%2F');
+  assert.match(text(r.location), /^Hola Dynatech, quisiera cotizar\./); await waitEvents(n0 + 1); assert.equal(received.at(-1).payload.data.service, undefined);
+  ok('mensajes por servicio (reparar, fabricar, hidráulico, mecanizado, componente, foto) y servicio medido');
 
   // 4) No se mide: DNT, GPC, nt=1, bots, prefetch — pero la redirección funciona igual
   const before = received.length;
@@ -97,11 +114,12 @@ try {
       await ctx.route('https://wa.me/**', route => route.fulfill({ status: 200, contentType: 'text/html', body: '<title>WhatsApp (simulado)</title>' }));
       const page = await ctx.newPage();
       const errors = []; page.on('pageerror', e => errors.push(e.message));
-      for (const [path, linkName, product] of [['/cilindros-hidraulicos?utm_source=facebook&utm_medium=social&utm_campaign=hidraulicos', 'Solicitar cotización', 'cilindros_hidraulicos'], ['/valvulas-neumaticas', 'Solicitar cotización', null], ['/servicios', null, null]]) {
+      for (const [path, linkName, product] of [['/cilindros-hidraulicos?utm_source=facebook&utm_medium=social&utm_campaign=hidraulicos', 'Cotizar por WhatsApp', 'cilindro_hidraulico'], ['/valvulas-neumaticas', 'Cotizar por WhatsApp', 'componente_neumatico'], ['/servicios', null, 'reparacion_cilindro_neumatico']]) {
         await page.goto(base + path, { waitUntil: 'load' });
         assert.equal(await page.locator('a[href*="/cotizacion/correo"]').count(), 0, `sin CTA de correo en ${path}`);
         assert.equal(await page.getByText('Cotizar por correo', { exact: false }).count(), 0, `sin texto de correo en ${path}`);
-        // WEB-020 (decisión del Capitán 05-oct): CTA principal "Solicitar cotización" (→ /cotizacion → WhatsApp); se busca dentro de <main> (no el del menú).
+        // Oct-2026: CTA único "Cotizar por WhatsApp" (→ /cotizacion → WhatsApp); se busca dentro de <main> (no el del menú).
+        assert.equal(await page.locator('main a[href^="https://wa.me"]').count(), 0, `sin botón WhatsApp duplicado junto al CTA en ${path}`);
         const link = linkName ? page.locator('main').getByRole('link', { name: linkName, exact: true }).first() : page.locator('main a[href^="/cotizacion"]').first();
         assert.ok(await link.isVisible(), `CTA WhatsApp visible en ${path} (${label})`);
         const n = opened.length;

@@ -1,5 +1,5 @@
 import { CONTACT } from "./constants";
-import { quoteBridgeHref } from "./quote";
+import { quoteBridgeHref, type QuoteService } from "./quote";
 
 /**
  * Genera un link de wa.me con mensaje pre-cargado.
@@ -46,6 +46,11 @@ export function whatsappCylinderService(): string {
   return quoteBridgeHref({ tpl: "cilindro" });
 }
 
+/** Cotización por necesidad (reparar, fabricar, mecanizar, componente, foto): mensaje propio y medición por servicio. */
+export function whatsappService(svc: QuoteService, item?: string): string {
+  return quoteBridgeHref({ svc, item });
+}
+
 /** "Quiero cotizar" genérico: pasa por /cotizacion. */
 export function whatsappGeneral(): string {
   return quoteBridgeHref();
@@ -57,9 +62,9 @@ export function whatsappSolucion(linea: string): string {
 }
 
 /**
- * CTA secundario "WhatsApp" (WEB-020, decisión del Capitán 05-oct): chat directo para consultas.
- * Es wa.me con el número oficial de CONTACT; CommercialTracking lo mide como `whatsapp_click`.
- * El CTA principal "Solicitar cotización" sigue pasando por /cotizacion (quote_whatsapp_click).
+ * Chat directo (wa.me) para consultas que no son cotización (garantías, devoluciones, contacto).
+ * Oct-2026: ya no se usa como botón contiguo al CTA «Cotizar por WhatsApp» (parecían dos procesos
+ * distintos para el mismo canal). CommercialTracking lo mide como `whatsapp_click`.
  */
 export function whatsappChat(): string {
   return whatsappLink("Hola Dynatech, tengo una consulta.");

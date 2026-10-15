@@ -36,11 +36,14 @@ try {
       checks.push({ route, width, status: response.status(), title: result.title, overflow: result.overflow });
       if (width === 390 && ['/cilindros-hidraulicos', '/mecanizado', '/', '/servicios'].includes(route)) {
         await page.evaluate(async () => {
-          for (let y = 0; y < document.documentElement.scrollHeight; y += 750) {
+          // Oct-2026: la portada es más larga; con saltos de 750 px/50 ms la última imagen diferida
+          // (lazy) aún no había empezado a cargar. Un desplazamiento más realista evita esa carrera.
+          for (let y = 0; y < document.documentElement.scrollHeight; y += 400) {
             window.scrollTo(0, y);
-            await new Promise(resolve => setTimeout(resolve, 50));
+            await new Promise(resolve => setTimeout(resolve, 120));
           }
-          await Promise.all([...document.images].map(image => image.decode().catch(() => {})));
+          // Lo que se comprueba es que ninguna imagen esté rota: se fuerza la carga de las diferidas.
+          await Promise.all([...document.images].map(image => { image.loading = 'eager'; return image.complete && image.naturalWidth ? null : new Promise(r => { image.addEventListener('load', r, { once: true }); image.addEventListener('error', r, { once: true }); setTimeout(r, 8000); }); }));
           window.scrollTo(0, 0);
         });
         assert.equal(await page.evaluate(() => [...document.images].filter(image => !image.naturalWidth).length), 0, `Imágenes ${route}`);
@@ -63,17 +66,20 @@ try {
 
   await page.goto(base + '/cilindros-hidraulicos');
   await page.evaluate(() => document.addEventListener('click', e => { if (e.target.closest('a')) e.preventDefault(); }));
-  await page.getByRole('link', { name: 'Cotiza cilindros hidráulicos por WhatsApp', exact: true }).click();
+  await page.locator('main').getByRole('link', { name: 'Cotizar por WhatsApp', exact: true }).first().click();
   const events = await page.evaluate(() => window.dataLayer);
   assert.equal(events.filter(e => e.event === 'quote_whatsapp_click').length, 1);
   assert.equal(events[0].page_path, '/cilindros-hidraulicos');
   assert.equal(events[0].source_page, '/cilindros-hidraulicos');
-  assert.equal(events[0].product, 'cilindros_hidraulicos');
+  assert.equal(events[0].product, 'cilindro_hidraulico');
+  assert.equal(events[0].service, 'hidraulico');
   assert.ok(!JSON.stringify(events).includes('text='));
 
   await page.goto(base + '/contacto');
   await page.evaluate(() => document.addEventListener('click', e => { if (e.target.closest('a')) e.preventDefault(); }));
-  await page.locator('main a[href^="tel:"]').click();
+  // Dos teléfonos de llamadas (15-oct-2026): principal y 809-854-2800.
+  assert.deepEqual(await page.locator('main a[href^="tel:"]').evaluateAll(as => as.map(a => a.getAttribute('href'))), ['tel:+18092844336', 'tel:+18098542800']);
+  await page.locator('main a[href^="tel:"]').first().click();
   await page.locator('main a[href^="mailto:"]').click();
   assert.deepEqual(await page.evaluate(() => window.dataLayer.map(e => e.event)), ['phone_click', 'email_click']);
   // AP-004: sin formulario de cotización compitiendo con WhatsApp.
@@ -95,13 +101,16 @@ try {
 
   await page.setViewportSize({ width: 390, height: 900 });
   await page.goto(base + '/');
-  await page.getByRole('button', { name: 'Menú', exact: true }).click();
-  assert.ok(await page.getByRole('link', { name: 'Servicios', exact: true }).first().isVisible());
+  await page.getByRole('button', { name: 'Abrir menú', exact: true }).click();
+  const mobileNav = page.getByRole('navigation', { name: 'Menú móvil', exact: true });
+  assert.ok(await mobileNav.getByRole('link', { name: 'Reparación de cilindros', exact: true }).isVisible());
+  assert.ok(await mobileNav.getByRole('link', { name: 'Mecanizado de piezas', exact: true }).isVisible());
+  assert.equal(await mobileNav.locator('a[href^="https://wa.me"]').count(), 0, 'menú móvil sin segundo botón de WhatsApp');
   const noJS = await browser.newContext({ javaScriptEnabled: false });
   const staticPage = await noJS.newPage();
   await staticPage.goto(base + '/mecanizado');
   assert.ok(await staticPage.getByRole('heading', { level: 1 }).isVisible());
-  assert.ok(await staticPage.getByRole('link', { name: 'Cotiza mecanizado por WhatsApp', exact: true }).isVisible());
+  assert.ok(await staticPage.locator('main').getByRole('link', { name: 'Cotizar por WhatsApp', exact: true }).first().isVisible());
   await noJS.close();
   assert.deepEqual(errors, []);
   await writeFile('docs/seo-verificacion/resultados.json', JSON.stringify({ checks, errors, admin: { status: adminStatus, verified: adminStatus === 307, note: adminStatus === 307 ? 'Redirección sin sesión' : 'NO VERIFICADO: faltan variables locales de Supabase' }, additional: ['redirecciones', '404', 'login noindex', 'clic WhatsApp sin datos personales', 'formulario por correo retirado del flujo (307)', 'conversión de contacto con API simulada', 'menú móvil', 'contenido sin JavaScript'] }, null, 2));
