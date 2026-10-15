@@ -56,7 +56,7 @@ Consulta del 15-oct-2026 al sitio `4bbea860-…`, de 20:10 a 20:25 UTC (16:10–
 
 - **9** eventos `quote_whatsapp_click`, todos con `utm_campaign=prueba_medicion` y `utm_medium=cpc`.
 - `service`: neumatico-reparar 2, hidraulico 2, componente 2, foto 2, mecanizado 1.
-- Llegaron 9 de los 10 clics. Falta el n.º 3 (escritorio, mecanizado, 20:15:03 UTC). El clic sí abrió WhatsApp con la frase, así que el evento se perdió en el envío desde el servidor (`after()` → `cloud.umami.is/api/send`, con 3 s de límite). Ese envío ignora los errores sin registrarlos y la causa no se puede comprobar. No hubo duplicados.
+- Llegaron 9 de los 10 clics. Falta el n.º 3 (escritorio, mecanizado, 20:15:03 UTC). El clic sí abrió WhatsApp con la frase. La investigación con los registros de Vercel está en la sección 8. No hubo duplicados.
 - No hubo ningún otro `quote_whatsapp_click` en el intervalo, así que no se mezclaron clics reales.
 - Las 25 visitas de página del intervalo vienen de los dominios `proyecto-dynatech-…vercel.app`.
 
@@ -64,7 +64,7 @@ Consulta del 15-oct-2026 al sitio `4bbea860-…`, de 20:10 a 20:25 UTC (16:10–
 
 **Implicación para medir Ads:** en esta muestra de 10 clics llegaron 9. Es un resultado puntual, no una tasa de pérdida permanente: la muestra es muy pequeña y la causa no quedó registrada. Mientras tanto, el número de conversaciones de WhatsApp con la frase es la cifra de referencia y Umami se usa como indicador.
 
-**Pendiente técnico:** el envío del servidor descarta los errores sin registrarlos. Hay que añadir un diagnóstico (estado HTTP o tiempo agotado, sin datos personales) para saber por qué se pierde un evento.
+**Pendiente técnico:** el envío del servidor descarta los errores sin registrarlos. Hay que añadir un diagnóstico (estado HTTP o tiempo agotado, sin datos personales) para saber por qué se pierde un evento. **Resuelto:** la causa probable y la corrección están en la sección 8.
 
 ## 4 · Analítica desactivada en Preview
 
@@ -108,3 +108,54 @@ Navegador de la app de Claude, ancho 483 px, **con la analítica rechazada** en 
 - **Umami, de 20:56 a 21:11 UTC:** 0 eventos `quote_whatsapp_click` y 0 visitas de `www.dynatech.com.do`. Solo 9 visitas de página desde un iPhone en RD (20:58–21:00 UTC), con origen vercel.com, en la vista previa antigua `wchzk67v8` (commit `a93435a`, anterior a la variable). Es la revisión del dueño desde el celular y queda **excluida** por la regla de la sección 3.
 
 **Exclusión de los resultados comerciales:** descontar los eventos con `utm_campaign=prueba_medicion`, las visitas de `*.vercel.app` y cualquier evento de producción del 15-oct-2026 entre 21:05 y 21:15 UTC (no hubo ninguno).
+
+## 8 · Clic perdido n.º 3: causa y detección de fallos
+
+### Registros de Vercel (consultados el 15-oct a las 21:10 UTC, dentro de la retención de 1 hora)
+
+Peticiones a `/cotizacion` de la vista previa `dmyqs8rng` con `utm_campaign=prueba_medicion` (duración de la función, que incluye el envío a Umami dentro de `after()`):
+
+| Hora UTC | Recorrido | Respuesta | Duración | ¿Llegó a Umami? |
+|---|---|---|---|---|
+| 20:13:56.8 | Reparar neumático (arranque en frío de 315 ms) | 307 | 3.656 ms | Sí, 20:14:00 |
+| 20:14:36.7 | Cilindro hidráulico | 307 | 1.444 ms | Sí |
+| **20:15:03.4** | **Mecanizado** | **307** | **3.122 ms** | **No** |
+| 20:15:29.4 | Componente | 307 | 1.173 ms | Sí |
+| 20:15:42.8 | Foto | 307 | 664 ms | Sí |
+| 20:17:10 – 20:18:37 | Los 5 recorridos en móvil | 307 | 586–778 ms | Sí |
+
+Además hubo peticiones con `nt=1` (pruebas con la analítica rechazada), que por diseño no envían evento.
+
+**Conclusión:**
+- El clic llegó al servidor y redirigió a WhatsApp con normalidad. Lo que falló fue el envío a Umami.
+- La función duró 3.122 ms, justo el límite de 3 s que tenía `AbortSignal.timeout(3000)`, cuando lo normal era 0,6–1,4 s. Lo más probable es que Umami tardara más de 3 s y el envío se cortara.
+- El primer clic también tardó unos 3,3 s y sí quedó registrado. Por eso, tras un tiempo agotado no se puede saber si Umami guardó el evento.
+- **La causa exacta no puede recuperarse.** El código ignoraba el error sin registrarlo, la función no dejó ninguna línea de log y Umami no conserva peticiones fallidas. La causa queda como «tiempo agotado, muy probable»; NO VERIFICADO al 100 %.
+
+### Corrección (`src/lib/quote-event.ts`)
+
+- **Límite de 8 s en lugar de 3 s.** Corre dentro de `after()`, cuando la redirección ya salió, así que no retrasa la apertura de WhatsApp. Prueba local con Umami tardando 3,5 s: la redirección respondió en 148 ms y el evento llegó una vez.
+- **Cada fallo deja una línea de error** en los registros de Vercel:
+
+  ```json
+  {"event":"quote_event_send_failed","reason":"timeout","ms":8004,"attempts":1,"service":"foto","source_page":"/","utm_campaign":"…"}
+  ```
+
+  - Motivos: `timeout`, `http_error` (con `status`), `rejected` (Umami responde `{"beep":"boop"}`) y `network` (con `code`).
+  - La línea no incluye agente de usuario, IP ni mensaje.
+- **Sin duplicados.** Umami no acepta una clave de idempotencia, así que solo se reintenta una vez cuando la conexión falló antes de enviar (`ECONNREFUSED`, `ENOTFOUND`, `EAI_AGAIN`, `EHOSTUNREACH`, `ENETUNREACH`, `UND_ERR_CONNECT_TIMEOUT`). Tras un tiempo agotado, un 5xx o un corte a mitad de respuesta no se reintenta, porque Umami pudo haberlo guardado.
+- Ahora también se detecta una respuesta 4xx o 5xx de Umami. Antes no se miraba el estado de la respuesta.
+- El evento y sus propiedades no cambian, así que el contrato de `/cotizacion` sigue igual.
+
+### Cómo detectar fallos en producción
+
+- **Inmediato:** en Vercel, Logs, buscar `quote_event_send_failed` (nivel error). En el plan Hobby los registros se conservan 1 hora, así que hay que revisarlos pronto o activar un drenaje de logs si se necesita historial.
+- **Conciliación:** en el mismo intervalo, el número de peticiones `GET /cotizacion` con 307 y sin `nt=1` debería ser igual a eventos en Umami + líneas `quote_event_send_failed`. Si sobran peticiones, la diferencia son bots, DNT o GPC, que no se miden.
+
+### Pruebas
+
+- `tests/quote-event.test.mjs` (6/6): envío correcto, Umami lento de más de 3 s (llega, 1 petición), tiempo agotado (1 registro, sin reintento), 500, rechazo «beep» y conexión rechazada (1 reintento, 1 registro).
+- E2E local con `next start`:
+  - Umami a 3,5 s: 307 en 148 ms y 1 evento.
+  - Umami colgado: 307 en 28 ms, 1 sola petición a Umami y la línea `quote_event_send_failed` con `reason: timeout` a los 8.004 ms.
+- Sin regresiones: `whatsapp-quote`, `ads-attribution`, `journeys-ads` (20), `commercial` (57), `seo-organic` y `analytics`; además `tsc`, `lint` (0 errores) y `build`.
