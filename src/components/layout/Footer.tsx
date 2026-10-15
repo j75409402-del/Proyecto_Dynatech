@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import { CONTACT, NAV, SITE, SOCIAL, emailHref } from "@/lib/constants";
+import { CALL_PHONES, CONTACT, NAV, SITE, SOCIAL, emailHref, telHref } from "@/lib/constants";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { Reveal } from "@/components/motion/Reveal";
 import { whatsappCylinderService } from "@/lib/whatsapp";
@@ -127,12 +127,17 @@ export function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <Phone className="h-4 w-4 text-signal shrink-0 mt-0.5" />
-                <a
-                  href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-                  className="-my-2.5 inline-flex min-h-10 items-center hover:text-surface transition-colors"
-                >
-                  {CONTACT.phone}
-                </a>
+                <span className="flex flex-col">
+                  {CALL_PHONES.map((p) => (
+                    <a
+                      key={p}
+                      href={telHref(p)}
+                      className="-my-2.5 inline-flex min-h-10 items-center hover:text-surface transition-colors"
+                    >
+                      {p}
+                    </a>
+                  ))}
+                </span>
               </li>
               <li className="flex items-start gap-2.5">
                 <Mail className="h-4 w-4 text-signal shrink-0 mt-0.5" />

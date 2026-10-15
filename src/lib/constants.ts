@@ -21,11 +21,21 @@ export const CONTACT = {
   whatsappDisplay: "+1 (809) 284-4336",
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "dynatechsrl@outlook.com",
   phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+1 (809) 284-4336",
+  /** Segundo teléfono, solo llamadas (confirmado por el dueño, 15-oct-2026). WhatsApp sigue en `whatsapp`. */
+  phone2: "+1 (809) 854-2800",
   address: "Av. Rómulo Betancourt, Santo Domingo, República Dominicana",
   streetAddress: "Av. Rómulo Betancourt",
   locality: "Santo Domingo",
   hours: "Lunes a Viernes · 8:00 AM - 5:00 PM · Sábado · 8:00 AM - 12:00 PM",
 } as const;
+
+/** Teléfonos de llamadas, en orden: principal y secundario. */
+export const CALL_PHONES = [CONTACT.phone, CONTACT.phone2] as const;
+
+/** Enlace tel: sin espacios ni signos de formato. */
+export function telHref(phone: string) {
+  return `tel:${phone.replace(/[^\d+]/g, "")}`;
+}
 
 /** Umami Cloud (sin cookies). El ID es público; el envío servidor de /cotizacion usa la API /api/send. */
 export const ANALYTICS = {
