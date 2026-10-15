@@ -9,6 +9,7 @@ import { whatsappService } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
 import { CylinderRelated } from "@/components/industrial/CylinderRelated";
+import { RealWorkPhoto } from "@/components/industrial/RealWorkPhoto";
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 
@@ -128,6 +129,15 @@ export default function CilindrosNeumaticosPage() {
               </div>
             </Reveal>
           </div>
+
+          <Reveal className="real-work mt-10">
+            <RealWorkPhoto />
+            <div className="real-work-text">
+              <p className="eyebrow">Trabajo real</p>
+              <h3 className="font-display text-surface">Cilindros con placa Dynatech</h3>
+              <p className="text-steel-300">Fabricamos el cilindro a partir de tu plano, una muestra o tus medidas. Envía una foto del que necesitas reemplazar y te cotizamos.</p>
+            </div>
+          </Reveal>
 
           <Reveal className="mt-8">
             <p className="text-steel-300">

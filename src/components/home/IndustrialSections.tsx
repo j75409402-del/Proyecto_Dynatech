@@ -9,6 +9,7 @@ import { whatsappService } from "@/lib/whatsapp";
 import type { QuoteService } from "@/lib/quote";
 import { CYLINDER_PARTS } from "@/lib/industrial-scenes";
 import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
+import { RealWorkPhoto } from "@/components/industrial/RealWorkPhoto";
 import { Reveal } from "@/components/motion/Reveal";
 
 const DETALLE: Record<string, string> = { fabricacion: "Ver tipos de cilindro", reparacion: "Ver reparación de cilindros", "kits-de-sellos": "Ver sellos y componentes" };
@@ -117,6 +118,15 @@ export function AntesDespues() {
           <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="max-w-2xl text-sm leading-relaxed text-steel-300">Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar.</p>
             <a href={whatsappService("neumatico-reparar")} target="_blank" rel="noopener" className="btn-primary min-h-12 shrink-0 px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: reparación de cilindro neumático</span></a>
+          </div>
+        </Reveal>
+        <Reveal className="real-work">
+          <RealWorkPhoto />
+          <div className="real-work-text">
+            <p className="section-kicker">Fabricación</p>
+            <h3>Cilindros fabricados en nuestro taller</h3>
+            <p>Fabricamos cilindros neumáticos a partir de tu plano, una muestra o tus medidas, en milímetros o en pulgadas. Envía una foto del cilindro que necesitas reemplazar.</p>
+            <a href={whatsappService("neumatico-fabricar")} target="_blank" rel="noopener" className="btn-primary min-h-12 self-start px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: fabricación de cilindro neumático</span></a>
           </div>
         </Reveal>
       </div>
