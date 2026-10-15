@@ -134,7 +134,7 @@ export default function CilindrosNeumaticosPage() {
             <RealWorkPhoto />
             <div className="real-work-text">
               <p className="eyebrow">Trabajo real</p>
-              <h3 className="font-display text-surface">Cilindros con placa Dynatech</h3>
+              <h3 className="font-display text-surface">Cilindros neumáticos del taller</h3>
               <p className="text-steel-300">Fabricamos el cilindro a partir de tu plano, una muestra o tus medidas. Envía una foto del que necesitas reemplazar y te cotizamos.</p>
             </div>
           </Reveal>

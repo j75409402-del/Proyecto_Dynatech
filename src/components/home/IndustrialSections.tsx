@@ -124,7 +124,7 @@ export function AntesDespues() {
           <RealWorkPhoto />
           <div className="real-work-text">
             <p className="section-kicker">Fabricación</p>
-            <h3>Cilindros fabricados en nuestro taller</h3>
+            <h3>Cilindros neumáticos del taller</h3>
             <p>Fabricamos cilindros neumáticos a partir de tu plano, una muestra o tus medidas, en milímetros o en pulgadas. Envía una foto del cilindro que necesitas reemplazar.</p>
             <a href={whatsappService("neumatico-fabricar")} target="_blank" rel="noopener" className="btn-primary min-h-12 self-start px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: fabricación de cilindro neumático</span></a>
           </div>
