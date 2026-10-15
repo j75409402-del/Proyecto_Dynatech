@@ -800,11 +800,14 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 
 /* Foto de trabajo real del taller (única imagen rotulada «Foto real»). */
 .real-work { margin-top:40px; display:grid; gap:24px; align-items:center; }
-.real-work-photo { margin:0; display:grid; gap:8px; max-width:360px; }
-.real-work-frame { position:relative; aspect-ratio:4/5; overflow:hidden; border:1px solid #0b0d101a; background:#0b1016; }
-.real-work-photo figcaption { font-size:13px; line-height:1.5; color:inherit; opacity:.8; }
+.real-work-photo { margin:0; display:grid; gap:10px; max-width:520px; }
+.real-work-frame { position:relative; aspect-ratio:5/3; overflow:hidden; border:1px solid #0b0d101a; background:#0b1016; }
+.real-work-photo figcaption { display:grid; gap:6px; font-size:13px; line-height:1.5; color:inherit; }
+.real-work-photo figcaption > span:last-child { opacity:.8; }
+/* Etiqueta «Foto real» fuera de la fotografía (debajo), para no tapar los cilindros. */
+.real-work-label { justify-self:start; padding:4px 8px; background:#0f7a3d; color:#fff; font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
 .img-note.is-real { background:#0f7a3d; }
 .real-work-text { display:flex; flex-direction:column; gap:12px; max-width:34rem; }
 .real-work-text h3 { font-size:24px; font-weight:600; letter-spacing:-.02em; }
 .real-work-text p:not(.section-kicker):not(.eyebrow) { line-height:1.65; opacity:.85; }
-@media(min-width:768px){ .real-work { grid-template-columns:minmax(0,360px) minmax(0,1fr); gap:40px; } }
+@media(min-width:768px){ .real-work { grid-template-columns:minmax(0,520px) minmax(0,1fr); gap:40px; } }
