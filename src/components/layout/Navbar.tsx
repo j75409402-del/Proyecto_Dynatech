@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
-import { NAV, SITE, CONTACT } from "@/lib/constants";
+import { NAV, SITE, CONTACT, CALL_PHONES, telHref } from "@/lib/constants";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -72,7 +72,7 @@ export function Navbar() {
       <div className="hidden bg-surface py-2 text-white md:block">
         <div className="container-max flex items-center justify-between gap-6 text-xs">
           <span className="text-white/70">{CONTACT.locality}, República Dominicana · Taller de cilindros, mecanizado y neumática industrial</span>
-          <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="-my-2 inline-flex min-h-10 items-center font-mono text-white/85 hover:text-white">{CONTACT.phone}</a>
+          <span className="flex items-center gap-3">{CALL_PHONES.map((p, i) => <span key={p} className="flex items-center gap-3">{i > 0 && <span aria-hidden="true" className="text-white/40">·</span>}<a href={telHref(p)} className="-my-2 inline-flex min-h-10 items-center font-mono text-white/85 hover:text-white">{p}</a></span>)}</span>
         </div>
       </div>
       <div
@@ -329,9 +329,11 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`} className="mt-5 flex min-h-11 items-center font-mono text-sm text-steel-400 hover:text-signal">
-            {CONTACT.phone}
-          </a>
+          {CALL_PHONES.map((p, i) => (
+            <a key={p} href={telHref(p)} className={`${i === 0 ? "mt-5 " : ""}flex min-h-11 items-center font-mono text-sm text-steel-400 hover:text-signal`}>
+              {p}
+            </a>
+          ))}
         </nav>
       </div>
     </header>

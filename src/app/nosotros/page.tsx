@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { commercialMetadata } from "@/lib/seo";
-import { CONTACT, SITE, emailHref } from "@/lib/constants";
+import { CALL_PHONES, CONTACT, SITE, emailHref, telHref } from "@/lib/constants";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { Band, SectionHead, Steps } from "@/components/page/Blocks";
@@ -113,7 +113,7 @@ export default function NosotrosPage() {
             <div><dt>Dirección</dt><dd>{CONTACT.address}</dd></div>
             <div><dt>Horario</dt><dd>{hoursLines().map((l) => <span key={l} className="block">{l}</span>)}</dd></div>
             <div><dt>WhatsApp</dt><dd><a href={whatsappGeneral()} target="_blank" rel="noopener">{CONTACT.whatsappDisplay}</a></dd></div>
-            <div><dt>Teléfono</dt><dd><a href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}>{CONTACT.phone}</a></dd></div>
+            <div><dt>Teléfonos</dt><dd>{CALL_PHONES.map((p) => <a key={p} href={telHref(p)} className="block">{p}</a>)}</dd></div>
             <div><dt>Correo</dt><dd><a href={emailHref()} className="[overflow-wrap:anywhere]">{CONTACT.email}</a></dd></div>
           </dl>
         </div>

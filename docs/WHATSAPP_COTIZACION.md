@@ -51,7 +51,7 @@ Reglas: enlazar `/cotizacion` siempre con `<a>`, nunca con `<Link>` (el prefetch
 - Retiro definitivo: cuando `quotes` no reciba filas nuevas en 30 días tras publicar (revisar en /admin) y se confirme que ningún webhook externo usa `/api/cotizacion`.
 
 ## Pruebas
-`tests/whatsapp-quote.test.mjs` (servidor + navegador escritorio/móvil, Umami simulado vía `UMAMI_API_URL`), `tests/ads-attribution.test.mjs` (atribución de Google Ads) y actualizados `commercial`, `analytics`, `seo-organic`.
+`tests/whatsapp-quote.test.mjs` (servidor + navegador escritorio/móvil, Umami simulado vía `UMAMI_API_URL`), `tests/ads-attribution.test.mjs` (atribución de Google Ads), `tests/journeys-ads.test.mjs` (los cinco recorridos desde la portada, escritorio y móvil, con y sin anuncio pagado) y actualizados `commercial`, `analytics`, `seo-organic`.
 
 ## Embudo: qué cuenta cada cifra (oct-2026)
 No mezclar etapas: un clic no es una conversación ni una cotización.

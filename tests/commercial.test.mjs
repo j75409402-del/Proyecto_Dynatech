@@ -77,7 +77,9 @@ try {
 
   await page.goto(base + '/contacto');
   await page.evaluate(() => document.addEventListener('click', e => { if (e.target.closest('a')) e.preventDefault(); }));
-  await page.locator('main a[href^="tel:"]').click();
+  // Dos teléfonos de llamadas (15-oct-2026): principal y 809-854-2800.
+  assert.deepEqual(await page.locator('main a[href^="tel:"]').evaluateAll(as => as.map(a => a.getAttribute('href'))), ['tel:+18092844336', 'tel:+18098542800']);
+  await page.locator('main a[href^="tel:"]').first().click();
   await page.locator('main a[href^="mailto:"]').click();
   assert.deepEqual(await page.evaluate(() => window.dataLayer.map(e => e.event)), ['phone_click', 'email_click']);
   // AP-004: sin formulario de cotización compitiendo con WhatsApp.
