@@ -68,9 +68,16 @@ Consulta del 15-oct-2026 al sitio `4bbea860-…`, de 20:10 a 20:25 UTC (16:10–
 
 `NEXT_PUBLIC_DISABLE_ANALYTICS=1`, tipo config, **solo en el entorno Preview** de Vercel (15-oct-2026). Con esa variable el ID de Umami queda vacío al compilar: el navegador no carga el script y `/cotizacion` no envía el evento del servidor. Producción no cambia. La comprobación en la nueva vista previa está en la sección 5.
 
+La variable solo afecta a los despliegues compilados después de crearla. Las vistas previas anteriores (`45f62cb`, `047c667`, `319baf8`, `a93435a`) siguen enviando a Umami: no hay que usarlas para probar.
+
 ## 5 · Verificación tras desactivar la analítica en Preview
 
-Pendiente de completar con el despliegue de este commit.
+Primera vista previa compilada con la variable: commit `b973e3f`, `proyecto-dynatech-lmwhyba01-…vercel.app`.
+
+- En el navegador: el ID de Umami está vacío, la página no carga `script.js` de Umami y no sale ninguna petición a `cloud.umami.is`.
+- Clic normal a las 20:53:21 UTC (16:53 en Santo Domingo), desde /mecanizado sin parámetros: WhatsApp se abre con el mensaje del servicio, sin la frase.
+- Clic con anuncio simulado a las 20:53:36 UTC, desde /cilindros-hidraulicos con `utm_source=google&utm_medium=cpc&utm_campaign=prueba_medicion`: el mensaje termina en «Vengo de un anuncio de Google».
+- **Umami, de 20:45 a 20:56 UTC: 0 eventos `quote_whatsapp_click`** y ninguna visita desde `lmwhyba01`. Solo aparecen 2 visitas de página a las 20:50 desde la vista previa anterior `wchzk67v8` (commit `a93435a`, compilada antes de la variable). Son pruebas y entran en la regla de exclusión de la sección 3.
 
 ## 6 · Foto real
 
