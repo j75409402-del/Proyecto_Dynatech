@@ -79,4 +79,6 @@ Pendiente de completar con el despliegue de este commit.
 - Recorte 5:3 (915×549) desde el original de 960×1280: queda menos pared y suelo, y los cinco cilindros completos, incluidos los vástagos y las bases.
 - Luz: curva suave que aclara sombras y medios tonos y deja las altas luces casi intactas (píxeles quemados: 2,8 % antes, 3,1 % después); +4 % de saturación; nitidez ligera. Sin retoque del contenido.
 - La etiqueta «Foto real · taller Dynatech» pasa debajo de la imagen. La columna se amplía de 360 a 520 px y el marco cambia de 4:5 a 5:3.
-- El original se conserva en el repositorio.
+- El original se conserva en el repositorio (restaurado tras el merge con `a93435a`, que lo había borrado).
+- `public/cilindros/taller-cilindros-neumaticos.jpg` (commit `a93435a` del otro chat) queda **sin usar** hasta que el dueño confirme su origen. Las placas «DYNATECH» salen ilegibles y la pared, el suelo y el óxido del cilindro usado no coinciden con la foto original, lo que indica una imagen generada o retocada con IA. Con «Foto real» solo se rotula la foto original. NO VERIFICADO.
+- Del commit `a93435a` se conservan los títulos y el pie descriptivos («Cilindros neumáticos del taller»).
