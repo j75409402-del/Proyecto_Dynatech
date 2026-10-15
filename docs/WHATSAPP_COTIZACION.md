@@ -37,13 +37,21 @@ No se envían mensajes, teléfonos ni datos personales. No se mide con DNT, GPC,
 
 Reglas: enlazar `/cotizacion` siempre con `<a>`, nunca con `<Link>` (el prefetch de Next contaría clics). Para campañas usar `https://www.dynatech.com.do/cotizacion?item=…&utm_source=…&utm_medium=…&utm_campaign=…`.
 
+## Atribución de Google Ads (14-oct-2026, aprobado por el dueño)
+- Una visita es de **anuncio pagado** solo si trae `utm_source=google` **y** `utm_medium=cpc` (en la URL de `/cotizacion` o guardados en la sesión desde la primera página). Entonces el mensaje de WhatsApp termina con la línea «Vengo de un anuncio de Google» (`PAID_AD_PHRASE` en `src/lib/quote.ts`).
+- La frase va **también con la analítica rechazada**; en ese caso no se envía ningún evento (`nt=1`).
+- Orgánica de Google, `utm_medium` distinto de `cpc` o sin parámetros: sin frase.
+- Las UTM viven en `sessionStorage` (por pestaña): navegar entre páginas conserva el origen pagado; una pestaña nueva sin parámetros no lo hereda.
+- Sufijo de URL final de los anuncios: `utm_source=google&utm_medium=cpc&utm_campaign=dyn_taller&utm_content={adgroupid}&utm_term={keyword}`.
+- Prueba: `tests/ads-attribution.test.mjs` (clic pagado, navegación, pestaña nueva, orgánica, sin parámetros, analítica rechazada; exactamente 1 evento por clic con consentimiento).
+
 ## Legado (no borrado todavía)
 - `/cotizacion/correo` → redirección **307** a `/cotizacion` (`next.config.mjs`; revertir = borrar la línea). Fuera del sitemap.
 - Se conservan `src/app/cotizacion/correo/page.tsx`, `src/components/forms/QuoteForm.tsx`, `/api/cotizacion`, `/api/upload-adjunto` (posible webhook/n8n externo y tabla `quotes` que lee `/admin`).
 - Retiro definitivo: cuando `quotes` no reciba filas nuevas en 30 días tras publicar (revisar en /admin) y se confirme que ningún webhook externo usa `/api/cotizacion`.
 
 ## Pruebas
-`tests/whatsapp-quote.test.mjs` (servidor + navegador escritorio/móvil, Umami simulado vía `UMAMI_API_URL`), y actualizados `commercial`, `analytics`, `seo-organic`.
+`tests/whatsapp-quote.test.mjs` (servidor + navegador escritorio/móvil, Umami simulado vía `UMAMI_API_URL`), `tests/ads-attribution.test.mjs` (atribución de Google Ads) y actualizados `commercial`, `analytics`, `seo-organic`.
 
 ## Embudo: qué cuenta cada cifra (oct-2026)
 No mezclar etapas: un clic no es una conversación ni una cotización.

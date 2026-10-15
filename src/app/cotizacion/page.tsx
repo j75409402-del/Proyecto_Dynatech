@@ -2,7 +2,7 @@ import { after } from "next/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { ANALYTICS, SITE } from "@/lib/constants";
-import { buildQuoteMessage, cleanPath, cleanText, isQuoteService, productFor, UTM_KEYS, whatsappUrl, type QuoteTemplate } from "@/lib/quote";
+import { buildQuoteMessage, cleanPath, cleanText, isPaidGoogleAd, isQuoteService, productFor, UTM_KEYS, whatsappUrl, type QuoteTemplate } from "@/lib/quote";
 
 /**
  * /cotizacion → WhatsApp Business (flujo principal aprobado por el dueño, AP-004, 4-oct-2026).
@@ -44,7 +44,10 @@ export default async function CotizacionPage({ searchParams }: Props) {
   // Servicio elegido (svc): solo claves conocidas de QUOTE_SERVICES; cualquier otro valor se ignora.
   const svcParam = p.get("svc");
   const svc = isQuoteService(svcParam) ? svcParam : null;
-  const message = buildQuoteMessage({ tpl, item, linea, sourcePage, svc });
+  // Clic de anuncio pagado (utm_source=google y utm_medium=cpc): la frase va en el mensaje aunque
+  // la analítica esté rechazada; el evento sigue dependiendo solo de trackingAllowed().
+  const paidAd = isPaidGoogleAd(p.get("utm_source"), p.get("utm_medium"));
+  const message = buildQuoteMessage({ tpl, item, linea, sourcePage, svc, paidAd });
   const destination = whatsappUrl(message);
 
   if (trackingAllowed(h, p) && ANALYTICS.umamiWebsiteId) {

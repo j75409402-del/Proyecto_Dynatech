@@ -40,12 +40,14 @@ try {
   assert.equal(ev.name, 'quote_whatsapp_click');
   assert.equal(ev.website, '4bbea860-f2e7-4268-9476-190563eeab0a');
   assert.deepEqual(ev.data, { channel: 'whatsapp', source_page: '/cilindros-hidraulicos', product: 'cilindros_hidraulicos', utm_source: 'google', utm_medium: 'cpc', utm_campaign: 'cilindros-oct' });
+  assert.ok(text(r.location).endsWith('\n\nVengo de un anuncio de Google'), 'google/cpc lleva la frase de anuncio');
   ok('redirección + evento servidor con source_page, product y UTM');
 
   // 2) Sin parámetros: origen por Referer, producto por ruta
   r = await hit('/cotizacion', { referer: 'https://www.dynatech.com.do/neumatica?x=1' });
   assert.equal(r.status, 307); assert.ok(r.location.startsWith(`https://wa.me/${OFFICIAL}?text=`));
   await waitEvents(2); assert.equal(received[1].payload.data.source_page, '/neumatica'); assert.equal(received[1].payload.data.product, 'neumatica');
+  assert.ok(!text(r.location).includes('Vengo de un anuncio'), 'sin UTM no hay frase de anuncio');
   ok('origen por Referer');
 
   // 3) Plantilla de cilindros y línea

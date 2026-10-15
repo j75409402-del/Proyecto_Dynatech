@@ -85,6 +85,18 @@ export const PRODUCT_BY_PATH: Record<string, string> = {
 
 export const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const;
 
+/**
+ * Atribución de Google Ads (aprobado por el dueño, 14-oct-2026; nota `claude/coordinacion-ads-web.md`).
+ * Solo una visita con utm_source=google Y utm_medium=cpc es un clic de anuncio pagado: entonces el
+ * mensaje de WhatsApp incluye esta frase, también si se rechazó la analítica (en ese caso no se envía
+ * ningún evento). Una visita orgánica de Google o sin parámetros no la lleva.
+ */
+export const PAID_AD_PHRASE = "Vengo de un anuncio de Google";
+
+export function isPaidGoogleAd(source: string | null | undefined, medium: string | null | undefined): boolean {
+  return cleanText(source, 80).toLowerCase() === "google" && cleanText(medium, 80).toLowerCase() === "cpc";
+}
+
 /** Texto corto y seguro para mensaje y analítica: sin saltos, sin controles, máx. 90. */
 export function cleanText(value: string | null | undefined, max = 90): string {
   return (value ?? "").replace(/[\u0000-\u001f\u007f<>]|\p{Cf}/gu, " ").replace(/\s+/g, " ").trim().slice(0, max);
@@ -116,7 +128,15 @@ export function productFor(item: string, linea: string, sourcePage: string, tpl:
   return PRODUCT_BY_PATH[sourcePage] ?? (sourcePage ? slug(sourcePage) : "general");
 }
 
-export function buildQuoteMessage(opts: { tpl: QuoteTemplate; item?: string; linea?: string; sourcePage?: string; svc?: string | null }): string {
+type QuoteMessageOptions = { tpl: QuoteTemplate; item?: string; linea?: string; sourcePage?: string; svc?: string | null; paidAd?: boolean };
+
+/** Mensaje precargado de WhatsApp; si la visita viene de un anuncio pagado, termina con PAID_AD_PHRASE. */
+export function buildQuoteMessage(opts: QuoteMessageOptions): string {
+  const message = baseQuoteMessage(opts);
+  return opts.paidAd ? `${message}\n\n${PAID_AD_PHRASE}` : message;
+}
+
+function baseQuoteMessage(opts: QuoteMessageOptions): string {
   const item = cleanText(opts.item);
   const linea = cleanText(opts.linea);
   const origin = opts.sourcePage ? `\n\n(Desde ${SITE.url.replace(/^https?:\/\//, "")}${opts.sourcePage === "/" ? "" : opts.sourcePage})` : "";
