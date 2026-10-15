@@ -7,7 +7,8 @@ Decisión del dueño: el prospecto va **directo a WhatsApp Business** (+1 809-28
 2. Al hacer clic, `CommercialTracking` añade `from=<página>`, las UTM de la sesión y `nt=1` si la analítica está rechazada/DNT; publica `quote_whatsapp_click` en `dataLayer` (para GTM/GA4 futuro).
 3. `src/app/cotizacion/page.tsx` (servidor) arma el mensaje precargado, registra `quote_whatsapp_click` en Umami vía `after()` (no retrasa al usuario) y redirige 307 a `https://wa.me/18092844336?text=…`.
 4. Sin JavaScript también funciona (redirección de servidor; origen por `Referer`, que los CTA internos envían porque usan `rel="noopener"` sin `noreferrer`). Clic central (`auxclick`) también añade origen/UTM.
-5. Limitaciones conocidas: peticiones HEAD de escáneres con agente de navegador y dobles clics cuentan; el envío servidor a Umami usa la IP del servidor (geografía/sesión aproximadas). Verificar en el panel de Umami tras el primer despliegue.
+5. Envío a Umami (15-oct-2026, `src/lib/quote-event.ts`): límite de 8 s dentro de `after()`, sin retrasar la redirección. Cada fallo deja en los registros de Vercel una línea de error `quote_event_send_failed` con motivo, servicio, página y campaña, sin datos personales. Solo se reintenta una vez si la conexión falló antes de enviar, para no duplicar. Ver `docs/ads-atribucion/EVIDENCIA.md` §7.
+6. Limitaciones conocidas: peticiones HEAD de escáneres con agente de navegador y dobles clics cuentan; el envío servidor a Umami usa la IP del servidor (geografía/sesión aproximadas). Verificar en el panel de Umami tras el primer despliegue.
 
 ## Cotización por necesidad (oct-2026)
 `/cotizacion?svc=<clave>` arma un mensaje corto propio y mide el servicio. Claves (`QUOTE_SERVICES` en `src/lib/quote.ts`):

@@ -2,6 +2,7 @@ import { after } from "next/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { ANALYTICS, SITE } from "@/lib/constants";
+import { sendQuoteEvent } from "@/lib/quote-event";
 import { buildQuoteMessage, cleanPath, cleanText, isPaidGoogleAd, isQuoteService, productFor, UTM_KEYS, whatsappUrl, type QuoteTemplate } from "@/lib/quote";
 
 /**
@@ -72,12 +73,14 @@ export default async function CotizacionPage({ searchParams }: Props) {
       },
     };
     const ua = h.get("user-agent") ?? "";
-    // after(): el envío no retrasa la redirección del usuario.
-    after(async () => {
-      try {
-        await fetch(ANALYTICS.umamiApiUrl, { method: "POST", headers: { "content-type": "application/json", "user-agent": ua }, body: JSON.stringify(body), signal: AbortSignal.timeout(3000) });
-      } catch { /* la analítica nunca bloquea la cotización */ }
-    });
+    // after(): el envío no retrasa la redirección del usuario. Los fallos quedan en los registros
+    // de Vercel como `quote_event_send_failed` (src/lib/quote-event.ts); nunca bloquean la cotización.
+    after(() => sendQuoteEvent({
+      url: ANALYTICS.umamiApiUrl,
+      body,
+      userAgent: ua,
+      context: { service: data.service, source_page: data.source_page, utm_campaign: data.utm_campaign },
+    }));
   }
 
   redirect(destination);
