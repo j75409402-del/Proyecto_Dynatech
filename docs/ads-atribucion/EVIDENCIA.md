@@ -1,6 +1,6 @@
 # Evidencia de pruebas · atribución de Google Ads, recorridos a WhatsApp y foto real
 
-Rama `mejora/conversion-cotizacion-whatsapp` · PR #3 (borrador). Nada de esto está en producción: `main` sigue en `de5734f`.
+Rama `mejora/conversion-cotizacion-whatsapp` · PR #3. **Publicado el 15-oct-2026** con la aprobación del dueño: merge `12b3b92` en `main` (contenido idéntico a `fb914a9`). Las secciones 1 a 6 se hicieron antes de publicar; la 7 es la verificación en producción.
 
 Hay tres tipos de prueba y no se mezclan:
 
@@ -62,7 +62,9 @@ Consulta del 15-oct-2026 al sitio `4bbea860-…`, de 20:10 a 20:25 UTC (16:10–
 
 **Exclusión de los resultados comerciales:** en cualquier informe, descontar los eventos con `utm_campaign=prueba_medicion` y las visitas de página de dominios `*.vercel.app`. En este intervalo eso son los 9 eventos de la tabla; no queda ninguna conversión real.
 
-**Implicación para medir Ads:** en esta muestra se perdió 1 de 10 clics. El número de conversaciones de WhatsApp con la frase sigue siendo la cifra de referencia; Umami se usa como indicador.
+**Implicación para medir Ads:** en esta muestra de 10 clics llegaron 9. Es un resultado puntual, no una tasa de pérdida permanente: la muestra es muy pequeña y la causa no quedó registrada. Mientras tanto, el número de conversaciones de WhatsApp con la frase es la cifra de referencia y Umami se usa como indicador.
+
+**Pendiente técnico:** el envío del servidor descarta los errores sin registrarlos. Hay que añadir un diagnóstico (estado HTTP o tiempo agotado, sin datos personales) para saber por qué se pierde un evento.
 
 ## 4 · Analítica desactivada en Preview
 
@@ -87,5 +89,22 @@ Primera vista previa compilada con la variable: commit `b973e3f`, `proyecto-dyna
 - Luz: curva suave que aclara sombras y medios tonos y deja las altas luces casi intactas (píxeles quemados: 2,8 % antes, 3,1 % después); +4 % de saturación; nitidez ligera. Sin retoque del contenido.
 - La etiqueta «Foto real · taller Dynatech» pasa debajo de la imagen. La columna se amplía de 360 a 520 px y el marco cambia de 4:5 a 5:3.
 - El original se conserva en el repositorio (restaurado tras el merge con `a93435a`, que lo había borrado).
-- `public/cilindros/taller-cilindros-neumaticos.jpg` (commit `a93435a` del otro chat) queda **sin usar** hasta que el dueño confirme su origen. Las placas «DYNATECH» salen ilegibles y la pared, el suelo y el óxido del cilindro usado no coinciden con la foto original, lo que indica una imagen generada o retocada con IA. Con «Foto real» solo se rotula la foto original. NO VERIFICADO.
+- `public/cilindros/taller-cilindros-neumaticos.jpg` (commit `a93435a` del otro chat): **el dueño confirmó el 15-oct-2026 que fue retocada con IA.** Se conserva en el repositorio pero no se usa. Con «Foto real» solo se rotula la foto original.
 - Del commit `a93435a` se conservan los títulos y el pie descriptivos («Cilindros neumáticos del taller»).
+
+## 7 · Verificación en producción (15-oct-2026)
+
+Merge `12b3b92` (padres `de5734f` y `fb914a9`; sin diferencias con `fb914a9`). Despliegue de producción listo a las 21:07:09 UTC (17:07 en Santo Domingo). Antes de fusionar se comprobó que la rama seguía en `fb914a9` y `main` en `de5734f`, sin commits nuevos.
+
+Navegador de la app de Claude, ancho 483 px, **con la analítica rechazada** en www.dynatech.com.do. Por eso estas pruebas no envían eventos (los clics llevan `nt=1`).
+
+- **Analítica activa en producción:** el ID de Umami `4bbea860-…` está en la página. La variable `NEXT_PUBLIC_DISABLE_ANALYTICS=1` sigue solo en Preview.
+- **Foto:** el recorte de la original carga en la portada y en /cilindros-neumaticos; la etiqueta queda fuera de la imagen y la imagen con IA no aparece.
+- **3D** en /cilindros-neumaticos: `is-ready`, three.js r186, nivel «medium», sin desbordamiento horizontal.
+- **Teléfonos:** `tel:+18092844336` y `tel:+18098542800` en la portada y /contacto.
+- **WhatsApp** (no se envió ningún mensaje; solo se abrió la página de WhatsApp):
+  - 21:10:05 UTC, /mecanizado sin parámetros: `phone=18092844336`, mensaje de mecanizado, sin la frase.
+  - 21:10:58 UTC, /cilindros-hidraulicos con `utm_source=google&utm_medium=cpc&utm_campaign=prueba_medicion`: mensaje de cilindro hidráulico que termina en «Vengo de un anuncio de Google».
+- **Umami, de 20:56 a 21:11 UTC:** 0 eventos `quote_whatsapp_click` y 0 visitas de `www.dynatech.com.do`. Solo 9 visitas de página desde un iPhone en RD (20:58–21:00 UTC), con origen vercel.com, en la vista previa antigua `wchzk67v8` (commit `a93435a`, anterior a la variable). Es la revisión del dueño desde el celular y queda **excluida** por la regla de la sección 3.
+
+**Exclusión de los resultados comerciales:** descontar los eventos con `utm_campaign=prueba_medicion`, las visitas de `*.vercel.app` y cualquier evento de producción del 15-oct-2026 entre 21:05 y 21:15 UTC (no hubo ninguno).
