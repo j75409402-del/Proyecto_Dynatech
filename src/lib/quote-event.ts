@@ -1,7 +1,7 @@
 /**
  * Envío del evento `quote_whatsapp_click` a Umami desde el servidor (/cotizacion).
  *
- * Contexto (15-oct-2026, docs/ads-atribucion/EVIDENCIA.md §7): de 10 clics de prueba se perdió 1.
+ * Contexto (15-oct-2026, docs/ads-atribucion/EVIDENCIA.md §8): de 10 clics de prueba se perdió 1.
  * En los registros de Vercel ese clic sí llegó a /cotizacion (307) pero la función duró 3.122 ms,
  * justo el límite de 3 s que tenía el envío; los demás duraron 0,6–1,4 s. El error se ignoraba
  * sin registrar nada, así que no había forma de detectarlo.

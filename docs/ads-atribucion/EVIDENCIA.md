@@ -56,7 +56,7 @@ Consulta del 15-oct-2026 al sitio `4bbea860-…`, de 20:10 a 20:25 UTC (16:10–
 
 - **9** eventos `quote_whatsapp_click`, todos con `utm_campaign=prueba_medicion` y `utm_medium=cpc`.
 - `service`: neumatico-reparar 2, hidraulico 2, componente 2, foto 2, mecanizado 1.
-- Llegaron 9 de los 10 clics. Falta el n.º 3 (escritorio, mecanizado, 20:15:03 UTC). El clic sí abrió WhatsApp con la frase. La investigación con los registros de Vercel está en la sección 7. No hubo duplicados.
+- Llegaron 9 de los 10 clics. Falta el n.º 3 (escritorio, mecanizado, 20:15:03 UTC). El clic sí abrió WhatsApp con la frase. La investigación con los registros de Vercel está en la sección 8. No hubo duplicados.
 - No hubo ningún otro `quote_whatsapp_click` en el intervalo, así que no se mezclaron clics reales.
 - Las 25 visitas de página del intervalo vienen de los dominios `proyecto-dynatech-…vercel.app`.
 
@@ -90,7 +90,7 @@ Primera vista previa compilada con la variable: commit `b973e3f`, `proyecto-dyna
 - `public/cilindros/taller-cilindros-neumaticos.jpg` (commit `a93435a` del otro chat) queda **sin usar** hasta que el dueño confirme su origen. Las placas «DYNATECH» salen ilegibles y la pared, el suelo y el óxido del cilindro usado no coinciden con la foto original, lo que indica una imagen generada o retocada con IA. Con «Foto real» solo se rotula la foto original. NO VERIFICADO.
 - Del commit `a93435a` se conservan los títulos y el pie descriptivos («Cilindros neumáticos del taller»).
 
-## 7 · Clic perdido n.º 3: causa y detección de fallos
+## 8 · Clic perdido n.º 3: causa y detección de fallos
 
 ### Registros de Vercel (consultados el 15-oct a las 21:10 UTC, dentro de la retención de 1 hora)
 
