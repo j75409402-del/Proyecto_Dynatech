@@ -1,16 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Ilustración de una termocupla con cabezal y una RTD con cable"><title>Ilustración de una termocupla con cabezal y una RTD con cable</title><g fill="none" stroke="#1f2a35" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
-<rect x="40" y="92" width="96" height="76" rx="14" fill="#dfe4e8"/>
-<rect x="52" y="80" width="72" height="16" rx="6" fill="#c3cbd2"/>
-<circle cx="88" cy="130" r="12" fill="#ffffff"/>
-<rect x="136" y="114" width="22" height="32" fill="#c3cbd2"/>
-<path d="M158 118 h26 v24 h-26 z" fill="#dfe4e8"/>
-<path d="M162 118 v24 M168 118 v24 M174 118 v24 M180 118 v24" stroke-width="2"/>
-<rect x="184" y="123" width="236" height="14" rx="7" fill="#dfe4e8"/>
-<circle cx="420" cy="130" r="7" fill="#E4002B" stroke="#E4002B"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Imagen ilustrativa de una termocupla con cabezal de conexión y una RTD con cable"><title>Imagen ilustrativa de una termocupla con cabezal de conexión y una RTD con cable</title><defs>
+<linearGradient id="steelV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7f9fa"/><stop offset=".28" stop-color="#d3d9de"/><stop offset=".5" stop-color="#8d979f"/><stop offset=".72" stop-color="#e3e7ea"/><stop offset="1" stop-color="#9aa3ab"/></linearGradient>
+<linearGradient id="steelH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa3ab"/><stop offset=".25" stop-color="#e8ecef"/><stop offset=".5" stop-color="#b9c1c8"/><stop offset=".78" stop-color="#f4f6f8"/><stop offset="1" stop-color="#8f99a2"/></linearGradient>
+<linearGradient id="alu" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1f3f5"/><stop offset=".55" stop-color="#c8cfd5"/><stop offset="1" stop-color="#9ea7af"/></linearGradient>
+<linearGradient id="grey" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9dde1"/><stop offset="1" stop-color="#a7afb6"/></linearGradient>
+<linearGradient id="greySide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa2aa"/><stop offset="1" stop-color="#7c858e"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a545d"/><stop offset=".45" stop-color="#2a3138"/><stop offset="1" stop-color="#151a1f"/></linearGradient>
+<linearGradient id="screen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe0d4"/><stop offset="1" stop-color="#9fb8a6"/></linearGradient>
+<linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9c4d6"/><stop offset="1" stop-color="#6f93ab"/></linearGradient>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef1f3"/></linearGradient>
+<radialGradient id="shadow"><stop offset="0" stop-color="#0b1016" stop-opacity=".28"/><stop offset="1" stop-color="#0b1016" stop-opacity="0"/></radialGradient>
+</defs><rect width="480" height="360" fill="url(#bg)"/><g stroke="#2b333b" stroke-width="1.2" stroke-linejoin="round">
+<ellipse cx="250" cy="196" rx="210" ry="10" fill="url(#shadow)" stroke="none"/>
+<ellipse cx="250" cy="312" rx="200" ry="9" fill="url(#shadow)" stroke="none"/>
+<path d="M38 112 q0-26 26-26 h62 q26 0 26 26 v52 q0 22-22 22 h-70 q-22 0-22-22 z" fill="url(#alu)"/>
+<path d="M44 96 h100 q8 0 8 8 v6 h-116 v-6 q0-8 8-8z" fill="url(#steelV)"/>
+<circle cx="95" cy="140" r="15" fill="url(#steelV)"/><circle cx="95" cy="140" r="6" fill="#59636c"/>
 
-<rect x="236" y="246" width="184" height="12" rx="6" fill="#dfe4e8"/>
-<rect x="212" y="242" width="26" height="20" rx="3" fill="#c3cbd2"/>
-<path d="M212 252 C160 252 150 300 96 300 C70 300 58 290 50 280" stroke-width="7"/>
-<path d="M50 280 l-14 -6 M50 280 l-6 -14" stroke="#E4002B"/>
-<circle cx="420" cy="252" r="6" fill="#E4002B" stroke="#E4002B"/>
+<rect x="152" y="128" width="14" height="26" fill="url(#steelV)"/>
+<rect x="166" y="122" width="30" height="38" rx="2" fill="url(#steelV)"/><path d="M175.9 122 v38 M185.8 122 v38" stroke-opacity=".5"/>
+<rect x="196" y="130" width="26" height="22" fill="url(#steelV)"/>
+<path d="M200 130 v22 M205 130 v22 M210 130 v22 M215 130 v22" stroke-opacity=".45"/>
+<path d="M222 133 h214 a8 8 0 0 1 0 16 h-214 z" fill="url(#steelV)"/>
+<path d="M226 136 h200" stroke="#fff" stroke-opacity=".8" stroke-width="2"/>
+<rect x="210" y="282" width="34" height="18" rx="4" fill="url(#steelV)"/>
+<path d="M244 285 h192 a6 6 0 0 1 0 12 h-192 z" fill="url(#steelV)"/>
+<path d="M248 287.5 h180" stroke="#fff" stroke-opacity=".8" stroke-width="1.5"/>
+<path d="M210 291 C150 291 140 250 96 254 C70 256 60 268 52 280" fill="none" stroke="#1d242b" stroke-width="9" stroke-linecap="round"/>
+<path d="M210 289 C152 289 142 248 96 252" fill="none" stroke="#6b7680" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M52 280 l-16 -4 M52 280 l-8 -14" stroke-width="3.5" stroke-linecap="round" stroke="#c40024"/>
+<path d="M52 280 l-17 2" stroke-width="3.5" stroke-linecap="round" stroke="#e9edf0"/>
 </g></svg>

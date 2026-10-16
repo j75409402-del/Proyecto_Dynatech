@@ -1,12 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Ilustración de la medición de nivel en un tanque"><title>Ilustración de la medición de nivel en un tanque</title><g fill="none" stroke="#1f2a35" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
-<path d="M120 110 Q120 80 160 80 H300 Q340 80 340 110 V320 H120 Z" fill="#ffffff"/>
-<path d="M122 190 H338 V318 H122 Z" fill="#d6dee5" stroke="none"/>
-<path d="M120 110 Q120 80 160 80 H300 Q340 80 340 110 V320 H120 Z"/>
-<path d="M122 190 H338" stroke="#E4002B"/>
-
-<rect x="214" y="40" width="52" height="40" rx="8" fill="#dfe4e8"/>
-<rect x="228" y="80" width="24" height="14" fill="#c3cbd2"/>
-<path d="M240 94 V290" stroke-width="6"/>
-<circle cx="240" cy="296" r="8" fill="#c3cbd2"/>
-<path d="M362 120 V300 M354 120 h16 M354 300 h16" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Imagen ilustrativa de la medición de nivel en un tanque"><title>Imagen ilustrativa de la medición de nivel en un tanque</title><defs>
+<linearGradient id="steelV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7f9fa"/><stop offset=".28" stop-color="#d3d9de"/><stop offset=".5" stop-color="#8d979f"/><stop offset=".72" stop-color="#e3e7ea"/><stop offset="1" stop-color="#9aa3ab"/></linearGradient>
+<linearGradient id="steelH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa3ab"/><stop offset=".25" stop-color="#e8ecef"/><stop offset=".5" stop-color="#b9c1c8"/><stop offset=".78" stop-color="#f4f6f8"/><stop offset="1" stop-color="#8f99a2"/></linearGradient>
+<linearGradient id="alu" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1f3f5"/><stop offset=".55" stop-color="#c8cfd5"/><stop offset="1" stop-color="#9ea7af"/></linearGradient>
+<linearGradient id="grey" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9dde1"/><stop offset="1" stop-color="#a7afb6"/></linearGradient>
+<linearGradient id="greySide" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9aa2aa"/><stop offset="1" stop-color="#7c858e"/></linearGradient>
+<linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a545d"/><stop offset=".45" stop-color="#2a3138"/><stop offset="1" stop-color="#151a1f"/></linearGradient>
+<linearGradient id="screen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe0d4"/><stop offset="1" stop-color="#9fb8a6"/></linearGradient>
+<linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a9c4d6"/><stop offset="1" stop-color="#6f93ab"/></linearGradient>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef1f3"/></linearGradient>
+<radialGradient id="shadow"><stop offset="0" stop-color="#0b1016" stop-opacity=".28"/><stop offset="1" stop-color="#0b1016" stop-opacity="0"/></radialGradient>
+</defs><rect width="480" height="360" fill="url(#bg)"/><g stroke="#2b333b" stroke-width="1.2" stroke-linejoin="round">
+<ellipse cx="240" cy="330" rx="140" ry="10" fill="url(#shadow)" stroke="none"/>
+<path d="M120 112 q0-32 40-32 h160 q40 0 40 32 v206 h-240 z" fill="url(#steelH)"/>
+<path d="M136 196 h208 v116 h-208 z" fill="url(#liquid)"/>
+<path d="M136 196 h208" stroke="#e8f0f5" stroke-width="2"/>
+<path d="M136 120 h208 v192 h-208 z" fill="none" stroke="#2b333b" stroke-opacity=".5"/>
+<rect x="212" y="36" width="56" height="40" rx="10" fill="url(#alu)"/>
+<rect x="226" y="76" width="28" height="14" fill="url(#steelV)"/>
+<rect x="237" y="90" width="6" height="200" fill="url(#steelH)"/>
+<circle cx="240" cy="294" r="8" fill="url(#steelV)"/>
+<path d="M364 120 V312 M356 120 h16 M356 312 h16" stroke="#5b6875" stroke-width="2"/>
+<path d="M364 196 h-14" stroke="#E4002B" stroke-width="3"/>
 </g></svg>

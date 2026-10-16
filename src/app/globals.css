@@ -881,7 +881,7 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 @media(min-width:1280px){ .prod-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
 .supply-media .img-note { left:6px; bottom:6px; padding:2px 6px; font-size:10px; }
 @media(min-width:640px){ .supply-media .img-note { left:10px; bottom:10px; padding:4px 8px; font-size:12px; } }
-.prod-note { position:absolute; left:0; right:0; bottom:0; padding:2px 4px; background:#0b1016cc; color:#fff; font-family:var(--font-mono),ui-monospace,monospace; font-size:9px; letter-spacing:.06em; text-transform:uppercase; text-align:center; }
+.prod-note { position:absolute; left:0; right:0; bottom:0; padding:2px 4px; background:#0b1016cc; color:#fff; font-family:var(--font-mono),ui-monospace,monospace; font-size:9px; letter-spacing:.06em; text-transform:uppercase; text-align:center; line-height:1.25; }
 
 /* Fotos y video reales del taller (oct-2026). */
 .taller-gallery { display:grid; grid-auto-flow:column; grid-auto-columns:78%; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px; }
