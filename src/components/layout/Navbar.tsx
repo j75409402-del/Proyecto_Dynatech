@@ -15,7 +15,7 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname.startsWith(href);
 }
 
-const SOLUCIONES_HREFS = [...SOLUCIONES.map((s) => `/${s.slug}`), ...NAV.cilindros.map((c) => c.href), ...NAV.especialidades.map((e) => e.href)];
+const SOLUCIONES_HREFS = ["/catalogo", ...SOLUCIONES.map((s) => `/${s.slug}`), ...NAV.cilindros.map((c) => c.href), ...NAV.especialidades.map((e) => e.href)];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -71,7 +71,7 @@ export function Navbar() {
     <header className="industrial-navbar sticky top-0 z-40 transition-all duration-300">
       <div className="hidden bg-surface py-2 text-white md:block">
         <div className="container-max flex items-center justify-between gap-6 text-xs">
-          <span className="text-white/70">{CONTACT.locality}, República Dominicana · Taller de cilindros, mecanizado y neumática industrial</span>
+          <span className="text-white/70">{CONTACT.locality}, República Dominicana · Suministro industrial · Taller de cilindros y mecanizado</span>
           <span className="flex items-center gap-3">{CALL_PHONES.map((p, i) => <span key={p} className="flex items-center gap-3">{i > 0 && <span aria-hidden="true" className="text-white/40">·</span>}<a href={telHref(p)} className="-my-2 inline-flex min-h-10 items-center font-mono text-white/85 hover:text-white">{p}</a></span>)}</span>
         </div>
       </div>
@@ -147,7 +147,7 @@ export function Navbar() {
               >
                 <div className="grid grid-cols-5 border border-black/10 bg-carbon shadow-[0_24px_60px_-24px_rgba(0,0,0,0.3)]">
                   <div className="col-span-3 p-5">
-                    <div className="eyebrow mb-3">Líneas de productos</div>
+                    <div className="eyebrow mb-3">Suministro industrial</div>
                     <ul className="space-y-1">
                       {SOLUCIONES.map((s) => (
                         <li key={s.slug}>
@@ -168,9 +168,17 @@ export function Navbar() {
                         </li>
                       ))}
                     </ul>
+                    <Link
+                      href="/catalogo"
+                      onClick={() => setMenuOpen(false)}
+                      className="mt-3 inline-flex min-h-10 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-surface hover:text-signal"
+                    >
+                      Ver catálogo completo
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
                   </div>
                   <div className="col-span-2 border-l border-black/10 bg-carbon-800 p-5 flex flex-col">
-                    <div className="eyebrow mb-3">Taller y componentes</div>
+                    <div className="eyebrow mb-3">Taller y componentes neumáticos</div>
                     <ul className="space-y-1 mb-4">
                       {[...NAV.cilindros, ...NAV.especialidades].map((c) => (
                         <li key={c.href}>
@@ -268,7 +276,7 @@ export function Navbar() {
             <ArrowRight className="h-4 w-4" />
           </a>
           <p className="mb-2 text-center text-sm text-[#a9b7c4]">Puedes empezar con una foto de la pieza o de su placa.</p>
-          <div className="eyebrow mt-4 mb-1">Taller</div>
+          <div className="eyebrow mt-4 mb-1">Fabricación, reparación y mecanizado</div>
           {NAV.cilindros.map((item) => (
             <Link
               key={item.href}
@@ -298,7 +306,18 @@ export function Navbar() {
               {item.label}
             </Link>
           ))}
-          <div className="eyebrow mt-5 mb-1">Líneas de productos</div>
+          <div className="eyebrow mt-5 mb-1">Suministro industrial</div>
+          <Link
+            href="/catalogo"
+            onClick={() => setOpen(false)}
+            aria-current={isActive(pathname, "/catalogo") ? "page" : undefined}
+            className={cn(
+              "flex min-h-11 items-center border-b border-black/5 text-sm font-medium",
+              isActive(pathname, "/catalogo") ? "text-signal" : "text-steel-200 hover:text-signal",
+            )}
+          >
+            Catálogo completo
+          </Link>
           {SOLUCIONES.map((s) => (
             <Link
               key={s.slug}

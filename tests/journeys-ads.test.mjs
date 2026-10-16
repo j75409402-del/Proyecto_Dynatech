@@ -30,7 +30,7 @@ const JOURNEYS = [
   { id: 1, name: 'Reparar un cilindro neumático', access: 'Reparar un cilindro neumático', path: '/servicios', service: 'neumatico-reparar', text: /reparación de un cilindro neumático/ },
   { id: 2, name: 'Fabricar un cilindro hidráulico', access: 'Cilindro hidráulico', path: '/cilindros-hidraulicos', service: 'hidraulico', text: /un cilindro hidráulico[\s\S]*¿Reparar o fabricar\?/ },
   { id: 3, name: 'Mecanizar una pieza bajo plano o muestra', access: 'Mecanizar una pieza', path: '/mecanizado', service: 'mecanizado', text: /mecanizado de una pieza/ },
-  { id: 4, name: 'Válvula, conexión u otro componente', access: 'Válvula, conexión u otro componente', path: '/neumatica', service: 'componente', text: /componente neumático/ },
+  { id: 4, name: 'Válvula, conexión u otro componente', access: '^Neumática$', path: '/neumatica', service: 'componente', text: /componente neumático/ },
   { id: 5, name: 'Solo tengo una foto', access: 'Solo tengo una foto', path: null, service: 'foto', text: /no tengo la referencia/ },
 ];
 const VIEWPORTS = {

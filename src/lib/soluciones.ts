@@ -60,7 +60,33 @@ export type Solucion = {
   ejemplos: string[];
   subcategorias: Subcategoria[];
   aplicaciones: string[];
+  /** Grupo de suministro al que pertenece (portada, menú y /catalogo). */
+  grupo: GrupoId;
+  /**
+   * Control, automatización e instrumentación: SOLO suministro (confirmado por el dueño, 15-oct-2026).
+   * La página muestra `SOLO_SUMINISTRO`.
+   */
+  soloSuministro?: boolean;
 };
+
+export type GrupoId = "neumatica" | "control" | "automatizacion" | "instrumentacion" | "resistencias";
+
+/** Alcance confirmado por el dueño (15-oct-2026). No anunciar CNC ni servicios en estas líneas. */
+export const SOLO_SUMINISTRO =
+  "solo suministramos los productos. No realizamos instalación, programación, mantenimiento, armado de tableros ni puesta en marcha.";
+
+/**
+ * Oferta de suministro confirmada por el dueño el 15-oct-2026: neumática, control industrial,
+ * automatización, instrumentación, resistencias eléctricas y termocuplas. Cada grupo usa solo
+ * las líneas y subcategorías ya documentadas en SOLUCIONES (sin productos nuevos).
+ */
+export const GRUPOS_SUMINISTRO: { id: GrupoId; title: string; desc: string }[] = [
+  { id: "neumatica", title: "Neumática", desc: "Válvulas, conexiones, unidades FRL, mangueras, accesorios y repuestos para cilindros." },
+  { id: "control", title: "Control industrial", desc: "Contactores, relés, protecciones, mando y señalización, y gabinetes para tableros." },
+  { id: "automatizacion", title: "Automatización", desc: "Sensores para detectar piezas, posición y presencia, con sus módulos y accesorios." },
+  { id: "instrumentacion", title: "Instrumentación", desc: "Medición de presión, temperatura, flujo y nivel para procesos." },
+  { id: "resistencias", title: "Resistencias y termocuplas", desc: "Resistencias de cartucho, termocuplas, RTD y alambre de resistencia." },
+];
 
 /** Información para evaluar solicitudes, sin prometer especificaciones ni disponibilidad. */
 export const DATOS_PARA_COTIZAR: Record<string, readonly string[]> = {
@@ -75,6 +101,7 @@ export const DATOS_PARA_COTIZAR: Record<string, readonly string[]> = {
 export const SOLUCIONES: Solucion[] = [
   {
     slug: "neumatica",
+    grupo: "neumatica",
     icon: Wind,
     name: "Neumática",
     title: "Neumática industrial",
@@ -167,13 +194,15 @@ export const SOLUCIONES: Solucion[] = [
     ],
     aplicaciones: [
       "Automatización de máquinas y líneas de producción",
-      "Mantenimiento de equipos neumáticos en planta",
+      "Repuestos para equipos neumáticos en planta",
       "Reemplazo de cilindros y componentes descontinuados",
       "Sistemas de aire comprimido",
     ],
   },
   {
     slug: "control-electrico",
+    grupo: "control",
+    soloSuministro: true,
     icon: Zap,
     name: "Control eléctrico",
     title: "Control eléctrico industrial",
@@ -252,13 +281,15 @@ export const SOLUCIONES: Solucion[] = [
     aplicaciones: [
       "Arranque y protección de motores",
       "Tableros de control de máquinas",
-      "Mantenimiento eléctrico de planta",
+      "Repuestos eléctricos para la planta",
       "Señalización y mando de procesos",
     ],
   },
   {
     // WEB-020 (05-oct-2026): el Capitán confirmó SOLO el suministro de gabinetes (no fabricación ni armado).
     slug: "gabinetes-electricos",
+    grupo: "control",
+    soloSuministro: true,
     icon: Boxes,
     name: "Gabinetes eléctricos",
     title: "Gabinetes eléctricos para tableros",
@@ -301,9 +332,11 @@ export const SOLUCIONES: Solucion[] = [
   },
   {
     slug: "sensores",
+    grupo: "automatizacion",
+    soloSuministro: true,
     icon: Radar,
     name: "Sensores",
-    title: "Sensores industriales",
+    title: "Sensores para automatización industrial",
     short: "Sensores inductivos, capacitivos, fotoeléctricos, magnéticos y de presión.",
     description:
       "Sensores inductivos, capacitivos, fotoeléctricos, magnéticos y de proximidad para detectar piezas, posición y presencia en procesos automatizados.",
@@ -388,6 +421,8 @@ export const SOLUCIONES: Solucion[] = [
   },
   {
     slug: "instrumentacion",
+    grupo: "instrumentacion",
+    soloSuministro: true,
     icon: Gauge,
     name: "Instrumentación",
     title: "Instrumentación industrial",
@@ -448,14 +483,15 @@ export const SOLUCIONES: Solucion[] = [
       "Supervisión de presión en líneas y equipos",
       "Control de temperatura en procesos",
       "Medición de caudal y nivel en tanques",
-      "Mantenimiento e instrumentación de planta",
+      "Reposición de instrumentos en planta",
     ],
   },
   {
     slug: "resistencias-electricas",
+    grupo: "resistencias",
     icon: Flame,
     name: "Resistencias eléctricas",
-    title: "Resistencias eléctricas industriales",
+    title: "Resistencias eléctricas y termocuplas",
     short: "Resistencias de cartucho, termocuplas, RTD y alambre de resistencia.",
     description:
       "Resistencias de cartucho de alta densidad para el calentamiento de cilindros en máquinas de inyección y procesos industriales, junto con termocuplas, RTD y alambre de resistencia. Cotizamos también según tu especificación.",

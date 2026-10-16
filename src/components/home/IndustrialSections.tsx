@@ -3,8 +3,7 @@ import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Box, Camera, FileText, Ruler } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { quoteHref } from "@/components/cta/QuoteCTA";
-import { SERVICIOS, COMPONENTES, SERVICIOS_ADICIONALES } from "@/lib/servicios";
-import { SOLUCIONES } from "@/lib/soluciones";
+import { SERVICIOS, COMPONENTES } from "@/lib/servicios";
 import { whatsappService } from "@/lib/whatsapp";
 import type { QuoteService } from "@/lib/quote";
 import { CYLINDER_PARTS } from "@/lib/industrial-scenes";
@@ -18,10 +17,10 @@ const SVC: Record<string, QuoteService> = { fabricacion: "neumatico-fabricar", r
 export function CilindrosDestacados() {
   const principales = [SERVICIOS[0], SERVICIOS[1], COMPONENTES[0]];
   return (
-    <section className="section-pad border-b border-black/10">
+    <section className="section-pad border-b border-black/10 bg-[#F4F5F6]">
       <div className="container-max">
         <div className="section-heading mb-12">
-          <div><p className="section-kicker">03 · Neumática, nuestra especialidad</p><h2 className="section-title">Cilindros neumáticos.<br /><span className="text-steel-500">De principio a fin.</span></h2></div>
+          <div><p className="section-kicker">04 · Neumática, nuestra especialidad</p><h2 className="section-title">Cilindros neumáticos.<br /><span className="text-steel-500">De principio a fin.</span></h2></div>
           <p className="max-w-md text-steel-300 leading-relaxed">Fabricación a medida, reparación y componentes para mantener tu equipo en operación. Trabajamos a partir de la información de tu aplicación.</p>
         </div>
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
@@ -75,39 +74,13 @@ export function ComoTrabajamos() {
   );
 }
 
-export function SolucionesIndustriales() {
-  return (
-    <section id="soluciones" className="section-pad scroll-mt-28 border-b border-black/10 bg-[#F4F5F6]">
-      <div className="container-max">
-        <div className="section-heading mb-10"><div><p className="section-kicker">04 · Líneas complementarias</p><h2 className="section-title">Más soluciones<br />para tu industria.</h2></div><p className="max-w-md leading-relaxed text-steel-300">Además de cilindros neumáticos, cotizamos componentes de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas.</p></div>
-        <div className="grid gap-4 lg:grid-cols-2" data-fab-hide="">
-          {SOLUCIONES.map((s) => (
-            <article key={s.slug} className="group flex gap-4 border border-black/10 bg-white p-4 transition-colors hover:border-black/25 sm:gap-6 sm:p-6 last:lg:col-span-2">
-              <Link href={`/${s.slug}`} className="relative block h-28 w-24 shrink-0 overflow-hidden bg-[#F4F5F6] sm:h-36 sm:w-36" aria-label={`Ver línea de ${s.name}`}><Image src={s.image} alt={s.imageAlt} fill sizes="(max-width: 639px) 96px, 144px" className="object-contain transition-transform duration-300 group-hover:scale-105" /></Link>
-              <div className="flex min-w-0 flex-1 flex-col justify-center"><h3 className="mb-2 font-display text-xl font-medium sm:text-2xl"><Link href={`/${s.slug}`} className="hover:text-signal">{s.name}</Link></h3><p className="text-sm leading-relaxed text-steel-300">{s.short}</p><div className="mt-3 flex flex-wrap gap-x-5 gap-y-1"><Link href={`/${s.slug}`} className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-surface hover:text-signal">Ver catálogo de la línea <ArrowUpRight className="h-4 w-4" /></Link><a href={quoteHref(s.name, s.name)} target="_blank" rel="noopener" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-signal">Solicitar cotización <ArrowRight className="h-4 w-4" /></a></div></div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function ServiciosComplementarios() {
-  return (
-    <section className="container-max py-12 sm:py-16">
-      <div className="grid gap-8 lg:grid-cols-3" data-fab-hide=""><div><p className="section-kicker">05 · También bajo cotización</p><h2 className="section-title">Servicios<br />complementarios.</h2><p className="mt-4 text-sm leading-relaxed text-steel-300">Los cilindros neumáticos son nuestra línea principal. También evaluamos solicitudes de hidráulicos y mecanizado.</p></div>{SERVICIOS_ADICIONALES.map((s) => <Link key={s.slug} href={`/${s.slug}`} className="group flex flex-col border border-black/10 p-6 transition-colors hover:border-signal/40 sm:p-8"><h3 className="mb-3 font-display text-2xl">{s.name}</h3><p className="mb-6 text-sm leading-relaxed text-steel-300">{s.description}</p><span className="mt-auto inline-flex min-h-11 items-center gap-2 text-sm font-medium text-signal">Ver {s.name.toLowerCase()} <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span></Link>)}</div>
-    </section>
-  );
-}
-
 /** Antes/después con las fotos ya publicadas (mismo caso que /cilindros-neumaticos). */
 export function AntesDespues() {
   return (
-    <section className="section-pad border-b border-black/10 bg-[#F4F5F6]" aria-labelledby="antes-despues-inicio">
+    <section className="section-pad border-b border-black/10 bg-white" aria-labelledby="antes-despues-inicio">
       <div className="container-max">
         <Reveal className="section-heading mb-10">
-          <div><p className="section-kicker">02 · Trabajo de taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después.</h2></div>
+          <div><p className="section-kicker">03 · Trabajos del taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después.</h2></div>
           <p className="max-w-md leading-relaxed text-steel-300">Cilindro ISO 32 mm recuperado en nuestro taller. Desliza para comparar.</p>
         </Reveal>
         <Reveal>

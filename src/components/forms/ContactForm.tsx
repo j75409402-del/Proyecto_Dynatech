@@ -13,9 +13,19 @@ import { trackCommercialEvent } from "@/lib/conversions";
 import { HONEYPOT_FIELD, looksLikeBot } from "@/lib/antispam";
 import { whatsappLink } from "@/lib/whatsapp";
 
+/**
+ * «¿Qué necesitas?» (oct-2026): reemplaza el asunto libre por opciones de la oferta confirmada.
+ * Se guarda en el mismo campo `subject` (contrato de /api/contacto sin cambios). Opcional.
+ */
+const NECESIDADES = [
+  { group: "Fabricación, reparación y mecanizado", options: ["Reparación de cilindro neumático", "Fabricación de cilindro neumático", "Cilindro hidráulico", "Mecanizado de piezas"] },
+  { group: "Suministro industrial", options: ["Neumática", "Control industrial", "Automatización (sensores)", "Instrumentación", "Resistencias y termocuplas"] },
+  { group: "Otro", options: ["Otra consulta"] },
+] as const;
+
 const contactSchema = z.object({
   name:    z.string().min(2, "Tu nombre es requerido"),
-  email:   z.string().email("Email inválido"),
+  email:   z.string().email("Correo inválido"),
   phone:   z.string().optional(),
   company: z.string().optional(),
   subject: z.string().optional(),
@@ -90,7 +100,7 @@ export function ContactForm() {
           <Input id="company" {...register("company")} placeholder="Opcional" />
         </div>
         <div>
-          <Label htmlFor="email">Email *</Label>
+          <Label htmlFor="email">Correo *</Label>
           <Input id="email" type="email" {...register("email")} placeholder="tu@empresa.do" />
           {errors.email && <FieldError msg={errors.email.message!} />}
         </div>
@@ -101,13 +111,25 @@ export function ContactForm() {
       </div>
 
       <div>
-        <Label htmlFor="subject">Asunto</Label>
-        <Input id="subject" {...register("subject")} placeholder="¿De qué se trata?" />
+        <Label htmlFor="subject">¿Qué necesitas?</Label>
+        <select
+          id="subject"
+          {...register("subject")}
+          defaultValue=""
+          className="block w-full min-h-11 bg-carbon-800 border border-black/10 px-4 py-2.5 text-base text-surface focus:border-signal focus:ring-1 focus:ring-signal focus:outline-none rounded-xs transition-colors"
+        >
+          <option value="">Elige una opción (opcional)</option>
+          {NECESIDADES.map((g) => (
+            <optgroup key={g.group} label={g.group}>
+              {g.options.map((o) => <option key={o} value={o}>{o}</option>)}
+            </optgroup>
+          ))}
+        </select>
       </div>
 
       <div>
         <Label htmlFor="message">Mensaje *</Label>
-        <Textarea id="message" {...register("message")} rows={5} placeholder="Escribe tu consulta..." />
+        <Textarea id="message" {...register("message")} rows={5} placeholder="Referencia o código, medidas, cantidad y ciudad." />
         {errors.message && <FieldError msg={errors.message.message!} />}
       </div>
 

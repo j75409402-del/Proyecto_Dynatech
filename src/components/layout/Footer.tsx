@@ -7,7 +7,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 import { hoursLines } from "@/components/page/TrustStrip";
 
-const solutionLinks = SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}` }));
+const solutionLinks = [{ label: "Catálogo completo", href: "/catalogo" }, ...SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}` }))];
 
 /** Cilindros y servicios industriales (antes mezclados en "Empresa"). */
 const serviceLinks = [...NAV.cilindros, ...NAV.especialidades];
@@ -58,7 +58,7 @@ export function Footer() {
 
           {/* Productos */}
           <div className="lg:col-span-2">
-            <div className="eyebrow mb-4">Productos</div>
+            <div className="eyebrow mb-4">Suministro industrial</div>
             <ul className="space-y-1">
               {solutionLinks.map((link) => (
                 <li key={link.href}>

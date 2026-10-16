@@ -5,7 +5,7 @@ export const SITE = {
   tagline: "Cilindros neumáticos · Fabricación y reparación",
   brandTagline: "Excellent Under Pressure.",
   description:
-    "Fabricación y reparación de cilindros neumáticos e hidráulicos y mecanizado de piezas en República Dominicana. Suministro de neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas bajo cotización.",
+    "Fabricación y reparación de cilindros neumáticos e hidráulicos y mecanizado de piezas con torno y fresadora en República Dominicana. Suministro de neumática, control industrial, automatización, instrumentación, resistencias eléctricas y termocuplas bajo cotización.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.dynatech.com.do",
   rnc: "133-45350-9",
 } as const;
