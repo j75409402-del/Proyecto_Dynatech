@@ -23,11 +23,15 @@ export const CONTACT = {
   phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+1 (809) 284-4336",
   /** Segundo teléfono, solo llamadas (confirmado por el dueño, 15-oct-2026). WhatsApp sigue en `whatsapp`. */
   phone2: "+1 (809) 854-2800",
-  address: "Av. Rómulo Betancourt, Santo Domingo, República Dominicana",
-  streetAddress: "Av. Rómulo Betancourt",
+  /** Número 2158 confirmado por el dueño el 16-oct-2026. */
+  address: "Av. Rómulo Betancourt 2158, Santo Domingo, República Dominicana",
+  streetAddress: "Av. Rómulo Betancourt 2158",
   locality: "Santo Domingo",
   hours: "Lunes a Viernes · 8:00 AM - 5:00 PM · Sábado · 8:00 AM - 12:00 PM",
 } as const;
+
+/** «Cómo llegar»: búsqueda de la dirección en Google Maps (abre la app en el celular). */
+export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.address)}`;
 
 /** Teléfonos de llamadas, en orden: principal y secundario. */
 export const CALL_PHONES = [CONTACT.phone, CONTACT.phone2] as const;

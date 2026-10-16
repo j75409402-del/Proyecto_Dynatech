@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SITE, CONTACT, ANALYTICS } from "@/lib/constants";
+import { SITE, CONTACT, ANALYTICS, MAPS_URL } from "@/lib/constants";
 import { CommercialTracking } from "@/components/CommercialTracking";
 import { CookielessAnalytics } from "@/components/CookielessAnalytics";
 import { MobileQuoteFab } from "@/components/layout/MobileQuoteFab";
@@ -38,6 +38,7 @@ const organizationJsonLd = {
     addressLocality: CONTACT.locality,
     addressCountry: "DO",
   },
+  hasMap: MAPS_URL,
 };
 
 const plexSans = IBM_Plex_Sans({

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { commercialMetadata } from "@/lib/seo";
-import { CALL_PHONES, CONTACT, SITE, emailHref, telHref } from "@/lib/constants";
+import { CALL_PHONES, CONTACT, MAPS_URL, SITE, emailHref, telHref } from "@/lib/constants";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { Band, SectionHead, Steps } from "@/components/page/Blocks";
@@ -109,8 +109,7 @@ export default function NosotrosPage() {
           <dl className="fact-list lg:col-span-8">
             <div><dt>Razón social</dt><dd>{SITE.legalName}</dd></div>
             <div><dt>RNC</dt><dd>{SITE.rnc}</dd></div>
-            {/* PENDIENTE CAPITÁN: número en Av. Rómulo Betancourt y enlace de Google Maps. */}
-            <div><dt>Dirección</dt><dd>{CONTACT.address}</dd></div>
+            <div><dt>Dirección</dt><dd>{CONTACT.address}<a href={MAPS_URL} target="_blank" rel="noopener" className="contact-map">Cómo llegar <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a></dd></div>
             <div><dt>Horario</dt><dd>{hoursLines().map((l) => <span key={l} className="block">{l}</span>)}</dd></div>
             <div><dt>WhatsApp</dt><dd><a href={whatsappGeneral()} target="_blank" rel="noopener">{CONTACT.whatsappDisplay}</a></dd></div>
             <div><dt>Teléfonos</dt><dd>{CALL_PHONES.map((p) => <a key={p} href={telHref(p)} className="block">{p}</a>)}</dd></div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { commercialMetadata } from "@/lib/seo";
 import { Phone, Mail, MapPin, Clock, ArrowUpRight } from "lucide-react";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { CALL_PHONES, CONTACT, SITE, emailHref, telHref } from "@/lib/constants";
+import { CALL_PHONES, CONTACT, MAPS_URL, SITE, emailHref, telHref } from "@/lib/constants";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { PageHero } from "@/components/page/PageHero";
@@ -43,8 +43,8 @@ function ContactPanel() {
         </li>
         <li>
           <MapPin className="h-5 w-5" aria-hidden="true" />
-          {/* PENDIENTE CAPITÁN: número exacto en Av. Rómulo Betancourt y enlace de Google Maps. */}
-          <span><span className="contact-label">Dirección</span><span className="contact-value">{CONTACT.address}</span></span>
+          <span><span className="contact-label">Dirección</span><span className="contact-value">{CONTACT.address}</span>
+            <a href={MAPS_URL} target="_blank" rel="noopener" className="contact-map">Cómo llegar <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a></span>
         </li>
       </ul>
     </div>

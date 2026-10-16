@@ -668,6 +668,12 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .contact-value { display:block; margin-top:2px; font-size:16px; line-height:1.45; color:#f5f7f9; }
 .contact-main .contact-value { font-size:20px; font-weight:600; }
 .contact-panel li a.contact-value { display:inline-flex; min-height:32px; align-items:center; }
+/* «Cómo llegar» (Google Maps), debajo de la dirección. Hereda el color del fondo (claro u oscuro). */
+.contact-map { display:flex; width:max-content; min-height:32px; align-items:center; gap:4px; margin-top:4px; font-weight:600; text-decoration:underline; text-underline-offset:4px; color:inherit; }
+.contact-map:hover { color:theme("colors.signal.DEFAULT"); }
+.fact-list dd a.contact-map { display:flex; width:max-content; margin:4px 0 -8px; }
+/* Dos teléfonos: uno debajo del otro (las reglas de enlace de arriba los dejaban pegados en una línea). */
+.contact-panel li a.contact-value.block, .fact-list dd a.block { display:flex; width:max-content; }
 .contact-panel li a.contact-value:hover { color:#ff5a75; }
 @media(min-width:1024px){ .contact-panel { padding:32px; } }
 /* Bloques compartidos dentro del tema oscuro de /cilindros-neumaticos */
