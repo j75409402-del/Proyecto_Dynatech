@@ -568,24 +568,6 @@
     },
     {
       "line": "Sensores",
-      "intention": "Sensores de nivel y flujo",
-      "target": "/instrumentacion",
-      "variants": [
-        "sensores de nivel y flujo"
-      ],
-      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
-      "priority": "P2",
-      "source": "src/lib/soluciones.ts",
-      "localVariants": [
-        "sensores de nivel y flujo República Dominicana",
-        "sensores de nivel y flujo Santo Domingo"
-      ],
-      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
-      "volume": "NO VERIFICADO",
-      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
-    },
-    {
-      "line": "Sensores",
       "intention": "Amplificadores, módulos y accesorios",
       "target": "/sensores#accesorios",
       "variants": [
@@ -668,54 +650,6 @@
         "termopozo Santo Domingo",
         "termopozos República Dominicana",
         "termopozos Santo Domingo"
-      ],
-      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
-      "volume": "NO VERIFICADO",
-      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
-    },
-    {
-      "line": "Instrumentación",
-      "intention": "Medición de flujo",
-      "target": "/instrumentacion#flujo",
-      "variants": [
-        "caudalímetro industrial",
-        "caudalímetros industriales",
-        "medidor de flujo",
-        "medición de caudal"
-      ],
-      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
-      "priority": "P2",
-      "source": "src/lib/soluciones.ts",
-      "localVariants": [
-        "caudalímetro industrial República Dominicana",
-        "caudalímetro industrial Santo Domingo",
-        "caudalímetros industriales República Dominicana",
-        "caudalímetros industriales Santo Domingo",
-        "medidor de flujo República Dominicana",
-        "medidor de flujo Santo Domingo",
-        "medición de caudal República Dominicana",
-        "medición de caudal Santo Domingo"
-      ],
-      "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
-      "volume": "NO VERIFICADO",
-      "searchStatus": "Variantes propuestas; ver busquedas.json para consultas efectivamente investigadas"
-    },
-    {
-      "line": "Instrumentación",
-      "intention": "Medición de nivel",
-      "target": "/instrumentacion#nivel",
-      "variants": [
-        "medición de nivel industrial",
-        "medidor de nivel para tanque"
-      ],
-      "decision": "Mantener sección/página existente; ampliar si consultas y leads justifican contenido propio",
-      "priority": "P2",
-      "source": "src/lib/soluciones.ts",
-      "localVariants": [
-        "medición de nivel industrial República Dominicana",
-        "medición de nivel industrial Santo Domingo",
-        "medidor de nivel para tanque República Dominicana",
-        "medidor de nivel para tanque Santo Domingo"
       ],
       "commercialModifier": "cotizar / proveedor o venta para suministros; fabricación y reparación solo en servicios confirmados",
       "volume": "NO VERIFICADO",
@@ -1098,6 +1032,18 @@
     {
       "intention": "Marcas, distribución oficial, grado marino",
       "status": "No ampliar oferta actual sin validar catálogo y decisiones comerciales vigentes"
+    },
+    {
+      "intention": "Sensores de nivel y flujo",
+      "status": "Retirado por el dueño el 15-oct-2026: no se ofrece; no crear página"
+    },
+    {
+      "intention": "Medición de flujo",
+      "status": "Retirado por el dueño el 15-oct-2026: no se ofrece; no crear página"
+    },
+    {
+      "intention": "Medición de nivel",
+      "status": "Retirado por el dueño el 15-oct-2026: no se ofrece; no crear página"
     }
   ]
 }

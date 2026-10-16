@@ -202,7 +202,7 @@ const GRUPO_VISUAL: Record<GrupoId, { image: string; quote: string; links: { lab
   instrumentacion: {
     image: "/banners/instrumentacion-procesos.webp",
     quote: whatsappSolucion("Instrumentación"),
-    links: [{ label: "Presión", href: "/instrumentacion#presion" }, { label: "Temperatura", href: "/instrumentacion#temperatura" }, { label: "Flujo y nivel", href: "/instrumentacion#flujo" }],
+    links: [{ label: "Presión", href: "/instrumentacion#presion" }, { label: "Temperatura", href: "/instrumentacion#temperatura" }],
   },
   resistencias: {
     image: "/banners/resistencias-electricas-industriales.webp",

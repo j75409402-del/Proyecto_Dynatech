@@ -33,7 +33,7 @@ const FAQS: Faq[] = [
   { q: "¿Reparan y también fabrican cilindros?", a: "Sí, neumáticos e hidráulicos. Reparamos cilindros dañados y fabricamos cilindros a la medida a partir de tu plano, una muestra o tus medidas. Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar." },
   { q: "¿Mecanizan piezas?", a: "Sí, con torno y fresadora, a partir de un plano o de una muestra. Envía el plano o fotos de la pieza con una referencia de tamaño, el material si lo conoces y la cantidad." },
   { q: "¿Atienden zonas francas?", a: "Sí. Atendemos solicitudes de empresas de zonas francas y del sector privado en República Dominicana." },
-  { q: "¿Qué productos suministran?", a: "Neumática (válvulas, conexiones, unidades FRL, mangueras y sellos), control industrial (contactores, relés, protecciones, mando y gabinetes), automatización (sensores), instrumentación (presión, temperatura, flujo y nivel), resistencias eléctricas y termocuplas, siempre bajo cotización." },
+  { q: "¿Qué productos suministran?", a: "Neumática (válvulas, conexiones, unidades FRL, mangueras y sellos), control industrial (contactores, relés, protecciones, mando y gabinetes), automatización (sensores), instrumentación (presión y temperatura), resistencias eléctricas y termocuplas, siempre bajo cotización." },
   { q: "¿Instalan o programan los equipos?", a: "No. En control, automatización e instrumentación solo suministramos los productos: no realizamos instalación, programación, mantenimiento, armado de tableros ni puesta en marcha." },
   { q: "¿Dónde están y en qué horario atienden?", a: `En ${CONTACT.address}. Horario: ${CONTACT.hours.replace(/ · /g, " ")}.` },
 ];

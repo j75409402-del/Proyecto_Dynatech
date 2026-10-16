@@ -2,7 +2,7 @@ import {
   Wind, Zap, Radar, Gauge, Flame,
   Cylinder, GitFork, Cable, SlidersHorizontal, Waves, Boxes,
   ToggleRight, ShieldAlert, CircleDot, Timer, MoveVertical, Plug,
-  ScanLine, Magnet, Thermometer, Activity, Cpu, Droplets,
+  ScanLine, Magnet, Thermometer, Cpu, Droplets,
   Ruler, Hammer, type LucideIcon,
 } from "lucide-react";
 
@@ -86,7 +86,7 @@ export const GRUPOS_SUMINISTRO: { id: GrupoId; title: string; desc: string }[] =
   { id: "neumatica", title: "Neumática", desc: "Válvulas, conexiones, unidades FRL, mangueras, accesorios y repuestos para cilindros." },
   { id: "control", title: "Control industrial", desc: "Contactores, relés, protecciones, mando y señalización, y gabinetes para tableros." },
   { id: "automatizacion", title: "Automatización", desc: "Sensores para detectar piezas, posición y presencia, con sus módulos y accesorios." },
-  { id: "instrumentacion", title: "Instrumentación", desc: "Medición de presión, temperatura, flujo y nivel para procesos." },
+  { id: "instrumentacion", title: "Instrumentación", desc: "Medición de presión y temperatura para procesos." },
   { id: "resistencias", title: "Resistencias y termocuplas", desc: "Resistencias de cartucho, termocuplas, RTD y alambre de resistencia." },
 ];
 
@@ -95,7 +95,7 @@ export const DATOS_PARA_COTIZAR: Record<string, readonly string[]> = {
   neumatica: ["Código o foto del componente", "Medidas de conexión y rosca, si las conoces", "Aplicación y presión de trabajo conocida"],
   "control-electrico": ["Referencia o foto de la etiqueta", "Tensión y corriente indicadas en el componente", "Función del repuesto en tu equipo o tablero"],
   sensores: ["Referencia y foto de la etiqueta", "Alimentación, conexión y tipo de salida, si los conoces", "Qué detecta el sensor y dónde está instalado"],
-  instrumentacion: ["Variable a medir: presión, temperatura, flujo o nivel", "Rango y unidades requeridos, si están definidos", "Foto, referencia y conexión al proceso"],
+  instrumentacion: ["Variable a medir: presión o temperatura", "Rango y unidades requeridos, si están definidos", "Foto, referencia y conexión al proceso"],
   "gabinetes-electricos": ["Medidas: alto × ancho × fondo", "Material y grado de protección (IP o NEMA), si están definidos", "Uso: interior o exterior, y qué va a alojar"],
   "resistencias-electricas": ["Fotos, forma y dimensiones", "Voltaje y potencia indicados, si los conoces", "Aplicación y cantidad requerida"],
 };
@@ -409,13 +409,6 @@ export const SOLUCIONES: Solucion[] = [
         href: "/resistencias-electricas#termocuplas",
       },
       {
-        id: "nivel-y-flujo",
-        icon: Activity,
-        title: "Sensores de nivel y flujo",
-        desc: "Medición de nivel y caudal para procesos industriales.",
-        href: "/instrumentacion",
-      },
-      {
         id: "accesorios",
         icon: Cpu,
         title: "Amplificadores, módulos y accesorios",
@@ -438,16 +431,16 @@ export const SOLUCIONES: Solucion[] = [
     icon: Gauge,
     name: "Instrumentación",
     title: "Instrumentación industrial",
-    short: "Medición de presión, temperatura, flujo y nivel para procesos.",
-    description: "Medición de presión, temperatura, flujo y nivel para procesos industriales.",
+    short: "Medición de presión y temperatura para procesos.",
+    description: "Manómetros, interruptores y transmisores de presión, termómetros y termopozos para procesos industriales.",
     metaDescription:
-      "Instrumentación industrial en República Dominicana: manómetros, transmisores e interruptores de presión, termómetros, termopozos, flujo y nivel.",
+      "Instrumentación industrial en República Dominicana: manómetros, transmisores e interruptores de presión, termómetros y termopozos.",
     image: "/banners/instrumentacion-procesos.webp",
     imageWidth: 512,
     imageHeight: 512,
     ctaTitle: "¿Necesitas un instrumento de medición?",
     imageAlt: "Fotografía editorial de instrumentos de medición en un proceso industrial",
-    ejemplos: ["Manómetros", "Termómetros", "Interruptores de presión", "Flujo", "Nivel"],
+    ejemplos: ["Manómetros", "Termómetros", "Interruptores de presión", "Termopozos"],
     subcategorias: [
       {
         id: "presion",
@@ -468,30 +461,6 @@ export const SOLUCIONES: Solucion[] = [
         ejemplos: ["Termómetros", "Termopozos", "Termómetros de bolsillo"],
       },
       {
-        id: "flujo",
-        icon: Activity,
-        title: "Medición de flujo",
-        image: "/referencia/medidor-de-flujo.jpg",
-        imageAlt: "Medidor de flujo con pantalla instalado en una tubería",
-        imageNote: "Foto de referencia",
-        imageFit: "cover",
-        credit: { author: "National Institute of Standards and Technology", license: "Public domain", url: "https://commons.wikimedia.org/wiki/File:Flow_meter_(8622934876).jpg" },
-        desc: "Caudalímetros electromagnéticos, vórtex y coriolis.",
-        cta: "Enviar especificaciones",
-      },
-      {
-        id: "nivel",
-        icon: Droplets,
-        title: "Medición de nivel",
-        image: "/referencia/interruptor-de-nivel.jpg",
-        imageAlt: "Interruptor de nivel tipo flotador",
-        imageNote: "Foto de referencia",
-        imageFit: "cover",
-        credit: { author: "S.J. de Waard", license: "CC BY 2.5", url: "https://commons.wikimedia.org/wiki/File:Floating_level_switch.JPG" },
-        desc: "Medición de nivel para tanques y procesos.",
-        cta: "Enviar especificaciones",
-      },
-      {
         id: "control",
         icon: Cpu,
         title: "Medición y control",
@@ -504,7 +473,6 @@ export const SOLUCIONES: Solucion[] = [
     aplicaciones: [
       "Supervisión de presión en líneas y equipos",
       "Control de temperatura en procesos",
-      "Medición de caudal y nivel en tanques",
       "Reposición de instrumentos en planta",
     ],
   },
@@ -562,9 +530,6 @@ export const SOLUCIONES: Solucion[] = [
         icon: Ruler,
         title: "Bajo especificación",
         desc: "Envíanos voltaje, potencia, medidas o una muestra y te cotizamos la resistencia que corresponde.",
-        image: "/products/resistencia-cartucho-mediana.jpg",
-        imageAlt: "Resistencia de cartucho sobre la mesa de trabajo",
-        imageFit: "cover",
         cta: "Enviar especificaciones",
       },
     ],
