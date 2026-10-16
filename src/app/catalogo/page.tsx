@@ -79,6 +79,7 @@ export default function ProductosPage() {
                         {sub.image
                           ? <Image src={sub.image} alt={sub.imageAlt ?? sub.title} fill sizes="96px" className={sub.imageFit === "cover" ? "object-cover" : "object-contain p-2"} />
                           : <sub.icon className="h-7 w-7" aria-hidden="true" strokeWidth={1.4} />}
+                        {sub.image && sub.imageNote && <span className="prod-note">{sub.imageNote}</span>}
                       </span>
                       <div className="prod-body">
                         <h4>{sub.title}</h4>

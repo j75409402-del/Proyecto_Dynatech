@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Ilustración de un alambre de resistencia en espiral"><title>Ilustración de un alambre de resistencia en espiral</title><g fill="none" stroke="#1f2a35" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<path d="M60 180 H150" stroke-width="4"/>
+<ellipse cx="150" cy="180" rx="12" ry="46"/><ellipse cx="166" cy="180" rx="12" ry="46"/><ellipse cx="182" cy="180" rx="12" ry="46"/><ellipse cx="198" cy="180" rx="12" ry="46"/><ellipse cx="214" cy="180" rx="12" ry="46"/><ellipse cx="230" cy="180" rx="12" ry="46"/><ellipse cx="246" cy="180" rx="12" ry="46"/><ellipse cx="262" cy="180" rx="12" ry="46"/><ellipse cx="278" cy="180" rx="12" ry="46"/><ellipse cx="294" cy="180" rx="12" ry="46"/><ellipse cx="310" cy="180" rx="12" ry="46"/><ellipse cx="326" cy="180" rx="12" ry="46"/>
+<path d="M340 180 H420" stroke-width="4"/>
+<circle cx="60" cy="180" r="8" fill="#E4002B" stroke="#E4002B"/>
+<circle cx="420" cy="180" r="8" fill="#E4002B" stroke="#E4002B"/>
+
+</g></svg>

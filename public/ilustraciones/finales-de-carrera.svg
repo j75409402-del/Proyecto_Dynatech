@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Ilustración de un final de carrera con palanca de rodillo"><title>Ilustración de un final de carrera con palanca de rodillo</title><g fill="none" stroke="#1f2a35" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<rect x="150" y="150" width="170" height="150" rx="10" fill="#dfe4e8"/>
+<rect x="170" y="170" width="130" height="34" rx="4" fill="#ffffff"/>
+<circle cx="182" cy="280" r="6"/><circle cx="288" cy="280" r="6"/><circle cx="182" cy="226" r="6"/><circle cx="288" cy="226" r="6"/>
+<rect x="210" y="118" width="50" height="34" rx="6" fill="#c3cbd2"/>
+<circle cx="235" cy="135" r="9" fill="#ffffff"/>
+<path d="M235 135 L330 70" stroke-width="10"/>
+<circle cx="338" cy="64" r="24" fill="#c3cbd2"/>
+<circle cx="338" cy="64" r="6" fill="#E4002B" stroke="#E4002B"/>
+<rect x="210" y="300" width="50" height="22" fill="#c3cbd2"/>
+
+</g></svg>

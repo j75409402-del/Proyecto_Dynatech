@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Ilustración de una caja eléctrica con prensaestopas"><title>Ilustración de una caja eléctrica con prensaestopas</title><g fill="none" stroke="#1f2a35" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<path d="M120 90 L320 90 L360 60 L160 60 Z" fill="#c3cbd2"/>
+<path d="M320 90 L360 60 L360 250 L320 280 Z" fill="#c3cbd2"/>
+<rect x="120" y="90" width="200" height="190" rx="6" fill="#dfe4e8"/>
+<rect x="136" y="106" width="168" height="158" rx="4" fill="#ffffff"/>
+<circle cx="146" cy="116" r="5"/><circle cx="294" cy="116" r="5"/><circle cx="146" cy="254" r="5"/><circle cx="294" cy="254" r="5"/>
+<path d="M200 185 l14 -24 h12 l-10 18 h14 l-24 34 l8 -28 z" fill="#E4002B" stroke="#E4002B" stroke-width="2"/>
+<rect x="160" y="280" width="30" height="20" fill="#c3cbd2"/><rect x="250" y="280" width="30" height="20" fill="#c3cbd2"/>
+<path d="M175 300 v34 M265 300 v34" stroke-width="9"/>
+</g></svg>

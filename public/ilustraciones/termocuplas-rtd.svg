@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-label="Ilustración de una termocupla con cabezal y una RTD con cable"><title>Ilustración de una termocupla con cabezal y una RTD con cable</title><g fill="none" stroke="#1f2a35" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<rect x="40" y="92" width="96" height="76" rx="14" fill="#dfe4e8"/>
+<rect x="52" y="80" width="72" height="16" rx="6" fill="#c3cbd2"/>
+<circle cx="88" cy="130" r="12" fill="#ffffff"/>
+<rect x="136" y="114" width="22" height="32" fill="#c3cbd2"/>
+<path d="M158 118 h26 v24 h-26 z" fill="#dfe4e8"/>
+<path d="M162 118 v24 M168 118 v24 M174 118 v24 M180 118 v24" stroke-width="2"/>
+<rect x="184" y="123" width="236" height="14" rx="7" fill="#dfe4e8"/>
+<circle cx="420" cy="130" r="7" fill="#E4002B" stroke="#E4002B"/>
+
+<rect x="236" y="246" width="184" height="12" rx="6" fill="#dfe4e8"/>
+<rect x="212" y="242" width="26" height="20" rx="3" fill="#c3cbd2"/>
+<path d="M212 252 C160 252 150 300 96 300 C70 300 58 290 50 280" stroke-width="7"/>
+<path d="M50 280 l-14 -6 M50 280 l-6 -14" stroke="#E4002B"/>
+<circle cx="420" cy="252" r="6" fill="#E4002B" stroke="#E4002B"/>
+</g></svg>

@@ -9,6 +9,7 @@ import type { QuoteService } from "@/lib/quote";
 import { CYLINDER_PARTS } from "@/lib/industrial-scenes";
 import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
 import { RealWorkPhoto } from "@/components/industrial/RealWorkPhoto";
+import { TallerGallery } from "@/components/industrial/TallerGallery";
 import { Reveal } from "@/components/motion/Reveal";
 
 const DETALLE: Record<string, string> = { fabricacion: "Ver tipos de cilindro", reparacion: "Ver reparación de cilindros", "kits-de-sellos": "Ver sellos y componentes" };
@@ -102,6 +103,20 @@ export function AntesDespues() {
             <a href={whatsappService("neumatico-fabricar")} target="_blank" rel="noopener" className="btn-primary min-h-12 self-start px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: fabricación de cilindro neumático</span></a>
           </div>
         </Reveal>
+        <div className="taller-work">
+          <div className="taller-work-head">
+            <div>
+              <p className="section-kicker">Mecanizado</p>
+              <h3>Torno y fresadora en el taller</h3>
+            </div>
+            <p>Fotos y video reales de nuestro taller en Santo Domingo. Mecanizamos piezas a partir de tu plano o de una muestra.</p>
+          </div>
+          <TallerGallery />
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2" data-fab-hide="">
+            <a href={whatsappService("mecanizado")} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6"><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: mecanizado de piezas</span></a>
+            <Link href="/mecanizado" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium hover:text-signal">Ver mecanizado <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
+          </div>
+        </div>
       </div>
     </section>
   );

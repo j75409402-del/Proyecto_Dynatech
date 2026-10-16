@@ -3,8 +3,9 @@ import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, type RelatedItem } from "@/components/page/Blocks";
-import { HydraulicCylinderDrawing, MachinedPartDrawing } from "@/components/page/TechDrawings";
+import { HydraulicCylinderDrawing } from "@/components/page/TechDrawings";
 import { Reveal } from "@/components/motion/Reveal";
+import { TallerGallery } from "@/components/industrial/TallerGallery";
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import { SERVICIOS_ADICIONALES } from "@/lib/servicios";
@@ -47,9 +48,12 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         quoteHref={mainQuote}
         secondary={{ href: "#datos", label: "Ver qué datos enviar" }}
         note={s.lead}
+        // Mecanizado: foto real del taller (15-oct-2026). Hidráulicos: esquema (sin fotos propias aún).
         visual={hidraulico
           ? <HydraulicCylinderDrawing title="Esquema de un cilindro hidráulico en corte con las medidas que pedimos: diámetro interior, diámetro del vástago, carrera y montajes" />
-          : <MachinedPartDrawing title="Esquema de una pieza mecanizada con las medidas que pedimos: largo total, diámetros, rosca y patrón de agujeros" />}
+          : undefined}
+        image={hidraulico ? undefined : { src: "/taller/torno-eje-fresadora.jpg", alt: "Eje largo montado en el torno del taller de Dynatech; al fondo, la fresadora", position: "center 45%" }}
+        caption={hidraulico ? undefined : { label: "Foto real · taller Dynatech", text: "Eje en el torno; al fondo, la fresadora" }}
         trust="lineas"
       />
 
@@ -57,6 +61,16 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         <Band tone="white" labelledBy="procesos">
           <SectionHead kicker="01 · Qué hacemos" id="procesos" title="Torno y fresadora" intro="Para piezas nuevas y repuestos. Dinos para qué equipo es la pieza y te confirmamos si podemos hacerla." />
           <OfferGrid columns={3} compact items={procesos.map((p, i) => ({ title: p.title, desc: p.text, icon: [Cog, Box, Ruler][i] ?? Cog }))} />
+          <div className="taller-work">
+            <div className="taller-work-head">
+              <div>
+                <p className="section-kicker">Trabajo real</p>
+                <h3>En nuestro taller</h3>
+              </div>
+              <p>Fotos y video de nuestro taller en Santo Domingo.</p>
+            </div>
+            <TallerGallery desde={1} />
+          </div>
         </Band>
       )}
 
