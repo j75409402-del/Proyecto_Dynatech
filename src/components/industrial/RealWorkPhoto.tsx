@@ -27,7 +27,7 @@ export function RealWorkPhoto({ className = "", sizes = "(max-width: 767px) 100v
       </div>
       <figcaption>
         <span className="real-work-label">Foto real · taller Dynatech</span>
-        <span className="block">Trabajo real del taller: cilindros neumáticos.</span>
+        <span className="block">Cilindros neumáticos en nuestro taller.</span>
       </figcaption>
     </figure>
   );

@@ -3,7 +3,6 @@ import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, type RelatedItem } from "@/components/page/Blocks";
-import { HydraulicCylinderDrawing } from "@/components/page/TechDrawings";
 import { Reveal } from "@/components/motion/Reveal";
 import { TallerGallery } from "@/components/industrial/TallerGallery";
 import { CONTACT, SITE } from "@/lib/constants";
@@ -32,6 +31,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
   const n = (i: number) => String(i + (procesos.length ? 1 : 0)).padStart(2, "0");
   // Hidráulicos: CTA principal sin elegir aún (reparar/fabricar se elige abajo); mecanizado: directo.
   const mainQuote = whatsappService(hidraulico ? "hidraulico" : "mecanizado");
+  const heroFoto = hidraulico ? "/taller/torno-pieza-larga-polipasto.jpg" as const : "/taller/torno-eje-fresadora.jpg" as const;
   const related: RelatedItem[] = [
     ...SERVICIOS_ADICIONALES.filter((o) => o.slug !== s.slug).map((o) => ({ href: `/${o.slug}`, title: o.name, desc: o.slug === "mecanizado" ? "Piezas bajo plano o muestra." : "Fabricación y reparación de cilindros hidráulicos.", icon: o.slug === "mecanizado" ? Cog : Droplets, label: `Ver ${o.name.toLowerCase()}` })),
     { href: "/servicios", title: "Reparación de cilindros neumáticos", desc: "Reparación y reconstrucción, con prueba antes de entregar.", image: "/cilindros/despues-cilindro-iso-32mm.jpg", label: "Ver reparación de cilindros" },
@@ -48,12 +48,9 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         quoteHref={mainQuote}
         secondary={{ href: "#datos", label: "Ver qué datos enviar" }}
         note={s.lead}
-        // Mecanizado: foto real del taller (15-oct-2026). Hidráulicos: esquema (sin fotos propias aún).
-        visual={hidraulico
-          ? <HydraulicCylinderDrawing title="Esquema de un cilindro hidráulico en corte con las medidas que pedimos: diámetro interior, diámetro del vástago, carrera y montajes" />
-          : undefined}
-        image={hidraulico ? undefined : { src: "/taller/torno-eje-fresadora.jpg", alt: "Eje largo montado en el torno del taller de Dynatech; al fondo, la fresadora", position: "center 45%" }}
-        caption={hidraulico ? undefined : { label: "Foto real · taller Dynatech", text: "Eje en el torno; al fondo, la fresadora" }}
+        // Fotos reales del taller (15-oct-2026): las piezas en el torno son cilindros hidráulicos.
+        image={{ src: heroFoto, alt: hidraulico ? "Cilindro hidráulico largo montado en el torno del taller de Dynatech, con polipasto" : "Cilindro hidráulico montado en el torno del taller de Dynatech; al fondo, la fresadora", position: hidraulico ? "center 55%" : "center 45%" }}
+        caption={{ label: "Foto real · taller Dynatech", text: hidraulico ? "Un cilindro hidráulico en nuestro torno" : "En el torno; al fondo, la fresadora" }}
         trust="lineas"
       />
 
@@ -67,9 +64,9 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
                 <p className="section-kicker">Trabajo real</p>
                 <h3>En nuestro taller</h3>
               </div>
-              <p>Fotos y video de nuestro taller en Santo Domingo.</p>
+              <p>Fotos y video de nuestro taller en Santo Domingo. Aquí, cilindros hidráulicos en el torno.</p>
             </div>
-            <TallerGallery desde={1} />
+            <TallerGallery omitir={[heroFoto]} />
           </div>
         </Band>
       )}
@@ -77,6 +74,18 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
       <Band tone="light" labelledBy="que-cotizamos">
         <SectionHead kicker={`${n(1)} · ${procesos.length ? "Cómo empezar" : "Qué hacemos"}`} id="que-cotizamos" title={hidraulico ? "¿Reparar o fabricar?" : "Con plano o con muestra"} />
         <OfferGrid columns={2} compact items={s.situations.map((t, i) => ({ title: t, desc: s.situationDescs[i], icon: situationIcons[i], quote: whatsappService(s.services[i]) }))} />
+        {hidraulico && (
+          <div className="taller-work">
+            <div className="taller-work-head">
+              <div>
+                <p className="section-kicker">Trabajo real</p>
+                <h3>Cilindros hidráulicos en nuestro taller</h3>
+              </div>
+              <p>Fotos y video de cilindros hidráulicos que estamos trabajando en el torno, en Santo Domingo.</p>
+            </div>
+            <TallerGallery omitir={[heroFoto]} />
+          </div>
+        )}
       </Band>
 
       <div id="datos" className="scroll-mt-28">

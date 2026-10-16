@@ -106,14 +106,15 @@ export function AntesDespues() {
         <div className="taller-work">
           <div className="taller-work-head">
             <div>
-              <p className="section-kicker">Mecanizado</p>
-              <h3>Torno y fresadora en el taller</h3>
+              <p className="section-kicker">Cilindros hidráulicos</p>
+              <h3>Así trabajamos en el torno</h3>
             </div>
-            <p>Fotos y video reales de nuestro taller en Santo Domingo. Mecanizamos piezas a partir de tu plano o de una muestra.</p>
+            <p>Cilindros hidráulicos en nuestro taller de Santo Domingo. Los trabajamos en el torno a partir de tu plano o de la pieza original.</p>
           </div>
           <TallerGallery />
           <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2" data-fab-hide="">
-            <a href={whatsappService("mecanizado")} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6"><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: mecanizado de piezas</span></a>
+            <a href={whatsappService("hidraulico")} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6"><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: cilindro hidráulico</span></a>
+            <Link href="/cilindros-hidraulicos" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium hover:text-signal">Ver cilindros hidráulicos <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
             <Link href="/mecanizado" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium hover:text-signal">Ver mecanizado <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
           </div>
         </div>
