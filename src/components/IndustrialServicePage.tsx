@@ -50,7 +50,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         note={s.lead}
         // Fotos reales del taller (15-oct-2026): las piezas en el torno son cilindros hidráulicos.
         image={{ src: heroFoto, alt: hidraulico ? "Cilindro hidráulico largo montado en el torno del taller de Dynatech, con polipasto" : "Cilindro hidráulico montado en el torno del taller de Dynatech; al fondo, la fresadora", position: hidraulico ? "center 55%" : "center 45%" }}
-        caption={{ label: "Foto real · taller Dynatech", text: hidraulico ? "Un cilindro hidráulico en nuestro torno" : "En el torno; al fondo, la fresadora" }}
+        caption={{ label: "Foto real · taller Dynatech", text: hidraulico ? "Cilindro hidráulico en proceso" : "Torno y fresadora, en el mismo taller" }}
         trust="lineas"
       />
 
@@ -64,7 +64,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
                 <p className="section-kicker">Trabajo real</p>
                 <h3>En nuestro taller</h3>
               </div>
-              <p>Fotos y video de nuestro taller en Santo Domingo. Aquí, cilindros hidráulicos en el torno.</p>
+              <p>Trabajo real de nuestro taller en Santo Domingo.</p>
             </div>
             <TallerGallery omitir={[heroFoto]} />
           </div>
@@ -81,7 +81,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
                 <p className="section-kicker">Trabajo real</p>
                 <h3>Cilindros hidráulicos en nuestro taller</h3>
               </div>
-              <p>Fotos y video de cilindros hidráulicos que estamos trabajando en el torno, en Santo Domingo.</p>
+              <p>Trabajo real de nuestro taller en Santo Domingo.</p>
             </div>
             <TallerGallery omitir={[heroFoto]} />
           </div>

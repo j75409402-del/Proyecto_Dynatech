@@ -895,3 +895,7 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .taller-work-head h3 { font-size:24px; font-weight:600; letter-spacing:-.02em; }
 .taller-work-head p { max-width:40rem; line-height:1.65; color:#3b4652; }
 @media(min-width:1024px){ .taller-work-head { flex-direction:row; align-items:flex-end; justify-content:space-between; gap:40px; } }
+.photo-credits { margin-top:24px; font-size:12px; line-height:1.6; color:#5b6875; }
+.photo-credits > span:first-child { font-weight:600; color:#3b4652; }
+.photo-credits a { text-decoration:underline; text-underline-offset:2px; }
+.photo-credits a:hover { color:#E4002B; }

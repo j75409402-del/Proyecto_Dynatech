@@ -6,6 +6,7 @@ import { PageHero } from "@/components/page/PageHero";
 import { Band, SectionHead } from "@/components/page/Blocks";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
+import { PhotoCredits } from "@/components/page/PhotoCredits";
 import { GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, SOLUCIONES, type Solucion, type Subcategoria } from "@/lib/soluciones";
 import { whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 
@@ -97,6 +98,7 @@ export default function ProductosPage() {
                 <Link href={`/${s.slug}`} className="catalog-line-link">Ver la página de {s.name.toLowerCase()} <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
               </div>
             ))}
+            <PhotoCredits items={lineas.flatMap((l) => productos(l))} />
           </Band>
         );
       })}

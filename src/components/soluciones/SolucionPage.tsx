@@ -7,6 +7,7 @@ import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, CheckList, type OfferItem } from "@/components/page/Blocks";
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
+import { PhotoCredits } from "@/components/page/PhotoCredits";
 import { SOLUCIONES, DATOS_PARA_COTIZAR, GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, type Solucion } from "@/lib/soluciones";
 import { whatsappService, whatsappSolucion } from "@/lib/whatsapp";
 
@@ -98,7 +99,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
           kicker="01 · Qué cotizamos"
           id="catalogo-titulo"
           title={<>Catálogo de {s.name.toLowerCase()}</>}
-          intro="Si no ves lo que buscas, envíanos el código, una foto o la descripción. Las imágenes son de referencia o ilustrativas del tipo de componente, no de inventario."
+          intro="Si no ves lo que buscas, envíanos el código, una foto o la descripción. Las fotos son de referencia del tipo de componente, no de inventario."
         />
         {s.soloSuministro && (
           <p className="scope-note mb-6"><Info className="h-4 w-4 shrink-0" aria-hidden="true" /><span>En esta línea {SOLO_SUMINISTRO}</span></p>
@@ -111,6 +112,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
           </ul>
         </nav>
         <OfferGrid items={items} />
+        <PhotoCredits items={s.subcategorias} />
       </Band>
 
       <QuoteChecklist

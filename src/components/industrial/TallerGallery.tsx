@@ -12,14 +12,14 @@ export const TALLER_FOTOS = [
     width: 768,
     height: 1024,
     alt: "Cilindro hidráulico montado en el torno del taller de Dynatech; al fondo, la fresadora",
-    caption: "Un cilindro hidráulico en nuestro torno. Al fondo, la fresadora.",
+    caption: "Cilindro hidráulico en proceso.",
   },
   {
     src: "/taller/torno-pieza-larga-polipasto.jpg",
     width: 900,
     height: 1600,
     alt: "Cilindro hidráulico largo montado en el torno, sostenido con un polipasto en el taller de Dynatech",
-    caption: "Cilindro hidráulico largo en el torno. Lo movemos con el polipasto.",
+    caption: "Para las piezas largas usamos el polipasto.",
   },
 ] as const;
 
@@ -50,11 +50,11 @@ export function TallerGallery({ video = true, omitir = [] }: { video?: boolean; 
               width={480}
               height={848}
               className="h-full w-full object-cover"
-              aria-label="Video real del taller: cilindro hidráulico girando en el torno"
+              aria-label="Video real del taller: cilindro hidráulico en el torno"
             />
             <span className="img-note is-real is-top">Video real · taller Dynatech</span>
           </div>
-          <figcaption>Así se ve un cilindro hidráulico girando en el torno.</figcaption>
+          <figcaption>Trabajo real, grabado en el taller.</figcaption>
         </figure>
       )}
     </div>

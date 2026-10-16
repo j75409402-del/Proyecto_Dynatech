@@ -107,9 +107,9 @@ export function AntesDespues() {
           <div className="taller-work-head">
             <div>
               <p className="section-kicker">Cilindros hidráulicos</p>
-              <h3>Así trabajamos en el torno</h3>
+              <h3>Así se trabaja en el taller</h3>
             </div>
-            <p>Cilindros hidráulicos en nuestro taller de Santo Domingo. Los trabajamos en el torno a partir de tu plano o de la pieza original.</p>
+            <p>Trabajo real de nuestro taller en Santo Domingo. Envíanos el plano o la pieza original y te cotizamos.</p>
           </div>
           <TallerGallery />
           <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2" data-fab-hide="">
