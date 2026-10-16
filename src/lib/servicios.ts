@@ -95,20 +95,30 @@ export const SERVICIOS_ADICIONALES = [
     services: ["hidraulico-reparar", "hidraulico-fabricar"],
     information: ["Fotos del cilindro completo, sus conexiones y puntos de montaje", "Qué falla o qué trabajo necesitas", "Plano, muestra o medidas disponibles, con sus unidades", "Equipo o aplicación donde trabaja", "Cantidad, ciudad y fecha en que lo necesitas"],
     note: "Con las fotos orientamos la cotización. El alcance exacto de una reparación se confirma al revisar el cilindro en el taller.",
+    procesos: [],
   },
   {
     slug: "mecanizado",
     name: "Mecanizado",
     title: "Mecanizado industrial en República Dominicana",
-    h1: "Mecanizado industrial bajo plano o muestra",
-    description: "Mecanizado de piezas industriales bajo plano o muestra en República Dominicana. Envía el plano o fotos de la pieza por WhatsApp y te cotizamos.",
-    intro: "Mecanizamos piezas industriales a partir de tu plano o de una muestra, en la cantidad que necesitas.",
-    lead: "Envía el plano, o fotos de la pieza con una referencia de tamaño, y la cantidad.",
+    h1: "Mecanizado de piezas con torno y fresadora",
+    description: "Mecanizado de piezas con torno y fresadora bajo plano o muestra en Santo Domingo, República Dominicana. Envía el plano o fotos de la pieza por WhatsApp y te cotizamos.",
+    intro: "Fabricamos piezas industriales con torno y fresadora a partir de tu plano o de una muestra: piezas nuevas o repuestos que ya no consigues, en la cantidad que necesitas.",
+    lead: "Envía el plano, o fotos de la pieza con una referencia de tamaño, el material si lo conoces y la cantidad.",
     situations: ["Tengo el plano", "Tengo la pieza o una muestra"],
-    situationDescs: ["Envía el plano con medidas y unidades; material y tolerancias, si están definidos.", "Envía fotos con una referencia de tamaño y cuéntanos qué función cumple la pieza."],
+    situationDescs: ["Envía el plano en PDF o una foto legible, con medidas y unidades; material y tolerancias, si están definidos, y la cantidad.", "Envía fotos de la pieza junto a una regla o cinta métrica y cuéntanos qué función cumple. Si hace falta la muestra física, te lo decimos."],
     services: ["mecanizado", "mecanizado"],
     information: ["Plano, o fotos de la pieza con una referencia de tamaño", "Medidas y unidades; tolerancias solo si están definidas en tu plano", "Material, si lo conoces o está especificado", "Cantidad de piezas y para qué equipo son", "Ciudad y fecha en que las necesitas"],
     note: "Si no tienes plano, con fotos y la descripción de la función empezamos. Si hace falta la muestra física u otra medida, te lo decimos antes de cotizar.",
+    /**
+     * Torno y fresadora confirmados por el dueño (15-oct-2026). NO anunciar CNC. Los ejemplos
+     * describen el tipo de pieza de cada proceso; la factibilidad se confirma al cotizar.
+     */
+    procesos: [
+      { title: "Torno", text: "Piezas cilíndricas o de revolución: ejes, bujes, pasadores, espaciadores y piezas con rosca." },
+      { title: "Fresadora", text: "Piezas planas o de bloque: placas, soportes, bases y bridas, con ranuras, chaveteros, escalones o agujeros." },
+      { title: "Bajo plano o muestra", text: "Con tu plano cotizamos según sus medidas y especificaciones. Con una muestra, tomamos las medidas de la pieza original." },
+    ],
   },
 ] as const;
 

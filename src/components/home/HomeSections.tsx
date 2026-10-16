@@ -1,32 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Building2, Camera, Cog, Droplets, Factory, GitFork, Wrench, Cylinder, Package, type LucideIcon } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Building2, Camera, Cog, Droplets, Factory, Wrench, Cylinder, Info, type LucideIcon } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { TrustStrip } from "@/components/page/TrustStrip";
 import { Band, SectionHead } from "@/components/page/Blocks";
-import { Reveal } from "@/components/motion/Reveal";
-import { SOLUCIONES } from "@/lib/soluciones";
-import { whatsappGeneral, whatsappService } from "@/lib/whatsapp";
+import { GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, SOLUCIONES, type GrupoId } from "@/lib/soluciones";
+import { whatsappGeneral, whatsappService, whatsappSolucion } from "@/lib/whatsapp";
 
 /**
- * Portada (mejora de conversión, oct-2026, sobre WEB-020).
- * - H1 directo: fabricación y reparación de cilindros neumáticos e hidráulicos + mecanizado.
- *   La neumática sigue como especialidad; las líneas de suministro bajan a #soluciones.
- * - Un solo CTA «Cotizar por WhatsApp» (→ /cotizacion → WhatsApp, quote_whatsapp_click).
- * - «¿Qué necesitas?»: un acceso por necesidad; cada uno lleva a su página o, en «Solo tengo
- *   una foto», directo a WhatsApp con su mensaje (svc=foto).
- * - Imagen sin personas ni logotipos, rotulada "Imagen de referencia" (auditoría H-W2).
- * - Sin clientes, cifras, certificaciones ni marcas representadas.
+ * Portada (oct-2026, pedido del dueño del 15-oct): presenta toda la oferta en dos bloques,
+ * «Fabricación, reparación y mecanizado» (los cilindros siguen destacados) y «Suministro
+ * industrial» (neumática, control industrial, automatización, instrumentación, resistencias
+ * y termocuplas). Un solo CTA «Cotizar por WhatsApp» (→ /cotizacion → WhatsApp, medido).
+ * Sin clientes, cifras, certificaciones, stock, precios ni plazos.
  */
 
-type Acceso = { icon: LucideIcon; title: string; text: string; href: string; quote?: boolean };
-const ACCESOS: Acceso[] = [
+type Acceso = { icon?: LucideIcon; title: string; text?: string; href: string };
+
+/** Taller: lo que más se quiere vender hoy (cada uno lleva a su página). */
+const ACCESOS_TALLER: Acceso[] = [
   { icon: Wrench, title: "Reparar un cilindro neumático", text: "Fugas, desgaste, golpes", href: "/servicios" },
   { icon: Cylinder, title: "Fabricar un cilindro neumático", text: "Bajo plano, muestra o medidas", href: "/cilindros-neumaticos" },
   { icon: Droplets, title: "Cilindro hidráulico", text: "Reparación o fabricación", href: "/cilindros-hidraulicos" },
-  { icon: Cog, title: "Mecanizar una pieza", text: "Bajo plano o muestra", href: "/mecanizado" },
-  { icon: GitFork, title: "Válvula, conexión u otro componente", text: "Con el código o una foto", href: "/neumatica" },
-  { icon: Camera, title: "Solo tengo una foto", text: "Te ayudamos a identificarla", href: whatsappService("foto"), quote: true },
+  { icon: Cog, title: "Mecanizar una pieza", text: "Torno y fresadora, bajo plano o muestra", href: "/mecanizado" },
+];
+
+/** Suministro: una entrada por grupo (página principal del grupo). */
+const ACCESOS_SUMINISTRO: Acceso[] = [
+  { title: "Neumática", href: "/neumatica" },
+  { title: "Control industrial", href: "/control-electrico" },
+  { title: "Automatización", href: "/sensores" },
+  { title: "Instrumentación", href: "/instrumentacion" },
+  { title: "Resistencias y termocuplas", href: "/resistencias-electricas" },
+  { title: "Ver todo el catálogo", href: "/catalogo" },
 ];
 
 export function HomeHero() {
@@ -38,41 +44,54 @@ export function HomeHero() {
       <div className="hx-shade" aria-hidden="true" />
       <div className="container-max hx-inner">
         <div className="hx-copy">
-          <p className="home-hero-kicker"><span aria-hidden="true" />Taller en Santo Domingo · RD</p>
+          <p className="home-hero-kicker"><span aria-hidden="true" />Santo Domingo · República Dominicana</p>
           <h1 id="home-hero-title" className="hx-title">
             <span className="home-hero-brand">Dynatech Ingeniería<span className="sr-only"> —</span></span>{" "}
-            Fabricación y reparación de cilindros <span className="text-signal">neumáticos e hidráulicos.</span>
+            Suministro industrial y taller de <span className="text-signal">cilindros y mecanizado.</span>
           </h1>
-          <p className="hx-lead">También mecanizamos piezas bajo plano o muestra. Neumática industrial: nuestra especialidad.</p>
+          <p className="hx-lead">
+            Fabricamos y reparamos cilindros neumáticos e hidráulicos, y mecanizamos piezas con torno y fresadora.
+            Suministramos neumática, control industrial, automatización, instrumentación, resistencias y termocuplas.
+          </p>
           <div className="hx-actions" data-fab-hide="">
             <a href={whatsappGeneral()} target="_blank" rel="noopener" className="btn-primary min-h-14 px-7">
               <WhatsAppIcon className="h-5 w-5" />Cotizar por WhatsApp<ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
-          <p className="home-hero-note">Empieza con una foto de la pieza o de su placa. No necesitas todas las medidas.</p>
+          <p className="home-hero-note">Empieza con una foto de la pieza, su placa o el código. No necesitas todas las medidas.</p>
         </div>
         <nav className="hx-paths" aria-label="¿Qué necesitas?">
           <p className="hx-paths-title">¿Qué necesitas?</p>
-          <ul>
-            {ACCESOS.map((a) => {
-              const inner = (
-                <>
-                  <a.icon className="h-5 w-5 shrink-0 text-signal" aria-hidden="true" />
-                  <span><b>{a.title}</b><small>{a.text}</small></span>
-                  {a.quote
-                    ? <WhatsAppIcon className="h-4 w-4 shrink-0 hx-path-arrow" />
-                    : <ArrowUpRight className="h-4 w-4 shrink-0 hx-path-arrow" aria-hidden="true" />}
-                </>
-              );
-              return (
+          <div className="hx-group">
+            <p className="hx-group-title">Fabricación, reparación y mecanizado</p>
+            <ul>
+              {ACCESOS_TALLER.map((a) => (
                 <li key={a.title}>
-                  {a.quote
-                    ? <a href={a.href} target="_blank" rel="noopener" className="hx-path">{inner}<span className="sr-only"> (abre WhatsApp)</span></a>
-                    : <Link href={a.href} className="hx-path">{inner}</Link>}
+                  <Link href={a.href} className="hx-path">
+                    {a.icon && <a.icon className="h-5 w-5 shrink-0 text-signal" aria-hidden="true" />}
+                    <span><b>{a.title}</b><small>{a.text}</small></span>
+                    <ArrowUpRight className="h-4 w-4 shrink-0 hx-path-arrow" aria-hidden="true" />
+                  </Link>
                 </li>
-              );
-            })}
-          </ul>
+              ))}
+            </ul>
+          </div>
+          <div className="hx-group">
+            <p className="hx-group-title">Suministro industrial</p>
+            <ul className="hx-chips">
+              {ACCESOS_SUMINISTRO.map((a) => (
+                <li key={a.title}>
+                  <Link href={a.href} className="hx-chip">{a.title}<ArrowUpRight className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /></Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <a href={whatsappService("foto")} target="_blank" rel="noopener" className="hx-path hx-photo">
+            <Camera className="h-5 w-5 shrink-0 text-signal" aria-hidden="true" />
+            <span><b>Solo tengo una foto</b><small>Te ayudamos a identificar la pieza</small></span>
+            <WhatsAppIcon className="h-4 w-4 shrink-0 hx-path-arrow" />
+            <span className="sr-only"> (abre WhatsApp)</span>
+          </a>
         </nav>
       </div>
       <p className="hx-note container-max"><span>Imagen de referencia</span></p>
@@ -82,7 +101,7 @@ export function HomeHero() {
 }
 
 /**
- * Los tres trabajos de taller que se quieren vender hoy, cada uno con qué enviar y su cotización
+ * Bloque 1 · Fabricación, reparación y mecanizado: cada trabajo con qué enviar y su cotización
  * directa (mensaje propio por servicio).
  */
 const TALLER_PRINCIPAL = [
@@ -90,7 +109,7 @@ const TALLER_PRINCIPAL = [
     href: "/servicios",
     tag: "Especialidad",
     title: "Cilindros neumáticos",
-    text: "Reparamos cilindros con fugas, desgaste o golpes y fabricamos cilindros nuevos a la medida, en mm o pulgadas.",
+    text: "Reparamos cilindros con fugas, desgaste o golpes y fabricamos cilindros nuevos a la medida, en milímetros o pulgadas.",
     send: "Fotos del cilindro y su placa, o el plano.",
     icon: Cylinder,
     actions: [
@@ -102,7 +121,7 @@ const TALLER_PRINCIPAL = [
   {
     href: "/cilindros-hidraulicos",
     title: "Cilindros hidráulicos",
-    text: "Reparamos y fabricamos cilindros hidráulicos para equipos industriales.",
+    text: "Reparamos cilindros hidráulicos con fugas o daños y fabricamos cilindros nuevos para equipos industriales.",
     send: "Fotos del cilindro, conexiones y montajes, o el plano.",
     icon: Droplets,
     actions: [
@@ -114,7 +133,7 @@ const TALLER_PRINCIPAL = [
   {
     href: "/mecanizado",
     title: "Mecanizado de piezas",
-    text: "Fabricamos piezas industriales a partir de tu plano o de una muestra.",
+    text: "Torneado y fresado de piezas industriales a partir de tu plano o de una muestra, como ejes, bujes, bridas o soportes.",
     send: "El plano, o fotos de la pieza con una referencia de tamaño.",
     icon: Cog,
     actions: [{ label: "Cotizar mecanizado", href: whatsappService("mecanizado") }],
@@ -126,9 +145,9 @@ export function TallerPrincipal() {
   return (
     <Band tone="white" id="taller" labelledBy="taller-titulo">
       <SectionHead
-        kicker="01 · Taller"
+        kicker="01 · Fabricación, reparación y mecanizado"
         id="taller-titulo"
-        title={<>Reparamos, fabricamos<br /><span className="text-steel-500">y mecanizamos.</span></>}
+        title={<>Taller de cilindros<br /><span className="text-steel-500">y mecanizado.</span></>}
         intro="Elige el trabajo y escríbenos por WhatsApp con el mensaje listo. Alcance, plazo y condiciones se confirman en la cotización."
       />
       <div className="taller-grid" data-fab-hide="">
@@ -161,58 +180,94 @@ export function TallerPrincipal() {
 }
 
 /**
- * Componentes y suministro (antes «Taller y suministro»). El taller ya se presenta en #taller;
- * aquí quedan todas las líneas de componentes. Mantiene el ancla #soluciones de WEB-010.
+ * Imagen (de referencia), enlaces y cotización de cada grupo. Los enlaces apuntan a páginas y
+ * anclas existentes de SOLUCIONES; no hay productos nuevos.
  */
-export function Categorias() {
+const GRUPO_VISUAL: Record<GrupoId, { image: string; quote: string; links: { label: string; href: string }[] }> = {
+  neumatica: {
+    image: "/banners/neumatica-industrial-conectores.webp",
+    quote: whatsappService("componente"),
+    links: [{ label: "Válvulas", href: "/valvulas-neumaticas" }, { label: "Conexiones y FRL", href: "/neumatica#conexiones" }, { label: "Sellos y vástagos", href: "/sellos-y-componentes" }],
+  },
+  control: {
+    image: "/banners/control-electrico.webp",
+    quote: whatsappSolucion("Control eléctrico"),
+    links: [{ label: "Control eléctrico", href: "/control-electrico" }, { label: "Gabinetes eléctricos", href: "/gabinetes-electricos" }],
+  },
+  automatizacion: {
+    image: "/banners/sensores-fotoceldas.webp",
+    quote: whatsappSolucion("Sensores"),
+    links: [{ label: "Sensores", href: "/sensores" }, { label: "Temporizadores y contadores", href: "/control-electrico#temporizadores" }],
+  },
+  instrumentacion: {
+    image: "/banners/instrumentacion-procesos.webp",
+    quote: whatsappSolucion("Instrumentación"),
+    links: [{ label: "Presión", href: "/instrumentacion#presion" }, { label: "Temperatura", href: "/instrumentacion#temperatura" }, { label: "Flujo y nivel", href: "/instrumentacion#flujo" }],
+  },
+  resistencias: {
+    image: "/banners/resistencias-electricas-industriales.webp",
+    quote: whatsappSolucion("Resistencias eléctricas"),
+    links: [{ label: "Resistencias de cartucho", href: "/resistencias-electricas#cartucho" }, { label: "Termocuplas y RTD", href: "/resistencias-electricas#termocuplas" }],
+  },
+};
+
+/**
+ * Bloque 2 · Suministro industrial. Mantiene el ancla #soluciones (WEB-010). Control,
+ * automatización e instrumentación son solo suministro (aviso visible).
+ */
+export function SuministroIndustrial() {
   return (
-    <Band tone="light" id="soluciones" labelledBy="categorias-titulo">
+    <Band tone="light" id="soluciones" labelledBy="suministro-titulo">
       <SectionHead
-        kicker="04 · Componentes y suministro"
-        id="categorias-titulo"
-        title={<>Componentes neumáticos<br /><span className="text-steel-500">y suministro industrial.</span></>}
-        intro="Elige la línea para ver qué cotizamos. Si no la encuentras o no conoces la referencia, envíanos una foto."
+        kicker="02 · Suministro industrial"
+        id="suministro-titulo"
+        title={<>Componentes para<br /><span className="text-steel-500">tu planta.</span></>}
+        intro="Cotizamos con el código, una foto de la placa o la descripción. Elige el grupo para ver qué suministramos."
       />
-      <div className="cat-groups" data-fab-hide="">
-        <div>
-          <p className="cat-group-title">Neumática y cilindros</p>
-          <ul className="cat-list">
-            {[
-              { href: "/valvulas-neumaticas", title: "Válvulas neumáticas", short: "Direccionales y solenoides para controlar el paso del aire.", icon: GitFork },
-              { href: "/sellos-y-componentes", title: "Sellos y componentes", short: "Kits de sellos, vástagos y componentes para cilindros.", icon: Package },
-              ...SOLUCIONES.filter((s) => s.slug === "neumatica").map((s) => ({ href: `/${s.slug}`, title: s.name, short: s.short, icon: s.icon })),
-            ].map((t) => (
-              <li key={t.href}>
-                <Link href={t.href} className="cat-item">
-                  <span className="cat-icon"><t.icon className="h-5 w-5" aria-hidden="true" /></span>
-                  <span className="cat-text"><b>{t.title}</b><small>{t.short}</small></span>
-                  <ArrowUpRight className="h-4 w-4 shrink-0 cat-arrow" aria-hidden="true" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p className="cat-group-title">Suministro industrial</p>
-          <ul className="cat-list">
-            {SOLUCIONES.filter((s) => s.slug !== "neumatica").map((s) => (
-              <li key={s.slug}>
-                <Link href={`/${s.slug}`} className="cat-item">
-                  <span className="cat-icon"><s.icon className="h-5 w-5" aria-hidden="true" /></span>
-                  <span className="cat-text"><b>{s.name}</b><small>{s.short}</small></span>
-                  <ArrowUpRight className="h-4 w-4 shrink-0 cat-arrow" aria-hidden="true" />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <ul className="supply-grid" data-fab-hide="">
+        {GRUPOS_SUMINISTRO.map((g) => {
+          const v = GRUPO_VISUAL[g.id];
+          const principal = SOLUCIONES.find((s) => s.grupo === g.id)!;
+          return (
+            <li key={g.id} className="supply-card">
+              <Link href={`/${principal.slug}`} className="supply-media" tabIndex={-1} aria-hidden="true">
+                <Image src={v.image} alt="" fill sizes="(max-width: 639px) 120px, (max-width: 1023px) 50vw, 33vw" className="object-cover" />
+                <span className="img-note">Referencia</span>
+              </Link>
+              <div className="supply-body">
+                <h3><Link href={`/${principal.slug}`}>{g.title}</Link></h3>
+                <p>{g.desc}</p>
+                <div className="supply-lines">
+                  {v.links.map((l) => (
+                    <Link key={l.href} href={l.href}>{l.label}<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></Link>
+                  ))}
+                </div>
+                <a href={v.quote} target="_blank" rel="noopener" className="supply-quote">
+                  <WhatsAppIcon className="h-4 w-4" />Cotizar<span className="sr-only"> {g.title.toLowerCase()} por WhatsApp</span>
+                </a>
+              </div>
+            </li>
+          );
+        })}
+        <li className="supply-card is-cta">
+          <div className="supply-body">
+            <Camera className="h-6 w-6 text-signal" aria-hidden="true" />
+            <h3>¿No conoces la referencia?</h3>
+            <p>Envía una foto de la pieza y de su placa, y te ayudamos a identificarla.</p>
+            <a href={whatsappService("foto")} target="_blank" rel="noopener" className="supply-quote">
+              <WhatsAppIcon className="h-4 w-4" />Enviar foto por WhatsApp
+            </a>
+            <Link href="/catalogo" className="supply-all">Ver todo el catálogo <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
+          </div>
+        </li>
+      </ul>
+      <p className="supply-scope"><Info className="h-4 w-4 shrink-0" aria-hidden="true" /><span><b>Control, automatización e instrumentación:</b> {SOLO_SUMINISTRO}</span></p>
     </Band>
   );
 }
 
 const SECTORES = [
-  { icon: Wrench, title: "Mantenimiento de planta", text: "Repuestos y reparaciones para que tus máquinas vuelvan a operar: cilindros, sellos, válvulas, sensores y componentes de tablero." },
+  { icon: Wrench, title: "Mantenimiento de planta", text: "Repuestos y reparación de cilindros para que tus máquinas vuelvan a operar: cilindros, sellos, válvulas, sensores y componentes de tablero." },
   { icon: Building2, title: "Zonas francas", text: "Atendemos solicitudes de empresas de zonas francas en República Dominicana, con la referencia o la muestra de lo que necesitas." },
   { icon: Factory, title: "Industria del sector privado", text: "Fabricación bajo plano o muestra y suministro industrial para plantas de producción y proyectos." },
 ] as const;
@@ -222,14 +277,12 @@ export function Sectores() {
     <Band tone="white" labelledBy="sectores-titulo">
       <SectionHead kicker="06 · Para quién trabajamos" id="sectores-titulo" title={<>Para quien mantiene<br />la planta en marcha.</>} />
       <div className="sector-grid">
-        {SECTORES.map((s, i) => (
-          <Reveal key={s.title} delay={i * 0.05} className="h-full">
-            <article className="sector-card">
-              <s.icon className="h-6 w-6 text-signal" aria-hidden="true" />
-              <h3>{s.title}</h3>
-              <p>{s.text}</p>
-            </article>
-          </Reveal>
+        {SECTORES.map((s) => (
+          <article key={s.title} className="sector-card">
+            <s.icon className="h-6 w-6 text-signal" aria-hidden="true" />
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
         ))}
       </div>
     </Band>

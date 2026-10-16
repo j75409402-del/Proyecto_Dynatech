@@ -1,4 +1,4 @@
-import { Box, Cog, Droplets, Factory, FileText, Wrench } from "lucide-react";
+import { Box, Cog, Droplets, Factory, FileText, Ruler, Wrench } from "lucide-react";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
@@ -26,6 +26,9 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
     areaServed: { "@type": "Country", name: "República Dominicana" },
   };
   const situationIcons = hidraulico ? [Wrench, Factory] : [FileText, Box];
+  // Mecanizado: bloque «Torno y fresadora» antes de plano/muestra (numeración correlativa).
+  const procesos = s.procesos;
+  const n = (i: number) => String(i + (procesos.length ? 1 : 0)).padStart(2, "0");
   // Hidráulicos: CTA principal sin elegir aún (reparar/fabricar se elige abajo); mecanizado: directo.
   const mainQuote = whatsappService(hidraulico ? "hidraulico" : "mecanizado");
   const related: RelatedItem[] = [
@@ -50,14 +53,21 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         trust="lineas"
       />
 
+      {procesos.length > 0 && (
+        <Band tone="white" labelledBy="procesos">
+          <SectionHead kicker="01 · Qué hacemos" id="procesos" title="Torno y fresadora" intro="Para piezas nuevas y repuestos. Dinos para qué equipo es la pieza y te confirmamos si podemos hacerla." />
+          <OfferGrid columns={3} compact items={procesos.map((p, i) => ({ title: p.title, desc: p.text, icon: [Cog, Box, Ruler][i] ?? Cog }))} />
+        </Band>
+      )}
+
       <Band tone="light" labelledBy="que-cotizamos">
-        <SectionHead kicker="01 · Qué hacemos" id="que-cotizamos" title={hidraulico ? "¿Reparar o fabricar?" : "Con plano o con muestra"} />
+        <SectionHead kicker={`${n(1)} · ${procesos.length ? "Cómo empezar" : "Qué hacemos"}`} id="que-cotizamos" title={hidraulico ? "¿Reparar o fabricar?" : "Con plano o con muestra"} />
         <OfferGrid columns={2} compact items={s.situations.map((t, i) => ({ title: t, desc: s.situationDescs[i], icon: situationIcons[i], quote: whatsappService(s.services[i]) }))} />
       </Band>
 
       <div id="datos" className="scroll-mt-28">
         <QuoteChecklist
-          kicker="02 · Para cotizar"
+          kicker={`${n(2)} · Para cotizar`}
           title="Información para tu cotización"
           intro="Comparte la información disponible. Si te falta algún dato, te diremos qué hace falta."
           items={s.information.map((t) => ({ title: t }))}
@@ -69,7 +79,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
       <Band tone="white" labelledBy="evaluacion">
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <p className="section-kicker">03 · La cotización</p>
+            <p className="section-kicker">{n(3)} · La cotización</p>
             <h2 id="evaluacion" className="section-title">Qué confirmamos al cotizar</h2>
           </div>
           <div className="lg:col-span-7 lg:pt-8">
@@ -79,7 +89,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         </Reveal>
       </Band>
 
-      <FaqBlock items={landingFaqs({ name: s.name, datos: s.information, referencePhotos: false, address: CONTACT.address, hours: CONTACT.hours })} kicker="04 · Preguntas frecuentes" title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
+      <FaqBlock items={landingFaqs({ name: s.name, datos: s.information, referencePhotos: false, address: CONTACT.address, hours: CONTACT.hours })} kicker={`${n(4)} · Preguntas frecuentes`} title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
 
       <RelatedGrid kicker="Relacionado" title="Otros servicios del taller" id="servicio-relacionado" items={related} />
 

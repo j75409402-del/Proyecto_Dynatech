@@ -71,7 +71,7 @@ export default function ContactoPage() {
           <div className="lg:col-span-5">
             <p className="section-kicker">Formulario</p>
             <h2 id="formulario-titulo" className="section-title">¿Prefieres escribirnos?</h2>
-            <p className="mt-5 max-w-md leading-relaxed text-steel-300">Déjanos tu mensaje y te respondemos por correo o teléfono. Para cotizaciones, WhatsApp es la vía directa.</p>
+            <p className="mt-5 max-w-md leading-relaxed text-steel-300">Déjanos tu mensaje y te respondemos por correo o teléfono. Si tienes fotos o el plano, envíalos por WhatsApp: es la vía más rápida para cotizar.</p>
             <ul className="mt-8 space-y-3 text-[15px] text-steel-200">
               <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 bg-signal" aria-hidden="true" />Referencia, código o foto de la placa</li>
               <li className="flex gap-3"><span className="mt-2 h-2 w-2 shrink-0 bg-signal" aria-hidden="true" />Plano, muestra o medidas (mm o pulgadas)</li>

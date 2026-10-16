@@ -1,12 +1,13 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { Info } from "lucide-react";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, CheckList, type OfferItem } from "@/components/page/Blocks";
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
-import { SOLUCIONES, DATOS_PARA_COTIZAR, type Solucion } from "@/lib/soluciones";
+import { SOLUCIONES, DATOS_PARA_COTIZAR, GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, type Solucion } from "@/lib/soluciones";
 import { whatsappService, whatsappSolucion } from "@/lib/whatsapp";
 
 type Props = {
@@ -79,7 +80,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
 
       <PageHero
         crumbs={[{ label: s.name }]}
-        kicker={`Línea industrial · ${s.name}`}
+        kicker={`Suministro industrial · ${GRUPOS_SUMINISTRO.find((g) => g.id === s.grupo)?.title ?? s.name}`}
         title={s.title}
         lead={<p>{s.description}</p>}
         quoteHref={neumatica ? lineQuote : quoteHref(s.name, s.name)}
@@ -99,6 +100,9 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
           title={<>Catálogo de {s.name.toLowerCase()}</>}
           intro="Si no ves lo que buscas, envíanos el código, una foto o la descripción. Las fotos son de referencia del tipo de componente."
         />
+        {s.soloSuministro && (
+          <p className="scope-note mb-6"><Info className="h-4 w-4 shrink-0" aria-hidden="true" /><span>En esta línea {SOLO_SUMINISTRO}</span></p>
+        )}
         <nav aria-label={`Subcategorías de ${s.name}`} className="mb-8" data-fab-hide="">
           <ul className="chip-nav">
             {s.subcategorias.map((sub) => (
@@ -127,13 +131,13 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
 
       <RelatedGrid
         kicker="Otras líneas"
-        title="Más soluciones industriales"
+        title="Más suministro industrial"
         id="otras-lineas"
         items={otras.map((o) => ({ href: `/${o.slug}`, title: o.name, desc: o.short, image: o.image, label: "Ver catálogo de la línea" }))}
       />
 
       <QuoteCTA
-        eyebrow={`Líneas industriales · ${s.name}`}
+        eyebrow={`Suministro industrial · ${s.name}`}
         title={s.ctaTitle}
         text="Envíanos el código, una foto, la muestra o la descripción y te cotizamos."
         quoteItem={s.name}
