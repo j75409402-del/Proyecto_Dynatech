@@ -62,6 +62,8 @@ export type OfferItem = {
   link?: { href: string; label: string };
   /** CTA de cotización (href de lib/quote.ts). */
   quote?: string;
+  /** Sin foto: tarjeta de texto con icono pequeño, sin el panel 16:10 (oct-2026). */
+  noMedia?: boolean;
 };
 
 /** Tarjetas con imagen real (o panel técnico con icono si no hay foto). */
@@ -71,7 +73,7 @@ export function OfferGrid({ items, columns = 3, compact = false }: { items: Offe
       {items.map((it, i) => (
         <Reveal key={it.id ?? it.title} delay={(i % 3) * 0.05} className="h-full">
           <article id={it.id} className="offer-card scroll-mt-28">
-            {!(compact && !it.image) && <div className={`offer-media ${it.image ? (it.imageFit === "cover" ? "is-photo" : "is-catalog") : "is-icon"}`}>
+            {!((compact || it.noMedia) && !it.image) && <div className={`offer-media ${it.image ? (it.imageFit === "cover" ? "is-photo" : "is-catalog") : "is-icon"}`}>
               {it.image ? (
                 <Image src={it.image} alt={it.imageAlt ?? it.title} fill sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw" className={it.imageFit === "cover" ? "object-cover" : "object-contain p-5"} />
               ) : it.icon ? (
@@ -80,7 +82,7 @@ export function OfferGrid({ items, columns = 3, compact = false }: { items: Offe
               {it.image && it.imageNote && <span className="img-note">{it.imageNote}</span>}
             </div>}
             <div className="offer-body">
-              {compact && !it.image && it.icon && <span className="offer-icon"><it.icon className="h-6 w-6" aria-hidden="true" /></span>}
+              {(compact || it.noMedia) && !it.image && it.icon && <span className="offer-icon"><it.icon className="h-6 w-6" aria-hidden="true" /></span>}
               <h3>{it.title}</h3>
               <p>{it.desc}</p>
               {it.ejemplos && it.ejemplos.length > 0 && (

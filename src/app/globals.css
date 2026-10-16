@@ -899,3 +899,4 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .photo-credits > span:first-child { font-weight:600; color:#3b4652; }
 .photo-credits a { text-decoration:underline; text-underline-offset:2px; }
 .photo-credits a:hover { color:#E4002B; }
+.prod-card:not(:has(.prod-thumb)) { grid-template-columns:1fr; }

@@ -76,12 +76,12 @@ export default function ProductosPage() {
                 <ul className="prod-grid" data-fab-hide="">
                   {productos(s).map((sub) => (
                     <li key={sub.id} className="prod-card">
-                      <span className={`prod-thumb ${sub.image ? (sub.imageFit === "cover" ? "is-photo" : "") : "is-icon"}`}>
-                        {sub.image
-                          ? <Image src={sub.image} alt={sub.imageAlt ?? sub.title} fill sizes="96px" className={sub.imageFit === "cover" ? "object-cover" : "object-contain p-2"} />
-                          : <sub.icon className="h-7 w-7" aria-hidden="true" strokeWidth={1.4} />}
-                        {sub.image && sub.imageNote && <span className="prod-note">{sub.imageNote}</span>}
-                      </span>
+                      {sub.image && (
+                        <span className={`prod-thumb ${sub.imageFit === "cover" ? "is-photo" : ""}`}>
+                          <Image src={sub.image} alt={sub.imageAlt ?? sub.title} fill sizes="96px" className={sub.imageFit === "cover" ? "object-cover" : "object-contain p-2"} />
+                          {sub.imageNote && <span className="prod-note">{sub.imageNote}</span>}
+                        </span>
+                      )}
                       <div className="prod-body">
                         <h4>{sub.title}</h4>
                         <p>{sub.desc}</p>

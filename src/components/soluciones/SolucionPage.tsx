@@ -65,6 +65,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
     imageAlt: sub.imageAlt,
     imageFit: sub.imageFit,
     imageNote: sub.imageNote,
+    noMedia: !sub.image,
     ejemplos: sub.ejemplos,
     ...(sub.href
       ? { link: { href: sub.href, label: linkLabel(sub.href, sub.title) } }
