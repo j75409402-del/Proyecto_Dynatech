@@ -10,8 +10,7 @@ import { CYLINDER_PARTS } from "@/lib/industrial-scenes";
 import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
 import { WorkRail } from "@/components/industrial/WorkRail";
 import { Band, SectionHead } from "@/components/page/Blocks";
-import { TRABAJOS_NEUMATICOS } from "@/lib/trabajos-neumaticos";
-import { TallerGallery } from "@/components/industrial/TallerGallery";
+import { TRABAJOS_TALLER } from "@/lib/trabajos-taller";
 import { Reveal } from "@/components/motion/Reveal";
 
 const DETALLE: Record<string, string> = { fabricacion: "Ver tipos de cilindro", reparacion: "Ver reparación de cilindros", "kits-de-sellos": "Ver sellos y componentes" };
@@ -79,26 +78,31 @@ export function ComoTrabajamos() {
 
 /** Antes/después con las fotos ya publicadas (mismo caso que /cilindros-neumaticos). */
 /**
- * Pasarela «Cilindros neumáticos: trabajos de nuestro taller», justo debajo de la portada (oct-2026).
- * Solo fotos reales confirmadas (src/lib/trabajos-neumaticos.ts). Cierra con el flujo de WhatsApp de cilindros.
+ * Pasarela «trabajos de nuestro taller», justo debajo de la portada (oct-2026).
+ * Fotos y videos reales confirmados (src/lib/trabajos-taller.ts): cilindros neumáticos e hidráulicos.
+ * Cada imagen sale una sola vez en la portada: la galería de hidráulicos de más abajo se retiró.
  */
-export function TrabajosNeumaticos() {
+export function TrabajosTaller() {
   return (
-    <Band tone="light" id="trabajos-neumaticos" labelledBy="trabajos-neumaticos-titulo" className="work-band">
+    <Band tone="light" id="trabajos-taller" labelledBy="trabajos-taller-titulo" className="work-band">
       <SectionHead
         kicker="Trabajos reales"
-        id="trabajos-neumaticos-titulo"
-        title="Cilindros neumáticos: trabajos de nuestro taller"
-        intro="Conoce algunos de nuestros trabajos de fabricación y reparación de cilindros neumáticos."
+        id="trabajos-taller-titulo"
+        title="Cilindros: trabajos de nuestro taller"
+        intro="Conoce algunos de nuestros trabajos de fabricación y reparación de cilindros neumáticos e hidráulicos."
       />
-      <div className={`work-body ${TRABAJOS_NEUMATICOS.length < 3 ? "is-few" : ""}`}>
-      <WorkRail items={TRABAJOS_NEUMATICOS} label="Fotos de trabajos de cilindros neumáticos" />
-      <div className="work-cta" data-fab-hide="">
-        <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
-          <WhatsAppIcon className="h-4 w-4" />Cotizar un cilindro neumático<ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </a>
-        <Link href="/cilindros-neumaticos" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium hover:text-signal">Ver cilindros neumáticos <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
-      </div>
+      <div className={`work-body ${TRABAJOS_TALLER.length < 3 ? "is-few" : ""}`}>
+        <WorkRail items={TRABAJOS_TALLER} label="Fotos y videos de trabajos del taller" />
+        <div className="work-cta" data-fab-hide="">
+          <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
+            <WhatsAppIcon className="h-4 w-4" />Cotizar un cilindro neumático<ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+          <a href={whatsappService("hidraulico")} target="_blank" rel="noopener" className="btn-secondary min-h-12 px-6">
+            <WhatsAppIcon className="h-4 w-4" />Cotizar un cilindro hidráulico
+          </a>
+          <Link href="/cilindros-hidraulicos" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium hover:text-signal">Ver cilindros hidráulicos <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
+          <Link href="/mecanizado" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium hover:text-signal">Ver mecanizado <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
+        </div>
       </div>
     </Band>
   );
@@ -122,22 +126,7 @@ export function AntesDespues() {
             <a href={whatsappService("neumatico-reparar")} target="_blank" rel="noopener" className="btn-primary min-h-12 shrink-0 px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: reparación de cilindro neumático</span></a>
           </div>
         </Reveal>
-        {/* Oct-2026: la foto real de cilindros neumáticos pasó a la pasarela bajo la portada (TrabajosNeumaticos). */}
-        <div className="taller-work">
-          <div className="taller-work-head">
-            <div>
-              <p className="section-kicker">Cilindros hidráulicos</p>
-              <h3>Así se trabaja en el taller</h3>
-            </div>
-            <p>Trabajo real de nuestro taller en Santo Domingo. Envíanos el plano o la pieza original y te cotizamos.</p>
-          </div>
-          <TallerGallery />
-          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2" data-fab-hide="">
-            <a href={whatsappService("hidraulico")} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6"><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: cilindro hidráulico</span></a>
-            <Link href="/cilindros-hidraulicos" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium hover:text-signal">Ver cilindros hidráulicos <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
-            <Link href="/mecanizado" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium hover:text-signal">Ver mecanizado <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
-          </div>
-        </div>
+        {/* Oct-2026: la foto real de cilindros neumáticos y las fotos y videos de hidráulicos pasaron a la pasarela bajo la portada (TrabajosTaller). */}
       </div>
     </section>
   );

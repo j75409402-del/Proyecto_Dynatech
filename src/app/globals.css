@@ -928,8 +928,9 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .work-rail-wrap.is-single .work-rail { grid-auto-columns:100%; }
 @media(min-width:768px){ .work-rail { grid-auto-columns:calc((100% - (var(--per-view) - 1) * 16px) / var(--per-view)); gap:16px; margin:0; padding:0; scroll-padding-inline:0; } }
 .work-rail figure { margin:0; }
-.work-rail-photo { position:relative; display:block; width:100%; aspect-ratio:3/2; overflow:hidden; background:#0b1016; cursor:zoom-in; }
+.work-rail-photo { position:relative; display:block; width:100%; aspect-ratio:3/4; overflow:hidden; background:#0b1016; cursor:zoom-in; }
 .work-rail-photo:focus-visible { outline:3px solid theme("colors.signal.DEFAULT"); outline-offset:3px; }
+.work-rail-photo.is-video { cursor:auto; }
 .work-rail-zoom { position:absolute; top:10px; right:10px; width:34px; height:34px; display:grid; place-items:center; background:#0b1016cc; color:#fff; }
 .work-rail figcaption { margin-top:10px; font-size:15px; line-height:1.45; color:#2b3540; }
 .work-rail-label { display:block; margin-bottom:2px; font-family:var(--font-mono),ui-monospace,monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#5b6875; }
