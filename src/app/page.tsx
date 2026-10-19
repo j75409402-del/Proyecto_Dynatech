@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { HomeHero, TallerPrincipal, SuministroIndustrial, Sectores } from "@/components/home/HomeSections";
-import { CilindrosDestacados, ComoTrabajamos, AntesDespues } from "@/components/home/IndustrialSections";
+import { CilindrosDestacados, ComoTrabajamos, AntesDespues, TrabajosNeumaticos } from "@/components/home/IndustrialSections";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { CONTACT } from "@/lib/constants";
@@ -42,6 +42,7 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
+      <TrabajosNeumaticos />
       <TallerPrincipal />
       <SuministroIndustrial />
       <AntesDespues />

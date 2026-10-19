@@ -4,11 +4,13 @@ import { ArrowRight, ArrowUpRight, Box, Camera, FileText, Ruler } from "lucide-r
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { quoteHref } from "@/components/cta/QuoteCTA";
 import { SERVICIOS, COMPONENTES } from "@/lib/servicios";
-import { whatsappService } from "@/lib/whatsapp";
+import { whatsappService, whatsappCylinderService } from "@/lib/whatsapp";
 import type { QuoteService } from "@/lib/quote";
 import { CYLINDER_PARTS } from "@/lib/industrial-scenes";
 import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
-import { RealWorkPhoto } from "@/components/industrial/RealWorkPhoto";
+import { WorkRail } from "@/components/industrial/WorkRail";
+import { Band, SectionHead } from "@/components/page/Blocks";
+import { TRABAJOS_NEUMATICOS } from "@/lib/trabajos-neumaticos";
 import { TallerGallery } from "@/components/industrial/TallerGallery";
 import { Reveal } from "@/components/motion/Reveal";
 
@@ -76,6 +78,32 @@ export function ComoTrabajamos() {
 }
 
 /** Antes/después con las fotos ya publicadas (mismo caso que /cilindros-neumaticos). */
+/**
+ * Pasarela «Cilindros neumáticos: trabajos de nuestro taller», justo debajo de la portada (oct-2026).
+ * Solo fotos reales confirmadas (src/lib/trabajos-neumaticos.ts). Cierra con el flujo de WhatsApp de cilindros.
+ */
+export function TrabajosNeumaticos() {
+  return (
+    <Band tone="light" id="trabajos-neumaticos" labelledBy="trabajos-neumaticos-titulo" className="work-band">
+      <SectionHead
+        kicker="Trabajos reales"
+        id="trabajos-neumaticos-titulo"
+        title="Cilindros neumáticos: trabajos de nuestro taller"
+        intro="Conoce algunos de nuestros trabajos de fabricación y reparación de cilindros neumáticos."
+      />
+      <div className={`work-body ${TRABAJOS_NEUMATICOS.length < 3 ? "is-few" : ""}`}>
+      <WorkRail items={TRABAJOS_NEUMATICOS} label="Fotos de trabajos de cilindros neumáticos" />
+      <div className="work-cta" data-fab-hide="">
+        <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
+          <WhatsAppIcon className="h-4 w-4" />Cotizar un cilindro neumático<ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </a>
+        <Link href="/cilindros-neumaticos" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium hover:text-signal">Ver cilindros neumáticos <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
+      </div>
+      </div>
+    </Band>
+  );
+}
+
 export function AntesDespues() {
   return (
     <section className="section-pad border-b border-black/10 bg-white" aria-labelledby="antes-despues-inicio">
@@ -94,15 +122,7 @@ export function AntesDespues() {
             <a href={whatsappService("neumatico-reparar")} target="_blank" rel="noopener" className="btn-primary min-h-12 shrink-0 px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: reparación de cilindro neumático</span></a>
           </div>
         </Reveal>
-        <Reveal className="real-work">
-          <RealWorkPhoto />
-          <div className="real-work-text">
-            <p className="section-kicker">Cilindros neumáticos</p>
-            <h3>Cilindros neumáticos del taller</h3>
-            <p>Fabricamos cilindros neumáticos a partir de tu plano, una muestra o tus medidas, en milímetros o en pulgadas. Envía una foto del cilindro que necesitas reemplazar.</p>
-            <a href={whatsappService("neumatico-fabricar")} target="_blank" rel="noopener" className="btn-primary min-h-12 self-start px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: fabricación de cilindro neumático</span></a>
-          </div>
-        </Reveal>
+        {/* Oct-2026: la foto real de cilindros neumáticos pasó a la pasarela bajo la portada (TrabajosNeumaticos). */}
         <div className="taller-work">
           <div className="taller-work-head">
             <div>

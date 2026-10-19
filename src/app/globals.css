@@ -906,3 +906,43 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .photo-credits a { text-decoration:underline; text-underline-offset:2px; }
 .photo-credits a:hover { color:#E4002B; }
 .prod-card:not(:has(.prod-thumb)) { grid-template-columns:1fr; }
+
+
+/* ── Pasarela «Cilindros neumáticos: trabajos de nuestro taller» (portada, oct-2026) ──
+   Fotos reales; sin movimiento automático. Móvil: deslizar con la siguiente foto asomando.
+   Computadora: hasta 3 fotos a la vez con flechas. Visor (<dialog>) para ampliar. */
+.work-body { display:grid; gap:28px; }
+@media(min-width:1024px){ .work-body.is-few { grid-template-columns:minmax(0,720px) minmax(0,1fr); align-items:end; gap:48px; } .work-body.is-few .work-cta { flex-direction:column; align-items:flex-start; } }
+.work-rail-wrap { min-width:0; }
+.work-rail-nav { display:none; }
+@media(min-width:768px){ .work-rail-nav { display:flex; justify-content:flex-end; gap:8px; margin-bottom:16px; } }
+.work-rail-nav button { width:44px; height:44px; display:grid; place-items:center; border:1px solid #0b0d1026; background:#fff; color:#0b0d10; }
+.work-rail-nav button:hover:not(:disabled) { border-color:#0b0d10; }
+.work-rail-nav button:disabled { opacity:.35; cursor:default; }
+.work-rail { display:grid; grid-auto-flow:column; grid-auto-columns:82%; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:none; margin:0 -16px; padding:0 16px; scroll-padding-inline:16px; list-style:none; }
+.work-rail::-webkit-scrollbar { display:none; }
+.work-rail > li { scroll-snap-align:start; min-width:0; }
+.work-rail-wrap.is-single .work-rail { grid-auto-columns:100%; }
+@media(min-width:768px){ .work-rail { grid-auto-columns:calc((100% - (var(--per-view) - 1) * 16px) / var(--per-view)); gap:16px; margin:0; padding:0; scroll-padding-inline:0; } }
+.work-rail figure { margin:0; }
+.work-rail-photo { position:relative; display:block; width:100%; aspect-ratio:3/2; overflow:hidden; background:#0b1016; cursor:zoom-in; }
+.work-rail-photo:focus-visible { outline:3px solid theme("colors.signal.DEFAULT"); outline-offset:3px; }
+.work-rail-zoom { position:absolute; top:10px; right:10px; width:34px; height:34px; display:grid; place-items:center; background:#0b1016cc; color:#fff; }
+.work-rail figcaption { margin-top:10px; font-size:15px; line-height:1.45; color:#2b3540; }
+.work-rail-label { display:block; margin-bottom:2px; font-family:var(--font-mono),ui-monospace,monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#5b6875; }
+.work-cta { display:flex; flex-wrap:wrap; align-items:center; gap:8px 24px; }
+.work-viewer { position:fixed; inset:0; margin:0; padding:0; border:0; width:100vw; max-width:100vw; height:100dvh; max-height:100dvh; background:#05080bf5; color:#fff; }
+.work-viewer[open] { display:grid; place-items:center; }
+.work-viewer::backdrop { background:#05080bf2; }
+.work-viewer figure { margin:0; display:flex; flex-direction:column; align-items:center; gap:12px; padding:16px; }
+.work-viewer-frame { overflow:hidden; cursor:zoom-in; }
+.work-viewer-frame.is-zoomed { cursor:zoom-out; }
+.work-viewer-img { display:block; width:auto; height:auto; max-width:min(1100px, calc(100vw - 32px)); max-height:calc(100dvh - 150px); transition:transform .2s ease; }
+@media (prefers-reduced-motion: reduce){ .work-viewer-img { transition:none; } }
+.work-viewer figcaption { display:flex; flex-wrap:wrap; justify-content:center; gap:4px 12px; text-align:center; font-size:15px; color:#dfe6ec; }
+.work-viewer .work-rail-label { margin:0; color:#a9b7c4; }
+.work-viewer-hint { width:100%; font-size:13px; color:#8d9aa6; }
+.work-viewer-close, .work-viewer-prev, .work-viewer-next { position:fixed; width:48px; height:48px; display:grid; place-items:center; background:#0b1016cc; color:#fff; border:1px solid #ffffff40; }
+.work-viewer-close { top:12px; right:12px; }
+.work-viewer-prev { left:12px; top:50%; transform:translateY(-50%); }
+.work-viewer-next { right:12px; top:50%; transform:translateY(-50%); }
