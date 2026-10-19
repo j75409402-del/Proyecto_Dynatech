@@ -29,14 +29,15 @@ export type TrabajoNeumatico = {
 
 export const TRABAJOS_NEUMATICOS: readonly TrabajoNeumatico[] = [
   {
-    // Confirmada por el dueño el 15-oct-2026.
+    // Confirmada por el dueño el 15-oct-2026. El 19-oct indicó: el de la derecha (oxidado) fue la muestra
+    // para fabricar cilindros nuevos; medida 160 x 150 (diámetro x carrera, mm). Sin cantidad en el pie (dijo «tres»; la foto muestra cuatro).
     src: "/cilindros/trabajo-real-cilindros-dynatech-recorte.jpg",
     width: 915,
     height: 549,
     full: "/cilindros/trabajo-real-cilindros-dynatech.jpg",
     fullWidth: 960,
     fullHeight: 1280,
-    alt: "Cuatro cilindros neumáticos y un cilindro usado, alineados sobre el piso del taller de Dynatech",
-    caption: "Cilindros neumáticos en nuestro taller.",
+    alt: "Cilindros neumáticos nuevos fabricados en el taller de Dynatech junto al cilindro oxidado que sirvió de muestra",
+    caption: "A la derecha, el cilindro oxidado que nos dieron de muestra; a la izquierda, los nuevos que fabricamos. 160 x 150 mm.",
   },
 ];

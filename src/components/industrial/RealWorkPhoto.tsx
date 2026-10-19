@@ -18,7 +18,7 @@ export function RealWorkPhoto({ className = "", sizes = "(max-width: 767px) 100v
       <div className="real-work-frame">
         <Image
           src="/cilindros/trabajo-real-cilindros-dynatech-recorte.jpg"
-          alt="Cuatro cilindros neumáticos y un cilindro usado, alineados sobre el piso del taller"
+          alt="Cilindros neumáticos nuevos fabricados en el taller de Dynatech junto al cilindro oxidado que sirvió de muestra"
           width={915}
           height={549}
           sizes={sizes}
@@ -27,7 +27,7 @@ export function RealWorkPhoto({ className = "", sizes = "(max-width: 767px) 100v
       </div>
       <figcaption>
         <span className="real-work-label">Foto real · taller Dynatech</span>
-        <span className="block">Cilindros neumáticos en nuestro taller.</span>
+        <span className="block">A la derecha, el cilindro oxidado que nos dieron de muestra; a la izquierda, los nuevos que fabricamos. 160 x 150 mm.</span>
       </figcaption>
     </figure>
   );
