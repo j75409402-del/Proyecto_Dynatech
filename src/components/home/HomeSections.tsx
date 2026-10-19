@@ -1,3 +1,5 @@
+import { SupplyRail } from "@/components/home/SupplyRail";
+import { VITRINA_SUMINISTRO } from "@/lib/vitrina-suministro";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Building2, Camera, Cog, Droplets, Factory, Wrench, Cylinder, Info, type LucideIcon } from "lucide-react";
@@ -38,9 +40,7 @@ const ACCESOS_SUMINISTRO: Acceso[] = [
 export function HomeHero() {
   return (
     <section className="hx" aria-labelledby="home-hero-title">
-      <div className="hx-media" aria-hidden="true">
-        <Image src="/banners/cilindros-taller-wide.webp" alt="" fill priority sizes="100vw" className="object-cover" style={{ objectPosition: "60% 40%" }} />
-      </div>
+      {/* Oct-2026: sin foto de fondo (se repetía en el visor 3D más abajo); la imagen la ponen los suministros. */}
       <div className="hx-shade" aria-hidden="true" />
       <div className="container-max hx-inner">
         <div className="hx-copy">
@@ -59,6 +59,7 @@ export function HomeHero() {
             </a>
           </div>
           <p className="home-hero-note">Empieza con una foto de la pieza, su placa o el código. No necesitas todas las medidas.</p>
+          <SupplyRail items={VITRINA_SUMINISTRO} />
         </div>
         <nav className="hx-paths" aria-label="¿Qué necesitas?">
           <p className="hx-paths-title">¿Qué necesitas?</p>
@@ -94,7 +95,6 @@ export function HomeHero() {
           </a>
         </nav>
       </div>
-      <p className="hx-note container-max"><span>Imagen de referencia</span></p>
       <TrustStrip variant="cilindros" />
     </section>
   );

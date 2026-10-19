@@ -950,3 +950,33 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .work-viewer-close { top:12px; right:12px; }
 .work-viewer-prev { left:12px; top:50%; transform:translateY(-50%); }
 .work-viewer-next { right:12px; top:50%; transform:translateY(-50%); }
+
+
+/* ── Pasarela de suministros en la portada (oct-2026) ──
+   Fotos de catálogo sobre fondo blanco, en el bloque de texto del hero. Avanza sola despacio;
+   se detiene al pasar el ratón, al enfocar o al tocar; botón de pausa. */
+.sx { margin-top:28px; padding-top:18px; border-top:1px solid #ffffff1a; min-width:0; }
+.sx-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.sx-title { font-family:var(--font-mono),ui-monospace,monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:#c7d2db; }
+.sx-title span { color:#7f8d9a; }
+.sx-controls { display:flex; gap:6px; flex-shrink:0; }
+.sx-controls button { width:40px; height:40px; display:grid; place-items:center; border:1px solid #ffffff2e; color:#f0f3f5; background:transparent; transition:border-color .2s; }
+.sx-controls button:hover { border-color:#E4002B; }
+.sx-track { display:grid; grid-auto-flow:column; grid-auto-columns:42%; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; overscroll-behavior-x:contain; scrollbar-width:none; list-style:none; margin:0; padding:0 0 2px; }
+.sx-track::-webkit-scrollbar { display:none; }
+.sx-track > li { scroll-snap-align:start; min-width:0; }
+@media(min-width:640px){ .sx-track { grid-auto-columns:calc((100% - 30px) / 4); } }
+.sx-card { display:block; }
+.sx-tile { position:relative; display:block; aspect-ratio:1; background:#fff; overflow:hidden; }
+.sx-tile img { padding:10px; }
+.sx-card small { display:block; margin-top:10px; font-family:var(--font-mono),ui-monospace,monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#8796a3; }
+.sx-card b { display:block; margin-top:2px; font-size:14px; font-weight:500; line-height:1.3; color:#f5f7f9; transition:color .2s; }
+.sx-card:hover b, .sx-card:focus-visible b { color:#ff5a75; }
+.sx-card:focus-visible { outline:2px solid #E4002B; outline-offset:3px; }
+@media(min-width:1024px){
+  /* Con la pasarela de suministros en la columna de texto: arriba alineado y título algo menor para que quepa en la primera pantalla. */
+  .hx-inner { align-items:start; padding-top:48px; padding-bottom:40px; min-height:0; }
+  .hx-title { font-size:clamp(2.7rem,3.6vw,3.6rem); }
+  .hx-lead { font-size:17px; }
+  .hx-paths { margin-top:8px; }
+}
