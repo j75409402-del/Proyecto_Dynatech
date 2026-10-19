@@ -27,7 +27,7 @@ export function RealWorkPhoto({ className = "", sizes = "(max-width: 767px) 100v
       </div>
       <figcaption>
         <span className="real-work-label">Foto real · taller Dynatech</span>
-        <span className="block">A la derecha, el cilindro oxidado que nos dieron de muestra; a la izquierda, los nuevos que fabricamos. 160 x 150 mm.</span>
+        <span className="block">Antes y después: el cliente trajo el cilindro oxidado (a la derecha) y fabricamos los nuevos. 160 x 150 mm.</span>
       </figcaption>
     </figure>
   );
