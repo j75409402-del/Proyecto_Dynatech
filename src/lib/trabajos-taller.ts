@@ -36,13 +36,13 @@ export const TRABAJOS_TALLER: readonly TrabajoTaller[] = [
     caption: "Cilindro hidráulico fabricado en nuestro taller.",
   },
   {
-    // Foto enviada por el dueño (15-oct); el 19-oct indicó que es la fabricación de un cilindro hidráulico.
+    // Foto enviada por el dueño (15-oct); el 19-oct pidió el pie «Fabricación de eje».
     kind: "foto",
     src: "/taller/torno-eje-fresadora.jpg",
     width: 768,
     height: 1024,
-    alt: "Fabricación de un cilindro hidráulico en el torno del taller de Dynatech; al fondo, la fresadora",
-    caption: "Fabricación de un cilindro hidráulico.",
+    alt: "Fabricación de un eje en el torno del taller de Dynatech; al fondo, la fresadora",
+    caption: "Fabricación de eje.",
   },
   {
     kind: "foto",

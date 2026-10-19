@@ -11,8 +11,8 @@ export const TALLER_FOTOS = [
     src: "/taller/torno-eje-fresadora.jpg",
     width: 768,
     height: 1024,
-    alt: "Fabricación de un cilindro hidráulico en el torno del taller de Dynatech; al fondo, la fresadora",
-    caption: "Fabricación de un cilindro hidráulico.",
+    alt: "Fabricación de un eje en el torno del taller de Dynatech; al fondo, la fresadora",
+    caption: "Fabricación de eje.",
   },
   {
     src: "/taller/torno-pieza-larga-polipasto.jpg",
