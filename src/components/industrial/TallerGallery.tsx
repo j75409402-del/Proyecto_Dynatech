@@ -23,11 +23,28 @@ export const TALLER_FOTOS = [
   },
 ] as const;
 
+/** Videos reales (sin sonido, sin reproducción automática; solo se descargan al darle play). */
+export const TALLER_VIDEOS = [
+  {
+    src: "/taller/torno-eje-video.mp4",
+    poster: "/taller/torno-eje-video-poster.jpg",
+    label: "Video real del taller: cilindro hidráulico en el torno",
+    caption: "Trabajo real, grabado en el taller.",
+  },
+  {
+    // Enviado por el dueño el 19-oct-2026: «cilindro hidráulico fabricado». Comprimido (56 s, 4,6 MB, sin audio).
+    src: "/taller/cilindro-hidraulico-fabricado-video.mp4",
+    poster: "/taller/cilindro-hidraulico-fabricado-poster.jpg",
+    label: "Video real del taller: cilindro hidráulico fabricado en el torno",
+    caption: "Cilindro hidráulico fabricado en nuestro taller.",
+  },
+] as const;
+
 type Src = (typeof TALLER_FOTOS)[number]["src"];
 
 export function TallerGallery({ video = true, omitir = [] }: { video?: boolean; /** Fotos que ya están en el hero de la página. */ omitir?: Src[] }) {
   return (
-    <div className="taller-gallery">
+    <div className={`taller-gallery ${TALLER_FOTOS.length - omitir.length + (video ? TALLER_VIDEOS.length : 0) >= 4 ? "cols-4" : ""}`}>
       {TALLER_FOTOS.filter((f) => !omitir.includes(f.src)).map((f) => (
         <figure key={f.src}>
           <div className="taller-gallery-frame">
@@ -37,12 +54,12 @@ export function TallerGallery({ video = true, omitir = [] }: { video?: boolean; 
           <figcaption>{f.caption}</figcaption>
         </figure>
       ))}
-      {video && (
-        <figure>
+      {video && TALLER_VIDEOS.map((v) => (
+        <figure key={v.src}>
           <div className="taller-gallery-frame">
             <video
-              src="/taller/torno-eje-video.mp4"
-              poster="/taller/torno-eje-video-poster.jpg"
+              src={v.src}
+              poster={v.poster}
               controls
               playsInline
               muted
@@ -50,13 +67,13 @@ export function TallerGallery({ video = true, omitir = [] }: { video?: boolean; 
               width={480}
               height={848}
               className="h-full w-full object-cover"
-              aria-label="Video real del taller: cilindro hidráulico en el torno"
+              aria-label={v.label}
             />
             <span className="img-note is-real is-top">Video real · taller Dynatech</span>
           </div>
-          <figcaption>Trabajo real, grabado en el taller.</figcaption>
+          <figcaption>{v.caption}</figcaption>
         </figure>
-      )}
+      ))}
     </div>
   );
 }
