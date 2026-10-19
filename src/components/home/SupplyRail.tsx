@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import type { VitrinaItem } from "@/lib/vitrina-suministro";
 
 /**
@@ -65,17 +65,17 @@ export function SupplyRail({ items }: { items: VitrinaItem[] }) {
       <div className="sx-head">
         <p className="sx-title">Lo que suministramos <span>· Imágenes de referencia</span></p>
         <div className="sx-controls" data-fab-hide="">
-          <button type="button" onClick={() => manual(-1)} aria-label="Productos anteriores"><ChevronLeft className="h-4 w-4" aria-hidden="true" /></button>
+          <button type="button" onClick={() => manual(-1)} aria-label="Categorías anteriores"><ChevronLeft className="h-4 w-4" aria-hidden="true" /></button>
           <button type="button" onClick={() => setPaused((p) => !p)} aria-label={paused ? "Reanudar el desplazamiento" : "Pausar el desplazamiento"}>
             {paused ? <Play className="h-4 w-4" aria-hidden="true" /> : <Pause className="h-4 w-4" aria-hidden="true" />}
           </button>
-          <button type="button" onClick={() => manual(1)} aria-label="Productos siguientes"><ChevronRight className="h-4 w-4" aria-hidden="true" /></button>
+          <button type="button" onClick={() => manual(1)} aria-label="Categorías siguientes"><ChevronRight className="h-4 w-4" aria-hidden="true" /></button>
         </div>
       </div>
       <ul
         ref={track}
         className="sx-track"
-        aria-label="Productos que suministramos"
+        aria-label="Categorías que suministramos"
         onPointerDown={() => setPaused(true)}
         onWheel={(e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) setPaused(true); }}
       >
@@ -85,8 +85,8 @@ export function SupplyRail({ items }: { items: VitrinaItem[] }) {
               <span className="sx-tile">
                 <Image src={it.image} alt="" fill sizes="(max-width: 639px) 42vw, (max-width: 1023px) 30vw, 180px" loading={i < 4 ? "eager" : "lazy"} className="object-contain" />
               </span>
-              <small>{it.grupo}</small>
               <b>{it.title}</b>
+              <small>Ver todo <ArrowUpRight className="inline h-3.5 w-3.5" aria-hidden="true" /></small>
             </Link>
           </li>
         ))}

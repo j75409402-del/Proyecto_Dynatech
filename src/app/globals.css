@@ -969,8 +969,8 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 .sx-card { display:block; }
 .sx-tile { position:relative; display:block; aspect-ratio:1; background:#fff; overflow:hidden; }
 .sx-tile img { padding:10px; }
-.sx-card small { display:block; margin-top:10px; font-family:var(--font-mono),ui-monospace,monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#8796a3; }
-.sx-card b { display:block; margin-top:2px; font-size:14px; font-weight:500; line-height:1.3; color:#f5f7f9; transition:color .2s; }
+.sx-card small { display:block; margin-top:4px; font-family:var(--font-mono),ui-monospace,monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#8796a3; }
+.sx-card b { display:block; margin-top:10px; font-size:15px; font-weight:500; line-height:1.3; color:#f5f7f9; transition:color .2s; }
 .sx-card:hover b, .sx-card:focus-visible b { color:#ff5a75; }
 .sx-card:focus-visible { outline:2px solid #E4002B; outline-offset:3px; }
 @media(min-width:1024px){

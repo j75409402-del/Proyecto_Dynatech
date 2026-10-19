@@ -1,35 +1,25 @@
-import { GRUPOS_SUMINISTRO, SOLUCIONES } from "./soluciones";
+import { GRUPOS_SUMINISTRO, SOLUCIONES, type GrupoId } from "./soluciones";
 
 /**
- * Pasarela de suministros en la portada (pedido del dueño, 19-oct-2026): fotos del catálogo de las
- * líneas que suministramos. Todo sale de soluciones.ts (fuente única): título, foto y enlace.
+ * Pasarela de suministros en la portada (pedido del dueño, 19-oct-2026): una tarjeta por CATEGORÍA
+ * (no por producto). Cada una lleva a la página de la línea, donde se ve todo lo que suministramos.
+ * Nombres y enlaces salen de soluciones.ts (fuente única); la foto es una del catálogo de esa línea.
  *
- * Excluidas a propósito: fotos con marcas de terceros visibles (fusibles NH, temporizador, manómetro,
- * contactor), fotos con crédito obligatorio (Wikimedia) y las ilustraciones IA (termocupla, RTD, alambre).
- * Ninguna de estas fotos se usa en otra sección de la portada.
+ * Fotos elegidas sin marcas de terceros visibles, sin crédito obligatorio y que no son ilustraciones IA.
+ * Ninguna se usa en otra sección de la portada (la sección 02 usa otras imágenes).
  */
-const PICKS = [
-  ["neumatica", "valvulas"],
-  ["neumatica", "frl"],
-  ["neumatica", "conexiones"],
-  ["control-electrico", "mando-y-senalizacion"],
-  ["sensores", "inductivos"],
-  ["sensores", "fotoelectricos"],
-  ["instrumentacion", "temperatura"],
-  ["resistencias-electricas", "cartucho"],
-] as const;
+const FOTO: Record<GrupoId, string> = {
+  neumatica: "/products/unidades-frl-smc.jpg",
+  control: "/products/pulsadores-selectores-autonics.jpg",
+  automatizacion: "/products/sensores-fotoelectricos.jpg",
+  instrumentacion: "/products/temperatura-teltru.jpg",
+  resistencias: "/products/resistencia-de-cartucho-real.jpg",
+};
 
-export type VitrinaItem = { key: string; title: string; grupo: string; image: string; href: string };
+export type VitrinaItem = { key: string; title: string; image: string; href: string };
 
-export const VITRINA_SUMINISTRO: VitrinaItem[] = PICKS.map(([slug, id]) => {
-  const linea = SOLUCIONES.find((s) => s.slug === slug);
-  const sub = linea?.subcategorias.find((x) => x.id === id);
-  if (!linea || !sub?.image) throw new Error(`Vitrina: falta ${slug}#${id} o su foto en soluciones.ts`);
-  return {
-    key: `${slug}-${id}`,
-    title: sub.title,
-    grupo: GRUPOS_SUMINISTRO.find((g) => g.id === linea.grupo)?.title ?? linea.name,
-    image: sub.image,
-    href: sub.href ?? `/${slug}#${id}`,
-  };
+export const VITRINA_SUMINISTRO: VitrinaItem[] = GRUPOS_SUMINISTRO.map((g) => {
+  const principal = SOLUCIONES.find((s) => s.grupo === g.id);
+  if (!principal) throw new Error(`Vitrina: no hay línea para la categoría ${g.id}`);
+  return { key: g.id, title: g.title, image: FOTO[g.id], href: `/${principal.slug}` };
 });
