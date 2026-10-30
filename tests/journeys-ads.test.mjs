@@ -1,4 +1,4 @@
-// Los cinco recorridos hacia WhatsApp (portada → «¿Qué necesitas?» → página → «Cotizar por WhatsApp»),
+// Los cinco recorridos hacia WhatsApp (portada → categorías o servicios → página → «Cotizar por WhatsApp»),
 // en escritorio y emulación móvil, con y sin parámetros de anuncio pagado (google/cpc).
 // Comprueba: el acceso es visible, el mensaje de WhatsApp es el del servicio, la frase
 // «Vengo de un anuncio de Google» aparece solo en la visita pagada y el servidor envía exactamente
@@ -27,11 +27,11 @@ if (useMock) {
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 const JOURNEYS = [
-  { id: 1, name: 'Reparar un cilindro neumático', access: 'Reparar un cilindro neumático', path: '/servicios', service: 'neumatico-reparar', text: /reparación de un cilindro neumático/ },
-  { id: 2, name: 'Fabricar un cilindro hidráulico', access: 'Cilindro hidráulico', path: '/cilindros-hidraulicos', service: 'hidraulico', text: /un cilindro hidráulico[\s\S]*¿Reparar o fabricar\?/ },
-  { id: 3, name: 'Mecanizar una pieza bajo plano o muestra', access: 'Mecanizar una pieza', path: '/mecanizado', service: 'mecanizado', text: /mecanizado de una pieza/ },
-  { id: 4, name: 'Válvula, conexión u otro componente', access: '^Neumática$', path: '/neumatica', service: 'componente', text: /componente neumático/ },
-  { id: 5, name: 'Solo tengo una foto', access: 'Solo tengo una foto', path: null, service: 'foto', text: /no tengo la referencia/ },
+  { id: 1, name: 'Reparar un cilindro neumático', selector: '.taller-links a[href="/servicios"]', path: '/servicios', service: 'neumatico-reparar', text: /reparación de un cilindro neumático/ },
+  { id: 2, name: 'Fabricar un cilindro hidráulico', selector: '.b2b-category h3 a[href="/cilindros-hidraulicos"]', path: '/cilindros-hidraulicos', service: 'hidraulico', text: /un cilindro hidráulico[\s\S]*¿Reparar o fabricar\?/ },
+  { id: 3, name: 'Mecanizar una pieza bajo plano o muestra', selector: '.taller-links a[href="/mecanizado"]', path: '/mecanizado', service: 'mecanizado', text: /mecanizado de una pieza/ },
+  { id: 4, name: 'Válvula, conexión u otro componente', selector: '.b2b-category h3 a[href="/valvulas-neumaticas"]', path: '/valvulas-neumaticas', service: 'componente', text: /componente neumático/ },
+  { id: 5, name: 'Solo tengo una foto', selector: '.b2b-category-query a[href^="/cotizacion"]', path: null, service: 'foto', text: /no tengo la referencia/ },
 ];
 const VIEWPORTS = {
   escritorio: { viewport: { width: 1366, height: 900 } },
@@ -52,9 +52,9 @@ try {
         await page.goto(`${base}/${paid ? `?${PAID}` : ''}`, { waitUntil: 'networkidle' });
 
         // Acceso por necesidad en la portada
-        const access = page.getByRole('navigation', { name: '¿Qué necesitas?' }).getByRole('link', { name: new RegExp(j.access) });
+        const access = page.locator(j.selector);
         await access.scrollIntoViewIfNeeded();
-        assert.ok(await access.isVisible(), `${vpName}: acceso «${j.access}» visible`);
+        assert.ok(await access.isVisible(), `${vpName}: acceso «${j.name}» visible`);
 
         let quoteLink = access;
         if (j.path) {

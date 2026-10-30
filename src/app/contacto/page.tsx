@@ -39,12 +39,12 @@ function ContactPanel() {
         </li>
         <li>
           <Clock className="h-5 w-5" aria-hidden="true" />
-          <span><span className="contact-label">Horario</span><span className="contact-value">{hoursLines().map((l) => <span key={l} className="block">{l}</span>)}</span></span>
+          <span><span className="contact-label">Horario comercial</span><span className="contact-value">{hoursLines().map((l) => <span key={l} className="block">{l}</span>)}</span></span>
         </li>
         <li>
           <MapPin className="h-5 w-5" aria-hidden="true" />
-          <span><span className="contact-label">Dirección</span><span className="contact-value">{CONTACT.address}</span>
-            <a href={MAPS_URL} target="_blank" rel="noopener" className="contact-map">Cómo llegar <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a></span>
+          <span><span className="contact-label">{MAPS_URL ? "Dirección" : "Ubicación comercial"}</span><span className="contact-value">{CONTACT.address}</span>
+            {MAPS_URL && (<a href={MAPS_URL} target="_blank" rel="noopener" className="contact-map">Cómo llegar <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>)}</span>
         </li>
       </ul>
     </div>
@@ -58,7 +58,7 @@ export default function ContactoPage() {
         crumbs={[{ label: "Contacto" }]}
         kicker={`${SITE.legalName} · RNC ${SITE.rnc}`}
         title="Contacta a Dynatech Ingeniería"
-        lead={<p>Para cotizar, escríbenos por WhatsApp: es nuestro canal principal. Puedes empezar con una foto, el código o el plano. También puedes llamar, escribir un correo o usar el formulario.</p>}
+        lead={<p>Solicita componentes para tu empresa por WhatsApp o correo. Comparte referencias, cantidades y especificaciones; puedes empezar con una foto, el código o el plano. También puedes usar el formulario de contacto.</p>}
         quoteHref={whatsappGeneral()}
         secondary={{ href: "#formulario", label: "Usar el formulario" }}
         note={`Atención: ${shortHours()}.`}

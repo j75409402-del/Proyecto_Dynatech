@@ -1,8 +1,9 @@
+import { locationSchema } from "@/lib/operations";
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SITE, CONTACT, ANALYTICS, MAPS_URL } from "@/lib/constants";
+import { SITE, CONTACT, ANALYTICS, PUBLIC_LOCATION } from "@/lib/constants";
 import { CommercialTracking } from "@/components/CommercialTracking";
 import { CookielessAnalytics } from "@/components/CookielessAnalytics";
 import { MobileQuoteFab } from "@/components/layout/MobileQuoteFab";
@@ -11,7 +12,7 @@ import "./globals.css";
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  ...locationSchema(PUBLIC_LOCATION),
   "@id": `${SITE.url}/#business`,
   legalName: SITE.legalName,
   name: SITE.name,
@@ -21,24 +22,6 @@ const organizationJsonLd = {
   email: CONTACT.email,
   telephone: CONTACT.phone,
   areaServed: { "@type": "Country", name: "República Dominicana" },
-  openingHoursSpecification: [{
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-    opens: "08:00",
-    closes: "17:00",
-  }, {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Saturday"],
-    opens: "08:00",
-    closes: "12:00",
-  }],
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: CONTACT.streetAddress,
-    addressLocality: CONTACT.locality,
-    addressCountry: "DO",
-  },
-  hasMap: MAPS_URL,
 };
 
 const plexSans = IBM_Plex_Sans({

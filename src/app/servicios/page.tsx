@@ -1,3 +1,4 @@
+import { ServiceAvailabilityNotice } from "@/components/page/ServiceAvailabilityNotice";
 import type { Metadata } from "next";
 import { commercialMetadata } from "@/lib/seo";
 import { Reveal } from "@/components/motion/Reveal";
@@ -61,7 +62,7 @@ const serviceJsonLd = {
   serviceType: "Fabricación, reparación y reconstrucción de cilindros neumáticos",
   provider: { "@id": `${SITE.url}/#business` },
   areaServed: "República Dominicana",
-  description: SITE.description,
+  description: DESCRIPTION,
 };
 
 const faqJsonLd = {
@@ -94,6 +95,7 @@ export default function ServiciosPage() {
   const fabricacion = SERVICIOS.filter((s) => FABRICACION_IDS.includes(s.id));
   return (
     <div>
+      <ServiceAvailabilityNotice service={"pneumatic-cylinders"} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
 

@@ -28,15 +28,15 @@ const TALLER = [
 
 const PROCESO = [
   { title: "Compartes tu necesidad", text: "Referencia, fotos, plano, muestra o medidas, por WhatsApp." },
-  { title: "Evaluamos la solicitud", text: "Revisamos la aplicación y los datos de tu equipo." },
-  { title: "Recibes la cotización", text: "Con alcance, condiciones y disponibilidad confirmados." },
-  { title: "Coordinamos tu pedido", text: "Fabricamos, reparamos o conseguimos la pieza y coordinamos la entrega." },
+  { title: "Recibes la cotización", text: "Con disponibilidad, precio, condiciones y plazo confirmados." },
+  { title: "Confirmas la orden de compra", text: "Formaliza tu pedido con las condiciones acordadas." },
+  { title: "Coordinamos tu pedido", text: "Coordinamos el suministro, la entrega y la facturación según la cotización." },
 ];
 
 const PRINCIPIOS = [
   { title: "Con los datos de tu equipo", body: "Evaluamos cada solicitud con la referencia, las fotos, el plano o la muestra que nos compartas, antes de cotizar." },
   { title: "A la medida", body: "Trabajamos a partir de lo que tengas. Si el repuesto original de un cilindro ya no existe, fabricamos el componente." },
-  { title: "Local", body: "Taller en Santo Domingo. Lo que no fabricamos, lo conseguimos bajo pedido, con el plazo confirmado en la cotización." },
+  { title: "Atención comercial", body: "Desde Santo Domingo, atendemos requerimientos industriales por WhatsApp y correo, bajo cotización y pedido." },
 ];
 
 export default function NosotrosPage() {
@@ -45,21 +45,32 @@ export default function NosotrosPage() {
       <PageHero
         crumbs={[{ label: "Nosotros" }]}
         kicker={`${SITE.legalName} · ${CONTACT.locality}`}
-        title={<>La referencia exacta. <span className="text-signal">No la más parecida.</span></>}
-        lead={<p>{SITE.legalName} es un proveedor industrial B2B y taller de cilindros neumáticos en República Dominicana. Reparamos y fabricamos cilindros, y cotizamos neumática, control eléctrico, sensores, instrumentación y resistencias eléctricas.</p>}
+        title={<>Suministro industrial. <span className="text-signal">Atención a empresas.</span></>}
+        lead={<p>{SITE.legalName} es un proveedor de suministros industriales bajo cotización y pedido para empresas y zonas francas en República Dominicana, especializado en neumática y componentes de automatización. También realizamos fabricación y reparación de cilindros y mecanizado de piezas.</p>}
         quoteHref={whatsappGeneral()}
         secondary={{ href: "#empresa", label: "Ver datos de la empresa" }}
         note="Trabajamos bajo cotización: nos envías las especificaciones, cotizamos y coordinamos la entrega."
         // PENDIENTE CAPITÁN: sustituir por una foto real de la fachada, el taller o el equipo (hoy es imagen de referencia).
         // WEB-011: distinta del hero de /servicios. Sin escena de taller IA ni marcas de terceros (auditoría V2).
         image={{ src: "/products/cilindros-neumaticos.jpg", alt: "Imagen de referencia: cilindros neumáticos de distintos tipos y tamaños", fit: "contain" }}
-        caption={{ label: "Imagen de referencia", text: "Taller de cilindros · Suministro industrial" }}
+        caption={{ label: "Imagen de referencia", text: "Suministro industrial · Especialistas en neumática" }}
         trust="lineas"
       />
 
       <Band tone="light" labelledBy="que-hacemos">
-        <SectionHead kicker="01 · Qué hacemos" id="que-hacemos" title="Taller de cilindros y suministro industrial" intro="Atendemos a empresas y zonas francas en República Dominicana." />
+        <SectionHead kicker="01 · Qué hacemos" id="que-hacemos" title="Suministro industrial y servicios técnicos" intro="Atendemos a empresas y zonas francas en República Dominicana." />
         <div className="grid gap-4 lg:grid-cols-2">
+          <Reveal className="h-full">
+            <div className="h-full border border-black/10 bg-white p-6 sm:p-8">
+              <h3 className="text-xl font-semibold">Suministro industrial</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-steel-300">Componentes para mantenimiento y automatización, cotizados con la referencia o una foto.</p>
+              <ul className="mt-6 grid border-t border-black/10">
+                {SOLUCIONES.map((s) => (
+                  <li key={s.slug} className="border-b border-black/10"><Link href={`/${s.slug}`} className="group flex min-h-12 items-center justify-between gap-3 text-[15px] hover:text-signal"><span className="flex items-center gap-3"><s.icon className="h-4 w-4 text-signal" aria-hidden="true" />{s.name}</span><ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" /></Link></li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
           <Reveal className="h-full">
             <div className="h-full bg-[#0b1016] p-6 text-white sm:p-8">
               <h3 className="text-xl font-semibold">Taller</h3>
@@ -67,17 +78,6 @@ export default function NosotrosPage() {
               <ul className="mt-6 grid border-t border-white/10">
                 {TALLER.map((t) => (
                   <li key={t.href} className="border-b border-white/10"><Link href={t.href} className="group flex min-h-12 items-center justify-between gap-3 text-[15px] hover:text-[#ff5a75]">{t.label}<ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" /></Link></li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
-          <Reveal delay={0.08} className="h-full">
-            <div className="h-full border border-black/10 bg-white p-6 sm:p-8">
-              <h3 className="text-xl font-semibold">Suministro industrial</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-steel-300">Componentes para mantenimiento y automatización, cotizados con la referencia o una foto.</p>
-              <ul className="mt-6 grid border-t border-black/10">
-                {SOLUCIONES.map((s) => (
-                  <li key={s.slug} className="border-b border-black/10"><Link href={`/${s.slug}`} className="group flex min-h-12 items-center justify-between gap-3 text-[15px] hover:text-signal"><span className="flex items-center gap-3"><s.icon className="h-4 w-4 text-signal" aria-hidden="true" />{s.name}</span><ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" /></Link></li>
                 ))}
               </ul>
             </div>
@@ -109,8 +109,8 @@ export default function NosotrosPage() {
           <dl className="fact-list lg:col-span-8">
             <div><dt>Razón social</dt><dd>{SITE.legalName}</dd></div>
             <div><dt>RNC</dt><dd>{SITE.rnc}</dd></div>
-            <div><dt>Dirección</dt><dd>{CONTACT.address}<a href={MAPS_URL} target="_blank" rel="noopener" className="contact-map">Cómo llegar <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a></dd></div>
-            <div><dt>Horario</dt><dd>{hoursLines().map((l) => <span key={l} className="block">{l}</span>)}</dd></div>
+            <div><dt>{MAPS_URL ? "Dirección" : "Ubicación comercial"}</dt><dd>{CONTACT.address}{MAPS_URL && (<a href={MAPS_URL} target="_blank" rel="noopener" className="contact-map">Cómo llegar <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>)}</dd></div>
+            <div><dt>Horario comercial</dt><dd>{hoursLines().map((l) => <span key={l} className="block">{l}</span>)}</dd></div>
             <div><dt>WhatsApp</dt><dd><a href={whatsappGeneral()} target="_blank" rel="noopener">{CONTACT.whatsappDisplay}</a></dd></div>
             <div><dt>Teléfonos</dt><dd>{CALL_PHONES.map((p) => <a key={p} href={telHref(p)} className="block">{p}</a>)}</dd></div>
             <div><dt>Correo</dt><dd><a href={emailHref()} className="[overflow-wrap:anywhere]">{CONTACT.email}</a></dd></div>

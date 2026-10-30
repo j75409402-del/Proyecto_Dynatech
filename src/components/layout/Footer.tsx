@@ -123,7 +123,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-steel-200">
               <li className="flex items-start gap-2.5">
                 <MapPin className="h-4 w-4 text-signal shrink-0 mt-0.5" />
-                <span>{CONTACT.address}<a href={MAPS_URL} target="_blank" rel="noopener" className="mt-1 block font-semibold text-white underline underline-offset-4 hover:text-signal">Cómo llegar</a></span>
+                <span>{CONTACT.address}{MAPS_URL && (<a href={MAPS_URL} target="_blank" rel="noopener" className="mt-1 block font-semibold text-white underline underline-offset-4 hover:text-signal">Cómo llegar</a>)}</span>
               </li>
               <li className="flex items-start gap-2.5">
                 <Phone className="h-4 w-4 text-signal shrink-0 mt-0.5" />

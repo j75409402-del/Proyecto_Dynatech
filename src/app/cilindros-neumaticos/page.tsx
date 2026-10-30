@@ -1,3 +1,4 @@
+import { ServiceAvailabilityNotice } from "@/components/page/ServiceAvailabilityNotice";
 import type { Metadata } from "next";
 import { CylinderExperience } from "@/components/industrial/CylinderExperience";
 import { commercialMetadata } from "@/lib/seo";
@@ -66,6 +67,7 @@ const serviceJsonLd = {
 export default function CilindrosNeumaticosPage() {
   return (
     <div className="industrial-detail cylinder-page">
+      <ServiceAvailabilityNotice service={"pneumatic-cylinders"} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <CylinderExperience />
 

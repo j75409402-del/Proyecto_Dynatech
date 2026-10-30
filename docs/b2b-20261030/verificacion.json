@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-30",
+  "task": "WEB-030",
+  "environment": "local production build, Edge headless; analytics mocked/blocked during tests",
+  "passed": {
+    "typecheck": true,
+    "build": true,
+    "lint": {
+      "errors": 0,
+      "warnings": [
+        "pre-existing postcss.config.mjs import/no-anonymous-default-export"
+      ]
+    },
+    "commercial": {
+      "page_viewports": 60,
+      "js_errors": 0,
+      "contact_form": "API mocked; no real submission",
+      "admin": "not verified locally; missing environment variables"
+    },
+    "seo": {
+      "keyword_targets": 42,
+      "subcategory_links": 32,
+      "valve_viewports": 3
+    },
+    "analytics": [
+      "no cookies/banner",
+      "SPA no duplicates",
+      "no personal data in events",
+      "DNT",
+      "prior refusal",
+      "admin excluded",
+      "works with tracker blocked"
+    ],
+    "whatsapp_quote": {
+      "checks": 9,
+      "mock_server_events": 20,
+      "official_number": "18092844336"
+    },
+    "ads_attribution": {
+      "groups": 6,
+      "scenarios": 7,
+      "real_ad_campaigns_modified": false
+    },
+    "home_journeys": {
+      "scenarios": 20,
+      "desktop_mobile": true,
+      "paid_organic": true
+    },
+    "quote_event": 6,
+    "notify": {
+      "tests": 5,
+      "real_email": false
+    },
+    "b2b_responsive": {
+      "widths": [
+        360,
+        390,
+        768,
+        1440
+      ],
+      "reduced_motion": true,
+      "no_js": true,
+      "cta_contrast_at_least": 4.5
+    },
+    "operations_policy": {
+      "physical_current": true,
+      "future_scenario_tested_in_isolation": true
+    },
+    "cylinder_regression": {
+      "widths": [
+        1440,
+        1024,
+        768,
+        390,
+        320
+      ],
+      "scroll": true,
+      "selection": true,
+      "assemble_explode": true,
+      "idle_renderer": true,
+      "fallbacks": [
+        "no-js",
+        "reduced-motion",
+        "context-loss"
+      ]
+    },
+    "mobile_performance": {
+      "note": "Una muestra local por ruta, CPU 4x y red 1.6 Mbps/150 ms. No equivale a Lighthouse ni Core Web Vitals de usuarios reales.",
+      "results": [
+        {
+          "route": "/",
+          "lcpMs": 1584,
+          "cls": 0
+        },
+        {
+          "route": "/sensores",
+          "lcpMs": 1428,
+          "cls": 0
+        },
+        {
+          "route": "/cilindros-hidraulicos",
+          "lcpMs": 1592,
+          "cls": 0
+        }
+      ]
+    },
+    "cylinder_touch": {
+      "touchDrag": true,
+      "renderedFrames": 291,
+      "renderedDragFps": 173.45646397732455,
+      "environment": "Edge headless, viewport móvil; no dispositivo físico"
+    }
+  },
+  "limitations": [
+    "No physical mobile device test",
+    "No real lead or email submission",
+    "No authenticated admin test",
+    "Preview does not load production Umami; analytics behavior was verified earlier with a mock on an enabled build"
+  ],
+  "production_modified": false,
+  "supabase_changes": false,
+  "move_activated": false
+}

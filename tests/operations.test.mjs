@@ -1,0 +1,25 @@
+// Política de mudanza INACTIVA y escenario futuro aislado, sin mutar la configuración.
+import assert from 'node:assert/strict';
+import { OPERATIONS, publicLocation, locationSchema, serviceNotice } from '../src/lib/operations.ts';
+const current = { address: 'Av. Rómulo Betancourt 2158, Santo Domingo, República Dominicana', streetAddress: 'Av. Rómulo Betancourt 2158', locality: 'Santo Domingo' };
+assert.equal(OPERATIONS.location, 'physical');
+assert.deepEqual(Object.values(OPERATIONS.services), ['current', 'current', 'current']);
+const active = publicLocation(OPERATIONS.location, current);
+assert.equal(active.address, current.address);
+assert.equal(new URL(active.mapUrl).searchParams.get('query'), current.address);
+assert.equal(locationSchema(active)['@type'], 'LocalBusiness');
+assert.equal(locationSchema(active).openingHoursSpecification.length, 2);
+assert.equal(serviceNotice('current'), undefined);
+const future = publicLocation('commercial-only', current);
+assert.equal(future.address, 'Santo Domingo, República Dominicana');
+assert.equal(future.mapUrl, undefined);
+assert.equal(future.streetAddress, undefined);
+const schema = locationSchema(future);
+assert.equal(schema['@type'], 'Organization');
+assert.equal(schema.hasMap, undefined);
+assert.equal(schema.openingHoursSpecification, undefined);
+assert.equal(schema.address.addressLocality, 'Santo Domingo');
+assert.ok(!JSON.stringify(schema).includes('2158'));
+assert.match(serviceNotice('confirm-before-booking'), /Consulta la disponibilidad actual/);
+assert.equal(OPERATIONS.location, 'physical', 'el ensayo no activa la mudanza');
+console.log('OK: ubicación actual preservada; escenario futuro sin dirección, mapa ni horarios presenciales antiguos; servicios actuales intactos.');

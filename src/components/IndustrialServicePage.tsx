@@ -1,3 +1,4 @@
+import { ServiceAvailabilityNotice } from "@/components/page/ServiceAvailabilityNotice";
 import { Box, Cog, Droplets, Factory, FileText, Ruler, Wrench } from "lucide-react";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
@@ -39,6 +40,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
   ];
   return (
     <>
+      <ServiceAvailabilityNotice service={hidraulico ? "hydraulic-cylinders" : "machining"} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHero
         crumbs={[{ label: "Servicios", href: "/servicios" }, { label: s.name }]}

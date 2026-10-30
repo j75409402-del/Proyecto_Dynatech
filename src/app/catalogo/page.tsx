@@ -46,12 +46,12 @@ export default function ProductosPage() {
     <>
       <PageHero
         crumbs={[{ label: "Productos" }]}
-        kicker="Suministro industrial · Bajo cotización"
+        kicker="Suministro industrial bajo cotización y pedido"
         title="Catálogo de productos industriales"
-        lead={<p>Neumática, control industrial, automatización, instrumentación, resistencias eléctricas y termocuplas. Cada categoría tiene su botón para cotizar por WhatsApp con el mensaje listo.</p>}
+        lead={<p>Neumática, control industrial, automatización, instrumentación, resistencias eléctricas y termocuplas. Cotiza por WhatsApp con el nombre de la categoría incluido; añade referencias, cantidades y especificaciones.</p>}
         quoteHref={whatsappGeneral()}
         secondary={{ href: "#categorias", label: "Ver categorías" }}
-        note="Envía el código, una foto de la placa o la descripción. Sin precios ni inventario publicados: todo se confirma en la cotización."
+        note="Disponibilidad, precios, condiciones y tiempos de entrega sujetos a cotización. Este catálogo no representa inventario en tiempo real."
         image={{ src: "/banners/neumatica-industrial-conectores.webp", alt: "Imagen de referencia: componentes neumáticos sobre una mesa de trabajo" }}
         caption={{ label: "Imagen de referencia", text: "Neumática · Control · Automatización · Instrumentación" }}
       />

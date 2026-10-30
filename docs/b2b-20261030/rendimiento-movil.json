@@ -1,0 +1,20 @@
+{
+  "note": "Una muestra local por ruta, CPU 4x y red 1.6 Mbps/150 ms. No equivale a Lighthouse ni Core Web Vitals de usuarios reales.",
+  "results": [
+    {
+      "route": "/",
+      "lcpMs": 1584,
+      "cls": 0
+    },
+    {
+      "route": "/sensores",
+      "lcpMs": 1428,
+      "cls": 0
+    },
+    {
+      "route": "/cilindros-hidraulicos",
+      "lcpMs": 1592,
+      "cls": 0
+    }
+  ]
+}

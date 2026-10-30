@@ -1,11 +1,13 @@
+import { OPERATIONS, publicLocation } from "@/lib/operations";
+
 export const SITE = {
   name: "Dynatech Ingeniería",
   legalName: "Dynatech Ingeniería SRL",
   shortName: "Dynatech",
-  tagline: "Cilindros neumáticos · Fabricación y reparación",
+  tagline: "Suministro industrial bajo cotización y pedido",
   brandTagline: "Excellent Under Pressure.",
   description:
-    "Fabricación y reparación de cilindros neumáticos e hidráulicos y mecanizado de piezas con torno y fresadora en República Dominicana. Suministro de neumática, control industrial, automatización, instrumentación, resistencias eléctricas y termocuplas bajo cotización.",
+    "Suministro industrial bajo cotización y pedido para empresas y zonas francas en República Dominicana. Especialistas en neumática y componentes de automatización.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.dynatech.com.do",
   rnc: "133-45350-9",
 } as const;
@@ -16,7 +18,7 @@ export function emailHref(subject?: string) {
   return `mailto:${CONTACT.email}${query}`;
 }
 
-export const CONTACT = {
+const CONTACT_DETAILS = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "18092844336",
   whatsappDisplay: "+1 (809) 284-4336",
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "dynatechsrl@outlook.com",
@@ -30,8 +32,10 @@ export const CONTACT = {
   hours: "Lunes a Viernes · 8:00 AM - 5:00 PM · Sábado · 8:00 AM - 12:00 PM",
 } as const;
 
-/** «Cómo llegar»: búsqueda de la dirección en Google Maps (abre la app en el celular). */
-export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.address)}`;
+/** Proyección pública: hoy mantiene exactamente la dirección y horarios confirmados. */
+export const PUBLIC_LOCATION = publicLocation(OPERATIONS.location, CONTACT_DETAILS);
+export const CONTACT = { ...CONTACT_DETAILS, ...PUBLIC_LOCATION };
+export const MAPS_URL = PUBLIC_LOCATION.mapUrl;
 
 /** Teléfonos de llamadas, en orden: principal y secundario. */
 export const CALL_PHONES = [CONTACT.phone, CONTACT.phone2] as const;

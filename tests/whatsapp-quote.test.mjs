@@ -23,7 +23,7 @@ async function hit(path, headers = {}) {
 }
 const text = loc => new URL(loc).searchParams.get('text') || '';
 const results = [];
-const ok = (name) => { results.push(name); };
+const ok = (name) => { results.push(name); console.log("OK: " + name); };
 
 try {
   // 1) Redirección con contexto completo + evento en servidor
@@ -107,6 +107,7 @@ try {
   try {
     for (const [label, opts] of [['escritorio', { viewport: { width: 1440, height: 900 }, userAgent: BROWSER_UA }], ['móvil', { ...devices['iPhone 13'] }]]) {
       const ctx = await browser.newContext(opts);
+      ctx.setDefaultNavigationTimeout(15000);
       await ctx.route('https://cloud.umami.is/**', route => route.abort());
       const opened = [];
       // La navegación a wa.me es un 307 del servidor; se registra la petición (no se intercepta un redirect).

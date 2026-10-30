@@ -168,8 +168,11 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
     camera.position.x = lookTarget.x;
     camera.lookAt(lookTarget);
     const fovGoal = premiumActive && (desktop || presentation) ? 30 + opening * 2 : 36;
-    const fov = warmed ? T.MathUtils.damp(camera.fov, fovGoal, 6, delta) : fovGoal;
-    if (Math.abs(camera.fov - fov) > .0005) { camera.fov = fov; camera.updateProjectionMatrix(); }
+    const dampedFov = warmed ? T.MathUtils.damp(camera.fov, fovGoal, 6, delta) : fovGoal;
+    // A alta frecuencia, descartar pasos pequeños podía dejar el FOV fuera de tolerancia
+    // indefinidamente. Converger y fijar el destino permite que el renderizador repose.
+    const fov = Math.abs(dampedFov - fovGoal) <= .01 ? fovGoal : dampedFov;
+    if (camera.fov !== fov) { camera.fov = fov; camera.updateProjectionMatrix(); }
     const cameraSettling = premiumActive && (Math.abs(camera.position.z - goalZ) > .003 || Math.abs(camera.position.y - goalY) > .002 || Math.abs(lookTarget.x - lookGoal.x) > .002 || Math.abs(camera.fov - fovGoal) > .01);
     flow.visible = dot.visible = !premiumActive;
     const explode = controls.exploded || (scene === "servicios" && progress > 0.35);

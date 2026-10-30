@@ -1,0 +1,16 @@
+{
+  "test": "tests/cylinder-cinematic.test.mjs",
+  "assertion": "idleRenderer: rendered frames must remain unchanged in 500 ms",
+  "local_before_fix": {
+    "before": 2035,
+    "after": 2157
+  },
+  "public_baseline": {
+    "url": "https://www.dynatech.com.do/cilindros-neumaticos",
+    "before": 2005,
+    "after": 2129
+  },
+  "cause": "FOV updates smaller than 0.0005 were discarded while distance from target stayed above the 0.01 settling threshold at high refresh rates.",
+  "fix": "Keep damped FOV updates and snap to target within 0.01; model, materials and interaction unchanged.",
+  "analytics": "blocked in browser; no quote clicks"
+}

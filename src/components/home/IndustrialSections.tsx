@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Box, Camera, FileText, Ruler } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Box } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { quoteHref } from "@/components/cta/QuoteCTA";
 import { SERVICIOS, COMPONENTES } from "@/lib/servicios";
@@ -22,7 +22,7 @@ export function CilindrosDestacados() {
     <section className="section-pad border-b border-black/10 bg-[#F4F5F6]">
       <div className="container-max">
         <div className="section-heading mb-12">
-          <div><p className="section-kicker">04 · Neumática, nuestra especialidad</p><h2 className="section-title">Cilindros neumáticos.<br /><span className="text-steel-500">De principio a fin.</span></h2></div>
+          <div><p className="section-kicker">Conoce nuestra especialidad</p><h2 className="section-title">Cilindros neumáticos.<br /><span className="text-steel-500">De principio a fin.</span></h2></div>
           <p className="max-w-md text-steel-300 leading-relaxed">Fabricación a medida, reparación y componentes para mantener tu equipo en operación. Trabajamos a partir de la información de tu aplicación.</p>
         </div>
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
@@ -57,20 +57,18 @@ export function CilindrosDestacados() {
 }
 
 export function ComoTrabajamos() {
+  const pasos = [
+    { title: "Envíanos tu requerimiento.", text: "Referencia, código, cantidad o una foto. Añade las especificaciones que tengas." },
+    { title: "Recibe una cotización.", text: "Revisamos tu solicitud y confirmamos disponibilidad, precio, condiciones y plazo." },
+    { title: "Confirma tu orden de compra.", text: "Formaliza tu pedido con las condiciones acordadas en la cotización." },
+    { title: "Coordinamos el suministro y la entrega.", text: "Acordamos contigo los detalles de entrega y facturación de tu pedido." },
+  ];
   return (
-    <section className="bg-surface text-white">
-      <div className="container-max grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:gap-16">
-        <div>
-          <p className="section-kicker !text-[#a9b7c4]">05 · Tu solicitud, paso a paso</p>
-          <h2 className="section-title">Una foto basta<br /><span className="text-white/55">para empezar.</span></h2>
-          <p className="mt-6 max-w-lg leading-relaxed text-white/70">Envía lo que tengas: fotos, el código, el plano, una muestra o las medidas. Si falta algún dato, te lo pedimos por el mismo chat. En la cotización confirmamos alcance, plazo y condiciones.</p>
-          <div className="my-8 grid grid-cols-3 gap-3">{[{ icon: Camera, name: "Fotos" }, { icon: FileText, name: "Plano o muestra" }, { icon: Ruler, name: "Medidas" }].map((item) => <div key={item.name} className="border border-white/15 p-4"><item.icon className="mb-3 h-5 w-5 text-signal" /><p className="text-sm text-white/80">{item.name}</p></div>)}</div>
-          <a href={whatsappService("foto")} target="_blank" rel="noopener" className="btn-primary min-h-14"><WhatsAppIcon className="h-5 w-5" />Cotizar por WhatsApp<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
-        </div>
-        <div className="flex flex-col justify-center">
-          <div className="relative aspect-[3/2] overflow-hidden border border-white/15 bg-white"><Image src="/products/cilindros-smc-2.jpg" alt="Imagen de catálogo: cilindros neumáticos de distintos tipos y tamaños" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-contain p-6" /><span className="img-note">Imagen de catálogo</span></div>
-          <ol className="mt-5 grid grid-cols-3 gap-px border border-white/15 bg-white/15">{["Comparte tu necesidad", "Recibe la cotización", "Coordina tu pedido"].map((step, i) => <li key={step} className="bg-surface px-4 py-5"><span className="mb-2 block font-mono text-xs text-[#ff6b84]">0{i + 1}</span><span className="text-sm text-white/80">{step}</span></li>)}</ol>
-        </div>
+    <section className="b2b-process" aria-labelledby="proceso-titulo">
+      <div className="container-max">
+        <div className="b2b-process-head"><div><p className="section-kicker">03 / Cómo solicitar productos</p><h2 id="proceso-titulo" className="section-title">Un proceso claro.<br /><span>De principio a entrega.</span></h2></div><a href={whatsappService("foto")} target="_blank" rel="noopener" className="btn-primary min-h-14" data-fab-hide=""><WhatsAppIcon className="h-5 w-5" />Enviar requerimiento<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div>
+        <ol className="b2b-steps">{pasos.map((p,i) => <li key={p.title}><span>{String(i+1).padStart(2,"0")}</span><h3>{p.title}</h3><p>{p.text}</p></li>)}</ol>
+        <p className="b2b-conditions">Disponibilidad, precios, condiciones y tiempos de entrega sujetos a cotización. El catálogo es una referencia de nuestras líneas; no muestra inventario en tiempo real.</p>
       </div>
     </section>
   );
@@ -83,6 +81,8 @@ export function ComoTrabajamos() {
  * Cada imagen sale una sola vez en la portada: la galería de hidráulicos de más abajo se retiró.
  */
 export function TrabajosTaller() {
+  // La foto neumática ya protagoniza el hero; el resto conserva su visor y video.
+  const trabajos = TRABAJOS_TALLER.filter((t) => t.src !== "/cilindros/trabajo-real-cilindros-dynatech.jpg");
   return (
     <Band tone="light" id="trabajos-taller" labelledBy="trabajos-taller-titulo" className="work-band">
       <SectionHead
@@ -91,8 +91,8 @@ export function TrabajosTaller() {
         title="Cilindros: trabajos de nuestro taller"
         intro="Conoce algunos de nuestros trabajos de fabricación y reparación de cilindros neumáticos e hidráulicos."
       />
-      <div className={`work-body ${TRABAJOS_TALLER.length < 3 ? "is-few" : ""}`}>
-        <WorkRail items={TRABAJOS_TALLER} label="Fotos y videos de trabajos del taller" />
+      <div className={`work-body ${trabajos.length < 3 ? "is-few" : ""}`}>
+        <WorkRail items={trabajos} label="Fotos y videos de trabajos del taller" />
         <div className="work-cta" data-fab-hide="">
           <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
             <WhatsAppIcon className="h-4 w-4" />Cotizar un cilindro neumático<ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -113,7 +113,7 @@ export function AntesDespues() {
     <section className="section-pad border-b border-black/10 bg-white" aria-labelledby="antes-despues-inicio">
       <div className="container-max">
         <Reveal className="section-heading mb-10">
-          <div><p className="section-kicker">03 · Trabajos del taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después.</h2></div>
+          <div><p className="section-kicker">Trabajos del taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después.</h2></div>
           <p className="max-w-md leading-relaxed text-steel-300">Cilindro ISO 32 mm recuperado en nuestro taller. Desliza para comparar.</p>
         </Reveal>
         <Reveal>

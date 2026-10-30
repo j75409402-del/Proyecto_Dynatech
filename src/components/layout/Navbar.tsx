@@ -71,7 +71,7 @@ export function Navbar() {
     <header className="industrial-navbar sticky top-0 z-40 transition-all duration-300">
       <div className="hidden bg-surface py-2 text-white md:block">
         <div className="container-max flex items-center justify-between gap-6 text-xs">
-          <span className="text-white/70">{CONTACT.locality}, República Dominicana · Suministro industrial · Taller de cilindros y mecanizado</span>
+          <span className="text-white/70">{CONTACT.locality}, República Dominicana · Suministro industrial bajo cotización y pedido</span>
           <span className="flex items-center gap-3">{CALL_PHONES.map((p, i) => <span key={p} className="flex items-center gap-3">{i > 0 && <span aria-hidden="true" className="text-white/40">·</span>}<a href={telHref(p)} className="-my-2 inline-flex min-h-10 items-center font-mono text-white/85 hover:text-white">{p}</a></span>)}</span>
         </div>
       </div>

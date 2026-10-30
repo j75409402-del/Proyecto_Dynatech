@@ -1,0 +1,9 @@
+
+> dynatech-web@0.1.0 lint
+> eslint .
+
+
+C:\Users\senm1\Dynatech\web-b2b-20261030\postcss.config.mjs
+  1:1  warning  Assign object to a variable before exporting as module default  import/no-anonymous-default-export
+
+✖ 1 problem (0 errors, 1 warning)

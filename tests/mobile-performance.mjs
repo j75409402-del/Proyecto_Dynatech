@@ -5,6 +5,7 @@ const results = [];
 try {
   for (const route of ['/', '/sensores', '/cilindros-hidraulicos']) {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true });
+    await context.route('https://cloud.umami.is/**', r => r.abort());
     const page = await context.newPage();
     await page.addInitScript(() => {
       window.mobileMetrics = { lcpMs: null, cls: 0 };

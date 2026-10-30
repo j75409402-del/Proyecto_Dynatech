@@ -263,3 +263,10 @@ El propietario aprobó la dirección Dynatech 3D v1 y autorizó expresamente pub
 El propietario señaló que no encontraba la experiencia publicada desde la portada real. Se añade una entrada visible de Cilindros en 3D inmediatamente bajo el encabezado de inicio, y se identifica claramente el enlace en los menús desktop y móvil. Se conserva el hero comercial, WhatsApp, formularios, rutas y la experiencia 3D aprobada. No se incorpora ninguna escena nueva a otras categorías.
 
 Validado antes de publicar: typecheck, lint (solo aviso previo), build; acceso desde la portada visible sin desplazar y enlaces de menú en 320, 390, 768, 1024 y 1440 px; llegada a Cilindros también sin JavaScript y con reduced-motion; 57 combinaciones comerciales y suite de analytics correctas. Evidencia en `docs/cilindros-premium/acceso-portada/local/verificacion.json`.
+
+
+## WEB-030 · 30-oct-2026 · renovación comercial B2B local
+
+Rama `web-b2b-20261030`, base origin/main `1a78844`, respaldo Git `backup/antes-b2b-20261030`. Sin publicación. Portada orientada a suministro bajo cotización y pedido; catálogo, rutas, APIs, WhatsApp y Umami conservados. Configuración de ubicación/servicios en `src/lib/operations.ts`, INACTIVA: dirección y horarios actuales siguen publicados en la vista previa. No se anunció mudanza. Cilindros conserva su diseño/modelo; corrección puntual del reposo de cámara a alta frecuencia.
+
+Auditoría, checklist de mudanza, resultados y límites: `docs/b2b-20261030/AUDITORIA-Y-PLAN.md`, `RESULTADO.md` y `SUPABASE-LECTURA.md`. Supabase revisado solo en lectura mediante el plugin solicitado; sin claves ni cambios en producción.

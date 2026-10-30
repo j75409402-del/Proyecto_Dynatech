@@ -1,0 +1,41 @@
+{
+  "results": [
+    {
+      "width": 360,
+      "reducedMotion": true,
+      "overflow": false,
+      "consoleErrors": [],
+      "location": "actual",
+      "categories": 9,
+      "steps": 4
+    },
+    {
+      "width": 390,
+      "reducedMotion": true,
+      "overflow": false,
+      "consoleErrors": [],
+      "location": "actual",
+      "categories": 9,
+      "steps": 4
+    },
+    {
+      "width": 768,
+      "reducedMotion": true,
+      "overflow": false,
+      "consoleErrors": [],
+      "location": "actual",
+      "categories": 9,
+      "steps": 4
+    },
+    {
+      "width": 1440,
+      "reducedMotion": true,
+      "overflow": false,
+      "consoleErrors": [],
+      "location": "actual",
+      "categories": 9,
+      "steps": 4
+    }
+  ],
+  "noJS": true
+}
