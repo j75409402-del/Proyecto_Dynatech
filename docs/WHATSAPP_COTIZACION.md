@@ -52,7 +52,7 @@ Migración `supabase/migrations/20261102042300_whatsapp_clicks.sql`. **No está 
 
 No hay columna de IP. El insert va en `after()`, con tope de 2 s y `try/catch`. Si faltan la URL o `SUPABASE_SERVICE_ROLE_KEY`, se omite en silencio. No hace falta una variable nueva.
 
-Los CTA internos siguen siendo `<a href="/cotizacion">`. Al cargar y al hacer clic, `CommercialTracking` añade `from` (la página) y las UTM de la sesión. En el mismo clic, si la analítica no está rechazada, `@vercel/analytics` envía `whatsapp_click` (slugs y UTM, sin el mensaje). `<Analytics />` no se monta cuando `NEXT_PUBLIC_DISABLE_ANALYTICS=1`. Hay que activar Web Analytics en el proyecto de Vercel para ver esas cifras.
+Los CTA internos siguen siendo `<a href="/cotizacion">`. Al cargar y al hacer clic, `CommercialTracking` añade `from` (la página) y las UTM de la sesión. En el mismo clic, si la analítica no está rechazada, `@vercel/analytics` envía `whatsapp_click` (slugs y UTM, sin el mensaje). El mismo componente trata `<a href="/correo">`: añade `from` y UTM, envía `email_click` y deja que el servidor redirija al mailto. `<Analytics />` no se monta cuando `NEXT_PUBLIC_DISABLE_ANALYTICS=1`. Hay que activar Web Analytics en el proyecto de Vercel para ver esas cifras.
 
 Reglas: enlazar `/cotizacion` siempre con `<a>`, nunca con `<Link>` (el prefetch de Next contaría clics). Para campañas usar `https://www.dynatech.com.do/cotizacion?item=…&utm_source=…&utm_medium=…&utm_campaign=…`.
 

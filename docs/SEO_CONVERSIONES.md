@@ -23,7 +23,7 @@ Implementado sobre el proyecto existente y recuperado en `C:/Users/senm1/Dynatec
 |---|---|
 | `whatsapp_click` | Clic hacia WhatsApp; no confirma una conversación ni una venta |
 | `phone_click` | Clic de llamada |
-| `email_click` | Clic de correo |
+| `email_click` | Clic de correo (`/correo` o un mailto que quede). También se envía a Vercel Web Analytics, sin el cuerpo del mensaje |
 | `quote_form_open` | Clic hacia el formulario de cotización |
 | `generate_lead` | API de formulario respondió con éxito; canal `quote_form` o `contact_form` |
 
