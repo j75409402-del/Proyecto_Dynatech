@@ -97,7 +97,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
 
       <Band tone="light" id="catalogo" labelledBy="catalogo-titulo">
         <SectionHead
-          kicker="01 · Qué cotizamos"
+          kicker="Catálogo de la línea"
           id="catalogo-titulo"
           title={<>Catálogo de {s.name.toLowerCase()}</>}
           intro="Si no ves lo que buscas, envíanos el código, una foto o la descripción. Las imágenes son de referencia del tipo de componente, no de inventario."
@@ -117,7 +117,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
       </Band>
 
       <QuoteChecklist
-        kicker="02 · Para cotizar"
+        kicker="Para cotizar"
         title="Qué datos necesitamos"
         intro={`Para cotizar ${s.name.toLowerCase()}, comparte los datos que tengas. No hace falta completarlos todos: con una foto legible de la placa o la referencia podemos empezar.`}
         items={datos}
@@ -126,11 +126,11 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
       />
 
       <Band tone="white" labelledBy="aplicaciones-titulo">
-        <SectionHead kicker="03 · Aplicaciones" id="aplicaciones-titulo" title="Dónde se usan" intro="Atendemos solicitudes de empresas y zonas francas en República Dominicana." />
+        <SectionHead kicker="Aplicación" id="aplicaciones-titulo" title="Dónde se usan" intro="Atendemos solicitudes de empresas y zonas francas en República Dominicana." />
         <CheckList items={s.aplicaciones} />
       </Band>
 
-      <FaqBlock items={faqs} kicker="04 · Preguntas frecuentes" title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
+      <FaqBlock items={faqs} kicker="Preguntas" title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
 
       <RelatedGrid
         kicker="Otras líneas"

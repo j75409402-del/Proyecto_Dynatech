@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { CALL_PHONES, CONTACT, MAPS_URL, NAV, SITE, SOCIAL, emailHref, telHref } from "@/lib/constants";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { Reveal } from "@/components/motion/Reveal";
@@ -120,39 +119,24 @@ export function Footer() {
           {/* Contacto */}
           <div className="col-span-2 min-w-0 sm:col-span-1 lg:col-span-3">
             <div className="eyebrow mb-4">Contacto</div>
-            <ul className="space-y-3 text-sm text-steel-200">
-              <li className="flex items-start gap-2.5">
-                <MapPin className="h-4 w-4 text-signal shrink-0 mt-0.5" />
-                <span>{CONTACT.address}{MAPS_URL && (<a href={MAPS_URL} target="_blank" rel="noopener" className="mt-1 block font-semibold text-white underline underline-offset-4 hover:text-signal">Cómo llegar</a>)}</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Phone className="h-4 w-4 text-signal shrink-0 mt-0.5" />
-                <span className="flex flex-col">
-                  {CALL_PHONES.map((p) => (
-                    <a
-                      key={p}
-                      href={telHref(p)}
-                      className="-my-2.5 inline-flex min-h-10 items-center hover:text-surface transition-colors"
-                    >
-                      {p}
-                    </a>
-                  ))}
-                </span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Mail className="h-4 w-4 text-signal shrink-0 mt-0.5" />
-                <a
-                  href={emailHref()}
-                  className="min-w-0 [overflow-wrap:anywhere] hover:text-surface transition-colors"
-                >
-                  {CONTACT.email}
-                </a>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Clock className="h-4 w-4 text-signal shrink-0 mt-0.5" />
-                <span>{hoursLines().map((l) => <span key={l} className="block">{l}</span>)}</span>
-              </li>
-            </ul>
+            <dl className="footer-facts">
+              <div>
+                <dt>Dirección</dt>
+                <dd>{CONTACT.address}{MAPS_URL && (<a href={MAPS_URL} target="_blank" rel="noopener">Cómo llegar</a>)}</dd>
+              </div>
+              <div>
+                <dt>Teléfonos</dt>
+                <dd>{CALL_PHONES.map((p) => <a key={p} href={telHref(p)}>{p}</a>)}</dd>
+              </div>
+              <div>
+                <dt>Correo</dt>
+                <dd><a href={emailHref()} className="[overflow-wrap:anywhere]">{CONTACT.email}</a></dd>
+              </div>
+              <div>
+                <dt>Horario</dt>
+                <dd>{hoursLines().map((l) => <span key={l}>{l}</span>)}</dd>
+              </div>
+            </dl>
           </div>
         </Reveal>
 

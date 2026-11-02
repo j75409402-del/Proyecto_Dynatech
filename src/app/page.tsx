@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { HomeHero, TallerPrincipal, SuministroIndustrial, Sectores, VentajasB2B, ContactoB2B } from "@/components/home/HomeSections";
-import { CilindrosDestacados, ComoTrabajamos, AntesDespues, TrabajosTaller } from "@/components/home/IndustrialSections";
+import { HomeHero, LineIndex, TallerPrincipal } from "@/components/home/HomeSections";
+import { ComoTrabajamos, AntesDespues, TrabajosTaller } from "@/components/home/IndustrialSections";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { CONTACT } from "@/lib/constants";
@@ -43,21 +43,17 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
-      <SuministroIndustrial />
-      <Sectores />
-      <ComoTrabajamos />
-      <VentajasB2B />
-      <ContactoB2B />
-      <CilindrosDestacados />
+      <LineIndex />
       <TallerPrincipal />
       <TrabajosTaller />
       <AntesDespues />
+      <ComoTrabajamos />
       <FaqBlock items={FAQS} kicker="Preguntas frecuentes" title="Antes de escribirnos" tone="light" />
       <QuoteCTA
         eyebrow="Suministro industrial bajo cotización y pedido"
         title="Cuéntanos qué necesita tu empresa."
         text="Comparte referencias, cantidades y especificaciones para preparar tu cotización."
-        ctaLabel="Solicitar cotización"
+        ctaLabel="Cotizar por WhatsApp"
         whatsappHref={whatsappGeneral()}
       />
     </>

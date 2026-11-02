@@ -69,7 +69,7 @@ export type OfferItem = {
 /** Tarjetas con imagen real (o panel técnico con icono si no hay foto). */
 export function OfferGrid({ items, columns = 3, compact = false }: { items: OfferItem[]; columns?: 2 | 3 | 4; /** Sin fotos: icono pequeño en lugar del panel 16:10. */ compact?: boolean }) {
   return (
-    <div className={`offer-grid cols-${columns}`} data-fab-hide="">
+    <div className={`offer-grid catalog-list cols-${columns}`} data-fab-hide="">
       {items.map((it, i) => (
         <Reveal key={it.id ?? it.title} delay={(i % 3) * 0.05} className="h-full">
           <article id={it.id} className="offer-card scroll-mt-28">

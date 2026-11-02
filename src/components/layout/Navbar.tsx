@@ -111,7 +111,7 @@ export function Navbar() {
               href="/cilindros-neumaticos"
               aria-current={isActive(pathname, "/cilindros-neumaticos") ? "page" : undefined}
               className={cn(
-                "inline-flex min-h-10 items-center text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
+                "inline-flex min-h-11 items-center text-sm font-medium tracking-tight transition-colors whitespace-nowrap",
                 isActive(pathname, "/cilindros-neumaticos") ? "text-signal" : "text-steel-200 hover:text-signal",
               )}
             >
@@ -131,7 +131,7 @@ export function Navbar() {
                 aria-expanded={menuOpen}
                 aria-controls="menu-soluciones"
                 className={cn(
-                  "flex min-h-10 items-center gap-1 text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
+                  "flex min-h-11 items-center gap-1.5 text-sm font-medium tracking-tight transition-colors whitespace-nowrap",
                   solucionesActive || menuOpen ? "text-signal" : "text-steel-200 hover:text-signal",
                 )}
               >
@@ -143,61 +143,60 @@ export function Navbar() {
               <div
                 id="menu-soluciones"
                 hidden={!menuOpen}
-                className="absolute left-0 top-full pt-4 w-[min(680px,calc(100vw-2rem))]"
+                className="absolute left-0 top-full z-50 w-[min(860px,calc(100vw-2rem))] pt-3"
               >
-                <div className="grid grid-cols-5 border border-black/10 bg-carbon shadow-[0_24px_60px_-24px_rgba(0,0,0,0.3)]">
-                  <div className="col-span-3 p-5">
-                    <div className="eyebrow mb-3">Suministro industrial</div>
-                    <ul className="space-y-1">
+                <div className="mega">
+                  <div>
+                    <div className="mega-label">Suministro</div>
+                    <ul>
                       {SOLUCIONES.map((s) => (
                         <li key={s.slug}>
                           <Link
                             href={`/${s.slug}`}
                             onClick={() => setMenuOpen(false)}
-                            className={cn(
-                              "group flex items-start gap-3 p-2 -mx-2 hover:bg-carbon-800 transition-colors",
-                              isActive(pathname, `/${s.slug}`) && "bg-carbon-800",
-                            )}
+                            className={cn(isActive(pathname, `/${s.slug}`) && "is-active")}
                           >
-                            <s.icon className="h-4 w-4 text-signal mt-0.5 shrink-0" />
-                            <span>
-                              <span className="block text-sm font-medium text-surface group-hover:text-signal">{s.name}</span>
-                              <span className="block text-xs text-steel-400 leading-snug">{s.short}</span>
-                            </span>
+                            <span>{s.name}</span>
+                            <small>{s.short}</small>
                           </Link>
                         </li>
                       ))}
                     </ul>
-                    <Link
-                      href="/catalogo"
-                      onClick={() => setMenuOpen(false)}
-                      className="mt-3 inline-flex min-h-10 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-surface hover:text-signal"
-                    >
-                      Ver catálogo completo
+                  </div>
+                  <div>
+                    <div className="mega-label">Taller</div>
+                    <ul>
+                      {NAV.cilindros.map((c) => (
+                        <li key={c.href}>
+                          <Link href={c.href} onClick={() => setMenuOpen(false)} className={cn(isActive(pathname, c.href) && "is-active")}>
+                            <span>{c.label}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mega-label mt-6">Componentes</div>
+                    <ul>
+                      {NAV.especialidades.map((c) => (
+                        <li key={c.href}>
+                          <Link href={c.href} onClick={() => setMenuOpen(false)} className={cn(isActive(pathname, c.href) && "is-active")}>
+                            <span>{c.label}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mega-aside">
+                    <div className="mega-label">Catálogo</div>
+                    <p>Referencia de categorías. Sin precios ni inventario en línea.</p>
+                    <Link href="/catalogo" onClick={() => setMenuOpen(false)}>
+                      Ver catálogo
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
-                  </div>
-                  <div className="col-span-2 border-l border-black/10 bg-carbon-800 p-5 flex flex-col">
-                    <div className="eyebrow mb-3">Taller y componentes neumáticos</div>
-                    <ul className="space-y-1 mb-4">
-                      {[...NAV.cilindros, ...NAV.especialidades].map((c) => (
-                        <li key={c.href}>
-                          <Link
-                            href={c.href}
-                            onClick={() => setMenuOpen(false)}
-                            className="flex min-h-10 items-center text-sm text-steel-200 hover:text-signal transition-colors"
-                          >
-                            {c.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
                     <a
                       href={whatsappGeneral()}
                       target="_blank"
                       rel="noopener"
                       onClick={() => setMenuOpen(false)}
-                      className="mt-auto inline-flex min-h-10 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
                     >
                       {NAV.cta.label}
                       <ArrowRight className="h-3.5 w-3.5" />
@@ -213,7 +212,7 @@ export function Navbar() {
                 href={item.href}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
                 className={cn(
-                  "inline-flex min-h-10 items-center text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
+                  "inline-flex min-h-11 items-center text-sm font-medium tracking-tight transition-colors whitespace-nowrap",
                   isActive(pathname, item.href) ? "text-signal" : "text-steel-200 hover:text-signal",
                 )}
               >
@@ -228,9 +227,7 @@ export function Navbar() {
               href={whatsappGeneral()}
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
-                         text-white font-medium min-h-11 py-2.5 px-4 xl:px-5 rounded-xs text-xs uppercase tracking-wider
-                         transition-colors whitespace-nowrap"
+              className="inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap bg-signal px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-signal-hover xl:px-5"
             >
               <WhatsAppIcon className="h-4 w-4" />
               {NAV.cta.label}
@@ -269,13 +266,13 @@ export function Navbar() {
             target="_blank"
             rel="noopener"
             onClick={() => setOpen(false)}
-            className="sticky top-0 z-10 -mx-4 mb-2 flex min-h-14 items-center justify-center gap-2 bg-signal px-4 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:bg-signal-hover sm:-mx-6"
+            className="sticky top-0 z-10 -mx-4 mb-2 flex min-h-14 items-center justify-center gap-2 bg-signal px-4 text-sm font-medium text-white transition-colors hover:bg-signal-hover sm:-mx-6"
           >
             <WhatsAppIcon className="h-5 w-5" />
             {NAV.cta.label}
             <ArrowRight className="h-4 w-4" />
           </a>
-          <p className="mb-2 text-center text-sm text-[#a9b7c4]">Puedes empezar con una foto de la pieza o de su placa.</p>
+          <p className="mb-2 text-center text-sm text-steel-400">Puedes empezar con una foto de la pieza o de su placa.</p>
           <div className="eyebrow mt-4 mb-1">Fabricación, reparación y mecanizado</div>
           {NAV.cilindros.map((item) => (
             <Link
@@ -325,11 +322,10 @@ export function Navbar() {
               onClick={() => setOpen(false)}
               aria-current={isActive(pathname, `/${s.slug}`) ? "page" : undefined}
               className={cn(
-                "flex min-h-11 items-center gap-3 border-b border-black/5 text-sm font-medium",
+                "flex min-h-11 items-center border-b border-black/5 text-sm font-medium",
                 isActive(pathname, `/${s.slug}`) ? "text-signal" : "text-steel-200 hover:text-signal",
               )}
             >
-              <s.icon className="h-4 w-4 text-signal" aria-hidden="true" />
               {s.name}
             </Link>
           ))}

@@ -1,6 +1,6 @@
 import { locationSchema } from "@/lib/operations";
 import type { Metadata } from "next";
-import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Barlow, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SITE, CONTACT, ANALYTICS, PUBLIC_LOCATION } from "@/lib/constants";
@@ -25,18 +25,26 @@ const organizationJsonLd = {
   areaServed: { "@type": "Country", name: "República Dominicana" },
 };
 
+const display = Barlow({
+  subsets: ["latin"],
+  weight: ["600"],
+  variable: "--font-display",
+  display: "swap",
+});
+
 const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500"],
   variable: "--font-sans",
   display: "swap",
 });
 
 const plexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400"],
   variable: "--font-mono",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -87,9 +95,9 @@ export default function RootLayout({
   return (
     <html
       lang="es-DO"
-      className={`${plexSans.variable} ${plexMono.variable}`}
+      className={`${display.variable} ${plexSans.variable} ${plexMono.variable}`}
     >
-      <body className="bg-carbon text-surface antialiased flex min-h-screen flex-col">
+      <body className="flex min-h-screen flex-col bg-[#F4F5F6] font-sans text-surface antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

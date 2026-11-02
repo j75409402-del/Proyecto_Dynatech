@@ -66,7 +66,7 @@ export function ComoTrabajamos() {
   return (
     <section className="b2b-process" aria-labelledby="proceso-titulo">
       <div className="container-max">
-        <div className="b2b-process-head"><div><p className="section-kicker">03 / Cómo solicitar productos</p><h2 id="proceso-titulo" className="section-title">Un proceso claro.<br /><span>De principio a entrega.</span></h2></div><a href={whatsappService("foto")} target="_blank" rel="noopener" className="btn-primary min-h-14" data-fab-hide=""><WhatsAppIcon className="h-5 w-5" />Enviar requerimiento<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div>
+        <div className="b2b-process-head"><div><p className="section-kicker">Cómo se cotiza</p><h2 id="proceso-titulo" className="section-title">De tu requerimiento a la entrega.</h2></div><a href={whatsappService("foto")} target="_blank" rel="noopener" className="btn-primary min-h-12" data-fab-hide=""><WhatsAppIcon className="h-5 w-5" />Cotizar por WhatsApp<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div>
         <ol className="b2b-steps">{pasos.map((p,i) => <li key={p.title}><span>{String(i+1).padStart(2,"0")}</span><h3>{p.title}</h3><p>{p.text}</p></li>)}</ol>
         <p className="b2b-conditions">Disponibilidad, precios, condiciones y tiempos de entrega sujetos a cotización. El catálogo es una referencia de nuestras líneas; no muestra inventario en tiempo real.</p>
       </div>
