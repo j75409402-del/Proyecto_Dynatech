@@ -13,6 +13,21 @@ export const metadata: Metadata = {
   alternates: { canonical: "/aplicaciones" },
 };
 
+/** Una foto por bloque. El hero no se repite abajo, y control no comparte la del gabinete. */
+const FOTO_APLICACION: Record<string, string> = {
+  neumatica: "/banners/neumatica-industrial-conectores.webp",
+  "control-electrico": "/products/arrancadores-manuales-telemecanique.jpg",
+  "gabinetes-electricos": "/banners/control-electrico.webp",
+  sensores: "/banners/sensores-fotoceldas.webp",
+  instrumentacion: "/banners/instrumentacion-procesos.webp",
+  "resistencias-electricas": "/banners/resistencias-electricas-industriales.webp",
+};
+
+function altDe(slug: string, src: string) {
+  const s = SOLUCIONES.find((x) => x.slug === slug);
+  return s?.subcategorias.find((sub) => sub.image === src)?.imageAlt ?? s?.imageAlt ?? "";
+}
+
 export default function AplicacionesPage() {
   const [first, second, ...rest] = SOLUCIONES;
   return (
@@ -36,8 +51,8 @@ export default function AplicacionesPage() {
         text={first.short}
         href={`/${first.slug}`}
         quote={quoteHref(first.name, "Suministro industrial")}
-        image={first.image}
-        alt={first.imageAlt}
+        image={FOTO_APLICACION[first.slug]}
+        alt={altDe(first.slug, FOTO_APLICACION[first.slug])}
       />
       <Editorial
         id="app-dos"
@@ -47,8 +62,8 @@ export default function AplicacionesPage() {
         text={second.short}
         href={`/${second.slug}`}
         quote={quoteHref(second.name, "Suministro industrial")}
-        image={second.image}
-        alt={second.imageAlt}
+        image={FOTO_APLICACION[second.slug]}
+        alt={altDe(second.slug, FOTO_APLICACION[second.slug])}
       />
       <section className="band band-white">
         <div className="container-max">
@@ -57,8 +72,8 @@ export default function AplicacionesPage() {
             {rest.map((s) => (
               <li key={s.slug}>
                 <Link href={`/${s.slug}`}>
-                  <span className="industry-photo"><Image src={s.image} alt="" fill sizes="33vw" className="object-cover" /></span>
-                  <span className="industry-copy"><strong>{s.name}</strong><small>{s.aplicaciones[0]}</small></span>
+                  <span className="industry-photo"><Image src={FOTO_APLICACION[s.slug]} alt="" fill sizes="33vw" className="object-cover" /></span>
+                  <span className="industry-copy"><strong>{s.aplicaciones[0]}</strong></span>
                 </Link>
               </li>
             ))}

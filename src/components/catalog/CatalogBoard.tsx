@@ -64,13 +64,11 @@ export function CatalogBoard({
           {shown.map((t) => (
             <li key={t.id} id={t.id}>
               <article className="radwell-tile">
-                <div className="radwell-photo">
-                  {t.image ? (
+                {t.image && (
+                  <div className="radwell-photo">
                     <Image src={t.image} alt={t.alt ?? ""} fill sizes="(max-width: 699px) 50vw, 22vw" className="object-contain" />
-                  ) : (
-                    <span className="radwell-empty">{t.title.slice(0, 1)}</span>
-                  )}
-                </div>
+                  </div>
+                )}
                 <h3>{t.href ? <Link href={t.href}>{t.title}</Link> : t.title}</h3>
                 <p>{t.fact}</p>
                 <a href={t.quote} target="_blank" rel="noopener">

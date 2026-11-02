@@ -8,7 +8,7 @@ import { CatalogBoard } from "@/components/catalog/CatalogBoard";
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import { PhotoCredits } from "@/components/page/PhotoCredits";
-import { SOLUCIONES, DATOS_PARA_COTIZAR, GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, type Solucion } from "@/lib/soluciones";
+import { SOLUCIONES, DATOS_PARA_COTIZAR, GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, fotoLibre, type Solucion } from "@/lib/soluciones";
 import { whatsappService, whatsappSolucion } from "@/lib/whatsapp";
 
 type Props = {
@@ -48,18 +48,22 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
     },
   };
 
-  const tiles = s.subcategorias.map((sub) => ({
-    id: sub.id,
-    category: s.slug,
-    title: sub.title,
-    fact: sub.desc,
-    image: sub.image,
-    alt: sub.imageAlt,
-    quote: sub.href
-      ? (neumatica ? whatsappService("componente", sub.title) : quoteHref(sub.title, s.name))
-      : (neumatica ? whatsappService("componente", sub.title) : quoteHref(sub.title, s.name)),
-    href: sub.href ?? `/${s.slug}#${sub.id}`,
-  }));
+  const usadas = new Set<string>([s.image]);
+  const tiles = s.subcategorias.map((sub) => {
+    const image = sub.image && !usadas.has(sub.image) ? sub.image : undefined;
+    if (image) usadas.add(image);
+    const quote = neumatica ? whatsappService("componente", sub.title) : quoteHref(sub.title, s.name);
+    return {
+      id: sub.id,
+      category: s.slug,
+      title: sub.title,
+      fact: sub.desc,
+      image,
+      alt: image ? sub.imageAlt : undefined,
+      quote,
+      href: sub.href ?? `/${s.slug}#${sub.id}`,
+    };
+  });
   const sides = SOLUCIONES.map((o) => ({ id: o.slug, label: o.name, href: `/${o.slug}` }));
 
   const datos = [...(DATOS_PARA_COTIZAR[s.slug] ?? []).map((t) => ({ title: t })), { title: "Cantidad y ciudad de entrega" }];
@@ -119,7 +123,11 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         kicker="Otras líneas"
         title="Otras líneas"
         id="otras-lineas"
-        items={otras.map((o) => ({ href: `/${o.slug}`, title: o.name, desc: o.short, image: o.image, label: "Ver línea" }))}
+        items={otras.map((o) => {
+          const image = fotoLibre(o, usadas);
+          if (image) usadas.add(image);
+          return { href: `/${o.slug}`, title: o.name, desc: o.short, image, label: "Ver línea" };
+        })}
       />
 
       <QuoteCTA

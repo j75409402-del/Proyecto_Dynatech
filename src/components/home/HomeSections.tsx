@@ -123,16 +123,27 @@ export function Editorial({
   );
 }
 
+/** Usos ya escritos en cada línea. Fotos distintas de las miniaturas del hero. */
+const USOS_HOME: { slug: string; index: number; image: string; fit: "cover" | "contain" }[] = [
+  { slug: "neumatica", index: 0, image: "/banners/neumatica-industrial.webp", fit: "cover" },
+  { slug: "control-electrico", index: 0, image: "/products/arrancadores-manuales-telemecanique.jpg", fit: "contain" },
+  { slug: "resistencias-electricas", index: 0, image: "/banners/resistencias-electricas-industriales.webp", fit: "cover" },
+];
+
 export function AplicacionesHome() {
+  const usos = USOS_HOME.map((u) => {
+    const s = SOLUCIONES.find((x) => x.slug === u.slug);
+    return s ? { title: s.aplicaciones[u.index], href: `/${s.slug}`, image: u.image, fit: u.fit } : null;
+  }).filter((u): u is { title: string; href: string; image: string; fit: "cover" | "contain" } => u !== null);
   return (
     <Band tone="white" labelledBy="aplicaciones-home">
       <SectionHead kicker="Aplicaciones" id="aplicaciones-home" title="Dónde se usan" intro="Empresas y zonas francas." aside={<Link href="/aplicaciones" className="inline-flex min-h-11 items-center gap-2 font-medium">Ver aplicaciones <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>} />
       <ul className="industry-grid">
-        {SOLUCIONES.map((s) => (
-          <li key={s.slug}>
-            <Link href={`/${s.slug}`}>
-              <span className="industry-photo"><Image src={s.image} alt="" fill sizes="(max-width: 699px) 100vw, 33vw" className="object-cover" /></span>
-              <span className="industry-copy"><strong>{s.name}</strong><small>{s.aplicaciones[0]}</small></span>
+        {usos.map((u) => (
+          <li key={u.href}>
+            <Link href={u.href}>
+              <span className="industry-photo"><Image src={u.image} alt="" fill sizes="(max-width: 699px) 100vw, 33vw" className={u.fit === "contain" ? "object-contain p-6" : "object-cover"} /></span>
+              <span className="industry-copy"><strong>{u.title}</strong></span>
             </Link>
           </li>
         ))}
@@ -146,14 +157,15 @@ export function HomeHero() {
     <section className="hero" aria-labelledby="home-hero-title">
       <div className="hero-media">
         <Image
-          src="/cilindros/trabajo-real-cilindros-dynatech-recorte.jpg"
-          alt="Cilindros neumáticos fabricados por Dynatech junto a la muestra que sirvió de referencia"
+          src="/hero/suministro-industrial.jpg"
+          alt="Imagen de referencia: componentes neumáticos, gabinete de control e instrumentación, sin marcas"
           fill
           priority
           fetchPriority="high"
           quality={68}
           sizes="100vw"
           className="hero-photo"
+          style={{ objectPosition: "68% 58%" }}
         />
       </div>
       <div className="hero-copy">
@@ -178,17 +190,21 @@ export function HomeHero() {
 
 /** Todas las líneas del catálogo, en la primera pantalla. */
 export function LineasDeUnVistazo() {
+  const usadas = new Set<string>();
   return (
     <section className="fold-lines" aria-label="Líneas de suministro">
       <ul>
         {SOLUCIONES.map((s) => {
-          const foto = s.subcategorias.find((sub) => sub.image) ?? null;
+          const foto = s.subcategorias.find((sub) => sub.image && !usadas.has(sub.image))?.image ?? (usadas.has(s.image) ? undefined : s.image);
+          if (foto) usadas.add(foto);
           return (
             <li key={s.slug}>
               <Link href={`/${s.slug}`}>
-                <span className="fold-photo">
-                  <Image src={foto?.image ?? s.image} alt="" fill sizes="140px" className="object-contain" />
-                </span>
+                {foto && (
+                  <span className="fold-photo">
+                    <Image src={foto} alt="" fill sizes="140px" className="object-contain" />
+                  </span>
+                )}
                 <span>{s.name}</span>
               </Link>
             </li>

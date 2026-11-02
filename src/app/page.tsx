@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeHero, LineasDeUnVistazo, Editorial, LineIndex, AplicacionesHome, ServiciosHome } from "@/components/home/HomeSections";
+import { HomeHero, LineasDeUnVistazo, Editorial, AplicacionesHome } from "@/components/home/HomeSections";
 import { ComoTrabajamos } from "@/components/home/IndustrialSections";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
@@ -17,10 +17,10 @@ export const metadata: Metadata = {
       "Componentes industriales para Compras, Mantenimiento e Ingeniería. Explora el catálogo y solicita tu cotización por WhatsApp.",
     url: "/",
     images: [{
-      url: "/cilindros/trabajo-real-cilindros-dynatech-recorte.jpg",
-      width: 915,
-      height: 549,
-      alt: "Cilindros neumáticos fabricados por Dynatech",
+      url: "/hero/suministro-industrial.jpg",
+      width: 1280,
+      height: 720,
+      alt: "Imagen de referencia: componentes neumáticos, gabinete de control e instrumentación",
     }],
   },
 };
@@ -66,8 +66,6 @@ export default function HomePage() {
         alt="Fabricación de un eje en el torno del taller de Dynatech; al fondo, la fresadora"
       />
       <AplicacionesHome />
-      <LineIndex />
-      <ServiciosHome />
       <ComoTrabajamos />
       <FaqBlock items={FAQS} kicker="Preguntas" title="Antes de escribir" tone="light" />
       <QuoteCTA

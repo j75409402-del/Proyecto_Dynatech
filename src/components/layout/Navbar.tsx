@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { NAV, SITE, CONTACT, CALL_PHONES, telHref } from "@/lib/constants";
-import { GRUPOS_SUMINISTRO, SOLUCIONES } from "@/lib/soluciones";
+import { GRUPOS_SUMINISTRO, SOLUCIONES, fotoLibre } from "@/lib/soluciones";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { SiteSearch } from "@/components/layout/SiteSearch";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -17,6 +17,16 @@ function isActive(pathname: string, href: string) {
 }
 
 const SOLUCIONES_HREFS = ["/catalogo", ...SOLUCIONES.map((s) => `/${s.slug}`), ...NAV.cilindros.map((c) => c.href), ...NAV.especialidades.map((e) => e.href)];
+
+const MENU_FOTO = new Map<string, string>();
+{
+  const usadas = new Set<string>();
+  for (const s of SOLUCIONES) {
+    const foto = fotoLibre(s, usadas) ?? s.image;
+    usadas.add(foto);
+    MENU_FOTO.set(s.slug, foto);
+  }
+}
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -158,7 +168,7 @@ export function Navbar() {
                             <li key={s.slug}>
                               <Link href={`/${s.slug}`} onClick={() => setMenuOpen(false)} className={cn(isActive(pathname, `/${s.slug}`) && "is-active")}>
                                 <span className="mega-thumb">
-                                  <Image src={s.image} alt="" fill sizes="72px" className="object-contain" />
+                                  <Image src={MENU_FOTO.get(s.slug) ?? s.image} alt="" fill sizes="72px" className="object-contain" />
                                 </span>
                                 <span>{s.name}</span>
                               </Link>

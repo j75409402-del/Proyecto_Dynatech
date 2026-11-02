@@ -550,3 +550,9 @@ export function getSolucion(slug: string): Solucion {
   if (!s) throw new Error(`Solución desconocida: ${slug}`);
   return s;
 }
+
+/** Primera foto de la línea que todavía no está en `usadas`. */
+export function fotoLibre(s: Solucion, usadas: ReadonlySet<string>): string | undefined {
+  const candidatas = [s.image, ...s.subcategorias.flatMap((sub) => (sub.image ? [sub.image] : []))];
+  return candidatas.find((src) => !usadas.has(src));
+}

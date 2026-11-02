@@ -32,17 +32,22 @@ function cotizar(s: Solucion, sub: Subcategoria) {
 }
 
 export default function ProductosPage() {
+  const usadas = new Set<string>();
   const tiles: CatalogTile[] = SOLUCIONES.flatMap((s) =>
-    productos(s).map((sub) => ({
-      id: `${s.slug}-${sub.id}`,
-      category: s.slug,
-      title: sub.title,
-      fact: sub.desc,
-      image: sub.image,
-      alt: sub.imageAlt,
-      quote: cotizar(s, sub),
-      href: sub.href ?? `/${s.slug}#${sub.id}`,
-    })),
+    productos(s).map((sub) => {
+      const image = sub.image && !usadas.has(sub.image) ? sub.image : undefined;
+      if (image) usadas.add(image);
+      return {
+        id: `${s.slug}-${sub.id}`,
+        category: s.slug,
+        title: sub.title,
+        fact: sub.desc,
+        image,
+        alt: image ? sub.imageAlt : undefined,
+        quote: cotizar(s, sub),
+        href: sub.href ?? `/${s.slug}#${sub.id}`,
+      };
+    }),
   );
   const sides = SOLUCIONES.map((s) => ({ id: s.slug, label: s.name }));
 
