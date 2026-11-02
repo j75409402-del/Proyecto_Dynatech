@@ -1,4 +1,3 @@
-import { Building2, Clock, FileCheck2, Gauge, MapPin } from "lucide-react";
 import { CONTACT, SITE } from "@/lib/constants";
 
 /** Horario corto a partir de CONTACT.hours ("Lunes a Viernes · 8:00 AM - 5:00 PM · Sábado · …"). */
@@ -24,20 +23,17 @@ export function hoursLines(hours: string = CONTACT.hours): string[] {
  */
 export function TrustStrip({ variant = "lineas" }: { variant?: "cilindros" | "lineas" }) {
   const items = [
-    { icon: MapPin, text: `${CONTACT.locality}, RD` },
-    { icon: FileCheck2, text: `RNC ${SITE.rnc}` },
-    { icon: Clock, text: shortHours() },
-    { icon: Building2, text: "Atendemos zonas francas y sector privado" },
-    ...(variant === "cilindros" ? [{ icon: Gauge, text: "Prueba de funcionamiento antes de entregar" }] : []),
+    `${CONTACT.locality}, República Dominicana`,
+    `RNC ${SITE.rnc}`,
+    shortHours(),
+    "Zonas francas y sector privado",
+    ...(variant === "cilindros" ? ["Prueba de funcionamiento antes de entregar"] : []),
   ];
   return (
     <div className="home-trust" data-variant={variant}>
       <ul className="container-max" aria-label="Datos de la empresa">
         {items.map((item) => (
-          <li key={item.text}>
-            <item.icon className="h-4 w-4 shrink-0 text-signal" aria-hidden="true" />
-            <span>{item.text}</span>
-          </li>
+          <li key={item}>{item}</li>
         ))}
       </ul>
     </div>

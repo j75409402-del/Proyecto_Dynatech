@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE.url}/valvulas-neumaticas`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE.url}/servicios`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE.url}/sellos-y-componentes`, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${SITE.url}/aplicaciones`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE.url}/nosotros`, changeFrequency: "yearly", priority: 0.5 },
     { url: `${SITE.url}/contacto`, changeFrequency: "yearly", priority: 0.5 },
     { url: `${SITE.url}/garantias`, changeFrequency: "yearly", priority: 0.3 },

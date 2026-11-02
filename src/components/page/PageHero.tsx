@@ -61,9 +61,11 @@ export function PageHero({ crumbs, kicker, title, lead, quoteHref, quoteLabel = 
           {note && <p className="home-hero-note">{note}</p>}
         </div>
         <figure className={`home-hero-visual ${visual ? "is-drawing" : image?.fit === "contain" ? "is-catalog" : ""}`}>
-          {visual ?? (image && (
-            <Image src={image.src} alt={image.alt} fill priority sizes="(max-width: 1023px) 100vw, 50vw" className={image.fit === "contain" ? "object-contain p-6" : "object-cover"} style={image.position ? { objectPosition: image.position } : undefined} />
-          ))}
+          <div className="home-hero-frame">
+            {visual ?? (image && (
+              <Image src={image.src} alt={image.alt} fill priority sizes="(max-width: 1023px) 100vw, 50vw" className={image.fit === "contain" ? "object-contain p-8" : "object-cover grade"} style={image.position ? { objectPosition: image.position } : undefined} />
+            ))}
+          </div>
           {caption && <figcaption><span>{caption.label}</span>{caption.text}</figcaption>}
         </figure>
       </div>

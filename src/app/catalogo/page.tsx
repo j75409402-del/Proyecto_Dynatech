@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Info } from "lucide-react";
-import { PageHero } from "@/components/page/PageHero";
-import { Band, SectionHead } from "@/components/page/Blocks";
+import { CatalogBoard, type CatalogTile } from "@/components/catalog/CatalogBoard";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
-import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { PhotoCredits } from "@/components/page/PhotoCredits";
 import { GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, SOLUCIONES, type Solucion, type Subcategoria } from "@/lib/soluciones";
 import { whatsappGeneral, whatsappService } from "@/lib/whatsapp";
@@ -21,13 +18,6 @@ export const metadata: Metadata = {
   openGraph: { title, description, url: "/catalogo", images: ["/banners/neumatica-industrial-conectores.webp"] },
 };
 
-/**
- * Catálogo por categorías (oct-2026). Fuente única: SOLUCIONES (solo categorías y tipos ya
- * documentados; sin SKUs, marcas, stock ni precios). Cada categoría tiene su botón de
- * cotización con el nombre de la categoría y de la línea en el mensaje de WhatsApp.
- * Se omiten las subcategorías que solo enlazan a otra línea (ya aparecen en su grupo) y la
- * reparación de cilindros (es un servicio del taller).
- */
 function productos(s: Solucion): Subcategoria[] {
   return s.subcategorias.filter((sub) => {
     if (!sub.href) return true;
@@ -42,73 +32,42 @@ function cotizar(s: Solucion, sub: Subcategoria) {
 }
 
 export default function ProductosPage() {
+  const usadas = new Set<string>();
+  const tiles: CatalogTile[] = SOLUCIONES.flatMap((s) =>
+    productos(s).map((sub) => {
+      const image = sub.image && !usadas.has(sub.image) ? sub.image : undefined;
+      if (image) usadas.add(image);
+      return {
+        id: `${s.slug}-${sub.id}`,
+        category: s.slug,
+        title: sub.title,
+        fact: sub.desc,
+        image,
+        alt: image ? sub.imageAlt : undefined,
+        quote: cotizar(s, sub),
+        href: sub.href ?? `/${s.slug}#${sub.id}`,
+      };
+    }),
+  );
+  const sides = SOLUCIONES.map((s) => ({ id: s.slug, label: s.name }));
+
   return (
     <>
-      <PageHero
-        crumbs={[{ label: "Productos" }]}
-        kicker="Suministro industrial bajo cotización y pedido"
-        title="Catálogo de productos industriales"
-        lead={<p>Neumática, control industrial, automatización, instrumentación, resistencias eléctricas y termocuplas. Cotiza por WhatsApp con el nombre de la categoría incluido; añade referencias, cantidades y especificaciones.</p>}
-        quoteHref={whatsappGeneral()}
-        secondary={{ href: "#categorias", label: "Ver categorías" }}
-        note="Disponibilidad, precios, condiciones y tiempos de entrega sujetos a cotización. Este catálogo no representa inventario en tiempo real."
-        image={{ src: "/banners/neumatica-industrial-conectores.webp", alt: "Imagen de referencia: componentes neumáticos sobre una mesa de trabajo" }}
-        caption={{ label: "Imagen de referencia", text: "Neumática · Control · Automatización · Instrumentación" }}
-      />
-
-      <nav id="categorias" aria-label="Categorías del catálogo" className="catalog-index scroll-mt-28" data-fab-hide="">
-        <ul className="container-max chip-nav">
-          {GRUPOS_SUMINISTRO.map((g) => <li key={g.id}><a href={`#${g.id}`}>{g.title}</a></li>)}
-        </ul>
-      </nav>
-
-      {GRUPOS_SUMINISTRO.map((g, gi) => {
-        const lineas = SOLUCIONES.filter((s) => s.grupo === g.id);
-        return (
-          <Band key={g.id} tone={gi % 2 ? "white" : "light"} id={g.id} labelledBy={`grupo-${g.id}`}>
-            <SectionHead kicker={`${String(gi + 1).padStart(2, "0")} · Suministro`} id={`grupo-${g.id}`} title={g.title} intro={g.desc} />
-            {lineas.some((l) => l.soloSuministro) && (
-              <p className="scope-note mb-8"><Info className="h-4 w-4 shrink-0" aria-hidden="true" /><span>En {g.title.toLowerCase()} {SOLO_SUMINISTRO}</span></p>
-            )}
-            {lineas.map((s) => (
-              <div key={s.slug} className="catalog-line">
-                {lineas.length > 1 && <h3 className="catalog-line-title">{s.name}</h3>}
-                <ul className="prod-grid" data-fab-hide="">
-                  {productos(s).map((sub) => (
-                    <li key={sub.id} className="prod-card">
-                      {sub.image && (
-                        <span className={`prod-thumb ${sub.imageFit === "cover" ? "is-photo" : ""}`}>
-                          <Image src={sub.image} alt={sub.imageAlt ?? sub.title} fill sizes="96px" className={sub.imageFit === "cover" ? "object-cover" : "object-contain p-2"} />
-                          {sub.imageNote && <span className="prod-note">{sub.imageNote}</span>}
-                        </span>
-                      )}
-                      <div className="prod-body">
-                        <h4>{sub.title}</h4>
-                        <p>{sub.desc}</p>
-                        <div className="prod-actions">
-                          <a href={cotizar(s, sub)} target="_blank" rel="noopener" className="prod-quote">
-                            <WhatsAppIcon className="h-4 w-4" />Cotizar<span className="sr-only">: {sub.title} por WhatsApp</span>
-                          </a>
-                          <Link href={sub.href ?? `/${s.slug}#${sub.id}`} className="prod-link">Detalles <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /><span className="sr-only"> de {sub.title}</span></Link>
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <Link href={`/${s.slug}`} className="catalog-line-link">Ver la página de {s.name.toLowerCase()} <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
-              </div>
-            ))}
-            <PhotoCredits items={lineas.flatMap((l) => productos(l))} />
-          </Band>
-        );
-      })}
-
-      <QuoteCTA
-        eyebrow="Suministro industrial · Catálogo"
-        title="¿No ves lo que buscas?"
-        text="Envíanos el código, una foto de la pieza o de su placa, o la descripción, y te decimos si podemos conseguirlo."
-        whatsappHref={whatsappService("foto")}
-      />
+      <header className="catalog-top">
+        <div className="container-max">
+          <Breadcrumbs items={[{ label: "Catálogo" }]} />
+          <h1>Catálogo</h1>
+          <p>Elige una categoría y cotiza por WhatsApp. Sin precios ni inventario.</p>
+          <a href={whatsappGeneral()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">Cotizar por WhatsApp</a>
+        </div>
+      </header>
+      <div className="container-max catalog-body">
+        <CatalogBoard sides={sides} tiles={tiles} heading="Familias" />
+        <p className="scope-note catalog-scope">{SOLO_SUMINISTRO} <Link href="/control-electrico">Control</Link>, <Link href="/sensores">sensores</Link> e <Link href="/instrumentacion">instrumentación</Link>.</p>
+        <PhotoCredits items={SOLUCIONES.flatMap((s) => productos(s))} />
+        <p className="sr-only">{GRUPOS_SUMINISTRO.map((g) => g.title).join(", ")}</p>
+      </div>
+      <QuoteCTA eyebrow="Catálogo" title="¿No ves la pieza?" text="Código, foto o placa." whatsappHref={whatsappService("foto")} ctaLabel="Cotizar por WhatsApp" />
     </>
   );
 }

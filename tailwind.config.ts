@@ -15,13 +15,13 @@ const config: Config = {
           500: "#CBD5E1", // bordes pesados
         },
         steel: {
-          DEFAULT: "#334155",
-          100: "#0F172A", // reservado, tono más oscuro de la escala
-          200: "#1E293B", // texto secundario prominente (nav, párrafos)
-          300: "#334155", // texto de cuerpo / labels
-          400: "#475569", // eyebrows / etiquetas mono
-          500: "#64748B", // íconos / metadata
-          600: "#94A3B8", // patrón decorativo (placeholder)
+          DEFAULT: "#3A424A",
+          100: "#14171B",
+          200: "#1C2126",
+          300: "#3A424A",
+          400: "#5C656E",
+          500: "#6E7882",
+          600: "#A7B0B8",
         },
         signal: {
           DEFAULT: "#E4002B", // safety red — Dynatech accent
@@ -37,7 +37,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "system-ui", "sans-serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },

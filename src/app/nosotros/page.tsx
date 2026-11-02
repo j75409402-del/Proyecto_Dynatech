@@ -45,11 +45,11 @@ export default function NosotrosPage() {
       <PageHero
         crumbs={[{ label: "Nosotros" }]}
         kicker={`${SITE.legalName} · ${CONTACT.locality}`}
-        title={<>Suministro industrial. <span className="text-signal">Atención a empresas.</span></>}
-        lead={<p>{SITE.legalName} es un proveedor de suministros industriales bajo cotización y pedido para empresas y zonas francas en República Dominicana, especializado en neumática y componentes de automatización. También realizamos fabricación y reparación de cilindros y mecanizado de piezas.</p>}
+        title="Suministro industrial"
+        lead={<p>Bajo cotización. Cilindros, mecanizado y componentes.</p>}
         quoteHref={whatsappGeneral()}
-        secondary={{ href: "#empresa", label: "Ver datos de la empresa" }}
-        note="Trabajamos bajo cotización: nos envías las especificaciones, cotizamos y coordinamos la entrega."
+        secondary={{ href: "#empresa", label: "Datos de la empresa" }}
+        note="Especificaciones, cotización y entrega."
         // PENDIENTE CAPITÁN: sustituir por una foto real de la fachada, el taller o el equipo (hoy es imagen de referencia).
         // WEB-011: distinta del hero de /servicios. Sin escena de taller IA ni marcas de terceros (auditoría V2).
         image={{ src: "/products/cilindros-neumaticos.jpg", alt: "Imagen de referencia: cilindros neumáticos de distintos tipos y tamaños", fit: "contain" }}

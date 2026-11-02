@@ -6,8 +6,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { NAV, SITE, CONTACT, CALL_PHONES, telHref } from "@/lib/constants";
-import { SOLUCIONES } from "@/lib/soluciones";
+import { GRUPOS_SUMINISTRO, SOLUCIONES } from "@/lib/soluciones";
 import { whatsappGeneral } from "@/lib/whatsapp";
+import { SiteSearch } from "@/components/layout/SiteSearch";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { cn } from "@/lib/utils";
 
@@ -24,14 +25,61 @@ export function Navbar() {
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const productButtonRef = useRef<HTMLButtonElement>(null);
+  const closeTimer = useRef<number | null>(null);
+  const pinned = useRef(false);
+  const focusPanel = useRef(false);
+
+  function clearClose() {
+    if (closeTimer.current !== null) {
+      window.clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  }
+  function openProducts() {
+    clearClose();
+    setMenuOpen(true);
+  }
+  function scheduleClose() {
+    clearClose();
+    closeTimer.current = window.setTimeout(() => {
+      if (!pinned.current) setMenuOpen(false);
+    }, 300);
+  }
+  function closeProducts() {
+    clearClose();
+    pinned.current = false;
+    setMenuOpen(false);
+  }
+  function toggleProducts() {
+    clearClose();
+    setMenuOpen((isOpen) => {
+      if (isOpen && pinned.current) {
+        pinned.current = false;
+        return false;
+      }
+      pinned.current = true;
+      return true;
+    });
+  }
 
   useEffect(() => {
+    function placeMenu() {
+      const header = menuRef.current?.closest("header");
+      if (!header || !menuRef.current) return;
+      menuRef.current.style.setProperty("--menu-top", `${Math.round(header.getBoundingClientRect().bottom)}px`);
+    }
     function onScroll() {
       setScrolled(window.scrollY > 12);
+      placeMenu();
     }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", placeMenu);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", placeMenu);
+    };
   }, []);
 
   // Menú móvil: Escape lo cierra.
@@ -48,14 +96,31 @@ export function Navbar() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Desplegable: se cierra con Escape o al hacer clic fuera.
+  useEffect(() => () => {
+    if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen || !focusPanel.current) return;
+    focusPanel.current = false;
+    menuRef.current?.querySelector<HTMLAnchorElement>("#menu-soluciones a")?.focus();
+  }, [menuOpen]);
+
+  // Desplegable: Escape, clic fuera, o 300 ms después de salir con el mouse.
   useEffect(() => {
     if (!menuOpen) return;
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setMenuOpen(false);
+      if (e.key !== "Escape") return;
+      if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+      pinned.current = false;
+      setMenuOpen(false);
+      productButtonRef.current?.focus();
     }
     function onClick(e: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setMenuOpen(false);
+      if (!menuRef.current || menuRef.current.contains(e.target as Node)) return;
+      if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+      pinned.current = false;
+      setMenuOpen(false);
     }
     document.addEventListener("keydown", onKey);
     document.addEventListener("mousedown", onClick);
@@ -111,7 +176,7 @@ export function Navbar() {
               href="/cilindros-neumaticos"
               aria-current={isActive(pathname, "/cilindros-neumaticos") ? "page" : undefined}
               className={cn(
-                "inline-flex min-h-10 items-center text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
+                "inline-flex min-h-11 items-center text-sm font-medium tracking-tight transition-colors whitespace-nowrap",
                 isActive(pathname, "/cilindros-neumaticos") ? "text-signal" : "text-steel-200 hover:text-signal",
               )}
             >
@@ -119,19 +184,26 @@ export function Navbar() {
             </Link>
             <div
               ref={menuRef}
-              className="relative"
-              onMouseEnter={() => setMenuOpen(true)}
-              onMouseLeave={() => setMenuOpen(false)}
+              className="product-menu"
+              onMouseEnter={openProducts}
+              onMouseLeave={scheduleClose}
             >
               <button
+                ref={productButtonRef}
                 type="button"
-                // Solo abre: con mouse el hover ya lo abrió y un toggle lo cerraría al hacer clic.
-                // Se cierra con Escape, clic fuera o al salir con el mouse.
-                onClick={() => setMenuOpen(true)}
+                onClick={toggleProducts}
+                onKeyDown={(e) => {
+                  if (e.key !== "ArrowDown") return;
+                  e.preventDefault();
+                  pinned.current = true;
+                  focusPanel.current = true;
+                  openProducts();
+                }}
                 aria-expanded={menuOpen}
+                aria-haspopup="true"
                 aria-controls="menu-soluciones"
                 className={cn(
-                  "flex min-h-10 items-center gap-1 text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
+                  "flex min-h-11 items-center gap-1.5 text-sm font-medium tracking-tight transition-colors whitespace-nowrap",
                   solucionesActive || menuOpen ? "text-signal" : "text-steel-200 hover:text-signal",
                 )}
               >
@@ -139,69 +211,55 @@ export function Navbar() {
                 <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", menuOpen && "rotate-180")} />
               </button>
 
-              {/* Panel (pt-4 deja un "puente" para que el hover no se corte al bajar el mouse) */}
               <div
                 id="menu-soluciones"
-                hidden={!menuOpen}
-                className="absolute left-0 top-full pt-4 w-[min(680px,calc(100vw-2rem))]"
+                data-open={menuOpen}
+                inert={!menuOpen}
+                aria-hidden={!menuOpen}
               >
-                <div className="grid grid-cols-5 border border-black/10 bg-carbon shadow-[0_24px_60px_-24px_rgba(0,0,0,0.3)]">
-                  <div className="col-span-3 p-5">
-                    <div className="eyebrow mb-3">Suministro industrial</div>
-                    <ul className="space-y-1">
-                      {SOLUCIONES.map((s) => (
-                        <li key={s.slug}>
-                          <Link
-                            href={`/${s.slug}`}
-                            onClick={() => setMenuOpen(false)}
-                            className={cn(
-                              "group flex items-start gap-3 p-2 -mx-2 hover:bg-carbon-800 transition-colors",
-                              isActive(pathname, `/${s.slug}`) && "bg-carbon-800",
-                            )}
-                          >
-                            <s.icon className="h-4 w-4 text-signal mt-0.5 shrink-0" />
-                            <span>
-                              <span className="block text-sm font-medium text-surface group-hover:text-signal">{s.name}</span>
-                              <span className="block text-xs text-steel-400 leading-snug">{s.short}</span>
-                            </span>
+                <div className="mega mega-portal">
+                  <div className="mega-cats">
+                    {GRUPOS_SUMINISTRO.map((g) => (
+                      <div key={g.id}>
+                        <div className="mega-label">{g.title}</div>
+                        <ul className="mega-tiles">
+                          {SOLUCIONES.filter((s) => s.grupo === g.id).map((s) => (
+                            <li key={s.slug}>
+                              <Link href={`/${s.slug}`} onClick={closeProducts} className={cn(isActive(pathname, `/${s.slug}`) && "is-active")}>
+                                <span className="mega-copy"><span>{s.name}</span><small>{s.short}</small></span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mega-aside">
+                    <div className="mega-label">Servicios</div>
+                    <ul>
+                      {NAV.cilindros.map((c) => (
+                        <li key={c.href}>
+                          <Link href={c.href} onClick={closeProducts}>
+                            <span>{c.label}</span>
+                          </Link>
+                        </li>
+                      ))}
+                      {NAV.especialidades.map((c) => (
+                        <li key={c.href}>
+                          <Link href={c.href} onClick={closeProducts}>
+                            <span>{c.label}</span>
                           </Link>
                         </li>
                       ))}
                     </ul>
-                    <Link
-                      href="/catalogo"
-                      onClick={() => setMenuOpen(false)}
-                      className="mt-3 inline-flex min-h-10 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-surface hover:text-signal"
-                    >
-                      Ver catálogo completo
+                    <Link href="/catalogo" onClick={closeProducts}>
+                      Ver catálogo
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
-                  </div>
-                  <div className="col-span-2 border-l border-black/10 bg-carbon-800 p-5 flex flex-col">
-                    <div className="eyebrow mb-3">Taller y componentes neumáticos</div>
-                    <ul className="space-y-1 mb-4">
-                      {[...NAV.cilindros, ...NAV.especialidades].map((c) => (
-                        <li key={c.href}>
-                          <Link
-                            href={c.href}
-                            onClick={() => setMenuOpen(false)}
-                            className="flex min-h-10 items-center text-sm text-steel-200 hover:text-signal transition-colors"
-                          >
-                            {c.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                    <a
-                      href={whatsappGeneral()}
-                      target="_blank"
-                      rel="noopener"
-                      onClick={() => setMenuOpen(false)}
-                      className="mt-auto inline-flex min-h-10 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-signal hover:gap-2.5 transition-all"
-                    >
-                      {NAV.cta.label}
+                    <Link href="/aplicaciones" onClick={closeProducts}>
+                      Aplicaciones
                       <ArrowRight className="h-3.5 w-3.5" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -213,7 +271,7 @@ export function Navbar() {
                 href={item.href}
                 aria-current={isActive(pathname, item.href) ? "page" : undefined}
                 className={cn(
-                  "inline-flex min-h-10 items-center text-xs font-medium uppercase tracking-wider transition-colors whitespace-nowrap",
+                  "inline-flex min-h-11 items-center text-sm font-medium tracking-tight transition-colors whitespace-nowrap",
                   isActive(pathname, item.href) ? "text-signal" : "text-steel-200 hover:text-signal",
                 )}
               >
@@ -223,14 +281,13 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
+            <SiteSearch />
             <a
               href={whatsappGeneral()}
               target="_blank"
               rel="noopener"
-              className="inline-flex items-center justify-center gap-2 bg-signal hover:bg-signal-hover
-                         text-white font-medium min-h-11 py-2.5 px-4 xl:px-5 rounded-xs text-xs uppercase tracking-wider
-                         transition-colors whitespace-nowrap"
+              className="inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap bg-signal px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-signal-hover xl:px-5"
             >
               <WhatsAppIcon className="h-4 w-4" />
               {NAV.cta.label}
@@ -263,19 +320,20 @@ export function Navbar() {
         )}
       >
         <nav className="container-max pb-6 flex flex-col max-h-[calc(100svh-4.5rem)] overflow-y-auto overscroll-contain" aria-label="Menú móvil">
+          <div className="mb-3"><SiteSearch onNavigate={() => setOpen(false)} /></div>
           {/* CTA primero: visible sin desplazarse dentro del menú. */}
           <a
             href={whatsappGeneral()}
             target="_blank"
             rel="noopener"
             onClick={() => setOpen(false)}
-            className="sticky top-0 z-10 -mx-4 mb-2 flex min-h-14 items-center justify-center gap-2 bg-signal px-4 text-sm font-medium uppercase tracking-wider text-white transition-colors hover:bg-signal-hover sm:-mx-6"
+            className="sticky top-0 z-10 -mx-4 mb-2 flex min-h-14 items-center justify-center gap-2 bg-signal px-4 text-sm font-medium text-white transition-colors hover:bg-signal-hover sm:-mx-6"
           >
             <WhatsAppIcon className="h-5 w-5" />
             {NAV.cta.label}
             <ArrowRight className="h-4 w-4" />
           </a>
-          <p className="mb-2 text-center text-sm text-[#a9b7c4]">Puedes empezar con una foto de la pieza o de su placa.</p>
+          <p className="mb-2 text-center text-sm text-steel-400">Puedes empezar con una foto de la pieza o de su placa.</p>
           <div className="eyebrow mt-4 mb-1">Fabricación, reparación y mecanizado</div>
           {NAV.cilindros.map((item) => (
             <Link
@@ -325,12 +383,14 @@ export function Navbar() {
               onClick={() => setOpen(false)}
               aria-current={isActive(pathname, `/${s.slug}`) ? "page" : undefined}
               className={cn(
-                "flex min-h-11 items-center gap-3 border-b border-black/5 text-sm font-medium",
+                "flex min-h-12 items-center gap-3 border-b border-black/5 text-sm font-medium",
                 isActive(pathname, `/${s.slug}`) ? "text-signal" : "text-steel-200 hover:text-signal",
               )}
             >
-              <s.icon className="h-4 w-4 text-signal" aria-hidden="true" />
-              {s.name}
+              <span className="relative h-10 w-10 shrink-0 overflow-hidden border border-black/10">
+                <Image src={s.image} alt="" fill sizes="40px" className="object-cover" />
+              </span>
+              <span>{s.name}<small className="mt-0.5 block text-xs font-normal text-steel-400">{s.short}</small></span>
             </Link>
           ))}
           <div className="eyebrow mt-5 mb-1">Empresa</div>

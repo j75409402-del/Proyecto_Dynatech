@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { HomeHero, TallerPrincipal, SuministroIndustrial, Sectores, VentajasB2B, ContactoB2B } from "@/components/home/HomeSections";
-import { CilindrosDestacados, ComoTrabajamos, AntesDespues, TrabajosTaller } from "@/components/home/IndustrialSections";
+import { HomeHero, LineasDeUnVistazo, NeumaticaIndustrial, Editorial, AplicacionesHome } from "@/components/home/HomeSections";
+import { ComoTrabajamos } from "@/components/home/IndustrialSections";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { CONTACT } from "@/lib/constants";
-import { whatsappGeneral } from "@/lib/whatsapp";
+import { whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Suministros industriales para empresas en República Dominicana",
@@ -17,47 +17,52 @@ export const metadata: Metadata = {
       "Componentes industriales para Compras, Mantenimiento e Ingeniería. Explora el catálogo y solicita tu cotización por WhatsApp.",
     url: "/",
     images: [{
-      url: "/cilindros/trabajo-real-cilindros-dynatech-recorte.jpg",
-      width: 915,
-      height: 549,
-      alt: "Cilindros neumáticos fabricados por Dynatech",
+      url: "/hero/suministro-industrial.jpg",
+      width: 1280,
+      height: 720,
+      alt: "Imagen de referencia: componentes neumáticos, gabinete de control e instrumentación",
     }],
   },
 };
 
 /** Solo hechos ya publicados en el sitio o confirmados por el Capitán (WEB-020). */
 const FAQS: Faq[] = [
-  { q: "¿El catálogo indica disponibilidad inmediata?", a: "No. Trabajamos bajo cotización y pedido. Disponibilidad, precios, condiciones y tiempos de entrega se confirman en la cotización antes de tu orden de compra." },
-  { q: "¿Qué necesito enviar?", a: "Lo que tengas: una foto, el código o la referencia, el plano, una muestra o las medidas. Para cilindros basta con una foto del cilindro y su placa, o el diámetro x carrera." },
-  { q: "No conozco la referencia, ¿puedo cotizar igual?", a: "Sí. Envía fotos de la pieza y de su placa, si tiene, y cuéntanos qué hace en la máquina. Si hace falta otro dato o la muestra, te lo pedimos por el mismo chat." },
-  { q: "¿Cómo envío la solicitud?", a: "Pulsa «Solicitar cotización» o «Cotizar por WhatsApp»: se abre WhatsApp con un mensaje listo según lo que necesitas. Adjunta las fotos o el plano y envíalo. También puedes llamar o escribir un correo desde la página de contacto." },
-  { q: "¿Reparan y también fabrican cilindros?", a: "Sí, neumáticos e hidráulicos. Reparamos cilindros dañados y fabricamos cilindros a la medida a partir de tu plano, una muestra o tus medidas. Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar." },
-  { q: "¿Mecanizan piezas?", a: "Sí, con torno y fresadora, a partir de un plano o de una muestra. Envía el plano o fotos de la pieza con una referencia de tamaño, el material si lo conoces y la cantidad." },
-  { q: "¿Atienden zonas francas?", a: "Sí. Atendemos solicitudes de empresas de zonas francas y del sector privado en República Dominicana." },
-  { q: "¿Qué productos suministran?", a: "Neumática (válvulas, conexiones, unidades FRL, mangueras y sellos), control industrial (contactores, relés, protecciones, mando y gabinetes), automatización (sensores), instrumentación (presión y temperatura), resistencias eléctricas y termocuplas, siempre bajo cotización." },
-  { q: "¿Instalan o programan los equipos?", a: "No. En control, automatización e instrumentación solo suministramos los productos: no realizamos instalación, programación, mantenimiento, armado de tableros ni puesta en marcha." },
-  { q: "¿Dónde están y en qué horario atienden?", a: `En ${CONTACT.address}. Horario: ${CONTACT.hours.replace(/ · /g, " ")}.` },
+  { q: "¿Hay stock en línea?", a: "No. Precio y plazo se confirman en la cotización." },
+  { q: "¿Qué envío?", a: "Foto, código, plano o muestra." },
+  { q: "¿Sin referencia?", a: "Sí. Foto de la pieza y de su placa." },
+  { q: "¿Cómo cotizo?", a: "Por WhatsApp, con el mensaje listo." },
+  { q: "¿Cilindros?", a: "Neumáticos e hidráulicos. Fabricamos y reparamos." },
+  { q: "¿Mecanizado?", a: "Torno y fresadora. Plano o muestra." },
+  { q: "¿Zonas francas?", a: "Sí. Empresas y zonas francas en el país." },
+  { q: "¿Qué suministran?", a: "Neumática, control, sensores, instrumentación y resistencias." },
+  { q: "¿Instalan o programan?", a: "No. En esas líneas solo suministramos." },
+  { q: "¿Dónde y cuándo?", a: `${CONTACT.address}. ${CONTACT.hours.replace(/ · /g, " ")}.` },
 ];
 
 export default function HomePage() {
   return (
     <>
       <HomeHero />
-      <SuministroIndustrial />
-      <Sectores />
+      <LineasDeUnVistazo />
+      <NeumaticaIndustrial />
+      <Editorial
+        id="home-mecanizado"
+        kicker="Taller"
+        title="Mecanizado de piezas"
+        text="Torno y fresadora. Plano o muestra."
+        href="/mecanizado"
+        quote={whatsappService("mecanizado")}
+        image="/studio/linea-mecanizado.jpg"
+        alt="Eje de acero en el torno, sin marcas"
+      />
+      <AplicacionesHome />
       <ComoTrabajamos />
-      <VentajasB2B />
-      <ContactoB2B />
-      <CilindrosDestacados />
-      <TallerPrincipal />
-      <TrabajosTaller />
-      <AntesDespues />
-      <FaqBlock items={FAQS} kicker="Preguntas frecuentes" title="Antes de escribirnos" tone="light" />
+      <FaqBlock items={FAQS} kicker="Preguntas" title="Antes de escribir" tone="light" />
       <QuoteCTA
-        eyebrow="Suministro industrial bajo cotización y pedido"
-        title="Cuéntanos qué necesita tu empresa."
-        text="Comparte referencias, cantidades y especificaciones para preparar tu cotización."
-        ctaLabel="Solicitar cotización"
+        eyebrow="Bajo cotización"
+        title="Empieza con una foto"
+        text="Código, plano o muestra."
+        ctaLabel="Cotizar por WhatsApp"
         whatsappHref={whatsappGeneral()}
       />
     </>

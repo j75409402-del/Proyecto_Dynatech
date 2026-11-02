@@ -1,14 +1,14 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
 import { Info } from "lucide-react";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
-import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, CheckList, type OfferItem } from "@/components/page/Blocks";
+import { Band, SectionHead, QuoteChecklist, RelatedGrid, CheckList } from "@/components/page/Blocks";
+import { CatalogBoard } from "@/components/catalog/CatalogBoard";
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import { PhotoCredits } from "@/components/page/PhotoCredits";
-import { SOLUCIONES, DATOS_PARA_COTIZAR, GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, type Solucion } from "@/lib/soluciones";
+import { SOLUCIONES, DATOS_PARA_COTIZAR, GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, fotoLibre, type Solucion } from "@/lib/soluciones";
 import { whatsappService, whatsappSolucion } from "@/lib/whatsapp";
 
 type Props = {
@@ -17,17 +17,9 @@ type Props = {
   destacado?: ReactNode;
 };
 
-/** Texto del enlace interno de una subcategoría con página propia (sin la palabra "cotizar"). */
-function linkLabel(href: string, title: string) {
-  if (href.startsWith("/cilindros-neumaticos")) return "Ver tipos de cilindro";
-  if (href.startsWith("/servicios")) return "Ver reparación de cilindros";
-  return `Ver ${title.toLowerCase()}`;
-}
-
 /**
- * Plantilla de línea industrial (WEB-010): Hero con imagen real → (destacado) → Qué cotizamos
- * (tarjetas con foto) → Qué datos necesitamos → Dónde se usan → Otras líneas → Cierre.
- * Sin SKUs, precios, inventario ni marcas representadas. Las anclas #<subcategoría> se conservan.
+ * Plantilla de línea: hero → familias en grilla (anclas #<subcategoría>) → datos → aplicaciones.
+ * Sin SKUs, precios, inventario ni marcas representadas.
  */
 export function SolucionPage({ solucion: s, destacado }: Props) {
   const otras = SOLUCIONES.filter((x) => x.slug !== s.slug);
@@ -56,21 +48,23 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
     },
   };
 
-  const items: OfferItem[] = s.subcategorias.map((sub) => ({
-    id: sub.id,
-    title: sub.title,
-    desc: sub.desc,
-    icon: sub.icon,
-    image: sub.image,
-    imageAlt: sub.imageAlt,
-    imageFit: sub.imageFit,
-    imageNote: sub.imageNote,
-    noMedia: !sub.image,
-    ejemplos: sub.ejemplos,
-    ...(sub.href
-      ? { link: { href: sub.href, label: linkLabel(sub.href, sub.title) } }
-      : { quote: neumatica ? whatsappService("componente", sub.title) : quoteHref(sub.title, s.name) }),
-  }));
+  const usadas = new Set<string>([s.image]);
+  const tiles = s.subcategorias.map((sub) => {
+    const image = sub.image && !usadas.has(sub.image) ? sub.image : undefined;
+    if (image) usadas.add(image);
+    const quote = neumatica ? whatsappService("componente", sub.title) : quoteHref(sub.title, s.name);
+    return {
+      id: sub.id,
+      category: s.slug,
+      title: sub.title,
+      fact: sub.desc,
+      image,
+      alt: image ? sub.imageAlt : undefined,
+      quote,
+      href: sub.href ?? `/${s.slug}#${sub.id}`,
+    };
+  });
+  const sides = SOLUCIONES.map((o) => ({ id: o.slug, label: o.name, href: `/${o.slug}` }));
 
   const datos = [...(DATOS_PARA_COTIZAR[s.slug] ?? []).map((t) => ({ title: t })), { title: "Cantidad y ciudad de entrega" }];
 
@@ -86,10 +80,9 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         title={s.title}
         lead={<p>{s.description}</p>}
         quoteHref={neumatica ? lineQuote : quoteHref(s.name, s.name)}
-        secondary={{ href: "#catalogo", label: "Ver catálogo de la línea" }}
-        note="Envía el código o una foto de la placa; si no conoces la referencia, una foto de la pieza basta para empezar."
+        secondary={{ href: "#catalogo", label: "Ver catálogo" }}
+        note="Código, foto o plano."
         image={{ src: s.image, alt: s.imageAlt }}
-        caption={{ label: "Imagen de referencia", text: s.ejemplos.slice(0, 3).join(" · ") }}
         trust="lineas"
       />
 
@@ -97,52 +90,49 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
 
       <Band tone="light" id="catalogo" labelledBy="catalogo-titulo">
         <SectionHead
-          kicker="01 · Qué cotizamos"
+          kicker="Catálogo de la línea"
           id="catalogo-titulo"
-          title={<>Catálogo de {s.name.toLowerCase()}</>}
-          intro="Si no ves lo que buscas, envíanos el código, una foto o la descripción. Las imágenes son de referencia del tipo de componente, no de inventario."
+          title="Catálogo"
+          intro="Fotos de referencia, no inventario."
         />
         {s.soloSuministro && (
           <p className="scope-note mb-6"><Info className="h-4 w-4 shrink-0" aria-hidden="true" /><span>En esta línea {SOLO_SUMINISTRO}</span></p>
         )}
-        <nav aria-label={`Subcategorías de ${s.name}`} className="mb-8" data-fab-hide="">
-          <ul className="chip-nav">
-            {s.subcategorias.map((sub) => (
-              <li key={sub.id}>{sub.href ? <Link href={sub.href}>{sub.title}</Link> : <a href={`#${sub.id}`}>{sub.title}</a>}</li>
-            ))}
-          </ul>
-        </nav>
-        <OfferGrid items={items} />
+        <CatalogBoard sides={sides} tiles={tiles} current={s.slug} heading={s.name} />
         <PhotoCredits items={s.subcategorias} />
       </Band>
 
       <QuoteChecklist
-        kicker="02 · Para cotizar"
-        title="Qué datos necesitamos"
-        intro={`Para cotizar ${s.name.toLowerCase()}, comparte los datos que tengas. No hace falta completarlos todos: con una foto legible de la placa o la referencia podemos empezar.`}
+        kicker="Para cotizar"
+        title="Qué enviar"
+        intro="Con foto o referencia basta."
         items={datos}
         quoteHref={lineQuote}
         note={`Atención por WhatsApp: ${shortHours()}.`}
       />
 
       <Band tone="white" labelledBy="aplicaciones-titulo">
-        <SectionHead kicker="03 · Aplicaciones" id="aplicaciones-titulo" title="Dónde se usan" intro="Atendemos solicitudes de empresas y zonas francas en República Dominicana." />
+        <SectionHead kicker="Aplicación" id="aplicaciones-titulo" title="Dónde se usan" intro="Empresas y zonas francas." />
         <CheckList items={s.aplicaciones} />
       </Band>
 
-      <FaqBlock items={faqs} kicker="04 · Preguntas frecuentes" title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
+      <FaqBlock items={faqs} kicker="Preguntas" title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
 
       <RelatedGrid
         kicker="Otras líneas"
-        title="Más suministro industrial"
+        title="Otras líneas"
         id="otras-lineas"
-        items={otras.map((o) => ({ href: `/${o.slug}`, title: o.name, desc: o.short, image: o.image, label: "Ver catálogo de la línea" }))}
+        items={otras.map((o) => {
+          const image = fotoLibre(o, usadas);
+          if (image) usadas.add(image);
+          return { href: `/${o.slug}`, title: o.name, desc: o.short, image, label: "Ver línea" };
+        })}
       />
 
       <QuoteCTA
         eyebrow={`Suministro industrial · ${s.name}`}
         title={s.ctaTitle}
-        text="Envíanos el código, una foto, la muestra o la descripción y te cotizamos."
+        text="Código, foto o muestra."
         quoteItem={s.name}
         quoteTipo={s.name}
         whatsappHref={lineQuote}

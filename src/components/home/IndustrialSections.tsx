@@ -58,17 +58,16 @@ export function CilindrosDestacados() {
 
 export function ComoTrabajamos() {
   const pasos = [
-    { title: "Envíanos tu requerimiento.", text: "Referencia, código, cantidad o una foto. Añade las especificaciones que tengas." },
-    { title: "Recibe una cotización.", text: "Revisamos tu solicitud y confirmamos disponibilidad, precio, condiciones y plazo." },
-    { title: "Confirma tu orden de compra.", text: "Formaliza tu pedido con las condiciones acordadas en la cotización." },
-    { title: "Coordinamos el suministro y la entrega.", text: "Acordamos contigo los detalles de entrega y facturación de tu pedido." },
+    { title: "Envías el dato", text: "Foto, código o plano." },
+    { title: "Recibes la cotización", text: "Precio, plazo y condiciones." },
+    { title: "Confirmas la entrega", text: "Orden, entrega y facturación." },
   ];
   return (
     <section className="b2b-process" aria-labelledby="proceso-titulo">
       <div className="container-max">
-        <div className="b2b-process-head"><div><p className="section-kicker">03 / Cómo solicitar productos</p><h2 id="proceso-titulo" className="section-title">Un proceso claro.<br /><span>De principio a entrega.</span></h2></div><a href={whatsappService("foto")} target="_blank" rel="noopener" className="btn-primary min-h-14" data-fab-hide=""><WhatsAppIcon className="h-5 w-5" />Enviar requerimiento<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div>
-        <ol className="b2b-steps">{pasos.map((p,i) => <li key={p.title}><span>{String(i+1).padStart(2,"0")}</span><h3>{p.title}</h3><p>{p.text}</p></li>)}</ol>
-        <p className="b2b-conditions">Disponibilidad, precios, condiciones y tiempos de entrega sujetos a cotización. El catálogo es una referencia de nuestras líneas; no muestra inventario en tiempo real.</p>
+        <div className="b2b-process-head"><div><p className="section-kicker">Proceso</p><h2 id="proceso-titulo" className="section-title">Cómo cotizar en 3 pasos</h2></div><a href={whatsappService("foto")} target="_blank" rel="noopener" className="btn-primary min-h-12" data-fab-hide=""><WhatsAppIcon className="h-5 w-5" />Cotizar por WhatsApp<ArrowRight className="h-4 w-4" aria-hidden="true" /></a></div>
+        <ol className="b2b-steps quote-steps">{pasos.map((p,i) => <li key={p.title}><span>{String(i+1).padStart(2,"0")}</span><h3>{p.title}</h3><p>{p.text}</p></li>)}</ol>
+        <p className="b2b-conditions">Sin inventario en línea. Precio y plazo, en la cotización.</p>
       </div>
     </section>
   );
@@ -88,14 +87,14 @@ export function TrabajosTaller() {
       <SectionHead
         kicker="Trabajos reales"
         id="trabajos-taller-titulo"
-        title="Cilindros: trabajos de nuestro taller"
-        intro="Conoce algunos de nuestros trabajos de fabricación y reparación de cilindros neumáticos e hidráulicos."
+        title="Trabajos del taller"
+        intro="Cilindros fabricados y reparados."
       />
       <div className={`work-body ${trabajos.length < 3 ? "is-few" : ""}`}>
         <WorkRail items={trabajos} label="Fotos y videos de trabajos del taller" />
         <div className="work-cta" data-fab-hide="">
           <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
-            <WhatsAppIcon className="h-4 w-4" />Cotizar un cilindro neumático<ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
           <a href={whatsappService("hidraulico")} target="_blank" rel="noopener" className="btn-secondary min-h-12 px-6">
             <WhatsAppIcon className="h-4 w-4" />Cotizar un cilindro hidráulico
@@ -113,8 +112,8 @@ export function AntesDespues() {
     <section className="section-pad border-b border-black/10 bg-white" aria-labelledby="antes-despues-inicio">
       <div className="container-max">
         <Reveal className="section-heading mb-10">
-          <div><p className="section-kicker">Trabajos del taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después.</h2></div>
-          <p className="max-w-md leading-relaxed text-steel-300">Cilindro ISO 32 mm recuperado en nuestro taller. Desliza para comparar.</p>
+          <div><p className="section-kicker">Taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después</h2></div>
+          <p className="max-w-md leading-relaxed text-steel-300">Cilindro ISO 32 mm, recuperado.</p>
         </Reveal>
         <Reveal>
           <BeforeAfterSlider
@@ -122,7 +121,7 @@ export function AntesDespues() {
             after={{ src: "/cilindros/despues-cilindro-iso-32mm.jpg", alt: "Después · Cilindro ISO 32 mm recuperado" }}
           />
           <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-2xl text-sm leading-relaxed text-steel-300">Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar.</p>
+            <p className="max-w-2xl text-sm leading-relaxed text-steel-300">Desarme, repuestos, ensamble y prueba.</p>
             <a href={whatsappService("neumatico-reparar")} target="_blank" rel="noopener" className="btn-primary min-h-12 shrink-0 px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: reparación de cilindro neumático</span></a>
           </div>
         </Reveal>
