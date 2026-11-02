@@ -189,6 +189,56 @@ export function HomeHero() {
 }
 
 /** Todas las líneas del catálogo, en la primera pantalla. */
+const PNEU_HOME: { id: string; label: string }[] = [
+  { id: "cilindros", label: "Cilindros neumáticos" },
+  { id: "mangueras", label: "Mangueras neumáticas" },
+  { id: "conexiones-rapidas", label: "Conexiones rápidas" },
+  { id: "valvulas", label: "Válvulas solenoides" },
+  { id: "frl", label: "Unidades FRL" },
+  { id: "controles-neumaticos", label: "Controles neumáticos" },
+];
+
+/** Familias reales de neumática, justo bajo las líneas. Sin repetir el bloque de taller. */
+export function NeumaticaIndustrial() {
+  const linea = SOLUCIONES.find((s) => s.slug === "neumatica");
+  if (!linea) return null;
+  const cards = PNEU_HOME.flatMap((p) => {
+    const sub = linea.subcategorias.find((s) => s.id === p.id);
+    if (!sub?.image) return [];
+    return [{
+      id: sub.id,
+      label: p.label,
+      href: sub.href ?? `/neumatica#${sub.id}`,
+      image: sub.image,
+      alt: sub.imageAlt ?? p.label,
+      quote: whatsappService("componente", p.label),
+    }];
+  });
+  return (
+    <section className="pneu-home" aria-labelledby="neumatica-industrial">
+      <div className="container-max">
+        <p className="section-kicker">Aire comprimido</p>
+        <h2 id="neumatica-industrial">Neumática industrial</h2>
+        <ul className="pneu-grid">
+          {cards.map((c) => (
+            <li key={c.id} className="pneu-card">
+              <Link href={c.href} className="pneu-photo" tabIndex={-1} aria-hidden="true">
+                <Image src={c.image} alt="" fill sizes="(max-width: 799px) 46vw, 240px" className="object-cover" />
+              </Link>
+              <h3><Link href={c.href}>{c.label}</Link></h3>
+              <a className="pneu-quote" href={c.quote} target="_blank" rel="noopener">
+                <WhatsAppIcon className="h-4 w-4" />
+                Cotizar
+                <span className="sr-only">: {c.label}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 export function LineasDeUnVistazo() {
   return (
     <section className="fold-lines" aria-label="Líneas de suministro">

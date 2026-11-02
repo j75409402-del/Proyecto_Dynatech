@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { HomeHero, LineasDeUnVistazo, Editorial, AplicacionesHome } from "@/components/home/HomeSections";
+import { HomeHero, LineasDeUnVistazo, NeumaticaIndustrial, Editorial, AplicacionesHome } from "@/components/home/HomeSections";
 import { ComoTrabajamos } from "@/components/home/IndustrialSections";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { CONTACT } from "@/lib/constants";
-import { whatsappCylinderService, whatsappGeneral, whatsappService } from "@/lib/whatsapp";
+import { whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Suministros industriales para empresas en República Dominicana",
@@ -44,19 +44,9 @@ export default function HomePage() {
     <>
       <HomeHero />
       <LineasDeUnVistazo />
-      <Editorial
-        id="home-cilindros"
-        kicker="Taller"
-        title="Cilindros neumáticos"
-        text="Fabricación y reparación. Foto, placa o plano."
-        href="/cilindros-neumaticos"
-        quote={whatsappCylinderService()}
-        image="/studio/linea-cilindros.jpg"
-        alt="Cilindros neumáticos sobre el banco del taller, sin marcas"
-      />
+      <NeumaticaIndustrial />
       <Editorial
         id="home-mecanizado"
-        flip
         kicker="Taller"
         title="Mecanizado de piezas"
         text="Torno y fresadora. Plano o muestra."
