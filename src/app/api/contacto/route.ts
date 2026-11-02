@@ -1,18 +1,19 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createServiceClient } from "@/lib/supabase/server";
-import { badOrigin, clientIp, looksLikeBot, rateLimited } from "@/lib/antispam";
+import { badOrigin, bodyTooLarge, clientIp, looksLikeBot, rateLimited } from "@/lib/antispam";
 import { pageLabel } from "@/lib/correo";
 import { notifyLead } from "@/lib/notify";
 import { cleanPath } from "@/lib/quote";
 
+const text = (min: number, max: number) => z.string().trim().min(min).max(max);
 const bodySchema = z.object({
-  name:    z.string().min(2),
-  email:   z.string().email(),
-  phone:   z.string().optional(),
-  company: z.string().optional(),
-  subject: z.string().optional(),
-  message: z.string().min(10),
+  name:    text(2, 120),
+  email:   z.string().trim().email().max(200),
+  phone:   z.string().trim().max(40).optional(),
+  company: z.string().trim().max(160).optional(),
+  subject: z.string().trim().max(160).optional(),
+  message: text(10, 4000),
 });
 
 export async function POST(req: Request) {
@@ -23,6 +24,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Demasiados envíos. Intenta en unos minutos o escríbenos por WhatsApp." }, { status: 429 });
   }
 
+  if (bodyTooLarge(req, 64 * 1024)) {
+    return NextResponse.json({ error: "El mensaje es demasiado grande" }, { status: 413 });
+  }
   let payload: unknown;
   try {
     payload = await req.json();
