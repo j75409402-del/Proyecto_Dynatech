@@ -5,14 +5,14 @@ import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid } from "@/components/page/Blocks";
 import { SITE } from "@/lib/constants";
 import { FaqBlock } from "@/components/page/FaqBlock";
-import { ENTREGA } from "@/lib/entrega";
+import { ENTREGA_LINEA } from "@/lib/entrega";
 import { getSolucion } from "@/lib/soluciones";
 import { whatsappService } from "@/lib/whatsapp";
 
 const neumatica = getSolucion("neumatica");
 const sub = neumatica.subcategorias.find((item) => item.id === "valvulas")!;
-const title = "Proveedor de válvulas neumáticas en República Dominicana · Dynatech";
-const description = "Suplidor de válvulas neumáticas y electroválvulas en Santo Domingo: direccionales y solenoides 2/2, 3/2, 5/2 y 5/3. Originales Festo y SMC por código.";
+const title = "Suplidor de electroválvulas en República Dominicana · Dynatech";
+const description = "Suplidor de válvulas neumáticas y electroválvulas en Santo Domingo: 3/2, 5/2 y 5/3. Bobinas de 24 VDC y 110 VAC. Originales Festo y SMC por código.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -24,15 +24,15 @@ export const metadata: Metadata = {
 
 const information = [
   { title: "Referencia y fotografías", text: "El código completo y una foto legible de la etiqueta. Añade una imagen de la válvula y sus conexiones; si tiene un símbolo de funcionamiento, inclúyelo." },
-  { title: "Configuración y accionamiento", text: "La configuración conocida (2/2, 3/2, 5/2 o 5/3) y cómo se acciona en tu máquina. Si no tienes ese dato, el código o las fotos bastan para revisar la solicitud." },
+  { title: "Configuración y accionamiento", text: "La configuración conocida (3/2, 5/2 o 5/3) y cómo se acciona en tu máquina. Si no tienes ese dato, el código o las fotos bastan para revisar la solicitud." },
   { title: "Conexiones y montaje", text: "Medidas de conexión y tipo de rosca, si están documentados. Indica si va montada sola o en un conjunto y envía fotos del montaje." },
-  { title: "Datos eléctricos y de operación", text: "Si tiene bobina, su etiqueta y la alimentación indicada. Añade la presión de trabajo conocida y qué función cumple la válvula en el equipo." },
+  { title: "Datos eléctricos y de operación", text: "Si tiene bobina, su etiqueta. Trabajamos bobinas de 24 VDC y 110 VAC. Añade qué función cumple la válvula en el equipo." },
   { title: "Cantidad y ciudad de entrega" },
 ];
 
 const TIPOS = [
   { id: "direccionales", title: "Válvulas direccionales", desc: "Controlan el paso y la dirección del aire hacia cilindros y actuadores.", ejemplos: ["2/2", "3/2", "5/2", "5/3"], image: "/products/valvulas-smc.jpg", imageAlt: "Válvulas neumáticas direccionales de distintas configuraciones" },
-  { id: "solenoides", title: "Electroválvulas y bobinas", desc: "Válvulas de accionamiento eléctrico y bobinas de reemplazo. Comparte la etiqueta de la bobina.", image: "/products/bobinas-smc.jpg", imageAlt: "Bobinas para electroválvulas neumáticas" },
+  { id: "solenoides", title: "Electroválvulas y bobinas", desc: "Válvulas de accionamiento eléctrico. Bobinas de 24 VDC y 110 VAC. Comparte la etiqueta de la bobina.", image: "/products/bobinas-smc.jpg", imageAlt: "Bobinas para electroválvulas neumáticas" },
   { id: "conjuntos", title: "Válvulas en conjunto", desc: "Válvulas montadas sobre una base común. Indica cuántas posiciones tiene y envía fotos del montaje.", image: "/products/manifold-smc.jpg", imageAlt: "Conjunto de válvulas neumáticas sobre base común" },
   { id: "descarga-y-cheque", title: "Descarga rápida y cheque", desc: "Indica su función en el circuito y comparte fotos de las conexiones.", ejemplos: ["Descarga rápida", "Cheque"], image: "/products/valvulas-mac.jpg", imageAlt: "Válvulas neumáticas de distintos tipos y conexiones" },
 ];
@@ -53,8 +53,8 @@ export default function ValvulasNeumaticasPage() {
       <PageHero
         crumbs={[{ label: "Neumática", href: "/neumatica" }, { label: "Válvulas neumáticas" }]}
         kicker="Neumática industrial · Válvulas"
-        title="Válvulas neumáticas direccionales y solenoides"
-        lead={<p>Dynatech Ingeniería SRL es un suplidor de válvulas neumáticas en Santo Domingo: direccionales y solenoides (electroválvulas) 2/2, 3/2, 5/2 y 5/3, para empresas y zonas francas. También piezas originales Festo y SMC por código. Cotizas por WhatsApp con el código o una foto.</p>}
+        title="Suplidor de válvulas neumáticas y electroválvulas"
+        lead={<p>Dynatech Ingeniería SRL es un suplidor de válvulas neumáticas y electroválvulas en República Dominicana: 3/2, 5/2 y 5/3, con bobinas de 24 VDC y 110 VAC, para empresas y zonas francas. También piezas originales Festo y SMC por código. Cotizas por WhatsApp con el código o una foto.</p>}
         quoteHref={whatsappService("componente", sub.title)}
         secondary={{ href: "#tipos", label: "Ver catálogo de la línea" }}
         note="Envía el código o una foto de la etiqueta. Si no lo tienes, una foto de la válvula y sus conexiones basta para empezar."
@@ -82,9 +82,9 @@ export default function ValvulasNeumaticasPage() {
       />
 
       <FaqBlock items={[
-        { q: "¿Dynatech vende electroválvulas en RD?", a: "Sí. Válvulas solenoides y direccionales 2/2, 3/2, 5/2 y 5/3, bajo cotización desde Santo Domingo." },
-        { q: "¿Consiguen válvulas originales Festo o SMC?", a: "Sí. Suministramos piezas originales Festo y SMC, y de otras marcas, bajo pedido por código." },
-        { q: "¿Cuánto tarda la entrega?", a: ENTREGA },
+        { q: "¿Dynatech es suplidor de electroválvulas en RD?", a: "Sí. Somos suplidor de electroválvulas y válvulas neumáticas 3/2, 5/2 y 5/3, con bobinas de 24 VDC y 110 VAC, bajo cotización desde Santo Domingo." },
+        { q: "¿Consiguen válvulas originales Festo o SMC?", a: "Sí. Cotizamos la pieza original por código. Si no está disponible, ofrecemos otra marca de primera calidad." },
+        { q: "¿Cuánto tarda la entrega?", a: ENTREGA_LINEA },
         { q: "¿Instalan o programan?", a: "No. En neumática solo suministramos." },
       ]} kicker="Preguntas frecuentes" title="Sobre válvulas neumáticas" tone="light" />
 

@@ -26,7 +26,7 @@ export function CylinderExperience() {
       <article className="cylinder-story cylinder-story-0" data-story="0">
         <p className="cylinder-kicker">Dynatech · Ingeniería en movimiento</p>
         <h1>Cilindros neumáticos{" "}<br/>a la medida<span className="cylinder-period">.</span></h1>
-        <p>Dynatech Ingeniería SRL es un suplidor de cilindros neumáticos en República Dominicana. Fabricamos el cilindro a partir de tu plano, una muestra o tus medidas, en milímetros o en pulgadas, y también suministramos piezas originales Festo y SMC por código. ¿El tuyo está dañado? <Link href="/servicios" className="cylinder-inline-link">Ver reparación de cilindros</Link>.</p>
+        <p>Puedes comprar cilindros neumáticos en Santo Domingo en Dynatech Ingeniería SRL. Trabajamos ISO, de tirantes, compactos, mini redondos y guiados. Fabricamos a partir de tu plano, una muestra o tus medidas, y también suministramos piezas originales Festo y SMC por código. ¿El tuyo está dañado? <Link href="/servicios" className="cylinder-inline-link">Ver reparación de cilindros</Link>.</p>
         <div className="cylinder-story-actions" data-fab-hide=""><a href={whatsappService("neumatico-fabricar")} target="_blank" rel="noopener" className="btn-primary"><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp <ArrowRight size={16} aria-hidden="true"/></a><a href="#interior-cilindro" className="cylinder-text-link">Descubre el interior <ArrowDown size={15}/></a></div>
         <p className="cylinder-trust">Santo Domingo, RD · RNC {SITE.rnc}</p>
       </article>
