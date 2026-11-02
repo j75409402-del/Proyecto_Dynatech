@@ -3,10 +3,9 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Band, SectionHead } from "@/components/page/Blocks";
-import { shortHours } from "@/components/page/TrustStrip";
 import { SOLO_SUMINISTRO, SOLUCIONES } from "@/lib/soluciones";
-import { NAV, SITE } from "@/lib/constants";
-import { whatsappGeneral, whatsappService } from "@/lib/whatsapp";
+import { SITE } from "@/lib/constants";
+import { whatsappCylinderService, whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 import { quoteHref } from "@/components/cta/QuoteCTA";
 
 /** Portada: cilindros y neumática, una sola acción. */
@@ -21,7 +20,6 @@ export function HomeHero() {
           height={549}
           priority
           fetchPriority="high"
-          decoding="sync"
           quality={68}
           sizes="(max-width: 1023px) 100vw, 48vw"
           className="hero-photo"
@@ -32,42 +30,83 @@ export function HomeHero() {
         </figcaption>
       </figure>
       <div className="hero-copy">
-        <p className="hero-kicker">Neumática industrial · {SITE.shortName}</p>
-        <h1 id="home-hero-title">Cilindros neumáticos y neumática industrial, bajo cotización.</h1>
-        <p className="hero-lead">
-          Fabricamos y reparamos cilindros. Suministramos válvulas, preparación de aire y componentes industriales para empresas y zonas francas en República Dominicana.
-        </p>
+        <p className="hero-kicker">{SITE.shortName} · Santo Domingo</p>
+        <h1 id="home-hero-title">Suministro industrial</h1>
+        <p className="hero-lead">Bajo cotización y pedido.</p>
         <div className="hero-actions" data-fab-hide="">
           <a href={whatsappGeneral()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
             <WhatsAppIcon className="h-5 w-5" />
             Cotizar por WhatsApp
           </a>
-          <Link href="/neumatica" className="hero-secondary">
-            Ver la línea de neumática
+          <Link href="/catalogo" className="hero-secondary">
+            Ver catálogo
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
-        <p className="hero-note">Empieza con una foto, el código o el plano. Suministro bajo cotización y pedido.</p>
+        <p className="hero-note">Foto, código o plano.</p>
       </div>
     </section>
   );
 }
 
-const AUDIENCIA = [
-  { title: "Compras", text: "Pide por referencia y cantidad. La cotización sirve para tu orden de compra." },
-  { title: "Mantenimiento", text: "Comparte el código, la placa o una foto del repuesto." },
-  { title: "Ingeniería", text: "Envía el plano, las especificaciones o lo que requiere la aplicación." },
+const OFERTAS = [
+  {
+    title: "Cilindros neumáticos",
+    text: "Fabricación y reparación.",
+    href: "/cilindros-neumaticos",
+    quote: whatsappCylinderService(),
+    image: "/products/cilindros-neumaticos.jpg",
+    alt: "Cilindros neumáticos industriales",
+  },
+  {
+    title: "Mecanizado de piezas",
+    text: "Torno y fresadora.",
+    href: "/mecanizado",
+    quote: whatsappService("mecanizado"),
+    image: "/taller/torno-eje-fresadora.jpg",
+    alt: "Fabricación de un eje en el torno del taller de Dynatech; al fondo, la fresadora",
+  },
 ] as const;
+
+const AUDIENCIA = [
+  { title: "Compras", text: "Referencia y cantidad." },
+  { title: "Mantenimiento", text: "Código, placa o foto." },
+  { title: "Ingeniería", text: "Plano o especificaciones." },
+] as const;
+
+export function OfertasClave() {
+  return (
+    <section className="key-offers" aria-labelledby="ofertas-titulo">
+      <h2 id="ofertas-titulo" className="sr-only">Ofertas principales</h2>
+      {OFERTAS.map((o) => (
+        <article key={o.href} className="key-offer">
+          <Link href={o.href} className="key-offer-photo" tabIndex={-1} aria-hidden="true">
+            <Image src={o.image} alt={o.alt} fill sizes="(max-width: 799px) 100vw, 50vw" className={o.href === "/mecanizado" ? "object-cover" : "object-contain p-6"} />
+          </Link>
+          <div className="key-offer-copy">
+            <h3><Link href={o.href}>{o.title}</Link></h3>
+            <p>{o.text}</p>
+            <a href={o.quote} target="_blank" rel="noopener" data-fab-hide="">
+              <WhatsAppIcon className="h-4 w-4" />
+              Cotizar por WhatsApp
+              <span className="sr-only">: {o.title}</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </section>
+  );
+}
 
 /** Índice de líneas: filas de catálogo, no tarjetas. */
 export function LineIndex() {
   return (
     <Band tone="white" id="lineas" labelledBy="lineas-titulo">
       <SectionHead
-        kicker="Suministro industrial"
+        kicker="Catálogo"
         id="lineas-titulo"
-        title="Líneas para cotizar"
-        intro="Elige la línea y envía la referencia, la cantidad o una foto. Confirmamos disponibilidad y condiciones en la cotización."
+        title="Líneas de suministro"
+        intro="Referencia, cantidad o foto."
       />
       <ol className="line-index">
         {SOLUCIONES.map((s, i) => (
@@ -85,8 +124,9 @@ export function LineIndex() {
         ))}
       </ol>
       <div className="line-foot">
-        <p><b>Control, automatización e instrumentación.</b> {SOLO_SUMINISTRO}</p>
-        <Link href="/catalogo">Ver el catálogo por categorías <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+        <p><Link href="/cilindros-hidraulicos">Cilindros hidráulicos</Link> · Reparación y fabricación.</p>
+        <p>Control, automatización e instrumentación: {SOLO_SUMINISTRO}</p>
+        <Link href="/catalogo">Ver catálogo <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
       </div>
       <ul className="audience" aria-label="A quién atendemos">
         {AUDIENCIA.map((a) => (
@@ -97,70 +137,3 @@ export function LineIndex() {
   );
 }
 
-const TALLER = [
-  {
-    title: "Cilindros neumáticos",
-    text: "Reparamos cilindros con fugas, desgaste o golpes y fabricamos cilindros nuevos a la medida, en milímetros o pulgadas.",
-    send: "Fotos del cilindro y su placa, o el plano.",
-    href: "/cilindros-neumaticos",
-    actions: [
-      { label: "Reparar", href: whatsappService("neumatico-reparar") },
-      { label: "Fabricar", href: whatsappService("neumatico-fabricar") },
-    ],
-  },
-  {
-    title: "Cilindros hidráulicos",
-    text: "Reparamos cilindros hidráulicos con fugas o daños y fabricamos cilindros nuevos para equipos industriales.",
-    send: "Fotos del cilindro, conexiones y montajes, o el plano.",
-    href: "/cilindros-hidraulicos",
-    actions: [
-      { label: "Reparar", href: whatsappService("hidraulico-reparar") },
-      { label: "Fabricar", href: whatsappService("hidraulico-fabricar") },
-    ],
-  },
-  {
-    title: "Mecanizado de piezas",
-    text: "Torneado y fresado a partir de un plano o de una muestra: ejes, bujes, bridas o soportes.",
-    send: "El plano, o fotos de la pieza con una referencia de tamaño.",
-    href: "/mecanizado",
-    actions: [{ label: "Cotizar mecanizado", href: whatsappService("mecanizado") }],
-  },
-] as const;
-
-export function TallerPrincipal() {
-  return (
-    <Band tone="light" id="taller" labelledBy="taller-titulo">
-      <SectionHead
-        kicker="Taller"
-        id="taller-titulo"
-        title="Fabricación, reparación y mecanizado"
-        intro="Elige el trabajo. Se abre WhatsApp con el mensaje listo. Alcance, plazo y condiciones se confirman en la cotización."
-      />
-      <ol className="spec-index" data-fab-hide="">
-        {TALLER.map((t, i) => (
-          <li key={t.title}>
-            <span className="line-no">{String(i + 1).padStart(2, "0")}</span>
-            <div className="spec-copy">
-              <h3><Link href={t.href}>{t.title}</Link></h3>
-              <p>{t.text}</p>
-              <p className="spec-send"><span>Qué enviar</span>{t.send}</p>
-            </div>
-            <div className="spec-actions">
-              {t.actions.map((a) => (
-                <a key={a.label} href={a.href} target="_blank" rel="noopener">
-                  <WhatsAppIcon className="h-4 w-4" />
-                  {a.label}
-                  <span className="sr-only">: {t.title}</span>
-                </a>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ol>
-      <p className="line-foot">
-        <span>También: {NAV.especialidades.map((e) => e.label).join(" · ")}.</span>
-        <span>Horario: {shortHours()}.</span>
-      </p>
-    </Band>
-  );
-}

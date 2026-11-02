@@ -48,7 +48,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         title={s.h1}
         lead={<p>{s.intro}</p>}
         quoteHref={mainQuote}
-        secondary={{ href: "#datos", label: "Ver qué datos enviar" }}
+        secondary={{ href: "#datos", label: "Qué enviar" }}
         note={s.lead}
         // Fotos reales del taller (15-oct-2026): las piezas en el torno son cilindros hidráulicos.
         image={{ src: heroFoto, alt: hidraulico ? "Cilindro hidráulico largo montado en el torno del taller de Dynatech, con polipasto" : "Cilindro hidráulico montado en el torno del taller de Dynatech; al fondo, la fresadora", position: hidraulico ? "center 55%" : "center 45%" }}
@@ -58,7 +58,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
 
       {procesos.length > 0 && (
         <Band tone="white" labelledBy="procesos">
-          <SectionHead kicker="01 · Qué hacemos" id="procesos" title="Torno y fresadora" intro="Para piezas nuevas y repuestos. Dinos para qué equipo es la pieza y te confirmamos si podemos hacerla." />
+          <SectionHead kicker="Qué hacemos" id="procesos" title="Torno y fresadora" intro="Piezas nuevas y repuestos." />
           <OfferGrid columns={3} compact items={procesos.map((p, i) => ({ title: p.title, desc: p.text, icon: [Cog, Box, Ruler][i] ?? Cog }))} />
           <div className="taller-work">
             <div className="taller-work-head">
@@ -74,7 +74,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
       )}
 
       <Band tone="light" labelledBy="que-cotizamos">
-        <SectionHead kicker={`${n(1)} · ${procesos.length ? "Cómo empezar" : "Qué hacemos"}`} id="que-cotizamos" title={hidraulico ? "¿Reparar o fabricar?" : "Con plano o con muestra"} />
+        <SectionHead kicker={procesos.length ? "Cómo empezar" : "Qué hacemos"} id="que-cotizamos" title={hidraulico ? "Reparar o fabricar" : "Plano o muestra"} />
         <OfferGrid columns={2} compact items={s.situations.map((t, i) => ({ title: t, desc: s.situationDescs[i], icon: situationIcons[i], quote: whatsappService(s.services[i]) }))} />
         {hidraulico && (
           <div className="taller-work">
@@ -93,8 +93,8 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
       <div id="datos" className="scroll-mt-28">
         <QuoteChecklist
           kicker={`${n(2)} · Para cotizar`}
-          title="Información para tu cotización"
-          intro="Comparte la información disponible. Si te falta algún dato, te diremos qué hace falta."
+          title="Qué enviar"
+          intro="Con lo que tengas basta."
           items={s.information.map((t) => ({ title: t }))}
           quoteHref={mainQuote}
           note={`Atención por WhatsApp: ${shortHours()}.`}
@@ -105,11 +105,11 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         <Reveal className="grid gap-6 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <p className="section-kicker">{n(3)} · La cotización</p>
-            <h2 id="evaluacion" className="section-title">Qué confirmamos al cotizar</h2>
+            <h2 id="evaluacion" className="section-title">En la cotización</h2>
           </div>
           <div className="lg:col-span-7 lg:pt-8">
             <p className="text-lg leading-relaxed text-steel-300">{s.note}</p>
-            <p className="mt-4 leading-relaxed text-steel-300">En la cotización te confirmamos por escrito el alcance del trabajo, el plazo y las condiciones.</p>
+            <p className="mt-4 leading-relaxed text-steel-300">Alcance, plazo y condiciones, por escrito.</p>
           </div>
         </Reveal>
       </Band>
@@ -118,7 +118,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
 
       <RelatedGrid kicker="Relacionado" title="Otros servicios del taller" id="servicio-relacionado" items={related} />
 
-      <QuoteCTA eyebrow={`${s.name} · Taller Dynatech`} title={hidraulico ? "¿Un cilindro hidráulico que reparar o fabricar?" : "¿Una pieza que mecanizar?"} text={s.lead} whatsappHref={mainQuote} />
+      <QuoteCTA eyebrow="Taller" title={hidraulico ? "Cotiza el cilindro" : "Cotiza la pieza"} text={s.lead} whatsappHref={mainQuote} />
     </>
   );
 }

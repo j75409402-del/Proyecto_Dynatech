@@ -102,23 +102,23 @@ export default function ServiciosPage() {
       <PageHero
         crumbs={[{ label: "Servicios" }]}
         kicker="Taller · Reparación de cilindros"
-        title={<>Reparación y reconstrucción de <span className="text-signal">cilindros neumáticos</span></>}
-        lead={<p>Recuperamos cilindros con fugas, desgaste o golpes: cambio de sellos, vástagos y componentes, incluso cuando el repuesto original ya no está disponible.</p>}
+        title="Reparación de cilindros"
+        lead={<p>Fugas, desgaste o golpes. Con prueba.</p>}
         quoteHref={whatsappService("neumatico-reparar")}
-        secondary={{ href: "#proceso", label: "Ver el proceso" }}
-        note={<>Empieza con fotos del cilindro y su placa. ¿Es hidráulico? <Link href="/cilindros-hidraulicos" className="font-medium text-white underline decoration-signal underline-offset-4 hover:text-signal">Ver cilindros hidráulicos</Link></>}
+        secondary={{ href: "#proceso", label: "El proceso" }}
+        note={<>Foto y placa. <Link href="/cilindros-hidraulicos" className="underline underline-offset-4">Hidráulicos</Link></>}
         image={{ src: "/cilindros/taller-portada-v2.webp", alt: "Imagen de referencia: técnico revisando un cilindro neumático en el banco" }}
         caption={{ label: "Imagen de referencia", text: "Reparación · Reconstrucción · Sellos" }}
         trust="cilindros"
       />
 
       <Band tone="white" id="proceso" labelledBy="proceso-titulo">
-        <SectionHead kicker="01 · Cómo reparamos" id="proceso-titulo" title="Del diagnóstico a la prueba" intro="El alcance de cada reparación se confirma después de revisar el cilindro. Las fotos ayudan a orientar, pero no sustituyen la inspección." />
+        <SectionHead kicker="Proceso" id="proceso-titulo" title="Hasta la prueba" intro="El alcance se confirma al revisar el cilindro." />
         <Steps items={PROCESO} />
       </Band>
 
       <Band tone="light" labelledBy="servicios-titulo">
-        <SectionHead kicker="02 · Qué hacemos" id="servicios-titulo" title="Reparación, reconstrucción y sellos" />
+        <SectionHead kicker="Oferta" id="servicios-titulo" title="Reparación y sellos" />
         <OfferGrid
           items={reparacion.map((s) => ({ id: s.id, title: s.title, desc: s.desc, icon: s.icon, ...REPARACION_MEDIA[s.id], quote: whatsappService("neumatico-reparar", s.title) }))}
         />

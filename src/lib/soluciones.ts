@@ -75,7 +75,7 @@ export type GrupoId = "neumatica" | "control" | "automatizacion" | "instrumentac
 
 /** Alcance confirmado por el dueño (15-oct-2026). No anunciar CNC ni servicios en estas líneas. */
 export const SOLO_SUMINISTRO =
-  "solo suministramos los productos. No realizamos instalación, programación, mantenimiento, armado de tableros ni puesta en marcha.";
+  "solo suministro. Sin instalación, programación, mantenimiento, tableros ni puesta en marcha.";
 
 /**
  * Oferta de suministro confirmada por el dueño el 15-oct-2026: neumática, control industrial,
@@ -107,15 +107,14 @@ export const SOLUCIONES: Solucion[] = [
     icon: Wind,
     name: "Neumática",
     title: "Neumática industrial",
-    short: "Cilindros, válvulas, conexiones, unidades FRL y accesorios para aire comprimido.",
-    description:
-      "Válvulas, conexiones, unidades FRL, mangueras, actuadores y accesorios para sistemas de aire comprimido. Cotizamos con la referencia, una foto o la descripción del componente.",
+    short: "Válvulas, FRL, conexiones y mangueras.",
+    description: "Componentes de aire comprimido. Código o foto.",
     metaDescription:
       "Neumática industrial en República Dominicana: válvulas, conectores, conexiones, unidades FRL, mangueras, cilindros y accesorios bajo cotización.",
     image: "/banners/neumatica-industrial-conectores.webp",
     imageWidth: 512,
     imageHeight: 512,
-    ctaTitle: "¿Necesitas un componente neumático?",
+    ctaTitle: "Cotiza neumática",
     imageAlt: "Componentes neumáticos: cilindros, conectores push-in, válvulas y filtro regulador",
     ejemplos: ["Cilindros neumáticos", "Válvulas", "Conectores", "Conexiones", "Unidades FRL", "Kits de sellos"],
     subcategorias: [
@@ -208,15 +207,14 @@ export const SOLUCIONES: Solucion[] = [
     icon: Zap,
     name: "Control eléctrico",
     title: "Control eléctrico industrial",
-    short: "Contactores, relés, protecciones, mando y señalización para tableros.",
-    description:
-      "Contactores, relés, protecciones y componentes de tablero para el control y la protección de máquinas y motores.",
+    short: "Contactores, relés y protecciones.",
+    description: "Componentes de tablero. Referencia o foto.",
     metaDescription:
       "Controles eléctricos industriales en República Dominicana: cotiza contactores, relés, breakers, fusibles, pulsadores y temporizadores con referencia o foto.",
     image: "/banners/control-electrico.webp",
     imageWidth: 512,
     imageHeight: 512,
-    ctaTitle: "¿Necesitas componentes de control eléctrico?",
+    ctaTitle: "Cotiza control eléctrico",
     imageAlt: "Fotografía editorial de un tablero de control eléctrico industrial",
     ejemplos: ["Contactores", "Relés", "Breakers", "Fusibles", "Pulsadores"],
     subcategorias: [
@@ -299,16 +297,15 @@ export const SOLUCIONES: Solucion[] = [
     soloSuministro: true,
     icon: Boxes,
     name: "Gabinetes eléctricos",
-    title: "Gabinetes eléctricos para tableros",
-    short: "Suministro de gabinetes y cajas eléctricas para tableros de control y distribución.",
-    description:
-      "Suministramos gabinetes y cajas eléctricas para alojar tableros de control, protección y distribución. Envíanos las medidas y el uso, y te cotizamos.",
+    title: "Gabinetes eléctricos",
+    short: "Gabinetes y cajas para tableros.",
+    description: "Solo suministro. Cotiza con medidas y uso.",
     metaDescription:
       "Suministro de gabinetes eléctricos en República Dominicana: cajas y gabinetes para tableros de control y distribución. Cotiza con medidas y uso.",
     image: "/banners/control-electrico.webp",
     imageWidth: 512,
     imageHeight: 512,
-    ctaTitle: "¿Necesitas un gabinete eléctrico?",
+    ctaTitle: "Cotiza un gabinete",
     imageAlt: "Imagen de referencia: gabinete eléctrico con componentes de control montados",
     ejemplos: ["Gabinetes para tablero", "Cajas eléctricas"],
     subcategorias: [
@@ -348,16 +345,15 @@ export const SOLUCIONES: Solucion[] = [
     soloSuministro: true,
     icon: Radar,
     name: "Sensores",
-    title: "Sensores para automatización industrial",
-    short: "Sensores inductivos, capacitivos, fotoeléctricos, magnéticos y de presión.",
-    description:
-      "Sensores inductivos, capacitivos, fotoeléctricos, magnéticos y de proximidad para detectar piezas, posición y presencia en procesos automatizados.",
+    title: "Sensores industriales",
+    short: "Inductivos, fotoeléctricos y de presión.",
+    description: "Detección de piezas y posición. Solo suministro.",
     metaDescription:
       "Sensores industriales en República Dominicana: inductivos, capacitivos, fotoeléctricos, fotoceldas, magnéticos, de presión y de temperatura bajo cotización.",
     image: "/banners/sensores-fotoceldas.webp",
     imageWidth: 512,
     imageHeight: 512,
-    ctaTitle: "¿Necesitas un sensor industrial?",
+    ctaTitle: "Cotiza un sensor",
     imageAlt: "Fotografía editorial de sensores fotoeléctricos industriales junto a una banda transportadora",
     ejemplos: ["Inductivos", "Fotoeléctricos", "Capacitivos", "Fotoceldas", "Presión"],
     subcategorias: [
@@ -431,14 +427,14 @@ export const SOLUCIONES: Solucion[] = [
     icon: Gauge,
     name: "Instrumentación",
     title: "Instrumentación industrial",
-    short: "Medición de presión y temperatura para procesos.",
-    description: "Manómetros, interruptores y transmisores de presión, termómetros y termopozos para procesos industriales.",
+    short: "Presión y temperatura.",
+    description: "Manómetros, transmisores y termómetros.",
     metaDescription:
       "Instrumentación industrial en República Dominicana: manómetros, transmisores e interruptores de presión, termómetros y termopozos.",
     image: "/banners/instrumentacion-procesos.webp",
     imageWidth: 512,
     imageHeight: 512,
-    ctaTitle: "¿Necesitas un instrumento de medición?",
+    ctaTitle: "Cotiza instrumentación",
     imageAlt: "Fotografía editorial de instrumentos de medición en un proceso industrial",
     ejemplos: ["Manómetros", "Termómetros", "Interruptores de presión", "Termopozos"],
     subcategorias: [
@@ -481,16 +477,15 @@ export const SOLUCIONES: Solucion[] = [
     grupo: "resistencias",
     icon: Flame,
     name: "Resistencias eléctricas",
-    title: "Resistencias eléctricas y termocuplas",
-    short: "Resistencias de cartucho, termocuplas, RTD y alambre de resistencia.",
-    description:
-      "Resistencias de cartucho de alta densidad para el calentamiento de cilindros en máquinas de inyección y procesos industriales, junto con termocuplas, RTD y alambre de resistencia. Cotizamos también según tu especificación.",
+    title: "Resistencias y termocuplas",
+    short: "Cartucho, termocuplas y RTD.",
+    description: "Calentamiento y medición. También bajo especificación.",
     metaDescription:
       "Resistencias eléctricas industriales en República Dominicana: de cartucho, termocuplas, RTD y alambre de resistencia. Cotización bajo especificación.",
     image: "/banners/resistencias-electricas-industriales.webp",
     imageWidth: 512,
     imageHeight: 512,
-    ctaTitle: "¿Necesitas una resistencia eléctrica?",
+    ctaTitle: "Cotiza resistencias",
     imageAlt: "Fotografía editorial de resistencias de cartucho y sondas de temperatura industriales",
     ejemplos: ["Resistencias de cartucho", "Termocuplas", "RTD", "Alambre de resistencia"],
     subcategorias: [

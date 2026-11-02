@@ -21,8 +21,7 @@ export function emailHref(subject?: string) {
 const CONTACT_DETAILS = {
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "18092844336",
   whatsappDisplay: "+1 (809) 284-4336",
-  /** Buzón comercial público. El aviso interno de leads sigue en su variable hasta el cambio aparte. */
-  email: "dynatechventas01@outlook.com",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "dynatechventas01@outlook.com",
   phone: process.env.NEXT_PUBLIC_CONTACT_PHONE ?? "+1 (809) 284-4336",
   /** Segundo teléfono, solo llamadas (confirmado por el dueño, 15-oct-2026). WhatsApp sigue en `whatsapp`. */
   phone2: "+1 (809) 854-2800",

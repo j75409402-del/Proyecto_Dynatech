@@ -33,11 +33,11 @@ export function quoteHref(item?: string, tipo?: string) {
  */
 export function QuoteCTA({
   eyebrow = "Fabricación · Reparación · Reconstrucción",
-  title = "¿Necesitas fabricar o reparar un cilindro neumático?",
+  title = "Cotiza tu cilindro",
   quoteItem,
   quoteTipo,
   ctaLabel = "Cotizar por WhatsApp",
-  text = "Envíanos el plano, la muestra, las medidas, fotos o las especificaciones y te cotizamos.",
+  text = "Plano, foto o muestra.",
   whatsappHref,
 }: Props) {
   return (
@@ -50,7 +50,7 @@ export function QuoteCTA({
         </div>
         <div data-fab-hide="">
           <a href={whatsappHref ?? (quoteItem ? quoteHref(quoteItem, quoteTipo) : whatsappCylinderService())} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6"><WhatsAppIcon className="h-5 w-5" />{ctaLabel}<ArrowRight className="h-4 w-4" aria-hidden="true" /></a>
-          <p className="quote-close-note">Se abre WhatsApp ({CONTACT.whatsappDisplay}) con el mensaje listo. Puedes empezar con una foto. Atención: {shortHours()}.</p>
+          <p className="quote-close-note">WhatsApp {CONTACT.whatsappDisplay}. {shortHours()}.</p>
         </div>
       </div>
     </section>

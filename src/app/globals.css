@@ -1175,7 +1175,12 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
   color: #f4f6f7;
 }
 .hero-copy {
-  padding: 28px 20px 22px;
+  order: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: calc(100svh - 4.5rem);
+  padding: 28px 20px 28px;
 }
 .hero-kicker {
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -1233,10 +1238,10 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
 @media (min-width: 1024px) {
   .hero { grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr); min-height: min(700px, calc(100svh - 108px)); }
   .hero-copy {
+    order: 0;
     grid-column: 1;
     grid-row: 1;
-    display: flex;
-    flex-direction: column;
+    min-height: 0;
     justify-content: center;
     padding: 72px 56px 72px max(32px, calc((100vw - 80rem) / 2));
   }
@@ -1245,6 +1250,23 @@ html:has(.cylinder-page), body:has(.cylinder-page) { overflow-x:clip; }
   .hero-actions { flex-direction: row; align-items: center; gap: 22px; }
   .hero-media { grid-column: 2; grid-row: 1; min-height: 100%; overflow: hidden; }
   .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 54% 42%; }
+}
+
+/* Dos ofertas principales, justo bajo el hero. */
+.key-offers { display: grid; background: #fff; border-bottom: 1px solid var(--line); }
+.key-offer { display: grid; min-width: 0; }
+.key-offer + .key-offer { border-top: 1px solid var(--line); }
+.key-offer-photo { position: relative; display: block; min-height: 220px; aspect-ratio: 16/10; background: #f7f8f8; overflow: hidden; }
+.key-offer-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 22px 20px 26px; }
+.key-offer-copy h3 { font-family: var(--font-display), var(--font-sans), sans-serif; font-weight: 600; font-size: clamp(1.7rem, 3vw, 2.4rem); letter-spacing: -0.035em; line-height: 1.05; }
+.key-offer-copy h3 a:hover { color: #c40024; }
+.key-offer-copy p { color: #3a424a; font-size: 1rem; }
+.key-offer-copy > a { display: inline-flex; min-height: 44px; align-items: center; gap: 8px; margin-top: 8px; font-weight: 500; color: #c40024; }
+@media (min-width: 800px) {
+  .key-offers { grid-template-columns: 1fr 1fr; }
+  .key-offer + .key-offer { border-top: 0; border-left: 1px solid var(--line); }
+  .key-offer-photo { aspect-ratio: 16/11; min-height: 280px; }
+  .key-offer-copy { padding: 28px 32px 32px; }
 }
 
 /* Índice de líneas y taller: filas, no tarjetas. */

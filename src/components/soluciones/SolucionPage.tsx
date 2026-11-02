@@ -86,8 +86,8 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         title={s.title}
         lead={<p>{s.description}</p>}
         quoteHref={neumatica ? lineQuote : quoteHref(s.name, s.name)}
-        secondary={{ href: "#catalogo", label: "Ver catálogo de la línea" }}
-        note="Envía el código o una foto de la placa; si no conoces la referencia, una foto de la pieza basta para empezar."
+        secondary={{ href: "#catalogo", label: "Ver catálogo" }}
+        note="Código, foto o plano."
         image={{ src: s.image, alt: s.imageAlt }}
         caption={{ label: "Imagen de referencia", text: s.ejemplos.slice(0, 3).join(" · ") }}
         trust="lineas"
@@ -99,8 +99,8 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         <SectionHead
           kicker="Catálogo de la línea"
           id="catalogo-titulo"
-          title={<>Catálogo de {s.name.toLowerCase()}</>}
-          intro="Si no ves lo que buscas, envíanos el código, una foto o la descripción. Las imágenes son de referencia del tipo de componente, no de inventario."
+          title="Catálogo"
+          intro="Fotos de referencia, no inventario."
         />
         {s.soloSuministro && (
           <p className="scope-note mb-6"><Info className="h-4 w-4 shrink-0" aria-hidden="true" /><span>En esta línea {SOLO_SUMINISTRO}</span></p>
@@ -118,15 +118,15 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
 
       <QuoteChecklist
         kicker="Para cotizar"
-        title="Qué datos necesitamos"
-        intro={`Para cotizar ${s.name.toLowerCase()}, comparte los datos que tengas. No hace falta completarlos todos: con una foto legible de la placa o la referencia podemos empezar.`}
+        title="Qué enviar"
+        intro="Con foto o referencia basta."
         items={datos}
         quoteHref={lineQuote}
         note={`Atención por WhatsApp: ${shortHours()}.`}
       />
 
       <Band tone="white" labelledBy="aplicaciones-titulo">
-        <SectionHead kicker="Aplicación" id="aplicaciones-titulo" title="Dónde se usan" intro="Atendemos solicitudes de empresas y zonas francas en República Dominicana." />
+        <SectionHead kicker="Aplicación" id="aplicaciones-titulo" title="Dónde se usan" intro="Empresas y zonas francas." />
         <CheckList items={s.aplicaciones} />
       </Band>
 
@@ -134,15 +134,15 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
 
       <RelatedGrid
         kicker="Otras líneas"
-        title="Más suministro industrial"
+        title="Otras líneas"
         id="otras-lineas"
-        items={otras.map((o) => ({ href: `/${o.slug}`, title: o.name, desc: o.short, image: o.image, label: "Ver catálogo de la línea" }))}
+        items={otras.map((o) => ({ href: `/${o.slug}`, title: o.name, desc: o.short, image: o.image, label: "Ver línea" }))}
       />
 
       <QuoteCTA
         eyebrow={`Suministro industrial · ${s.name}`}
         title={s.ctaTitle}
-        text="Envíanos el código, una foto, la muestra o la descripción y te cotizamos."
+        text="Código, foto o muestra."
         quoteItem={s.name}
         quoteTipo={s.name}
         whatsappHref={lineQuote}
