@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Boxes, PanelTop, Rows3 } from "lucide-react";
+import { Boxes } from "lucide-react";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
@@ -17,9 +17,11 @@ const QUOTE = quoteHref("Breakers", "Control eléctrico");
 const MARCAS = ["Schneider Electric", "ABB", "Siemens", "Eaton"] as const;
 
 const TIPOS = [
-  { id: "riel-din", title: "Riel DIN", desc: "Breakers termomagnéticos para riel DIN. Lo más común es 1, 2 y 3 polos, y también cualquier otro número de polos y amperaje.", icon: Rows3 },
-  { id: "mccb", title: "Caja moldeada (MCCB)", desc: "Breakers de caja moldeada para tableros de distribución y principales, en cualquier número de polos y amperaje.", icon: Boxes },
-  { id: "panel", title: "Panel", desc: "Breakers tipo panel, en cualquier número de polos y amperaje.", icon: PanelTop },
+  { id: "din-1", title: "Riel DIN, 1 polo", desc: "Un módulo, con bornes arriba y abajo. También cotizamos cualquier otro número de polos y amperaje.", image: "/grid/breaker-din-1-polo.jpg", imageAlt: "Breaker de un polo para riel DIN, sin marcas" },
+  { id: "din-2", title: "Riel DIN, 2 polos", desc: "Dos módulos juntos, para dos polos.", image: "/grid/breaker-din-2-polos.jpg", imageAlt: "Breaker de dos polos para riel DIN, sin marcas" },
+  { id: "din-3", title: "Riel DIN, 3 polos", desc: "Tres módulos juntos, para tres polos.", image: "/grid/breaker-din-3-polos.jpg", imageAlt: "Breaker de tres polos para riel DIN, sin marcas" },
+  { id: "mccb", title: "Caja moldeada (MCCB)", desc: "Caja más grande, con mango y bornes de potencia, para tableros de distribución.", image: "/grid/breaker-mccb.jpg", imageAlt: "Breaker de caja moldeada con tres bornes, sin marcas" },
+  { id: "panel", title: "Tipo panel", desc: "Breaker enchufable, con las uñas metálicas para el panel.", image: "/grid/breaker-panel.jpg", imageAlt: "Breaker tipo panel con uñas de conexión, sin marcas" },
 ];
 
 const FAQS: Faq[] = [
@@ -78,8 +80,8 @@ export default function BreakersPage() {
       />
 
       <Band tone="white" id="tipos" labelledBy="breakers-tipos">
-        <SectionHead kicker="Suministro" id="breakers-tipos" title="Qué suministramos" intro="Los tres tipos, en cualquier número de polos y amperaje." />
-        <OfferGrid columns={3} items={TIPOS.map((t) => ({ ...t, noMedia: true, quote: QUOTE }))} />
+        <SectionHead kicker="Suministro" id="breakers-tipos" title="Qué suministramos" intro="Riel DIN de 1, 2 y 3 polos, caja moldeada y panel. También cualquier otro número de polos y amperaje. Fotos de referencia, sin marcas." />
+        <OfferGrid columns={3} items={TIPOS.map((t) => ({ ...t, quote: QUOTE }))} />
         <p className="mt-6 max-w-3xl text-base leading-relaxed text-steel-300">{ENTREGA_LINEA} Entregamos en todo el país.</p>
       </Band>
 
