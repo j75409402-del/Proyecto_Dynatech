@@ -9,7 +9,7 @@ import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { Band, SectionHead, OfferGrid, QuoteButton } from "@/components/page/Blocks";
 import { CylinderRelated } from "@/components/industrial/CylinderRelated";
-import { ENTREGA } from "@/lib/entrega";
+import { ENTREGA_LINEA } from "@/lib/entrega";
 
 export const metadata: Metadata = {
   ...commercialMetadata("Sellos y componentes para cilindros neumáticos", "Cotiza kits de sellos, vástagos y componentes bajo medida para cilindros neumáticos en República Dominicana.", "/sellos-y-componentes"),
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
 const BLOQUES = [
   {
     id: "kits-de-sellos",
-    title: "Kits de sellos",
-    desc: "Kits de sellos para la reparación y el mantenimiento de cilindros neumáticos.",
-    need: "El código del cilindro o del kit, una foto o el cilindro de muestra.",
+    title: "Kits de sellos para cilindros neumáticos",
+    desc: "Kits de sellos para cilindros neumáticos, de 32 a 100 mm.",
+    need: "Diámetro de la camisa, diámetro del vástago y la marca.",
     image: "/products/kits-sello-smc.jpg",
     imageAlt: "Kits de sellos para cilindros neumáticos en sus bolsas",
     item: "Kits de sellos",
@@ -50,7 +50,7 @@ const BLOQUES = [
 
 /** Qué datos o medidas pedir por pieza (solo orientación para la solicitud; no son especificaciones). */
 const MEDIDAS = [
-  { pieza: "Kit de sellos", minimo: "Código del cilindro o del kit; si no lo tienes, diámetro interior de la camisa y diámetro del vástago.", ayuda: "Foto de la placa del cilindro y de los sellos usados." },
+  { pieza: "Kit de sellos", minimo: "Diámetro de la camisa, diámetro del vástago y la marca. De 32 a 100 mm.", ayuda: "Foto de la placa del cilindro y de los sellos usados." },
   { pieza: "Vástago o barra cromada", minimo: "Diámetro y largo total; tipo y largo de la rosca en el extremo.", ayuda: "El vástago de muestra o un plano." },
   { pieza: "Camisa", minimo: "Diámetro interior y largo.", ayuda: "La camisa original o un plano." },
   { pieza: "Tapas", minimo: "Diámetro, tipo de montaje y conexiones de aire.", ayuda: "La tapa original o fotos con una referencia de tamaño." },
@@ -64,7 +64,7 @@ export default function SellosYComponentesPage() {
         crumbs={[{ label: "Sellos y componentes" }]}
         kicker="Repuestos para cilindros neumáticos"
         title={<>Kits de sellos y componentes <span className="text-signal">para cilindros neumáticos</span></>}
-        lead={<p>Dynatech Ingeniería SRL es un suplidor de kits de sellos, vástagos cromados y componentes bajo medida para cilindros neumáticos en República Dominicana. Envíanos el código, una foto o la muestra y te cotizamos.</p>}
+        lead={<p>Dynatech Ingeniería SRL es un suplidor de kits de sellos para cilindros neumáticos, de 32 a 100 mm, además de vástagos cromados y componentes bajo medida. Para el kit envía el diámetro de la camisa, el del vástago y la marca.</p>}
         quoteHref={quoteHref("Kits de sellos")}
         secondary={{ href: "#medidas", label: "Ver qué medidas enviar" }}
         note="Indica si tus medidas son en mm o en pulgadas, y la cantidad."
@@ -98,7 +98,7 @@ export default function SellosYComponentesPage() {
 
       <CylinderRelated current="/sellos-y-componentes" />
 
-      <FaqBlock items={[...landingFaqs({ name: "Sellos y componentes", datos: MEDIDAS.map((m) => `${m.pieza}: ${m.minimo.charAt(0).toLowerCase()}${m.minimo.slice(1).replace(/\.$/, "")}`), address: CONTACT.address, hours: CONTACT.hours }), { q: "¿Cuánto tarda la entrega?", a: ENTREGA }]} kicker="Preguntas frecuentes" title="Sobre sellos y componentes" tone="light" />
+      <FaqBlock items={[{ q: "¿Dónde consigo kits de sellos para cilindros neumáticos?", a: "En Dynatech Ingeniería SRL, en Santo Domingo. Kits de sellos para cilindros neumáticos de 32 a 100 mm. Envía el diámetro de la camisa, el del vástago y la marca." }, ...landingFaqs({ name: "Sellos y componentes", datos: MEDIDAS.map((m) => `${m.pieza}: ${m.minimo.charAt(0).toLowerCase()}${m.minimo.slice(1).replace(/\.$/, "")}`), address: CONTACT.address, hours: CONTACT.hours }), { q: "¿Cuánto tarda la entrega?", a: ENTREGA_LINEA }]} kicker="Preguntas frecuentes" title="Sobre sellos y componentes" tone="light" />
 
       <QuoteCTA
         eyebrow="Sellos · Vástagos · Componentes"

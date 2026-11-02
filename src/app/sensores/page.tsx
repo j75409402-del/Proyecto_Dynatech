@@ -40,7 +40,7 @@ export default function SensoresPage() {
       headline="¿Buscas un proveedor de sensores industriales en República Dominicana?"
       lead={
         <>
-          <p>Dynatech Ingeniería SRL es un suplidor industrial en República Dominicana. Suministra sensores industriales en Santo Domingo: inductivos de M8 a M30, PNP o NPN, NO/NC y con conector M12; fotoeléctricos de todo tipo (difusos, de barrera, retrorreflectivos y de fibra óptica); también capacitivos, finales de carrera, ultrasónicos, magnéticos para cilindro, de presión y de temperatura. En esta línea solo suministramos. Cotizas por WhatsApp con referencia o foto de la etiqueta. Entregamos en todo el país.</p>
+          <p>Puedes comprar sensores inductivos y fotoeléctricos en Santo Domingo en Dynatech Ingeniería SRL. Es un suplidor industrial en República Dominicana y suministra sensores industriales: inductivos de M8 a M30, PNP o NPN, NO/NC y con conector M12; fotoeléctricos de todo tipo (difusos, de barrera, retrorreflectivos y de fibra óptica); también capacitivos, finales de carrera, ultrasónicos, magnéticos para cilindro, de presión y de temperatura. En esta línea solo suministramos. Cotizas por WhatsApp con referencia o foto de la etiqueta. Entregamos en todo el país.</p>
           <p>Marcas comunes: Omron, Sick, Autonics, Banner y Pepperl+Fuchs. Suministramos productos originales por código.</p>
         </>
       }
@@ -49,6 +49,9 @@ export default function SensoresPage() {
           <Band tone="white" id="sensores-comunes" labelledBy="sensores-comunes-titulo">
             <SectionHead kicker="Los más comunes" id="sensores-comunes-titulo" title="Sensores industriales" intro="Fotos de referencia, sin marcas. El modelo se confirma con el código o la foto de la etiqueta." />
             <OfferGrid columns={3} items={COMUNES.map((s) => ({ ...s, quote: quoteHref(s.title, "Sensores") }))} />
+          </Band>
+          <Band tone="light" labelledBy="fotoelectricos-lineas-titulo">
+            <SectionHead kicker="Líneas de producción" id="fotoelectricos-lineas-titulo" title="Fotoeléctricos para líneas de producción" intro="Difusos, de barrera y retrorreflectivos, para detectar presencia en la línea. El modelo se confirma con el código o la foto de la etiqueta." />
           </Band>
           <LineSupply id="sensores-suministro" entrega={ENTREGA_LINEA} items={[
             { label: "Sensores inductivos", text: "De M8 a M30, PNP o NPN, NO/NC, con cable o conector M12.", href: "/sensores#inductivos" },
@@ -65,6 +68,7 @@ export default function SensoresPage() {
         </>
       }
       faqItems={[
+        { q: "¿Dónde compro sensores inductivos y fotoeléctricos en Santo Domingo?", a: "Puedes comprar sensores inductivos y fotoeléctricos en Santo Domingo en Dynatech Ingeniería SRL. Los fotoeléctricos para líneas de producción incluyen difusos, de barrera y retrorreflectivos." },
         { q: "¿Qué sensores suministran?", a: "Inductivos de M8 a M30, PNP o NPN, NO/NC y conector M12; capacitivos; fotoeléctricos difusos, de barrera, retrorreflectivos y de fibra óptica; finales de carrera; ultrasónicos; magnéticos para cilindro; switches y transmisores de presión; termocuplas J y K y RTD PT100." },
         { q: "¿Instalan o programan?", a: "No. En sensores solo suministramos. Sin instalación, programación, mantenimiento ni puesta en marcha." },
         { q: "¿Cuánto tarda la entrega?", a: ENTREGA_LINEA },

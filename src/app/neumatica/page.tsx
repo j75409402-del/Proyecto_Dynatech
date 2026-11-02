@@ -18,11 +18,12 @@ const DESCRIPTION =
 
 /** Confirmado por el dueño: sin cifras de plazo ni país de origen. */
 const ENTREGA =
-  "Entrega inmediata cuando hay existencia, o importación del producto cuando no se encuentra en el país. Disponibilidad y plazo se confirman en la cotización.";
+  "Entrega inmediata cuando hay existencia, o importación cuando no; disponibilidad y plazo se confirman en la cotización.";
 
 const FAQS: Faq[] = [
   { q: "¿Dynatech vende electroválvulas en RD?", a: "Sí. Válvulas solenoides y direccionales 2/2, 3/2, 5/2 y 5/3, bajo cotización desde Santo Domingo." },
-  { q: "¿Consiguen repuestos originales Festo o SMC en RD?", a: "Sí. Suministramos piezas originales Festo y SMC, y de otras marcas, bajo pedido por código. Cotizamos exactamente el código que nos envías." },
+  { q: "¿Consiguen repuestos originales Festo o SMC en RD?", a: "Sí. Suministramos piezas originales Festo y SMC por código. Cotizamos exactamente el código que nos envías." },
+  { q: "¿Tienen equivalentes a Festo o SMC?", a: "Cotizamos la pieza original por código. Si no está disponible, ofrecemos otra marca de primera calidad." },
   { q: "¿Cuánto tarda la entrega?", a: ENTREGA },
   { q: "¿Entregan fuera de Santo Domingo?", a: "Sí. En todo el país, incluidas las zonas francas del interior." },
   { q: "¿Pueden reemplazar un cilindro que ya no se fabrica?", a: "Sí. Lo fabricamos a la medida desde plano, muestra o medidas, en mm o pulgadas." },

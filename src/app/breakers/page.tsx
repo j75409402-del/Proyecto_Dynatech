@@ -81,7 +81,10 @@ export default function BreakersPage() {
 
       <Band tone="white" id="tipos" labelledBy="breakers-tipos">
         <SectionHead kicker="Suministro" id="breakers-tipos" title="Qué suministramos" intro="Riel DIN de 1, 2 y 3 polos, caja moldeada y panel. También cualquier otro número de polos y amperaje. Fotos de referencia, sin marcas." />
-        <OfferGrid columns={3} items={TIPOS.map((t) => ({ ...t, quote: QUOTE }))} />
+        <OfferGrid columns={3} items={TIPOS.filter((t) => t.id !== "mccb").map((t) => ({ ...t, quote: QUOTE }))} />
+        <h2 id="mccb" className="section-title mt-12">Breakers de caja moldeada (MCCB)</h2>
+        <p className="mt-3 max-w-3xl text-base leading-relaxed text-steel-300">Para tableros de distribución y principales, bajo cotización.</p>
+        <OfferGrid columns={3} items={TIPOS.filter((t) => t.id === "mccb").map((t) => ({ ...t, quote: QUOTE }))} />
         <p className="mt-6 max-w-3xl text-base leading-relaxed text-steel-300">{ENTREGA_LINEA} Entregamos en todo el país.</p>
       </Band>
 

@@ -12,7 +12,7 @@ import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
 import { CylinderRelated } from "@/components/industrial/CylinderRelated";
 import { RealWorkPhoto } from "@/components/industrial/RealWorkPhoto";
 import { CONTACT, SITE } from "@/lib/constants";
-import { ENTREGA } from "@/lib/entrega";
+import { ENTREGA_LINEA } from "@/lib/entrega";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 
 export const metadata: Metadata = {
@@ -32,6 +32,9 @@ const TIPOS = [
   { code: "S/E", title: "Simple efecto", desc: "Retorno por resorte." },
   { code: "CPT", title: "Compactos", desc: "Para espacios reducidos." },
   { code: "ISO", title: "ISO", desc: "Cilindros de norma ISO." },
+  { code: "TR", title: "De tirantes", desc: "Cilindro con tirantes, tie-rod." },
+  { code: "MINI", title: "Mini redondo", desc: "Cilindro redondo de tamaño mini." },
+  { code: "GUI", title: "Guiado", desc: "Cilindro con guía." },
   { code: "mm / in", title: "Métricos y en pulgadas", desc: "Diámetro y carrera en ambos sistemas." },
   { code: "ESP", title: "A la medida", desc: "Especiales, bajo plano o muestra." },
 ];
@@ -46,13 +49,14 @@ const NECESITAMOS = [
 
 /** Solo hechos ya publicados en esta página y en /servicios (WEB-020). */
 const FAQS: Faq[] = [
+  { q: "¿Dónde comprar cilindros neumáticos en Santo Domingo?", a: "Puedes comprar cilindros neumáticos en Santo Domingo en Dynatech Ingeniería SRL. Trabajamos ISO, de tirantes, compactos, mini redondos y guiados." },
   { q: "¿Qué datos necesito enviar?", a: "Con cualquiera de estos datos podemos empezar: plano, muestra, medidas, fotos o el código. Lo mínimo: diámetro x carrera o una foto del cilindro y su placa." },
   { q: "¿Fabrican en milímetros y en pulgadas?", a: "Sí. Fabricamos el cilindro a partir de tu plano, una muestra o tus medidas, en milímetros o en pulgadas." },
   { q: "¿Pueden fabricarlo si el original ya no se consigue?", a: "Sí. Fabricamos cilindros completos a medida, incluso cuando el original ya no está disponible." },
   { q: "¿Y si mi cilindro está dañado?", a: "Lo reparamos o reconstruimos: desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar. Ver la página de reparación de cilindros." },
   { q: "¿Atienden empresas y zonas francas?", a: "Sí. Atendemos solicitudes de empresas del sector privado y de zonas francas en República Dominicana." },
   { q: "¿Consiguen cilindros originales Festo o SMC?", a: "Sí. Suministramos piezas originales Festo y SMC, y de otras marcas, bajo pedido por código." },
-  { q: "¿Cuánto tarda la entrega?", a: ENTREGA },
+  { q: "¿Cuánto tarda la entrega?", a: ENTREGA_LINEA },
   { q: "¿Dónde están y en qué horario atienden?", a: `En ${CONTACT.address}. Horario: ${CONTACT.hours.replace(/ · /g, " ")}.` },
 ];
 

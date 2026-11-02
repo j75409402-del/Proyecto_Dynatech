@@ -7,12 +7,22 @@ import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, type Related
 import { Reveal } from "@/components/motion/Reveal";
 import { TallerGallery } from "@/components/industrial/TallerGallery";
 import { CONTACT, SITE } from "@/lib/constants";
-import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
-import { ENTREGA } from "@/lib/entrega";
+import { FaqBlock, landingFaqs, type Faq } from "@/components/page/FaqBlock";
+import { ENTREGA, ENTREGA_LINEA } from "@/lib/entrega";
 import { SERVICIOS_ADICIONALES } from "@/lib/servicios";
 import { whatsappService } from "@/lib/whatsapp";
 
 type Service = (typeof SERVICIOS_ADICIONALES)[number];
+
+const HIDRAULICO_FAQS: Faq[] = [
+  { q: "¿Es mejor reparar o comprar nuevo un cilindro hidráulico?", a: "Si la camisa y el vástago están sanos o se pueden recuperar, reparar suele convenir. Si la camisa está rayada o deformada, o el vástago no tiene arreglo, conviene cambiarlo. Dynatech hace el diagnóstico y cotiza las dos opciones. También hay cilindros hidráulicos listos." },
+  { q: "¿Quién repara cilindros hidráulicos en República Dominicana?", a: `Dynatech Ingeniería SRL, en ${CONTACT.streetAddress}, Santo Domingo, repara, reconstruye y fabrica cilindros hidráulicos a la medida, con prueba de funcionamiento antes de la entrega. También suministra cilindros listos. Entrega en todo el país.` },
+  { q: "¿Qué necesito para cotizar la reparación de un cilindro hidráulico?", a: `Foto del cilindro y de la falla, foto de la placa, medidas (camisa, vástago, carrera y montaje) y plano si lo tienes. WhatsApp ${CONTACT.whatsappDisplay}.` },
+  { q: "¿Hacen el cambio de sellos de cilindros hidráulicos?", a: "Sí. Cambiamos el kit de sellos según las medidas del cilindro, con prueba de funcionamiento antes de la entrega." },
+  { q: "¿Fabrican un cilindro hidráulico si ya no existe el original?", a: "Sí. Lo fabricamos a la medida a partir de un plano, una muestra o las medidas. El vástago se recupera o se fabrica nuevo, según el daño." },
+  { q: "¿Cuánto tarda la entrega?", a: ENTREGA_LINEA },
+  { q: "¿Entregan fuera de Santo Domingo?", a: "Sí, entregamos en todo el país." },
+];
 
 /**
  * Plantilla de cilindros hidráulicos y mecanizado (prioridad comercial, oct-2026). No hay fotos
@@ -56,6 +66,18 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         caption={{ label: "Foto real · taller Dynatech", text: hidraulico ? "Cilindro hidráulico en proceso" : "Torno y fresadora, en el mismo taller" }}
         trust="lineas"
       />
+
+      {hidraulico && (
+        <Band tone="white" labelledBy="reparar-o-cambiar">
+          <SectionHead kicker="Taller" id="reparar-o-cambiar" title="¿Reparar o cambiar un cilindro hidráulico?" />
+          <div className="mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-steel-300">
+            <p><b className="text-surface">Respuesta corta.</b> Conviene reparar cuando la camisa y el vástago están en buen estado o se pueden recuperar. Conviene cambiar cuando la camisa está rayada o deformada, o el vástago está doblado y no tiene arreglo. En Dynatech Ingeniería SRL, en Santo Domingo, reparamos, reconstruimos y fabricamos a la medida. También hay cilindros hidráulicos listos. El vástago se recupera o se fabrica nuevo, según el daño.</p>
+            <p><b className="text-surface">En el taller.</b> Diagnóstico del cilindro desarmado, cambio de sellos, vástago recuperado o nuevo, y mecanizado en torno y fresadora cuando hace falta. Prueba de funcionamiento antes de la entrega.</p>
+            <p><b className="text-surface">Para cotizar.</b> Foto del cilindro y de la falla, foto de la placa si tiene, medidas de camisa, vástago, carrera y montaje, y plano o muestra si los tienes. WhatsApp {CONTACT.whatsappDisplay}.</p>
+            <p>{ENTREGA_LINEA} Entregamos en todo el país.</p>
+          </div>
+        </Band>
+      )}
 
       {procesos.length > 0 && (
         <Band tone="white" labelledBy="procesos">
@@ -115,7 +137,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         </Reveal>
       </Band>
 
-      <FaqBlock items={[...landingFaqs({ name: s.name, datos: s.information, referencePhotos: false, address: CONTACT.address, hours: CONTACT.hours }), { q: "¿Cuánto tarda la entrega?", a: ENTREGA }]} kicker={`${n(4)} · Preguntas frecuentes`} title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
+      <FaqBlock items={hidraulico ? HIDRAULICO_FAQS : [...landingFaqs({ name: s.name, datos: s.information, referencePhotos: false, address: CONTACT.address, hours: CONTACT.hours }), { q: "¿Cuánto tarda la entrega?", a: ENTREGA }]} kicker={`${n(4)} · Preguntas frecuentes`} title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
 
       <RelatedGrid kicker="Relacionado" title="Otros servicios del taller" id="servicio-relacionado" items={related} />
 
