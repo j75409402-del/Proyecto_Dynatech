@@ -8,30 +8,72 @@ import { SITE } from "@/lib/constants";
 import { whatsappCylinderService, whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 import { quoteHref } from "@/components/cta/QuoteCTA";
 
-export function CilindrosBand() {
+function PhotoBand({
+  id,
+  kicker,
+  title,
+  text,
+  href,
+  quote,
+  image,
+  alt,
+}: {
+  id: string;
+  kicker: string;
+  title: string;
+  text: string;
+  href: string;
+  quote: string;
+  image: string;
+  alt: string;
+}) {
   return (
-    <section className="cyl-band" aria-labelledby="cyl-band-title">
-      <div className="cyl-band-air" aria-hidden="true" />
-      <div className="container-max cyl-band-inner">
-        <div>
-          <p className="hero-kicker">Taller</p>
-          <h2 id="cyl-band-title">Cilindros neumáticos</h2>
-          <p>Fabricación y reparación.</p>
-          <ul>
-            <li>Foto, placa o plano.</li>
-            <li>Milímetros o pulgadas.</li>
-            <li>Prueba antes de entregar.</li>
-          </ul>
-          <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6" data-fab-hide="">
+    <section className="photo-band" aria-labelledby={id}>
+      <Image src={image} alt={alt} fill sizes="100vw" className="photo-band-img" />
+      <div className="photo-band-shade" aria-hidden="true" />
+      <div className="container-max photo-band-copy">
+        <p className="hero-kicker">{kicker}</p>
+        <h2 id={id}>{title}</h2>
+        <p>{text}</p>
+        <div className="hero-actions" data-fab-hide="">
+          <a href={quote} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
             <WhatsAppIcon className="h-5 w-5" />
             Cotizar por WhatsApp
           </a>
+          <Link href={href} className="hero-secondary">Ver más <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
-        <figure>
-          <Image src="/cilindros/trabajo-real-cilindros-dynatech-recorte.jpg" alt="Cilindros neumáticos fabricados por Dynatech junto a la muestra que sirvió de referencia" width={915} height={549} sizes="(max-width: 1023px) 100vw, 46vw" />
-        </figure>
       </div>
     </section>
+  );
+}
+
+export function CilindrosBand() {
+  return (
+    <PhotoBand
+      id="cyl-band-title"
+      kicker="Taller"
+      title="Cilindros neumáticos"
+      text="Fabricación y reparación. Foto, placa o plano."
+      href="/cilindros-neumaticos"
+      quote={whatsappCylinderService()}
+      image="/taller/cilindro-hidraulico-fabricado-poster.jpg"
+      alt="Cilindro hidráulico fabricado en el torno del taller"
+    />
+  );
+}
+
+export function MecanizadoBand() {
+  return (
+    <PhotoBand
+      id="mecanizado-band-title"
+      kicker="Taller"
+      title="Mecanizado de piezas"
+      text="Torno y fresadora. Plano o muestra."
+      href="/mecanizado"
+      quote={whatsappService("mecanizado")}
+      image="/taller/torno-eje-fresadora.jpg"
+      alt="Fabricación de un eje en el torno del taller de Dynatech; al fondo, la fresadora"
+    />
   );
 }
 
@@ -56,17 +98,42 @@ export function ServiciosHome() {
   );
 }
 
+export function Editorial({
+  id, flip, kicker, title, text, href, quote, image, alt,
+}: {
+  id: string; flip?: boolean; kicker: string; title: string; text: string; href: string; quote: string; image: string; alt: string;
+}) {
+  return (
+    <section className={`edit ${flip ? "is-flip" : ""}`} aria-labelledby={id}>
+      <div className="edit-photo">
+        <Image src={image} alt={alt} fill sizes="(max-width: 899px) 100vw, 58vw" className="object-cover" />
+      </div>
+      <div className="edit-copy">
+        <p className="section-kicker">{kicker}</p>
+        <h2 id={id}>{title}</h2>
+        <p>{text}</p>
+        <div className="hero-actions" data-fab-hide="">
+          <a href={quote} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
+            <WhatsAppIcon className="h-5 w-5" />Cotizar por WhatsApp
+          </a>
+          <Link href={href} className="edit-more">Ver más <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function AplicacionesHome() {
   return (
-    <Band tone="light" labelledBy="aplicaciones-home">
+    <Band tone="white" labelledBy="aplicaciones-home">
       <SectionHead kicker="Aplicaciones" id="aplicaciones-home" title="Dónde se usan" intro="Empresas y zonas francas." aside={<Link href="/aplicaciones" className="inline-flex min-h-11 items-center gap-2 font-medium">Ver aplicaciones <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>} />
-      <ul className="app-grid">
+      <ul className="industry-grid">
         {SOLUCIONES.map((s) => (
           <li key={s.slug}>
-            <h3><Link href={`/${s.slug}`}>{s.name}</Link></h3>
-            <ul>
-              {s.aplicaciones.slice(0, 3).map((a) => <li key={a}>{a}</li>)}
-            </ul>
+            <Link href={`/${s.slug}`}>
+              <span className="industry-photo"><Image src={s.image} alt="" fill sizes="(max-width: 699px) 100vw, 33vw" className="object-cover" /></span>
+              <span className="industry-copy"><strong>{s.name}</strong><small>{s.aplicaciones[0]}</small></span>
+            </Link>
           </li>
         ))}
       </ul>
@@ -77,28 +144,18 @@ export function AplicacionesHome() {
 export function HomeHero() {
   return (
     <section className="hero" aria-labelledby="home-hero-title">
-      <figure className="hero-media">
-        <svg className="hero-flow" viewBox="0 0 800 500" aria-hidden="true">
-          <path d="M-20 360 C 160 300, 280 420, 460 340 S 760 220, 840 280" />
-          <path d="M-20 220 C 180 160, 320 260, 520 190 S 780 80, 860 140" />
-          <path d="M40 460 C 220 400, 360 480, 560 410 S 820 320, 900 360" />
-        </svg>
+      <div className="hero-media">
         <Image
           src="/cilindros/trabajo-real-cilindros-dynatech-recorte.jpg"
           alt="Cilindros neumáticos fabricados por Dynatech junto a la muestra que sirvió de referencia"
-          width={915}
-          height={549}
+          fill
           priority
           fetchPriority="high"
           quality={68}
-          sizes="(max-width: 1023px) 100vw, 48vw"
+          sizes="100vw"
           className="hero-photo"
         />
-        <figcaption>
-          <span>Trabajo del taller</span>
-          Cilindros fabricados a partir de una muestra.
-        </figcaption>
-      </figure>
+      </div>
       <div className="hero-copy">
         <p className="hero-kicker">{SITE.shortName} · Santo Domingo</p>
         <h1 id="home-hero-title">Suministro industrial</h1>
@@ -178,21 +235,20 @@ export function LineIndex() {
         title="Líneas de suministro"
         intro="Referencia, cantidad o foto."
       />
-      <ol className="line-index">
-        {SOLUCIONES.map((s, i) => (
+      <ul className="studio-grid">
+        {SOLUCIONES.map((s) => (
           <li key={s.slug}>
-            <span className="line-no">{String(i + 1).padStart(2, "0")}</span>
-            <div className="line-main">
-              <h3><Link href={`/${s.slug}`}>{s.name}</Link></h3>
-              <p>{s.short}</p>
-            </div>
+            <Link href={`/${s.slug}`} className="studio-photo" aria-label={s.name}>
+              <Image src={s.image} alt="" fill sizes="(max-width: 639px) 50vw, 30vw" className="object-contain" />
+            </Link>
+            <h3><Link href={`/${s.slug}`}>{s.name}</Link></h3>
+            <p>{s.short}</p>
             <a href={quoteHref(s.name, "Suministro industrial")} target="_blank" rel="noopener" className="line-quote">
-              Cotizar por WhatsApp
-              <span className="sr-only">: {s.name}</span>
+              Solicitar cotización<span className="sr-only">: {s.name}</span>
             </a>
           </li>
         ))}
-      </ol>
+      </ul>
       <div className="line-foot">
         <p><Link href="/cilindros-hidraulicos">Cilindros hidráulicos</Link> · Reparación y fabricación.</p>
         <p>Control, automatización e instrumentación: {SOLO_SUMINISTRO}</p>

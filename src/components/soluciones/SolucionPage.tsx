@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
 import { Info } from "lucide-react";
 import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
-import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, CheckList, type OfferItem } from "@/components/page/Blocks";
+import { Band, SectionHead, QuoteChecklist, RelatedGrid, CheckList } from "@/components/page/Blocks";
+import { CatalogBoard } from "@/components/catalog/CatalogBoard";
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
 import { PhotoCredits } from "@/components/page/PhotoCredits";
@@ -17,17 +17,9 @@ type Props = {
   destacado?: ReactNode;
 };
 
-/** Texto del enlace interno de una subcategoría con página propia (sin la palabra "cotizar"). */
-function linkLabel(href: string, title: string) {
-  if (href.startsWith("/cilindros-neumaticos")) return "Ver tipos de cilindro";
-  if (href.startsWith("/servicios")) return "Ver reparación de cilindros";
-  return `Ver ${title.toLowerCase()}`;
-}
-
 /**
- * Plantilla de línea industrial (WEB-010): Hero con imagen real → (destacado) → Qué cotizamos
- * (tarjetas con foto) → Qué datos necesitamos → Dónde se usan → Otras líneas → Cierre.
- * Sin SKUs, precios, inventario ni marcas representadas. Las anclas #<subcategoría> se conservan.
+ * Plantilla de línea: hero → familias en grilla (anclas #<subcategoría>) → datos → aplicaciones.
+ * Sin SKUs, precios, inventario ni marcas representadas.
  */
 export function SolucionPage({ solucion: s, destacado }: Props) {
   const otras = SOLUCIONES.filter((x) => x.slug !== s.slug);
@@ -56,21 +48,19 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
     },
   };
 
-  const items: OfferItem[] = s.subcategorias.map((sub) => ({
+  const tiles = s.subcategorias.map((sub) => ({
     id: sub.id,
+    category: s.slug,
     title: sub.title,
-    desc: sub.desc,
-    icon: sub.icon,
+    fact: sub.desc,
     image: sub.image,
-    imageAlt: sub.imageAlt,
-    imageFit: sub.imageFit,
-    imageNote: sub.imageNote,
-    noMedia: !sub.image,
-    ejemplos: sub.ejemplos,
-    ...(sub.href
-      ? { link: { href: sub.href, label: linkLabel(sub.href, sub.title) } }
-      : { quote: neumatica ? whatsappService("componente", sub.title) : quoteHref(sub.title, s.name) }),
+    alt: sub.imageAlt,
+    quote: sub.href
+      ? (neumatica ? whatsappService("componente", sub.title) : quoteHref(sub.title, s.name))
+      : (neumatica ? whatsappService("componente", sub.title) : quoteHref(sub.title, s.name)),
+    href: sub.href ?? `/${s.slug}#${sub.id}`,
   }));
+  const sides = SOLUCIONES.map((o) => ({ id: o.slug, label: o.name, href: `/${o.slug}` }));
 
   const datos = [...(DATOS_PARA_COTIZAR[s.slug] ?? []).map((t) => ({ title: t })), { title: "Cantidad y ciudad de entrega" }];
 
@@ -105,14 +95,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         {s.soloSuministro && (
           <p className="scope-note mb-6"><Info className="h-4 w-4 shrink-0" aria-hidden="true" /><span>En esta línea {SOLO_SUMINISTRO}</span></p>
         )}
-        <nav aria-label={`Subcategorías de ${s.name}`} className="mb-8" data-fab-hide="">
-          <ul className="chip-nav">
-            {s.subcategorias.map((sub) => (
-              <li key={sub.id}>{sub.href ? <Link href={sub.href}>{sub.title}</Link> : <a href={`#${sub.id}`}>{sub.title}</a>}</li>
-            ))}
-          </ul>
-        </nav>
-        <OfferGrid items={items} />
+        <CatalogBoard sides={sides} tiles={tiles} current={s.slug} heading={s.name} />
         <PhotoCredits items={s.subcategorias} />
       </Band>
 

@@ -79,11 +79,11 @@ export function OfferGrid({ items, columns = 3, compact = false }: { items: Offe
               ) : it.icon ? (
                 <it.icon className="h-16 w-16" aria-hidden="true" strokeWidth={1.2} />
               ) : null}
-              {it.image && it.imageNote && <span className="img-note">{it.imageNote}</span>}
             </div>}
             <div className="offer-body">
               {(compact || it.noMedia) && !it.image && it.icon && <span className="offer-icon"><it.icon className="h-6 w-6" aria-hidden="true" /></span>}
               <h3>{it.title}</h3>
+              {it.imageNote && <p className="studio-note">{it.imageNote}</p>}
               {(it.ejemplos && it.ejemplos.length > 0) ? (
                 <ul className="family-facts">
                   {it.ejemplos.slice(0, 3).map((e) => <li key={e}>{e}</li>)}

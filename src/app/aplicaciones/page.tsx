@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { QuoteCTA } from "@/components/cta/QuoteCTA";
-import { PageHero } from "@/components/page/PageHero";
-import { Band } from "@/components/page/Blocks";
+import { Editorial } from "@/components/home/HomeSections";
+import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SOLUCIONES } from "@/lib/soluciones";
 import { whatsappGeneral } from "@/lib/whatsapp";
+import Image from "next/image";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Aplicaciones",
@@ -13,33 +14,58 @@ export const metadata: Metadata = {
 };
 
 export default function AplicacionesPage() {
+  const [first, second, ...rest] = SOLUCIONES;
   return (
     <>
-      <PageHero
-        crumbs={[{ label: "Aplicaciones" }]}
-        kicker="Suministro industrial"
-        title="Aplicaciones"
-        lead={<p>Empresas y zonas francas.</p>}
-        quoteHref={whatsappGeneral()}
-        note="Foto, código o plano."
-        image={{ src: "/banners/neumatica-industrial-conectores.webp", alt: "Componentes neumáticos de referencia" }}
-        caption={{ label: "Imagen de referencia", text: "Líneas industriales" }}
-        trust="lineas"
-      />
-      <Band tone="light" labelledBy="aplicaciones-lista">
-        <h2 id="aplicaciones-lista" className="sr-only">Aplicaciones por línea</h2>
-        <div className="app-groups">
-          {SOLUCIONES.map((s) => (
-            <section key={s.slug} aria-labelledby={`app-${s.slug}`}>
-              <h3 id={`app-${s.slug}`}><Link href={`/${s.slug}`}>{s.name}</Link></h3>
-              <ul>
-                {s.aplicaciones.map((a) => <li key={a}>{a}</li>)}
-              </ul>
-            </section>
-          ))}
+      <section className="hero" aria-labelledby="app-hero">
+        <div className="hero-media">
+          <Image src="/banners/neumatica-industrial.webp" alt="Imagen de referencia de componentes neumáticos industriales" fill priority sizes="100vw" className="hero-photo" />
         </div>
-      </Band>
-      <QuoteCTA eyebrow="Bajo cotización" title="Cuéntanos el uso" text="Foto, código o plano." whatsappHref={whatsappGeneral()} />
+        <div className="hero-copy">
+          <Breadcrumbs items={[{ label: "Aplicaciones" }]} />
+          <p className="hero-kicker">Empresas y zonas francas</p>
+          <h1 id="app-hero">Aplicaciones</h1>
+          <p className="hero-lead">Dónde se usa cada línea.</p>
+          <a href={whatsappGeneral()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">Cotizar por WhatsApp</a>
+        </div>
+      </section>
+      <Editorial
+        id="app-uno"
+        kicker={first.name}
+        title={first.aplicaciones[0]}
+        text={first.short}
+        href={`/${first.slug}`}
+        quote={quoteHref(first.name, "Suministro industrial")}
+        image={first.image}
+        alt={first.imageAlt}
+      />
+      <Editorial
+        id="app-dos"
+        flip
+        kicker={second.name}
+        title={second.aplicaciones[0]}
+        text={second.short}
+        href={`/${second.slug}`}
+        quote={quoteHref(second.name, "Suministro industrial")}
+        image={second.image}
+        alt={second.imageAlt}
+      />
+      <section className="band band-white">
+        <div className="container-max">
+          <h2 className="section-title">Más aplicaciones</h2>
+          <ul className="industry-grid">
+            {rest.map((s) => (
+              <li key={s.slug}>
+                <Link href={`/${s.slug}`}>
+                  <span className="industry-photo"><Image src={s.image} alt="" fill sizes="33vw" className="object-cover" /></span>
+                  <span className="industry-copy"><strong>{s.name}</strong><small>{s.aplicaciones[0]}</small></span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+      <QuoteCTA eyebrow="Bajo cotización" title="Cuéntanos el uso" text="Foto, código o plano." whatsappHref={whatsappGeneral()} ctaLabel="Cotizar por WhatsApp" />
     </>
   );
 }
