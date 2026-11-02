@@ -25,7 +25,7 @@ function analyticsOff() {
 }
 
 /** Evento de Vercel Web Analytics. No incluye el mensaje, el cuerpo del correo ni datos de contacto. */
-function trackVercelClick(name: "whatsapp_click" | "email_click", props: Record<string, string | undefined>) {
+function trackVercelClick(name: "whatsapp_click" | "email_click" | "phone_click", props: Record<string, string | undefined>) {
   if (process.env.NEXT_PUBLIC_DISABLE_ANALYTICS === "1" || analyticsOff()) return;
   if (window.location.pathname.startsWith("/admin")) return;
   const data: Record<string, string> = {};
@@ -109,6 +109,7 @@ export function CommercialTracking() {
         trackVercelClick("whatsapp_click", { source_page: window.location.pathname, utm_source: utm.utm_source, utm_medium: utm.utm_medium, utm_campaign: utm.utm_campaign });
       } else if (url.protocol === "tel:") {
         trackCommercialEvent("phone_click", "phone", placement);
+        trackVercelClick("phone_click", { source_page: window.location.pathname });
       } else if (url.protocol === "mailto:") {
         trackCommercialEvent("email_click", "email", placement);
         trackVercelClick("email_click", { source_page: window.location.pathname });
