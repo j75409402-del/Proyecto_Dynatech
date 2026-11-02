@@ -21,13 +21,15 @@ type Props = {
   lead?: ReactNode;
   /** Sustituye las preguntas genéricas de la plantilla. */
   faqItems?: Faq[];
+  /** Sustituye la foto del hero sin cambiar la imagen de la línea en el resto del sitio. */
+  heroImage?: { src: string; alt: string; fit?: "cover" | "contain" };
 };
 
 /**
  * Plantilla de línea: hero → familias en grilla (anclas #<subcategoría>) → datos → aplicaciones.
  * Sin SKUs, precios, inventario ni marcas representadas.
  */
-export function SolucionPage({ solucion: s, destacado, headline, lead, faqItems }: Props) {
+export function SolucionPage({ solucion: s, destacado, headline, lead, faqItems, heroImage }: Props) {
   const otras = SOLUCIONES.filter((x) => x.slug !== s.slug);
   // Neumática (especialidad): mensaje «busco un componente neumático… código o foto» y medición
   // como componente_neumatico. Las demás líneas mantienen su mensaje por línea.
@@ -88,7 +90,7 @@ export function SolucionPage({ solucion: s, destacado, headline, lead, faqItems 
         quoteHref={neumatica ? lineQuote : quoteHref(s.name, s.name)}
         secondary={{ href: "#catalogo", label: "Ver catálogo" }}
         note="Código, foto o plano."
-        image={{ src: s.image, alt: s.imageAlt }}
+        image={heroImage ?? { src: s.image, alt: s.imageAlt }}
         trust="lineas"
       />
 

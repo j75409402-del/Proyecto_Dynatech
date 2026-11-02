@@ -20,6 +20,9 @@ const COMUNES = [
   { id: "temperatura", title: "Temperatura", desc: "Termocuplas tipo J y K, y sondas RTD PT100.", image: "/grid/sensor-temperatura.jpg", imageAlt: "Termocupla y sonda RTD, sin marcas" },
 ];
 
+const HERO = "/sensores/sensores-inductivos.webp";
+const HERO_ALT = "Sensores inductivos de proximidad industriales en varios tamaños";
+
 const solucion = getSolucion("sensores");
 const title = "Proveedor de sensores industriales en República Dominicana · Dynatech";
 const description =
@@ -28,15 +31,16 @@ const description =
 export const metadata: Metadata = {
   title: { absolute: title },
   description,
-  twitter: { card: "summary_large_image", title, description, images: [solucion.image] },
+  twitter: { card: "summary_large_image", title, description, images: [HERO] },
   alternates: { canonical: "/sensores" },
-  openGraph: { title, description, url: "/sensores", images: [solucion.image] },
+  openGraph: { title, description, url: "/sensores", images: [{ url: HERO, alt: HERO_ALT }] },
 };
 
 export default function SensoresPage() {
   return (
     <SolucionPage
       solucion={solucion}
+      heroImage={{ src: HERO, alt: HERO_ALT, fit: "cover" }}
       headline="¿Buscas un proveedor de sensores industriales en República Dominicana?"
       lead={
         <>
