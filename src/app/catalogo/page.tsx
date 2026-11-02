@@ -7,9 +7,9 @@ import { PhotoCredits } from "@/components/page/PhotoCredits";
 import { GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, SOLUCIONES, type Solucion, type Subcategoria } from "@/lib/soluciones";
 import { whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 
-const title = "Catálogo de productos industriales en República Dominicana";
+const title = "Catálogo industrial en Santo Domingo";
 const description =
-  "Neumática, control industrial, automatización, instrumentación, resistencias eléctricas y termocuplas bajo cotización en Santo Domingo. Cotiza cada categoría por WhatsApp.";
+  "Neumática, control industrial, automatización, instrumentación, resistencias y termocuplas bajo cotización en Santo Domingo. Cotiza por WhatsApp.";
 
 export const metadata: Metadata = {
   title,
