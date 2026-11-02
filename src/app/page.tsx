@@ -51,8 +51,8 @@ export default function HomePage() {
         text="Fabricación y reparación. Foto, placa o plano."
         href="/cilindros-neumaticos"
         quote={whatsappCylinderService()}
-        image="/cilindros/trabajo-real-cilindros-dynatech-recorte.jpg"
-        alt="Cilindros neumáticos fabricados por Dynatech junto a la muestra que sirvió de referencia"
+        image="/studio/linea-cilindros.jpg"
+        alt="Cilindros neumáticos sobre el banco del taller, sin marcas"
       />
       <Editorial
         id="home-mecanizado"
@@ -62,8 +62,8 @@ export default function HomePage() {
         text="Torno y fresadora. Plano o muestra."
         href="/mecanizado"
         quote={whatsappService("mecanizado")}
-        image="/taller/torno-eje-fresadora.jpg"
-        alt="Fabricación de un eje en el torno del taller de Dynatech; al fondo, la fresadora"
+        image="/studio/linea-mecanizado.jpg"
+        alt="Eje de acero en el torno, sin marcas"
       />
       <AplicacionesHome />
       <ComoTrabajamos />

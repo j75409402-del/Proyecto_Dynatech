@@ -83,7 +83,6 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
         secondary={{ href: "#catalogo", label: "Ver catálogo" }}
         note="Código, foto o plano."
         image={{ src: s.image, alt: s.imageAlt }}
-        caption={{ label: "Imagen de referencia", text: s.ejemplos.slice(0, 3).join(" · ") }}
         trust="lineas"
       />
 

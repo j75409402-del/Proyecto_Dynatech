@@ -125,9 +125,9 @@ export function Editorial({
 
 /** Usos ya escritos en cada línea. Fotos distintas de las miniaturas del hero. */
 const USOS_HOME: { slug: string; index: number; image: string; fit: "cover" | "contain" }[] = [
-  { slug: "neumatica", index: 0, image: "/banners/neumatica-industrial.webp", fit: "cover" },
-  { slug: "control-electrico", index: 0, image: "/products/arrancadores-manuales-telemecanique.jpg", fit: "contain" },
-  { slug: "resistencias-electricas", index: 0, image: "/banners/resistencias-electricas-industriales.webp", fit: "cover" },
+  { slug: "neumatica", index: 0, image: "/studio/uso-lineas.jpg", fit: "cover" },
+  { slug: "control-electrico", index: 0, image: "/studio/uso-motores.jpg", fit: "cover" },
+  { slug: "resistencias-electricas", index: 0, image: "/studio/uso-inyeccion.jpg", fit: "cover" },
 ];
 
 export function AplicacionesHome() {
@@ -190,26 +190,19 @@ export function HomeHero() {
 
 /** Todas las líneas del catálogo, en la primera pantalla. */
 export function LineasDeUnVistazo() {
-  const usadas = new Set<string>();
   return (
     <section className="fold-lines" aria-label="Líneas de suministro">
       <ul>
-        {SOLUCIONES.map((s) => {
-          const foto = s.subcategorias.find((sub) => sub.image && !usadas.has(sub.image))?.image ?? (usadas.has(s.image) ? undefined : s.image);
-          if (foto) usadas.add(foto);
-          return (
-            <li key={s.slug}>
-              <Link href={`/${s.slug}`}>
-                {foto && (
-                  <span className="fold-photo">
-                    <Image src={foto} alt="" fill sizes="140px" className="object-contain" />
-                  </span>
-                )}
-                <span>{s.name}</span>
-              </Link>
-            </li>
-          );
-        })}
+        {SOLUCIONES.map((s) => (
+          <li key={s.slug}>
+            <Link href={`/${s.slug}`}>
+              <span className="fold-photo">
+                <Image src={s.image} alt="" fill sizes="(max-width: 799px) 33vw, 160px" className="object-cover" />
+              </span>
+              <span>{s.name}</span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </section>
   );

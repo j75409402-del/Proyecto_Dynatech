@@ -15,12 +15,12 @@ export const metadata: Metadata = {
 
 /** Una foto por bloque. El hero no se repite abajo, y control no comparte la del gabinete. */
 const FOTO_APLICACION: Record<string, string> = {
-  neumatica: "/banners/neumatica-industrial-conectores.webp",
-  "control-electrico": "/products/arrancadores-manuales-telemecanique.jpg",
-  "gabinetes-electricos": "/banners/control-electrico.webp",
-  sensores: "/banners/sensores-fotoceldas.webp",
-  instrumentacion: "/banners/instrumentacion-procesos.webp",
-  "resistencias-electricas": "/banners/resistencias-electricas-industriales.webp",
+  neumatica: "/studio/linea-neumatica.jpg",
+  "control-electrico": "/studio/linea-control.jpg",
+  "gabinetes-electricos": "/studio/linea-gabinetes.jpg",
+  sensores: "/studio/linea-sensores.jpg",
+  instrumentacion: "/studio/linea-instrumentacion.jpg",
+  "resistencias-electricas": "/studio/linea-resistencias.jpg",
 };
 
 function altDe(slug: string, src: string) {
@@ -34,7 +34,7 @@ export default function AplicacionesPage() {
     <>
       <section className="hero" aria-labelledby="app-hero">
         <div className="hero-media">
-          <Image src="/banners/neumatica-industrial.webp" alt="Imagen de referencia de componentes neumáticos industriales" fill priority sizes="100vw" className="hero-photo" />
+          <Image src="/studio/uso-lineas.jpg" alt="Conjunto neumático en una máquina, sin marcas" fill priority sizes="100vw" className="hero-photo" />
         </div>
         <div className="hero-copy">
           <Breadcrumbs items={[{ label: "Aplicaciones" }]} />

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { NAV, SITE, CONTACT, CALL_PHONES, telHref } from "@/lib/constants";
-import { GRUPOS_SUMINISTRO, SOLUCIONES, fotoLibre } from "@/lib/soluciones";
+import { GRUPOS_SUMINISTRO, SOLUCIONES } from "@/lib/soluciones";
 import { whatsappGeneral } from "@/lib/whatsapp";
 import { SiteSearch } from "@/components/layout/SiteSearch";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
@@ -18,16 +18,6 @@ function isActive(pathname: string, href: string) {
 
 const SOLUCIONES_HREFS = ["/catalogo", ...SOLUCIONES.map((s) => `/${s.slug}`), ...NAV.cilindros.map((c) => c.href), ...NAV.especialidades.map((e) => e.href)];
 
-const MENU_FOTO = new Map<string, string>();
-{
-  const usadas = new Set<string>();
-  for (const s of SOLUCIONES) {
-    const foto = fotoLibre(s, usadas) ?? s.image;
-    usadas.add(foto);
-    MENU_FOTO.set(s.slug, foto);
-  }
-}
-
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,14 +25,61 @@ export function Navbar() {
   const pathname = usePathname();
   const menuRef = useRef<HTMLDivElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const productButtonRef = useRef<HTMLButtonElement>(null);
+  const closeTimer = useRef<number | null>(null);
+  const pinned = useRef(false);
+  const focusPanel = useRef(false);
+
+  function clearClose() {
+    if (closeTimer.current !== null) {
+      window.clearTimeout(closeTimer.current);
+      closeTimer.current = null;
+    }
+  }
+  function openProducts() {
+    clearClose();
+    setMenuOpen(true);
+  }
+  function scheduleClose() {
+    clearClose();
+    closeTimer.current = window.setTimeout(() => {
+      if (!pinned.current) setMenuOpen(false);
+    }, 300);
+  }
+  function closeProducts() {
+    clearClose();
+    pinned.current = false;
+    setMenuOpen(false);
+  }
+  function toggleProducts() {
+    clearClose();
+    setMenuOpen((isOpen) => {
+      if (isOpen && pinned.current) {
+        pinned.current = false;
+        return false;
+      }
+      pinned.current = true;
+      return true;
+    });
+  }
 
   useEffect(() => {
+    function placeMenu() {
+      const header = menuRef.current?.closest("header");
+      if (!header || !menuRef.current) return;
+      menuRef.current.style.setProperty("--menu-top", `${Math.round(header.getBoundingClientRect().bottom)}px`);
+    }
     function onScroll() {
       setScrolled(window.scrollY > 12);
+      placeMenu();
     }
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", placeMenu);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", placeMenu);
+    };
   }, []);
 
   // Menú móvil: Escape lo cierra.
@@ -59,14 +96,31 @@ export function Navbar() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
-  // Desplegable: se cierra con Escape o al hacer clic fuera.
+  useEffect(() => () => {
+    if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen || !focusPanel.current) return;
+    focusPanel.current = false;
+    menuRef.current?.querySelector<HTMLAnchorElement>("#menu-soluciones a")?.focus();
+  }, [menuOpen]);
+
+  // Desplegable: Escape, clic fuera, o 300 ms después de salir con el mouse.
   useEffect(() => {
     if (!menuOpen) return;
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setMenuOpen(false);
+      if (e.key !== "Escape") return;
+      if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+      pinned.current = false;
+      setMenuOpen(false);
+      productButtonRef.current?.focus();
     }
     function onClick(e: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setMenuOpen(false);
+      if (!menuRef.current || menuRef.current.contains(e.target as Node)) return;
+      if (closeTimer.current !== null) window.clearTimeout(closeTimer.current);
+      pinned.current = false;
+      setMenuOpen(false);
     }
     document.addEventListener("keydown", onKey);
     document.addEventListener("mousedown", onClick);
@@ -130,16 +184,23 @@ export function Navbar() {
             </Link>
             <div
               ref={menuRef}
-              className="relative"
-              onMouseEnter={() => setMenuOpen(true)}
-              onMouseLeave={() => setMenuOpen(false)}
+              className="product-menu"
+              onMouseEnter={openProducts}
+              onMouseLeave={scheduleClose}
             >
               <button
+                ref={productButtonRef}
                 type="button"
-                // Solo abre: con mouse el hover ya lo abrió y un toggle lo cerraría al hacer clic.
-                // Se cierra con Escape, clic fuera o al salir con el mouse.
-                onClick={() => setMenuOpen(true)}
+                onClick={toggleProducts}
+                onKeyDown={(e) => {
+                  if (e.key !== "ArrowDown") return;
+                  e.preventDefault();
+                  pinned.current = true;
+                  focusPanel.current = true;
+                  openProducts();
+                }}
                 aria-expanded={menuOpen}
+                aria-haspopup="true"
                 aria-controls="menu-soluciones"
                 className={cn(
                   "flex min-h-11 items-center gap-1.5 text-sm font-medium tracking-tight transition-colors whitespace-nowrap",
@@ -150,13 +211,11 @@ export function Navbar() {
                 <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", menuOpen && "rotate-180")} />
               </button>
 
-              {/* Panel (pt-4 deja un "puente" para que el hover no se corte al bajar el mouse) */}
               <div
                 id="menu-soluciones"
                 data-open={menuOpen}
                 inert={!menuOpen}
                 aria-hidden={!menuOpen}
-                className="absolute left-1/2 top-full z-50 w-[min(1080px,calc(100vw-2rem))] -translate-x-1/2 pt-3"
               >
                 <div className="mega mega-portal">
                   <div className="mega-cats">
@@ -166,11 +225,8 @@ export function Navbar() {
                         <ul className="mega-tiles">
                           {SOLUCIONES.filter((s) => s.grupo === g.id).map((s) => (
                             <li key={s.slug}>
-                              <Link href={`/${s.slug}`} onClick={() => setMenuOpen(false)} className={cn(isActive(pathname, `/${s.slug}`) && "is-active")}>
-                                <span className="mega-thumb">
-                                  <Image src={MENU_FOTO.get(s.slug) ?? s.image} alt="" fill sizes="72px" className="object-contain" />
-                                </span>
-                                <span>{s.name}</span>
+                              <Link href={`/${s.slug}`} onClick={closeProducts} className={cn(isActive(pathname, `/${s.slug}`) && "is-active")}>
+                                <span className="mega-copy"><span>{s.name}</span><small>{s.short}</small></span>
                               </Link>
                             </li>
                           ))}
@@ -183,24 +239,24 @@ export function Navbar() {
                     <ul>
                       {NAV.cilindros.map((c) => (
                         <li key={c.href}>
-                          <Link href={c.href} onClick={() => setMenuOpen(false)}>
+                          <Link href={c.href} onClick={closeProducts}>
                             <span>{c.label}</span>
                           </Link>
                         </li>
                       ))}
                       {NAV.especialidades.map((c) => (
                         <li key={c.href}>
-                          <Link href={c.href} onClick={() => setMenuOpen(false)}>
+                          <Link href={c.href} onClick={closeProducts}>
                             <span>{c.label}</span>
                           </Link>
                         </li>
                       ))}
                     </ul>
-                    <Link href="/catalogo" onClick={() => setMenuOpen(false)}>
+                    <Link href="/catalogo" onClick={closeProducts}>
                       Ver catálogo
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
-                    <Link href="/aplicaciones" onClick={() => setMenuOpen(false)}>
+                    <Link href="/aplicaciones" onClick={closeProducts}>
                       Aplicaciones
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
@@ -327,11 +383,14 @@ export function Navbar() {
               onClick={() => setOpen(false)}
               aria-current={isActive(pathname, `/${s.slug}`) ? "page" : undefined}
               className={cn(
-                "flex min-h-11 items-center border-b border-black/5 text-sm font-medium",
+                "flex min-h-12 items-center gap-3 border-b border-black/5 text-sm font-medium",
                 isActive(pathname, `/${s.slug}`) ? "text-signal" : "text-steel-200 hover:text-signal",
               )}
             >
-              {s.name}
+              <span className="relative h-10 w-10 shrink-0 overflow-hidden border border-black/10">
+                <Image src={s.image} alt="" fill sizes="40px" className="object-cover" />
+              </span>
+              <span>{s.name}<small className="mt-0.5 block text-xs font-normal text-steel-400">{s.short}</small></span>
             </Link>
           ))}
           <div className="eyebrow mt-5 mb-1">Empresa</div>
