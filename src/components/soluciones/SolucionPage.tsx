@@ -6,7 +6,7 @@ import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, QuoteChecklist, RelatedGrid, CheckList } from "@/components/page/Blocks";
 import { CatalogBoard } from "@/components/catalog/CatalogBoard";
 import { CONTACT, SITE } from "@/lib/constants";
-import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
+import { FaqBlock, landingFaqs, type Faq } from "@/components/page/FaqBlock";
 import { PhotoCredits } from "@/components/page/PhotoCredits";
 import { SOLUCIONES, DATOS_PARA_COTIZAR, GRUPOS_SUMINISTRO, SOLO_SUMINISTRO, fotoLibre, type Solucion } from "@/lib/soluciones";
 import { whatsappService, whatsappSolucion } from "@/lib/whatsapp";
@@ -15,13 +15,19 @@ type Props = {
   solucion: Solucion;
   /** Bloque opcional entre el hero y el catálogo (ej. cilindros y válvulas en Neumática). */
   destacado?: ReactNode;
+  /** Sustituye el H1 de la plantilla sin cambiar el nombre de la línea en el menú. */
+  headline?: ReactNode;
+  /** Sustituye el párrafo del hero. */
+  lead?: ReactNode;
+  /** Sustituye las preguntas genéricas de la plantilla. */
+  faqItems?: Faq[];
 };
 
 /**
  * Plantilla de línea: hero → familias en grilla (anclas #<subcategoría>) → datos → aplicaciones.
  * Sin SKUs, precios, inventario ni marcas representadas.
  */
-export function SolucionPage({ solucion: s, destacado }: Props) {
+export function SolucionPage({ solucion: s, destacado, headline, lead, faqItems }: Props) {
   const otras = SOLUCIONES.filter((x) => x.slug !== s.slug);
   // Neumática (especialidad): mensaje «busco un componente neumático… código o foto» y medición
   // como componente_neumatico. Las demás líneas mantienen su mensaje por línea.
@@ -68,7 +74,7 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
 
   const datos = [...(DATOS_PARA_COTIZAR[s.slug] ?? []).map((t) => ({ title: t })), { title: "Cantidad y ciudad de entrega" }];
 
-  const faqs = landingFaqs({ name: s.name, datos: datos.map((d) => d.title), address: CONTACT.address, hours: CONTACT.hours });
+  const faqs = faqItems ?? landingFaqs({ name: s.name, datos: datos.map((d) => d.title), address: CONTACT.address, hours: CONTACT.hours });
 
   return (
     <div>
@@ -77,8 +83,8 @@ export function SolucionPage({ solucion: s, destacado }: Props) {
       <PageHero
         crumbs={[{ label: s.name }]}
         kicker={`Suministro industrial · ${GRUPOS_SUMINISTRO.find((g) => g.id === s.grupo)?.title ?? s.name}`}
-        title={s.title}
-        lead={<p>{s.description}</p>}
+        title={headline ?? s.title}
+        lead={lead ?? <p>{s.description}</p>}
         quoteHref={neumatica ? lineQuote : quoteHref(s.name, s.name)}
         secondary={{ href: "#catalogo", label: "Ver catálogo" }}
         note="Código, foto o plano."
