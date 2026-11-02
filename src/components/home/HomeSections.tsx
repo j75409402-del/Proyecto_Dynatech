@@ -113,13 +113,13 @@ export function TallerPrincipal() {
 const neumatica = getSolucion("neumatica");
 const sub = (id: string) => neumatica.subcategorias.find((s) => s.id === id)!;
 const CATEGORIAS = [
-  { title: "Cilindros neumáticos", text: "Cilindros, fabricación a medida y componentes.", href: "/cilindros-neumaticos", image: sub("cilindros").image!, quote: quoteHref("Cilindros neumáticos", "Neumática"), related: { href: "/neumatica#cilindros", label: "Ver en catálogo" } },
-  { title: "Válvulas neumáticas", text: "Válvulas y electroválvulas para circuitos neumáticos.", href: "/valvulas-neumaticas", image: sub("valvulas").image!, quote: quoteHref("Válvulas neumáticas", "Neumática") },
-  { title: "FRL y accesorios neumáticos", text: "Preparación de aire, conexiones y mangueras.", href: "/neumatica#frl", image: sub("frl").image!, quote: quoteHref("Unidades FRL y accesorios", "Neumática"), related: { href: "/neumatica#conexiones", label: "Conexiones y accesorios" } },
-  { title: "Cilindros hidráulicos", text: "Reparación y fabricación según tu aplicación.", href: "/cilindros-hidraulicos", image: "/taller/cilindro-hidraulico-fabricado-poster.jpg", quote: whatsappService("hidraulico"), real: true },
+  { title: "Cilindros neumáticos", text: "Cilindros, fabricación a medida y componentes.", href: "/cilindros-neumaticos", image: sub("cilindros").image!, imageAlt: sub("cilindros").imageAlt ?? "Cilindros neumáticos", quote: quoteHref("Cilindros neumáticos", "Neumática"), related: { href: "/neumatica#cilindros", label: "Ver en catálogo" } },
+  { title: "Válvulas neumáticas", text: "Válvulas y electroválvulas para circuitos neumáticos.", href: "/valvulas-neumaticas", image: sub("valvulas").image!, imageAlt: sub("valvulas").imageAlt ?? "Válvulas neumáticas", quote: quoteHref("Válvulas neumáticas", "Neumática") },
+  { title: "FRL y accesorios neumáticos", text: "Preparación de aire, conexiones y mangueras.", href: "/neumatica#frl", image: sub("frl").image!, imageAlt: sub("frl").imageAlt ?? "Unidades FRL y accesorios", quote: quoteHref("Unidades FRL y accesorios", "Neumática"), related: { href: "/neumatica#conexiones", label: "Conexiones y accesorios" } },
+  { title: "Cilindros hidráulicos", text: "Reparación y fabricación según tu aplicación.", href: "/cilindros-hidraulicos", image: "/taller/cilindro-hidraulico-fabricado-poster.jpg", imageAlt: "Cilindro hidráulico fabricado en el torno", quote: whatsappService("hidraulico"), real: true },
   ...["control-electrico", "sensores", "instrumentacion", "resistencias-electricas"].map((slug) => {
     const line = getSolucion(slug);
-    return { title: line.name, text: line.short, href: `/${slug}`, image: line.image, quote: quoteHref(line.name, "Suministro industrial"), related: slug === "control-electrico" ? { href: "/gabinetes-electricos", label: "También gabinetes eléctricos" } : undefined };
+    return { title: line.name, text: line.short, href: `/${slug}`, image: line.image, imageAlt: line.imageAlt, quote: quoteHref(line.name, "Suministro industrial"), related: slug === "control-electrico" ? { href: "/gabinetes-electricos", label: "También gabinetes eléctricos" } : undefined };
   }),
 ];
 
@@ -131,7 +131,7 @@ export function SuministroIndustrial() {
         {CATEGORIAS.map((c, i) => (
           <li key={c.href} className="b2b-category">
             <Link href={c.href} className="b2b-category-image" tabIndex={-1} aria-hidden="true">
-              <Image src={c.image} alt="" fill sizes="(max-width: 639px) 40vw, (max-width: 1023px) 45vw, 30vw" className={"real" in c ? "object-cover" : "object-contain p-5"} />
+              <Image src={c.image} alt={c.imageAlt} fill sizes="(max-width: 639px) 40vw, (max-width: 1023px) 45vw, 30vw" className={"real" in c ? "object-cover" : "object-contain p-5"} />
               <span>{"real" in c ? "Trabajo real" : "Referencia de categoría"}</span>
             </Link>
             <div className="b2b-category-body"><span className="b2b-index">{String(i + 1).padStart(2, "0")}</span><h3><Link href={c.href}>{c.title}<ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" /></Link></h3><p>{c.text}</p>
