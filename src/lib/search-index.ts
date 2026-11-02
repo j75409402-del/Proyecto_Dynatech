@@ -32,6 +32,7 @@ export function buildSearchIndex(): SearchEntry[] {
   }));
   return [
     { title: "Catálogo", href: "/catalogo", group: "Líneas", hint: "Todas las categorías" },
+    { title: "Breakers", href: "/breakers", group: "Control eléctrico", hint: "Riel DIN, caja moldeada y panel" },
     { title: "Aplicaciones", href: "/aplicaciones", group: "Empresa", hint: "Dónde se usan" },
     ...lines,
     ...families,

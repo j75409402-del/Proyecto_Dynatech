@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SolucionPage } from "@/components/soluciones/SolucionPage";
 import { LineSupply } from "@/components/soluciones/LineSupply";
 import { ENTREGA } from "@/lib/entrega";
@@ -22,10 +23,10 @@ export default function ControlElectricoPage() {
     <SolucionPage
       solucion={solucion}
       headline="¿Buscas un proveedor de control eléctrico en República Dominicana?"
-      lead={<p>Dynatech Ingeniería SRL es un suplidor de control eléctrico industrial en Santo Domingo: contactores, relés, breakers, fusibles, pulsadores, temporizadores y conectores para empresas y zonas francas. En esta línea solo suministramos. Cotizas por WhatsApp con referencia o foto.</p>}
+      lead={<p>Dynatech Ingeniería SRL es un suplidor de control eléctrico industrial en Santo Domingo: contactores, relés, <Link href="/breakers">breakers</Link>, fusibles, pulsadores, temporizadores y conectores para empresas y zonas francas. En esta línea solo suministramos. Cotizas por WhatsApp con referencia o foto.</p>}
       destacado={<LineSupply id="control-suministro" items={[
         { label: "Contactores y relés", text: "Contactores para arranque y control de motores, relés de control y relés térmicos.", href: "/control-electrico#contactores-y-reles" },
-        { label: "Breakers y protección", text: "Interruptores termomagnéticos, arrancadores manuales y protección de circuitos.", href: "/control-electrico#proteccion" },
+        { label: "Breakers y protección", text: "Interruptores termomagnéticos, arrancadores manuales y protección de circuitos.", href: "/breakers", linkText: "Ver breakers" },
         { label: "Fusibles y portafusibles", text: "Fusibles industriales, fusibles tipo NH y bases portafusibles.", href: "/control-electrico#fusibles" },
         { label: "Pulsadores, selectores y luces piloto", text: "Mando y señalización para tableros de control.", href: "/control-electrico#mando-y-senalizacion" },
         { label: "Temporizadores, contadores y controladores", text: "Temporizadores, contadores y controladores de temperatura para tablero.", href: "/control-electrico#temporizadores" },
