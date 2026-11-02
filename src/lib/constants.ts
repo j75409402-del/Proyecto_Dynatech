@@ -12,10 +12,22 @@ export const SITE = {
   rnc: "133-45350-9",
 } as const;
 
-/** Enlace uniforme al correo de contacto publicado por la empresa. */
-export function emailHref(subject?: string) {
-  const query = subject ? `?subject=${encodeURIComponent(subject)}` : "";
-  return `mailto:${CONTACT.email}${query}`;
+function queryValue(value: string | undefined) {
+  return (value ?? "").replace(/[\u0000-\u001f\u007f<>]|\p{Cf}/gu, " ").replace(/\s+/g, " ").trim().slice(0, 90);
+}
+
+/**
+ * Enlace interno al correo comercial. `/correo` mide el clic y redirige al mailto
+ * con asunto y cuerpo. `from` y las UTM las añade el navegador al hacer clic.
+ */
+export function emailHref(context?: { item?: string; linea?: string }) {
+  const params = new URLSearchParams();
+  const item = queryValue(context?.item);
+  const linea = queryValue(context?.linea);
+  if (item) params.set("item", item);
+  if (linea) params.set("linea", linea);
+  const q = params.toString();
+  return q ? `/correo?${q}` : "/correo";
 }
 
 const CONTACT_DETAILS = {

@@ -1,3 +1,5 @@
+> 2-nov-2026 — Correo comercial (rama `fix/correo-contacto`, sin fusionar): el contacto público es `dynatechventas01@outlook.com`. Los CTA de correo pasan por `/correo` (307 al mailto con asunto y cuerpo). El clic se registra en `whatsapp_clicks.channel` (`email`) dentro de `after()` y como evento `email_click` de Vercel Web Analytics. La migración `20261102052248_email_click_channel.sql` **no se aplicó**. Dirección y horario no se tocaron. Falta confirmación del dueño para aplicar la migración y para alinear `LEAD_NOTIFY_EMAIL` / `NEXT_PUBLIC_CONTACT_EMAIL` en Vercel.
+
 > 2-nov-2026 — Medición (rama `feat/p1-medicion-whatsapp`, sin fusionar): `/cotizacion` registra el clic en `whatsapp_clicks` dentro de `after()` y sigue redirigiendo 307 a WhatsApp. La migración está en el repo y **no se aplicó** a `hkubisdxytxogadatlif`. Sin variable nueva. Vercel Web Analytics (`whatsapp_click`) queda en el código; hay que activarlo en el panel. Textos alternativos de las fotos de categoría y del banner de cilindros, tomados del archivo o del alt ya publicado de esa misma imagen. Dirección y horario no se tocaron. NO VERIFICADO en producción.
 
 > 19-oct-2026 — Hero de la portada: pasarela «Lo que suministramos» con fotos del catálogo (válvulas, FRL, conexiones, pulsadores, sensores inductivos y fotoeléctricos, temperatura, resistencias de cartucho), tomadas de `soluciones.ts` (`src/lib/vitrina-suministro.ts`, `SupplyRail.tsx`). Avanza sola cada 4 s; se detiene con el ratón, el foco, al tocar o con el botón de pausa; sin movimiento con «reducir movimiento». Excluidas: fotos con marcas de terceros visibles, fotos con crédito obligatorio e ilustraciones IA. Se quitó la foto de fondo del hero (se repetía en el visor 3D): ninguna imagen se repite en la portada.
@@ -85,7 +87,7 @@ Nada se marca como resuelto si no se comprobó.
   - `/api/upload-adjunto` rechaza tipos no permitidos (400) y archivos de más de 10 MB (400).
   - Con datos válidos devuelve una URL firmada.
 - **Datos visibles:**
-  - Email `dynatechsrl@outlook.com`.
+  - Email `dynatechventas01@outlook.com`.
   - Teléfono `+1 (809) 284-4336`.
   - WhatsApp `wa.me/18092844336`.
   - Canonical en `https://www.dynatech.com.do`.

@@ -1,6 +1,7 @@
 import { after } from "next/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { trackingAllowed } from "@/lib/click-guard";
 import { ANALYTICS, SITE } from "@/lib/constants";
 import { sendQuoteEvent } from "@/lib/quote-event";
 import { buildQuoteMessage, cleanPath, cleanText, isPaidGoogleAd, isQuoteService, mergeUtm, productFor, readUtm, UTM_KEYS, whatsappUrl, type QuoteTemplate } from "@/lib/quote";
@@ -16,19 +17,6 @@ import { buildWhatsappClick, logWhatsappClick } from "@/lib/whatsapp-click";
  * IMPORTANTE: enlazar /cotizacion siempre con <a>, nunca con <Link> de Next (el prefetch contaría clics).
  */
 export const dynamic = "force-dynamic";
-
-const BOT = /bot|crawl|spider|slurp|preview|facebookexternalhit|whatsapp|headless|lighthouse|curl|wget|python|node-fetch|axios/i;
-
-type Headers = Awaited<ReturnType<typeof headers>>;
-function isPrefetch(h: Headers) {
-  return h.get("next-router-prefetch") === "1" || h.get("purpose") === "prefetch" || (h.get("sec-purpose") ?? "").includes("prefetch") || h.get("rsc") === "1";
-}
-
-function trackingAllowed(h: Headers, p: URLSearchParams) {
-  if (h.get("dnt") === "1" || h.get("sec-gpc") === "1" || p.get("nt") === "1") return false;
-  const ua = h.get("user-agent") ?? "";
-  return Boolean(ua) && !BOT.test(ua) && !isPrefetch(h);
-}
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 

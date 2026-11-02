@@ -3,7 +3,9 @@ import type { Database } from "@/types/database.types";
 import { cleanText, isQuoteService, slug, type QuoteTemplate, type UtmParams } from "@/lib/quote";
 
 /**
- * Registro del clic de /cotizacion en public.whatsapp_clicks.
+ * Registro del clic de /cotizacion o /correo en public.whatsapp_clicks.
+ * El canal `email` solo se envía desde /correo. /cotizacion no manda `channel`
+ * y la columna queda en `whatsapp` cuando la migración ya está aplicada.
  * Reutiliza NEXT_PUBLIC_SUPABASE_URL (o SUPABASE_URL) y SUPABASE_SERVICE_ROLE_KEY.
  * No hay variable nueva. Si faltan, no hace nada.
  * No guarda IP, mensaje, teléfono ni datos de contacto.
