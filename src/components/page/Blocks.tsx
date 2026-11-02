@@ -150,7 +150,7 @@ export function RelatedGrid({ kicker = "Relacionado", title, items, id = "relaci
           <li key={it.href}>
             <Link href={it.href} className="related-card group">
               {it.image ? (
-                <span className="related-thumb"><Image src={it.image} alt="" fill sizes="96px" className="object-cover" /></span>
+                <span className="related-thumb"><Image src={it.image} alt={it.title} fill sizes="96px" className="object-cover" /></span>
               ) : it.icon ? (
                 <span className="related-thumb is-icon"><it.icon className="h-6 w-6" aria-hidden="true" /></span>
               ) : null}

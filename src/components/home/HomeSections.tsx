@@ -142,7 +142,7 @@ export function AplicacionesHome() {
         {usos.map((u) => (
           <li key={u.href}>
             <Link href={u.href}>
-              <span className="industry-photo"><Image src={u.image} alt="" fill sizes="(max-width: 699px) 100vw, 33vw" className={u.fit === "contain" ? "object-contain p-6" : "object-cover"} /></span>
+              <span className="industry-photo"><Image src={u.image} alt={u.title} fill sizes="(max-width: 699px) 100vw, 33vw" className={u.fit === "contain" ? "object-contain p-6" : "object-cover"} /></span>
               <span className="industry-copy"><strong>{u.title}</strong></span>
             </Link>
           </li>
@@ -223,7 +223,7 @@ export function NeumaticaIndustrial() {
           {cards.map((c) => (
             <li key={c.id} className="pneu-card">
               <Link href={c.href} className="pneu-photo" tabIndex={-1} aria-hidden="true">
-                <Image src={c.image} alt="" fill sizes="(max-width: 799px) 46vw, 240px" className="object-cover" />
+                <Image src={c.image} alt={c.alt} fill sizes="(max-width: 799px) 46vw, 240px" className="object-cover" />
               </Link>
               <h3><Link href={c.href}>{c.label}</Link></h3>
               <a className="pneu-quote" href={c.quote} target="_blank" rel="noopener">
@@ -247,7 +247,7 @@ export function LineasDeUnVistazo() {
           <li key={s.slug}>
             <Link href={`/${s.slug}`}>
               <span className="fold-photo">
-                <Image src={s.image} alt="" fill sizes="(max-width: 799px) 33vw, 160px" className="object-cover" />
+                <Image src={s.image} alt={s.name} fill sizes="(max-width: 799px) 33vw, 160px" className="object-cover" />
               </span>
               <span>{s.name}</span>
             </Link>
@@ -321,7 +321,7 @@ export function LineIndex() {
         {SOLUCIONES.map((s) => (
           <li key={s.slug}>
             <Link href={`/${s.slug}`} className="studio-photo" aria-label={s.name}>
-              <Image src={s.image} alt="" fill sizes="(max-width: 639px) 50vw, 30vw" className="object-contain" />
+              <Image src={s.image} alt={s.name} fill sizes="(max-width: 639px) 50vw, 30vw" className="object-contain" />
             </Link>
             <h3><Link href={`/${s.slug}`}>{s.name}</Link></h3>
             <p>{s.short}</p>
