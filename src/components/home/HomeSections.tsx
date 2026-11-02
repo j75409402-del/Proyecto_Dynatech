@@ -176,6 +176,29 @@ export function HomeHero() {
   );
 }
 
+/** Todas las líneas del catálogo, en la primera pantalla. */
+export function LineasDeUnVistazo() {
+  return (
+    <section className="fold-lines" aria-label="Líneas de suministro">
+      <ul>
+        {SOLUCIONES.map((s) => {
+          const foto = s.subcategorias.find((sub) => sub.image) ?? null;
+          return (
+            <li key={s.slug}>
+              <Link href={`/${s.slug}`}>
+                <span className="fold-photo">
+                  <Image src={foto?.image ?? s.image} alt="" fill sizes="140px" className="object-contain" />
+                </span>
+                <span>{s.name}</span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
 const OFERTAS = [
   {
     title: "Cilindros neumáticos",

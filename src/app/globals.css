@@ -1589,7 +1589,7 @@ img.grade { filter: saturate(0.86) contrast(1.04); }
 .hero {
   display: block;
   position: relative;
-  min-height: min(88vh, 760px);
+  min-height: min(46vh, 440px);
   overflow: hidden;
   background: #121418;
 }
@@ -1612,7 +1612,7 @@ img.grade { filter: saturate(0.86) contrast(1.04); }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: min(88vh, 760px);
+  min-height: min(46vh, 440px);
   max-width: 38rem;
   margin-left: max(20px, calc((100vw - 80rem) / 2));
   padding: 18vh 28px 56px 0;
@@ -1671,11 +1671,22 @@ img.grade { filter: saturate(0.86) contrast(1.04); }
 }
 .family-grid .offer-media img { object-fit: contain !important; padding: 12% !important; }
 @media (max-width: 799px) {
-  .hero::after, .photo-band-shade { background: linear-gradient(180deg, rgba(18,20,24,.2) 0%, rgba(18,20,24,.55) 42%, #121418 100%); }
+  .hero, .hero-copy { min-height: 250px; }
+  .hero-copy { padding-top: 20px; padding-bottom: 16px; }
+  .hero::after, .photo-band-shade { background: linear-gradient(180deg, rgba(18,20,24,.15) 0%, rgba(18,20,24,.45) 38%, #121418 100%); }
   .hero-copy, .photo-band-copy { margin-left: 0; padding-left: 20px; padding-right: 20px; }
   .studio-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (min-width: 800px) { .studio-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.fold-lines { background: #fff; border-bottom: 1px solid var(--line); }
+.fold-lines ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; list-style: none; margin: 0 auto; max-width: 80rem; padding: 14px 16px 16px; }
+.fold-lines a { display: grid; gap: 6px; color: #14171b; font-size: 13px; font-weight: 600; line-height: 1.2; }
+.fold-lines a:hover { color: #c40024; }
+.fold-photo { position: relative; display: block; aspect-ratio: 1; background: #fff; border: 1px solid #e6e8ea; }
+@media (min-width: 800px) {
+  .fold-lines ul { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; padding: 18px 24px 22px; }
+  .fold-lines a { font-size: 14px; }
+}
 @media (min-width: 900px) {
   .cyl-band-inner { grid-template-columns: .9fr 1.1fr; align-items: center; gap: 56px; padding: 104px 0; }
   .quote-steps.b2b-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeHero, Editorial, LineIndex, AplicacionesHome, ServiciosHome } from "@/components/home/HomeSections";
+import { HomeHero, LineasDeUnVistazo, Editorial, LineIndex, AplicacionesHome, ServiciosHome } from "@/components/home/HomeSections";
 import { ComoTrabajamos } from "@/components/home/IndustrialSections";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
@@ -43,6 +43,7 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
+      <LineasDeUnVistazo />
       <Editorial
         id="home-cilindros"
         kicker="Taller"
