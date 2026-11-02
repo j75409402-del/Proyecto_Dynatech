@@ -2,7 +2,9 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createServiceClient } from "@/lib/supabase/server";
 import { badOrigin, clientIp, looksLikeBot, rateLimited } from "@/lib/antispam";
+import { pageLabel } from "@/lib/correo";
 import { notifyLead } from "@/lib/notify";
+import { cleanPath } from "@/lib/quote";
 
 const bodySchema = z.object({
   name:    z.string().min(2),
@@ -82,7 +84,9 @@ export async function POST(req: Request) {
     }
   }
 
-  await notifyLead(`Nuevo mensaje de contacto · ${data.name}`, [
+  const sourcePage = cleanPath(req.headers.get("referer"), req.headers.get("x-forwarded-host") ?? req.headers.get("host")) || "/contacto";
+  const page = pageLabel(sourcePage);
+  await notifyLead(`Cotización – ${page} (web) · ${data.name}`, [
     `Nombre: ${data.name}`,
     `Empresa: ${data.company || "-"}`,
     `Email: ${data.email}`,

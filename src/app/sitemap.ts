@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     { url: `${SITE.url}/cilindros-neumaticos`, changeFrequency: "monthly", priority: 1 },
     { url: `${SITE.url}/catalogo`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE.url}/breakers`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE.url}/valvulas-neumaticas`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE.url}/servicios`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE.url}/sellos-y-componentes`, changeFrequency: "monthly", priority: 0.9 },
