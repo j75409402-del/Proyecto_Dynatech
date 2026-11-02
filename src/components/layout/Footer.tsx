@@ -51,13 +51,14 @@ export function Footer() {
               </div>
             </div>
             <p className="text-sm text-steel-300 leading-relaxed max-w-sm">
-              {SITE.description}
+              Suministro industrial bajo cotización.
             </p>
+            <Link href="/aplicaciones" className="mt-3 inline-flex min-h-10 items-center text-sm text-steel-200 hover:text-signal">Aplicaciones</Link>
           </div>
 
           {/* Productos */}
           <div className="lg:col-span-2">
-            <div className="eyebrow mb-4">Suministro industrial</div>
+            <div className="eyebrow mb-4">Productos</div>
             <ul className="space-y-1">
               {solutionLinks.map((link) => (
                 <li key={link.href}>
@@ -74,7 +75,7 @@ export function Footer() {
 
           {/* Cilindros y servicios */}
           <div className="lg:col-span-2">
-            <div className="eyebrow mb-4">Taller y componentes</div>
+            <div className="eyebrow mb-4">Servicios</div>
             <ul className="space-y-1">
               {serviceLinks.map((link) => (
                 <li key={link.href}>

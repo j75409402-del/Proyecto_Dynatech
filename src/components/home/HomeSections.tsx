@@ -8,6 +8,44 @@ import { SITE } from "@/lib/constants";
 import { whatsappCylinderService, whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 import { quoteHref } from "@/components/cta/QuoteCTA";
 
+export function ServiciosHome() {
+  const items = [
+    { title: "Reparación de cilindros", text: "Fugas, desgaste o golpes.", href: "/servicios", quote: whatsappService("neumatico-reparar") },
+    { title: "Mecanizado de piezas", text: "Torno y fresadora.", href: "/mecanizado", quote: whatsappService("mecanizado") },
+  ] as const;
+  return (
+    <Band tone="white" labelledBy="servicios-home">
+      <SectionHead kicker="Servicios" id="servicios-home" title="Taller" intro="Reparación y mecanizado." />
+      <ul className="service-row">
+        {items.map((s) => (
+          <li key={s.href}>
+            <h3><Link href={s.href}>{s.title}</Link></h3>
+            <p>{s.text}</p>
+            <a href={s.quote} target="_blank" rel="noopener">Solicitar cotización<span className="sr-only">: {s.title}</span></a>
+          </li>
+        ))}
+      </ul>
+    </Band>
+  );
+}
+
+export function AplicacionesHome() {
+  return (
+    <Band tone="light" labelledBy="aplicaciones-home">
+      <SectionHead kicker="Aplicaciones" id="aplicaciones-home" title="Dónde se usan" intro="Empresas y zonas francas." aside={<Link href="/aplicaciones" className="inline-flex min-h-11 items-center gap-2 font-medium">Ver aplicaciones <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>} />
+      <ul className="app-grid">
+        {SOLUCIONES.map((s) => (
+          <li key={s.slug}>
+            <h3><Link href={`/${s.slug}`}>{s.name}</Link></h3>
+            <ul>
+              {s.aplicaciones.slice(0, 3).map((a) => <li key={a}>{a}</li>)}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </Band>
+  );
+}
 /** Portada: cilindros y neumática, una sola acción. */
 export function HomeHero() {
   return (

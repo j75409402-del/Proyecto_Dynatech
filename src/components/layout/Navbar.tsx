@@ -6,8 +6,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { NAV, SITE, CONTACT, CALL_PHONES, telHref } from "@/lib/constants";
-import { SOLUCIONES } from "@/lib/soluciones";
+import { GRUPOS_SUMINISTRO, SOLUCIONES } from "@/lib/soluciones";
 import { whatsappGeneral } from "@/lib/whatsapp";
+import { SiteSearch } from "@/components/layout/SiteSearch";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { cn } from "@/lib/utils";
 
@@ -143,64 +144,54 @@ export function Navbar() {
               <div
                 id="menu-soluciones"
                 hidden={!menuOpen}
-                className="absolute left-0 top-full z-50 w-[min(860px,calc(100vw-2rem))] pt-3"
+                className="absolute left-1/2 top-full z-50 w-[min(1080px,calc(100vw-2rem))] -translate-x-1/2 pt-3"
               >
-                <div className="mega">
-                  <div>
-                    <div className="mega-label">Suministro</div>
-                    <ul>
-                      {SOLUCIONES.map((s) => (
-                        <li key={s.slug}>
-                          <Link
-                            href={`/${s.slug}`}
-                            onClick={() => setMenuOpen(false)}
-                            className={cn(isActive(pathname, `/${s.slug}`) && "is-active")}
-                          >
-                            <span>{s.name}</span>
-                            <small>{s.short}</small>
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
+                <div className="mega mega-portal">
+                  <div className="mega-cats">
+                    {GRUPOS_SUMINISTRO.map((g) => (
+                      <div key={g.id}>
+                        <div className="mega-label">{g.title}</div>
+                        <ul className="mega-tiles">
+                          {SOLUCIONES.filter((s) => s.grupo === g.id).map((s) => (
+                            <li key={s.slug}>
+                              <Link href={`/${s.slug}`} onClick={() => setMenuOpen(false)} className={cn(isActive(pathname, `/${s.slug}`) && "is-active")}>
+                                <span className="mega-thumb">
+                                  <Image src={s.image} alt="" fill sizes="72px" className="object-contain" />
+                                </span>
+                                <span>{s.name}</span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
                   </div>
-                  <div>
-                    <div className="mega-label">Taller</div>
+                  <div className="mega-aside">
+                    <div className="mega-label">Servicios</div>
                     <ul>
                       {NAV.cilindros.map((c) => (
                         <li key={c.href}>
-                          <Link href={c.href} onClick={() => setMenuOpen(false)} className={cn(isActive(pathname, c.href) && "is-active")}>
+                          <Link href={c.href} onClick={() => setMenuOpen(false)}>
                             <span>{c.label}</span>
                           </Link>
                         </li>
                       ))}
-                    </ul>
-                    <div className="mega-label mt-6">Componentes</div>
-                    <ul>
                       {NAV.especialidades.map((c) => (
                         <li key={c.href}>
-                          <Link href={c.href} onClick={() => setMenuOpen(false)} className={cn(isActive(pathname, c.href) && "is-active")}>
+                          <Link href={c.href} onClick={() => setMenuOpen(false)}>
                             <span>{c.label}</span>
                           </Link>
                         </li>
                       ))}
                     </ul>
-                  </div>
-                  <div className="mega-aside">
-                    <div className="mega-label">Catálogo</div>
-                    <p>Referencia de categorías. Sin precios ni inventario en línea.</p>
                     <Link href="/catalogo" onClick={() => setMenuOpen(false)}>
                       Ver catálogo
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
-                    <a
-                      href={whatsappGeneral()}
-                      target="_blank"
-                      rel="noopener"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {NAV.cta.label}
+                    <Link href="/aplicaciones" onClick={() => setMenuOpen(false)}>
+                      Aplicaciones
                       <ArrowRight className="h-3.5 w-3.5" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -222,7 +213,8 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-2 shrink-0">
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
+            <SiteSearch />
             <a
               href={whatsappGeneral()}
               target="_blank"
@@ -260,6 +252,7 @@ export function Navbar() {
         )}
       >
         <nav className="container-max pb-6 flex flex-col max-h-[calc(100svh-4.5rem)] overflow-y-auto overscroll-contain" aria-label="Menú móvil">
+          <div className="mb-3"><SiteSearch onNavigate={() => setOpen(false)} /></div>
           {/* CTA primero: visible sin desplazarse dentro del menú. */}
           <a
             href={whatsappGeneral()}

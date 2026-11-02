@@ -69,7 +69,7 @@ export type OfferItem = {
 /** Tarjetas con imagen real (o panel técnico con icono si no hay foto). */
 export function OfferGrid({ items, columns = 3, compact = false }: { items: OfferItem[]; columns?: 2 | 3 | 4; /** Sin fotos: icono pequeño en lugar del panel 16:10. */ compact?: boolean }) {
   return (
-    <div className={`offer-grid catalog-list cols-${columns}`} data-fab-hide="">
+    <div className={`offer-grid family-grid cols-${columns}`} data-fab-hide="">
       {items.map((it, i) => (
         <Reveal key={it.id ?? it.title} delay={(i % 3) * 0.05} className="h-full">
           <article id={it.id} className="offer-card scroll-mt-28">
@@ -84,17 +84,18 @@ export function OfferGrid({ items, columns = 3, compact = false }: { items: Offe
             <div className="offer-body">
               {(compact || it.noMedia) && !it.image && it.icon && <span className="offer-icon"><it.icon className="h-6 w-6" aria-hidden="true" /></span>}
               <h3>{it.title}</h3>
-              <p>{it.desc}</p>
-              {it.ejemplos && it.ejemplos.length > 0 && (
-                <ul className="offer-tags" aria-label={`Ejemplos de ${it.title}`}>
-                  {it.ejemplos.map((e) => <li key={e}>{e}</li>)}
+              {(it.ejemplos && it.ejemplos.length > 0) ? (
+                <ul className="family-facts">
+                  {it.ejemplos.slice(0, 3).map((e) => <li key={e}>{e}</li>)}
                 </ul>
+              ) : (
+                <p>{it.desc}</p>
               )}
               {it.need && <p className="offer-need"><span>Necesitamos</span>{it.need}</p>}
               <div className="offer-actions">
                 {it.quote && (
                   <a href={it.quote} target="_blank" rel="noopener" className="offer-quote">
-                    <WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: {it.title}</span>
+                    Solicitar cotización<span className="sr-only">: {it.title}</span>
                   </a>
                 )}
                 {it.link && (
