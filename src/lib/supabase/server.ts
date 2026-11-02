@@ -53,8 +53,9 @@ export async function createClient() {
  */
 export function createServiceClient() {
   const { url, serviceKey } = resolveConfig();
+  if (!serviceKey) throw new Error("Falta SUPABASE_SERVICE_ROLE_KEY");
 
-  return createServerClient<Database>(url, serviceKey!, {
+  return createServerClient<Database>(url, serviceKey, {
     cookies: {
       getAll: () => [],
       setAll: () => {},

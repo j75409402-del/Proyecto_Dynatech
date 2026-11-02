@@ -1,23 +1,24 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createServiceClient } from "@/lib/supabase/server";
-import { badOrigin, clientIp, looksLikeBot, rateLimited } from "@/lib/antispam";
+import { badOrigin, bodyTooLarge, clientIp, looksLikeBot, rateLimited } from "@/lib/antispam";
 import { notifyLead } from "@/lib/notify";
 
+const text = (min: number, max: number) => z.string().trim().min(min).max(max);
 const bodySchema = z.object({
-  company_name: z.string().min(2),
-  contact_name: z.string().min(2),
-  email:        z.string().email(),
-  phone:        z.string().min(8),
-  rnc:          z.string().optional(),
-  city:         z.string().optional(),
+  company_name: text(2, 160),
+  contact_name: text(2, 120),
+  email:        z.string().trim().email().max(200),
+  phone:        text(8, 40),
+  rnc:          z.string().trim().max(20).optional(),
+  city:         z.string().trim().max(80).optional(),
   items: z.array(z.object({
-    sku:      z.string().optional(),
-    name:     z.string().min(2),
-    quantity: z.coerce.number().min(1),
-    notes:    z.string().optional(),
-  })).min(1),
-  message: z.string().optional(),
+    sku:      z.string().trim().max(80).optional(),
+    name:     text(2, 200),
+    quantity: z.coerce.number().int().min(1).max(9999),
+    notes:    z.string().trim().max(500).optional(),
+  })).min(1).max(30),
+  message: z.string().trim().max(4000).optional(),
 });
 
 export async function POST(req: Request) {
@@ -28,6 +29,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Demasiadas solicitudes. Intenta en unos minutos o escríbenos por WhatsApp." }, { status: 429 });
   }
 
+  if (bodyTooLarge(req, 64 * 1024)) {
+    return NextResponse.json({ error: "La solicitud es demasiado grande" }, { status: 413 });
+  }
   let payload: unknown;
   try {
     payload = await req.json();

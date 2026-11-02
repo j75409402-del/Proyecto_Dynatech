@@ -9,6 +9,14 @@
 
 const hits = new Map<string, number[]>();
 
+/** true si Content-Length declara un cuerpo mayor que el tope. Sin cabecera, no bloquea. */
+export function bodyTooLarge(req: Request, maxBytes: number): boolean {
+  const raw = req.headers.get("content-length");
+  if (!raw) return false;
+  const size = Number(raw);
+  return !Number.isFinite(size) || size < 0 || size > maxBytes;
+}
+
 export function clientIp(req: Request): string {
   const fwd = req.headers.get("x-forwarded-for");
   return (fwd?.split(",")[0] ?? req.headers.get("x-real-ip") ?? "desconocida").trim();

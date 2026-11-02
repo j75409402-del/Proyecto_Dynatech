@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createServiceClient } from "@/lib/supabase/server";
-import { badOrigin, clientIp, rateLimited } from "@/lib/antispam";
+import { badOrigin, bodyTooLarge, clientIp, rateLimited } from "@/lib/antispam";
 
 /**
  * Prepara la subida de un adjunto (plano, foto o PDF) del formulario de cotización.
@@ -36,6 +36,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Demasiados archivos. Intenta en unos minutos." }, { status: 429 });
   }
 
+  if (bodyTooLarge(req, 8 * 1024)) {
+    return NextResponse.json({ error: "Datos del archivo inválidos" }, { status: 413 });
+  }
   let payload: unknown;
   try {
     payload = await req.json();
