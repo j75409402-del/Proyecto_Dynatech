@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeHero, OfertasClave, LineIndex, AplicacionesHome, ServiciosHome } from "@/components/home/HomeSections";
+import { HomeHero, OfertasClave, CilindrosBand, LineIndex, AplicacionesHome, ServiciosHome } from "@/components/home/HomeSections";
 import { ComoTrabajamos, AntesDespues, TrabajosTaller } from "@/components/home/IndustrialSections";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 import { QuoteCTA } from "@/components/cta/QuoteCTA";
@@ -44,6 +44,7 @@ export default function HomePage() {
     <>
       <HomeHero />
       <OfertasClave />
+      <CilindrosBand />
       <ServiciosHome />
       <AplicacionesHome />
       <LineIndex />

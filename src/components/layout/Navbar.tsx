@@ -143,7 +143,9 @@ export function Navbar() {
               {/* Panel (pt-4 deja un "puente" para que el hover no se corte al bajar el mouse) */}
               <div
                 id="menu-soluciones"
-                hidden={!menuOpen}
+                data-open={menuOpen}
+                inert={!menuOpen}
+                aria-hidden={!menuOpen}
                 className="absolute left-1/2 top-full z-50 w-[min(1080px,calc(100vw-2rem))] -translate-x-1/2 pt-3"
               >
                 <div className="mega mega-portal">

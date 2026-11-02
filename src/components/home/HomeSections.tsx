@@ -8,6 +8,33 @@ import { SITE } from "@/lib/constants";
 import { whatsappCylinderService, whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 import { quoteHref } from "@/components/cta/QuoteCTA";
 
+export function CilindrosBand() {
+  return (
+    <section className="cyl-band" aria-labelledby="cyl-band-title">
+      <div className="cyl-band-air" aria-hidden="true" />
+      <div className="container-max cyl-band-inner">
+        <div>
+          <p className="hero-kicker">Taller</p>
+          <h2 id="cyl-band-title">Cilindros neumáticos</h2>
+          <p>Fabricación y reparación.</p>
+          <ul>
+            <li>Foto, placa o plano.</li>
+            <li>Milímetros o pulgadas.</li>
+            <li>Prueba antes de entregar.</li>
+          </ul>
+          <a href={whatsappCylinderService()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6" data-fab-hide="">
+            <WhatsAppIcon className="h-5 w-5" />
+            Cotizar por WhatsApp
+          </a>
+        </div>
+        <figure>
+          <Image src="/cilindros/trabajo-real-cilindros-dynatech-recorte.jpg" alt="Cilindros neumáticos fabricados por Dynatech junto a la muestra que sirvió de referencia" width={915} height={549} sizes="(max-width: 1023px) 100vw, 46vw" />
+        </figure>
+      </div>
+    </section>
+  );
+}
+
 export function ServiciosHome() {
   const items = [
     { title: "Reparación de cilindros", text: "Fugas, desgaste o golpes.", href: "/servicios", quote: whatsappService("neumatico-reparar") },
@@ -51,6 +78,11 @@ export function HomeHero() {
   return (
     <section className="hero" aria-labelledby="home-hero-title">
       <figure className="hero-media">
+        <svg className="hero-flow" viewBox="0 0 800 500" aria-hidden="true">
+          <path d="M-20 360 C 160 300, 280 420, 460 340 S 760 220, 840 280" />
+          <path d="M-20 220 C 180 160, 320 260, 520 190 S 780 80, 860 140" />
+          <path d="M40 460 C 220 400, 360 480, 560 410 S 820 320, 900 360" />
+        </svg>
         <Image
           src="/cilindros/trabajo-real-cilindros-dynatech-recorte.jpg"
           alt="Cilindros neumáticos fabricados por Dynatech junto a la muestra que sirvió de referencia"
