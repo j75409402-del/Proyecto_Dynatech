@@ -1,10 +1,12 @@
 # Solicitudes por correo — 2 de octubre de 2026
 
+> 2-nov-2026: el correo comercial público es `dynatechventas01@outlook.com`. Pie, portada, contacto y páginas legales enlazan a `/correo` (no a un mailto directo). `/correo` responde 307 con asunto `Cotización desde dynatech.com.do – <pieza, línea o página>` y cuerpo `Enviado desde: <página>`, más los campos Empresa, Pieza/modelo y Cantidad. El registro (`channel=email` en `whatsapp_clicks` y el evento `email_click` de Vercel) no retrasa esa redirección. La migración no está aplicada. `LEAD_NOTIFY_EMAIL` y `NEXT_PUBLIC_CONTACT_EMAIL` en Vercel no se modificaron en este cambio.
+
 ## Comportamiento preparado
 
-El botón «Cotizar por correo» de los bloques QuoteCTA abre `/cotizacion/correo`. Conserva la línea y el elemento solicitados mediante `tipo` y `nombre`. Reutiliza QuoteForm y `/api/cotizacion`: primero guarda la solicitud y después envía un aviso a `dynatechsrl@outlook.com`. Incluye empresa, contacto, teléfono, RNC cuando exista, artículos, cantidades, notas y enlaces de adjuntos. Reply-To permite responder al correo del cliente validado por la API.
+El botón «Cotizar por correo» de los bloques QuoteCTA abre `/cotizacion/correo`. Conserva la línea y el elemento solicitados mediante `tipo` y `nombre`. Reutiliza QuoteForm y `/api/cotizacion`: primero guarda la solicitud y después envía un aviso a `dynatechventas01@outlook.com`. Incluye empresa, contacto, teléfono, RNC cuando exista, artículos, cantidades, notas y enlaces de adjuntos. Reply-To permite responder al correo del cliente validado por la API.
 
-La ruta `/cotizacion` y los botones de WhatsApp conservan su comportamiento. Los enlaces de correo de contacto general siguen siendo mailto. No se modifican APIs ni payloads de webhooks, bot de WhatsApp, DNS web, imágenes, catálogo, dependencias ni cron.
+La ruta `/cotizacion` y los botones de WhatsApp conservan su comportamiento. Desde el 2-nov-2026 los enlaces de correo de contacto general pasan por `/correo`. No se modifican APIs ni payloads de webhooks, bot de WhatsApp, DNS web, imágenes, catálogo, dependencias ni cron.
 
 ## Configuración aplicada con autorización del propietario
 
@@ -20,7 +22,7 @@ DNS en MiDominio.do, añadidos sin reemplazar registros:
 
 TTL: 7200, mínimo admitido por el proveedor. No se añadió DMARC opcional ni se modificaron los A de Vercel o el TXT de Google.
 
-Variables de producción en Vercel: `LEAD_NOTIFY_EMAIL=dynatechsrl@outlook.com`, `RESEND_FROM=Dynatech Web <web@dynatech.com.do>` y `RESEND_API_KEY` como Secret. El remitente es una identidad técnica de envío, no un nuevo buzón de recepción ni un reemplazo del correo comercial público.
+Variables de producción en Vercel: `LEAD_NOTIFY_EMAIL` (debe coincidir con el correo comercial público `dynatechventas01@outlook.com`; el secreto no se cambió el 2-nov-2026), `RESEND_FROM=Dynatech Web <web@dynatech.com.do>` y `RESEND_API_KEY` como Secret. El remitente es una identidad técnica de envío, no un buzón de recepción ni un reemplazo del correo comercial público.
 
 Las nuevas variables requieren despliegue para entrar en vigor. Base del trabajo: commit de producción `73c09562662be534707745b9bb076f5c3c327eb2`, rama local `codex/correo-solicitudes-20261002`, sin incorporar cambios no relacionados de otras copias. Publicación pendiente de autorización conforme a AGENTS.md.
 

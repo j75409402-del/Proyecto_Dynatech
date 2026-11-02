@@ -80,7 +80,7 @@ try {
   // Dos teléfonos de llamadas (15-oct-2026): principal y 809-854-2800.
   assert.deepEqual(await page.locator('main a[href^="tel:"]').evaluateAll(as => as.map(a => a.getAttribute('href'))), ['tel:+18092844336', 'tel:+18098542800']);
   await page.locator('main a[href^="tel:"]').first().click();
-  await page.locator('main a[href^="mailto:"]').click();
+  await page.locator('main').getByRole('link', { name: 'dynatechventas01@outlook.com' }).click();
   assert.deepEqual(await page.evaluate(() => window.dataLayer.map(e => e.event)), ['phone_click', 'email_click']);
   // AP-004: sin formulario de cotización compitiendo con WhatsApp.
   await page.goto(base + '/mecanizado');

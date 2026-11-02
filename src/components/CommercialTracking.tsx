@@ -24,8 +24,8 @@ function analyticsOff() {
   try { return localStorage.getItem("dynatech.analytics-consent.v1") === "rejected"; } catch { return false; }
 }
 
-/** Evento whatsapp_click de Vercel Web Analytics. No incluye el mensaje ni datos de contacto. */
-function trackWhatsappClick(props: Record<string, string | undefined>) {
+/** Evento de Vercel Web Analytics. No incluye el mensaje, el cuerpo del correo ni datos de contacto. */
+function trackVercelClick(name: "whatsapp_click" | "email_click", props: Record<string, string | undefined>) {
   if (process.env.NEXT_PUBLIC_DISABLE_ANALYTICS === "1" || analyticsOff()) return;
   if (window.location.pathname.startsWith("/admin")) return;
   const data: Record<string, string> = {};
@@ -33,13 +33,13 @@ function trackWhatsappClick(props: Record<string, string | undefined>) {
     const clean = cleanText(value, 80);
     if (clean) data[key] = clean;
   }
-  try { track("whatsapp_click", data); } catch { /* el clic no espera a la analítica */ }
+  try { track(name, data); } catch { /* el clic no espera a la analítica */ }
 }
 
 /** Deja en el enlace la página de origen y las UTM de la visita, también sin esperar al clic. */
-function decorateCotizacion(element: HTMLAnchorElement) {
+function decorateMeasured(element: HTMLAnchorElement, pathname: "/cotizacion" | "/correo") {
   const url = new URL(element.href, window.location.href);
-  if (url.origin !== window.location.origin || url.pathname !== "/cotizacion") return null;
+  if (url.origin !== window.location.origin || url.pathname !== pathname) return null;
   const utm = { ...storedUtm() };
   for (const key of UTM_KEYS) {
     const value = url.searchParams.get(key);
@@ -56,7 +56,11 @@ function decorateCotizacion(element: HTMLAnchorElement) {
 export function CommercialTracking() {
   useEffect(() => {
     rememberUtm();
-    document.querySelectorAll("a[href]").forEach((node) => { if (node instanceof HTMLAnchorElement) decorateCotizacion(node); });
+    document.querySelectorAll("a[href]").forEach((node) => {
+      if (!(node instanceof HTMLAnchorElement)) return;
+      decorateMeasured(node, "/cotizacion");
+      decorateMeasured(node, "/correo");
+    });
     function onClick(event: MouseEvent) {
       const element = event.target instanceof Element ? event.target.closest("a[href]") : null;
       if (!(element instanceof HTMLAnchorElement)) return;
@@ -64,7 +68,7 @@ export function CommercialTracking() {
       const placement = element.closest("header") ? "header" : element.closest("footer") ? "footer" : "content";
       if (url.origin === window.location.origin && url.pathname === "/cotizacion") {
         // Contexto para la medición en servidor: página de origen, UTM y preferencia de privacidad.
-        const decorated = decorateCotizacion(element);
+        const decorated = decorateMeasured(element, "/cotizacion");
         const current = decorated?.url ?? url;
         const utm = decorated?.utm ?? storedUtm();
         const item = cleanText(current.searchParams.get("item"));
@@ -74,7 +78,7 @@ export function CommercialTracking() {
         const svc = isQuoteService(svcParam) ? svcParam : null;
         const extra: CommercialExtra = { source_page: window.location.pathname, product: productFor(item, linea, window.location.pathname, tpl, svc), ...(svc ? { service: svc } : {}), ...(linea ? { line: linea } : {}), ...utm };
         trackCommercialEvent("quote_whatsapp_click", "whatsapp", placement, extra);
-        trackWhatsappClick({
+        trackVercelClick("whatsapp_click", {
           source_page: window.location.pathname,
           item: item ? slug(item) : undefined,
           linea: linea ? slug(linea) : undefined,
@@ -84,14 +88,30 @@ export function CommercialTracking() {
           utm_medium: utm.utm_medium,
           utm_campaign: utm.utm_campaign,
         });
+      } else if (url.origin === window.location.origin && url.pathname === "/correo") {
+        const decorated = decorateMeasured(element, "/correo");
+        const current = decorated?.url ?? url;
+        const utm = decorated?.utm ?? storedUtm();
+        const item = cleanText(current.searchParams.get("item"));
+        const linea = cleanText(current.searchParams.get("linea"));
+        trackCommercialEvent("email_click", "email", placement, { source_page: window.location.pathname, ...(item ? { product: slug(item) } : {}), ...(linea ? { line: linea } : {}), ...utm });
+        trackVercelClick("email_click", {
+          source_page: window.location.pathname,
+          item: item ? slug(item) : undefined,
+          linea: linea ? slug(linea) : undefined,
+          utm_source: utm.utm_source,
+          utm_medium: utm.utm_medium,
+          utm_campaign: utm.utm_campaign,
+        });
       } else if (url.protocol === "https:" && url.hostname === "wa.me") {
         const utm = storedUtm();
         trackCommercialEvent("whatsapp_click", "whatsapp", placement, { source_page: window.location.pathname, ...utm });
-        trackWhatsappClick({ source_page: window.location.pathname, utm_source: utm.utm_source, utm_medium: utm.utm_medium, utm_campaign: utm.utm_campaign });
+        trackVercelClick("whatsapp_click", { source_page: window.location.pathname, utm_source: utm.utm_source, utm_medium: utm.utm_medium, utm_campaign: utm.utm_campaign });
       } else if (url.protocol === "tel:") {
         trackCommercialEvent("phone_click", "phone", placement);
       } else if (url.protocol === "mailto:") {
         trackCommercialEvent("email_click", "email", placement);
+        trackVercelClick("email_click", { source_page: window.location.pathname });
       }
     }
     // auxclick: clic central / abrir en pestaña nueva también lleva origen y UTM.
