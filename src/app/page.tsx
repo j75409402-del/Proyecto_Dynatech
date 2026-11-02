@@ -6,15 +6,17 @@ import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { CONTACT } from "@/lib/constants";
 import { whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 
+const TITLE = "Proveedor industrial en República Dominicana: cilindros neumáticos, control, gabinetes, sensores, instrumentación y resistencias · Dynatech";
+const DESCRIPTION =
+  "Suplidor industrial en Santo Domingo. Cilindros neumáticos, válvulas, FRL y mangueras; control eléctrico, gabinetes, sensores, instrumentación y resistencias. Cotiza por WhatsApp.";
+
 export const metadata: Metadata = {
-  title: "Suministros industriales para empresas en República Dominicana",
-  description:
-    "Suministro industrial bajo cotización y pedido para empresas y zonas francas en República Dominicana. Neumática, control, sensores e instrumentación.",
+  title: { absolute: TITLE },
+  description: DESCRIPTION,
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Suministros industriales para empresas en República Dominicana",
-    description:
-      "Componentes industriales para Compras, Mantenimiento e Ingeniería. Explora el catálogo y solicita tu cotización por WhatsApp.",
+    title: TITLE,
+    description: DESCRIPTION,
     url: "/",
     images: [{
       url: "/hero/suministro-industrial.jpg",
@@ -34,7 +36,8 @@ const FAQS: Faq[] = [
   { q: "¿Cilindros?", a: "Neumáticos e hidráulicos. Fabricamos y reparamos." },
   { q: "¿Mecanizado?", a: "Torno y fresadora. Plano o muestra." },
   { q: "¿Zonas francas?", a: "Sí. Empresas y zonas francas en el país." },
-  { q: "¿Qué suministran?", a: "Neumática, control, sensores, instrumentación y resistencias." },
+  { q: "¿Qué suministran?", a: "Cilindros neumáticos, válvulas, unidades FRL, conexiones y mangueras; control eléctrico, gabinetes, sensores, instrumentación y resistencias. También fabricamos y reparamos cilindros, y mecanizamos en torno y fresadora." },
+  { q: "¿Cuánto tarda la entrega?", a: "Entrega inmediata cuando hay existencia, o importación cuando no está en el país; disponibilidad y plazo se confirman en la cotización." },
   { q: "¿Instalan o programan?", a: "No. En esas líneas solo suministramos." },
   { q: "¿Dónde y cuándo?", a: `${CONTACT.address}. ${CONTACT.hours.replace(/ · /g, " ")}.` },
 ];

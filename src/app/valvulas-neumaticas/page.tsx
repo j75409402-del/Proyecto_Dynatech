@@ -3,18 +3,19 @@ import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid } from "@/components/page/Blocks";
-import { CONTACT, SITE } from "@/lib/constants";
-import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
+import { SITE } from "@/lib/constants";
+import { FaqBlock } from "@/components/page/FaqBlock";
+import { ENTREGA } from "@/lib/entrega";
 import { getSolucion } from "@/lib/soluciones";
 import { whatsappService } from "@/lib/whatsapp";
 
 const neumatica = getSolucion("neumatica");
 const sub = neumatica.subcategorias.find((item) => item.id === "valvulas")!;
-const title = "Válvulas neumáticas en República Dominicana";
-const description = "Válvulas neumáticas direccionales y solenoides en Santo Domingo. Cotiza con Dynatech enviando referencia, foto, conexiones y datos de tu aplicación.";
+const title = "Proveedor de válvulas neumáticas en República Dominicana · Dynatech";
+const description = "Suplidor de válvulas neumáticas y electroválvulas en Santo Domingo: direccionales y solenoides 2/2, 3/2, 5/2 y 5/3. Originales Festo y SMC por código.";
 
 export const metadata: Metadata = {
-  title,
+  title: { absolute: title },
   description,
   alternates: { canonical: "/valvulas-neumaticas" },
   openGraph: { title, description, url: "/valvulas-neumaticas", images: [sub.image!] },
@@ -53,7 +54,7 @@ export default function ValvulasNeumaticasPage() {
         crumbs={[{ label: "Neumática", href: "/neumatica" }, { label: "Válvulas neumáticas" }]}
         kicker="Neumática industrial · Válvulas"
         title="Válvulas neumáticas direccionales y solenoides"
-        lead={<p>Cotiza válvulas para controlar el paso del aire en tus equipos. Recibimos solicitudes de empresas y zonas francas en República Dominicana desde Santo Domingo.</p>}
+        lead={<p>Dynatech Ingeniería SRL es un suplidor de válvulas neumáticas en Santo Domingo: direccionales y solenoides (electroválvulas) 2/2, 3/2, 5/2 y 5/3, para empresas y zonas francas. También piezas originales Festo y SMC por código. Cotizas por WhatsApp con el código o una foto.</p>}
         quoteHref={whatsappService("componente", sub.title)}
         secondary={{ href: "#tipos", label: "Ver catálogo de la línea" }}
         note="Envía el código o una foto de la etiqueta. Si no lo tienes, una foto de la válvula y sus conexiones basta para empezar."
@@ -80,7 +81,12 @@ export default function ValvulasNeumaticasPage() {
         note={`Atención por WhatsApp: ${shortHours()}.`}
       />
 
-      <FaqBlock items={landingFaqs({ name: "Válvulas neumáticas", datos: information.map((i) => i.title), address: CONTACT.address, hours: CONTACT.hours })} kicker="Preguntas frecuentes" title="Sobre válvulas neumáticas" tone="light" />
+      <FaqBlock items={[
+        { q: "¿Dynatech vende electroválvulas en RD?", a: "Sí. Válvulas solenoides y direccionales 2/2, 3/2, 5/2 y 5/3, bajo cotización desde Santo Domingo." },
+        { q: "¿Consiguen válvulas originales Festo o SMC?", a: "Sí. Suministramos piezas originales Festo y SMC, y de otras marcas, bajo pedido por código." },
+        { q: "¿Cuánto tarda la entrega?", a: ENTREGA },
+        { q: "¿Instalan o programan?", a: "No. En neumática solo suministramos." },
+      ]} kicker="Preguntas frecuentes" title="Sobre válvulas neumáticas" tone="light" />
 
       <RelatedGrid
         kicker="Tu sistema neumático"

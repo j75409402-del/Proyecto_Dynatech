@@ -9,12 +9,13 @@ import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { Band, SectionHead, OfferGrid, QuoteButton } from "@/components/page/Blocks";
 import { CylinderRelated } from "@/components/industrial/CylinderRelated";
+import { ENTREGA } from "@/lib/entrega";
 
 export const metadata: Metadata = {
   ...commercialMetadata("Sellos y componentes para cilindros neumáticos", "Cotiza kits de sellos, vástagos y componentes bajo medida para cilindros neumáticos en República Dominicana.", "/sellos-y-componentes"),
-  title: "Sellos y componentes para cilindros neumáticos",
+  title: { absolute: "Proveedor de sellos para cilindros neumáticos en República Dominicana · Dynatech" },
   description:
-    "Kits de sellos, vástagos y barras cromadas, y componentes bajo medida para cilindros neumáticos. Cotiza con el código, una foto o la muestra.",
+    "Suplidor de kits de sellos, vástagos y componentes bajo medida para cilindros neumáticos en Santo Domingo. Cotiza con código, foto o muestra.",
   alternates: { canonical: "/sellos-y-componentes" },
 };
 
@@ -63,7 +64,7 @@ export default function SellosYComponentesPage() {
         crumbs={[{ label: "Sellos y componentes" }]}
         kicker="Repuestos para cilindros neumáticos"
         title={<>Kits de sellos y componentes <span className="text-signal">para cilindros neumáticos</span></>}
-        lead={<p>Kits de sellos, vástagos y barras cromadas, y componentes bajo medida. Envíanos el código, una foto o la muestra y te cotizamos.</p>}
+        lead={<p>Dynatech Ingeniería SRL es un suplidor de kits de sellos, vástagos cromados y componentes bajo medida para cilindros neumáticos en República Dominicana. Envíanos el código, una foto o la muestra y te cotizamos.</p>}
         quoteHref={quoteHref("Kits de sellos")}
         secondary={{ href: "#medidas", label: "Ver qué medidas enviar" }}
         note="Indica si tus medidas son en mm o en pulgadas, y la cantidad."
@@ -97,7 +98,7 @@ export default function SellosYComponentesPage() {
 
       <CylinderRelated current="/sellos-y-componentes" />
 
-      <FaqBlock items={landingFaqs({ name: "Sellos y componentes", datos: MEDIDAS.map((m) => `${m.pieza}: ${m.minimo.charAt(0).toLowerCase()}${m.minimo.slice(1).replace(/\.$/, "")}`), address: CONTACT.address, hours: CONTACT.hours })} kicker="Preguntas frecuentes" title="Sobre sellos y componentes" tone="light" />
+      <FaqBlock items={[...landingFaqs({ name: "Sellos y componentes", datos: MEDIDAS.map((m) => `${m.pieza}: ${m.minimo.charAt(0).toLowerCase()}${m.minimo.slice(1).replace(/\.$/, "")}`), address: CONTACT.address, hours: CONTACT.hours }), { q: "¿Cuánto tarda la entrega?", a: ENTREGA }]} kicker="Preguntas frecuentes" title="Sobre sellos y componentes" tone="light" />
 
       <QuoteCTA
         eyebrow="Sellos · Vástagos · Componentes"

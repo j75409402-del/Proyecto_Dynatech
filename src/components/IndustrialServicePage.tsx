@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { TallerGallery } from "@/components/industrial/TallerGallery";
 import { CONTACT, SITE } from "@/lib/constants";
 import { FaqBlock, landingFaqs } from "@/components/page/FaqBlock";
+import { ENTREGA } from "@/lib/entrega";
 import { SERVICIOS_ADICIONALES } from "@/lib/servicios";
 import { whatsappService } from "@/lib/whatsapp";
 
@@ -114,7 +115,7 @@ export function IndustrialServicePage({ service: s }: { service: Service }) {
         </Reveal>
       </Band>
 
-      <FaqBlock items={landingFaqs({ name: s.name, datos: s.information, referencePhotos: false, address: CONTACT.address, hours: CONTACT.hours })} kicker={`${n(4)} · Preguntas frecuentes`} title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
+      <FaqBlock items={[...landingFaqs({ name: s.name, datos: s.information, referencePhotos: false, address: CONTACT.address, hours: CONTACT.hours }), { q: "¿Cuánto tarda la entrega?", a: ENTREGA }]} kicker={`${n(4)} · Preguntas frecuentes`} title={`Sobre ${s.name.toLowerCase()}`} tone="light" />
 
       <RelatedGrid kicker="Relacionado" title="Otros servicios del taller" id="servicio-relacionado" items={related} />
 

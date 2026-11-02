@@ -12,13 +12,14 @@ import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
 import { CylinderRelated } from "@/components/industrial/CylinderRelated";
 import { RealWorkPhoto } from "@/components/industrial/RealWorkPhoto";
 import { CONTACT, SITE } from "@/lib/constants";
+import { ENTREGA } from "@/lib/entrega";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 
 export const metadata: Metadata = {
   ...commercialMetadata("Cilindros neumáticos en República Dominicana", "Fabricación de cilindros neumáticos a la medida bajo cotización. Comparte plano, muestra o medidas para tu solicitud.", "/cilindros-neumaticos"),
-  title: "Cilindros neumáticos a la medida",
+  title: { absolute: "Proveedor de cilindros neumáticos en República Dominicana · Dynatech" },
   description:
-    "Fabricación de cilindros neumáticos a la medida en RD: doble y simple efecto, compactos, ISO y especiales, en mm o pulgadas. Cotiza con plano o muestra.",
+    "Suplidor de cilindros neumáticos en Santo Domingo: doble y simple efecto, compactos e ISO, y a la medida. También reparación en el taller. Originales Festo y SMC por código.",
   alternates: { canonical: "/cilindros-neumaticos" },
 };
 
@@ -50,6 +51,8 @@ const FAQS: Faq[] = [
   { q: "¿Pueden fabricarlo si el original ya no se consigue?", a: "Sí. Fabricamos cilindros completos a medida, incluso cuando el original ya no está disponible." },
   { q: "¿Y si mi cilindro está dañado?", a: "Lo reparamos o reconstruimos: desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar. Ver la página de reparación de cilindros." },
   { q: "¿Atienden empresas y zonas francas?", a: "Sí. Atendemos solicitudes de empresas del sector privado y de zonas francas en República Dominicana." },
+  { q: "¿Consiguen cilindros originales Festo o SMC?", a: "Sí. Suministramos piezas originales Festo y SMC, y de otras marcas, bajo pedido por código." },
+  { q: "¿Cuánto tarda la entrega?", a: ENTREGA },
   { q: "¿Dónde están y en qué horario atienden?", a: `En ${CONTACT.address}. Horario: ${CONTACT.hours.replace(/ · /g, " ")}.` },
 ];
 

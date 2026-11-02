@@ -88,7 +88,7 @@ export const SERVICIOS_ADICIONALES = [
     /** H1 corto (el title SEO no cambia). */
     h1: "Cilindros hidráulicos",
     description: "Reparación y fabricación de cilindros hidráulicos en República Dominicana. Envía fotos, plano o muestra por WhatsApp y te cotizamos.",
-    intro: "Reparación y fabricación. Plano, foto o muestra.",
+    intro: "Dynatech Ingeniería SRL fabrica y repara cilindros hidráulicos en República Dominicana. Plano, foto o muestra.",
     lead: "Fotos del cilindro o el plano.",
     situations: ["Reparar un cilindro hidráulico", "Fabricar un cilindro hidráulico"],
     situationDescs: ["Cuéntanos qué falla y envía fotos del cilindro completo, sus conexiones y puntos de montaje.", "Envía el plano, la muestra o las medidas con sus unidades, y para qué equipo es."],
@@ -103,7 +103,7 @@ export const SERVICIOS_ADICIONALES = [
     title: "Mecanizado industrial en República Dominicana",
     h1: "Mecanizado de piezas",
     description: "Mecanizado de piezas con torno y fresadora bajo plano o muestra en Santo Domingo, República Dominicana. Envía el plano o fotos de la pieza por WhatsApp y te cotizamos.",
-    intro: "Torno y fresadora. Plano o muestra.",
+    intro: "Dynatech Ingeniería SRL mecaniza piezas en República Dominicana con torno y fresadora. Plano o muestra.",
     lead: "Plano, o fotos con una referencia de tamaño.",
     situations: ["Tengo el plano", "Tengo la pieza o una muestra"],
     situationDescs: ["Envía el plano en PDF o una foto legible, con medidas y unidades; material y tolerancias, si están definidos, y la cantidad.", "Envía fotos de la pieza junto a una regla o cinta métrica y cuéntanos qué función cumple. Si hace falta la muestra física, te lo decimos."],
