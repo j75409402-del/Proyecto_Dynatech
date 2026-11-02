@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { SITE, CONTACT, ANALYTICS, PUBLIC_LOCATION } from "@/lib/constants";
 import { CommercialTracking } from "@/components/CommercialTracking";
 import { CookielessAnalytics } from "@/components/CookielessAnalytics";
+import { VercelWebAnalytics } from "@/components/VercelWebAnalytics";
 import { MobileQuoteFab } from "@/components/layout/MobileQuoteFab";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import "./globals.css";
@@ -95,6 +96,7 @@ export default function RootLayout({
         />
         <CommercialTracking />
         <CookielessAnalytics websiteId={ANALYTICS.umamiWebsiteId} scriptUrl={ANALYTICS.umamiScriptUrl} />
+        <VercelWebAnalytics />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

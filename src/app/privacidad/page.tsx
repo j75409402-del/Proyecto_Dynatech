@@ -10,7 +10,7 @@ export default function PrivacidadPage() {
     <LegalPage
       eyebrow="Legal"
       title="Política de privacidad"
-      updated="octubre 2026"
+      updated="noviembre 2026"
       intro={`Este es un documento de referencia general — si tu empresa requiere una versión revisada por asesoría legal, contáctanos y la actualizamos. En Dynatech Ingeniería SRL ("Dynatech", "nosotros") respetamos la privacidad de quienes visitan ${SITE.url} y usan nuestros formularios de cotización y contacto.`}
       sections={[
         {
@@ -79,8 +79,15 @@ export default function PrivacidadPage() {
               clics en WhatsApp, teléfono, correo o solicitudes enviadas. Esta medición no usa
               cookies de analítica ni seguimiento entre sitios. No enviamos nombres, correos,
               teléfonos, mensajes, adjuntos ni contenidos de formularios al panel.
+              El clic que abre la cotización por WhatsApp también puede guardarse en nuestra
+              base: la página de origen, la campaña (utm_source, utm_medium y utm_campaign),
+              la página de referencia sin parámetros y los primeros caracteres del navegador.
+              No guardamos la dirección IP, el mensaje de WhatsApp ni datos de contacto.
+              Si activamos Vercel Web Analytics, cuenta las páginas vistas y el evento
+              whatsapp_click con la misma regla: sin cookies de analítica y sin datos personales.
               Umami procesa datos técnicos de navegación para ofrecer estadísticas; el servicio
               está alojado en Estados Unidos y este plan conserva las estadísticas durante seis meses.
+              Vercel también procesa esa medición en Estados Unidos cuando el panel está activo.
               No activamos publicidad ni grabaciones de sesiones. Respetamos la señal
               «No rastrear» del navegador y el rechazo de analítica guardado anteriormente.
               Las cookies técnicas necesarias para el funcionamiento son independientes.

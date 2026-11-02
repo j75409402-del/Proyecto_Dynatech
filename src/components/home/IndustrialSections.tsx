@@ -28,7 +28,7 @@ export function CilindrosDestacados() {
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
           <Link href="/cilindros-neumaticos" className="cyl-preview group" aria-label="Explorar el cilindro neumático en 3D: piezas y funciones">
             <span className="cyl-preview-stage">
-              <Image src="/banners/cilindros-taller-wide.webp" alt="" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover" />
+              <Image src="/banners/cilindros-taller-wide.webp" alt="Imagen de referencia: cilindro neumático con sus componentes sobre el banco" fill sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover" />
               <span className="img-note">Imagen de referencia</span>
               <span className="cyl-preview-badge"><Box className="h-4 w-4" aria-hidden="true" />Visor 3D</span>
             </span>

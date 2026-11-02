@@ -5,7 +5,7 @@ Decisión del dueño: el prospecto va **directo a WhatsApp Business** (+1 809-28
 ## Flujo
 1. Todos los CTA de cotización enlazan a `/cotizacion?item=…&linea=…&tpl=…` (`quoteHref`, `whatsappGeneral`, `whatsappCylinderService`, `whatsappSolucion` → `src/lib/quote.ts`).
 2. Al hacer clic, `CommercialTracking` añade `from=<página>`, las UTM de la sesión y `nt=1` si la analítica está rechazada/DNT; publica `quote_whatsapp_click` en `dataLayer` (para GTM/GA4 futuro).
-3. `src/app/cotizacion/page.tsx` (servidor) arma el mensaje precargado, registra `quote_whatsapp_click` en Umami vía `after()` (no retrasa al usuario) y redirige 307 a `https://wa.me/18092844336?text=…`.
+3. `src/app/cotizacion/page.tsx` (servidor) arma el mensaje precargado, registra el clic con `after()` (no retrasa al usuario) y redirige 307 a `https://wa.me/18092844336?text=…`. El registro es la fila `whatsapp_clicks` (Supabase, solo `service_role`) y, si hay ID de Umami, el evento `quote_whatsapp_click`.
 4. Sin JavaScript también funciona (redirección de servidor; origen por `Referer`, que los CTA internos envían porque usan `rel="noopener"` sin `noreferrer`). Clic central (`auxclick`) también añade origen/UTM.
 5. Envío a Umami (15-oct-2026, `src/lib/quote-event.ts`): límite de 8 s dentro de `after()`, sin retrasar la redirección. Cada fallo deja en los registros de Vercel una línea de error `quote_event_send_failed` con motivo, servicio, página y campaña, sin datos personales. Solo se reintenta una vez si la conexión falló antes de enviar, para no duplicar. Ver `docs/ads-atribucion/EVIDENCIA.md` §8.
 6. Limitaciones conocidas: peticiones HEAD de escáneres con agente de navegador y dobles clics cuentan; el envío servidor a Umami usa la IP del servidor (geografía/sesión aproximadas). Verificar en el panel de Umami tras el primer despliegue.
@@ -34,7 +34,25 @@ Todos invitan a empezar con una foto y piden como máximo dos datos; el resto se
 | `line` | `linea` si existe |
 | `utm_source/medium/campaign/term/content` | URL de /cotizacion o primera visita de la sesión |
 | `channel` | `whatsapp` |
-No se envían mensajes, teléfonos ni datos personales. No se mide con DNT, GPC, rechazo de analítica, bots ni prefetch del navegador. Umami cliente **no** recibe `quote_whatsapp_click` (evita doble conteo): la cifra oficial es la del servidor. Clics a `wa.me` directos (garantías, devoluciones, formulario de contacto) siguen como `whatsapp_click`.
+No se envían mensajes, teléfonos ni datos personales. No se mide con DNT, GPC, rechazo de analítica, bots ni prefetch del navegador. Umami cliente **no** recibe `quote_whatsapp_click` (evita doble conteo): la cifra oficial de Umami es la del servidor. Clics a `wa.me` directos (garantías, devoluciones, formulario de contacto) siguen como `whatsapp_click`.
+
+## Registro propio (`whatsapp_clicks`, 2-nov-2026)
+
+Migración `supabase/migrations/20261102042300_whatsapp_clicks.sql`. **No está aplicada** en producción. RLS activo, sin política de lectura, `INSERT` solo para `service_role`.
+
+| Columna | Qué guarda |
+|---|---|
+| `item`, `linea` | Slug del parámetro (máx. 60). Vacío → null |
+| `svc` | Clave conocida de `QUOTE_SERVICES`; cualquier otra se ignora |
+| `tpl` | `general`, `item`, `cilindro` o `solucion` |
+| `source_page` | `from` o, si no viene, la ruta del Referer del propio sitio |
+| `utm_source`, `utm_medium`, `utm_campaign` | De la URL de `/cotizacion` o, si faltan, del Referer interno |
+| `referrer` | Origen y ruta del Referer, sin query ni hash |
+| `user_agent` | Texto recortado a 200 caracteres |
+
+No hay columna de IP. El insert va en `after()`, con tope de 2 s y `try/catch`. Si faltan la URL o `SUPABASE_SERVICE_ROLE_KEY`, se omite en silencio. No hace falta una variable nueva.
+
+Los CTA internos siguen siendo `<a href="/cotizacion">`. Al cargar y al hacer clic, `CommercialTracking` añade `from` (la página) y las UTM de la sesión. En el mismo clic, si la analítica no está rechazada, `@vercel/analytics` envía `whatsapp_click` (slugs y UTM, sin el mensaje). `<Analytics />` no se monta cuando `NEXT_PUBLIC_DISABLE_ANALYTICS=1`. Hay que activar Web Analytics en el proyecto de Vercel para ver esas cifras.
 
 Reglas: enlazar `/cotizacion` siempre con `<a>`, nunca con `<Link>` (el prefetch de Next contaría clics). Para campañas usar `https://www.dynatech.com.do/cotizacion?item=…&utm_source=…&utm_medium=…&utm_campaign=…`.
 

@@ -1,3 +1,5 @@
+> **Medición de clics, 2-nov-2026 (rama `feat/p1-medicion-whatsapp`, sin publicar):** `/cotizacion` sigue respondiendo 307 a `wa.me/18092844336`. Si la visita se puede medir (no es bot, prefetch, DNT, GPC ni `nt=1`), `after()` inserta una fila en `whatsapp_clicks` y no espera el resultado. Tiempo límite 2 s. Si faltan `SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_URL` o `SUPABASE_SERVICE_ROLE_KEY`, no registra nada y la redirección sigue. No hay variable nueva. La migración `20261102042300_whatsapp_clicks.sql` está en el repo y **no se aplicó** a producción (`hkubisdxytxogadatlif`). `<Analytics />` envía el evento `whatsapp_click` en el clic del CTA; hay que activar Web Analytics en Vercel. No se guarda IP ni el mensaje.
+
 > **Publicado 15-oct-2026:** PR #3 en producción (merge `12b3b92`, contenido de `fb914a9`): conversión por WhatsApp, atribución de Google Ads («Vengo de un anuncio de Google» con `utm_source=google` + `utm_medium=cpc`), segundo teléfono de llamadas y foto real recortada. `taller-cilindros-neumaticos.jpg` está retocada con IA (confirmado por el dueño): no usarla. Pendiente técnico: diagnóstico de errores del envío a Umami desde el servidor. Evidencia: `docs/ads-atribucion/EVIDENCIA.md`.
 > **Segundo teléfono, 15-oct-2026 (confirmado por el dueño; rama `mejora/conversion-cotizacion-whatsapp`, pendiente de aprobación para publicar):** `CONTACT.phone2` = +1 (809) 854-2800, solo llamadas. Se muestra junto al principal en la barra superior, el menú móvil, el pie, /contacto y /nosotros (`CALL_PHONES`, `telHref()` en `src/lib/constants.ts`). WhatsApp y las cotizaciones siguen en +1 (809) 284-4336. El JSON-LD mantiene el teléfono principal.
 > **Atribución de Google Ads, 14-oct-2026 (rama `mejora/conversion-cotizacion-whatsapp`, pendiente de aprobación para publicar):** si la visita trae `utm_source=google` y `utm_medium=cpc`, `/cotizacion` añade «Vengo de un anuncio de Google» al mensaje de WhatsApp (también con la analítica rechazada, sin evento). El evento `quote_whatsapp_click` no cambia: conserva `service` y UTM. Ver `docs/WHATSAPP_COTIZACION.md`.
@@ -169,6 +171,7 @@ Ninguna página pública consulta Supabase al navegar.
 | `contact_messages` | Formulario de contacto | 0 filas |
 | `products` / `categories` / `product_variants` / `brands` | Catálogo viejo, **archivado**. No se muestra en la web. | 169 productos, 82 categorías |
 | `site_settings` | Solo la lee el cron keepalive | existe |
+| `whatsapp_clicks` | Clics de `/cotizacion` (sin IP ni datos personales). RLS activo, sin lectura pública, `INSERT` solo para `service_role`. | Migración en el repo; **no aplicada** a producción |
 
 - **Storage:** bucket `cotizacion-adjuntos`, **público**, límite 10 MB, tipos PNG/JPEG/WEBP/PDF. Se creó por API y no está en las migraciones. Vacío al 1-oct.
 - **Auth:** 1 usuario, `dynatechgerencia@outlook.com`. Los **registros públicos están ABIERTOS** (`disable_signup=false`). Lo tiene que cerrar el dueño en el panel de Supabase.
@@ -249,7 +252,7 @@ Si falla, ofrece WhatsApp.
 |---|---|---|
 | `NEXT_PUBLIC_SUPABASE_URL` / `SUPABASE_URL` | Conexión | Configurada (los formularios y el keepalive responden) |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` / `SUPABASE_ANON_KEY` | Clave pública | Configurada (la devuelve `/api/upload-adjunto`) |
-| `SUPABASE_SERVICE_ROLE_KEY` | Escrituras del servidor. **Secreta** | Configurada (el keepalive y las URLs firmadas funcionan) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Escrituras del servidor, incluido el insert de `whatsapp_clicks`. **Secreta**. No hay variable nueva para esa tabla. | Configurada (el keepalive y las URLs firmadas funcionan) |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER`, `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_CONTACT_PHONE` | Datos visibles | NO VERIFICADO si existen. Lo que se ve en producción coincide con los valores por defecto de `constants.ts` |
 | `NEXT_PUBLIC_SITE_URL` | Canonical, sitemap, JSON-LD | NO VERIFICADO. El canonical en producción sale `https://www.dynatech.com.do` (correcto) |
 | `QUOTE_WEBHOOK_URL`, `CONTACT_WEBHOOK_URL` | Webhooks | NO VERIFICADO |

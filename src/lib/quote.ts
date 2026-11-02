@@ -85,6 +85,45 @@ export const PRODUCT_BY_PATH: Record<string, string> = {
 
 export const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const;
 
+export type UtmKey = (typeof UTM_KEYS)[number];
+export type UtmParams = Partial<Record<UtmKey, string>>;
+
+/** UTM saneadas de una query. No incluye el resto de parámetros. */
+export function readUtm(params: URLSearchParams): UtmParams {
+  const out: UtmParams = {};
+  for (const key of UTM_KEYS) {
+    const value = cleanText(params.get(key), 80);
+    if (value) out[key] = value;
+  }
+  return out;
+}
+
+function ownHosts(extraHost?: string | null): Set<string> {
+  const own = new URL(SITE.url);
+  const hosts = new Set([own.hostname, own.hostname.replace(/^www\./, ""), "localhost", "127.0.0.1"]);
+  const extra = (extraHost ?? "").split(",")[0]?.trim().replace(/:\d+$/, "").toLowerCase() ?? "";
+  if (extra && /^[a-z0-9.-]+$/.test(extra)) hosts.add(extra);
+  return hosts;
+}
+
+/**
+ * Completa las UTM que no vengan en /cotizacion con las de un Referer del propio sitio
+ * (la visita aterrizó en otra página y el CTA no llegó a copiarlas). Un Referer externo no aporta UTM.
+ */
+export function mergeUtm(primary: UtmParams, referer: string | null | undefined, extraHost?: string | null): UtmParams {
+  const out: UtmParams = { ...primary };
+  if (!referer) return out;
+  try {
+    const url = new URL(referer);
+    if (!ownHosts(extraHost).has(url.hostname)) return out;
+    const extra = readUtm(url.searchParams);
+    for (const key of UTM_KEYS) if (!out[key] && extra[key]) out[key] = extra[key];
+  } catch {
+    /* Referer inválido */
+  }
+  return out;
+}
+
 /**
  * Atribución de Google Ads (aprobado por el dueño, 14-oct-2026; nota `claude/coordinacion-ads-web.md`).
  * Solo una visita con utm_source=google Y utm_medium=cpc es un clic de anuncio pagado: entonces el
@@ -102,13 +141,12 @@ export function cleanText(value: string | null | undefined, max = 90): string {
   return (value ?? "").replace(/[\u0000-\u001f\u007f<>]|\p{Cf}/gu, " ").replace(/\s+/g, " ").trim().slice(0, max);
 }
 
-/** Solo la ruta (sin query ni hash) y solo si es del propio sitio. */
-export function cleanPath(value: string | null | undefined): string {
+/** Solo la ruta (sin query ni hash) y solo si es del propio sitio. `extraHost` acepta el host de esta petición (vista previa). */
+export function cleanPath(value: string | null | undefined, extraHost?: string | null): string {
   if (!value) return "";
   try {
     const url = new URL(value, SITE.url);
-    const own = new URL(SITE.url);
-    if (url.hostname !== own.hostname && url.hostname !== own.hostname.replace(/^www\./, "") && !["localhost", "127.0.0.1"].includes(url.hostname)) return "";
+    if (!ownHosts(extraHost).has(url.hostname)) return "";
     return url.pathname.startsWith("/admin") ? "" : url.pathname.slice(0, 120);
   } catch {
     return "";

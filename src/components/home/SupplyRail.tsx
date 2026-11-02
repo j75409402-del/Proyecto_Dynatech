@@ -83,7 +83,7 @@ export function SupplyRail({ items }: { items: VitrinaItem[] }) {
           <li key={it.key}>
             <Link href={it.href} className="sx-card">
               <span className="sx-tile">
-                <Image src={it.image} alt="" fill sizes="(max-width: 639px) 42vw, (max-width: 1023px) 30vw, 180px" loading={i < 4 ? "eager" : "lazy"} className="object-contain" />
+                <Image src={it.image} alt={it.imageAlt} fill sizes="(max-width: 639px) 42vw, (max-width: 1023px) 30vw, 180px" loading={i < 4 ? "eager" : "lazy"} className="object-contain" />
               </span>
               <b>{it.title}</b>
               <small>Ver todo <ArrowUpRight className="inline h-3.5 w-3.5" aria-hidden="true" /></small>

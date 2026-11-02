@@ -394,6 +394,51 @@ export type Database = {
         }
         Relationships: []
       }
+      whatsapp_clicks: {
+        Row: {
+          created_at: string
+          id: string
+          item: string | null
+          linea: string | null
+          referrer: string | null
+          source_page: string | null
+          svc: string | null
+          tpl: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          item?: string | null
+          linea?: string | null
+          referrer?: string | null
+          source_page?: string | null
+          svc?: string | null
+          tpl?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          item?: string | null
+          linea?: string | null
+          referrer?: string | null
+          source_page?: string | null
+          svc?: string | null
+          tpl?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
