@@ -1,5 +1,4 @@
 import { CONTACT, SITE } from "@/lib/constants";
-import { cleanText } from "@/lib/quote";
 
 /** Asunto fijo: identifica el sitio y la pieza, la línea o la página. */
 const PAGE_LABEL: Record<string, string> = {
@@ -23,7 +22,19 @@ const PAGE_LABEL: Record<string, string> = {
   "/sensores": "Sensores",
   "/instrumentacion": "Instrumentación",
   "/resistencias-electricas": "Resistencias eléctricas",
+  "/breakers": "Breakers",
+  "/aplicaciones": "Aplicaciones",
 };
+
+/** Nombre visible de la página de origen. Vacío si no hay ruta. */
+export function pageLabel(sourcePage: string): string {
+  const path = sourcePage.split("?")[0].replace(/\/$/, "") || "/";
+  if (path === "/") return PAGE_LABEL["/"] ?? "Inicio";
+  if (PAGE_LABEL[path]) return PAGE_LABEL[path];
+  const slug = path.replace(/^\//, "").split("/")[0] ?? "";
+  if (!slug) return "Sitio";
+  return slug.replace(/-/g, " ").replace(/\b\p{L}/gu, (letter) => letter.toLocaleUpperCase("es"));
+}
 
 export function siteHost() {
   try {
@@ -33,23 +44,13 @@ export function siteHost() {
   }
 }
 
-/** Producto o línea si vienen en la URL; si no, el nombre de la página. */
-export function quoteTopic(item: string, linea: string, sourcePage: string) {
-  const product = cleanText(item, 80);
-  const line = cleanText(linea, 80);
-  if (product && line && line !== product) return `${product} / ${line}`.slice(0, 80);
-  if (product) return product;
-  if (line) return line;
-  if (PAGE_LABEL[sourcePage]) return PAGE_LABEL[sourcePage];
-  if (sourcePage && sourcePage !== "/") return sourcePage.slice(0, 80);
-  return "Contacto";
-}
-
 export function buildMailto(opts: { item?: string | null; linea?: string | null; sourcePage?: string | null }) {
   const sourcePage = opts.sourcePage || "";
-  const topic = quoteTopic(opts.item ?? "", opts.linea ?? "", sourcePage);
-  const page = sourcePage || "directo";
-  const subject = `Cotización desde ${siteHost()} – ${topic}`;
-  const body = `Enviado desde: ${page}\n\nEmpresa:\nPieza/modelo:\nCantidad:\n`;
+  const label = sourcePage ? pageLabel(sourcePage) : "Sitio";
+  const host = siteHost();
+  const subject = `Cotización – ${label} (web)`;
+  const body = label === "Sitio"
+    ? `Hola, vengo de ${host} y quiero cotizar:`
+    : `Hola, vengo de la página de ${label} en ${host} y quiero cotizar:`;
   return `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

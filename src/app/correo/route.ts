@@ -6,7 +6,7 @@ import { buildWhatsappClick, logWhatsappClick } from "@/lib/whatsapp-click";
 
 /**
  * /correo → mailto del correo comercial.
- * 1) Arma asunto y cuerpo (origen del sitio, página o pieza, campos en blanco).
+ * 1) Arma asunto «Cotización – <página> (web)» y un cuerpo que nombra esa página.
  * 2) Si la visita se puede medir, after() inserta whatsapp_clicks con channel=email.
  *    No espera el resultado: un fallo o la falta de variables no cambia la redirección.
  * 3) Responde 307 al mailto. El destino lo construye el servidor; no se acepta un correo ajeno.
