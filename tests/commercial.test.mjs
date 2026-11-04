@@ -14,7 +14,7 @@ await mkdir('docs/seo-verificacion', { recursive: true });
 try {
   const sitemap = await (await page.request.get(`${base}/sitemap.xml`)).text();
   const routes = [...sitemap.matchAll(/<loc>https:\/\/www\.dynatech\.com\.do([^<]*)<\/loc>/g)].map(m => m[1] || '/');
-  assert.equal(routes.length, 22); // +/aplicaciones (rediseño) y +/breakers
+  assert.equal(routes.length, 20); // sin /garantias ni /devoluciones (noindex)
   for (const width of [390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of routes) {

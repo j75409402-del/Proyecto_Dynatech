@@ -12,6 +12,9 @@ export const SITE = {
   rnc: "133-45350-9",
 } as const;
 
+/** Host canónico. Las visitas con parámetros (UTM de Google Business) se consolidan aquí. */
+export const CANONICAL_ORIGIN = "https://www.dynatech.com.do";
+
 function queryValue(value: string | undefined) {
   return (value ?? "").replace(/[\u0000-\u001f\u007f<>]|\p{Cf}/gu, " ").replace(/\s+/g, " ").trim().slice(0, 90);
 }

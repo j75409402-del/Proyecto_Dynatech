@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeHero, LineasDeUnVistazo, NeumaticaIndustrial, Editorial, AplicacionesHome } from "@/components/home/HomeSections";
+import { HomeHero, LineasDeUnVistazo, LinePageLinks, NeumaticaIndustrial, Editorial, AplicacionesHome } from "@/components/home/HomeSections";
 import { ComoTrabajamos } from "@/components/home/IndustrialSections";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 import { Band, SectionHead } from "@/components/page/Blocks";
@@ -50,6 +50,7 @@ export default function HomePage() {
     <>
       <HomeHero />
       <LineasDeUnVistazo />
+      <LinePageLinks />
       <Band tone="white" labelledBy="zonas-francas">
         <SectionHead kicker="Zonas francas" id="zonas-francas" title="Suministro para zonas francas" />
         <p className="mt-6 max-w-3xl text-base leading-relaxed text-steel-300">Suministramos a empresas de zonas francas en todo el país. Facturamos bajo el régimen de zonas francas. La exención de ITBIS aplica según la condición de zona franca del cliente.</p>
@@ -61,6 +62,7 @@ export default function HomePage() {
         title="Mecanizado de piezas"
         text="Torno y fresadora. Plano o muestra."
         href="/mecanizado"
+        linkLabel="Mecanizado en torno y fresadora"
         quote={whatsappService("mecanizado")}
         image="/studio/linea-mecanizado.jpg"
         alt="Eje de acero en el torno, sin marcas"

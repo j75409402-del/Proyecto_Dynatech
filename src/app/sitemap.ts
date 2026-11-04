@@ -1,30 +1,46 @@
 import type { MetadataRoute } from "next";
-import { SITE } from "@/lib/constants";
+import { CANONICAL_ORIGIN } from "@/lib/constants";
 import { SERVICIOS_ADICIONALES } from "@/lib/servicios";
 import { SOLUCIONES } from "@/lib/soluciones";
 
-// Lista fija: el sitio ya no tiene catálogo dinámico, así que el sitemap no consulta Supabase.
+/**
+ * Páginas públicas reales. Fuera del sitemap:
+ * - /garantias y /devoluciones: borrador legal corto, con noindex.
+ * - /cotizacion, /cotizacion/correo y /correo: redirecciones.
+ * - /admin: bloqueado en robots.ts.
+ * /catalogo se queda: tablero de familias con descripción y cotización.
+ */
+const UPDATED = new Date("2026-11-04");
+
+function entry(
+  path: string,
+  priority: number,
+  changeFrequency: "monthly" | "yearly" = "monthly",
+): MetadataRoute.Sitemap[number] {
+  return {
+    // La home no lleva barra final: coincide con el canonical que emite Next.
+    url: path === "/" ? CANONICAL_ORIGIN : `${CANONICAL_ORIGIN}${path}`,
+    lastModified: UPDATED,
+    changeFrequency,
+    priority,
+  };
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    { url: `${SITE.url}/`, changeFrequency: "monthly", priority: 1 },
-    ...SERVICIOS_ADICIONALES.map((s) => ({ url: `${SITE.url}/${s.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
-    ...SOLUCIONES.map((s) => ({
-      url: `${SITE.url}/${s.slug}`,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    })),
-    { url: `${SITE.url}/cilindros-neumaticos`, changeFrequency: "monthly", priority: 1 },
-    { url: `${SITE.url}/catalogo`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE.url}/breakers`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE.url}/valvulas-neumaticas`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE.url}/servicios`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE.url}/sellos-y-componentes`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${SITE.url}/aplicaciones`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE.url}/nosotros`, changeFrequency: "yearly", priority: 0.5 },
-    { url: `${SITE.url}/contacto`, changeFrequency: "yearly", priority: 0.5 },
-    { url: `${SITE.url}/garantias`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE.url}/devoluciones`, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE.url}/privacidad`, changeFrequency: "yearly", priority: 0.2 },
-    { url: `${SITE.url}/terminos`, changeFrequency: "yearly", priority: 0.2 },
+    entry("/", 1),
+    entry("/cilindros-neumaticos", 1),
+    ...SERVICIOS_ADICIONALES.map((s) => entry(`/${s.slug}`, 0.8)),
+    ...SOLUCIONES.map((s) => entry(`/${s.slug}`, 0.7)),
+    entry("/breakers", 0.8),
+    entry("/valvulas-neumaticas", 0.8),
+    entry("/servicios", 0.9),
+    entry("/sellos-y-componentes", 0.9),
+    entry("/catalogo", 0.8),
+    entry("/aplicaciones", 0.6),
+    entry("/nosotros", 0.5, "yearly"),
+    entry("/contacto", 0.5, "yearly"),
+    entry("/privacidad", 0.2, "yearly"),
+    entry("/terminos", 0.2, "yearly"),
   ];
 }

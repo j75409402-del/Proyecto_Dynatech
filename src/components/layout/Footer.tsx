@@ -1,15 +1,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CALL_PHONES, CONTACT, MAPS_URL, NAV, SITE, SOCIAL, emailHref, telHref } from "@/lib/constants";
-import { SOLUCIONES } from "@/lib/soluciones";
+import { SUPPLY_LINE_LINKS, TALLER_LINE_LINKS } from "@/lib/line-links";
 import { Reveal } from "@/components/motion/Reveal";
 import { whatsappCylinderService } from "@/lib/whatsapp";
 import { hoursLines } from "@/components/page/TrustStrip";
 
-const solutionLinks = [{ label: "Catálogo completo", href: "/catalogo" }, ...SOLUCIONES.map((s) => ({ label: s.name, href: `/${s.slug}` }))];
+const solutionLinks = [{ label: "Catálogo completo", href: "/catalogo" }, ...SUPPLY_LINE_LINKS];
 
-/** Cilindros y servicios industriales (antes mezclados en "Empresa"). */
-const serviceLinks = [...NAV.cilindros, ...NAV.especialidades];
+/** Taller y componentes. Las líneas usan el mismo texto que la portada. */
+const serviceLinks = [
+  { label: "Reparación de cilindros neumáticos", href: "/servicios" },
+  ...TALLER_LINE_LINKS,
+  ...NAV.especialidades,
+];
 
 const companyLinks = [
   { label: "Nosotros",               href: "/nosotros" },
