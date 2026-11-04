@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Barlow, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { SITE, CONTACT, ANALYTICS, PUBLIC_LOCATION } from "@/lib/constants";
+import { SITE, CONTACT, ANALYTICS, CANONICAL_ORIGIN, PUBLIC_LOCATION } from "@/lib/constants";
 import { CommercialTracking } from "@/components/CommercialTracking";
 import { CookielessAnalytics } from "@/components/CookielessAnalytics";
 import { VercelWebAnalytics } from "@/components/VercelWebAnalytics";
@@ -66,7 +66,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE.url),
+  metadataBase: new URL(CANONICAL_ORIGIN),
   title: {
     default: `${SITE.name} · ${SITE.tagline}`,
     template: `%s · ${SITE.name}`,

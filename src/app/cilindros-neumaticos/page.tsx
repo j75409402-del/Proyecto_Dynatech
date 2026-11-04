@@ -15,11 +15,14 @@ import { CONTACT, SITE } from "@/lib/constants";
 import { ENTREGA_LINEA } from "@/lib/entrega";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
 
+const title = "Cilindros neumáticos en Santo Domingo · Cotiza";
+const description =
+  "Cilindros neumáticos para mantenimiento y compras de planta en Santo Domingo: ISO, compactos y a la medida, y reparación. Cotiza por WhatsApp.";
+
 export const metadata: Metadata = {
-  ...commercialMetadata("Cilindros neumáticos en República Dominicana", "Fabricación de cilindros neumáticos a la medida bajo cotización. Comparte plano, muestra o medidas para tu solicitud.", "/cilindros-neumaticos"),
-  title: { absolute: "Proveedor de cilindros neumáticos en República Dominicana · Dynatech" },
-  description:
-    "Suplidor de cilindros neumáticos en Santo Domingo: doble y simple efecto, compactos e ISO, y a la medida. También reparación en el taller. Originales Festo y SMC por código.",
+  ...commercialMetadata(title, description, "/cilindros-neumaticos"),
+  title: { absolute: title },
+  description,
   alternates: { canonical: "/cilindros-neumaticos" },
 };
 

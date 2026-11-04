@@ -3,7 +3,10 @@ import { commercialMetadata } from "@/lib/seo";
 import { LegalPage } from "@/components/legal/LegalPage";
 import { CONTACT, emailHref } from "@/lib/constants";
 
-export const metadata: Metadata = commercialMetadata("Garantías", "Condiciones de garantía de los trabajos y piezas de Dynatech Ingeniería SRL.", "/garantias");
+export const metadata: Metadata = {
+  ...commercialMetadata("Garantías", "Condiciones de garantía de los trabajos y piezas de Dynatech Ingeniería SRL.", "/garantias"),
+  robots: { index: false, follow: true },
+};
 
 export default function GarantiasPage() {
   return (

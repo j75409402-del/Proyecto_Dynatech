@@ -4,7 +4,10 @@ import { commercialMetadata } from "@/lib/seo";
 import { LegalPage } from "@/components/legal/LegalPage";
 import { CONTACT, emailHref } from "@/lib/constants";
 
-export const metadata: Metadata = commercialMetadata("Política de devoluciones", "Condiciones para devolución o cambio de productos comprados a Dynatech Ingeniería SRL.", "/devoluciones");
+export const metadata: Metadata = {
+  ...commercialMetadata("Política de devoluciones", "Condiciones para devolución o cambio de productos comprados a Dynatech Ingeniería SRL.", "/devoluciones"),
+  robots: { index: false, follow: true },
+};
 
 export default function DevolucionesPage() {
   return (

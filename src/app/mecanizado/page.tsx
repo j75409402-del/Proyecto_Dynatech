@@ -4,8 +4,9 @@ import { SERVICIOS_ADICIONALES } from "@/lib/servicios";
 import { commercialMetadata } from "@/lib/seo";
 
 const service = SERVICIOS_ADICIONALES[1];
-const title = "Mecanizado industrial en República Dominicana · Dynatech";
-const description = "Mecanizado de piezas en República Dominicana con torno y fresadora, bajo plano o muestra.";
+const title = "Mecanizado de piezas en Santo Domingo · Cotiza";
+const description =
+  "Mecanizado en torno y fresadora para mantenimiento y compras de planta en Santo Domingo. Envía plano o muestra y cotiza por WhatsApp.";
 export const metadata: Metadata = {
   ...commercialMetadata(title, description, `/${service.slug}`),
   title: { absolute: title },

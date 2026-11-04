@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Band, SectionHead } from "@/components/page/Blocks";
 import { SOLO_SUMINISTRO, SOLUCIONES } from "@/lib/soluciones";
+import { LINE_PAGE_LINKS } from "@/lib/line-links";
 import { SITE } from "@/lib/constants";
 import { whatsappCylinderService, whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 import { quoteHref } from "@/components/cta/QuoteCTA";
@@ -99,10 +100,20 @@ export function ServiciosHome() {
 }
 
 export function Editorial({
-  id, flip, kicker, title, text, href, quote, image, alt,
+  id, flip, kicker, title, text, href, quote, image, alt, linkLabel,
 }: {
-  id: string; flip?: boolean; kicker: string; title: string; text: string; href: string; quote: string; image: string; alt: string;
+  id: string;
+  flip?: boolean;
+  kicker: string;
+  title: string;
+  text: string;
+  href: string;
+  quote: string;
+  image: string;
+  alt: string;
+  linkLabel?: string;
 }) {
+  const more = linkLabel ?? "Ver más";
   return (
     <section className={`edit ${flip ? "is-flip" : ""}`} aria-labelledby={id}>
       <div className="edit-photo">
@@ -116,7 +127,7 @@ export function Editorial({
           <a href={quote} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">
             <WhatsAppIcon className="h-5 w-5" />Cotizar por WhatsApp
           </a>
-          <Link href={href} className="edit-more">Ver más <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+          <Link href={href} className="edit-more">{more} <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
         </div>
       </div>
     </section>
@@ -239,6 +250,23 @@ export function NeumaticaIndustrial() {
   );
 }
 
+/** Enlaces de texto a cada página de línea, con ancla descriptiva. */
+export function LinePageLinks() {
+  return (
+    <nav className="line-index" aria-label="Líneas de suministro y taller">
+      <div className="container-max">
+        <ul>
+          {LINE_PAGE_LINKS.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href}>{link.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
+  );
+}
+
 export function LineasDeUnVistazo() {
   return (
     <section className="fold-lines" aria-label="Líneas de suministro">
@@ -249,7 +277,7 @@ export function LineasDeUnVistazo() {
               <span className="fold-photo">
                 <Image src={s.image} alt={s.name} fill sizes="(max-width: 799px) 33vw, 160px" className="object-cover" />
               </span>
-              <span>{s.name}</span>
+              <span>{s.title}</span>
             </Link>
           </li>
         ))}

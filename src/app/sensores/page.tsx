@@ -24,9 +24,9 @@ const HERO = "/sensores/sensores-inductivos.webp";
 const HERO_ALT = "Sensores inductivos de proximidad industriales en varios tamaños";
 
 const solucion = getSolucion("sensores");
-const title = "Proveedor de sensores industriales en República Dominicana · Dynatech";
+const title = "Sensores industriales en Santo Domingo · Cotiza";
 const description =
-  "Suplidor industrial de sensores en Santo Domingo: inductivos de M8 a M30, PNP/NPN, NO/NC y conector M12; fotoeléctricos difusos, de barrera, retrorreflectivos y de fibra óptica. Omron, Sick, Autonics, Banner y Pepperl+Fuchs. Suministramos productos originales por código.";
+  "Sensores para mantenimiento y compras de planta en Santo Domingo: inductivos y fotoeléctricos para líneas de producción. Cotiza por WhatsApp.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
