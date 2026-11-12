@@ -1019,7 +1019,7 @@
     },
     {
       "intention": "Gabinetes/tableros eléctricos completos",
-      "status": "NO VERIFICADO como suministro; componentes de tablero sí confirmados"
+      "status": "Retirado por el dueño el 12-nov-2026: no se ofrecen gabinetes ni cajas eléctricas; no crear página. /gabinetes-electricos redirige 301 a /control-electrico. Los componentes de tablero siguen en /control-electrico."
     },
     {
       "intention": "Automatización industrial integral / programación PLC",

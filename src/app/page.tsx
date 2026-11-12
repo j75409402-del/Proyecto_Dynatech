@@ -8,9 +8,9 @@ import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { CONTACT } from "@/lib/constants";
 import { whatsappGeneral, whatsappService } from "@/lib/whatsapp";
 
-const TITLE = "Proveedor industrial en República Dominicana: cilindros neumáticos, control, gabinetes, sensores, instrumentación y resistencias · Dynatech";
+const TITLE = "Proveedor industrial en República Dominicana: cilindros neumáticos, control, sensores, instrumentación y resistencias · Dynatech";
 const DESCRIPTION =
-  "Suplidor industrial en Santo Domingo. Cilindros neumáticos, válvulas, FRL y mangueras; control eléctrico, gabinetes, sensores, instrumentación y resistencias. Cotiza por WhatsApp.";
+  "Suplidor industrial en Santo Domingo. Cilindros neumáticos, válvulas, FRL y mangueras; control eléctrico, sensores, instrumentación y resistencias. Cotiza por WhatsApp.";
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       url: "/hero/suministro-industrial.jpg",
       width: 1280,
       height: 720,
-      alt: "Imagen de referencia: componentes neumáticos, gabinete de control e instrumentación",
+      alt: "Imagen de referencia: componentes neumáticos, control eléctrico e instrumentación",
     }],
   },
 };
@@ -38,7 +38,7 @@ const FAQS: Faq[] = [
   { q: "¿Cilindros?", a: "Neumáticos e hidráulicos. Fabricamos y reparamos." },
   { q: "¿Mecanizado?", a: "Torno y fresadora. Plano o muestra." },
   { q: "¿Zonas francas?", a: "Sí. Empresas y zonas francas en el país." },
-  { q: "¿Qué suministran?", a: "Cilindros neumáticos, válvulas, unidades FRL, conexiones y mangueras; control eléctrico, gabinetes, sensores, instrumentación y resistencias. También fabricamos y reparamos cilindros, y mecanizamos en torno y fresadora." },
+  { q: "¿Qué suministran?", a: "Cilindros neumáticos, válvulas, unidades FRL, conexiones y mangueras; control eléctrico, sensores, instrumentación y resistencias. También fabricamos y reparamos cilindros, y mecanizamos en torno y fresadora." },
   { q: "¿Cuánto tarda la entrega?", a: ENTREGA_LINEA },
   { q: "¿Suministran a zonas francas?", a: "Sí. Suministramos a empresas de zonas francas en todo el país y facturamos bajo el régimen de zonas francas. La exención de ITBIS aplica según la condición de zona franca del cliente." },
   { q: "¿Instalan o programan?", a: "No. En esas líneas solo suministramos." },

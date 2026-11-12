@@ -169,7 +169,7 @@ export function HomeHero() {
       <div className="hero-media">
         <Image
           src="/hero/suministro-industrial.jpg"
-          alt="Imagen de referencia: componentes neumáticos, gabinete de control e instrumentación, sin marcas"
+          alt="Imagen de referencia: componentes neumáticos, control eléctrico e instrumentación, sin marcas"
           fill
           priority
           fetchPriority="high"

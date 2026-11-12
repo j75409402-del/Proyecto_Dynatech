@@ -14,7 +14,8 @@ await mkdir('docs/seo-verificacion', { recursive: true });
 try {
   const sitemap = await (await page.request.get(`${base}/sitemap.xml`)).text();
   const routes = [...sitemap.matchAll(/<loc>https:\/\/www\.dynatech\.com\.do([^<]*)<\/loc>/g)].map(m => m[1] || '/');
-  assert.equal(routes.length, 20); // sin /garantias ni /devoluciones (noindex)
+  assert.equal(routes.length, 19); // sin /garantias ni /devoluciones (noindex); sin /gabinetes-electricos (301)
+  assert.equal(sitemap.toLowerCase().includes('gabinete'), false);
   for (const width of [390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of routes) {
@@ -27,7 +28,9 @@ try {
         canonical: document.querySelector('link[rel="canonical"]')?.href,
         overflow: document.documentElement.scrollWidth > innerWidth,
         schemas: [...document.querySelectorAll('script[type="application/ld+json"]')].map(s => JSON.parse(s.textContent)),
+        offersCabinets: /gabinete/i.test(document.documentElement.innerHTML),
       }));
+      assert.equal(result.offersCabinets, false, route);
       assert.equal(result.h1, 1, route);
       assert.ok(result.title && result.description, route);
       assert.equal(result.canonical, `https://www.dynatech.com.do${route}`, route);
@@ -51,6 +54,9 @@ try {
       }
     }
   }
+  const gabinetes = await page.request.get(base + '/gabinetes-electricos', { maxRedirects: 0 });
+  assert.equal(gabinetes.status(), 301);
+  assert.equal(new URL(gabinetes.headers().location, base).pathname, '/control-electrico');
   for (const [path, expected] of [['/reparacion-cilindros-neumaticos', '/servicios'], ['/categorias/neumatica', '/neumatica'], ['/categorias/sensores-autonics', '/sensores'], ['/carrito', '/cotizacion']]) {
     const response = await page.request.get(base + path, { maxRedirects: 0 });
     assert.equal(response.status(), 308);

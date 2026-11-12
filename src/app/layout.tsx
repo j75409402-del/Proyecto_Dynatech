@@ -20,7 +20,7 @@ const organizationJsonLd = {
   url: SITE.url,
   logo: `${SITE.url}/brand/dynatech-logo.png`,
   description:
-    "Dynatech Ingeniería SRL es un suplidor industrial en República Dominicana. Lo principal son los cilindros neumáticos: suministro, fabricación y reparación. También válvulas, unidades FRL, conexiones y mangueras; control eléctrico, gabinetes eléctricos, sensores, instrumentación y resistencias eléctricas. Piezas originales Festo y SMC por código. Mecanizado en torno y fresadora, y cilindros hidráulicos.",
+    "Dynatech Ingeniería SRL es un suplidor industrial en República Dominicana. Lo principal son los cilindros neumáticos: suministro, fabricación y reparación. También válvulas, unidades FRL, conexiones y mangueras; control eléctrico, sensores, instrumentación y resistencias eléctricas. Piezas originales Festo y SMC por código. Mecanizado en torno y fresadora, y cilindros hidráulicos.",
   email: CONTACT.email,
   telephone: [CONTACT.phone, CONTACT.phone2],
   knowsAbout: [
@@ -33,7 +33,6 @@ const organizationJsonLd = {
     "Unidades FRL",
     "Neumática industrial",
     "Control eléctrico industrial",
-    "Gabinetes eléctricos",
     "Sensores industriales",
     "Instrumentación industrial",
     "Resistencias eléctricas",

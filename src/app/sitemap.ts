@@ -7,6 +7,7 @@ import { SOLUCIONES } from "@/lib/soluciones";
  * Páginas públicas reales. Fuera del sitemap:
  * - /garantias y /devoluciones: borrador legal corto, con noindex.
  * - /cotizacion, /cotizacion/correo y /correo: redirecciones.
+ * - /gabinetes-electricos: 301 a /control-electrico (línea retirada; no indexar).
  * - /admin: bloqueado en robots.ts.
  * /catalogo se queda: tablero de familias con descripción y cotización.
  */

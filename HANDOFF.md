@@ -10,6 +10,7 @@ Resumen para el próximo agente. El detalle está en `PROJECT_CONTEXT.md` y `AUD
 - **Qué es el sitio:**
   - Proveedor industrial B2B **bajo cotización**: sin precios, carrito ni inventario.
   - Tiene 5 páginas de línea: `/neumatica`, `/control-electrico`, `/sensores`, `/instrumentacion` y `/resistencias-electricas`.
+- **Gabinetes eléctricos (12-nov-2026):** el dueño los retiró. No están en menú, catálogo, formulario ni sitemap. `/gabinetes-electricos` es un 301 a `/control-electrico`. No volver a ofrecerlos.
   - Los **cilindros neumáticos** son la línea destacada: `/cilindros-neumaticos`, `/servicios` y `/sellos-y-componentes`.
 - **Catálogo de SKUs:** retirado el 30-sep-2026 (`75f0337`). **No restaurarlo** sin pedido del dueño. Sigue en git (`6178629`) y en las tablas de Supabase.
 - **Hosting Cloudflare:** preparado (`00ba341`, `docs/CLOUDFLARE.md`), probado en local y **no desplegado**.
