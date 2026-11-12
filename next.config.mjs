@@ -31,6 +31,8 @@ const nextConfig = {
       // Temporal (307) a propósito: revertir = borrar esta línea.
       { source: "/cotizacion/correo", destination: "/cotizacion", permanent: false },
       { source: "/mapa-del-sitio", destination: "/", permanent: true },
+      // 12-nov-2026: el dueño retiró los gabinetes eléctricos. 301 para no dejar un 404 indexado.
+      { source: "/gabinetes-electricos", destination: "/control-electrico", statusCode: 301 },
 
       { source: "/categorias/:slug(cil.*)", destination: cilindros, permanent: true },
       { source: "/productos/:slug(cil.*)", destination: cilindros, permanent: true },

@@ -13,11 +13,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/aplicaciones" },
 };
 
-/** Una foto por bloque. El hero no se repite abajo, y control no comparte la del gabinete. */
+/** Una foto por bloque. El hero no se repite abajo. */
 const FOTO_APLICACION: Record<string, string> = {
   neumatica: "/studio/linea-neumatica.jpg",
   "control-electrico": "/studio/linea-control.jpg",
-  "gabinetes-electricos": "/studio/linea-gabinetes.jpg",
   sensores: "/studio/linea-sensores.jpg",
   instrumentacion: "/studio/linea-instrumentacion.jpg",
   "resistencias-electricas": "/studio/linea-resistencias.jpg",

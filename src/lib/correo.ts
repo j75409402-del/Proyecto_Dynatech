@@ -18,7 +18,8 @@ const PAGE_LABEL: Record<string, string> = {
   "/valvulas-neumaticas": "Válvulas neumáticas",
   "/sellos-y-componentes": "Sellos y componentes",
   "/control-electrico": "Control eléctrico",
-  "/gabinetes-electricos": "Gabinetes eléctricos",
+  // Línea retirada (12-nov-2026). Un enlace viejo no debe nombrarla.
+  "/gabinetes-electricos": "Control eléctrico",
   "/sensores": "Sensores",
   "/instrumentacion": "Instrumentación",
   "/resistencias-electricas": "Resistencias eléctricas",

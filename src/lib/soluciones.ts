@@ -84,7 +84,7 @@ export const SOLO_SUMINISTRO =
  */
 export const GRUPOS_SUMINISTRO: { id: GrupoId; title: string; desc: string }[] = [
   { id: "neumatica", title: "Neumática", desc: "Válvulas, conexiones, unidades FRL, mangueras, accesorios y repuestos para cilindros." },
-  { id: "control", title: "Control industrial", desc: "Contactores, relés, protecciones, mando y señalización, y gabinetes para tableros." },
+  { id: "control", title: "Control industrial", desc: "Contactores, relés, protecciones, mando y señalización." },
   { id: "automatizacion", title: "Automatización", desc: "Sensores para detectar piezas, posición y presencia, con sus módulos y accesorios." },
   { id: "instrumentacion", title: "Instrumentación", desc: "Medición de presión y temperatura para procesos." },
   { id: "resistencias", title: "Resistencias y termocuplas", desc: "Resistencias de cartucho, termocuplas, RTD y alambre de resistencia." },
@@ -96,7 +96,6 @@ export const DATOS_PARA_COTIZAR: Record<string, readonly string[]> = {
   "control-electrico": ["Referencia o foto de la etiqueta", "Tensión y corriente indicadas en el componente", "Función del repuesto en tu equipo o tablero"],
   sensores: ["Referencia y foto de la etiqueta", "Alimentación, conexión y tipo de salida, si los conoces", "Qué detecta el sensor y dónde está instalado"],
   instrumentacion: ["Variable a medir: presión o temperatura", "Rango y unidades requeridos, si están definidos", "Foto, referencia y conexión al proceso"],
-  "gabinetes-electricos": ["Medidas: alto × ancho × fondo", "Material y grado de protección (IP o NEMA), si están definidos", "Uso: interior o exterior, y qué va a alojar"],
   "resistencias-electricas": ["Fotos, forma y dimensiones", "Voltaje y potencia indicados, si los conoces", "Aplicación y cantidad requerida"],
 };
 
@@ -304,52 +303,6 @@ export const SOLUCIONES: Solucion[] = [
       "Tableros de control de máquinas",
       "Repuestos eléctricos para la planta",
       "Señalización y mando de procesos",
-    ],
-  },
-  {
-    // WEB-020 (05-oct-2026): el Capitán confirmó SOLO el suministro de gabinetes (no fabricación ni armado).
-    slug: "gabinetes-electricos",
-    grupo: "control",
-    soloSuministro: true,
-    icon: Boxes,
-    name: "Gabinetes eléctricos",
-    title: "Gabinetes eléctricos",
-    short: "Gabinetes y cajas para tableros.",
-    description: "Solo suministro. Cotiza con medidas y uso.",
-    metaDescription:
-      "Suministro de gabinetes eléctricos en República Dominicana: cajas y gabinetes para tableros de control y distribución. Cotiza con medidas y uso.",
-    image: "/studio/linea-gabinetes.jpg",
-    imageWidth: 1024,
-    imageHeight: 1024,
-    ctaTitle: "Cotiza un gabinete",
-    imageAlt: "Gabinete eléctrico de acero con la puerta abierta, sin marcas",
-    ejemplos: ["Gabinetes para tablero", "Cajas eléctricas"],
-    subcategorias: [
-      {
-        id: "gabinetes-para-tablero",
-        icon: Boxes,
-        title: "Gabinetes para tableros",
-        desc: "Gabinetes para alojar tableros de control, protección o distribución de máquinas y planta.",
-        image: "/studio/gabinete-tablero.jpg",
-        imageAlt: "Interior de un gabinete con borneras y cableado, sin marcas",
-        imageFit: "cover",
-      },
-      {
-        id: "cajas-electricas",
-        icon: Plug,
-        title: "Cajas eléctricas",
-        image: "/studio/caja-industrial.jpg",
-        imageAlt: "Caja eléctrica industrial con prensaestopas, sin marcas",
-        imageFit: "cover",
-        desc: "Cajas para conexión, paso o mando en campo, según las medidas y el uso que nos indiques.",
-        cta: "Enviar especificaciones",
-      },
-    ],
-    aplicaciones: [
-      "Tableros de control de máquinas",
-      "Distribución y protección eléctrica en planta",
-      "Reemplazo de gabinetes dañados",
-      "Ampliaciones de tableros existentes",
     ],
   },
   {
