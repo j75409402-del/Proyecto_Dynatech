@@ -77,8 +77,8 @@ const faqJsonLd = {
 const REPARACION_IDS = ["reparacion", "reconstruccion", "cambio-de-sellos"];
 const FABRICACION_IDS = ["fabricacion", "bajo-muestra-o-plano", "personalizados"];
 const REPARACION_MEDIA: Record<string, { image: string; imageAlt: string; imageFit?: "cover" | "contain"; imageNote?: string }> = {
-  reparacion: { image: "/cilindros/taller-reparando.jpg", imageAlt: "Imagen de referencia: técnico reparando un cilindro neumático", imageFit: "cover", imageNote: "Imagen de referencia" },
-  reconstruccion: { image: "/banners/cilindros-taller-wide.webp", imageAlt: "Imagen de referencia: cilindro neumático con sus componentes sobre el banco", imageFit: "cover", imageNote: "Imagen de referencia" },
+  reparacion: { image: "/cilindros/taller-reparando.jpg", imageAlt: "Imagen de referencia: técnico reparando un cilindro neumático", imageFit: "cover" },
+  reconstruccion: { image: "/banners/cilindros-taller-wide.webp", imageAlt: "Imagen de referencia: cilindro neumático con sus componentes sobre el banco", imageFit: "cover" },
   "cambio-de-sellos": { image: "/products/kits-sello-smc.jpg", imageAlt: "Imagen de catálogo: kits de sellos de reemplazo para cilindros neumáticos", imageNote: "Imagen de catálogo" },
 };
 
@@ -107,7 +107,7 @@ export default function ServiciosPage() {
         secondary={{ href: "#proceso", label: "El proceso" }}
         note={<>Foto y placa. <Link href="/cilindros-hidraulicos" className="underline underline-offset-4">Hidráulicos</Link></>}
         image={{ src: "/cilindros/taller-portada-v2.webp", alt: "Imagen de referencia: técnico revisando un cilindro neumático en el banco" }}
-        caption={{ label: "Imagen de referencia", text: "Reparación · Reconstrucción · Sellos" }}
+        caption={{ text: "Reparación · Reconstrucción · Sellos" }}
         trust="cilindros"
       />
 

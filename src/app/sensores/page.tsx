@@ -46,7 +46,7 @@ export default function SensoresPage() {
       destacado={
         <>
           <Band tone="white" id="sensores-comunes" labelledBy="sensores-comunes-titulo">
-            <SectionHead kicker="Los más comunes" id="sensores-comunes-titulo" title="Sensores industriales" intro="Fotos de referencia, sin marcas. El modelo se confirma con el código o la foto de la etiqueta." />
+            <SectionHead kicker="Los más comunes" id="sensores-comunes-titulo" title="Sensores industriales" intro="El modelo se confirma con el código o la foto de la etiqueta." />
             <OfferGrid columns={3} items={COMUNES.map((s) => ({ ...s, quote: quoteHref(s.title, "Sensores") }))} />
           </Band>
           <Band tone="light" labelledBy="fotoelectricos-lineas-titulo">
