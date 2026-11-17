@@ -29,11 +29,11 @@ export async function createStage(host: HTMLElement, initial: SceneId, select: (
   const hemisphere = new T.HemisphereLight(0xf1f6ff, 0x32363b, 3); world.add(hemisphere);
   const cylinderRim = new T.DirectionalLight(0xc7dbef, 2.6); cylinderRim.position.set(-3, 3, -4); cylinderRim.visible = false; world.add(cylinderRim);
   const key = new T.DirectionalLight(0xffffff, 5); key.position.set(4, 6, 5); world.add(key);
-  const rim = new T.DirectionalLight(0xe4002b, 2); rim.position.set(-4, -1, 3); world.add(rim);
+  const rim = new T.DirectionalLight(0xc70c1b, 2); rim.position.set(-4, -1, 3); world.add(rim);
   const steel = new T.MeshStandardMaterial({ color: 0xa8b4c1, metalness: 0.72, roughness: 0.32 });
   const aluminum = new T.MeshStandardMaterial({ color: 0xd3dce5, metalness: 0.55, roughness: 0.27 });
   const graphite = new T.MeshStandardMaterial({ color: 0x242a33, metalness: 0.4, roughness: 0.4 });
-  const signal = new T.MeshStandardMaterial({ color: 0xe4002b, metalness: 0.3, roughness: 0.3 });
+  const signal = new T.MeshStandardMaterial({ color: 0xc70c1b, metalness: 0.3, roughness: 0.3 });
   const light = new T.MeshStandardMaterial({ color: 0xf2f0e9, metalness: 0.1, roughness: 0.45 });
   const heat = new T.MeshStandardMaterial({ color: 0xaaa099, metalness: 0.55, roughness: 0.35, emissive: 0x6c170c, emissiveIntensity: 0.1 });
   const geometries: T.BufferGeometry[] = [];

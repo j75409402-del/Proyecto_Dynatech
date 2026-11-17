@@ -24,8 +24,8 @@ const config: Config = {
           600: "#A7B0B8",
         },
         signal: {
-          DEFAULT: "#E4002B", // safety red — Dynatech accent
-          hover: "#C40024",
+          DEFAULT: "#C70C1B", // rojo del logo oficial (muestreado 17-nov-2026)
+          hover: "#A30A16",
           soft: "#FEE7EB",
         },
         warning: {

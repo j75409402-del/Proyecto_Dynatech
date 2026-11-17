@@ -202,10 +202,10 @@ export const SOLUCIONES: Solucion[] = [
         title: "Reparación de cilindros",
         desc: "Reparación y reconstrucción de cilindros neumáticos, con prueba de funcionamiento antes de entregar.",
         href: "/servicios",
-        // WEB-011: foto real del caso antes/después (antes era el hero de /servicios).
-        image: "/cilindros/antes-cilindro-iso-32mm.jpg",
-        imageAlt: "Cilindro neumático ISO 32 mm con corrosión, antes de su reparación en el taller",
-        imageFit: "cover",
+        // 17-nov-2026: el dueño retiró las fotos antes/después ISO 32 mm. Foto real del taller.
+        image: "/cilindros/cilindro-desgastado-taller.webp",
+        imageAlt: "Cilindro neumático desgastado recibido en el taller de Dynatech",
+        imageFit: "contain",
       },
     ],
     aplicaciones: [

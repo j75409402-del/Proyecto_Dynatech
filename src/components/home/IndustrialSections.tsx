@@ -7,11 +7,9 @@ import { SERVICIOS, COMPONENTES } from "@/lib/servicios";
 import { whatsappService, whatsappCylinderService } from "@/lib/whatsapp";
 import type { QuoteService } from "@/lib/quote";
 import { CYLINDER_PARTS } from "@/lib/industrial-scenes";
-import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
 import { WorkRail } from "@/components/industrial/WorkRail";
 import { Band, SectionHead } from "@/components/page/Blocks";
 import { TRABAJOS_TALLER } from "@/lib/trabajos-taller";
-import { Reveal } from "@/components/motion/Reveal";
 
 const DETALLE: Record<string, string> = { fabricacion: "Ver tipos de cilindro", reparacion: "Ver reparación de cilindros", "kits-de-sellos": "Ver sellos y componentes" };
 const SVC: Record<string, QuoteService> = { fabricacion: "neumatico-fabricar", reparacion: "neumatico-reparar", "kits-de-sellos": "componente" };
@@ -104,29 +102,5 @@ export function TrabajosTaller() {
         </div>
       </div>
     </Band>
-  );
-}
-
-export function AntesDespues() {
-  return (
-    <section className="section-pad border-b border-black/10 bg-white" aria-labelledby="antes-despues-inicio">
-      <div className="container-max">
-        <Reveal className="section-heading mb-10">
-          <div><p className="section-kicker">Taller</p><h2 id="antes-despues-inicio" className="section-title">Antes y después</h2></div>
-          <p className="max-w-md leading-relaxed text-steel-300">Cilindro ISO 32 mm, recuperado.</p>
-        </Reveal>
-        <Reveal>
-          <BeforeAfterSlider
-            before={{ src: "/cilindros/antes-cilindro-iso-32mm.jpg", alt: "Antes · Cilindro ISO 32 mm" }}
-            after={{ src: "/cilindros/despues-cilindro-iso-32mm.jpg", alt: "Después · Cilindro ISO 32 mm recuperado" }}
-          />
-          <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-2xl text-sm leading-relaxed text-steel-300">Desarme, repuestos, ensamble y prueba.</p>
-            <a href={whatsappService("neumatico-reparar")} target="_blank" rel="noopener" className="btn-primary min-h-12 shrink-0 px-6" data-fab-hide=""><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: reparación de cilindro neumático</span></a>
-          </div>
-        </Reveal>
-        {/* Oct-2026: la foto real de cilindros neumáticos y las fotos y videos de hidráulicos pasaron a la pasarela bajo la portada (TrabajosTaller). */}
-      </div>
-    </section>
   );
 }

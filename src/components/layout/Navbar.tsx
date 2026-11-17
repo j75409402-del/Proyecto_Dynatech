@@ -154,20 +154,15 @@ export function Navbar() {
         >
           {/* Brand */}
           <Link href="/" className="flex items-center gap-2.5 group [perspective:400px] shrink-0">
+            {/* Logo oficial (17-nov-2026): símbolo + DYNATECH / INGENIERÍA SRL en una línea. */}
             <Image
-              src="/brand/dynatech-badge.png"
-              alt=""
-              width={40}
-              height={40}
+              src="/brand/dynatech-lockup.png"
+              alt={`${SITE.shortName} Ingeniería SRL`}
+              width={1024}
+              height={264}
               priority
-              className="h-10 w-10 shrink-0"
+              className="h-9 w-auto shrink-0 sm:h-10"
             />
-            <div>
-              <div className="font-display text-xl font-semibold tracking-tight text-surface leading-none">{SITE.shortName}</div>
-              <div className="font-mono text-xs uppercase tracking-[0.08em] text-steel-400 mt-0.5">
-                Ingeniería · SRL
-              </div>
-            </div>
           </Link>
 
           {/* Nav desktop */}
