@@ -6,8 +6,7 @@ import { SolucionPage } from "@/components/soluciones/SolucionPage";
 import { Band, SectionHead } from "@/components/page/Blocks";
 import { Reveal } from "@/components/motion/Reveal";
 import { getSolucion } from "@/lib/soluciones";
-import { CALL_PHONES, CONTACT, SITE, emailHref, telHref } from "@/lib/constants";
-import { whatsappService } from "@/lib/whatsapp";
+import { CONTACT, SITE } from "@/lib/constants";
 import type { Faq } from "@/components/page/FaqBlock";
 
 const solucion = getSolucion("neumatica");
@@ -132,50 +131,6 @@ function NeumaticaTexto() {
           <li><b className="text-surface">Repuestos.</b> Kits de sellos y vástagos cromados. <Link href="/sellos-y-componentes" className="text-signal">Ver sellos y vástagos</Link>.</li>
           <li><b className="text-surface">Marcas originales.</b> Suministramos piezas originales Festo y SMC, y de otras marcas originales, bajo pedido por código.</li>
         </ul>
-      </Band>
-      <Band tone="light" labelledBy="neumatica-taller">
-        <SectionHead kicker="Taller" id="neumatica-taller" title="Servicios de taller" />
-        <ul className="mt-8 grid gap-4 text-base leading-relaxed text-steel-300">
-          <li><b className="text-surface">Reparación de cilindros.</b> Reparación, reconstrucción y cambio de sellos, con prueba de funcionamiento antes de entregar. <Link href="/servicios" className="text-signal">Ver reparación</Link>.</li>
-          <li><b className="text-surface">Fabricación a la medida.</b> Cilindros nuevos bajo plano, muestra o medidas (ejemplo real del taller: 160 x 150 mm). <Link href="/cilindros-neumaticos" className="text-signal">Ver fabricación</Link>.</li>
-          <li><b className="text-surface">Mecanizado.</b> Torno y fresadora, bajo plano o muestra. <Link href="/mecanizado" className="text-signal">Ver mecanizado</Link>.</li>
-          <li><b className="text-surface">Cilindros hidráulicos.</b> Fabricación y reparación. <Link href="/cilindros-hidraulicos" className="text-signal">Ver cilindros hidráulicos</Link>.</li>
-        </ul>
-      </Band>
-      <Band tone="white" labelledBy="neumatica-para-quien">
-        <SectionHead kicker="Alcance" id="neumatica-para-quien" title="Para quién es" />
-        <div className="mt-8 grid gap-8">
-          <div>
-            <h3 className="font-semibold text-surface">Sí</h3>
-            <p className="mt-2 max-w-3xl text-base leading-relaxed text-steel-300">Compras, mantenimiento e ingeniería de manufactureras y empresas de zonas francas en República Dominicana que necesitan repuestos para máquinas y líneas de producción, sistemas de aire comprimido o reemplazo de componentes descontinuados.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-surface">No</h3>
-            <p className="mt-2 max-w-3xl text-base leading-relaxed text-steel-300">En neumática solo suministramos. No instalamos ni programamos. Tampoco vendemos neumáticos (gomas) de vehículos.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-surface">Plazos de entrega</h3>
-            <p className="mt-2 max-w-3xl text-base leading-relaxed text-steel-300">{ENTREGA}</p>
-          </div>
-        </div>
-      </Band>
-      <Band tone="light" labelledBy="neumatica-como-cotizar">
-        <SectionHead kicker="Cotización" id="neumatica-como-cotizar" title="Cómo cotizar" />
-        <ol className="mt-8 grid list-decimal gap-4 pl-5 text-base leading-relaxed text-steel-300">
-          <li>Escribe por <a href={whatsappService("componente")} target="_blank" rel="noopener" className="text-signal">WhatsApp al {CONTACT.whatsappDisplay}</a> con el código o una foto del componente (y de su placa).</li>
-          <li>Añade medidas de conexión y rosca, si las conoces; para electroválvulas, la etiqueta de la bobina y su voltaje.</li>
-          <li>Indica la aplicación, la presión de trabajo, la cantidad y la ciudad de entrega.</li>
-        </ol>
-        <p className="mt-6 max-w-3xl text-base leading-relaxed text-steel-300">Recibes precio, plazo y condiciones. Confirmas la orden, entrega y facturación. Entregamos en todo el país, incluidas las zonas francas del interior.</p>
-      </Band>
-      <Band tone="white" labelledBy="neumatica-donde">
-        <SectionHead kicker="Santo Domingo" id="neumatica-donde" title="Dónde estamos" />
-        <div className="mt-6 max-w-3xl text-base leading-relaxed text-steel-300">
-          <p>{SITE.legalName} · RNC {SITE.rnc}</p>
-          <p>{CONTACT.address}</p>
-          <p>Tel.: {CALL_PHONES.map((p, i) => <span key={p}>{i > 0 && " · "}<a href={telHref(p)} className="text-signal">{p}</a></span>)} · <a href={emailHref()} className="text-signal">{CONTACT.email}</a></p>
-          <p>{CONTACT.hours}</p>
-        </div>
       </Band>
     </>
   );
