@@ -101,7 +101,6 @@ export function SolucionPage({ solucion: s, destacado, headline, lead, faqItems,
           kicker="Catálogo de la línea"
           id="catalogo-titulo"
           title="Catálogo"
-          intro="Fotos de referencia, no inventario."
         />
         {s.soloSuministro && (
           <p className="scope-note mb-6"><Info className="h-4 w-4 shrink-0" aria-hidden="true" /><span>En esta línea {SOLO_SUMINISTRO}</span></p>

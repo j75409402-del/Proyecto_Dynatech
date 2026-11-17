@@ -10,7 +10,7 @@ export function PhotoCredits({ items }: { items: Subcategoria[] }) {
   if (!conCredito.length) return null;
   return (
     <p className="photo-credits">
-      <span>Fotos de referencia (no son inventario ni trabajos de Dynatech):</span>{" "}
+      <span>Créditos de fotos:</span>{" "}
       {conCredito.map((s, i) => (
         <span key={s.id}>
           {s.title}: <a href={s.credit!.url} target="_blank" rel="noopener noreferrer">{s.credit!.author}</a>, {s.credit!.license}, Wikimedia Commons, editada{i < conCredito.length - 1 ? " · " : "."}

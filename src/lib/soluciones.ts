@@ -283,7 +283,6 @@ export const SOLUCIONES: Solucion[] = [
         title: "Finales de carrera e interruptores",
         image: "/referencia/final-de-carrera.jpg",
         imageAlt: "Final de carrera con palanca de rodillo instalado en una estructura",
-        imageNote: "Foto de referencia",
         imageFit: "cover",
         credit: { author: "S.J. de Waard", license: "CC BY 2.5", url: "https://commons.wikimedia.org/wiki/File:Eindschakelaar_op_de_Mallegatsluis_in_Gouda.JPG" },
         desc: "Interruptores de posición para detectar el recorrido de máquinas.",

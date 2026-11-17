@@ -24,7 +24,7 @@ type Props = {
   /** Visual: imagen real de public/ o un nodo (p. ej. esquema técnico SVG). */
   image?: { src: string; alt: string; fit?: "cover" | "contain"; /** object-position para fotos verticales (p. ej. "center 35%"). */ position?: string };
   visual?: ReactNode;
-  caption?: { label: string; text: string };
+  caption?: { label?: string; text: string };
   trust?: "cilindros" | "lineas" | false;
   /** Tamaño del título: la portada lo usa más grande. */
   size?: "home" | "page";
@@ -66,7 +66,7 @@ export function PageHero({ crumbs, kicker, title, lead, quoteHref, quoteLabel = 
               <Image src={image.src} alt={image.alt} fill priority quality={85} sizes="(max-width: 1023px) 100vw, 50vw" className={image.fit === "contain" ? "object-contain p-8" : "object-cover grade"} style={image.position ? { objectPosition: image.position } : undefined} />
             ))}
           </div>
-          {caption && <figcaption><span>{caption.label}</span>{caption.text}</figcaption>}
+          {caption && <figcaption>{caption.label && <span>{caption.label}</span>}{caption.text}</figcaption>}
         </figure>
       </div>
       {trust && <TrustStrip variant={trust} />}
