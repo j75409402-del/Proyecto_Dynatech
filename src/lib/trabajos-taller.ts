@@ -6,7 +6,7 @@
  * clientes ni características que no estén confirmados. No repetir la misma imagen en la portada.
  *
  * Excluidas a propósito (19-oct-2026):
- * - antes/despues-cilindro-iso-32mm.jpg: origen sin confirmar (siguen en la sección «Antes y después»).
+ * - antes/despues-cilindro-iso-32mm.jpg: RETIRADAS del sitio el 17-nov-2026 por orden del dueño («no lo quiero ver en ninguna parte»). No volver a usarlas.
  * - taller-cilindros-neumaticos.jpg: origen sin confirmar (ver RealWorkPhoto.tsx).
  * - taller-reparando.jpg, taller-portada-v2.webp, cilindros-nuevos.jpg: imágenes de referencia/IA.
  *

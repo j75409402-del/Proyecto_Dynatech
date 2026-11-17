@@ -338,7 +338,7 @@ Ver `docs/CLOUDFLARE.md`.
 ## 18. Diseño
 
 - Tema claro.
-  - Rojo de marca **`#E4002B`** (`signal`), hover `#C40024`, suave `#FEE7EB`.
+  - Rojo de marca **`#C70C1B`** (`signal`, rojo del logo oficial desde el 17-nov-2026), hover `#A30A16`, suave `#FEE7EB`.
   - Texto casi negro `#0B0D10` (`surface`).
   - **Ojo:** `carbon-*` son blancos y grises claros (fondos), y `surface` es el oscuro.
 - Tipografía: IBM Plex Sans para el texto e IBM Plex Mono para eyebrows y datos.
@@ -372,7 +372,7 @@ Los archivos usan CRLF en Windows. Con un git sin `core.autocrlf` pueden aparece
 7. **No borres imágenes** de `public/`.
 8. **No toques el cron keepalive** (`vercel.json`, `/api/keepalive`, `custom-worker.ts`).
 9. **No subas secretos** ni modifiques `.env.local`.
-10. **Identidad visual:** rojo `#E4002B`, logo, IBM Plex, radios mínimos.
+10. **Identidad visual:** rojo `#C70C1B`, logo, IBM Plex, radios mínimos.
 11. **Páginas nuevas:**
     - Deben llevar `metadata` (title, description, canonical), `Breadcrumbs` y `QuoteCTA`, y agregarse a `sitemap.ts`.
     - Si van en el menú, agregarlas a `NAV` o `SOLUCIONES`.

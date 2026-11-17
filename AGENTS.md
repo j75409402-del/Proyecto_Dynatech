@@ -38,7 +38,7 @@ Antes de dar un cambio por terminado: `npx tsc --noEmit`, `npm run lint` y `npm 
 - **No renombres** `src/middleware.ts` a `proxy.ts`: el adaptador de Cloudflare no soporta el proxy en Node.
 - **No subas secretos**, no modifiques `.env.local` y no imprimas claves en logs ni commits.
 - **Diseño:**
-  - Mantén la identidad: rojo `#E4002B` (`signal`), IBM Plex Sans/Mono, radios mínimos y estilo industrial.
+  - Mantén la identidad: rojo del logo oficial `#C70C1B` (`signal`, desde el 17-nov-2026), IBM Plex Sans/Mono, radios mínimos y estilo industrial.
   - Usa las clases existentes (`btn-primary`, `container-max`, `section-pad`, `eyebrow`) y los componentes `Reveal`, `QuoteCTA` y `Breadcrumbs`.
 - **Páginas nuevas:** `metadata` con canonical, `Breadcrumbs` y `QuoteCTA` al final, entrada en `sitemap.ts`. Los CTA de cotización usan `quoteHref()`.
 - **Textos** en español de República Dominicana, con tuteo.

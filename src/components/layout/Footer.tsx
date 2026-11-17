@@ -34,24 +34,16 @@ export function Footer() {
         <Reveal className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-12 lg:gap-8">
           {/* Brand + tagline */}
           <div className="col-span-2 lg:col-span-3">
-            <div className="flex items-center gap-2.5 mb-4">
+            <div className="mb-4">
               <Image
-                src="/brand/dynatech-badge.png"
-                alt=""
-                width={36}
-                height={36}
-                className="h-9 w-9 shrink-0"
+                src="/brand/dynatech-lockup-blanco.png"
+                alt={`${SITE.shortName} Ingeniería SRL`}
+                width={1024}
+                height={264}
+                className="h-9 w-auto"
               />
-              <div>
-                <div className="font-display font-semibold text-surface leading-none">
-                  {SITE.shortName}
-                </div>
-                <div className="font-mono text-xs uppercase tracking-[0.08em] text-steel-400 mt-0.5">
-                  Ingeniería · SRL
-                </div>
-                <div className="mt-1 font-mono text-xs uppercase tracking-[0.1em] text-steel-500" lang="en">
-                  {SITE.brandTagline}
-                </div>
+              <div className="mt-2 font-mono text-xs uppercase tracking-[0.1em] text-steel-500" lang="en">
+                {SITE.brandTagline}
               </div>
             </div>
             <p className="text-sm text-steel-300 leading-relaxed max-w-sm">

@@ -7,7 +7,6 @@ import { QuoteCTA } from "@/components/cta/QuoteCTA";
 import { PageHero } from "@/components/page/PageHero";
 import { shortHours } from "@/components/page/TrustStrip";
 import { Band, SectionHead, OfferGrid, QuoteChecklist, RelatedGrid, Steps } from "@/components/page/Blocks";
-import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
 import { SITE } from "@/lib/constants";
 import Link from "next/link";
 import { ArrowUpRight, Cog, Droplets } from "lucide-react";
@@ -141,19 +140,8 @@ export default function ServiciosPage() {
         </Reveal>
       </Band>
 
-      <Band tone="white" labelledBy="antes-despues-servicios">
-        <SectionHead kicker="03 · Trabajo de taller" id="antes-despues-servicios" title="Antes y después" intro="Cilindro ISO 32 mm recuperado en nuestro taller. Desliza para comparar." />
-        <Reveal>
-          <BeforeAfterSlider
-            before={{ src: "/cilindros/antes-cilindro-iso-32mm.jpg", alt: "Antes · Cilindro ISO 32 mm" }}
-            after={{ src: "/cilindros/despues-cilindro-iso-32mm.jpg", alt: "Después · Cilindro ISO 32 mm recuperado" }}
-          />
-          <p className="mt-5 max-w-3xl text-sm leading-relaxed text-steel-300">Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar.</p>
-        </Reveal>
-      </Band>
-
       <QuoteChecklist
-        kicker="04 · Para cotizar"
+        kicker="03 · Para cotizar"
         title="Qué enviar para cotizar una reparación"
         intro="Con fotos del cilindro y su placa podemos empezar. Añade lo que tengas:"
         items={[

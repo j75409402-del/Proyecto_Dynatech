@@ -37,10 +37,10 @@ export function HydraulicCylinderDrawing({ title }: Props) {
         <path d="M122 176h300v10H122zM122 254h300v10H122z" fill="url(#td-hatch)" />
         {/* Pistón con sellos */}
         <path d="M232 186h34v68h-34z" fill="#ffffff12" />
-        <path d="M240 186v68M258 186v68" stroke="#e4002b" strokeWidth="3" />
+        <path d="M240 186v68M258 186v68" stroke="#C70C1B" strokeWidth="3" />
         {/* Tapa delantera / prensaestopas */}
         <path d="M422 168h40v104h-40z" fill="#ffffff08" />
-        <path d="M430 208v24M454 208v24" stroke="#e4002b" strokeWidth="3" />
+        <path d="M430 208v24M454 208v24" stroke="#C70C1B" strokeWidth="3" />
         {/* Vástago */}
         <path d="M266 208h300v24H266z" fill="#ffffff10" />
         {/* Montaje delantero (rosca y ojo) */}

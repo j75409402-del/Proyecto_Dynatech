@@ -1,16 +1,15 @@
 import { ServiceAvailabilityNotice } from "@/components/page/ServiceAvailabilityNotice";
 import type { Metadata } from "next";
-import { CylinderExperience } from "@/components/industrial/CylinderExperience";
-import { commercialMetadata } from "@/lib/seo";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, FileText, Box, Ruler, Camera, Hash, Factory, Wrench } from "lucide-react";
+import { commercialMetadata } from "@/lib/seo";
 import { Reveal } from "@/components/motion/Reveal";
-import { QuoteCTA, quoteHref } from "@/components/cta/QuoteCTA";
+import { quoteHref } from "@/components/cta/QuoteCTA";
 import { whatsappService } from "@/lib/whatsapp";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import { BeforeAfterSlider } from "@/components/industrial/BeforeAfterSlider";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { CylinderRelated } from "@/components/industrial/CylinderRelated";
-import { RealWorkPhoto } from "@/components/industrial/RealWorkPhoto";
+import { TaHead, TaHero, TaLink, TaProductCard, TaSteps } from "@/components/taller/TallerA";
 import { CONTACT, SITE } from "@/lib/constants";
 import { ENTREGA_LINEA } from "@/lib/entrega";
 import { FaqBlock, type Faq } from "@/components/page/FaqBlock";
@@ -43,11 +42,23 @@ const TIPOS = [
 ];
 
 const NECESITAMOS = [
-  { icon: FileText, title: "Plano", desc: "Plano o dibujo técnico de la pieza." },
-  { icon: Box, title: "Muestra", desc: "El cilindro o el componente original." },
-  { icon: Ruler, title: "Medidas", desc: "Diámetro y carrera, como mínimo." },
-  { icon: Camera, title: "Fotos", desc: "Del cilindro, su placa y su montaje." },
-  { icon: Hash, title: "Código", desc: "La referencia del cilindro, si la tienes." },
+  { title: "Plano", desc: "Plano o dibujo técnico de la pieza." },
+  { title: "Muestra", desc: "El cilindro o el componente original." },
+  { title: "Medidas", desc: "Diámetro y carrera, como mínimo." },
+  { title: "Fotos", desc: "Del cilindro, su placa y su montaje." },
+  { title: "Código", desc: "La referencia del cilindro, si la tienes." },
+];
+
+/** Componentes para cilindro (textos de /sellos-y-componentes). Anclas existentes de esa página. */
+const COMPONENTES_CIL = [
+  { href: "/sellos-y-componentes#kits-de-sellos", title: "Kits de sellos", text: "Para reparación y mantenimiento.", image: "/products/kit-sellos-recorte.webp", alt: "Imagen de referencia: kit de sellos para cilindro neumático", imgClass: "p-5" },
+  { href: "/sellos-y-componentes#vastagos", title: "Vástagos cromados a medida", text: "Con el acabado y la tolerancia del original.", image: "/products/vastago-cromado-cilindro-neumatico.webp", alt: "Vástago cromado para cilindro neumático, con rosca y tuerca en el extremo", imgClass: "p-4" },
+];
+
+const PASOS = [
+  { title: "Envías el dato", text: "Plano, muestra, medidas o fotos." },
+  { title: "Recibes la cotización", text: "Precio, plazo y condiciones." },
+  { title: "Confirmas", text: "Orden, entrega y facturación." },
 ];
 
 /** Solo hechos ya publicados en esta página y en /servicios (WEB-020). */
@@ -74,147 +85,98 @@ const serviceJsonLd = {
   description: "Fabricación de cilindros neumáticos a la medida (doble y simple efecto, compactos, ISO y especiales, métricos y en pulgadas) y reparación bajo cotización.",
 };
 
+/**
+ * Dirección A «Taller primero» (17-nov-2026, aprobada por el dueño). Sustituye la experiencia 3D
+ * (CylinderExperience, que queda en el repo sin usar). Se conservan las anclas #cilindro-producto,
+ * #interior-cilindro y #cilindro-aplicacion. Sin las fotos antes/después ISO 32 mm (retiradas por el dueño).
+ */
 export default function CilindrosNeumaticosPage() {
+  const fabricar = whatsappService("neumatico-fabricar");
   return (
-    <div className="industrial-detail cylinder-page">
+    <div className="taller-a">
       <ServiceAvailabilityNotice service={"pneumatic-cylinders"} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
-      <CylinderExperience />
+      <div className="ta-crumb"><div className="container-max"><Breadcrumbs items={[{ label: "Cilindros neumáticos" }]} /></div></div>
 
-      <section className="section-pad border-b border-black/5 cylinder-types">
+      <div id="cilindro-producto">
+        <TaHero
+          id="cilindros-hero-title"
+          kicker="Fabricación · Reparación · Reconstrucción"
+          title={<>Cilindros neumáticos <span>a la medida.</span></>}
+          lead="Bajo plano, muestra o medidas. En milímetros o pulgadas."
+          whatsappHref={fabricar}
+          correoItem="Cilindro neumático"
+          notes={["Aunque el original ya no se consiga"]}
+          image="/cilindros/cilindros-fabricados-detalle.webp"
+          imageAlt="Cilindros neumáticos nuevos fabricados en el taller de Dynatech junto al cilindro oxidado que sirvió de muestra"
+          caption="Cilindros fabricados en nuestro taller"
+          objectPosition="50% 70%"
+        />
+      </div>
+
+      <section className="ta-sec" aria-labelledby="tipos-cilindro">
         <div className="container-max">
-          <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">01 · Qué cilindros trabajamos</div>
-            <h2 className="font-display text-display-lg text-surface">Tipos de cilindro</h2>
-          </Reveal>
-
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-black/5 border border-black/5">
-            {TIPOS.map((t, i) => (
-              <Reveal key={t.title} delay={i * 0.05} className="h-full">
-                <div className="group bg-carbon hover:bg-carbon-800 p-6 sm:p-8 h-full transition-colors duration-300">
-                  <div className="font-mono text-xs text-signal tracking-techno mb-6">{t.code}</div>
-                  <h3 className="font-display text-xl sm:text-2xl text-surface mb-2">{t.title}</h3>
-                  <p className="text-sm text-steel-300 leading-relaxed">{t.desc}</p>
-                </div>
-              </Reveal>
-            ))}
+          <TaHead kicker="Qué fabricamos" id="tipos-cilindro" title="Tipos de cilindro" aside={<p>Si no ves el tuyo, envía una foto con la placa.</p>} />
+          <div className="ta-types">
+            <span className="ta-types-pic"><Image src="/cilindros/cilindro-fabricado-taller.webp" alt="Cilindro neumático de tirantes fabricado en el taller de Dynatech" fill sizes="340px" className="object-contain p-8" /></span>
+            <ul className="ta-tg">
+              {TIPOS.map((t, i) => (
+                <li key={t.title}><i>{String(i + 1).padStart(2, "0")}</i><b>{t.title}</b><span>{t.desc}</span></li>
+              ))}
+            </ul>
           </div>
+          <p className="ta-intro">Puedes comprar cilindros neumáticos en Santo Domingo en Dynatech Ingeniería SRL. Trabajamos ISO, de tirantes, compactos, mini redondos y guiados. Fabricamos a partir de tu plano, una muestra o tus medidas, y también suministramos piezas originales Festo y SMC por código.</p>
         </div>
       </section>
 
-      {/* FABRICACIÓN (la reparación vive en /servicios: mapa de intención WEB-010) */}
-      <section className="section-pad border-b border-black/5 bg-carbon-900 cylinder-services">
+      <section className="ta-sec is-tint" id="cilindro-aplicacion" aria-labelledby="para-cotizar">
         <div className="container-max">
-          <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">02 · Fabricación</div>
-            <h2 className="font-display text-display-lg text-surface">Un cilindro nuevo, a tu medida</h2>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            <Reveal className="h-full md:col-span-3">
-              <div className="flex h-full flex-col border border-black/10 bg-carbon p-8">
-                <Factory className="h-6 w-6 text-signal mb-5" />
-                <h3 className="font-display text-2xl text-surface mb-5">Fabricación a la medida</h3>
-                <ul className="space-y-3 mb-8 flex-1">
-                  {["Cilindros nuevos a la medida", "Fabricación bajo muestra o plano", "Cilindros personalizados", "Medidas en milímetros o en pulgadas"].map((it) => (
-                    <li key={it} className="flex items-start gap-3 text-steel-200">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-signal" />
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-                <a href={whatsappService("neumatico-fabricar")} target="_blank" rel="noopener" className="btn-primary min-h-12 self-start">
-                  <WhatsAppIcon className="h-4 w-4" />
-                  Cotizar por WhatsApp
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-              </div>
-            </Reveal>
-            <Reveal delay={0.08} className="h-full md:col-span-2">
-              <div className="flex h-full flex-col border border-black/10 bg-carbon p-8">
-                <Wrench className="h-6 w-6 text-signal mb-5" />
-                <h3 className="font-display text-2xl text-surface mb-3">¿Tu cilindro está dañado?</h3>
-                <p className="text-steel-300 leading-relaxed mb-8 flex-1">La reparación, la reconstrucción y el cambio de sellos tienen su propia página.</p>
-                <Link href="/servicios" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium uppercase tracking-wider text-surface hover:text-signal">
-                  Ver reparación de cilindros <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-
-          <Reveal className="real-work mt-10">
-            <RealWorkPhoto />
-            <div className="real-work-text">
-              <p className="eyebrow">Trabajo real</p>
-              <h3 className="font-display text-surface">Cilindros neumáticos del taller</h3>
-              <p className="text-steel-300">Fabricamos el cilindro a partir de tu plano, una muestra o tus medidas. Envía una foto del que necesitas reemplazar y te cotizamos.</p>
-            </div>
-          </Reveal>
-
-          <Reveal className="mt-8">
-            <p className="text-steel-300">
-              ¿Buscas un cilindro estándar? Envíanos su código o medidas y te confirmamos disponibilidad.
-              <a
-                href={quoteHref("Cilindro neumático estándar")}
-                target="_blank"
-                rel="noopener"
-                className="mt-1 flex min-h-11 w-fit items-center gap-1 text-signal font-medium hover:underline whitespace-nowrap"
-              >
-                <WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp <ArrowRight className="inline h-3.5 w-3.5" aria-hidden="true" />
-              </a>
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* QUÉ NECESITAMOS */}
-      <section className="section-pad cylinder-quote-inputs">
-        <div className="container-max">
-          <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">03 · Para cotizar</div>
-            <h2 className="font-display text-display-lg text-surface">Qué necesitamos de ti</h2>
-            <p className="text-steel-300 mt-4">Con cualquiera de estos datos empezamos. No necesitas todas las medidas: basta una foto del cilindro y su placa, o el diámetro x carrera.</p>
-          </Reveal>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <TaHead kicker="Para cotizar" id="para-cotizar" title="Envía cualquiera de estos datos" />
+          <ul className="ta-need">
             {NECESITAMOS.map((n, i) => (
-              <Reveal key={n.title} delay={i * 0.05} className="h-full last:col-span-2 md:last:col-span-1">
-                <div className="h-full border border-black/10 bg-carbon p-6">
-                  <span className="grid h-10 w-10 place-items-center bg-signal-soft text-signal mb-4">
-                    <n.icon className="h-5 w-5" />
-                  </span>
-                  <h3 className="font-display text-lg text-surface mb-1">{n.title}</h3>
-                  <p className="text-sm text-steel-300 leading-relaxed">{n.desc}</p>
-                </div>
-              </Reveal>
+              <li key={n.title}><i>{String(i + 1).padStart(2, "0")}</i><b>{n.title}</b><span>{n.desc}</span></li>
             ))}
-          </div>
-
-          <Reveal className="mt-10">
-            <a href={whatsappService("neumatico-fabricar")} target="_blank" rel="noopener" className="btn-primary min-h-12">
-              <WhatsAppIcon className="h-4 w-4" />
-              Cotizar por WhatsApp
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </Reveal>
+          </ul>
+          <p className="ta-min">Lo mínimo: diámetro x carrera, o una foto del cilindro y su placa.</p>
+          <p className="ta-std">¿Buscas un cilindro estándar? Envíanos su código o medidas y te confirmamos disponibilidad. <a href={quoteHref("Cilindro neumático estándar")} target="_blank" rel="noopener" className="ta-link"><WhatsAppIcon className="h-4 w-4" />Cotizar por WhatsApp<span className="sr-only">: cilindro neumático estándar</span></a></p>
+          <p className="ta-deliv">{ENTREGA_LINEA}</p>
         </div>
       </section>
 
-      {/* ANTES Y DESPUÉS (fotos ya publicadas en /servicios) */}
-      <section className="section-pad border-t border-black/5 bg-carbon-900">
+      <section className="ta-sec" aria-labelledby="reparacion-cilindro">
+        <div className="container-max ta-rep">
+          <Reveal className="ta-rep-pic">
+            <Image src="/cilindros/cilindro-desgastado-taller.webp" alt="Cilindro neumático desgastado recibido en el taller de Dynatech" fill sizes="(max-width: 767px) 100vw, 55vw" className="object-contain p-6" />
+          </Reveal>
+          <div>
+            <p className="ta-eyebrow">¿Tu cilindro está dañado?</p>
+            <h2 id="reparacion-cilindro" className="ta-h2">Lo reparamos o lo reconstruimos</h2>
+            <ol className="ta-proc">
+              <li>Desarme y diagnóstico</li>
+              <li>Reemplazo de componentes dañados</li>
+              <li>Ensamblaje con las tolerancias correctas</li>
+              <li>Prueba de funcionamiento antes de entregar</li>
+            </ol>
+            <div className="ta-ctas" data-fab-hide="">
+              <a href={whatsappService("neumatico-reparar")} target="_blank" rel="noopener" className="ta-btn-red"><WhatsAppIcon className="h-[18px] w-[18px]" />Cotizar por WhatsApp<span className="sr-only">: reparación de cilindro neumático</span></a>
+              <TaLink href="/servicios">Ver reparación de cilindros</TaLink>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="ta-sec is-tint" id="interior-cilindro" aria-labelledby="componentes-cilindro">
         <div className="container-max">
-          <Reveal className="max-w-2xl mb-12">
-            <div className="eyebrow mb-3">04 · Trabajo real</div>
-            <h2 className="font-display text-display-lg text-surface">Antes y después</h2>
-            <p className="text-steel-300 mt-4">Cilindro ISO 32 mm recuperado en nuestro taller. Desliza para comparar.</p>
-          </Reveal>
-          <Reveal>
-            <BeforeAfterSlider
-              before={{ src: "/cilindros/antes-cilindro-iso-32mm.jpg", alt: "Antes · Cilindro ISO 32 mm" }}
-              after={{ src: "/cilindros/despues-cilindro-iso-32mm.jpg", alt: "Después · Cilindro ISO 32 mm recuperado" }}
-            />
-            <p className="text-sm text-steel-300 mt-5 max-w-3xl">Una reconstrucción incluye desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar. <Link href="/servicios" className="inline-flex min-h-10 items-center font-medium text-surface underline decoration-signal underline-offset-4 hover:text-signal">Ver reparación de cilindros</Link></p>
-          </Reveal>
+          <TaHead kicker="Componentes" id="componentes-cilindro" title="Sellos, vástagos y piezas" aside={<TaLink href="/sellos-y-componentes">Ver sellos y componentes</TaLink>} />
+          <ul className="ta-parts">
+            {COMPONENTES_CIL.map((c) => <TaProductCard key={c.href} {...c} />)}
+            <li className="ta-pc">
+              <Link href="/sellos-y-componentes#componentes">
+                <span className="ta-pc-img is-photo"><Image src="/taller/torno-pieza-larga-polipasto.jpg" alt="Pieza larga montada en el torno del taller de Dynatech" fill sizes="(max-width: 767px) 100vw, 33vw" className="object-cover" style={{ objectPosition: "50% 62%" }} /></span>
+                <span className="ta-pc-body"><span className="ta-pc-title">Componentes bajo medida</span><span className="ta-pc-text">Camisa, tapa y pistón.</span></span>
+              </Link>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -222,7 +184,7 @@ export default function CilindrosNeumaticosPage() {
 
       <FaqBlock items={FAQS} kicker="Preguntas frecuentes" title="Sobre cilindros a la medida" tone="white" />
 
-      <QuoteCTA eyebrow="Fabricación · Bajo plano o muestra" title="¿Necesitas un cilindro neumático a la medida?" text="Envía el plano, la muestra, las medidas o fotos del cilindro y su placa. Te confirmamos alcance, plazo y condiciones en la cotización." whatsappHref={whatsappService("neumatico-fabricar")} />
+      <TaSteps id="como-cotizar-cilindro" steps={PASOS} whatsappHref={fabricar} correoItem="Cilindro neumático" />
     </div>
   );
 }

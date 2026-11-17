@@ -43,7 +43,7 @@ Resumen para el próximo agente. El detalle está en `PROJECT_CONTEXT.md` y `AUD
 6. **No tocar el cron keepalive** (`vercel.json`, `/api/keepalive`, `custom-worker.ts`).
 7. **No cambiar `middleware.ts` a `proxy.ts`** mientras se piense usar Cloudflare.
 8. **No subir secretos**, no modificar `.env.local` y no exponer la service-role key.
-9. **Mantener la identidad visual:** rojo `#E4002B`, IBM Plex, radios mínimos.
+9. **Mantener la identidad visual:** rojo del logo oficial `#C70C1B` (desde el 17-nov-2026), IBM Plex, radios mínimos.
 
 ## Archivos para leer primero
 
