@@ -148,7 +148,7 @@ export function AplicacionesHome() {
   }).filter((u): u is { title: string; href: string; image: string; fit: "cover" | "contain" } => u !== null);
   return (
     <Band tone="white" labelledBy="aplicaciones-home">
-      <SectionHead kicker="Aplicaciones" id="aplicaciones-home" title="Dónde se usan" intro="Empresas y zonas francas." aside={<Link href="/aplicaciones" className="inline-flex min-h-11 items-center gap-2 font-medium">Ver aplicaciones <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>} />
+      <SectionHead kicker="Aplicaciones" id="aplicaciones-home" title="Dónde se usan" intro="Empresas privadas y zonas francas." aside={<Link href="/aplicaciones" className="inline-flex min-h-11 items-center gap-2 font-medium">Ver aplicaciones <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>} />
       <ul className="industry-grid">
         {usos.map((u) => (
           <li key={u.href}>

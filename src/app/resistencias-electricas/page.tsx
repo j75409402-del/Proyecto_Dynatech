@@ -22,7 +22,7 @@ export default function ResistenciasElectricasPage() {
     <SolucionPage
       solucion={solucion}
       headline="¿Buscas un proveedor de resistencias eléctricas en República Dominicana?"
-      lead={<p>Dynatech Ingeniería SRL es un suplidor industrial en República Dominicana. Suministra resistencias eléctricas en Santo Domingo: de cartucho, de banda y tubulares, termocuplas tipo J y K, y sondas RTD PT100. Las que van a la medida se consiguen o se mandan a fabricar. También hay alambre de resistencia. Escríbenos por WhatsApp con fotos, voltaje, potencia o una muestra. Entregamos en todo el país.</p>}
+      lead={<p>Resistencias de cartucho, de banda y tubulares, termocuplas J y K y sondas RTD PT100, bajo cotización.</p>}
       destacado={<LineSupply id="resistencias-suministro" entrega={ENTREGA_LINEA} items={[
         { label: "Resistencias de cartucho", text: "Para calentamiento de cilindros en máquinas de inyección de plástico.", href: "/resistencias-electricas#cartucho" },
         { label: "Resistencias de banda", text: "Bajo cotización.", href: "/resistencias-electricas#resistencias-suministro", linkText: "Ver en esta página" },
@@ -36,7 +36,7 @@ export default function ResistenciasElectricasPage() {
         { q: "¿Y si la resistencia es a la medida?", a: "Se consiguen o se mandan a fabricar. Envíanos voltaje, potencia, medidas o una muestra y te cotizamos." },
         { q: "¿Suministran termocuplas y RTD?", a: "Sí. Termocuplas tipo J y K, y sondas RTD PT100, bajo cotización." },
         { q: "¿Cuánto tarda la entrega?", a: ENTREGA_LINEA },
-        { q: "¿Atienden zonas francas?", a: "Sí. Empresas y zonas francas en el país." },
+        { q: "¿Atienden zonas francas?", a: "Sí. Empresas privadas y zonas francas en el país." },
       ]}
     />
   );

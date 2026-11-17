@@ -34,17 +34,16 @@ export function Footer() {
         <Reveal className="grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-12 lg:gap-8">
           {/* Brand + tagline */}
           <div className="col-span-2 lg:col-span-3">
-            <div className="mb-4">
+            {/* Logo oficial del dueño (17-nov-2026), sin alterar, sobre placa blanca: ya trae «EXCELLENT UNDER PRESSURE.». */}
+            <div className="mb-4 inline-block rounded-sm bg-white p-3">
               <Image
-                src="/brand/dynatech-lockup-blanco.png"
-                alt={`${SITE.shortName} Ingeniería SRL`}
-                width={1024}
-                height={264}
-                className="h-9 w-auto"
+                src="/brand/dynatech-logo-oficial.png"
+                alt={`${SITE.shortName} Ingeniería SRL. ${SITE.brandTagline}`}
+                width={640}
+                height={598}
+                sizes="208px"
+                className="h-auto w-[208px]"
               />
-              <div className="mt-2 font-mono text-xs uppercase tracking-[0.1em] text-steel-500" lang="en">
-                {SITE.brandTagline}
-              </div>
             </div>
             <p className="text-sm text-steel-300 leading-relaxed max-w-sm">
               Suministro industrial bajo cotización.

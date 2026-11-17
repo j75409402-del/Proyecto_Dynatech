@@ -64,7 +64,7 @@ export default function SellosYComponentesPage() {
         crumbs={[{ label: "Sellos y componentes" }]}
         kicker="Repuestos para cilindros neumáticos"
         title={<>Kits de sellos y componentes <span className="text-signal">para cilindros neumáticos</span></>}
-        lead={<p>Dynatech Ingeniería SRL es un suplidor de kits de sellos para cilindros neumáticos, de 32 a 100 mm, además de vástagos cromados y componentes bajo medida. Para el kit envía el diámetro de la camisa, el del vástago y la marca.</p>}
+        lead={<p>Kits de sellos de 32 a 100 mm, vástagos cromados y componentes bajo medida.</p>}
         quoteHref={quoteHref("Kits de sellos")}
         secondary={{ href: "#medidas", label: "Ver qué medidas enviar" }}
         note="Indica si tus medidas son en mm o en pulgadas, y la cantidad."

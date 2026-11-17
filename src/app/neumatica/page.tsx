@@ -29,7 +29,7 @@ const FAQS: Faq[] = [
   { q: "¿Pueden reemplazar un cilindro que ya no se fabrica?", a: "Sí. Lo fabricamos a la medida desde plano, muestra o medidas, en mm o pulgadas." },
   { q: "¿Reparan cilindros neumáticos?", a: "Sí. Reparación, reconstrucción y cambio de sellos, con prueba antes de entregar." },
   { q: "¿Instalan o programan?", a: "No. En neumática solo suministramos." },
-  { q: "¿Atienden zonas francas?", a: "Sí. Empresas y zonas francas en el país." },
+  { q: "¿Atienden zonas francas?", a: "Sí. Empresas privadas y zonas francas en el país." },
   { q: "¿Cómo sé la disponibilidad?", a: "Disponibilidad y plazo se confirman en la cotización." },
 ];
 
@@ -133,11 +133,7 @@ function NeumaticaTexto() {
           <li><b className="text-surface">Marcas originales.</b> Suministramos piezas originales Festo y SMC, y de otras marcas originales, bajo pedido por código.</li>
         </ul>
       </Band>
-      <Band tone="light" labelledBy="neumatica-festo-smc">
-        <SectionHead kicker="Por código" id="neumatica-festo-smc" title="¿Una alternativa para repuestos Festo o SMC?" />
-        <p className="mt-6 max-w-3xl text-base leading-relaxed text-steel-300">Sí. Suministramos piezas originales Festo y SMC bajo pedido por código. Envíanos el código de la placa y te cotizamos exactamente esa pieza original, no un equivalente. Si el cilindro ya no se fabrica, lo fabricamos a la medida a partir de la muestra o las medidas.</p>
-      </Band>
-      <Band tone="white" labelledBy="neumatica-taller">
+      <Band tone="light" labelledBy="neumatica-taller">
         <SectionHead kicker="Taller" id="neumatica-taller" title="Servicios de taller" />
         <ul className="mt-8 grid gap-4 text-base leading-relaxed text-steel-300">
           <li><b className="text-surface">Reparación de cilindros.</b> Reparación, reconstrucción y cambio de sellos, con prueba de funcionamiento antes de entregar. <Link href="/servicios" className="text-signal">Ver reparación</Link>.</li>
@@ -146,7 +142,7 @@ function NeumaticaTexto() {
           <li><b className="text-surface">Cilindros hidráulicos.</b> Fabricación y reparación. <Link href="/cilindros-hidraulicos" className="text-signal">Ver cilindros hidráulicos</Link>.</li>
         </ul>
       </Band>
-      <Band tone="light" labelledBy="neumatica-para-quien">
+      <Band tone="white" labelledBy="neumatica-para-quien">
         <SectionHead kicker="Alcance" id="neumatica-para-quien" title="Para quién es" />
         <div className="mt-8 grid gap-8">
           <div>
@@ -163,7 +159,7 @@ function NeumaticaTexto() {
           </div>
         </div>
       </Band>
-      <Band tone="white" labelledBy="neumatica-como-cotizar">
+      <Band tone="light" labelledBy="neumatica-como-cotizar">
         <SectionHead kicker="Cotización" id="neumatica-como-cotizar" title="Cómo cotizar" />
         <ol className="mt-8 grid list-decimal gap-4 pl-5 text-base leading-relaxed text-steel-300">
           <li>Escribe por <a href={whatsappService("componente")} target="_blank" rel="noopener" className="text-signal">WhatsApp al {CONTACT.whatsappDisplay}</a> con el código o una foto del componente (y de su placa).</li>
@@ -172,7 +168,7 @@ function NeumaticaTexto() {
         </ol>
         <p className="mt-6 max-w-3xl text-base leading-relaxed text-steel-300">Recibes precio, plazo y condiciones. Confirmas la orden, entrega y facturación. Entregamos en todo el país, incluidas las zonas francas del interior.</p>
       </Band>
-      <Band tone="light" labelledBy="neumatica-donde">
+      <Band tone="white" labelledBy="neumatica-donde">
         <SectionHead kicker="Santo Domingo" id="neumatica-donde" title="Dónde estamos" />
         <div className="mt-6 max-w-3xl text-base leading-relaxed text-steel-300">
           <p>{SITE.legalName} · RNC {SITE.rnc}</p>
@@ -192,7 +188,7 @@ export default function NeumaticaPage() {
       <SolucionPage
         solucion={solucion}
         headline="¿Buscas un proveedor de neumática en República Dominicana?"
-        lead={<p>Dynatech Ingeniería SRL es un suplidor de neumática industrial en Santo Domingo: cilindros, válvulas direccionales y solenoides (electroválvulas), unidades FRL, conexiones y mangueras para empresas y zonas francas. Además fabricamos y reparamos cilindros neumáticos en nuestro taller; cotizas por WhatsApp con una foto, código o plano.</p>}
+        lead={<p>Cilindros, válvulas, unidades FRL, conexiones y mangueras, para empresas privadas y zonas francas.</p>}
         destacado={<><NeumaticaTexto /><CilindrosDestacado /></>}
         faqItems={FAQS}
       />

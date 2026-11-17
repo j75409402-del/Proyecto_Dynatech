@@ -37,7 +37,7 @@ export default function AplicacionesPage() {
         </div>
         <div className="hero-copy">
           <Breadcrumbs items={[{ label: "Aplicaciones" }]} />
-          <p className="hero-kicker">Empresas y zonas francas</p>
+          <p className="hero-kicker">Empresas privadas y zonas francas</p>
           <h1 id="app-hero">Aplicaciones</h1>
           <p className="hero-lead">Dónde se usa cada línea.</p>
           <a href={whatsappGeneral()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">Cotizar por WhatsApp</a>

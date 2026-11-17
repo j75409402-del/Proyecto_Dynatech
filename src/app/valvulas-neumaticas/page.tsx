@@ -54,7 +54,7 @@ export default function ValvulasNeumaticasPage() {
         crumbs={[{ label: "Neumática", href: "/neumatica" }, { label: "Válvulas neumáticas" }]}
         kicker="Neumática industrial · Válvulas"
         title="Suplidor de válvulas neumáticas y electroválvulas"
-        lead={<p>Dynatech Ingeniería SRL es un suplidor de válvulas neumáticas y electroválvulas en República Dominicana: 3/2, 5/2 y 5/3, con bobinas de 24 VDC y 110 VAC, para empresas y zonas francas. También piezas originales Festo y SMC por código. Cotizas por WhatsApp con el código o una foto.</p>}
+        lead={<p>Válvulas 3/2, 5/2 y 5/3 y electroválvulas de 24 VDC y 110 VAC, bajo cotización.</p>}
         quoteHref={whatsappService("componente", sub.title)}
         secondary={{ href: "#tipos", label: "Ver catálogo de la línea" }}
         note="Envía el código o una foto de la etiqueta. Si no lo tienes, una foto de la válvula y sus conexiones basta para empezar."

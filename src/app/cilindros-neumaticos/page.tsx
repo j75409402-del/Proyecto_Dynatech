@@ -68,7 +68,7 @@ const FAQS: Faq[] = [
   { q: "¿Fabrican en milímetros y en pulgadas?", a: "Sí. Fabricamos el cilindro a partir de tu plano, una muestra o tus medidas, en milímetros o en pulgadas." },
   { q: "¿Pueden fabricarlo si el original ya no se consigue?", a: "Sí. Fabricamos cilindros completos a medida, incluso cuando el original ya no está disponible." },
   { q: "¿Y si mi cilindro está dañado?", a: "Lo reparamos o reconstruimos: desarme, reemplazo de los componentes dañados, ensamblaje y prueba de funcionamiento antes de entregar. Ver la página de reparación de cilindros." },
-  { q: "¿Atienden empresas y zonas francas?", a: "Sí. Atendemos solicitudes de empresas del sector privado y de zonas francas en República Dominicana." },
+  { q: "¿Atienden empresas privadas y zonas francas?", a: "Sí. Atendemos solicitudes de empresas del sector privado y de zonas francas en República Dominicana." },
   { q: "¿Consiguen cilindros originales Festo o SMC?", a: "Sí. Suministramos piezas originales Festo y SMC, y de otras marcas, bajo pedido por código." },
   { q: "¿Cuánto tarda la entrega?", a: ENTREGA_LINEA },
   { q: "¿Dónde están y en qué horario atienden?", a: `En ${CONTACT.address}. Horario: ${CONTACT.hours.replace(/ · /g, " ")}.` },

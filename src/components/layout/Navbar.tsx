@@ -158,7 +158,7 @@ export function Navbar() {
             <Image
               src="/brand/dynatech-lockup.png"
               alt={`${SITE.shortName} Ingeniería SRL`}
-              width={1024}
+              width={1006}
               height={264}
               priority
               className="h-9 w-auto shrink-0 sm:h-10"

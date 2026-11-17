@@ -35,7 +35,7 @@ export function landingFaqs({ name, datos, referencePhotos = true, address, hour
   return [
     { q: `¿Cómo cotizo ${name.toLowerCase()}?`, a: "Por WhatsApp. Adjunta foto, código o plano." },
     { q: "¿Qué datos?", a: `${datos.join("; ")}. Con foto o referencia basta.` },
-    { q: "¿Zonas francas?", a: "Sí. Empresas y zonas francas." },
+    { q: "¿Zonas francas?", a: "Sí. Empresas privadas y zonas francas." },
     ...(referencePhotos ? [{ q: "¿Las fotos son inventario?", a: "No. Son referencia. El plazo va en la cotización." }] : []),
     { q: "¿Dónde están y en qué horario atienden?", a: `En ${address}. Horario: ${hours.replace(/ · /g, " ")}.` },
   ];

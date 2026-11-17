@@ -58,7 +58,7 @@ export default function NosotrosPage() {
       />
 
       <Band tone="light" labelledBy="que-hacemos">
-        <SectionHead kicker="01 · Qué hacemos" id="que-hacemos" title="Suministro industrial y servicios técnicos" intro="Atendemos a empresas y zonas francas en República Dominicana." />
+        <SectionHead kicker="01 · Qué hacemos" id="que-hacemos" title="Suministro industrial y servicios técnicos" intro="Atendemos a empresas privadas y zonas francas en República Dominicana." />
         <div className="grid gap-4 lg:grid-cols-2">
           <Reveal className="h-full">
             <div className="h-full border border-black/10 bg-white p-6 sm:p-8">

@@ -58,12 +58,7 @@ export default function BreakersPage() {
         crumbs={[{ label: "Control eléctrico", href: "/control-electrico" }, { label: "Breakers" }]}
         kicker="Suministro industrial · Control eléctrico"
         title={TITLE}
-        lead={
-          <>
-            <p>Dynatech Ingeniería SRL es un suplidor industrial en República Dominicana. En Santo Domingo suministra breakers e interruptores industriales para tableros, máquinas y plantas: de riel DIN, de caja moldeada (MCCB) y de panel, en cualquier número de polos y amperaje. Cotizas por WhatsApp con amperaje, polos, tensión y kA, o con una foto de la etiqueta. Entregamos en todo el país.</p>
-            <p>Marcas comunes: {MARCAS.join(", ")}. Suministramos productos originales por código.</p>
-          </>
-        }
+        lead={<p>Breakers de riel DIN, de caja moldeada (MCCB) y de panel, bajo cotización.</p>}
         quoteHref={QUOTE}
         secondary={{ href: "#tipos", label: "Ver tipos" }}
         note={`WhatsApp ${CONTACT.whatsappDisplay}. En esta línea solo suministramos.`}
