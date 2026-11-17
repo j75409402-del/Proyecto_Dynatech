@@ -120,7 +120,7 @@ export function SolucionPage({ solucion: s, destacado, headline, lead, faqItems,
       />
 
       <Band tone="white" labelledBy="aplicaciones-titulo">
-        <SectionHead kicker="Aplicación" id="aplicaciones-titulo" title="Dónde se usan" intro="Empresas y zonas francas." />
+        <SectionHead kicker="Aplicación" id="aplicaciones-titulo" title="Dónde se usan" intro="Empresas privadas y zonas francas." />
         <CheckList items={s.aplicaciones} />
       </Band>
 

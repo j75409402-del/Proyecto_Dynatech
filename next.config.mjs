@@ -12,6 +12,8 @@ const nextConfig = {
       },
     ],
     formats: ["image/avif", "image/webp"],
+    // Next 16 solo acepta las calidades listadas (por defecto [75]). 85: fotos de hero (17-nov-2026).
+    qualities: [75, 85],
   },
   experimental: {
     optimizePackageImports: ["lucide-react"],

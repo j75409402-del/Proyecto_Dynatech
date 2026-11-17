@@ -1,26 +1,18 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Reveal } from "@/components/motion/Reveal";
+import { CorreoButton } from "@/components/taller/CorreoButton";
+
+export { CorreoButton };
 
 /**
  * Dirección A «Taller primero» (aprobada por el dueño el 17-nov-2026).
  * Bloques compartidos por la portada y /cilindros-neumaticos. Estilos `.ta-*` en globals.css.
  * Reglas: fotos reales del taller o recortes de producto; poco texto; nada de antes/después ISO 32 mm.
  */
-
-/** Enlace de cotización por correo: /correo mide el clic y redirige al mailto (nunca <Link>). */
-export function CorreoButton({ item, className = "ta-btn-line" }: { item?: string; className?: string }) {
-  const href = item ? `/correo?item=${encodeURIComponent(item)}` : "/correo";
-  return (
-    <a href={href} className={className}>
-      <Mail className="h-[18px] w-[18px]" aria-hidden="true" />
-      Cotizar por correo
-    </a>
-  );
-}
 
 export function TaHero({
   id,
@@ -77,7 +69,7 @@ export function TaHero({
           fill
           priority
           fetchPriority="high"
-          quality={72}
+          quality={85}
           sizes="(max-width: 767px) 100vw, 58vw"
           className="object-cover"
           style={{ objectPosition }}

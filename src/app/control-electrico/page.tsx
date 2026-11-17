@@ -23,7 +23,7 @@ export default function ControlElectricoPage() {
     <SolucionPage
       solucion={solucion}
       headline="¿Buscas un proveedor de control eléctrico en República Dominicana?"
-      lead={<p>Dynatech Ingeniería SRL es un suplidor de control eléctrico industrial en Santo Domingo: contactores, relés, <Link href="/breakers">breakers</Link>, fusibles, pulsadores, temporizadores y conectores para empresas y zonas francas. En esta línea solo suministramos. Cotizas por WhatsApp con referencia o foto.</p>}
+      lead={<p>Contactores, relés, <Link href="/breakers">breakers</Link>, fusibles, pulsadores, temporizadores y conectores, bajo cotización.</p>}
       destacado={<LineSupply id="control-suministro" items={[
         { label: "Contactores y relés", text: "Contactores para arranque y control de motores, relés de control y relés térmicos.", href: "/control-electrico#contactores-y-reles" },
         { label: "Breakers y protección", text: "Interruptores termomagnéticos, arrancadores manuales y protección de circuitos.", href: "/breakers", linkText: "Ver breakers" },
@@ -37,7 +37,7 @@ export default function ControlElectricoPage() {
         { q: "¿Dynatech vende contactores y relés en RD?", a: "Sí. Contactores, relés de control y relés térmicos, bajo cotización desde Santo Domingo." },
         { q: "¿Instalan o arman tableros?", a: "No. En control eléctrico solo suministramos. Sin instalación, programación, mantenimiento, tableros ni puesta en marcha." },
         { q: "¿Cuánto tarda la entrega?", a: ENTREGA },
-        { q: "¿Atienden zonas francas?", a: "Sí. Empresas y zonas francas en el país." },
+        { q: "¿Atienden zonas francas?", a: "Sí. Empresas privadas y zonas francas en el país." },
       ]}
     />
   );

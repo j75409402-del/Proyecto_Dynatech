@@ -42,12 +42,7 @@ export default function SensoresPage() {
       solucion={solucion}
       heroImage={{ src: HERO, alt: HERO_ALT, fit: "cover" }}
       headline="¿Buscas un proveedor de sensores industriales en República Dominicana?"
-      lead={
-        <>
-          <p>Puedes comprar sensores inductivos y fotoeléctricos en Santo Domingo en Dynatech Ingeniería SRL. Es un suplidor industrial en República Dominicana y suministra sensores industriales: inductivos de M8 a M30, PNP o NPN, NO/NC y con conector M12; fotoeléctricos de todo tipo (difusos, de barrera, retrorreflectivos y de fibra óptica); también capacitivos, finales de carrera, ultrasónicos, magnéticos para cilindro, de presión y de temperatura. En esta línea solo suministramos. Cotizas por WhatsApp con referencia o foto de la etiqueta. Entregamos en todo el país.</p>
-          <p>Marcas comunes: Omron, Sick, Autonics, Banner y Pepperl+Fuchs. Suministramos productos originales por código.</p>
-        </>
-      }
+      lead={<p>Inductivos, fotoeléctricos, capacitivos y más, bajo cotización.</p>}
       destacado={
         <>
           <Band tone="white" id="sensores-comunes" labelledBy="sensores-comunes-titulo">
@@ -76,7 +71,7 @@ export default function SensoresPage() {
         { q: "¿Qué sensores suministran?", a: "Inductivos de M8 a M30, PNP o NPN, NO/NC y conector M12; capacitivos; fotoeléctricos difusos, de barrera, retrorreflectivos y de fibra óptica; finales de carrera; ultrasónicos; magnéticos para cilindro; switches y transmisores de presión; termocuplas J y K y RTD PT100." },
         { q: "¿Instalan o programan?", a: "No. En sensores solo suministramos. Sin instalación, programación, mantenimiento ni puesta en marcha." },
         { q: "¿Cuánto tarda la entrega?", a: ENTREGA_LINEA },
-        { q: "¿Atienden zonas francas?", a: "Sí. Empresas y zonas francas en el país." },
+        { q: "¿Atienden zonas francas?", a: "Sí. Empresas privadas y zonas francas en el país." },
       ]}
     />
   );

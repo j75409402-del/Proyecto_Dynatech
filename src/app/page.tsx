@@ -38,7 +38,7 @@ const FAQS: Faq[] = [
   { q: "¿Cómo cotizo?", a: "Por WhatsApp, con el mensaje listo." },
   { q: "¿Cilindros?", a: "Neumáticos e hidráulicos. Fabricamos y reparamos." },
   { q: "¿Mecanizado?", a: "Torno y fresadora. Plano o muestra." },
-  { q: "¿Zonas francas?", a: "Sí. Empresas y zonas francas en el país." },
+  { q: "¿Zonas francas?", a: "Sí. Empresas privadas y zonas francas en el país." },
   { q: "¿Qué suministran?", a: "Cilindros neumáticos, válvulas, unidades FRL, conexiones y mangueras; control eléctrico, sensores, instrumentación y resistencias. También fabricamos y reparamos cilindros, y mecanizamos en torno y fresadora." },
   { q: "¿Cuánto tarda la entrega?", a: ENTREGA_LINEA },
   { q: "¿Suministran a zonas francas?", a: "Sí. Suministramos a empresas de zonas francas en todo el país y facturamos bajo el régimen de zonas francas. La exención de ITBIS aplica según la condición de zona franca del cliente." },
@@ -77,7 +77,7 @@ export default function HomePage() {
         lead="A la medida, bajo plano o muestra, en milímetros o pulgadas."
         whatsappHref={whatsappCylinderService()}
         correoItem="Cilindro neumático"
-        notes={["Envía una foto y la placa", "Empresas y zonas francas"]}
+        notes={["Envía una foto y la placa", "Empresas privadas y zonas francas"]}
         image="/taller/cilindros-fabricados-en-taller.webp"
         imageAlt="Cilindros neumáticos fabricados en el taller de Dynatech junto al cilindro original que sirvió de muestra"
         caption="Cilindros fabricados en nuestro taller"
