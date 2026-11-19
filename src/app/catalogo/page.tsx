@@ -57,7 +57,7 @@ export default function ProductosPage() {
         <div className="container-max">
           <Breadcrumbs items={[{ label: "Catálogo" }]} />
           <h1>Catálogo</h1>
-          <p>Elige una categoría y cotiza por WhatsApp. Sin precios ni inventario.</p>
+          <p>Elige una categoría y cotiza por WhatsApp.</p>
           <a href={whatsappGeneral()} target="_blank" rel="noopener" className="btn-primary min-h-12 px-6">Cotizar por WhatsApp</a>
         </div>
       </header>
