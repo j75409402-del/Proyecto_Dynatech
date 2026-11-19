@@ -32,7 +32,6 @@ export const metadata: Metadata = {
 
 /** Solo hechos ya publicados en el sitio o confirmados por el Capitán (WEB-020). */
 const FAQS: Faq[] = [
-  { q: "¿Hay stock en línea?", a: "No. Precio y plazo se confirman en la cotización." },
   { q: "¿Qué envío?", a: "Foto, código, plano o muestra." },
   { q: "¿Sin referencia?", a: "Sí. Foto de la pieza y de su placa." },
   { q: "¿Cómo cotizo?", a: "Por WhatsApp, con el mensaje listo." },
